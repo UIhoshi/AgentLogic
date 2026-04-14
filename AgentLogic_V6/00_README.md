@@ -37,6 +37,10 @@
   能力状态矩阵，区分实现、条件启用、stub、flag 关闭等状态。
 - `10_PackagingPolicy.md`
   当前逻辑包的分层打包边界和强制保留规则。
+- `14_ProjectFactMapTemplate.md`
+  项目事实地图标准模板，可直接复制用于新项目接入。
+- `15_LogicEntryChecklist.md`
+  逻辑入口检查清单标准模板，可直接复制用于启动前核对。
 - `raw_tools/`
   直接保留的工具源码层。
 - `raw_tooling/`
