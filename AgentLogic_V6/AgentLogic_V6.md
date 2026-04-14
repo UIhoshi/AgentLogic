@@ -1,4 +1,4 @@
-# AgentLogic V5
+# AgentLogic V6
 
 本文件是通用型 AI 工程协作协议，用于在开始项目、复核项目、修复项目、重构项目、打包项目和发布项目时，统一 AI 的工作方式、文档纪律与交付边界。
 
@@ -60,6 +60,50 @@
   - L2：方案、架构、交互、边界
   - L3：代码修改、构建、验证、发布
 - 未确认任务边界前，不应擅自扩大范围或额外追加功能。
+
+### 3.4 全部 Agent 强制遵循主逻辑接入
+
+- 只要是开始一个新项目、接手一个新模块、进入一个新子系统、或切入一个新阶段，所有 Agent 都必须先遵循主逻辑的接入与规划流程，而不是直接开始实现、修改或执行命令。
+- 这里的“所有 Agent”包括但不限于：
+  - 主线程 Agent
+  - 子 Agent
+  - 并行 Agent
+  - 模块专用 Agent
+  - review / verification / planning Agent
+- 强制接入流程默认至少包括：
+  - 识别项目文档主入口
+  - 读取相关 md 与关键入口源码
+  - 判断当前任务属于 L1、L2 还是 L3
+  - 给出当前阶段的执行顺序、边界和风险判断
+- 如果任务是“新增模块”而不是“修复已有模块”，则必须额外补一层模块级规划：
+  - 模块目标
+  - 模块边界
+  - 与现有系统的关系
+  - 入口与落点
+  - 验证方式
+- 未完成这一步前，Agent 不应直接进入实现状态，除非用户明确要求跳过，且该跳过行为已被记录为风险。
+
+### 3.5 主逻辑优先于局部习惯
+
+- 当项目内存在零散习惯、临时说明、旧注释、局部模块约定时，所有 Agent 应优先以主逻辑为最高协作规则，再结合项目当前真实结构做局部适配。
+- 局部规则可以补充主逻辑，但不应绕开主逻辑的接入、分层、验证与回写要求。
+- 主逻辑的价值在于让不同 Agent 在不同时间进入项目时，仍能沿同一条稳定方法进入系统，从而显著降低错误率和结构偏移。
+
+### 3.6 主逻辑必须完整阅读，不得截断理解
+
+- Agent 对主逻辑的阅读必须是完整阅读，而不是只读前半部分、只读命中的少数条款、或只看到 `1`、`2`、`3` 就默认后面的 `11`、`12`、`13` 可以忽略。
+- 主逻辑中的后续章节通常承担：
+  - 禁止事项
+  - 回写要求
+  - 打包规则
+  - 风险边界
+  - 版本维护规则
+- 如果这些内容被跳过，前期看似更快，后期再回来对齐会显著增加返工成本、结构偏移和规则冲突。
+- 因此，Agent 在声称“已完成主逻辑接入”前，默认必须满足：
+  - 已按顺序完整阅读主逻辑
+  - 已确认后部章节没有与当前任务直接相关的约束
+  - 已将后部章节中的强制条款纳入当前执行判断
+- 对主逻辑的阅读，不应只做关键词命中式读取，而应做全量结构化读取。
 
 ---
 
@@ -133,6 +177,39 @@
 
 - 对明确可定位的问题，应主动沿日志、路径、实例状态、构建链路继续排查。
 - 不应把显然能继续查清的问题过早甩回给用户。
+
+### 5.4.1 工具与 Skills 的主动评估义务
+
+- 如果 AI 无法确定当前任务最适合使用什么工具、什么 skills，或者怀疑现有默认路径明显低效，就不应机械沿用旧路径。
+- 在这种情况下，AI 应主动进行受约束的工具评估，至少回答：
+  - 当前默认工具是否只是“能用”，而不是“更合适”
+  - 当前任务是否存在更专业、更高效、更稳定的工具或 skills
+  - 替代方案是否能显著提升：
+    - 阅读效率
+    - 分类精度
+    - 搜索质量
+    - 结构理解速度
+    - 自动化程度
+- 这种主动评估的目标，是避免 AI 闭门造车，只在已有低效工具里反复兜圈，而忽略更适合当前任务的现成工具。
+
+### 5.4.2 外部更优工具发现规则
+
+- 当 AI 在开始新项目、接手新模块、建立新流程时，发现外部已有明显更合适的工具、skills、分类器、索引器、阅读器、分析器或自动化组件，应主动记录并提出。
+- 这里的“主动提出”不是要求立刻擅自接入，而是要求：
+  - 先说明为什么现有工具不够好
+  - 再说明候选工具为什么更合适
+  - 再说明它当前属于：
+    - 推荐项
+    - 候选增强项
+    - 已正式集成项
+- 未经确认，不应把外部候选工具直接当成现有正式能力描述。
+
+### 5.4.3 避免工具保守主义
+
+- AI 不应因为手头已有某个老工具、默认浏览器路径、默认搜索路径或既有脚本，就自动假设它仍然是当前项目的最优方案。
+- “先用旧工具凑合完成”可以是短期策略，但不应阻止 AI 识别和提出更好的工具替代方向。
+- 对高频、低效、重复、长耗时的工作路径，AI 应优先考虑是否存在更合适的工具化替代。
+- 默认工具低效时，Agent 应主动寻找更适合当前任务的工具或方案，但必须区分正式能力与候选增强。
 
 ### 5.5 禁止擅自追加功能
 
@@ -403,9 +480,146 @@
 
 ---
 
-## 14. 版本说明
+## 14. 源码驱动逻辑包维护协议
 
-- 本版为 `AgentLogic_V5`
+### 14.1 逻辑包不是源码备份
+
+- 当任务是“整理归纳当前项目并输出逻辑包”时，交付物不应等同于整个源码目录的原样复制。
+- 逻辑包应是围绕“如何理解、进入、执行、验证、扩展该系统”构建的结构化知识包。
+- 逻辑包默认至少应包含：
+  - 总纲
+  - 架构分层
+  - 主执行链路
+  - 工具整合清单
+  - 权限与安全机制
+  - 扩展机制
+  - 关键源码映射
+
+### 14.2 工具必须整合成系统视图
+
+- 当项目包含内置工具、外部工具、MCP 工具、技能、子 Agent、命令系统时，逻辑包不能只按目录罗列。
+- 必须至少回答以下问题：
+  - 工具从哪里注册
+  - 工具如何注入给模型
+  - 工具如何经过权限判定
+  - 工具如何执行
+  - 工具结果如何回流到会话
+  - 哪些工具始终可用
+  - 哪些工具受平台、权限、环境变量或 feature flag 控制
+- 工具整合文档应优先形成：
+  - 工具分类
+  - 启用条件
+  - 风险等级
+  - 关键源码路径
+
+### 14.3 逻辑包必须标注源码依据
+
+- 逻辑包中的每个关键结论，默认都应能追溯到实际源码或项目文档。
+- 只要条件允许，就应标出：
+  - 对应 md 路径
+  - 对应源码路径
+  - 对应入口文件
+  - 对应关键函数或关键模块
+- 若某能力处于 stub、半实现、条件启用、平台限定或 feature flag 关闭状态，必须显式标注，不得按“完整可用”记录。
+
+### 14.4 逻辑包输出结构建议
+
+- 当需要形成独立逻辑包时，建议默认输出：
+  - `00_README.md`
+  - `01_MasterLogic.md`
+  - `02_Architecture.md`
+  - `03_AgenticLoop.md`
+  - `04_Tools.md`
+  - `05_PermissionsAndSafety.md`
+  - `06_Extensibility.md`
+  - `07_CommandSurface.md`
+  - `08_SourceIndex.md`
+  - `manifest.json`
+- 如果已有上位总纲，例如 `AgentLogic_V6.md`，则逻辑包应保留该总纲并叠加当前项目特有内容，而不是替换其通用规则价值。
+
+### 14.4.1 分层打包强制建议
+
+- 当项目本身存在大量工具源码、工具编排源码、权限源码或命令源码时，逻辑包不应只输出抽象说明层。
+- 默认应采用至少三层结构：
+  - 抽象逻辑层
+  - 原始源码层
+  - 索引映射层
+- 抽象逻辑层负责解释系统为什么这样设计。
+- 原始源码层负责保留关键能力的真实实现，尤其是工具本体。
+- 索引映射层负责告诉后续维护者：
+  - 哪些源码必须优先阅读
+  - 哪些源码只是支撑层
+  - 哪些源码目前是 stub、死分支或条件启用
+
+### 14.4.2 工具允许直接打包
+
+- 对于工具系统，本规则允许直接将工具源码目录整体纳入逻辑包，而不是要求把每个工具都重新改写成摘要。
+- 但只打包工具源码仍然不够，必须同时补一份工具总览文档，说明：
+  - 工具分类
+  - 工具入口
+  - 工具注册点
+  - 工具执行基础设施
+  - 工具权限边界
+  - 工具启用条件
+- 如果工具数量较多，允许采用“工具源码原样保留 + 总览文档分层解释”的方式，不要求把所有工具都并入一份大表。
+
+### 14.4.3 主逻辑可强制指定输出边界
+
+- 当逻辑包目标不只是阅读，而是后续持续维护与复用时，主逻辑应显式强制指定：
+  - 哪些目录必须进包
+  - 哪些目录只需要索引，不需要全文复制
+  - 哪些目录只能做摘要，不宜整包复制
+- 典型强制指定方式包括：
+  - 工具目录必须整包保留
+  - 权限核心目录必须保留索引或关键实现
+  - 文档目录可以选择性摘录而不是全部复制
+  - UI 大型目录可只保留入口索引与关键链路说明
+- 若未强制指定，后续维护者容易把逻辑包做成“半摘要半丢失”的不稳定结构。
+
+### 14.4.4 建议的强制打包优先级
+
+- 对于 Agentic CLI、工具型系统、带权限控制的工程项目，建议默认按以下优先级决定是否进包：
+  - P0 必须整包保留：
+    - 工具目录
+    - 工具注册与执行基础设施
+  - P1 必须保留关键实现或整包保留：
+    - 权限系统
+    - 子 Agent / Agent 定义系统
+    - MCP 核心服务
+    - Skills 核心系统
+  - P2 允许只保留索引与映射：
+    - 命令面
+    - 上下文构建层
+    - 状态层
+  - P3 默认只保留入口与说明：
+    - 大型 UI 组件层
+    - 主题、视觉、展示性组件
+- 如果项目的主要价值正好集中在 UI，本优先级允许被项目级逻辑覆盖。
+
+### 14.4.5 能力状态必须入包
+
+- 逻辑包不应只回答“有没有这个目录”，还必须回答“能力现在处于什么状态”。
+- 至少应标注以下状态之一：
+  - implemented
+  - enabled conditionally
+  - disabled by feature flag
+  - stub
+  - external-only
+- 若没有能力状态矩阵，后续维护者会误把“代码存在”当成“能力可用”。
+
+### 14.5 逻辑包版本迭代规则
+
+- 只要在当前项目中发现更准确的执行链路、工具边界、权限行为、打包规则或扩展模型，就应回写到主逻辑文件，而不是只更新导出包。
+- 主逻辑文件与导出逻辑包之间，应保持：
+  - 主逻辑负责抽象规则
+  - 项目逻辑包负责实例化映射
+  - 版本号递增时，应说明新增了哪些结构，而不是只改文件名
+
+---
+
+## 15. 版本说明
+
+- 本版为 `AgentLogic_V6`
 - 本版是对 `agentlogic.md` 与 `agentlogic test1.md` 的整理版：
   - 保留通用工程规则
   - 保留打包 / 文档 / 冲突清理 / README 表现规则
@@ -413,7 +627,7 @@
 
 ---
 
-# AgentLogic V5 (English Version)
+# AgentLogic V6 (English Version)
 
 This document is a general AI engineering collaboration protocol. It standardizes how AI should work when starting a project, reviewing a project, fixing a project, refactoring a project, packaging a project, or publishing a project.
 
@@ -475,6 +689,50 @@ This document is a general AI engineering collaboration protocol. It standardize
   - L2: solution design, architecture, interaction, constraints
   - L3: code changes, builds, validation, release
 - Before the task boundary is clear, do not expand scope or add extra work on your own.
+
+### 3.4 Every Agent Must Follow the Master Logic on Entry
+
+- Whenever an agent starts a new project, takes over a new module, enters a new subsystem, or moves into a new phase, it must first follow the master-logic onboarding and planning flow instead of directly implementing, editing, or executing commands.
+- “Every agent” includes, but is not limited to:
+  - the main-thread agent
+  - sub-agents
+  - parallel agents
+  - module-specific agents
+  - review, verification, and planning agents
+- The mandatory onboarding flow should include at least:
+  - identifying the documentation entrypoint
+  - reading the relevant markdown and key entrypoint source files
+  - determining whether the task is L1, L2, or L3
+  - defining the execution order, current scope boundary, and risk judgment
+- If the task is “adding a new module” rather than “fixing an existing module”, the agent must also add a module-level plan:
+  - module objective
+  - module boundary
+  - relationship to the existing system
+  - entrypoints and landing points
+  - validation method
+- Until this step is completed, the agent should not move into direct implementation unless the user explicitly asks to skip it and that skip has been recorded as a risk.
+
+### 3.5 The Master Logic Takes Priority Over Local Habits
+
+- When a project contains scattered conventions, temporary notes, stale comments, or local module habits, all agents should treat the master logic as the highest collaboration rule and then adapt to the real project structure.
+- Local rules may refine the master logic, but they should not bypass the master logic’s onboarding, layering, validation, and documentation-sync requirements.
+- The value of the master logic is that different agents can enter the project at different times and still follow the same stable path into the system, which significantly reduces error rate and structural drift.
+
+### 3.6 The Master Logic Must Be Read in Full
+
+- An agent must read the master logic in full. It is not acceptable to read only the front section, only a few matching clauses, or to assume that once sections `1`, `2`, and `3` are seen, later sections such as `11`, `12`, and `13` can be ignored.
+- Later sections of the master logic often contain:
+  - prohibitions
+  - documentation-sync requirements
+  - packaging rules
+  - risk boundaries
+  - version-maintenance rules
+- Skipping those sections may look faster in the beginning, but it substantially increases later realignment cost, structural drift, and rule conflicts.
+- Therefore, before an agent claims that master-logic onboarding is complete, it should by default satisfy all of the following:
+  - it has read the full master logic in order
+  - it has confirmed that later sections do not contain constraints relevant to the current task
+  - it has incorporated the mandatory clauses from later sections into the current execution judgment
+- Reading the master logic should not be treated as keyword matching; it should be treated as a full structured read.
 
 ---
 
@@ -548,6 +806,39 @@ This document is a general AI engineering collaboration protocol. It standardize
 
 - When a problem can be traced through logs, paths, instance state, or build chains, keep moving until the likely cause is clear.
 - Do not hand obvious next-step troubleshooting back to the user too early.
+
+### 5.4.1 Duty to Evaluate Tools and Skills Proactively
+
+- If AI cannot determine which tool or skill is most appropriate for the current task, or if the default path appears clearly inefficient, it should not mechanically keep using the old path.
+- In that situation, AI should perform a constrained tool evaluation and answer at least:
+  - whether the current default tool is merely usable instead of actually appropriate
+  - whether the task has a more specialized, efficient, or stable tool or skill available
+  - whether the alternative can materially improve:
+    - reading efficiency
+    - classification accuracy
+    - search quality
+    - structural understanding speed
+    - automation level
+- The purpose of this proactive evaluation is to prevent AI from operating in a closed loop with weak default tools while overlooking better-fit tools that already exist.
+
+### 5.4.2 External Better-Tool Discovery Rule
+
+- When AI starts a new project, takes over a new module, or establishes a new workflow, and finds that an external tool, skill, classifier, indexer, reader, analyzer, or automation component is clearly better suited, it should proactively record and propose it.
+- “Proactively propose” does not mean silently integrating it immediately. It means:
+  - first explain why the current tool path is insufficient
+  - then explain why the candidate tool is a better fit
+  - then explicitly classify it as one of:
+    - recommended
+    - candidate enhancement
+    - already integrated
+- Without confirmation, AI should not describe an external candidate tool as if it were already part of the current system.
+
+### 5.4.3 Avoid Tool Conservatism
+
+- AI should not assume that an old tool, default browser path, default search path, or inherited script is still the best current option just because it already exists.
+- “Use the old tool to get something done first” can be a temporary tactic, but it should not prevent AI from recognizing and proposing better tool directions.
+- For high-frequency, inefficient, repetitive, or long-running workflows, AI should actively consider whether a better tool-based alternative exists.
+- When the default tool path is inefficient, the agent should actively look for a more appropriate tool or approach for the task, but it must distinguish between officially integrated capabilities and candidate enhancements.
 
 ### 5.5 No Unapproved Feature Additions
 
@@ -821,9 +1112,146 @@ This document is a general AI engineering collaboration protocol. It standardize
 
 ---
 
-## 14. Version Note
+## 14. Source-Driven Logic Package Maintenance Protocol
 
-- This version is `AgentLogic_V5`.
+### 14.1 A Logic Package Is Not a Raw Source Backup
+
+- When the task is to organize a project into a logic package, the deliverable should not be a blind copy of the entire repository.
+- A logic package should be a structured knowledge package focused on how to understand, enter, execute, validate, and extend the system.
+- By default, it should include at least:
+  - a master logic file
+  - architecture layers
+  - the main execution flow
+  - a tool integration inventory
+  - permissions and safety mechanisms
+  - extensibility mechanisms
+  - key source mappings
+
+### 14.2 Tools Must Be Integrated as a System View
+
+- When a project contains built-in tools, external tools, MCP tools, skills, sub-agents, or command systems, the logic package must not only list directories.
+- It should answer at least:
+  - where tools are registered
+  - how tools are exposed to the model
+  - how tool permissions are evaluated
+  - how tools execute
+  - how tool results flow back into the conversation
+  - which tools are always available
+  - which tools are controlled by platform, permissions, environment variables, or feature flags
+- The tool integration document should preferentially provide:
+  - tool categories
+  - enablement conditions
+  - risk levels
+  - key source paths
+
+### 14.3 Every Logic Package Must Cite Source Evidence
+
+- Every key conclusion in the logic package should be traceable to real source files or project markdown.
+- When practical, include:
+  - markdown paths
+  - source code paths
+  - entry files
+  - key functions or modules
+- If a capability is stubbed, partially implemented, conditionally enabled, platform-limited, or feature-flagged off, this must be stated explicitly.
+
+### 14.4 Recommended Logic Package Structure
+
+- When producing an independent logic package, the default output should be:
+  - `00_README.md`
+  - `01_MasterLogic.md`
+  - `02_Architecture.md`
+  - `03_AgenticLoop.md`
+  - `04_Tools.md`
+  - `05_PermissionsAndSafety.md`
+  - `06_Extensibility.md`
+  - `07_CommandSurface.md`
+  - `08_SourceIndex.md`
+  - `manifest.json`
+- If a higher-level master logic file already exists, such as `AgentLogic_V6.md`, the package should retain that master logic and layer project-specific structure on top of it instead of replacing its generic engineering value.
+
+### 14.4.1 Layered Packaging Should Be Treated as the Default
+
+- When a project contains substantial tool source code, tool orchestration code, permission code, or command code, the logic package should not stop at the abstract documentation layer.
+- By default, it should use at least three layers:
+  - the abstract logic layer
+  - the raw source layer
+  - the index and mapping layer
+- The abstract logic layer explains why the system is structured the way it is.
+- The raw source layer preserves the real implementation of critical capabilities, especially the tool system.
+- The index and mapping layer tells future maintainers:
+  - which sources must be read first
+  - which sources are support layers
+  - which sources are currently stubs, dead branches, or conditionally enabled
+
+### 14.4.2 Tool Source Is Allowed to Be Packaged Directly
+
+- For the tool system, this protocol explicitly allows the tool source directories to be included directly in the logic package.
+- But raw tool source alone is insufficient; the package must also include a tool overview document that explains:
+  - tool categories
+  - tool entrypoints
+  - tool registration points
+  - tool execution infrastructure
+  - tool permission boundaries
+  - tool enablement conditions
+- When there are many tools, it is acceptable to use a layered approach of “raw tool source preserved as-is + overview documentation with system-level explanation” instead of rewriting every tool into one oversized summary.
+
+### 14.4.3 The Master Logic May Explicitly Enforce Packaging Boundaries
+
+- When the package is intended not only for reading but also for ongoing maintenance and reuse, the master logic should explicitly enforce:
+  - which directories must be included
+  - which directories only need indexed references
+  - which directories should be summarized instead of copied wholesale
+- Typical enforced rules include:
+  - tool directories must be preserved as a package layer
+  - core permission directories must be preserved through either raw copies or key implementation slices
+  - documentation directories may be selectively extracted rather than fully copied
+  - large UI directories may be represented by entrypoint indexes and key execution-flow explanations
+- Without explicit enforcement, future maintainers often produce unstable packages that are half-summary and half-loss.
+
+### 14.4.4 Recommended Packaging Priority
+
+- For agentic CLI systems, tool-centric systems, and permission-bound engineering projects, the default packaging priority should be:
+  - P0 must be preserved as raw package layers:
+    - tool directories
+    - tool registration and execution infrastructure
+  - P1 must preserve either key implementations or full raw copies:
+    - permission systems
+    - sub-agent and agent-definition systems
+    - MCP core services
+    - skill systems
+  - P2 may be preserved as indexes and mappings:
+    - command surfaces
+    - context-building layers
+    - state layers
+  - P3 should default to entrypoints and explanations only:
+    - large UI component layers
+    - theme, presentation, and display-oriented components
+- If the main value of the project is the UI itself, the project-specific logic may override this priority.
+
+### 14.4.5 Capability Status Must Be Captured
+
+- A logic package should not only answer “does this directory exist”; it must also answer “what is the current capability state”.
+- At minimum, one of the following states should be recorded:
+  - implemented
+  - enabled conditionally
+  - disabled by feature flag
+  - stub
+  - external-only
+- Without a capability-state matrix, future maintainers will incorrectly treat “code exists” as “capability is available”.
+
+### 14.5 Version Iteration Rules for Logic Packages
+
+- When a project reveals more accurate execution flows, tool boundaries, permission behavior, packaging rules, or extensibility models, those lessons should be written back into the main logic file instead of only updating the exported package.
+- The relationship should remain:
+  - the master logic defines abstract rules
+  - the project logic package defines project-specific mappings
+  - when the version increases, the documentation should state what structural value was added instead of only changing the file name
+
+---
+
+## 15. Version Note
+
+- This version is `AgentLogic_V6`.
 - It is a consolidated version based on `agentlogic.md` and `agentlogic test1.md`.
 - It keeps:
   - general engineering rules
