@@ -1354,6 +1354,66 @@ This document is a general AI engineering collaboration protocol. It standardize
   - the project logic package defines project-specific mappings
   - when the version increases, the documentation should state what structural value was added instead of only changing the file name
 
+### 14.6 Validation Artifact and Repository Sync Rules
+
+- For UI, layout, rendering, window-behavior, and visual-regression work, screenshot-based visual verification is a required validation tool, not an optional extra.
+- The agent must not rely only on code reading or build success when the problem is visibly behavioral.
+- When UI verification depends on screenshots, screenshots may be generated as temporary validation artifacts.
+- After the screenshot has completed its debugging or confirmation purpose, the temporary screenshot file must be deleted immediately.
+- Temporary UI screenshots must not remain in `dist`, release folders, staging folders, or the repository root after verification is complete.
+- The main logic must not absorb every useful discovery by default.
+- Project-specific discoveries, task-specific notes, and temporary working patterns should stay in project markdown, task notes, or local structure unless the user explicitly asks for main-logic promotion.
+- Only when the user explicitly says that a rule should enter the main logic should that rule be written back into `AgentLogic_V6`.
+- When the user explicitly asks for a main-logic update, the updated main logic must be synchronized not only to the current project repository but also to the dedicated rules repository: `https://github.com/UIhoshi/workspace-rules`.
+- That cross-repository sync applies specifically to main-logic updates, not to every project-layer change by default.
+- After the rule has been written back, the repository must be synchronized in the same round unless a concrete blocker exists.
+- Routine logic additions do not justify a major-version jump such as `V6 -> V7`.
+- Unless the change is a real major logic-generation upgrade, updates should remain within the current logic version line.
+- If the repository already contains a release archive for the current logic version, the same-version archive should be replaced instead of creating an arbitrary new major version.
+- If no tag, release, or release-archive baseline exists yet, do not fabricate a fake release flow. In that case, keep normal repository synchronization and preserve the current version line.
+
+### 14.7 Startup Re-Read Loop for Main Logic
+
+- Before every new work round, the agent must re-read the current project's main logic entry before executing.
+- "Every new work round" includes returning after interruption, starting a new user request, entering a new module, or resuming after a failed attempt.
+- The purpose is not ceremonial reading. The purpose is to refresh the current behavioral constraints, validation rules, packaging rules, and repository-sync rules before action.
+- This startup re-read loop must be reflected not only in the logic package itself, but also in the project's own top-level markdown so the project can remind future agents locally.
+- If the project already declares its logic entry path, the startup loop should explicitly point back to that path.
+
+### 14.8 Structured External-Brain Rule
+
+- Do not assume that stable execution comes from internal memory alone.
+- The preferred working model is an externalized memory model: methods, decisions, exceptions, and learned procedures should be written into structured records and revisited before execution.
+- Spreadsheet-like structure is a valid and preferred form of external memory when the user's working style depends on collecting many facts into one navigable structure.
+- When the user describes a workflow similar to an Excel habit, the agent should interpret that as a preference for:
+  - structured aggregation
+  - repeatable lookup
+  - reusable execution patterns
+  - low-memory-dependence workflows
+- Therefore, when the agent encounters uncertainty, difficulty, or a recurring task, the default response should be:
+  - look back at the recorded structure first
+  - reuse the recorded method if it exists
+  - only improvise when the structured record does not already provide a usable path
+- This rule applies both to the user's own documented working style and to the agent's collaboration behavior in the repository.
+
+### 14.9 Logic-Project Closed Loop Rule
+
+- Project work must form a closed loop between the main logic and the project's own structure documents.
+- The default loop is:
+  - read the main logic first
+  - read the relevant project markdown and structure files
+  - before making the formal update, return once more to the main logic
+  - then decide how to implement the project change
+- This means the main logic is not only a startup reference. It is also a pre-implementation calibration layer.
+- When the task is to update, refactor, or extend the project, the agent must not jump directly from reading project files into implementation.
+- The agent must first re-check the change through the main-logic lens before editing code, packaging artifacts, or project documentation.
+- The purpose of this loop is:
+  - prevent local project drift
+  - prevent implementation choices from bypassing collaboration rules
+  - ensure project updates still obey the same higher-order method
+  - keep project facts and execution rules continuously aligned
+- This closed loop should also be reflected in the project's own top-level markdown so the project locally reminds future agents how updates must be performed.
+
 ---
 
 ## 15. Version Note
