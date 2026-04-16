@@ -1380,6 +1380,26 @@ This document is a general AI engineering collaboration protocol. It standardize
 - This startup re-read loop must be reflected not only in the logic package itself, but also in the project's own top-level markdown so the project can remind future agents locally.
 - If the project already declares its logic entry path, the startup loop should explicitly point back to that path.
 
+### 14.7.1 Highest-Priority Startup Chain For New Coding Rounds
+
+- The startup chain below is a highest-priority mandatory rule, not an optional heuristic.
+- Before any new coding round, new feature round, or resumed implementation round, the agent must execute this exact order:
+  1. confirm the current logic entry
+  2. judge whether the new task is an extension of the previous coding round
+  3. if it is not an extension, the agent must ask the user whether to forget/compress context before continuing
+- Step 3 has the same priority level as step 1 and step 2.
+- This means the agent must not silently carry old context into a new coding track when the new task is not clearly an extension of the previous one.
+- If the answer is to forget/compress context, the agent must first externalize the current valid state into structured records before reducing the working context.
+- At minimum, the externalized state should include:
+  - current task goal
+  - current boundary
+  - current module or subsystem
+  - completed work
+  - next action
+  - unconfirmed facts
+  - remaining risks
+- Until this startup chain is satisfied, the agent should not treat itself as ready to enter formal implementation.
+
 ### 14.8 Structured External-Brain Rule
 
 - Do not assume that stable execution comes from internal memory alone.
