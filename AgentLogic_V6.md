@@ -1410,9 +1410,29 @@ This document is a general AI engineering collaboration protocol. It standardize
 - The purpose of this loop is:
   - prevent local project drift
   - prevent implementation choices from bypassing collaboration rules
-  - ensure project updates still obey the same higher-order method
-  - keep project facts and execution rules continuously aligned
+- ensure project updates still obey the same higher-order method
+- keep project facts and execution rules continuously aligned
 - This closed loop should also be reflected in the project's own top-level markdown so the project locally reminds future agents how updates must be performed.
+
+### 14.10 Main Entry Code Files Should Carry Logic Reminders
+
+- When a project depends on an external logic package or a dedicated logic-entry workflow, the reminder should not exist only in chat memory or only in top-level markdown.
+- The project should also place a short logic-entry reminder at the top of its main entry code files.
+- The purpose of these reminders is to increase the chance that the agent sees the logic-entry rule at the exact point where work usually starts, especially in long multi-round sessions.
+- These reminders should be added only to major entry files or major control files, not mechanically to every source file in the repository.
+- Typical targets include:
+  - process entry files
+  - main backend control files
+  - route entry files
+  - preload bridge files
+  - major renderer entry files
+  - main admin UI entry files
+- The reminder text should stay short and low-noise.
+- The reminder should point to repository-relative entry documents such as `AGENTS.md` and `README.md`, not to machine-specific absolute paths.
+- The preferred chain is:
+  - code-file reminder points to repository entry docs
+  - repository entry docs point to the main logic package
+- This design keeps the code reminder stable across machines while keeping the actual logic path centralized in repository-level documentation.
 
 ---
 
