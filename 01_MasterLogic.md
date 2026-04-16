@@ -19,7 +19,8 @@
 
 - 主入口文档：
   - `README.md`
-  - `CLAUDE.md`
+  - `AIagent.md`
+  - `AGENTS.md`
   - `docs/introduction/architecture-overview.mdx`
 - 主入口代码：
   - `src/entrypoints/cli.tsx`
