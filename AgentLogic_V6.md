@@ -1380,6 +1380,41 @@ This document is a general AI engineering collaboration protocol. It standardize
 - This startup re-read loop must be reflected not only in the logic package itself, but also in the project's own top-level markdown so the project can remind future agents locally.
 - If the project already declares its logic entry path, the startup loop should explicitly point back to that path.
 
+### 14.7.0 A Logic Package May Define One Absolute First-Entry File
+
+- A logic package may explicitly define one absolute first-entry file, such as `00_START_HERE.md`.
+- If such a file exists, the agent must read that file first before treating any other markdown, checklist, or logic file as the initial entrypoint.
+- The purpose of this file is not to become a second README. Its purpose is to force the correct reading order and reduce ambiguity about where formal work may begin.
+- This file should define:
+  - the mandatory reading chain
+  - whether the reading order is fixed
+  - the conditions for formal implementation readiness
+  - the startup chain for new coding rounds when needed
+- If the logic package declares such a file, other entry docs should point back to it instead of competing with it.
+
+### 14.7.0.1 The First-Entry File Is Logic, Not Project Content
+
+- A dedicated first-entry file such as `00_START_HERE.md` must be treated as logic-entry control, not as normal project content.
+- The agent must not use that file to record routine project changes, temporary notes, implementation details, or business-facing summaries.
+- Unless the user explicitly authorizes a logic update or rule update, the agent must not modify that first-entry file as part of ordinary project work.
+- For normal project tasks, the correct behavior is:
+  - read the first-entry file
+  - complete the mandatory reading chain
+  - continue into the project's own files
+- This boundary exists to prevent the first-entry file from gradually turning into a mixed document that weakens the logic-entry role.
+
+### 14.7.0.2 A Mandatory Full-Read Chain May Be Declared
+
+- A logic package may explicitly declare a mandatory full-read chain.
+- If such a chain is declared, the agent must not replace it with:
+  - skimming
+  - partial reading
+  - keyword-only reading
+  - summary-based substitution
+  - previous-session memory
+- If the chain says files must be fully read from beginning to end, that requirement is mandatory.
+- Until the declared full-read chain is completed, the agent must not treat itself as ready for formal planning, implementation, modification, validation, review, or rule synchronization.
+
 ### 14.7.1 Highest-Priority Startup Chain For New Coding Rounds
 
 - The startup chain below is a highest-priority mandatory rule, not an optional heuristic.

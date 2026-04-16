@@ -8,14 +8,18 @@ It is not a business project repository. It is an external rules brain that defi
 
 Start from:
 
-- `AgentLogic_V6.md`
+- `00_START_HERE.md`
 
-Then re-read:
+Then fully read the mandatory chain defined there.
 
-- `01_MasterLogic.md`
-- `15_LogicEntryChecklist.md`
+For this repository, the required full-read chain is:
 
-These three files are the minimum logic-entry set for every new work round.
+1. `README.md`
+2. `AgentLogic_V6.md`
+3. `01_MasterLogic.md`
+4. `15_LogicEntryChecklist.md`
+
+The agent must not treat itself as ready for formal work until the full-read chain has been completed.
 
 ## What This Repository Contains
 
@@ -42,6 +46,8 @@ For project work:
 
 1. Confirm where the current project's logic entry is declared.
 2. If the project points to this repository, re-read:
+   - `00_START_HERE.md`
+   - `README.md`
    - `AgentLogic_V6.md`
    - `01_MasterLogic.md`
    - `15_LogicEntryChecklist.md`
@@ -55,6 +61,7 @@ If a project no longer points to this repository or the logic-entry path is miss
 ## Important Boundaries
 
 - This repository is versioned logic, not a business workspace.
+- `00_START_HERE.md` is logic-entry control, not project content, and must not be modified unless the user explicitly asks for a logic update.
 - Do not create project code, logs, builds, or runtime artifacts here.
 - Main entry code files in business projects should point back to repository-relative entry docs such as `AGENTS.md` and `README.md`, not to machine-specific absolute paths.
 - Logic-entry rules should stay version-agnostic. Do not assume future projects will always remain on `V6`.
@@ -62,5 +69,7 @@ If a project no longer points to this repository or the logic-entry path is miss
 
 ## Related File
 
+- `00_START_HERE.md`
+  The mandatory first-entry file for this logic repository.
 - `00_README.md`
   The package-internal structure overview.
