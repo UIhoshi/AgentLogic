@@ -1,4 +1,4 @@
-# workspace-rules
+# AgentLogic
 
 This repository is the dedicated logic-package repository for the current Agent workflow.
 
@@ -58,6 +58,7 @@ If a project no longer points to this repository or the logic-entry path is miss
 - Do not create project code, logs, builds, or runtime artifacts here.
 - Main entry code files in business projects should point back to repository-relative entry docs such as `AGENTS.md` and `README.md`, not to machine-specific absolute paths.
 - Logic-entry rules should stay version-agnostic. Do not assume future projects will always remain on `V6`.
+- Business projects should also provide a repository-level enforcement script, such as `node scripts/check-logic-entry.js`, so logic-entry reminders can be checked mechanically instead of relying only on chat memory or human discipline.
 
 ## Related File
 

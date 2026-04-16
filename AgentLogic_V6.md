@@ -1364,7 +1364,7 @@ This document is a general AI engineering collaboration protocol. It standardize
 - The main logic must not absorb every useful discovery by default.
 - Project-specific discoveries, task-specific notes, and temporary working patterns should stay in project markdown, task notes, or local structure unless the user explicitly asks for main-logic promotion.
 - Only when the user explicitly says that a rule should enter the main logic should that rule be written back into `AgentLogic_V6`.
-- When the user explicitly asks for a main-logic update, the updated main logic must be synchronized not only to the current project repository but also to the dedicated rules repository: `https://github.com/UIhoshi/workspace-rules`.
+- When the user explicitly asks for a main-logic update, the updated main logic must be synchronized not only to the current project repository but also to the dedicated rules repository: `https://github.com/UIhoshi/AgentLogic`.
 - That cross-repository sync applies specifically to main-logic updates, not to every project-layer change by default.
 - After the rule has been written back, the repository must be synchronized in the same round unless a concrete blocker exists.
 - Routine logic additions do not justify a major-version jump such as `V6 -> V7`.
@@ -1433,6 +1433,23 @@ This document is a general AI engineering collaboration protocol. It standardize
   - code-file reminder points to repository entry docs
   - repository entry docs point to the main logic package
 - This design keeps the code reminder stable across machines while keeping the actual logic path centralized in repository-level documentation.
+
+### 14.10.1 Repository-Level Enforcement Script Should Back The Reminder
+
+- A logic reminder only in markdown and source headers is stronger than chat memory, but it is still not a full engineering enforcement mechanism.
+- If the project wants stronger execution guarantees, it should add a repository-level enforcement script that mechanically checks whether:
+  - the repository entry docs still point to the current logic entry
+  - the key entry code files still retain the logic reminder
+  - the reminder text still points to repository-relative docs rather than machine-specific paths
+- A recommended command pattern is:
+  - `node scripts/check-logic-entry.js`
+- This script does not replace the requirement to read the logic package.
+- Its role is to prevent silent drift, accidental deletion of reminders, and project-layer desynchronization after multiple implementation rounds.
+- Therefore the preferred enforcement stack becomes:
+  - logic package defines the rule
+  - repository markdown declares the entry path
+  - key entry code files carry short reminders
+  - repository script checks the reminder chain mechanically
 
 ---
 
