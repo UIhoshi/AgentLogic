@@ -1471,6 +1471,24 @@ This document is a general AI engineering collaboration protocol. It standardize
   - key entry code files carry short reminders
   - repository script checks the reminder chain mechanically
 
+### 14.10.2 Header-Level Mandatory Rules Should Default To English
+
+- When a project writes mandatory workflow rules into file headers, the default language for those header-level rules must be English.
+- This applies to header notices in:
+  - source files
+  - style files
+  - markup files
+  - project markdown files
+- The purpose is to maximize consistency across:
+  - different agents
+  - different language settings
+  - different model providers
+  - cross-project reuse
+- Local-language explanation is still allowed in normal project markdown body text.
+- But the short mandatory rule written into file headers should default to English unless the user explicitly requests a different default.
+- Therefore a project should not mix header-level mandatory rules between Chinese, English, and other languages by default.
+- The repository-level enforcement script should also validate the English header rule text if the project has standardized on it.
+
 ---
 
 ## 15. Version Note
