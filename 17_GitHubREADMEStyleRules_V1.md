@@ -568,6 +568,64 @@ But the following should stay broadly consistent:
 
 This is the minimum structural consistency target.
 
+## README Density By Repository Maturity
+
+Repositories at different maturity levels should not all carry the same README density.
+
+The structure skeleton should remain recognizable, but the amount of detail should scale with maturity.
+
+### Early / New Repository
+
+Best fit:
+
+- first public push
+- early alpha
+- still validating scope
+
+Density rules:
+
+- keep the README lean
+- keep optional sections to a minimum
+- focus on positioning, value, quick start, core features, basic technical shape, and license
+- omit roadmap, FAQ, version evolution, and heavy developer detail unless they already add real value
+
+### Active / Mature Repository
+
+Best fit:
+
+- public project with active iteration
+- real users or contributors
+- stable enough release or usage story
+
+Density rules:
+
+- use the full normal skeleton
+- FAQ, roadmap, version evolution, and richer quick-start variants are allowed when truthful
+- keep the landing-page rhythm strong even when more lower-half detail is present
+
+### Maintenance / Stable Repository
+
+Best fit:
+
+- feature-stable projects
+- long-lived tools in maintenance mode
+- archived or low-change but still usable repositories
+
+Density rules:
+
+- keep the top half strong and current
+- compress forward-looking sections such as roadmap unless they are still meaningful
+- prefer clear status signaling, compatibility, limitations, and maintenance notes over aspirational expansion
+- avoid bloating the README with old historical detail that belongs in changelogs or release notes
+
+## Density Guardrails
+
+- `Default Required`: maturity level may change content density, but it must not break the shared section rhythm.
+- `Default Required`: a sparse README is acceptable only when it is intentionally sparse, not incomplete.
+- `Conditional Required`: early repositories may omit some optional sections, but should not omit the first runnable path.
+- `Conditional Required`: mature repositories should not hide important usage, compatibility, or release information just to stay short.
+- `Conditional Required`: maintenance-mode repositories should clearly communicate current status if development pace has slowed or feature growth has stopped.
+
 ## Conditional Expansion Rules
 
 ### FAQ

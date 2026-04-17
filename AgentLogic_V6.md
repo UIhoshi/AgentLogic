@@ -1720,6 +1720,24 @@ This document is a general AI engineering collaboration protocol. It standardize
 - But accidental structure drift between `README.md`, `README.zh-CN.md`, `README.ja.md`, or other language files should be treated as a documentation inconsistency rather than accepted by default.
 - If one language intentionally diverges, that divergence should be conscious and justified by a real audience or platform reason.
 
+### 14.10.15 GitHub README Density Should Scale With Repository Maturity
+
+- Not every repository should carry the same README density.
+- The shared structure should stay recognizable, but optional depth should scale with repository maturity.
+- For early or newly public repositories:
+  - keep the README lean
+  - prioritize positioning, value, quick start, core features, basic technical shape, and license
+  - omit optional lower-half sections unless they already add real value
+- For active or mature repositories:
+  - the full normal skeleton may be used
+  - FAQ, roadmap, version evolution, and richer quick-start variants are appropriate when truthful
+- For maintenance-mode or stable repositories:
+  - keep the top half current and useful
+  - compress aspirational sections
+  - prefer status clarity, compatibility, limitations, and maintenance notes over expansion fluff
+- A sparse README is acceptable only when it is intentionally sparse for maturity reasons, not when it is simply incomplete.
+- A mature README should not hide important usage or compatibility information just to stay short.
+
 ---
 
 ## 15. Version Note

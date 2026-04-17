@@ -26,6 +26,7 @@ It should be used together with:
 ## 1. Structure Check
 
 - [ ] The README follows the template baseline or a justified repository-specific equivalent
+- [ ] The README density matches the repository's maturity level rather than feeling arbitrarily sparse or bloated
 - [ ] The README has a clear project title
 - [ ] The README has a one-line positioning statement near the top
 - [ ] The README includes a clear value or pain-point section
@@ -113,6 +114,7 @@ It should be used together with:
 - [ ] The first screen gives a clear and strong first impression
 - [ ] The README is easy to scan
 - [ ] The page feels balanced rather than text-heavy or image-heavy
+- [ ] Optional depth matches repository maturity: early, active, or maintenance mode
 - [ ] The repository homepage feels intentional rather than improvised
 - [ ] The README is ready to function as a public-facing repository landing page
 

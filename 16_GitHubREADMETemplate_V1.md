@@ -104,6 +104,17 @@ Use only when applicable:
 - version evolution
 - author/about section
 
+## Maturity Adaptation Rule
+
+The template should adapt to repository maturity without losing the shared README skeleton.
+
+Rules:
+
+- early or newly public repositories may stay lighter and omit some optional lower-half sections
+- active or mature repositories may use more of the optional sections when they add real reader value
+- maintenance-mode repositories should prefer current status, compatibility, and limits over aspirational filler
+- regardless of maturity, the README should still provide a clear top-half landing page and at least one truthful usage path
+
 ## Placeholder Rules
 
 Use explicit placeholders during drafting, and replace them only with confirmed facts:
