@@ -132,6 +132,7 @@ Recommended pattern:
 Rules:
 
 - `Conditional Required`: if the project is visual, interactive, or workflow-driven, add a preview or proof section in the top half of the README.
+- `Conditional Required`: if screenshots or GIFs do not exist yet, replace `Product Preview` with `Product Proof`, `Usage Proof`, or another truthful proof section instead of faking visuals.
 - Use 1 to 3 preview assets by default.
 - Use 1 GIF at most unless the product truly needs more.
 - Do not overload the first half of the README with too many images.
@@ -162,6 +163,12 @@ Recommended pattern:
 - `Default Required`: quick start or usage must appear in the upper half of the README.
 - If a release link is not confirmed, use source setup instead.
 - Important warnings should be placed directly below quick start, not buried later.
+- `Conditional Required`: if the project has multiple real usage paths, structure `Quick Start` as a short multi-entry section instead of forcing a single path.
+- Preferred order for product repositories:
+  - release/install path
+  - local source/runtime path
+  - browser-only, fallback, or advanced path
+- Do not let developer setup crowd out the normal user install path on product-style repositories.
 
 ## At-A-Glance Table Rules
 
@@ -358,6 +365,8 @@ Recommended traits:
 - value proposition before technical details
 - quick start oriented around using the product
 - `At a Glance` table kept as a stable mid-page anchor
+- optional lightweight `Version Evolution` section in the lower half when release maturity matters
+- FAQ, roadmap, and demo video used only when they materially improve product understanding
 
 ### Developer Style
 
@@ -375,6 +384,7 @@ Recommended traits:
 - install and usage higher
 - screenshots optional
 - examples and technical summary earlier
+- version-history detail may replace product-oriented evolution storytelling when the repository is primarily developer-facing
 
 ## Style Selection Rules
 
@@ -384,6 +394,7 @@ Use `Product Style` when most of the following are true:
 - screenshots or GIFs materially improve understanding
 - the project is distributed as an app, packaged tool, or user-facing workflow
 - the repository homepage should sell product value quickly
+- the normal reader should understand how to use the product before reading technical details
 
 Use `Developer Style` when most of the following are true:
 
@@ -391,11 +402,20 @@ Use `Developer Style` when most of the following are true:
 - the main reader is a developer
 - installation and usage matter more than screenshots
 - visual product proof is secondary to code examples or integration examples
+- the README should optimize for implementation clarity over product landing-page impact
 
 Tie-break rule:
 
 - if a repository is mixed and also needs strong public presentation, default to `Product Style`
 - then pull installation, examples, or developer commands slightly higher without abandoning the overall structure
+
+## Version Evolution Section Rules
+
+- `Conditional Required`: include a lightweight `Version Evolution`, `How It Evolved`, or equivalent section when the repository has meaningful product-stage progression and that history helps users understand the current release.
+- Keep this section in the lower half of the README.
+- Keep it short, usually 3 to 5 bullets.
+- Use milestone framing, not a full changelog.
+- If a detailed changelog or release-notes document already exists, this section should summarize rather than duplicate it.
 
 ## Structural Consistency Rule
 

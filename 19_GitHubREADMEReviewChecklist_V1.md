@@ -81,6 +81,8 @@ It should be used together with:
 - [ ] The quick-start section is in the upper half of the page
 - [ ] Important warnings are placed directly near quick start
 - [ ] If no release exists, source-based setup or another truthful path is used instead
+- [ ] If the project has multiple real entry paths, quick start reflects them instead of collapsing everything into one fake path
+- [ ] For product-style repositories, the normal user path appears before advanced developer-only paths
 
 ## 8. Style-Mode Check
 
@@ -94,6 +96,7 @@ It should be used together with:
 - [ ] FAQ is included if the project has recurring confusion, install issues, or compatibility caveats
 - [ ] Roadmap is included if future direction helps readers
 - [ ] Demo video is included only when GIFs are insufficient
+- [ ] Version evolution is included only when it adds real context and remains lightweight
 - [ ] Optional sections improve clarity instead of just making the README longer
 
 ## 10. Final Quality Check

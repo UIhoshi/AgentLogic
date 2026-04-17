@@ -71,6 +71,7 @@ May require adaptation:
 - The opening should explain what the project is and why it matters.
 - Prefer concrete user pain points over abstract slogans.
 - A practical `Quick Start`, `Usage`, or equivalent section must exist by default.
+- If the project offers more than one real entry path, `Quick Start` should reflect the main supported paths instead of pretending there is only one.
 - If the product has a UI, screenshots or GIFs are strongly recommended.
 - If the project supports multiple languages, keep language links near the top and split full content into separate files.
 - If a field is unverified, do not invent it. Leave it pending, omit it, or convert it into a TODO for the repository owner.
@@ -100,6 +101,7 @@ Use only when applicable:
 - platform compatibility
 - known limitations
 - version history
+- version evolution
 - author/about section
 
 ## Placeholder Rules
@@ -133,6 +135,39 @@ If the README points users to downloadable release assets:
 - use a confirmed release URL only
 - do not invent a release link
 - if no release exists yet, replace the download step with source-based setup or mark the release as pending
+
+## Multi-Path Quick Start Rule
+
+If the project has multiple truthful user entry paths, prefer a short multi-path quick-start block over a fake single-path flow.
+
+Common valid paths include:
+
+- release package path
+- local source/runtime path
+- browser-only or fallback path
+- CLI path
+
+Rules:
+
+- keep each path short and outcome-oriented
+- order paths by normal user priority, not by developer preference
+- do not force `npm run dev` to be the only path if most users install from Releases
+- do not add a path that is not actually supported
+
+## Version Evolution Rule
+
+Use a lightweight `Version Evolution`, `How It Evolved`, or equivalent section when:
+
+- the project has real release evolution worth highlighting
+- readers benefit from seeing how the product matured
+- the section helps explain why the current version matters
+
+Rules:
+
+- keep it brief
+- place it in the lower half of the README
+- do not let it replace a full changelog or release notes
+- prefer milestone-style summaries instead of exhaustive bullet dumps
 
 ## Screenshot Rule
 
@@ -178,10 +213,31 @@ Optional example:
 
 ## 30-Second Quick Start
 
+### Path 1: Latest Release
+
 1. Download from [Latest Release]([LATEST_RELEASE_URL])
 2. [QUICK_START_STEP_1]
 3. [QUICK_START_STEP_2]
-4. [QUICK_START_STEP_3]
+
+### Path 2: Local Source Runtime
+
+```bash
+[DEV_COMMAND]
+```
+
+- [LOCAL_RUNTIME_NOTE_1]
+- [LOCAL_RUNTIME_NOTE_2]
+
+### Path 3: Optional Fallback Path
+
+```bash
+[OPTIONAL_FALLBACK_COMMAND]
+```
+
+- [OPTIONAL_FALLBACK_NOTE_1]
+- [OPTIONAL_FALLBACK_NOTE_2]
+
+> Remove unused paths. Keep only the real supported paths for the repository.
 
 **Important notes**
 
@@ -243,6 +299,14 @@ Optional example:
 - [LATEST_VERSION_SUMMARY]
 
 > Or replace with a link to Releases or a changelog.
+
+## Version Evolution
+
+- [VERSION_MILESTONE_1]
+- [VERSION_MILESTONE_2]
+- [VERSION_MILESTONE_3]
+
+> Use only when the project has real release evolution worth highlighting. Keep this brief.
 
 ## Contributing / Support
 

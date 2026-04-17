@@ -63,10 +63,22 @@ Best fit:
 
 ## Quick Start
 
+### Path 1: Latest Release
+
 1. Download the latest package from [Releases](./releases)
 2. Install and launch the server
 3. Connect the client machine inside the same LAN
 4. Create and publish your first playback task
+
+### Path 2: Local Source Runtime
+
+```bash
+npm install
+npm run dev
+```
+
+- Use this path when you want to run the desktop workflow from source.
+- Keep this below the release path because most operators are not expected to start from source.
 
 > Important:
 > Keep only one active instance per machine when upgrading.
@@ -136,6 +148,12 @@ npm run package
 - Safer batch operations
 - Improved multilingual UI coverage
 
+## Version Evolution
+
+- Early versions focused on stable LAN playback control and packaging reliability.
+- Mid-cycle releases improved day-to-day operator workflows and multilingual presentation.
+- The current line emphasizes public-repository clarity, stronger onboarding, and cleaner release framing.
+
 ## Contributing / Support
 
 - Open an Issue for bugs or ideas
@@ -190,6 +208,8 @@ import { loadLogic } from "agentlogic-sdk";
 
 const logic = await loadLogic();
 ```
+
+> If the package also ships a CLI or hosted docs entrypoint, add that as a separate path instead of overloading the install snippet.
 
 ## At a Glance
 
@@ -249,6 +269,12 @@ npm run build
 
 MIT
 ```
+
+## Example Notes
+
+- Product-style examples may use multi-entry quick start when the repository has both release and source paths.
+- Product-style examples may include a lightweight `Version Evolution` section in the lower half when the product has meaningful release maturity.
+- Developer-style examples should stay biased toward installation, code usage, and implementation clarity unless the repository also needs strong product framing.
 
 ## Example Usage Rule
 

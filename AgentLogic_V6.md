@@ -1617,6 +1617,44 @@ This document is a general AI engineering collaboration protocol. It standardize
 - If the repository already has a strong repository-specific README standard, that standard may override the package defaults.
 - But the automatic trigger rule still applies: the agent must consciously pass through the repository's README system rather than skipping README judgment entirely.
 
+### 14.10.8 Product README Quick Start Should Preserve Real Entry Paths
+
+- For product-style repositories, `Quick Start` must describe the real supported user entry paths instead of flattening everything into a single developer-only flow.
+- If the project has multiple truthful entry paths, the README should preserve them explicitly when they help the user choose how to start.
+- Typical path categories include:
+  - release or installer path
+  - local source/runtime path
+  - browser-only or fallback path
+- The default ordering for product-style repositories should be:
+  1. normal user path
+  2. source or local runtime path
+  3. fallback or advanced path
+- The agent must not force `npm run dev` or equivalent to become the only visible path when most real users start from Releases or installers.
+
+### 14.10.9 Product README May Use Lightweight Version Evolution
+
+- A product-style repository may include a lightweight `Version Evolution`, `How It Evolved`, or equivalent section when release maturity helps explain the current product state.
+- This section should stay in the lower half of the README.
+- It should remain brief, usually 3 to 5 bullets, and summarize milestones rather than turning into a full changelog.
+- If the repository already has detailed release notes or a changelog, the README section should summarize and point outward rather than duplicate detail.
+- The purpose is to add product context without weakening the landing-page rhythm.
+
+### 14.10.10 Product Preview May Fall Back To Product Proof
+
+- Product-style repositories should aim to include an early visual preview section.
+- But if screenshots or GIFs do not exist yet, the agent must not fake visual assets just to preserve symmetry.
+- In that case, the agent should replace `Product Preview` with a truthful early proof section such as:
+  - `Product Proof`
+  - `Usage Proof`
+  - `Workflow Proof`
+- This fallback should still preserve the same top-half structure:
+  - hero
+  - early proof
+  - value
+  - quick start
+  - compact summary
+- The goal is structural consistency without fabricated assets.
+
 ---
 
 ## 15. Version Note
