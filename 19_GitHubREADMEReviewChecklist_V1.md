@@ -38,6 +38,7 @@ It should be used together with:
 ## 2. Style Check
 
 - [ ] The top-half structure roughly matches the standard rhythm: Hero -> proof/preview -> value -> quick start -> compact summary
+- [ ] Locked top-half sections were not casually reordered
 - [ ] The Hero section is centered by default, or there is a good reason not to center it
 - [ ] If badges are present, they are placed near the hero and do not feel overloaded
 - [ ] The README includes an `At a Glance` table or an equivalent compact summary block
@@ -69,6 +70,9 @@ It should be used together with:
 - [ ] Multilingual links are shown only if those files actually exist
 - [ ] Full multilingual content is not stacked into one page by default
 - [ ] `README.md` still works as the primary landing page
+- [ ] Major section order is mirrored across language files unless there is a deliberate reason not to
+- [ ] The top-half structure is mirrored across language files
+- [ ] Shared screenshots, GIFs, and core links stay aligned across language files where possible
 
 ## 6. Preview And Proof Check
 

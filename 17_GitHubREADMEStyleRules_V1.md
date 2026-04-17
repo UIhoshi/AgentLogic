@@ -84,6 +84,46 @@ The default README should follow this presentation rhythm:
 
 Projects may merge adjacent sections, but should not scramble the top-half flow casually.
 
+## Section Order Rigidity Rules
+
+Structural consistency depends not only on which sections exist, but also on which sections are allowed to move.
+
+### Top-Half Locked Order
+
+The following top-half sequence should be treated as locked by default:
+
+1. Hero
+2. Preview or proof
+3. Value or pain-point section
+4. Quick start
+5. At-a-glance summary
+
+Rules:
+
+- `Default Required`: do not move technical implementation above value or quick start in product-style repositories.
+- `Default Required`: do not push quick start below large technical sections.
+- `Conditional Required`: for developer-style repositories, install and usage may move above preview, but hero and first runnable path should still remain near the top.
+- `Conditional Required`: if a repository has no preview section, the proof replacement section should occupy the same slot rather than shifting the whole rhythm.
+
+### Lower-Half Flexible Order
+
+The following lower-half sections may swap when it improves clarity:
+
+- core features
+- technical implementation
+- repository layout
+- development commands
+- FAQ
+- roadmap
+- version evolution
+- contribution
+- license
+
+Rules:
+
+- Lower-half reordering is allowed only if the top-half rhythm remains intact.
+- Do not use lower-half flexibility as an excuse to move the whole README into a developer-doc order for product repositories.
+
 ## Hero Rules
 
 Recommended default:

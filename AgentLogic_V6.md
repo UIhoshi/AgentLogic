@@ -1694,6 +1694,32 @@ This document is a general AI engineering collaboration protocol. It standardize
 - The top-half preview block should normally contain no more than 3 visual assets by default.
 - If a project needs more screenshots than that, the extra assets should move lower in the README or into dedicated docs instead of bloating the first screen.
 
+### 14.10.13 GitHub README Top-Half Section Order Should Be Mostly Locked
+
+- A shared README system loses value if repositories keep the same sections but shuffle the top-half order freely.
+- Therefore the top-half order should be treated as mostly locked by default:
+  1. hero
+  2. preview or proof
+  3. value or pain-point section
+  4. quick start
+  5. compact summary such as `At a Glance`
+- For product-style repositories, the agent should not move technical implementation above value or quick start.
+- For developer-style repositories, limited adjustment is allowed, but the first runnable path must still remain near the top.
+- Lower-half sections may swap more freely as long as the top-half landing-page rhythm remains intact.
+
+### 14.10.14 Multilingual README Files Should Be Structurally Mirrored
+
+- If a repository maintains multiple language README files, they should stay structurally mirrored by default.
+- Structural mirroring means:
+  - the same major section order
+  - the same top-half rhythm
+  - the same major proof assets when shared
+  - the same core repository links when shared
+- The purpose is not to force sentence-level literal translation.
+- Natural localization is allowed.
+- But accidental structure drift between `README.md`, `README.zh-CN.md`, `README.ja.md`, or other language files should be treated as a documentation inconsistency rather than accepted by default.
+- If one language intentionally diverges, that divergence should be conscious and justified by a real audience or platform reason.
+
 ---
 
 ## 15. Version Note

@@ -128,6 +128,19 @@ If the repository is multilingual, prefer:
 
 Do not stack full Chinese, English, and Japanese versions into one page by default.
 
+## Multilingual Structure Mirroring Rule
+
+If multiple language README files exist, they should stay structurally mirrored unless there is a strong project-specific reason not to.
+
+Rules:
+
+- keep the same major section order across language files
+- keep the same top-half structure across language files
+- keep badge presence consistent across language files when the badge data is shared
+- keep screenshots, GIFs, and repository-relative links aligned across language files where possible
+- allow wording to be localized naturally without forcing sentence-level literal translation
+- if one language omits a major section, that omission should be intentional and justified, not accidental drift
+
 ## Release Rule
 
 If the README points users to downloadable release assets:
