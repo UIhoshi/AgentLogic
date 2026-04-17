@@ -51,6 +51,8 @@ It should be used together with:
 - [ ] Every badge corresponds to real data
 - [ ] There are no vanity badges that add no useful decision signal
 - [ ] Missing CI, docs, release, or platform support has not been faked through badges
+- [ ] Badge order follows the repository's style mode priority rather than random selection
+- [ ] If the repository is minimal, weak badges were omitted instead of padding the strip
 
 ## 4. Content Truthfulness Check
 
@@ -74,6 +76,9 @@ It should be used together with:
 - [ ] Non-visual projects replace screenshots with a better proof layer such as usage examples, API examples, or architecture proof
 - [ ] The preview section is strong enough to explain the project quickly without becoming cluttered
 - [ ] GIF use is restrained and purposeful
+- [ ] Screenshot assets use stable repository-relative paths
+- [ ] Screenshot filenames are clean and reusable rather than export-noise names
+- [ ] The top-half preview block is not overloaded with too many images or GIFs
 
 ## 7. Quick Start Check
 

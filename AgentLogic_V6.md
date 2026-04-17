@@ -1655,6 +1655,45 @@ This document is a general AI engineering collaboration protocol. It standardize
   - compact summary
 - The goal is structural consistency without fabricated assets.
 
+### 14.10.11 GitHub README Badge Selection Should Follow A Priority Matrix
+
+- A GitHub README should not choose badges ad hoc.
+- If the repository uses badges, badge selection should follow a stable priority matrix based on repository style mode.
+- For product-style repositories, the default badge priority should be:
+  1. release or version
+  2. license
+  3. platform
+  4. build status
+  5. stars
+- For developer-style repositories, the default badge priority should be:
+  1. package version or release
+  2. license
+  3. build status
+  4. runtime or language
+  5. coverage or docs status
+- For minimal repositories, the default badge priority should be:
+  1. license
+  2. version or release
+  3. build status
+- The agent should prefer omitting weak badges over padding the badge strip with low-value or vanity signals.
+- Badge count should normally remain within 3 to 5 and should not exceed 6 without a concrete reason.
+
+### 14.10.12 GitHub README Screenshot Assets Should Follow A Stable Structure
+
+- When a repository uses screenshots or GIFs in its README, the assets should follow a stable repository structure rather than ad hoc export naming.
+- The default asset directory should be:
+  - `screenshots/`
+- The default naming pattern should prefer stable, reusable names such as:
+  - `main.png`
+  - `demo.gif`
+  - `usage.png`
+  - `feature-01.png`
+  - `feature-02.png`
+- The agent should avoid committing noisy export filenames such as timestamped screenshot names, `image (12).png`, or `final-final-demo.gif`.
+- Screenshot references should stay repository-relative and stable across machines.
+- The top-half preview block should normally contain no more than 3 visual assets by default.
+- If a project needs more screenshots than that, the extra assets should move lower in the README or into dedicated docs instead of bloating the first screen.
+
 ---
 
 ## 15. Version Note

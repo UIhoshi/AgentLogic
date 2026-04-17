@@ -325,6 +325,103 @@ Recommended pattern:
 - If the repository has no external docs, omit docs badges.
 - If stars are too low to add signal, stars may be omitted without penalty.
 
+## Badge Priority Matrix
+
+Use this matrix when deciding which badges survive if the repository has too many possible badges.
+
+### Product-Style Badge Order
+
+Keep in this order:
+
+1. release or version
+2. license
+3. platform
+4. build status
+5. stars
+6. docs or website status
+
+Rules:
+
+- The first row should usually stop at 5 badges.
+- A sixth badge is allowed only when it adds real reader decision value.
+- If the repository has no releases yet, use a truthful pre-release or status badge instead of inventing a release badge.
+
+### Developer-Style Badge Order
+
+Keep in this order:
+
+1. package version or release
+2. license
+3. build status
+4. runtime or language
+5. test coverage or docs status
+6. package registry badge
+
+Rules:
+
+- Prefer build and runtime signal over stars for developer-first repositories.
+- Coverage badges are optional and should be omitted if they are noisy, stale, or misleading.
+
+### Minimal Badge Order
+
+Keep in this order:
+
+1. license
+2. version or release
+3. build status
+
+Rules:
+
+- If one of these signals is unavailable, do not replace it with vanity badges.
+- Minimal repositories should favor fewer badges over weaker badges.
+
+## Screenshot Asset Rules
+
+Visual consistency across repositories should also come from screenshot structure, not only section order.
+
+Recommended default directory:
+
+- `screenshots/`
+
+Recommended default filenames:
+
+- `main.png` for the primary static hero screenshot
+- `demo.gif` for the primary workflow animation
+- `usage.png` for a real usage or secondary UI view
+- `feature-01.png`, `feature-02.png`, `feature-03.png` for additional supporting stills
+
+Rules:
+
+- `Default Required`: use repository-relative screenshot paths such as `./screenshots/main.png`.
+- `Default Required`: keep README assets inside `screenshots/` unless the project has a stronger established asset convention.
+- `Default Required`: prefer lowercase kebab-case or simple lowercase filenames.
+- `Default Required`: avoid spaces, dates, random export names, and machine-generated screenshot names in committed README assets.
+- `Conditional Required`: for product-style repositories, the first screenshot should usually be a stable main UI or main workflow image.
+- `Conditional Required`: if a GIF exists, keep a single primary GIF by default and avoid stacking many animations.
+- `Recommended`: keep static screenshots in `.png` unless there is a strong reason to use another format.
+- `Recommended`: use captions in the README when an image needs context.
+
+## Screenshot Naming Guardrails
+
+Avoid names like:
+
+- `Screenshot 2026-04-17 at 10.22.44.png`
+- `image (12).png`
+- `final-final-demo.gif`
+
+Prefer names like:
+
+- `main.png`
+- `demo.gif`
+- `usage.png`
+- `feature-01.png`
+
+## Screenshot Layout Guardrails
+
+- Do not place more than 3 visual assets in the top-half preview block by default.
+- Prefer one strong main screenshot plus one GIF or one supporting screenshot.
+- If a project needs more visual proof, move extra screenshots lower or into dedicated docs.
+
 ## Technical Section Rules
 
 - Put technical implementation below the product/value half.
