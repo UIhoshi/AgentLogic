@@ -1,0 +1,438 @@
+# GitHub README Style Rules V1
+
+This file defines the default presentation rules for GitHub-facing `README.md` files that use the repository template.
+
+## Purpose
+
+- Keep repository homepages visually structured across different projects.
+- Reduce README drift between repositories.
+- Allow project-specific variation without losing the same overall page rhythm.
+
+## Relationship To The Template
+
+- `16_GitHubREADMETemplate_V1.md` defines the content structure.
+- This file defines the presentation structure.
+- Future projects should use both:
+  - template for section selection and wording baseline
+  - style rules for layout rhythm and visual consistency
+
+## Design Goal
+
+The goal is not pixel-level uniformity.
+
+The goal is:
+
+- similar first-screen structure
+- similar information rhythm
+- similar preview-section treatment
+- similar technical summary treatment
+- similar lower-page developer section treatment
+
+Projects may differ in screenshots, copy tone, or section emphasis, but should not feel structurally unrelated.
+
+## Constraint Levels
+
+This file uses three levels:
+
+- `Default Required`: should be treated as the normal baseline
+- `Conditional Required`: must be used when the condition is met
+- `Recommended`: preferred when it improves the repository homepage
+
+## What To Keep From The Grok Draft
+
+The following ideas are worth keeping:
+
+- centered hero opening
+- clear one-line positioning under the title
+- multilingual links near the top when real files exist
+- a visually strong preview section
+- a compact “at a glance” summary table
+- a technical implementation section lower on the page
+- a short development command block near the lower half
+
+## What To Avoid Or Soften
+
+The following parts should not become hard requirements:
+
+- inline HTML color styling such as `<span style="color:#0066ff;">...`
+- forcing the exact same centered layout in every repository
+- forcing every repository to have screenshots or GIFs
+- forcing every repository to have emoji in the title
+- forcing every repository to expose development commands high on the page
+
+## Why The Grok Draft Needs Adjustment
+
+- GitHub Markdown rendering does not reliably support all inline style expectations.
+- Colored text in titles is fragile and not necessary for strong hierarchy.
+- Some repositories are product-facing, while others are libraries or backend services.
+- A single visual recipe should guide structure, not freeze all projects into one look.
+
+## Default Visual Structure
+
+The default README should follow this presentation rhythm:
+
+1. Hero
+2. Preview or proof section
+3. Problem/value section
+4. Quick start
+5. At-a-glance summary
+6. Core features
+7. Technical implementation
+8. Development or build commands
+9. Contribution / support
+10. License
+
+Projects may merge adjacent sections, but should not scramble the top-half flow casually.
+
+## Hero Rules
+
+Recommended default:
+
+```md
+<div align="center">
+
+# [OPTIONAL_EMOJI] [PROJECT_NAME]
+
+**[ONE_LINE_POSITIONING]**
+
+[English](./README.md) | [简体中文](./README.zh-CN.md) | [日本語](./README.ja.md)
+
+</div>
+```
+
+Rules:
+
+- `Default Required`: use a centered hero by default.
+- `Conditional Required`: if the repository is clearly developer-first and has little benefit from a product-style landing page, a left-aligned hero is allowed.
+- `Default Required`: keep the project title and one-line positioning in the hero area.
+- Use emoji only when it improves recognition and does not look gimmicky.
+- Remove multilingual links if the files do not exist.
+- Do not rely on inline color styling as a required pattern.
+
+## Preview Section Rules
+
+For visual products, the preview section should appear early.
+
+Recommended pattern:
+
+```md
+## Product Preview
+
+<div align="center">
+
+![Main UI](./screenshots/main.png)
+**Main interface**
+
+![Demo](./screenshots/demo.gif)
+**Core workflow demo**
+
+</div>
+```
+
+Rules:
+
+- `Conditional Required`: if the project is visual, interactive, or workflow-driven, add a preview or proof section in the top half of the README.
+- Use 1 to 3 preview assets by default.
+- Use 1 GIF at most unless the product truly needs more.
+- Do not overload the first half of the README with too many images.
+- Prefer captions under images when the visual needs explanation.
+- For non-visual projects, replace this section with usage proof, architecture, API example, or benchmark summary.
+
+## Value Section Rules
+
+- Keep the “what problem does this solve” section above deep technical details.
+- Prefer 3 to 5 bullets.
+- Bold the pain-point label if it improves scanning.
+- Do not write generic marketing fluff without operational detail.
+
+Recommended pattern:
+
+```md
+## ✨ What does this help with?
+
+- **Pain point 1**: [specific problem and how the project helps]
+- **Pain point 2**: [specific problem and how the project helps]
+- **Pain point 3**: [specific problem and how the project helps]
+```
+
+## Quick Start Rules
+
+- Quick start must remain short and executable.
+- Keep it within 3 to 5 steps by default.
+- `Default Required`: quick start or usage must appear in the upper half of the README.
+- If a release link is not confirmed, use source setup instead.
+- Important warnings should be placed directly below quick start, not buried later.
+
+## At-A-Glance Table Rules
+
+This is worth standardizing because it reduces README drift well.
+
+Recommended pattern:
+
+```md
+## At a Glance
+
+<div align="center">
+
+| Topic | Summary |
+|-------|---------|
+| Runtime | [RUNTIME_SUMMARY] |
+| Deployment | [DEPLOYMENT_SUMMARY] |
+| Focus | [PROJECT_FOCUS] |
+| Documentation | [DOCS_LOCATION] |
+
+</div>
+```
+
+Rules:
+
+- `Default Required`: include an `At a Glance` summary table or an equivalent compact summary block.
+- Keep 3 to 5 rows by default.
+- Use this table for fast scanning, not detailed explanation.
+- `Conditional Required`: for product-style repositories, this section should remain visually compact and easy to scan.
+- `Conditional Required`: for very small libraries or micro-tools, an equivalent short summary block may replace the table, but omission should be rare.
+
+## Badge Rules
+
+Badges are worth standardizing because they create a stable visual strip under the hero.
+
+Recommended default:
+
+```md
+<div align="center">
+
+[![Release](https://img.shields.io/badge/release-v1.0.0-blue)]([RELEASE_URL])
+[![License](https://img.shields.io/badge/license-MIT-green)]([LICENSE_URL])
+[![Platform](https://img.shields.io/badge/platform-Windows-lightgrey)]([PLATFORM_URL])
+
+</div>
+```
+
+Rules:
+
+- `Default Required`: place badges directly below the hero when the repository has meaningful badge data.
+- `Default Required`: use 3 to 5 badges by default.
+- `Default Required`: do not exceed 6 badges unless the repository has a very strong reason.
+- `Conditional Required`: if there is no real data for a badge, omit it instead of inventing one.
+- Good default badge categories:
+  - release or version
+  - license
+  - platform
+  - build status
+  - stars
+- Avoid vanity badges that do not help a reader decide whether to use the project.
+
+## Badge Presets By Project Type
+
+These presets are intended to reduce badge drift across repositories.
+
+### Product-Style Repository Preset
+
+Default priority:
+
+- release or version
+- license
+- platform
+- build status
+- stars
+
+Good fit:
+
+- desktop apps
+- web apps
+- user-facing tools
+
+Recommended pattern:
+
+```md
+<div align="center">
+
+[![Release](https://img.shields.io/badge/release-[VERSION]-blue)]([RELEASE_URL])
+[![License](https://img.shields.io/badge/license-[LICENSE]-green)]([LICENSE_URL])
+[![Platform](https://img.shields.io/badge/platform-[PLATFORM]-lightgrey)]([PLATFORM_URL])
+[![Build](https://img.shields.io/badge/build-passing-brightgreen)]([BUILD_URL])
+[![Stars](https://img.shields.io/github/stars/[OWNER]/[REPO]?style=flat)]([STARS_URL])
+
+</div>
+```
+
+### Developer-Style Repository Preset
+
+Default priority:
+
+- package version or release
+- license
+- build status
+- language or runtime
+- test coverage or docs status
+
+Good fit:
+
+- SDKs
+- libraries
+- CLI tools
+- backend services
+
+Recommended pattern:
+
+```md
+<div align="center">
+
+[![Version](https://img.shields.io/badge/version-[VERSION]-blue)]([RELEASE_URL])
+[![License](https://img.shields.io/badge/license-[LICENSE]-green)]([LICENSE_URL])
+[![Build](https://img.shields.io/badge/build-passing-brightgreen)]([BUILD_URL])
+[![Runtime](https://img.shields.io/badge/runtime-[RUNTIME]-informational)]([RUNTIME_URL])
+[![Docs](https://img.shields.io/badge/docs-available-blueviolet)]([DOCS_URL])
+
+</div>
+```
+
+### Minimal Repository Preset
+
+Use when the repository is too small to justify a full badge strip.
+
+Default priority:
+
+- license
+- version or release
+- build status
+
+Recommended pattern:
+
+```md
+<div align="center">
+
+[![License](https://img.shields.io/badge/license-[LICENSE]-green)]([LICENSE_URL])
+[![Version](https://img.shields.io/badge/version-[VERSION]-blue)]([RELEASE_URL])
+[![Build](https://img.shields.io/badge/build-passing-brightgreen)]([BUILD_URL])
+
+</div>
+```
+
+## Badge Selection Guardrails
+
+- Prefer one badge per decision signal.
+- Do not add multiple badges that communicate nearly the same thing.
+- If a project is pre-release and has no stable version, use a truthful pre-release label rather than a fake stable version.
+- If the repository has no CI, omit build badges.
+- If the repository has no external docs, omit docs badges.
+- If stars are too low to add signal, stars may be omitted without penalty.
+
+## Technical Section Rules
+
+- Put technical implementation below the product/value half.
+- Use short lists and one small repository-layout table.
+- Do not let this section become a full architecture manual.
+
+## Development Command Rules
+
+Recommended pattern:
+
+```bash
+npm install
+npm run dev
+npm run build
+```
+
+Rules:
+
+- Keep the command block short.
+- Include only confirmed commands.
+- Put long build or release procedures in `docs/` if necessary.
+
+## Two Default Style Modes
+
+### Product Style
+
+Best for:
+
+- desktop apps
+- web apps
+- end-user tools
+
+Recommended traits:
+
+- centered hero
+- badge strip below the hero
+- preview section early
+- value proposition before technical details
+- quick start oriented around using the product
+- `At a Glance` table kept as a stable mid-page anchor
+
+### Developer Style
+
+Best for:
+
+- SDKs
+- libraries
+- CLI tools
+- backend services
+
+Recommended traits:
+
+- centered hero still allowed, but left alignment is acceptable when product-style framing would feel artificial
+- a smaller or more restrained preview section
+- install and usage higher
+- screenshots optional
+- examples and technical summary earlier
+
+## Style Selection Rules
+
+Use `Product Style` when most of the following are true:
+
+- the project has a GUI
+- screenshots or GIFs materially improve understanding
+- the project is distributed as an app, packaged tool, or user-facing workflow
+- the repository homepage should sell product value quickly
+
+Use `Developer Style` when most of the following are true:
+
+- the project is mainly an SDK, library, CLI, API, or backend service
+- the main reader is a developer
+- installation and usage matter more than screenshots
+- visual product proof is secondary to code examples or integration examples
+
+Tie-break rule:
+
+- if a repository is mixed and also needs strong public presentation, default to `Product Style`
+- then pull installation, examples, or developer commands slightly higher without abandoning the overall structure
+
+## Structural Consistency Rule
+
+Across repositories, the style does not need to be identical.
+
+But the following should stay broadly consistent:
+
+- recognizable hero section
+- early value explanation
+- early quick-start or usage path
+- compact summary block or equivalent
+- technical details in the lower half
+
+This is the minimum structural consistency target.
+
+## Conditional Expansion Rules
+
+### FAQ
+
+- `Conditional Required`: include an FAQ section when the project has recurring installation issues, compatibility caveats, or common misunderstandings.
+- Place FAQ in the lower half of the README.
+
+### Roadmap
+
+- `Conditional Required`: include a roadmap when the repository is public, actively evolving, and readers benefit from seeing planned direction.
+- Keep roadmap short. Detailed planning belongs in issues, milestones, or docs.
+
+### Demo Video
+
+- `Conditional Required`: include a demo video link when GIFs are insufficient to explain the product interaction.
+- Prefer a linked thumbnail or a short labeled link rather than embedding clutter.
+- Demo video is recommended for product-style repositories, not for every repository by default.
+
+## Guardrails
+
+- Do not add decorative HTML that GitHub may render inconsistently.
+- Do not use colored text styling as a dependency.
+- Do not center everything mechanically.
+- Do not allow screenshots to push quick start too far down.
+- Do not let technical sections dominate the first screen unless the repository is clearly developer-first.

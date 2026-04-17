@@ -1524,6 +1524,99 @@ This document is a general AI engineering collaboration protocol. It standardize
 - Therefore a project should not mix header-level mandatory rules between Chinese, English, and other languages by default.
 - The repository-level enforcement script should also validate the English header rule text if the project has standardized on it.
 
+### 14.10.3 A Logic Package May Carry A Default GitHub README Template
+
+- A logic package may include one repository-level default template for GitHub-facing `README.md` work.
+- If that template exists, it should be treated as the default baseline when:
+  - creating a new repository `README.md`
+  - rewriting an incomplete or placeholder README
+  - preparing a repository homepage for open-source publication
+- In this package, the default file is:
+  - `16_GitHubREADMETemplate_V1.md`
+- This template should integrate existing README presentation rules rather than compete with them.
+- At minimum, the integrated rule set should preserve:
+  - README as the public landing page and first product impression
+  - practical quick-start or usage content by default
+  - multilingual README split across files instead of stacking full languages into one page
+  - repository-relative links instead of machine-specific absolute paths
+- The template is a structure baseline, not permission to invent facts.
+- The agent must not fabricate:
+  - screenshots
+  - GIF demos
+  - release links
+  - commands
+  - technical claims
+  - platform support
+- If the project already has a stronger explicit repository-specific README standard, that project-specific standard may override the package default.
+- If no stronger README standard exists, the package template should be reused instead of rebuilding the structure from scratch.
+
+### 14.10.4 A Logic Package May Also Carry GitHub README Style Rules
+
+- A content template alone is insufficient when the goal is to keep repository homepages broadly consistent across many projects.
+- Therefore a logic package may carry a separate GitHub README style-rules file in addition to the README template.
+- In this package, the default style-rules file is:
+  - `17_GitHubREADMEStyleRules_V1.md`
+- When a future repository uses the GitHub README template, it should also check the style-rules file in the same round.
+- The purpose is not to force pixel-identical README pages.
+- The purpose is to preserve broad structural consistency across repositories, including:
+  - recognizable hero section
+  - early value explanation
+  - early quick-start or usage path
+  - stable preview or proof section treatment
+  - technical details in the lower half rather than replacing the landing-page layer
+- Project-specific variation is still allowed.
+- But a repository should not drift so far that its README structure becomes unrelated to the rest of the project set without a good reason.
+
+### 14.10.5 A Logic Package May Carry README Example Files
+
+- A template and a style-rules file are usually enough for policy, but example files are useful for execution consistency.
+- Therefore a logic package may also carry one or more README example files that show:
+  - a product-style repository homepage
+  - a developer-style repository homepage
+- In this package, the default example file is:
+  - `18_GitHubREADMEExamples_V1.md`
+- Example files are not the source of truth for project facts.
+- Their purpose is to reduce ambiguity about final page shape, section rhythm, and visual balance.
+- When the agent prepares a new repository README, it should preferably use:
+  - the template file for section structure
+  - the style-rules file for presentation constraints
+  - the examples file for finished-page reference
+- This three-layer README system should be treated as the default baseline unless the project explicitly declares a stronger repository-specific standard.
+
+### 14.10.6 A Logic Package May Carry A README Review Checklist
+
+- A README system is more stable when it includes not only generation assets but also a final review layer.
+- Therefore a logic package may carry a dedicated GitHub README review checklist.
+- In this package, the default review-checklist file is:
+  - `19_GitHubREADMEReviewChecklist_V1.md`
+- When the agent drafts, rewrites, or significantly restructures a repository README, it should preferably run through the checklist before treating the README as complete.
+- The checklist should verify at least:
+  - structural completeness
+  - style consistency
+  - badge sanity
+  - truthfulness of links, screenshots, commands, and claims
+  - presence of a practical quick-start path
+- The default README workflow in this package therefore becomes:
+  - template
+  - style rules
+  - examples
+  - review checklist
+- This four-layer README system should be treated as the normal baseline unless a repository-specific standard overrides it.
+
+### 14.10.7 GitHub Upload Or Publication Automatically Triggers The README System
+
+- When the task includes uploading a project to GitHub, preparing a repository for first public push, preparing a repository homepage for publication, or restructuring a repository immediately before GitHub publication, the README system must be triggered automatically.
+- In this trigger case, README work is not optional polish.
+- It is part of publication readiness.
+- The agent should automatically invoke the full README workflow in the same round:
+  - `16_GitHubREADMETemplate_V1.md`
+  - `17_GitHubREADMEStyleRules_V1.md`
+  - `18_GitHubREADMEExamples_V1.md`
+  - `19_GitHubREADMEReviewChecklist_V1.md`
+- The agent must not upload or publish the repository while ignoring an obviously weak, placeholder, structurally inconsistent, or unreviewed README when the repository homepage is part of the public GitHub presentation.
+- If the repository already has a strong repository-specific README standard, that standard may override the package defaults.
+- But the automatic trigger rule still applies: the agent must consciously pass through the repository's README system rather than skipping README judgment entirely.
+
 ---
 
 ## 15. Version Note

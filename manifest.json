@@ -25,14 +25,22 @@
     "raw_commands",
     "capability_matrix",
     "packaging_policy",
-    "cross_directory_map"
+    "cross_directory_map",
+    "github_readme_template",
+    "github_readme_style",
+    "github_readme_examples",
+    "github_readme_review_checklist"
   ],
   "notes": [
     "This package is a structured logic package, not a raw source backup.",
     "When logic gets refined, update AgentLogic_V6.md first and then resync the package.",
     "Tool source is intentionally preserved as a raw layer in this package.",
     "Command source is also preserved as a raw layer in this version.",
-    "Projects using this package should back logic-entry reminders with a repository-level enforcement script such as node scripts/check-logic-entry.js."
+    "Projects using this package should back logic-entry reminders with a repository-level enforcement script such as node scripts/check-logic-entry.js.",
+    "This package includes GitHub README Template V1 at 16_GitHubREADMETemplate_V1.md for repository-homepage README creation and rewrites.",
+    "This package includes GitHub README Style Rules V1 at 17_GitHubREADMEStyleRules_V1.md so future repositories use both template and style instead of drifting structurally.",
+    "This package includes GitHub README Examples V1 at 18_GitHubREADMEExamples_V1.md for concrete Product Style and Developer Style reference.",
+    "This package includes GitHub README Review Checklist V1 at 19_GitHubREADMEReviewChecklist_V1.md for final README quality control."
   ],
   "version": "V6"
 }

@@ -29,6 +29,14 @@ The agent must not treat itself as ready for formal work until the full-read cha
   A project-level reinforcement and mapping layer for the main logic.
 - `02_Architecture.md` to `15_LogicEntryChecklist.md`
   Supporting layers for architecture, tools, safety, extensibility, packaging, and logic-entry templates.
+- `16_GitHubREADMETemplate_V1.md`
+  The default GitHub README template for new projects and README rewrites.
+- `17_GitHubREADMEStyleRules_V1.md`
+  The default GitHub README presentation rules for keeping README structure visually consistent across projects.
+- `18_GitHubREADMEExamples_V1.md`
+  The example gallery for Product Style and Developer Style GitHub README layouts.
+- `19_GitHubREADMEReviewChecklist_V1.md`
+  The self-review checklist for validating a finished GitHub README against template, style, and truthfulness rules.
 - `raw_tools/`
   Raw tool source layer.
 - `raw_tooling/`
@@ -56,6 +64,16 @@ For project work:
 5. Re-check the intended change through the logic lens.
 6. Implement and validate.
 
+For GitHub publication work:
+
+1. If the task includes uploading or preparing a repository for GitHub, automatically invoke the GitHub README system.
+2. Use:
+   - `16_GitHubREADMETemplate_V1.md`
+   - `17_GitHubREADMEStyleRules_V1.md`
+   - `18_GitHubREADMEExamples_V1.md`
+   - `19_GitHubREADMEReviewChecklist_V1.md`
+3. Treat README quality as part of publication readiness, not as optional polish.
+
 If a project no longer points to this repository or the logic-entry path is missing, do not guess. Ask the user where the current logic package is located first.
 
 ## Important Boundaries
@@ -73,3 +91,11 @@ If a project no longer points to this repository or the logic-entry path is miss
   The mandatory first-entry file for this logic repository.
 - `00_README.md`
   The package-internal structure overview.
+- `16_GitHubREADMETemplate_V1.md`
+  The repository-level GitHub README template baseline for future projects.
+- `17_GitHubREADMEStyleRules_V1.md`
+  The repository-level GitHub README style baseline for future projects.
+- `18_GitHubREADMEExamples_V1.md`
+  The repository-level GitHub README examples file for concrete reference.
+- `19_GitHubREADMEReviewChecklist_V1.md`
+  The repository-level GitHub README review checklist for final quality control.
