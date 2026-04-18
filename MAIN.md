@@ -1,3 +1,22 @@
+<!--
+MANDATORY LOGIC GATE
+
+Before making changes here, read `AGENTS.md` and `README.md` first.
+Then follow the repository-declared logic entry chain, including `00_START_HERE.md`,
+`modules/01_MasterLogic.md`, and `modules/15_LogicEntryChecklist.md` when applicable.
+
+Before every new coding round, explicitly decide whether the current task extends
+the previous coding round.
+If it does not, explicitly ask whether to forget/compress context before continuing.
+
+Treat this flow as a blocking gate, not as guidance, documentation, or a reminder.
+Do not infer continuation by yourself.
+Do not skip the context-reset question for efficiency.
+
+Do not continue deeper reading, modify files, delete files, perform write actions,
+or begin implementation before the logic-entry loop above has been completed.
+-->
+
 # AgentLogic Main Entry
 
 This file is the stable machine-facing entrypoint for AgentLogic.

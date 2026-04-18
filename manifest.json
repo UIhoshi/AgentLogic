@@ -12,6 +12,7 @@
       "files": [
         "00_START_HERE.md",
         "README.md",
+        "AGENTS.md",
         "versions/AgentLogic_V6.md"
       ]
     },
@@ -20,11 +21,13 @@
       "files": [
         "00_START_HERE.md",
         "README.md",
+        "AGENTS.md",
         "versions/AgentLogic_V6.md",
         "modules/01_MasterLogic.md",
         "modules/03_AgenticLoop.md",
         "modules/05_PermissionsAndSafety.md",
         "modules/12_AgentEnforcement.md",
+        "modules/13_MandatoryLogicGateTemplate.md",
         "modules/15_LogicEntryChecklist.md"
       ]
     },
@@ -33,11 +36,13 @@
       "files": [
         "00_START_HERE.md",
         "README.md",
+        "AGENTS.md",
         "versions/AgentLogic_V6.md",
         "modules/01_MasterLogic.md",
         "modules/03_AgenticLoop.md",
         "modules/05_PermissionsAndSafety.md",
         "modules/12_AgentEnforcement.md",
+        "modules/13_MandatoryLogicGateTemplate.md",
         "modules/15_LogicEntryChecklist.md",
         "modules/16_GitHubREADMETemplate_V1.md",
         "modules/17_GitHubREADMEStyleRules_V1.md",
@@ -47,6 +52,9 @@
     }
   },
   "optional_modules": {
+    "mandatory_logic_gate": [
+      "modules/13_MandatoryLogicGateTemplate.md"
+    ],
     "github_readme": [
       "modules/16_GitHubREADMETemplate_V1.md",
       "modules/17_GitHubREADMEStyleRules_V1.md",

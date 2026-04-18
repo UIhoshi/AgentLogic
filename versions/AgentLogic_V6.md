@@ -1738,6 +1738,36 @@ This document is a general AI engineering collaboration protocol. It standardize
 - A sparse README is acceptable only when it is intentionally sparse for maturity reasons, not when it is simply incomplete.
 - A mature README should not hide important usage or compatibility information just to stay short.
 
+### 14.10.16 The Entry-File Logic Gate Is Mandatory, Not Advisory
+
+- The logic notice placed at the top of major entry files must be treated as a mandatory execution gate, not as a suggestion, reminder, or stylistic comment.
+- This requirement exists because repeated testing shows that AI agents often begin practical work from major entry files first.
+- Therefore the highest-leverage place to reduce entry errors is the exact file where implementation would otherwise begin.
+
+- The mandatory gate must block the following common failure modes:
+  - skipping repository entry documents
+  - silently treating a new task as a continuation of the previous coding round
+  - carrying stale context into a new task without explicit confirmation
+  - starting deeper reading, write operations, deletion, or implementation before the startup loop is complete
+
+- For that reason, every major entry file must carry the standardized Mandatory Logic Gate header.
+- This is not optional on major entry files.
+- Repositories should treat absence, weakening, or removal of that gate as a logic-entry integrity failure.
+
+- The Mandatory Logic Gate must enforce all of the following:
+  - read repository entry documents first
+  - follow the repository-declared logic-entry chain
+  - explicitly determine whether the current task extends the previous coding round
+  - if it does not, explicitly ask whether to forget/compress context first
+  - treat this startup loop as a blocking gate
+  - prohibit deeper reading, write actions, deletions, or implementation before the loop is complete
+
+- The gate should be short, English by default, and repository-relative in its path references.
+- It must not use machine-specific absolute paths.
+- It must not be downgraded into general prose or business-facing explanation.
+
+- Repositories should also provide a mechanical validation path, such as a repository-level checking script, so that the gate can be verified rather than assumed.
+
 ---
 
 ## 15. Version Note

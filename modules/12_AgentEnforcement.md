@@ -108,6 +108,48 @@ Agent 至少必须完成：
   - `node scripts/check-logic-entry.js`
 - 只有具备这三层后，逻辑入口约束才开始从“规范级”向“工程级”过渡。
 
+## 4.2.5 Major Entry Files Must Carry the Mandatory Logic Gate
+
+- Every major entry file in the repository must carry the standardized Mandatory Logic Gate header.
+- This is a mandatory enforcement requirement, not a documentation preference.
+
+- The reason is operational:
+  - AI agents frequently begin work from major entry files
+  - therefore the entry file is the most reliable place to block premature implementation
+  - repeated testing shows that this significantly reduces context-carryover errors and skipped startup checks
+
+- The Mandatory Logic Gate must not be interpreted as:
+  - a reminder
+  - optional guidance
+  - a local coding style
+  - a comment that may be removed during cleanup
+
+- It must instead be interpreted as:
+  - a blocking startup gate
+  - an implementation precondition
+  - a repository-level logic enforcement point
+
+- Before the gate has been satisfied, the agent must not:
+  - continue deeper reading
+  - edit files
+  - delete files
+  - execute write operations
+  - begin implementation
+
+- The gate must require the agent to:
+  1. read `AGENTS.md` and `README.md`
+  2. follow the repository-declared logic-entry chain
+  3. explicitly determine whether the task extends the previous coding round
+  4. if not, explicitly ask whether to forget/compress context first
+
+- The gate must be:
+  - English by default
+  - short and high-signal
+  - repository-relative in path references
+  - present on every major entry file
+
+- Repositories should back this requirement with a mechanical validation script so that major entry files can be checked for gate presence and integrity.
+
 ## 4.2.4.1 文件头强制规则默认使用英文
 
 - 如果项目把强制规则写入文件头部，这些头部规则默认必须使用英文。

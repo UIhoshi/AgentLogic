@@ -2,7 +2,7 @@
 
 - Host target: generic
 - Profile: core-enhanced
-- Generated at: 2026-04-18T11:22:08+09:00
+- Generated at: 2026-04-18T12:11:39+09:00
 - Stable entry: MAIN.md
 - Version: V6
 
@@ -11,6 +11,25 @@ This is a generated primary-logic bundle. Regenerate it from scripts/build-profi
 ---
 
 ## BEGIN FILE: 00_START_HERE.md
+
+<!--
+MANDATORY LOGIC GATE
+
+Before making changes here, read `AGENTS.md` and `README.md` first.
+Then follow the repository-declared logic entry chain, including `00_START_HERE.md`,
+`modules/01_MasterLogic.md`, and `modules/15_LogicEntryChecklist.md` when applicable.
+
+Before every new coding round, explicitly decide whether the current task extends
+the previous coding round.
+If it does not, explicitly ask whether to forget/compress context before continuing.
+
+Treat this flow as a blocking gate, not as guidance, documentation, or a reminder.
+Do not infer continuation by yourself.
+Do not skip the context-reset question for efficiency.
+
+Do not continue deeper reading, modify files, delete files, perform write actions,
+or begin implementation before the logic-entry loop above has been completed.
+-->
 
 # 00_START_HERE.md
 
@@ -70,6 +89,25 @@ For local AI host installation, the stable binding target is `MAIN.md`.
 
 ## BEGIN FILE: README.md
 
+<!--
+MANDATORY LOGIC GATE
+
+Before making changes here, read `AGENTS.md` and `README.md` first.
+Then follow the repository-declared logic entry chain, including `00_START_HERE.md`,
+`modules/01_MasterLogic.md`, and `modules/15_LogicEntryChecklist.md` when applicable.
+
+Before every new coding round, explicitly decide whether the current task extends
+the previous coding round.
+If it does not, explicitly ask whether to forget/compress context before continuing.
+
+Treat this flow as a blocking gate, not as guidance, documentation, or a reminder.
+Do not infer continuation by yourself.
+Do not skip the context-reset question for efficiency.
+
+Do not continue deeper reading, modify files, delete files, perform write actions,
+or begin implementation before the logic-entry loop above has been completed.
+-->
+
 # AgentLogic
 
 AgentLogic is a versioned primary-logic package intended to be pulled into local AI coding hosts and used as their default operating logic.
@@ -89,6 +127,13 @@ It is designed to govern:
 The stable machine-facing entrypoint is:
 
 - `MAIN.md`
+
+## Repository Agent Entry
+
+For repository work, also read:
+
+- `AGENTS.md`
+- `00_START_HERE.md`
 
 Hosts should bind to `MAIN.md` or to a generated bundle built from `manifest.json`.
 
@@ -253,6 +298,77 @@ Maintenance rules for entry surfaces, version bumps, and required local checks a
 - Reference raw layers must not be injected as default prompt material unless a host or user explicitly opts in.
 
 ## END FILE: README.md
+
+---
+
+## BEGIN FILE: AGENTS.md
+
+<!--
+MANDATORY LOGIC GATE
+
+Before making changes here, read `AGENTS.md` and `README.md` first.
+Then follow the repository-declared logic entry chain, including `00_START_HERE.md`,
+`modules/01_MasterLogic.md`, and `modules/15_LogicEntryChecklist.md` when applicable.
+
+Before every new coding round, explicitly decide whether the current task extends
+the previous coding round.
+If it does not, explicitly ask whether to forget/compress context before continuing.
+
+Treat this flow as a blocking gate, not as guidance, documentation, or a reminder.
+Do not infer continuation by yourself.
+Do not skip the context-reset question for efficiency.
+
+Do not continue deeper reading, modify files, delete files, perform write actions,
+or begin implementation before the logic-entry loop above has been completed.
+-->
+
+# AGENTS.md
+
+This file is the repository-level agent entry document for AgentLogic.
+
+## Required Entry Path
+
+For formal work in this repository:
+
+1. Read `00_START_HERE.md` first.
+2. Complete the mandatory full-read chain declared there.
+3. Only after that, proceed with planning, implementation, validation, or rule synchronization.
+
+## Repository Logic Chain
+
+The current logic-entry chain is:
+
+1. `00_START_HERE.md`
+2. `README.md`
+3. `versions/AgentLogic_V6.md`
+4. `modules/01_MasterLogic.md`
+5. `modules/15_LogicEntryChecklist.md`
+
+## Startup Gate
+
+Before every new coding round:
+
+1. confirm the current logic entry
+2. judge whether the task extends the previous coding round
+3. if it does not, ask whether to `forget/compress context` before continuing
+
+This startup gate is mandatory.
+
+## Repository Boundary
+
+This repository is logic infrastructure, not a business-project workspace.
+
+- Do not treat it as an application repository.
+- Do not create unrelated business code here.
+- Do not treat reference raw layers as default prompt material unless explicitly requested.
+
+## Stable Host Binding
+
+- Human-first entry: `00_START_HERE.md`
+- Stable host binding entry: `MAIN.md`
+- Versioned main logic source: `versions/AgentLogic_V6.md`
+
+## END FILE: AGENTS.md
 
 ---
 
@@ -1998,6 +2114,36 @@ This document is a general AI engineering collaboration protocol. It standardize
 - A sparse README is acceptable only when it is intentionally sparse for maturity reasons, not when it is simply incomplete.
 - A mature README should not hide important usage or compatibility information just to stay short.
 
+### 14.10.16 The Entry-File Logic Gate Is Mandatory, Not Advisory
+
+- The logic notice placed at the top of major entry files must be treated as a mandatory execution gate, not as a suggestion, reminder, or stylistic comment.
+- This requirement exists because repeated testing shows that AI agents often begin practical work from major entry files first.
+- Therefore the highest-leverage place to reduce entry errors is the exact file where implementation would otherwise begin.
+
+- The mandatory gate must block the following common failure modes:
+  - skipping repository entry documents
+  - silently treating a new task as a continuation of the previous coding round
+  - carrying stale context into a new task without explicit confirmation
+  - starting deeper reading, write operations, deletion, or implementation before the startup loop is complete
+
+- For that reason, every major entry file must carry the standardized Mandatory Logic Gate header.
+- This is not optional on major entry files.
+- Repositories should treat absence, weakening, or removal of that gate as a logic-entry integrity failure.
+
+- The Mandatory Logic Gate must enforce all of the following:
+  - read repository entry documents first
+  - follow the repository-declared logic-entry chain
+  - explicitly determine whether the current task extends the previous coding round
+  - if it does not, explicitly ask whether to forget/compress context first
+  - treat this startup loop as a blocking gate
+  - prohibit deeper reading, write actions, deletions, or implementation before the loop is complete
+
+- The gate should be short, English by default, and repository-relative in its path references.
+- It must not use machine-specific absolute paths.
+- It must not be downgraded into general prose or business-facing explanation.
+
+- Repositories should also provide a mechanical validation path, such as a repository-level checking script, so that the gate can be verified rather than assumed.
+
 ---
 
 ## 15. Version Note
@@ -2553,14 +2699,54 @@ Agent 鑷冲皯蹇呴』瀹屾垚锛?
 
 ## 4.2.4 浠撳簱绾х‖绾︽潫鎺ㄨ崘钀界偣
 
-- 濡傛灉椤圭洰甯屾湜鎶婇€昏緫鍏ュ彛浠庘€滄枃妗ｈ鑼冣€濆崌绾т负鈥滃伐绋嬬骇绾︽潫鈥濓紝鑷冲皯搴旇ˉ浠ヤ笅涓夊眰锛?
-  - 浠撳簱涓绘枃妗ｅ０鏄庨€昏緫鍏ュ彛涓庢鏌ュ懡浠?
+- 濡傛灉椤圭洰甯屾湜鎶婇€昏緫鍏ュ彛浠庘€滄枃妗ｈ鑼冣€濆崌绾т负鈥滃伐绋嬬骇绾︽潫鈥濓紝鑷冲皯搴旇ˉ浠ヤ笅涓夊眰锛?  - 浠撳簱涓绘枃妗ｅ０鏄庨€昏緫鍏ュ彛涓庢鏌ュ懡浠?
   - 鍏抽敭鍏ュ彛浠ｇ爜鏂囦欢椤堕儴淇濈暀浣庡櫔澹版彁閱?
   - 浠撳簱鎻愪緵鍙墽琛岃剼鏈鏌ヨ繖浜涙彁閱掓槸鍚︿粛瀛樺湪
 - 杩欑妫€鏌ヨ剼鏈殑鐩爣涓嶆槸鏇夸唬涓婚€昏緫闃呰锛岃€屾槸闃叉椤圭洰鍦ㄥ杞敼鍔ㄥ悗鎶婇€昏緫鍏ュ彛鎻愰啋鎮勬倓鍒犳帀銆?
 - 鎺ㄨ崘鍛戒护褰㈡€佺ず渚嬶細
   - `node scripts/check-logic-entry.js`
 - 鍙湁鍏峰杩欎笁灞傚悗锛岄€昏緫鍏ュ彛绾︽潫鎵嶅紑濮嬩粠鈥滆鑼冪骇鈥濆悜鈥滃伐绋嬬骇鈥濊繃娓°€?
+## 4.2.5 Major Entry Files Must Carry the Mandatory Logic Gate
+
+- Every major entry file in the repository must carry the standardized Mandatory Logic Gate header.
+- This is a mandatory enforcement requirement, not a documentation preference.
+
+- The reason is operational:
+  - AI agents frequently begin work from major entry files
+  - therefore the entry file is the most reliable place to block premature implementation
+  - repeated testing shows that this significantly reduces context-carryover errors and skipped startup checks
+
+- The Mandatory Logic Gate must not be interpreted as:
+  - a reminder
+  - optional guidance
+  - a local coding style
+  - a comment that may be removed during cleanup
+
+- It must instead be interpreted as:
+  - a blocking startup gate
+  - an implementation precondition
+  - a repository-level logic enforcement point
+
+- Before the gate has been satisfied, the agent must not:
+  - continue deeper reading
+  - edit files
+  - delete files
+  - execute write operations
+  - begin implementation
+
+- The gate must require the agent to:
+  1. read `AGENTS.md` and `README.md`
+  2. follow the repository-declared logic-entry chain
+  3. explicitly determine whether the task extends the previous coding round
+  4. if not, explicitly ask whether to forget/compress context first
+
+- The gate must be:
+  - English by default
+  - short and high-signal
+  - repository-relative in path references
+  - present on every major entry file
+
+- Repositories should back this requirement with a mechanical validation script so that major entry files can be checked for gate presence and integrity.
 
 ## 4.2.4.1 鏂囦欢澶村己鍒惰鍒欓粯璁や娇鐢ㄨ嫳鏂?
 
@@ -2608,6 +2794,418 @@ Agent 鑷冲皯蹇呴』瀹屾垚锛?
 - 濡傛灉鍚庣画鏂板鏇村噯纭殑瑙勫垯锛屽簲鍏堝洖鍐?`AgentLogic_V6.md`锛屽啀鍚屾鏈€昏緫鍖?
 
 ## END FILE: modules/12_AgentEnforcement.md
+
+---
+
+## BEGIN FILE: modules/13_MandatoryLogicGateTemplate.md
+
+# Mandatory Logic Gate Template
+
+This file defines the mandatory header template that must be added to every major entry file.
+
+It is not a suggestion.
+It is not a style preference.
+It is not a documentation nicety.
+
+It is a blocking execution gate.
+
+The purpose of this template is to reduce AI entry errors at the exact point where implementation usually begins.
+
+Those errors include, but are not limited to:
+
+- skipping repository entry documents
+- treating a new task as an automatic continuation of the previous coding round
+- silently carrying stale context into a new task
+- starting deeper reading, writes, deletions, or implementation before the logic-entry loop is complete
+- treating mandatory startup behavior as guidance instead of a hard gate
+
+This template exists because repeated testing shows that AI agents often start from major entry files first.
+Therefore, the gate must be placed exactly there.
+
+---
+
+## 1. Status
+
+This template is mandatory.
+
+It must be treated as:
+
+- a blocking gate
+- an execution precondition
+- a repository-level enforcement target
+
+It must not be treated as:
+
+- optional guidance
+- a reminder only
+- a stylistic comment
+- a replaceable local habit
+
+---
+
+## 2. Scope
+
+This template must be added to every major entry file.
+
+Typical required targets include:
+
+- process entry files
+- CLI entry files
+- main backend control files
+- route entry files
+- preload bridge files
+- major renderer entry files
+- main admin UI entry files
+- other high-frequency implementation entrypoints
+
+This template should not be mechanically added to every file in the repository.
+
+Do not spread it across:
+
+- utility files
+- leaf components
+- helper modules
+- pure style files
+- unrelated test fixtures
+- low-level implementation files that are not real entrypoints
+
+The rule is:
+
+- mandatory on major entry files
+- not universal on all files
+
+---
+
+## 3. Repository Link Rule
+
+The header template must point to repository-relative entry documents first.
+
+Default required repository-relative targets:
+
+- `AGENTS.md`
+- `README.md`
+
+The code-file header must not use:
+
+- machine-specific absolute paths
+- local-user absolute paths
+- temporary working-directory assumptions
+- hardcoded host-specific locations
+
+If the repository depends on an external logic package, that external path should be declared in repository-level entry documents, not hardcoded into every source-file header.
+
+The preferred chain is:
+
+1. entry-file header points to `AGENTS.md` and `README.md`
+2. repository entry documents point to the current logic-entry chain
+3. the logic-entry chain points to the real control files
+
+This preserves portability across machines and repositories.
+
+---
+
+## 4. Required Logic Chain
+
+The mandatory logic gate must force the agent back into the repository-declared logic-entry chain.
+
+That chain should include, when applicable:
+
+- `00_START_HERE.md`
+- `modules/01_MasterLogic.md`
+- `modules/15_LogicEntryChecklist.md`
+
+If the repository declares a different or extended logic chain, that repository-declared chain takes precedence.
+
+The header template should not attempt to duplicate the full logic package.
+Its purpose is to block premature implementation and redirect the agent into the proper chain.
+
+---
+
+## 5. Mandatory Startup Gate Behavior
+
+The template must enforce all of the following behaviors before implementation:
+
+1. read repository entry documents first
+2. follow the declared logic-entry chain
+3. explicitly determine whether the current task is an extension of the previous coding round
+4. if it is not an extension, explicitly ask whether to forget/compress context first
+5. treat this startup loop as a blocking gate
+6. do not infer continuation automatically
+7. do not skip the context-reset question for efficiency
+8. do not continue deeper reading, writes, deletions, or implementation before the loop is complete
+
+This behavior is mandatory because the highest-risk failure pattern is not lack of capability.
+It is inconsistent entry behavior.
+
+---
+
+## 6. Language Rule
+
+Header-level mandatory rules must default to English.
+
+This applies to:
+
+- source files
+- script files
+- markup files
+- style files
+- repository markdown files when using header-level mandatory notices
+
+The purpose is consistency across:
+
+- agents
+- models
+- environments
+- future repository checks
+
+Local-language explanation may still exist in normal document bodies.
+But the header-level mandatory gate must default to English unless the repository explicitly declares otherwise.
+
+---
+
+## 7. Noise Rule
+
+The template must stay short and high-signal.
+
+It must not become:
+
+- a project summary
+- a module explanation
+- a changelog
+- a TODO area
+- a debugging notebook
+- a business description
+
+Its only role is to block premature implementation and redirect the agent into the logic-entry chain.
+
+---
+
+## 8. Standard Long Template
+
+Use the following as the default long-form template.
+
+### Plain text form
+
+```txt
+MANDATORY LOGIC GATE
+
+Before making changes here, read `AGENTS.md` and `README.md` first.
+Then follow the repository-declared logic entry chain, including `00_START_HERE.md`,
+`modules/01_MasterLogic.md`, and `modules/15_LogicEntryChecklist.md` when applicable.
+
+Before every new coding round, explicitly decide whether the current task extends
+the previous coding round.
+If it does not, explicitly ask whether to forget/compress context before continuing.
+
+Treat this flow as a blocking gate, not as guidance, documentation, or a reminder.
+Do not infer continuation by yourself.
+Do not skip the context-reset question for efficiency.
+
+Do not continue deeper reading, modify files, delete files, perform write actions,
+or begin implementation before the logic-entry loop above has been completed.
+```
+
+---
+
+## 9. Standard Short Template
+
+Use the short form only when the file type or entry-file constraints make the long form impractical.
+
+### Plain text form
+
+```txt
+MANDATORY LOGIC GATE
+
+Read `AGENTS.md` and `README.md` before making changes here.
+Then follow the repository-declared logic entry chain.
+
+Before every new coding round, explicitly decide whether this task extends the previous round.
+If not, explicitly ask whether to forget/compress context first.
+
+This is a blocking gate.
+Do not infer continuation by yourself.
+Do not start deeper reading, writes, or implementation before this loop is completed.
+```
+
+The short version is a fallback, not the default.
+
+---
+
+## 10. Language-Specific Header Forms
+
+### 10.1 JS / TS / TSX
+
+```ts
+/**
+ * MANDATORY LOGIC GATE
+ *
+ * Before making changes here, read `AGENTS.md` and `README.md` first.
+ * Then follow the repository-declared logic entry chain, including `00_START_HERE.md`,
+ * `modules/01_MasterLogic.md`, and `modules/15_LogicEntryChecklist.md` when applicable.
+ *
+ * Before every new coding round, explicitly decide whether the current task extends
+ * the previous coding round.
+ * If it does not, explicitly ask whether to forget/compress context before continuing.
+ *
+ * Treat this flow as a blocking gate, not as guidance, documentation, or a reminder.
+ * Do not infer continuation by yourself.
+ * Do not skip the context-reset question for efficiency.
+ *
+ * Do not continue deeper reading, modify files, delete files, perform write actions,
+ * or begin implementation before the logic-entry loop above has been completed.
+ */
+```
+
+### 10.2 Python
+
+```py
+# MANDATORY LOGIC GATE
+#
+# Before making changes here, read `AGENTS.md` and `README.md` first.
+# Then follow the repository-declared logic entry chain, including `00_START_HERE.md`,
+# `modules/01_MasterLogic.md`, and `modules/15_LogicEntryChecklist.md` when applicable.
+#
+# Before every new coding round, explicitly decide whether the current task extends
+# the previous coding round.
+# If it does not, explicitly ask whether to forget/compress context before continuing.
+#
+# Treat this flow as a blocking gate, not as guidance, documentation, or a reminder.
+# Do not infer continuation by yourself.
+# Do not skip the context-reset question for efficiency.
+#
+# Do not continue deeper reading, modify files, delete files, perform write actions,
+# or begin implementation before the logic-entry loop above has been completed.
+```
+
+### 10.3 Markdown
+
+```md
+<!--
+MANDATORY LOGIC GATE
+
+Before making changes here, read `AGENTS.md` and `README.md` first.
+Then follow the repository-declared logic entry chain, including `00_START_HERE.md`,
+`modules/01_MasterLogic.md`, and `modules/15_LogicEntryChecklist.md` when applicable.
+
+Before every new coding round, explicitly decide whether the current task extends
+the previous coding round.
+If it does not, explicitly ask whether to forget/compress context before continuing.
+
+Treat this flow as a blocking gate, not as guidance, documentation, or a reminder.
+Do not infer continuation by yourself.
+Do not skip the context-reset question for efficiency.
+
+Do not continue deeper reading, modify files, delete files, perform write actions,
+or begin implementation before the logic-entry loop above has been completed.
+-->
+```
+
+### 10.4 PowerShell / Shell
+
+```powershell
+# MANDATORY LOGIC GATE
+#
+# Before making changes here, read `AGENTS.md` and `README.md` first.
+# Then follow the repository-declared logic entry chain, including `00_START_HERE.md`,
+# `modules/01_MasterLogic.md`, and `modules/15_LogicEntryChecklist.md` when applicable.
+#
+# Before every new coding round, explicitly decide whether the current task extends
+# the previous coding round.
+# If it does not, explicitly ask whether to forget/compress context before continuing.
+#
+# Treat this flow as a blocking gate, not as guidance, documentation, or a reminder.
+# Do not infer continuation by yourself.
+# Do not skip the context-reset question for efficiency.
+#
+# Do not continue deeper reading, modify files, delete files, perform write actions,
+# or begin implementation before the logic-entry loop above has been completed.
+```
+
+---
+
+## 11. Enforcement Intent
+
+This template should be backed by repository-level enforcement when possible.
+
+Recommended repository-level check responsibilities include:
+
+- verify that major entry files still contain the mandatory gate
+- verify that the header remains in English
+- verify that `AGENTS.md` and `README.md` are still referenced
+- verify that the repository entry docs still point to the current logic-entry chain
+- verify that machine-specific absolute paths are not used in the gate
+
+A typical enforcement command may look like:
+
+```bash
+node scripts/check-logic-entry.js
+```
+
+The script is not a replacement for reading the logic package.
+Its job is to prevent silent drift.
+
+---
+
+## 12. Validation Targets
+
+When implementing repository-level checks for this template, the repository should prefer validating the presence of stable anchor phrases such as:
+
+- `MANDATORY LOGIC GATE`
+- ``read `AGENTS.md` and `README.md` first``
+- `forget/compress context`
+- `blocking gate`
+- `Do not infer continuation by yourself`
+
+The exact string policy may vary by repository, but the enforcement should remain strict enough to detect deletion, weakening, or accidental rewriting of the gate.
+
+---
+
+## 13. Why This Template Is Mandatory
+
+This template is mandatory because it solves a real execution problem.
+
+Repeated observation shows that AI agents often begin from major entry files.
+That makes those files the highest-leverage place to stop incorrect execution paths before they become file edits, deletions, or stale-context implementation.
+
+Therefore this template must be treated as:
+
+- a tested execution-control mechanism
+- a mandatory repository safeguard
+- a structural reduction of agent error rate
+
+It must not be downgraded into a soft recommendation.
+
+---
+
+## 14. Relationship To Other Logic Files
+
+This template does not replace:
+
+- `00_START_HERE.md`
+- `versions/AgentLogic_V6.md`
+- `modules/01_MasterLogic.md`
+- `modules/12_AgentEnforcement.md`
+- `modules/15_LogicEntryChecklist.md`
+
+Instead, it forces the agent back into them at the exact moment where implementation would otherwise start too early.
+
+Its role is not to carry the whole logic package.
+Its role is to stop premature action.
+
+---
+
+## 15. Recommended Repository Adoption Rule
+
+Repositories using AgentLogic should treat the following as the default adoption stack:
+
+1. repository entry docs declare the logic-entry chain
+2. all major entry files carry the Mandatory Logic Gate header
+3. repository enforcement script checks the gate mechanically
+4. updates to the gate are synchronized with the main logic when promoted
+
+This stack should be treated as the default engineering baseline, not a special-case hardening step.
+
+## END FILE: modules/13_MandatoryLogicGateTemplate.md
 
 ---
 

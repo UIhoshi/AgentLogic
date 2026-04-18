@@ -1,0 +1,64 @@
+<!--
+MANDATORY LOGIC GATE
+
+Before making changes here, read `AGENTS.md` and `README.md` first.
+Then follow the repository-declared logic entry chain, including `00_START_HERE.md`,
+`modules/01_MasterLogic.md`, and `modules/15_LogicEntryChecklist.md` when applicable.
+
+Before every new coding round, explicitly decide whether the current task extends
+the previous coding round.
+If it does not, explicitly ask whether to forget/compress context before continuing.
+
+Treat this flow as a blocking gate, not as guidance, documentation, or a reminder.
+Do not infer continuation by yourself.
+Do not skip the context-reset question for efficiency.
+
+Do not continue deeper reading, modify files, delete files, perform write actions,
+or begin implementation before the logic-entry loop above has been completed.
+-->
+
+# AGENTS.md
+
+This file is the repository-level agent entry document for AgentLogic.
+
+## Required Entry Path
+
+For formal work in this repository:
+
+1. Read `00_START_HERE.md` first.
+2. Complete the mandatory full-read chain declared there.
+3. Only after that, proceed with planning, implementation, validation, or rule synchronization.
+
+## Repository Logic Chain
+
+The current logic-entry chain is:
+
+1. `00_START_HERE.md`
+2. `README.md`
+3. `versions/AgentLogic_V6.md`
+4. `modules/01_MasterLogic.md`
+5. `modules/15_LogicEntryChecklist.md`
+
+## Startup Gate
+
+Before every new coding round:
+
+1. confirm the current logic entry
+2. judge whether the task extends the previous coding round
+3. if it does not, ask whether to `forget/compress context` before continuing
+
+This startup gate is mandatory.
+
+## Repository Boundary
+
+This repository is logic infrastructure, not a business-project workspace.
+
+- Do not treat it as an application repository.
+- Do not create unrelated business code here.
+- Do not treat reference raw layers as default prompt material unless explicitly requested.
+
+## Stable Host Binding
+
+- Human-first entry: `00_START_HERE.md`
+- Stable host binding entry: `MAIN.md`
+- Versioned main logic source: `versions/AgentLogic_V6.md`

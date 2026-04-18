@@ -1,3 +1,22 @@
+<!--
+MANDATORY LOGIC GATE
+
+Before making changes here, read `AGENTS.md` and `README.md` first.
+Then follow the repository-declared logic entry chain, including `00_START_HERE.md`,
+`modules/01_MasterLogic.md`, and `modules/15_LogicEntryChecklist.md` when applicable.
+
+Before every new coding round, explicitly decide whether the current task extends
+the previous coding round.
+If it does not, explicitly ask whether to forget/compress context before continuing.
+
+Treat this flow as a blocking gate, not as guidance, documentation, or a reminder.
+Do not infer continuation by yourself.
+Do not skip the context-reset question for efficiency.
+
+Do not continue deeper reading, modify files, delete files, perform write actions,
+or begin implementation before the logic-entry loop above has been completed.
+-->
+
 # AgentLogic
 
 AgentLogic is a versioned primary-logic package intended to be pulled into local AI coding hosts and used as their default operating logic.
@@ -17,6 +36,13 @@ It is designed to govern:
 The stable machine-facing entrypoint is:
 
 - `MAIN.md`
+
+## Repository Agent Entry
+
+For repository work, also read:
+
+- `AGENTS.md`
+- `00_START_HERE.md`
 
 Hosts should bind to `MAIN.md` or to a generated bundle built from `manifest.json`.
 
@@ -53,6 +79,8 @@ This profile is the recommended default for general coding work and includes:
 
 - `MAIN.md`
   - stable host binding entrypoint
+- `AGENTS.md`
+  - repository-level agent entry document
 - `manifest.json`
   - machine-readable package contract
 - `profiles/`
