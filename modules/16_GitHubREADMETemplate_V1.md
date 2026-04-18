@@ -115,6 +115,25 @@ Rules:
 - maintenance-mode repositories should prefer current status, compatibility, and limits over aspirational filler
 - regardless of maturity, the README should still provide a clear top-half landing page and at least one truthful usage path
 
+## Private Testing Repository Rule
+
+Some repositories are not yet public-release repositories, but are still product-like enough to benefit from a strong GitHub landing page.
+
+Rules:
+
+- a private-testing or internal-iteration repository should not automatically degrade into a plain developer note dump if the repository is still product-like
+- if the repository is product-like, the README may still use a strong product-style structure with:
+  - centered hero
+  - visually clear badge strip
+  - early proof section
+  - compact summary block
+- the repository's testing or private status should be expressed explicitly as truthful status information, rather than by removing the landing-page structure
+- in this mode, README work should still preserve truthfulness:
+  - do not invent releases
+  - do not invent screenshots
+  - do not invent licenses
+  - do not invent public availability
+
 ## Placeholder Rules
 
 Use explicit placeholders during drafting, and replace them only with confirmed facts:

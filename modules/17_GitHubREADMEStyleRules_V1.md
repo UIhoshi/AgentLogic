@@ -546,6 +546,24 @@ Tie-break rule:
 - if a repository is mixed and also needs strong public presentation, default to `Product Style`
 - then pull installation, examples, or developer commands slightly higher without abandoning the overall structure
 
+## Private Testing Product-Style Rule
+
+Some repositories are still private, testing-only, or internal-iteration repositories, but are nevertheless product-style repositories rather than libraries.
+
+Rules:
+
+- `Default Required`: do not collapse a product-style repository into a plain internal note page only because it is still private or in testing
+- `Default Required`: if the repository is product-like, preserve the normal high-impact top-half rhythm:
+  - centered hero
+  - badge strip
+  - proof or preview section
+  - value section
+  - quick start
+  - compact summary block
+- `Conditional Required`: private/testing status should be made explicit through truthful wording and/or status badges instead of by weakening the page structure
+- `Recommended`: a truthful testing-status badge such as `private testing`, `internal iteration`, `prototype`, or equivalent is a good fit when the repository is not yet in public-release mode
+- `Recommended`: strong visual hierarchy is still preferred in this mode when it improves recognition and keeps the repository aligned with the rest of the project set
+
 ## Version Evolution Section Rules
 
 - `Conditional Required`: include a lightweight `Version Evolution`, `How It Evolved`, or equivalent section when the repository has meaningful product-stage progression and that history helps users understand the current release.

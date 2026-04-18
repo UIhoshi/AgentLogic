@@ -100,6 +100,8 @@ It should be used together with:
 - [ ] If the project is mixed, the tie-break rule was applied consciously rather than randomly
 - [ ] A developer-first repository is not forced into a fake product page
 - [ ] A product-style repository still exposes enough executable usage information
+- [ ] If the repository is private/testing but still product-like, it did not degrade into a weak plain-text README unnecessarily
+- [ ] If the repository is private/testing and product-like, the testing/private status is explicit without abandoning strong visual hierarchy
 
 ## 9. Optional Section Check
 
