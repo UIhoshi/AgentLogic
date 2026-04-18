@@ -1372,6 +1372,34 @@ This document is a general AI engineering collaboration protocol. It standardize
 - If the repository already contains a release archive for the current logic version, the same-version archive should be replaced instead of creating an arbitrary new major version.
 - If no tag, release, or release-archive baseline exists yet, do not fabricate a fake release flow. In that case, keep normal repository synchronization and preserve the current version line.
 
+### 14.6.1 Primary Logic Source Precedence Rule
+
+- If a workspace or project explicitly declares one current primary logic source, that source must take precedence over older local logic notes, stale helper files, or ad hoc workspace reminders when they conflict.
+- This precedence rule applies especially when:
+  - the workspace has an installed main logic package
+  - the project points to a dedicated logic repository
+  - older local notes survive from earlier iterations
+- In that situation, the agent must treat the declared current primary logic source as the logic truth baseline for future work.
+- Older local logic notes may still help as supporting context, but they must not silently override the current main logic.
+
+### 14.6.2 Upload Boundary Rule For Logic Files And Build Byproducts
+
+- Ordinary project repositories must not absorb logic-control files that belong to the logic system itself unless the task is explicitly to update the logic repository.
+- By default, the following must not be uploaded into ordinary project repositories:
+  - logic-package markdown directly related to the main logic repository
+  - private rule bundles
+  - local logic-entry control files
+  - workspace-only logic notes
+  - build byproducts
+  - generated intermediates
+  - machine-specific runtime artifacts
+  - temporary packaging leftovers
+- By default, files that are normally acceptable to upload into ordinary project repositories are:
+  - project-related markdown
+  - project source code
+  - release versions or release assets that are actually intended for publication
+- If the task is specifically to update the logic repository itself, then logic-related markdown belongs in that logic repository rather than in the ordinary project repository.
+
 ### 14.7 Startup Re-Read Loop for Main Logic
 
 - Before every new work round, the agent must re-read the current project's main logic entry before executing.
