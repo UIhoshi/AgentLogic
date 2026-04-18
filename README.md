@@ -1,101 +1,181 @@
 # AgentLogic
 
-This repository is the dedicated logic-package repository for the current Agent workflow.
+AgentLogic is a versioned primary-logic package intended to be pulled into local AI coding hosts and used as their default operating logic.
 
-It is not a business project repository. It is an external rules brain that defines how project work should be entered, checked, executed, validated, and synced.
+It is designed to govern:
 
-## Current Logic Entry
+- project starts
+- project updates
+- version iteration
+- refactors
+- reviews
+- release preparation
+- forget/compress-context decisions
 
-Start from:
+## Stable Entry
 
-- `00_START_HERE.md`
+The stable machine-facing entrypoint is:
 
-Then fully read the mandatory chain defined there.
+- `MAIN.md`
 
-For this repository, the required full-read chain is:
+Hosts should bind to `MAIN.md` or to a generated bundle built from `manifest.json`.
 
-1. `README.md`
-2. `AgentLogic_V6.md`
-3. `01_MasterLogic.md`
-4. `15_LogicEntryChecklist.md`
+Hosts should not bind directly to `versions/AgentLogic_V6.md` or any future versioned file name.
 
-The agent must not treat itself as ready for formal work until the full-read chain has been completed.
+## Architecture
 
-## What This Repository Contains
+This repository now has four responsibilities:
 
-- `AgentLogic_V6.md`
-  The main logic file and highest-priority workflow rule set.
-- `01_MasterLogic.md`
-  A project-level reinforcement and mapping layer for the main logic.
-- `02_Architecture.md` to `15_LogicEntryChecklist.md`
-  Supporting layers for architecture, tools, safety, extensibility, packaging, and logic-entry templates.
-- `16_GitHubREADMETemplate_V1.md`
-  The default GitHub README template for new projects and README rewrites.
-- `17_GitHubREADMEStyleRules_V1.md`
-  The default GitHub README presentation rules for keeping README structure visually consistent across projects.
-- `18_GitHubREADMEExamples_V1.md`
-  The example gallery for Product Style and Developer Style GitHub README layouts.
-- `19_GitHubREADMEReviewChecklist_V1.md`
-  The self-review checklist for validating a finished GitHub README against template, style, and truthfulness rules.
-- `raw_tools/`
-  Raw tool source layer.
-- `raw_tooling/`
-  Tool registration and execution infrastructure layer.
-- `raw_permissions/`
-  Permission and safety core layer.
-- `raw_extensions/`
-  MCP, skills, and agent-extension layer.
-- `raw_commands/`
-  Command-surface raw source layer.
+- source logic
+  versioned logic files and supporting rule documents
+- profile definition
+  machine-readable bundle membership in `manifest.json`
+- host adaptation
+  installation scripts in `adapters/`
+- bundle generation
+  host-ready outputs built by `scripts/build-profile.ps1`
 
-## How To Use This Repository
+## Current Default Profile
 
-For project work:
+- `core-enhanced`
 
-1. Confirm where the current project's logic entry is declared.
-2. If the project points to this repository, re-read:
-   - `00_START_HERE.md`
-   - `README.md`
-   - `AgentLogic_V6.md`
-   - `01_MasterLogic.md`
-   - `15_LogicEntryChecklist.md`
-3. Read the project's own markdown and fact files.
-4. Read the relevant code files.
-5. Re-check the intended change through the logic lens.
-6. Implement and validate.
+This profile is the recommended default for general coding work and includes:
 
-For GitHub publication work:
+- startup chain rules
+- project update rules
+- version iteration rules
+- forget/compress-context rules
+- agentic loop rules
+- permissions and safety rules
+- enforcement rules
 
-1. If the task includes uploading or preparing a repository for GitHub, automatically invoke the GitHub README system.
-2. Use:
-   - `16_GitHubREADMETemplate_V1.md`
-   - `17_GitHubREADMEStyleRules_V1.md`
-   - `18_GitHubREADMEExamples_V1.md`
-   - `19_GitHubREADMEReviewChecklist_V1.md`
-3. Treat README quality as part of publication readiness, not as optional polish.
+## Repository Layout
 
-If a project no longer points to this repository or the logic-entry path is missing, do not guess. Ask the user where the current logic package is located first.
+- `MAIN.md`
+  - stable host binding entrypoint
+- `manifest.json`
+  - machine-readable package contract
+- `profiles/`
+  - profile documentation
+- `adapters/`
+  - host installation layer
+- `scripts/`
+  - bundle generation
+- `versions/`
+  current stable and future versioned logic sources
+- `modules/`
+  core operating rules and optional publishing modules
+- `reference/raw_tools/`, `reference/raw_tooling/`, `reference/raw_permissions/`, `reference/raw_extensions/`, `reference/raw_commands/`
+  reference layers, not default prompt material
+
+## One-Command Host Setup
+
+Install into any supported host through the root installer:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost codex
+```
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost claude
+```
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost gemini
+```
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost generic
+```
+
+Shell environments can use the same installer through `install.sh`:
+
+```bash
+./install.sh --host codex
+```
+
+Direct host adapter calls remain available when a host needs custom target paths.
+
+Build a host-ready bundle directly:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\build-profile.ps1 -ProfileName core-enhanced -TargetHost generic
+```
+
+Install into Codex:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\adapters\codex\install.ps1
+```
+
+Build a Claude-ready bundle:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\adapters\claude\install.ps1
+```
+
+Build a Gemini-ready bundle:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\adapters\gemini\install.ps1
+```
+
+## Usage Rules
+
+For any host using AgentLogic as its primary local logic:
+
+1. Sync the repository.
+2. Read `manifest.json`.
+3. Build the selected profile bundle.
+4. Bind that bundle to the host's primary instruction surface.
+5. Rebuild and refresh on future updates.
+
+## Package Validation
+
+Validate the package contract after any refactor, version bump, or profile change:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\validate-package.ps1
+```
+
+The validation checks:
+
+- stable entry and human entry exist
+- `manifest.json` and `manifest.schema.json` stay aligned
+- every declared profile file exists
+- optional modules and adapters resolve
+- `current_version` matches `main_logic_file`
+
+For maintainers, run the full lightweight local gate:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\maintainer-check.ps1
+```
+
+## Version Release
+
+Prepare the next version by copying the current version file, updating the manifest, and rewriting active documentation references:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\release-version.ps1 -NewVersion V7
+```
+
+Then run validation again:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\validate-package.ps1
+```
+
+GitHub Actions also runs package validation and one default bundle build on every push and pull request through `.github/workflows/validate-package.yml`.
+
+## Contribution Contract
+
+Maintenance rules for entry surfaces, version bumps, and required local checks are documented in `CONTRIBUTING.md`.
 
 ## Important Boundaries
 
-- This repository is versioned logic, not a business workspace.
-- `00_START_HERE.md` is logic-entry control, not project content, and must not be modified unless the user explicitly asks for a logic update.
-- Do not create project code, logs, builds, or runtime artifacts here.
-- Main entry code files in business projects should point back to repository-relative entry docs such as `AGENTS.md` and `README.md`, not to machine-specific absolute paths.
-- Logic-entry rules should stay version-agnostic. Do not assume future projects will always remain on `V6`.
-- Business projects should also provide a repository-level enforcement script, such as `node scripts/check-logic-entry.js`, so logic-entry reminders can be checked mechanically instead of relying only on chat memory or human discipline.
-
-## Related File
-
-- `00_START_HERE.md`
-  The mandatory first-entry file for this logic repository.
-- `00_README.md`
-  The package-internal structure overview.
-- `16_GitHubREADMETemplate_V1.md`
-  The repository-level GitHub README template baseline for future projects.
-- `17_GitHubREADMEStyleRules_V1.md`
-  The repository-level GitHub README style baseline for future projects.
-- `18_GitHubREADMEExamples_V1.md`
-  The repository-level GitHub README examples file for concrete reference.
-- `19_GitHubREADMEReviewChecklist_V1.md`
-  The repository-level GitHub README review checklist for final quality control.
+- This repository is logic infrastructure, not a business project workspace.
+- `00_START_HERE.md` remains the human-readable mandatory first-entry control file for the logic source.
+- `MAIN.md` is the stable host entrypoint.
+- Versioned logic should remain versioned; the stable host binding should remain version-agnostic.
+- Reference raw layers must not be injected as default prompt material unless a host or user explicitly opts in.

@@ -1,0 +1,25 @@
+name: Validate AgentLogic Package
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate package contract
+        shell: pwsh
+        run: |
+          ./scripts/validate-package.ps1
+
+      - name: Build default generic bundle
+        shell: pwsh
+        run: |
+          ./scripts/build-profile.ps1 -ProfileName core-enhanced -TargetHost generic

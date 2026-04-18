@@ -16,9 +16,9 @@ This file is logic, not project content.
 Before any formal planning, implementation, modification, validation, review, packaging, or rule synchronization work, the agent MUST fully read all of the following files from beginning to end in this exact order:
 
 1. `README.md`
-2. `AgentLogic_V6.md`
-3. `01_MasterLogic.md`
-4. `15_LogicEntryChecklist.md`
+2. `versions/AgentLogic_V6.md`
+3. `modules/01_MasterLogic.md`
+4. `modules/15_LogicEntryChecklist.md`
 
 ## Non-Negotiable Rules
 
@@ -41,3 +41,11 @@ After the mandatory full-read chain is complete, every new coding round must fol
 3. If it is not an extension, ask the user whether to `forget/compress context` before continuing.
 
 Until the reading chain and the startup chain are both satisfied, the agent is not in a formal implementation-ready state.
+
+## Host Binding Note
+
+For local AI host installation, the stable binding target is `MAIN.md`.
+
+- Humans should start from `00_START_HERE.md`.
+- Hosts should bind to `MAIN.md` or to a generated profile bundle.
+- Versioned files under `versions/` remain source-of-truth history, not direct host binding targets.
