@@ -63,3 +63,10 @@
   - 先补上下文延申判断或上下文重置提问
   - 先补目录审计
   - 先补项目事实地图
+
+
+## 8. Continuous Execution Authorization Checks
+
+- [ ] If the user explicitly gave a continuous-execution instruction such as "unless I say stop, keep going", that instruction has been recorded as an active authorization for the current task scope
+- [ ] Subsequent planned implementation steps are being treated as part of the same continuous execution round rather than as repeated re-confirmation points
+- [ ] The current work is still being treated as implementation / build-out phase by default, not as formal product-test stage, unless the user explicitly said testing has begun

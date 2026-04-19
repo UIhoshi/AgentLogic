@@ -1808,3 +1808,37 @@ This document is a general AI engineering collaboration protocol. It standardize
   - instance-conflict cleanup rules
   - README presentation rules
 - It removes repository-specific appendices that do not belong to the current project.
+
+
+### 14.7.1.1 Continuous Execution Authorization Must Suppress Repeated Confirmation
+
+- The purpose of the startup chain is to preserve logic continuity, prevent forgotten constraints, and avoid silent context drift.
+- It is **not** intended to force repeated confirmation during one continuous implementation track.
+- Therefore, if the user explicitly states any equivalent of:
+  - "unless I say stop, keep going"
+  - "keep following the plan"
+  - "do not stop to ask me again"
+  - "keep writing until I tell you to stop"
+  then the agent must treat that as an active continuous-execution authorization for the current task scope.
+- Under that authorization, the agent must default to treating subsequent work as part of the same implementation round unless a real task-boundary break appears.
+- This means the agent must not repeatedly re-ask for confirmation at ordinary boundaries such as:
+  - moving from reading to editing
+  - moving from one planned implementation step to the next
+  - running the next validation in the same planned chain
+  - fixing follow-up issues discovered during the same execution sequence
+- In this mode, the correct behavior is:
+  - keep following the planned order
+  - keep writing, validating, and progressing
+  - only pause when:
+    - the user explicitly says to stop
+    - the current plan is complete and a new strategic direction is required
+    - a true blocker exists that cannot be resolved from local context
+    - a high-risk irreversible action is about to be taken
+
+### 14.7.1.2 "Keep Going Until I Say Stop" Also Implies Pre-Test Build-Out Phase
+
+- When the user explicitly says "unless I say stop, keep going" or equivalent, the default interpretation is that the work is still in an implementation / build-out phase.
+- It should not be interpreted as formal product testing, acceptance testing, or a test-signoff phase unless the user explicitly says the task has entered testing.
+- Therefore the agent should continue building through the planned sequence instead of prematurely switching into a "pause and ask before each stage" testing posture.
+- The agent may still run local verification, builds, and sanity checks during continuous execution.
+- But those checks are part of continuous implementation progress, not evidence that the work has already entered formal product-test stage.

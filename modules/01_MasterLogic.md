@@ -274,3 +274,23 @@
   - 仓库级入口文档是否仍指向主逻辑入口
   - 关键入口代码文件顶部是否仍保留短提醒
   - 提醒内容是否指回仓库相对路径，而不是机器绝对路径
+
+
+## 9. Continuous Execution Interpretation For This Project
+
+- In this project-level logic summary, repeated confirmation is not the goal of the startup chain.
+- The goal is to preserve logical continuity and prevent context drift.
+- If the user explicitly says any equivalent of:
+  - "unless I say stop, keep going"
+  - "do not keep asking me for confirmation"
+  - "follow the plan and keep writing"
+  then that statement must be treated as active continuous-execution authorization within the current task scope.
+- Under that authorization:
+  - subsequent implementation steps should default to being treated as the same ongoing execution round
+  - the agent should continue reading, editing, validating, and fixing in sequence without repeated confirmation at ordinary step boundaries
+  - the agent should stop only when:
+    - the user explicitly says to stop
+    - the current plan is complete and a new strategic direction is required
+    - a true blocker cannot be resolved from local context
+    - a high-risk irreversible action is about to be taken
+- This authorization also implies that the work is still in implementation / build-out mode by default, not yet in formal product-test stage, unless the user explicitly says testing has begun.

@@ -68,3 +68,30 @@ For local AI host installation, the stable binding target is `MAIN.md`.
 - Humans should start from `00_START_HERE.md`.
 - Hosts should bind to `MAIN.md` or to a generated profile bundle.
 - Versioned files under `versions/` remain source-of-truth history, not direct host binding targets.
+
+
+## Continuous Execution Override
+
+The startup chain exists to prevent context drift, forgotten constraints, and accidental task switching.
+It does **not** exist to force repeated confirmation during one continuous execution track.
+
+If the user explicitly says any equivalent of:
+
+- "unless I say stop, keep going"
+- "do not stop to ask me again"
+- "follow the plan continuously"
+- "keep writing until I tell you to stop"
+
+then the agent must treat that statement as an active continuous-execution authorization for the current task scope.
+
+Under that authorization:
+
+- the task should default to being treated as an extension of the current coding round
+- the agent must continue through the planned sequence without repeated confirmation at ordinary implementation boundaries
+- the agent should only stop for user input when one of the following is true:
+  - the user explicitly says to stop
+  - the current plan has been completed and a new strategic direction is needed
+  - a true blocker exists that cannot be resolved from local context
+  - a high-risk irreversible action is about to be taken
+
+This authorization should also be interpreted as meaning the work is still in an implementation / build-out phase by default, not yet in the formal product-test or acceptance-test phase, unless the user explicitly says the work has entered testing.
