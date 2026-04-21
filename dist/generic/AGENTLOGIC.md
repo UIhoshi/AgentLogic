@@ -2,7 +2,7 @@
 
 - Host target: generic
 - Profile: core-enhanced
-- Generated at: 2026-04-18T12:11:39+09:00
+- Generated at: 2026-04-21T22:54:20+09:00
 - Stable entry: MAIN.md
 - Version: V6
 
@@ -82,6 +82,33 @@ For local AI host installation, the stable binding target is `MAIN.md`.
 - Humans should start from `00_START_HERE.md`.
 - Hosts should bind to `MAIN.md` or to a generated profile bundle.
 - Versioned files under `versions/` remain source-of-truth history, not direct host binding targets.
+
+
+## Continuous Execution Override
+
+The startup chain exists to prevent context drift, forgotten constraints, and accidental task switching.
+It does **not** exist to force repeated confirmation during one continuous execution track.
+
+If the user explicitly says any equivalent of:
+
+- "unless I say stop, keep going"
+- "do not stop to ask me again"
+- "follow the plan continuously"
+- "keep writing until I tell you to stop"
+
+then the agent must treat that statement as an active continuous-execution authorization for the current task scope.
+
+Under that authorization:
+
+- the task should default to being treated as an extension of the current coding round
+- the agent must continue through the planned sequence without repeated confirmation at ordinary implementation boundaries
+- the agent should only stop for user input when one of the following is true:
+  - the user explicitly says to stop
+  - the current plan has been completed and a new strategic direction is needed
+  - a true blocker exists that cannot be resolved from local context
+  - a high-risk irreversible action is about to be taken
+
+This authorization should also be interpreted as meaning the work is still in an implementation / build-out phase by default, not yet in the formal product-test or acceptance-test phase, unless the user explicitly says the work has entered testing.
 
 ## END FILE: 00_START_HERE.md
 
@@ -170,6 +197,8 @@ This profile is the recommended default for general coding work and includes:
 
 - `MAIN.md`
   - stable host binding entrypoint
+- `AGENTS.md`
+  - repository-level agent entry document
 - `manifest.json`
   - machine-readable package contract
 - `profiles/`
@@ -1748,6 +1777,34 @@ This document is a general AI engineering collaboration protocol. It standardize
 - If the repository already contains a release archive for the current logic version, the same-version archive should be replaced instead of creating an arbitrary new major version.
 - If no tag, release, or release-archive baseline exists yet, do not fabricate a fake release flow. In that case, keep normal repository synchronization and preserve the current version line.
 
+### 14.6.1 Primary Logic Source Precedence Rule
+
+- If a workspace or project explicitly declares one current primary logic source, that source must take precedence over older local logic notes, stale helper files, or ad hoc workspace reminders when they conflict.
+- This precedence rule applies especially when:
+  - the workspace has an installed main logic package
+  - the project points to a dedicated logic repository
+  - older local notes survive from earlier iterations
+- In that situation, the agent must treat the declared current primary logic source as the logic truth baseline for future work.
+- Older local logic notes may still help as supporting context, but they must not silently override the current main logic.
+
+### 14.6.2 Upload Boundary Rule For Logic Files And Build Byproducts
+
+- Ordinary project repositories must not absorb logic-control files that belong to the logic system itself unless the task is explicitly to update the logic repository.
+- By default, the following must not be uploaded into ordinary project repositories:
+  - logic-package markdown directly related to the main logic repository
+  - private rule bundles
+  - local logic-entry control files
+  - workspace-only logic notes
+  - build byproducts
+  - generated intermediates
+  - machine-specific runtime artifacts
+  - temporary packaging leftovers
+- By default, files that are normally acceptable to upload into ordinary project repositories are:
+  - project-related markdown
+  - project source code
+  - release versions or release assets that are actually intended for publication
+- If the task is specifically to update the logic repository itself, then logic-related markdown belongs in that logic repository rather than in the ordinary project repository.
+
 ### 14.7 Startup Re-Read Loop for Main Logic
 
 - Before every new work round, the agent must re-read the current project's main logic entry before executing.
@@ -1845,12 +1902,13 @@ This document is a general AI engineering collaboration protocol. It standardize
 - keep project facts and execution rules continuously aligned
 - This closed loop should also be reflected in the project's own top-level markdown so the project locally reminds future agents how updates must be performed.
 
-### 14.10 Main Entry Code Files Should Carry Logic Reminders
+### 14.10 Real Entry / Starting Source Files Should Carry Logic Reminders
 
 - When a project depends on an external logic package or a dedicated logic-entry workflow, the reminder should not exist only in chat memory or only in top-level markdown.
-- The project should also place a short logic-entry reminder at the top of its main entry code files.
+- The project should also place a short logic-entry reminder at the top of its real entry / starting source files.
 - The purpose of these reminders is to increase the chance that the agent sees the logic-entry rule at the exact point where work usually starts, especially in long multi-round sessions.
-- These reminders should be added only to major entry files or major control files, not mechanically to every source file in the repository.
+- These reminders should cover all real source-level starting points where an agent is likely to begin reading, changing, routing, bootstrapping, or controlling execution.
+- They should not be mechanically added to every source file in the repository.
 - Typical targets include:
   - process entry files
   - main backend control files
@@ -1870,7 +1928,7 @@ This document is a general AI engineering collaboration protocol. It standardize
 - A logic reminder only in markdown and source headers is stronger than chat memory, but it is still not a full engineering enforcement mechanism.
 - If the project wants stronger execution guarantees, it should add a repository-level enforcement script that mechanically checks whether:
   - the repository entry docs still point to the current logic entry
-  - the key entry code files still retain the logic reminder
+  - the real entry / starting source files still retain the logic reminder
   - the reminder text still points to repository-relative docs rather than machine-specific paths
 - A recommended command pattern is:
   - `node scripts/check-logic-entry.js`
@@ -1879,7 +1937,7 @@ This document is a general AI engineering collaboration protocol. It standardize
 - Therefore the preferred enforcement stack becomes:
   - logic package defines the rule
   - repository markdown declares the entry path
-  - key entry code files carry short reminders
+  - real entry / starting source files carry short reminders
   - repository script checks the reminder chain mechanically
 
 ### 14.10.2 Header-Level Mandatory Rules Should Default To English
@@ -2114,10 +2172,10 @@ This document is a general AI engineering collaboration protocol. It standardize
 - A sparse README is acceptable only when it is intentionally sparse for maturity reasons, not when it is simply incomplete.
 - A mature README should not hide important usage or compatibility information just to stay short.
 
-### 14.10.16 The Entry-File Logic Gate Is Mandatory, Not Advisory
+### 14.10.16 The Entry / Starting Source File Logic Gate Is Mandatory, Not Advisory
 
-- The logic notice placed at the top of major entry files must be treated as a mandatory execution gate, not as a suggestion, reminder, or stylistic comment.
-- This requirement exists because repeated testing shows that AI agents often begin practical work from major entry files first.
+- The logic notice placed at the top of real entry / starting source files must be treated as a mandatory execution gate, not as a suggestion, reminder, or stylistic comment.
+- This requirement exists because repeated testing shows that AI agents often begin practical work from entry files, control files, route files, renderer roots, and other high-frequency starting source files first.
 - Therefore the highest-leverage place to reduce entry errors is the exact file where implementation would otherwise begin.
 
 - The mandatory gate must block the following common failure modes:
@@ -2126,8 +2184,8 @@ This document is a general AI engineering collaboration protocol. It standardize
   - carrying stale context into a new task without explicit confirmation
   - starting deeper reading, write operations, deletion, or implementation before the startup loop is complete
 
-- For that reason, every major entry file must carry the standardized Mandatory Logic Gate header.
-- This is not optional on major entry files.
+- For that reason, every real entry / starting source file must carry the standardized Mandatory Logic Gate header.
+- This is not optional on real entry / starting source files.
 - Repositories should treat absence, weakening, or removal of that gate as a logic-entry integrity failure.
 
 - The Mandatory Logic Gate must enforce all of the following:
@@ -2156,6 +2214,40 @@ This document is a general AI engineering collaboration protocol. It standardize
   - instance-conflict cleanup rules
   - README presentation rules
 - It removes repository-specific appendices that do not belong to the current project.
+
+
+### 14.7.1.1 Continuous Execution Authorization Must Suppress Repeated Confirmation
+
+- The purpose of the startup chain is to preserve logic continuity, prevent forgotten constraints, and avoid silent context drift.
+- It is **not** intended to force repeated confirmation during one continuous implementation track.
+- Therefore, if the user explicitly states any equivalent of:
+  - "unless I say stop, keep going"
+  - "keep following the plan"
+  - "do not stop to ask me again"
+  - "keep writing until I tell you to stop"
+  then the agent must treat that as an active continuous-execution authorization for the current task scope.
+- Under that authorization, the agent must default to treating subsequent work as part of the same implementation round unless a real task-boundary break appears.
+- This means the agent must not repeatedly re-ask for confirmation at ordinary boundaries such as:
+  - moving from reading to editing
+  - moving from one planned implementation step to the next
+  - running the next validation in the same planned chain
+  - fixing follow-up issues discovered during the same execution sequence
+- In this mode, the correct behavior is:
+  - keep following the planned order
+  - keep writing, validating, and progressing
+  - only pause when:
+    - the user explicitly says to stop
+    - the current plan is complete and a new strategic direction is required
+    - a true blocker exists that cannot be resolved from local context
+    - a high-risk irreversible action is about to be taken
+
+### 14.7.1.2 "Keep Going Until I Say Stop" Also Implies Pre-Test Build-Out Phase
+
+- When the user explicitly says "unless I say stop, keep going" or equivalent, the default interpretation is that the work is still in an implementation / build-out phase.
+- It should not be interpreted as formal product testing, acceptance testing, or a test-signoff phase unless the user explicitly says the task has entered testing.
+- Therefore the agent should continue building through the planned sequence instead of prematurely switching into a "pause and ask before each stage" testing posture.
+- The agent may still run local verification, builds, and sanity checks during continuous execution.
+- But those checks are part of continuous implementation progress, not evidence that the work has already entered formal product-test stage.
 
 ## END FILE: versions/AgentLogic_V6.md
 
@@ -2430,15 +2522,32 @@ This document is a general AI engineering collaboration protocol. It standardize
 - 宸ュ叿绯荤粺蹇呴』鏁村悎鎴愬畬鏁磋鍥撅紝鑷冲皯娑电洊娉ㄥ唽銆佽繃婊ゃ€佹巿鏉冦€佹墽琛屻€佸洖娴併€?
 - 椤圭洰绾ч€昏緫鍖呴渶瑕佷繚鐣欌€滆兘鍔涚姸鎬佲€濈淮搴︼紝閬垮厤鎶?stub 鎴栨浠ｇ爜璇啓鎴愮湡瀹炶兘鍔涖€?
 - 鍙戠幇鏇村噯纭殑鏋舵瀯銆佸伐鍏枫€佹潈闄愩€佹墿灞曡竟鐣屾椂锛屽簲鍚屾鍙嶅摵涓婚€昏緫鏂囦欢銆?
-- 褰撻」鐩瓨鍦ㄦ槑鏄剧殑涓昏鍏ュ彛浠ｇ爜鏂囦欢鏃讹紝杩欎簺鏂囦欢椤堕儴搴旀斁缃煭灏忕殑閫昏緫鍏ュ彛鎻愰啋銆?
-- 杩欎簺鎻愰啋搴斾紭鍏堟斁鍦ㄩ珮棰戣捣鎵嬫枃浠讹紝鑰屼笉鏄棤宸埆閾烘弧鍏ㄤ粨銆?
-- 鎻愰啋搴旀寚鍚戜粨搴撳唴鐨?`AGENTS.md`銆乣README.md` 绛夌浉瀵瑰叆鍙ｆ枃浠讹紝鑰屼笉鏄啓鍏ユ満鍣ㄧ浉鍏崇殑缁濆璺緞銆?
+- 褰撻」鐩瓨鍦ㄧ湡瀹炲叆鍙?/ 璧锋墜婧愮爜鏂囦欢鏃讹紝杩欎簺鏂囦欢椤堕儴榛樿閮藉簲鏀剧疆鐭皬鐨勯€昏緫鍏ュ彛鎻愰啋銆?- 杩欐潯瑙勫垯鐨勯粯璁よ寖鍥翠笉鏄€滃彧闄愬叧閿叆鍙ｂ€濓紝鑰屾槸瑕嗙洊椤圭洰鍐呮墍鏈夌湡瀹炲叆鍙?/ 璧锋墜婧愮爜鏂囦欢锛涗絾涓嶅簲鏈烘閾烘弧宸ュ叿鍑芥暟銆佸彾瀛愮粍浠跺拰闈炲叆鍙ｅ疄鐜版枃浠躲€?- 鎻愰啋搴旀寚鍚戜粨搴撳唴鐨?`AGENTS.md`銆乣README.md` 绛夌浉瀵瑰叆鍙ｆ枃浠讹紝鑰屼笉鏄啓鍏ユ満鍣ㄧ浉鍏崇殑缁濆璺緞銆?
 - 杩欐牱鍙互鎶娾€滀富閫昏緫鍥炶鈥濅粠椤跺眰鏂囨。寤朵几鍒扮湡瀹炲紑宸ョ偣锛岄檷浣庡杞璇濆悗鐨勪富閫昏緫婕傜Щ椋庨櫓銆?
-- 濡傛灉椤圭洰瑕佹妸杩欐潯瑙勫垯浠庘€滄枃妗ｈ鑼冣€濆崌绾т负鈥滃伐绋嬬害鏉熲€濓紝鍒欒繕搴旀彁渚涗粨搴撶骇鏍￠獙鑴氭湰锛岀敤浜庢満姊版鏌ュ叧閿叆鍙ｆ枃浠朵笌涓绘枃妗ｆ槸鍚︿粛淇濈暀閫昏緫鍏ュ彛鎻愰啋銆?
-- 璇ョ被鑴氭湰搴斾紭鍏堟鏌ワ細
+- 濡傛灉椤圭洰瑕佹妸杩欐潯瑙勫垯浠庘€滄枃妗ｈ鑼冣€濆崌绾т负鈥滃伐绋嬬害鏉熲€濓紝鍒欒繕搴旀彁渚涗粨搴撶骇鏍￠獙鑴氭湰锛岀敤浜庢満姊版鏌ユ墍鏈夌湡瀹炲叆鍙?/ 璧锋墜婧愮爜鏂囦欢涓庝富鏂囨。鏄惁浠嶄繚鐣欓€昏緫鍏ュ彛鎻愰啋銆?- 璇ョ被鑴氭湰搴斾紭鍏堟鏌ワ細
   - 浠撳簱绾у叆鍙ｆ枃妗ｆ槸鍚︿粛鎸囧悜涓婚€昏緫鍏ュ彛
-  - 鍏抽敭鍏ュ彛浠ｇ爜鏂囦欢椤堕儴鏄惁浠嶄繚鐣欑煭鎻愰啋
+  - 鎵€鏈夌湡瀹炲叆鍙?/ 璧锋墜婧愮爜鏂囦欢椤堕儴鏄惁浠嶄繚鐣欑煭鎻愰啋
   - 鎻愰啋鍐呭鏄惁鎸囧洖浠撳簱鐩稿璺緞锛岃€屼笉鏄満鍣ㄧ粷瀵硅矾寰?
+
+
+## 9. Continuous Execution Interpretation For This Project
+
+- In this project-level logic summary, repeated confirmation is not the goal of the startup chain.
+- The goal is to preserve logical continuity and prevent context drift.
+- If the user explicitly says any equivalent of:
+  - "unless I say stop, keep going"
+  - "do not keep asking me for confirmation"
+  - "follow the plan and keep writing"
+  then that statement must be treated as active continuous-execution authorization within the current task scope.
+- Under that authorization:
+  - subsequent implementation steps should default to being treated as the same ongoing execution round
+  - the agent should continue reading, editing, validating, and fixing in sequence without repeated confirmation at ordinary step boundaries
+  - the agent should stop only when:
+    - the user explicitly says to stop
+    - the current plan is complete and a new strategic direction is required
+    - a true blocker cannot be resolved from local context
+    - a high-risk irreversible action is about to be taken
+- This authorization also implies that the work is still in implementation / build-out mode by default, not yet in formal product-test stage, unless the user explicitly says testing has begun.
 
 ## END FILE: modules/01_MasterLogic.md
 
@@ -2699,21 +2808,19 @@ Agent 鑷冲皯蹇呴』瀹屾垚锛?
 
 ## 4.2.4 浠撳簱绾х‖绾︽潫鎺ㄨ崘钀界偣
 
-- 濡傛灉椤圭洰甯屾湜鎶婇€昏緫鍏ュ彛浠庘€滄枃妗ｈ鑼冣€濆崌绾т负鈥滃伐绋嬬骇绾︽潫鈥濓紝鑷冲皯搴旇ˉ浠ヤ笅涓夊眰锛?  - 浠撳簱涓绘枃妗ｅ０鏄庨€昏緫鍏ュ彛涓庢鏌ュ懡浠?
-  - 鍏抽敭鍏ュ彛浠ｇ爜鏂囦欢椤堕儴淇濈暀浣庡櫔澹版彁閱?
-  - 浠撳簱鎻愪緵鍙墽琛岃剼鏈鏌ヨ繖浜涙彁閱掓槸鍚︿粛瀛樺湪
-- 杩欑妫€鏌ヨ剼鏈殑鐩爣涓嶆槸鏇夸唬涓婚€昏緫闃呰锛岃€屾槸闃叉椤圭洰鍦ㄥ杞敼鍔ㄥ悗鎶婇€昏緫鍏ュ彛鎻愰啋鎮勬倓鍒犳帀銆?
-- 鎺ㄨ崘鍛戒护褰㈡€佺ず渚嬶細
+- 濡傛灉椤圭洰甯屾湜鎶婇€昏緫鍏ュ彛浠庘€滄枃妗ｈ鑼冣€濆崌绾т负鈥滃伐绋嬬骇绾︽潫鈥濓紝鑷冲皯搴旇ˉ浠ヤ笅涓夊眰锛?  - 浠撳簱涓绘枃妗ｅ０鏄庨€昏緫鍏ュ彛涓庢鏌ュ懡浠?  - 鎵€鏈夌湡瀹炲叆鍙?/ 璧锋墜婧愮爜鏂囦欢椤堕儴淇濈暀浣庡櫔澹版彁閱?  - 浠撳簱鎻愪緵鍙墽琛岃剼鏈鏌ヨ繖浜涙彁閱掓槸鍚︿粛瀛樺湪
+- 杩欑妫€鏌ヨ剼鏈殑鐩爣涓嶆槸鏇夸唬涓婚€昏緫闃呰锛岃€屾槸闃叉椤圭洰鍦ㄥ杞敼鍔ㄥ悗鎶婇€昏緫鍏ュ彛鎻愰啋鎮勬倓鍒犳帀銆?- 杩欓噷鐨勨€滃叆鍙?/ 璧锋墜婧愮爜鏂囦欢鈥濋粯璁や笉鍐嶅彧鎸囧皯鏁板叧閿叆鍙ｏ紝鑰屾槸鎸?Agent 寰堝彲鑳戒粠閭ｉ噷寮€濮嬮槄璇汇€佷慨鏀规垨瀹炴柦鐨勭湡瀹炰唬鐮佸叆鍙ｏ紱宸ュ叿鍑芥暟銆佸彾瀛愮粍浠跺拰闈炲叆鍙ｅ疄鐜版枃浠朵笉搴旇鏈烘绾冲叆銆?- 鎺ㄨ崘鍛戒护褰㈡€佺ず渚嬶細
   - `node scripts/check-logic-entry.js`
 - 鍙湁鍏峰杩欎笁灞傚悗锛岄€昏緫鍏ュ彛绾︽潫鎵嶅紑濮嬩粠鈥滆鑼冪骇鈥濆悜鈥滃伐绋嬬骇鈥濊繃娓°€?
-## 4.2.5 Major Entry Files Must Carry the Mandatory Logic Gate
 
-- Every major entry file in the repository must carry the standardized Mandatory Logic Gate header.
+## 4.2.5 Real Entry / Starting Source Files Must Carry the Mandatory Logic Gate
+
+- Every real entry / starting source file in the repository must carry the standardized Mandatory Logic Gate header.
 - This is a mandatory enforcement requirement, not a documentation preference.
 
 - The reason is operational:
-  - AI agents frequently begin work from major entry files
-  - therefore the entry file is the most reliable place to block premature implementation
+  - AI agents frequently begin work from entry files, control files, route files, renderer roots, and other high-frequency starting source files
+  - therefore these source-level starting points are the most reliable places to block premature implementation
   - repeated testing shows that this significantly reduces context-carryover errors and skipped startup checks
 
 - The Mandatory Logic Gate must not be interpreted as:
@@ -2744,9 +2851,9 @@ Agent 鑷冲皯蹇呴』瀹屾垚锛?
   - English by default
   - short and high-signal
   - repository-relative in path references
-  - present on every major entry file
+  - present on every real entry / starting source file
 
-- Repositories should back this requirement with a mechanical validation script so that major entry files can be checked for gate presence and integrity.
+- Repositories should back this requirement with a mechanical validation script so that real entry / starting source files can be checked for gate presence and integrity.
 
 ## 4.2.4.1 鏂囦欢澶村己鍒惰鍒欓粯璁や娇鐢ㄨ嫳鏂?
 
@@ -2801,7 +2908,7 @@ Agent 鑷冲皯蹇呴』瀹屾垚锛?
 
 # Mandatory Logic Gate Template
 
-This file defines the mandatory header template that must be added to every major entry file.
+This file defines the mandatory header template that must be added to every real entry / starting source file.
 
 It is not a suggestion.
 It is not a style preference.
@@ -2819,8 +2926,8 @@ Those errors include, but are not limited to:
 - starting deeper reading, writes, deletions, or implementation before the logic-entry loop is complete
 - treating mandatory startup behavior as guidance instead of a hard gate
 
-This template exists because repeated testing shows that AI agents often start from major entry files first.
-Therefore, the gate must be placed exactly there.
+This template exists because repeated testing shows that AI agents often start from entry files, control files, route files, renderer roots, and other high-frequency starting source files first.
+Therefore, the gate must be placed at those real starting points.
 
 ---
 
@@ -2845,7 +2952,7 @@ It must not be treated as:
 
 ## 2. Scope
 
-This template must be added to every major entry file.
+This template must be added to every real entry / starting source file.
 
 Typical required targets include:
 
@@ -2871,7 +2978,7 @@ Do not spread it across:
 
 The rule is:
 
-- mandatory on major entry files
+- mandatory on all real entry / starting source files
 - not universal on all files
 
 ---
@@ -3129,7 +3236,7 @@ This template should be backed by repository-level enforcement when possible.
 
 Recommended repository-level check responsibilities include:
 
-- verify that major entry files still contain the mandatory gate
+- verify that real entry / starting source files still contain the mandatory gate
 - verify that the header remains in English
 - verify that `AGENTS.md` and `README.md` are still referenced
 - verify that the repository entry docs still point to the current logic-entry chain
@@ -3164,8 +3271,8 @@ The exact string policy may vary by repository, but the enforcement should remai
 
 This template is mandatory because it solves a real execution problem.
 
-Repeated observation shows that AI agents often begin from major entry files.
-That makes those files the highest-leverage place to stop incorrect execution paths before they become file edits, deletions, or stale-context implementation.
+Repeated observation shows that AI agents often begin from entry files, control files, route files, renderer roots, and other high-frequency starting source files.
+That makes those files the highest-leverage places to stop incorrect execution paths before they become file edits, deletions, or stale-context implementation.
 
 Therefore this template must be treated as:
 
@@ -3199,7 +3306,7 @@ Its role is to stop premature action.
 Repositories using AgentLogic should treat the following as the default adoption stack:
 
 1. repository entry docs declare the logic-entry chain
-2. all major entry files carry the Mandatory Logic Gate header
+2. all real entry / starting source files carry the Mandatory Logic Gate header
 3. repository enforcement script checks the gate mechanically
 4. updates to the gate are synchronized with the main logic when promoted
 
@@ -3276,6 +3383,13 @@ This stack should be treated as the default engineering baseline, not a special-
   - 鍏堣ˉ涓婁笅鏂囧欢鐢冲垽鏂垨涓婁笅鏂囬噸缃彁闂?
   - 鍏堣ˉ鐩綍瀹¤
   - 鍏堣ˉ椤圭洰浜嬪疄鍦板浘
+
+
+## 8. Continuous Execution Authorization Checks
+
+- [ ] If the user explicitly gave a continuous-execution instruction such as "unless I say stop, keep going", that instruction has been recorded as an active authorization for the current task scope
+- [ ] Subsequent planned implementation steps are being treated as part of the same continuous execution round rather than as repeated re-confirmation points
+- [ ] The current work is still being treated as implementation / build-out phase by default, not as formal product-test stage, unless the user explicitly said testing has begun
 
 ## END FILE: modules/15_LogicEntryChecklist.md
 

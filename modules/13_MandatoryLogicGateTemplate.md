@@ -1,6 +1,6 @@
 # Mandatory Logic Gate Template
 
-This file defines the mandatory header template that must be added to every major entry file.
+This file defines the mandatory header template that must be added to every real entry / starting source file.
 
 It is not a suggestion.
 It is not a style preference.
@@ -18,8 +18,8 @@ Those errors include, but are not limited to:
 - starting deeper reading, writes, deletions, or implementation before the logic-entry loop is complete
 - treating mandatory startup behavior as guidance instead of a hard gate
 
-This template exists because repeated testing shows that AI agents often start from major entry files first.
-Therefore, the gate must be placed exactly there.
+This template exists because repeated testing shows that AI agents often start from entry files, control files, route files, renderer roots, and other high-frequency starting source files first.
+Therefore, the gate must be placed at those real starting points.
 
 ---
 
@@ -44,7 +44,7 @@ It must not be treated as:
 
 ## 2. Scope
 
-This template must be added to every major entry file.
+This template must be added to every real entry / starting source file.
 
 Typical required targets include:
 
@@ -70,7 +70,7 @@ Do not spread it across:
 
 The rule is:
 
-- mandatory on major entry files
+- mandatory on all real entry / starting source files
 - not universal on all files
 
 ---
@@ -328,7 +328,7 @@ This template should be backed by repository-level enforcement when possible.
 
 Recommended repository-level check responsibilities include:
 
-- verify that major entry files still contain the mandatory gate
+- verify that real entry / starting source files still contain the mandatory gate
 - verify that the header remains in English
 - verify that `AGENTS.md` and `README.md` are still referenced
 - verify that the repository entry docs still point to the current logic-entry chain
@@ -363,8 +363,8 @@ The exact string policy may vary by repository, but the enforcement should remai
 
 This template is mandatory because it solves a real execution problem.
 
-Repeated observation shows that AI agents often begin from major entry files.
-That makes those files the highest-leverage place to stop incorrect execution paths before they become file edits, deletions, or stale-context implementation.
+Repeated observation shows that AI agents often begin from entry files, control files, route files, renderer roots, and other high-frequency starting source files.
+That makes those files the highest-leverage places to stop incorrect execution paths before they become file edits, deletions, or stale-context implementation.
 
 Therefore this template must be treated as:
 
@@ -398,7 +398,7 @@ Its role is to stop premature action.
 Repositories using AgentLogic should treat the following as the default adoption stack:
 
 1. repository entry docs declare the logic-entry chain
-2. all major entry files carry the Mandatory Logic Gate header
+2. all real entry / starting source files carry the Mandatory Logic Gate header
 3. repository enforcement script checks the gate mechanically
 4. updates to the gate are synchronized with the main logic when promoted
 

@@ -101,21 +101,22 @@ Agent 至少必须完成：
 
 - 如果项目希望把逻辑入口从“文档规范”升级为“工程级约束”，至少应补以下三层：
   - 仓库主文档声明逻辑入口与检查命令
-  - 关键入口代码文件顶部保留低噪声提醒
+  - 所有真实入口 / 起手源码文件顶部保留低噪声提醒
   - 仓库提供可执行脚本检查这些提醒是否仍存在
 - 这种检查脚本的目标不是替代主逻辑阅读，而是防止项目在多轮改动后把逻辑入口提醒悄悄删掉。
+- 这里的“入口 / 起手源码文件”默认不再只指少数关键入口，而是指 Agent 很可能从那里开始阅读、修改或实施的真实代码入口；工具函数、叶子组件和非入口实现文件不应被机械纳入。
 - 推荐命令形态示例：
   - `node scripts/check-logic-entry.js`
 - 只有具备这三层后，逻辑入口约束才开始从“规范级”向“工程级”过渡。
 
-## 4.2.5 Major Entry Files Must Carry the Mandatory Logic Gate
+## 4.2.5 Real Entry / Starting Source Files Must Carry the Mandatory Logic Gate
 
-- Every major entry file in the repository must carry the standardized Mandatory Logic Gate header.
+- Every real entry / starting source file in the repository must carry the standardized Mandatory Logic Gate header.
 - This is a mandatory enforcement requirement, not a documentation preference.
 
 - The reason is operational:
-  - AI agents frequently begin work from major entry files
-  - therefore the entry file is the most reliable place to block premature implementation
+  - AI agents frequently begin work from entry files, control files, route files, renderer roots, and other high-frequency starting source files
+  - therefore these source-level starting points are the most reliable places to block premature implementation
   - repeated testing shows that this significantly reduces context-carryover errors and skipped startup checks
 
 - The Mandatory Logic Gate must not be interpreted as:
@@ -146,9 +147,9 @@ Agent 至少必须完成：
   - English by default
   - short and high-signal
   - repository-relative in path references
-  - present on every major entry file
+  - present on every real entry / starting source file
 
-- Repositories should back this requirement with a mechanical validation script so that major entry files can be checked for gate presence and integrity.
+- Repositories should back this requirement with a mechanical validation script so that real entry / starting source files can be checked for gate presence and integrity.
 
 ## 4.2.4.1 文件头强制规则默认使用英文
 

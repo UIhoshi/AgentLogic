@@ -1497,12 +1497,13 @@ This document is a general AI engineering collaboration protocol. It standardize
 - keep project facts and execution rules continuously aligned
 - This closed loop should also be reflected in the project's own top-level markdown so the project locally reminds future agents how updates must be performed.
 
-### 14.10 Main Entry Code Files Should Carry Logic Reminders
+### 14.10 Real Entry / Starting Source Files Should Carry Logic Reminders
 
 - When a project depends on an external logic package or a dedicated logic-entry workflow, the reminder should not exist only in chat memory or only in top-level markdown.
-- The project should also place a short logic-entry reminder at the top of its main entry code files.
+- The project should also place a short logic-entry reminder at the top of its real entry / starting source files.
 - The purpose of these reminders is to increase the chance that the agent sees the logic-entry rule at the exact point where work usually starts, especially in long multi-round sessions.
-- These reminders should be added only to major entry files or major control files, not mechanically to every source file in the repository.
+- These reminders should cover all real source-level starting points where an agent is likely to begin reading, changing, routing, bootstrapping, or controlling execution.
+- They should not be mechanically added to every source file in the repository.
 - Typical targets include:
   - process entry files
   - main backend control files
@@ -1522,7 +1523,7 @@ This document is a general AI engineering collaboration protocol. It standardize
 - A logic reminder only in markdown and source headers is stronger than chat memory, but it is still not a full engineering enforcement mechanism.
 - If the project wants stronger execution guarantees, it should add a repository-level enforcement script that mechanically checks whether:
   - the repository entry docs still point to the current logic entry
-  - the key entry code files still retain the logic reminder
+  - the real entry / starting source files still retain the logic reminder
   - the reminder text still points to repository-relative docs rather than machine-specific paths
 - A recommended command pattern is:
   - `node scripts/check-logic-entry.js`
@@ -1531,7 +1532,7 @@ This document is a general AI engineering collaboration protocol. It standardize
 - Therefore the preferred enforcement stack becomes:
   - logic package defines the rule
   - repository markdown declares the entry path
-  - key entry code files carry short reminders
+  - real entry / starting source files carry short reminders
   - repository script checks the reminder chain mechanically
 
 ### 14.10.2 Header-Level Mandatory Rules Should Default To English
@@ -1766,10 +1767,10 @@ This document is a general AI engineering collaboration protocol. It standardize
 - A sparse README is acceptable only when it is intentionally sparse for maturity reasons, not when it is simply incomplete.
 - A mature README should not hide important usage or compatibility information just to stay short.
 
-### 14.10.16 The Entry-File Logic Gate Is Mandatory, Not Advisory
+### 14.10.16 The Entry / Starting Source File Logic Gate Is Mandatory, Not Advisory
 
-- The logic notice placed at the top of major entry files must be treated as a mandatory execution gate, not as a suggestion, reminder, or stylistic comment.
-- This requirement exists because repeated testing shows that AI agents often begin practical work from major entry files first.
+- The logic notice placed at the top of real entry / starting source files must be treated as a mandatory execution gate, not as a suggestion, reminder, or stylistic comment.
+- This requirement exists because repeated testing shows that AI agents often begin practical work from entry files, control files, route files, renderer roots, and other high-frequency starting source files first.
 - Therefore the highest-leverage place to reduce entry errors is the exact file where implementation would otherwise begin.
 
 - The mandatory gate must block the following common failure modes:
@@ -1778,8 +1779,8 @@ This document is a general AI engineering collaboration protocol. It standardize
   - carrying stale context into a new task without explicit confirmation
   - starting deeper reading, write operations, deletion, or implementation before the startup loop is complete
 
-- For that reason, every major entry file must carry the standardized Mandatory Logic Gate header.
-- This is not optional on major entry files.
+- For that reason, every real entry / starting source file must carry the standardized Mandatory Logic Gate header.
+- This is not optional on real entry / starting source files.
 - Repositories should treat absence, weakening, or removal of that gate as a logic-entry integrity failure.
 
 - The Mandatory Logic Gate must enforce all of the following:
