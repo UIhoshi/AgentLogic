@@ -2,6 +2,12 @@
 
 These adapters are the installation layer for pulling AgentLogic into local AI hosts as the primary logic.
 
+For first-time local installation, start at the repository root:
+
+- AI agents: `AGENT_INSTALL.md`
+- Humans: `INSTALL.md`
+- Diagnostic command: `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\doctor.ps1`
+
 Goals:
 
 - build a stable bundle from `manifest.json`

@@ -27,8 +27,18 @@ if ($config -match "(?m)^model_instructions_file\s*=") {
     $updated = [System.Text.RegularExpressions.Regex]::Replace($config, "(?m)^model_instructions_file\s*=.*$", $line)
 }
 else {
-    $prefix = if ([string]::IsNullOrWhiteSpace($config)) { "" } else { $config.TrimEnd() + "`r`n" }
-    $updated = $prefix + $line + "`r`n"
+    $firstTableMatch = [System.Text.RegularExpressions.Regex]::Match($config, "(?m)^\[")
+
+    if ($firstTableMatch.Success) {
+        $beforeTables = $config.Substring(0, $firstTableMatch.Index).TrimEnd()
+        $tables = $config.Substring($firstTableMatch.Index).TrimStart("`r", "`n")
+        $prefix = if ([string]::IsNullOrWhiteSpace($beforeTables)) { "" } else { $beforeTables + "`r`n" }
+        $updated = $prefix + $line + "`r`n" + $tables
+    }
+    else {
+        $prefix = if ([string]::IsNullOrWhiteSpace($config)) { "" } else { $config.TrimEnd() + "`r`n" }
+        $updated = $prefix + $line + "`r`n"
+    }
 }
 
 [System.IO.File]::WriteAllText($configPath, $updated, [System.Text.UTF8Encoding]::new($false))

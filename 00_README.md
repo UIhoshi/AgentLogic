@@ -1,5 +1,11 @@
 # AgentLogic_V6
 
+本仓库如果用于本地安装，请优先查看：
+
+- AI 安装入口：`AGENT_INSTALL.md`
+- 人类安装入口：`INSTALL.md`
+- 首选诊断命令：`powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\doctor.ps1`
+
 本目录是基于当前仓库 `C:\Users\XU RONG\Downloads\claude-code-main\claude-code-main` 提炼出来的分层逻辑包，不是无边界源码镜像。
 
 它的目标是把当前项目中和 Agent、工具、权限、安全、扩展、命令面、源码映射相关的关键信息整理成一套可持续维护的规则包，便于你后续继续升级主逻辑和逻辑包。

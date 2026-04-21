@@ -16,6 +16,7 @@
     "optional_modules",
     "host_outputs",
     "adapters",
+    "install",
     "notes"
   ],
   "properties": {
@@ -139,11 +140,127 @@
         }
       }
     },
+    "install": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "default_profile",
+        "stable_entry",
+        "agent_guide",
+        "human_guide",
+        "doctor",
+        "hosts",
+        "validation"
+      ],
+      "properties": {
+        "default_profile": {
+          "type": "string",
+          "minLength": 1
+        },
+        "stable_entry": {
+          "type": "string",
+          "pattern": "^[^\\\\]+\\.md$"
+        },
+        "agent_guide": {
+          "type": "string",
+          "pattern": "^[^\\\\]+\\.md$"
+        },
+        "human_guide": {
+          "type": "string",
+          "pattern": "^[^\\\\]+\\.md$"
+        },
+        "doctor": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "command",
+            "script"
+          ],
+          "properties": {
+            "command": {
+              "type": "string",
+              "minLength": 1
+            },
+            "script": {
+              "type": "string",
+              "pattern": "^scripts/.+\\.ps1$"
+            }
+          }
+        },
+        "hosts": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "codex",
+            "claude",
+            "gemini",
+            "generic"
+          ],
+          "properties": {
+            "codex": {
+              "$ref": "#/$defs/installHost"
+            },
+            "claude": {
+              "$ref": "#/$defs/installHost"
+            },
+            "gemini": {
+              "$ref": "#/$defs/installHost"
+            },
+            "generic": {
+              "$ref": "#/$defs/installHost"
+            }
+          }
+        },
+        "validation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "command",
+            "script"
+          ],
+          "properties": {
+            "command": {
+              "type": "string",
+              "minLength": 1
+            },
+            "script": {
+              "type": "string",
+              "pattern": "^scripts/.+\\.ps1$"
+            }
+          }
+        }
+      }
+    },
     "notes": {
       "type": "array",
       "items": {
         "type": "string",
         "minLength": 1
+      }
+    }
+  },
+  "$defs": {
+    "installHost": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "command",
+        "adapter",
+        "output"
+      ],
+      "properties": {
+        "command": {
+          "type": "string",
+          "minLength": 1
+        },
+        "adapter": {
+          "type": "string",
+          "pattern": "^adapters/.+/install\\.ps1$"
+        },
+        "output": {
+          "type": "string",
+          "minLength": 1
+        }
       }
     }
   }

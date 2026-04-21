@@ -21,6 +21,19 @@ or begin implementation before the logic-entry loop above has been completed.
 
 This file is the repository-level agent entry document for AgentLogic.
 
+## Local Installation Entry
+
+If the user asks to install, load, mount, bind, or use this logic on the local computer, read:
+
+- `AGENT_INSTALL.md` first for agent-facing installation steps
+- `INSTALL.md` for human-facing installation steps
+
+Then run the diagnostic entry:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\doctor.ps1
+```
+
 ## Required Entry Path
 
 For formal work in this repository:

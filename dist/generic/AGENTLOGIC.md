@@ -2,7 +2,7 @@
 
 - Host target: generic
 - Profile: core-enhanced
-- Generated at: 2026-04-21T22:54:20+09:00
+- Generated at: 2026-04-21T23:14:41+09:00
 - Stable entry: MAIN.md
 - Version: V6
 
@@ -34,6 +34,17 @@ or begin implementation before the logic-entry loop above has been completed.
 # 00_START_HERE.md
 
 This file is the mandatory first entry for this logic repository.
+
+## Local Installation Entry
+
+For local installation, read `AGENT_INSTALL.md` first if you are an AI agent.
+For human installation, read `INSTALL.md` first.
+
+Recommended first diagnostic command:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\doctor.ps1
+```
 
 ## File Boundary
 
@@ -114,6 +125,217 @@ This authorization should also be interpreted as meaning the work is still in an
 
 ---
 
+## BEGIN FILE: INSTALL.md
+
+<!--
+MANDATORY LOGIC GATE
+
+Before making changes here, read `AGENTS.md` and `README.md` first.
+Then follow the repository-declared logic entry chain, including `00_START_HERE.md`,
+`modules/01_MasterLogic.md`, and `modules/15_LogicEntryChecklist.md` when applicable.
+
+Before every new coding round, explicitly decide whether the current task extends
+the previous coding round.
+If it does not, explicitly ask whether to forget/compress context before continuing.
+
+Treat this flow as a blocking gate, not as guidance, documentation, or a reminder.
+Do not infer continuation by yourself.
+Do not skip the context-reset question for efficiency.
+
+Do not continue deeper reading, modify files, delete files, perform write actions,
+or begin implementation before the logic-entry loop above has been completed.
+-->
+
+# Install AgentLogic Locally
+
+This page is the human-facing installation entry for AgentLogic.
+
+If you are an AI agent, start with [`AGENT_INSTALL.md`](./AGENT_INSTALL.md) instead.
+
+## What "Install" Means
+
+AgentLogic is not a normal app dependency. Installing it means:
+
+1. build the selected AgentLogic profile into a host-ready bundle;
+2. copy or bind that bundle to the target AI host;
+3. verify that the local host can use `MAIN.md` or the generated bundle as its primary logic.
+
+The stable host binding entry is:
+
+- `MAIN.md`
+
+The default profile is:
+
+- `core-enhanced`
+
+## First Diagnostic Command
+
+Run this before guessing which command to use:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\doctor.ps1
+```
+
+The doctor checks the repository shape, reads `manifest.json`, lists supported hosts, and prints the recommended install commands.
+
+## One-Command Install
+
+Choose the host that should receive the local logic.
+
+### Codex
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost codex
+```
+
+### Claude
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost claude
+```
+
+### Gemini
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost gemini
+```
+
+### Generic bundle
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost generic
+```
+
+On shell environments:
+
+```bash
+./install.sh --host codex
+```
+
+## Validate The Package
+
+After installation or repository changes:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\validate-package.ps1
+```
+
+For maintainers:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\maintainer-check.ps1
+```
+
+## Important Boundaries
+
+- Do not treat this repository as a business project workspace.
+- Do not create unrelated project files inside this repository.
+- Hosts should bind to `MAIN.md` or to a generated bundle, not directly to a versioned file.
+- Generated bundles are built from `manifest.json` and `scripts/build-profile.ps1`.
+
+## END FILE: INSTALL.md
+
+---
+
+## BEGIN FILE: AGENT_INSTALL.md
+
+<!--
+MANDATORY LOGIC GATE
+
+Before making changes here, read `AGENTS.md` and `README.md` first.
+Then follow the repository-declared logic entry chain, including `00_START_HERE.md`,
+`modules/01_MasterLogic.md`, and `modules/15_LogicEntryChecklist.md` when applicable.
+
+Before every new coding round, explicitly decide whether the current task extends
+the previous coding round.
+If it does not, explicitly ask whether to forget/compress context before continuing.
+
+Treat this flow as a blocking gate, not as guidance, documentation, or a reminder.
+Do not infer continuation by yourself.
+Do not skip the context-reset question for efficiency.
+
+Do not continue deeper reading, modify files, delete files, perform write actions,
+or begin implementation before the logic-entry loop above has been completed.
+-->
+
+# Agent Installation Guide
+
+This is the shortest installation path for AI agents.
+
+Goal: install AgentLogic into the current local AI host without guessing the entrypoint, target bundle, or validation command.
+
+## Do Not Guess
+
+Before installing, identify:
+
+1. whether the current directory is the AgentLogic repository root;
+2. the target host: `codex`, `claude`, `gemini`, or `generic`;
+3. the selected profile, normally `core-enhanced`;
+4. whether the host should bind to `MAIN.md` directly or to a generated bundle.
+
+If uncertain, run the doctor first.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\doctor.ps1
+```
+
+## Stable Facts
+
+- Repository role: primary local logic package.
+- Stable host entry: `MAIN.md`.
+- Default profile: `core-enhanced`.
+- Machine-readable contract: `manifest.json`.
+- Root installer: `install.ps1`.
+- Validation command: `scripts/validate-package.ps1`.
+
+## Install Commands
+
+### Codex
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost codex
+```
+
+### Claude
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost claude
+```
+
+### Gemini
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost gemini
+```
+
+### Generic
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost generic
+```
+
+## Validate
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\validate-package.ps1
+```
+
+## Agent Decision Rule
+
+If the user asks to "load", "install", "mount", "bind", or "use this logic locally", do this:
+
+1. run `scripts/doctor.ps1`;
+2. choose the target host from local context or the user request;
+3. run the matching `install.ps1 -TargetHost ...` command;
+4. run `scripts/validate-package.ps1`;
+5. report the installed host, profile, output path, and any remaining manual binding step.
+
+Do not search through unrelated project files or treat the AgentLogic repository as a business workspace.
+
+## END FILE: AGENT_INSTALL.md
+
+---
+
 ## BEGIN FILE: README.md
 
 <!--
@@ -138,6 +360,18 @@ or begin implementation before the logic-entry loop above has been completed.
 # AgentLogic
 
 AgentLogic is a versioned primary-logic package intended to be pulled into local AI coding hosts and used as their default operating logic.
+
+## Install Locally First
+
+If the goal is to load AgentLogic onto this computer, start here:
+
+- Human installation guide: [`INSTALL.md`](./INSTALL.md)
+- AI-agent installation guide: [`AGENT_INSTALL.md`](./AGENT_INSTALL.md)
+- Diagnostic command:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\doctor.ps1
+```
 
 It is designed to govern:
 
@@ -215,6 +449,8 @@ This profile is the recommended default for general coding work and includes:
   reference layers, not default prompt material
 
 ## One-Command Host Setup
+
+For the guided path, read `INSTALL.md` or run `scripts/doctor.ps1` first.
 
 Install into any supported host through the root installer:
 
@@ -354,6 +590,19 @@ or begin implementation before the logic-entry loop above has been completed.
 # AGENTS.md
 
 This file is the repository-level agent entry document for AgentLogic.
+
+## Local Installation Entry
+
+If the user asks to install, load, mount, bind, or use this logic on the local computer, read:
+
+- `AGENT_INSTALL.md` first for agent-facing installation steps
+- `INSTALL.md` for human-facing installation steps
+
+Then run the diagnostic entry:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\doctor.ps1
+```
 
 ## Required Entry Path
 

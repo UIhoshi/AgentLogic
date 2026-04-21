@@ -21,6 +21,18 @@ or begin implementation before the logic-entry loop above has been completed.
 
 AgentLogic is a versioned primary-logic package intended to be pulled into local AI coding hosts and used as their default operating logic.
 
+## Install Locally First
+
+If the goal is to load AgentLogic onto this computer, start here:
+
+- Human installation guide: [`INSTALL.md`](./INSTALL.md)
+- AI-agent installation guide: [`AGENT_INSTALL.md`](./AGENT_INSTALL.md)
+- Diagnostic command:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\doctor.ps1
+```
+
 It is designed to govern:
 
 - project starts
@@ -97,6 +109,8 @@ This profile is the recommended default for general coding work and includes:
   reference layers, not default prompt material
 
 ## One-Command Host Setup
+
+For the guided path, read `INSTALL.md` or run `scripts/doctor.ps1` first.
 
 Install into any supported host through the root installer:
 

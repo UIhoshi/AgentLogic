@@ -21,6 +21,17 @@ or begin implementation before the logic-entry loop above has been completed.
 
 This file is the mandatory first entry for this logic repository.
 
+## Local Installation Entry
+
+For local installation, read `AGENT_INSTALL.md` first if you are an AI agent.
+For human installation, read `INSTALL.md` first.
+
+Recommended first diagnostic command:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\doctor.ps1
+```
+
 ## File Boundary
 
 This file is logic, not project content.

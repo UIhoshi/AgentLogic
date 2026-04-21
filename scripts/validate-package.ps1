@@ -31,6 +31,9 @@ Assert-Exists -Root $RepoRoot -RelativePath "MAIN.md" -Label "Stable entry"
 Assert-Exists -Root $RepoRoot -RelativePath "00_START_HERE.md" -Label "Human entry"
 Assert-Exists -Root $RepoRoot -RelativePath "install.ps1" -Label "PowerShell installer"
 Assert-Exists -Root $RepoRoot -RelativePath "install.sh" -Label "Shell installer"
+Assert-Exists -Root $RepoRoot -RelativePath "INSTALL.md" -Label "Human install guide"
+Assert-Exists -Root $RepoRoot -RelativePath "AGENT_INSTALL.md" -Label "Agent install guide"
+Assert-Exists -Root $RepoRoot -RelativePath "scripts/doctor.ps1" -Label "Install doctor"
 
 $manifest = Get-Content -Raw -Path $manifestPath | ConvertFrom-Json
 
@@ -46,6 +49,7 @@ $requiredTopLevelKeys = @(
     "optional_modules",
     "host_outputs",
     "adapters",
+    "install",
     "notes"
 )
 
@@ -88,6 +92,28 @@ foreach ($groupProperty in $manifest.optional_modules.PSObject.Properties) {
 
 foreach ($adapterProperty in $manifest.adapters.PSObject.Properties) {
     Assert-Exists -Root $RepoRoot -RelativePath $adapterProperty.Value -Label "Adapter '$($adapterProperty.Name)'"
+}
+
+if (-not $manifest.install) {
+    Fail "manifest.json missing install section."
+}
+
+Assert-Exists -Root $RepoRoot -RelativePath $manifest.install.stable_entry -Label "Install stable entry"
+Assert-Exists -Root $RepoRoot -RelativePath $manifest.install.agent_guide -Label "Install agent guide"
+Assert-Exists -Root $RepoRoot -RelativePath $manifest.install.human_guide -Label "Install human guide"
+Assert-Exists -Root $RepoRoot -RelativePath $manifest.install.doctor.script -Label "Install doctor script"
+Assert-Exists -Root $RepoRoot -RelativePath $manifest.install.validation.script -Label "Install validation script"
+
+foreach ($hostProperty in $manifest.install.hosts.PSObject.Properties) {
+    $hostName = $hostProperty.Name
+    $installHost = $hostProperty.Value
+    Assert-Exists -Root $RepoRoot -RelativePath $installHost.adapter -Label "Install host '$hostName' adapter"
+    if (-not $installHost.command) {
+        Fail "Install host '$hostName' is missing command."
+    }
+    if (-not $installHost.output) {
+        Fail "Install host '$hostName' is missing output."
+    }
 }
 
 foreach ($outputProperty in $manifest.host_outputs.PSObject.Properties) {

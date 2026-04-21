@@ -23,6 +23,16 @@ This file is the stable machine-facing entrypoint for AgentLogic.
 
 Hosts that want to install this repository as their primary local logic should bind to this file, or to a bundle built from the profile declared in `manifest.json`.
 
+For local installation discovery:
+
+- AI agents should read `AGENT_INSTALL.md` first.
+- Humans should read `INSTALL.md` first.
+- The diagnostic command is:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\doctor.ps1
+```
+
 Do not bind hosts directly to `versions/AgentLogic_V6.md` or any future versioned file name.
 
 ## Purpose
