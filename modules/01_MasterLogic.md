@@ -1,6 +1,6 @@
-# AgentLogic_V6 Master Logic
+# AgentLogic_V6_5 Master Logic
 
-本文件不是替代 `AgentLogic_V6.md`，而是将当前主逻辑映射到当前仓库，形成一份面向 Claude Code 类 Agentic CLI 系统的项目级主逻辑摘要。
+本文件不是替代 `AgentLogic_V6_5.md`，而是将当前主逻辑映射到当前仓库，形成一份面向 Claude Code 类 Agentic CLI 系统的项目级主逻辑摘要。
 
 ## 1. 当前项目定位
 
@@ -177,6 +177,20 @@
   - 是否存在更适合当前任务的工具或 skills
   - 是否存在更成熟的外部候选方案
   - 候选方案属于推荐项、候选增强项还是正式集成项
+
+## 4.6.1 Mandatory Tool Verification Summary
+
+- The main logic now treats some verification tool paths as mandatory rather than optional.
+- Local repository facts must be verified by local search/listing plus targeted reads.
+- Latest/current/remote facts must be verified by authoritative external read-only checks.
+- UI / visible behavior must be verified by screenshot or equivalent visual evidence.
+- Runtime / build / packaging claims must be verified by command, build, or runtime checks.
+- Path-sensitive writes, side-effecting commands, and external state changes must include pre-target confirmation and post-result confirmation.
+- Permission-sensitive execution must include permission-mode and allowance confirmation before execution.
+- If the matching verification tool was not used, the conclusion should not be treated as fully verified.
+- `29_MandatoryVerificationMatrix.md` should be treated as the hard mapping layer for conclusion type -> tool family -> minimum pass condition.
+- `30_ToolQuestionBoundaryMatrix.md` should be treated as the hard boundary layer for tool family -> allowed question types -> support-only question types -> forbidden-alone question types.
+- `31_ToolMisuseAndAntiPatternMatrix.md` should be treated as the anti-pattern layer for common invalid closure paths, their correction recipes, and the safe interim labels that should replace overconfident conclusions.
 
 ## 4.7 V6 只作为外挂逻辑包，不作为项目目录
 

@@ -307,6 +307,47 @@
 - 对高频、低效、重复、长耗时的工作路径，AI 应优先考虑是否存在更合适的工具化替代。
 - 默认工具低效时，Agent 应主动寻找更适合当前任务的工具或方案，但必须区分正式能力与候选增强。
 
+### 5.4.4 Mandatory Tool-Use And Verification Policy
+
+- For some classes of conclusions, tool usage is not optional; it is a mandatory verification path.
+- For local repository facts, use local search/listing plus targeted source reads before making strong conclusions.
+- For latest/current/remote facts, use authoritative external read-only verification instead of memory or stale local notes.
+- For UI or visible behavior, use screenshot or equivalent visual verification rather than relying only on code reading or build success.
+- For runtime/build/packaging claims, use command, build, or runtime verification rather than static inference alone.
+- For path-sensitive writes or side-effecting commands, confirm the working directory and target path before mutation, then inspect the result afterward.
+- For external state changes, follow the order: validate locally first, confirm the remote target second, execute the remote change last, and verify afterward.
+- For permission-sensitive tools, confirm the current permission mode and actual allowance state before execution.
+- The key rule is: the class of conclusion must match the class of tool that can truly justify it; if the corresponding verification tool was not used, the conclusion should not be treated as fully verified.
+
+### 5.4.5 Mandatory Verification Matrix
+
+- The mandatory tool-use policy should be backed by a concrete verification matrix rather than left as a loose principle.
+- That matrix should map: conclusion type -> mandatory tool family -> minimum pass condition -> default failure state.
+- If the matching tool family was not used, the conclusion should stay unverified, partially verified, or inferred-but-not-confirmed rather than being marked complete.
+- Search results alone should not close repository-fact questions.
+- Code reading alone should not close UI/visible-behavior questions.
+- Static structure alone should not close runtime/build/packaging questions.
+- Remote changes should not be treated as safe unless both the target and the post-change state were verified.
+
+### 5.4.6 Tool Question-Boundary Matrix
+
+- The main logic should define not only which tools are required, but also which kinds of questions each tool family is actually strong enough to answer.
+- Search/listing tools may narrow candidate locations, but should not close implementation-fact questions by themselves.
+- Static file reads may confirm explicit code and config facts, but should not close runtime or UI-visible questions by themselves.
+- Build success may confirm a successful build, but should not close visual-behavior questions.
+- Memory, stale notes, or cached assumptions should not close latest/current/remote-fact questions.
+- If a tool family is only support-capable for the question type, the answer should remain partial, inferred, or blocked on stronger verification.
+
+### 5.4.7 Tool Misuse And Anti-Pattern Matrix
+
+- The main logic should explicitly record common tool anti-patterns so that agents do not repeat the same weak closure behaviors across projects.
+- A search hit should not be treated as implementation proof.
+- A static read should not be treated as runtime proof.
+- A successful build should not be treated as visual proof.
+- Memory or stale notes should not be treated as current remote proof.
+- Write-first diagnosis and remote-change-first workflows should be treated as invalid default paths.
+- When an anti-pattern occurred, the agent should either run the correction path or downgrade the conclusion label instead of pretending the task is fully verified.
+
 ### 5.5 禁止擅自追加功能
 
 - 未经用户明确确认，不得擅自添加需求外功能、交互、状态机变化、默认行为变化、视觉改造、流程改造或“顺手优化”。
@@ -946,6 +987,47 @@ This document is a general AI engineering collaboration protocol. It standardize
 - “Use the old tool to get something done first” can be a temporary tactic, but it should not prevent AI from recognizing and proposing better tool directions.
 - For high-frequency, inefficient, repetitive, or long-running workflows, AI should actively consider whether a better tool-based alternative exists.
 - When the default tool path is inefficient, the agent should actively look for a more appropriate tool or approach for the task, but it must distinguish between officially integrated capabilities and candidate enhancements.
+
+### 5.4.4 Mandatory Tool-Use And Verification Policy
+
+- For some classes of conclusions, tool usage is not optional; it is a mandatory verification path.
+- For local repository facts, use local search/listing plus targeted source reads before making strong conclusions.
+- For latest/current/remote facts, use authoritative external read-only verification instead of memory or stale local notes.
+- For UI or visible behavior, use screenshot or equivalent visual verification rather than relying only on code reading or build success.
+- For runtime/build/packaging claims, use command, build, or runtime verification rather than static inference alone.
+- For path-sensitive writes or side-effecting commands, confirm the working directory and target path before mutation, then inspect the result afterward.
+- For external state changes, follow the order: validate locally first, confirm the remote target second, execute the remote change last, and verify afterward.
+- For permission-sensitive tools, confirm the current permission mode and actual allowance state before execution.
+- The key rule is: the class of conclusion must match the class of tool that can truly justify it; if the corresponding verification tool was not used, the conclusion should not be treated as fully verified.
+
+### 5.4.5 Mandatory Verification Matrix
+
+- The mandatory tool-use policy should be backed by a concrete verification matrix rather than left as a loose principle.
+- That matrix should map: conclusion type -> mandatory tool family -> minimum pass condition -> default failure state.
+- If the matching tool family was not used, the conclusion should stay unverified, partially verified, or inferred-but-not-confirmed rather than being marked complete.
+- Search results alone should not close repository-fact questions.
+- Code reading alone should not close UI/visible-behavior questions.
+- Static structure alone should not close runtime/build/packaging questions.
+- Remote changes should not be treated as safe unless both the target and the post-change state were verified.
+
+### 5.4.6 Tool Question-Boundary Matrix
+
+- The main logic should define not only which tools are required, but also which kinds of questions each tool family is actually strong enough to answer.
+- Search/listing tools may narrow candidate locations, but should not close implementation-fact questions by themselves.
+- Static file reads may confirm explicit code and config facts, but should not close runtime or UI-visible questions by themselves.
+- Build success may confirm a successful build, but should not close visual-behavior questions.
+- Memory, stale notes, or cached assumptions should not close latest/current/remote-fact questions.
+- If a tool family is only support-capable for the question type, the answer should remain partial, inferred, or blocked on stronger verification.
+
+### 5.4.7 Tool Misuse And Anti-Pattern Matrix
+
+- The main logic should explicitly record common tool anti-patterns so that agents do not repeat the same weak closure behaviors across projects.
+- A search hit should not be treated as implementation proof.
+- A static read should not be treated as runtime proof.
+- A successful build should not be treated as visual proof.
+- Memory or stale notes should not be treated as current remote proof.
+- Write-first diagnosis and remote-change-first workflows should be treated as invalid default paths.
+- When an anti-pattern occurred, the agent should either run the correction path or downgrade the conclusion label instead of pretending the task is fully verified.
 
 ### 5.5 No Unapproved Feature Additions
 

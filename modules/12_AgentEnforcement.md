@@ -184,6 +184,42 @@ Agent 至少必须完成：
 - 未经确认，不得把候选工具描述成当前项目的正式能力。
 - 默认工具低效时，Agent 应主动寻找更适合当前任务的工具或方案，但必须区分正式能力与候选增强。
 
+## 4.3.1 Mandatory Tool Verification Must Not Be Skipped
+
+- When a task falls into a main-logic mandatory tool-use scenario, the agent must not bypass the corresponding verification tool and go directly to a conclusion.
+- This includes at least:
+  - local repository facts must be verified by local search/listing plus targeted reads
+  - latest/current/remote facts must be verified by authoritative external sources
+  - UI / visible behavior must be verified by screenshot or equivalent visual evidence
+  - runtime/build/packaging claims must be verified by command, build, or runtime tools
+  - path-sensitive writes and external state changes must include pre-target confirmation and post-result confirmation
+  - permission-sensitive execution must include permission-mode and allowance confirmation before execution
+- Without those verifications, the task should not be treated as fully verified.
+
+## 4.3.2 Weak Tool Families Must Not Over-Close Strong Questions
+
+- An agent must not let a weak evidence tool family answer a stronger question than that tool family can justify.
+- This means at minimum:
+  - search hits must not be treated as final implementation proof
+  - static reads must not be treated as runtime proof
+  - build success must not be treated as visual proof
+  - memory or stale notes must not be treated as current remote proof
+- If the current tool family can only support the question rather than close it, the answer must remain partial, inferred, or blocked on stronger verification.
+
+## 4.3.3 Known Tool Anti-Patterns Must Be Treated As Verification Failure
+
+- If the agent reaches a conclusion through a known tool anti-pattern, that path must be treated as a verification failure rather than a successful shortcut.
+- This includes at least:
+  - search-hit closure
+  - static-read closure on runtime claims
+  - build-success closure on UI-visible claims
+  - memory-based closure on current remote facts
+  - write-first diagnosis
+  - remote-change-first workflows
+- After such an anti-pattern, the agent must either:
+  - run the correction recipe and finish the missing verification path, or
+  - downgrade the conclusion label to partial / inferred / unverified.
+
 ## 5. 为什么这是强制要求
 
 - 不同 Agent 进入项目时最容易出错的地方，不是能力不够，而是入口不一致。
@@ -192,6 +228,7 @@ Agent 至少必须完成：
 
 ## 6. 实际使用要求
 
-- 每次新项目开始时，优先读 `AgentLogic_V6.md`
+- 每次新项目开始时，优先读 `AgentLogic_V6_5.md`
 - 每次项目级维护时，再结合本包中的分层文档与原始层目录
-- 如果后续新增更准确的规则，应先回写 `AgentLogic_V6.md`，再同步本逻辑包
+- 如果后续新增更准确的规则，应先回写 `AgentLogic_V6_5.md`，再同步本逻辑包
+

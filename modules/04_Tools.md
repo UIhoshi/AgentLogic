@@ -165,3 +165,39 @@
   保留工具接口、工具注册、工具编排与执行基础设施。
 
 这样做的目的不是把所有逻辑重新写一遍，而是确保后续维护者既能看总览，也能立即落到真实实现。
+
+## 9. Mandatory Tool-Use Policy
+
+For this logic line, some tool usages are mandatory rather than optional.
+
+- For local repository facts, use local search/listing + targeted file reads before strong conclusions.
+- For latest/current/remote facts, use authoritative external read-only verification.
+- For UI or visible behavior, use screenshot or equivalent visual verification.
+- For runtime/build/packaging claims, use command/build/runtime verification.
+- For path-sensitive writes or side-effecting commands, verify working directory and target path before mutation, then inspect results after mutation.
+- For external state changes, validate locally first, confirm remote target second, change remotely last, and verify afterward.
+- For permission-sensitive tools, confirm current permission mode and actual tool allowance before execution.
+
+The key rule is: the conclusion must be matched with the tool class that can actually justify it.
+## 10. Mandatory Verification Matrix
+
+Use `29_MandatoryVerificationMatrix.md` when the task needs a hard mapping from conclusion type to required tool family and minimum pass condition.
+
+- It is the execution companion to the mandatory tool-use policy.
+- It should be used when an agent needs to decide whether a conclusion is merely plausible or actually verified.
+- If the matching verification tool and evidence class are absent, the result should stay unverified or partially verified rather than being marked complete.
+## 11. Tool Question-Boundary Matrix
+
+Use `30_ToolQuestionBoundaryMatrix.md` when the task is not only choosing a tool, but deciding whether that tool family is strong enough to answer the question by itself.
+
+- It distinguishes between tool families that may support a conclusion and tool families that may actually close it.
+- It should be used to stop search-hit closure, read-only closure on runtime claims, and build-success closure on visual claims.
+- If a tool family is only support-capable for the question type, the answer should stay partial or inferred until a stronger evidence class is used.
+## 12. Tool Misuse And Anti-Pattern Matrix
+
+Use `31_ToolMisuseAndAntiPatternMatrix.md` when the task needs explicit examples of invalid tool closure and the correction path that should replace it.
+
+- It captures common failure modes such as search-hit closure, static-read closure on runtime claims, and build-success closure on visual claims.
+- It should be used when an agent needs to explain why a conclusion is still only partial, inferred, or unsafe.
+- It is the anti-pattern companion to the mandatory verification and question-boundary matrices.
+
