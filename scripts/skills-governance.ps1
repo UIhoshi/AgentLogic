@@ -225,7 +225,9 @@ if (-not $skillsRoot) {
 
 Write-Host "Skills root: $skillsRoot"
 Write-Host "Portable logic-carried skills: not governed by this pass unless AgentLogic explicitly ships them in a future version."
-Write-Host "Flat Gemini inventories are treated with a stricter engineering-first active set by default."
+if ($TargetHost -eq "gemini") {
+    Write-Host "Flat Gemini inventories are treated with a stricter engineering-first active set by default."
+}
 
 $inventory = Get-SkillInventory -SkillsRoot $skillsRoot -TargetName $TargetHost
 
