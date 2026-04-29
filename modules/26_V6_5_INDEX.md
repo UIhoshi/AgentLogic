@@ -37,3 +37,15 @@ These modules explain the system context that governance depends on.
 ## 4. Reading Priority
 - For **Behavior Improvements**: Read the **Governance Modules (1-10)** first.
 - For **System Modeling**: Read the **Structural Modules (1-4)** second.
+
+
+---
+
+## 12. Reference source baseline
+
+The V6.5 line used the following primary external comparison source during promotion:
+
+- `https://github.com/claude-code-best/claude-code`
+- Local comparison path: `D:\workspace\claude-code`
+
+Future V6.x iterations should preserve this practice and explicitly register their comparative source baselines.

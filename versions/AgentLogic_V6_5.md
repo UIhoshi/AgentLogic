@@ -54,3 +54,34 @@ The V6.5 line is now promoted from draft status.
 - **Default Profile**: `core-enhanced` (now includes all V6.5 modules)
 
 Agents adopting this line must strictly follow the **Mandatory Verification Matrix** and the **Tool Usage Choreography** defined in the modules above.
+
+
+---
+
+## 4. Reference Source Registration
+
+The V6.5 stable line was derived in part from structured comparison against the following external source repository:
+
+- Primary external reference source: `https://github.com/claude-code-best/claude-code`
+- Local comparison path used during promotion: `D:\workspace\claude-code`
+
+This reference source informed the V6.5 additions around:
+
+- runtime mode taxonomy
+- tool governance
+- mandatory verification
+- question-boundary mapping
+- tool anti-pattern detection
+
+## 5. Future Iteration Reference-Source Rule
+
+For future logic iterations, a version line must explicitly record its external or comparative reference source when such a source materially influenced the update.
+
+At minimum, record:
+
+- source repository URL
+- local comparison path when used
+- whether the source fed the stable line or only a draft line
+- tag, commit, or inspection date when practical
+
+A version iteration should not be treated as fully documented if the reference source baseline was materially used but never recorded.
