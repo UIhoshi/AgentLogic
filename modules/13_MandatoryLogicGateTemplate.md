@@ -381,7 +381,7 @@ It must not be downgraded into a soft recommendation.
 This template does not replace:
 
 - `00_START_HERE.md`
-- `versions/AgentLogic_V6.md`
+- `versions/AgentLogic_V6_5.md`
 - `modules/01_MasterLogic.md`
 - `modules/12_AgentEnforcement.md`
 - `modules/15_LogicEntryChecklist.md`

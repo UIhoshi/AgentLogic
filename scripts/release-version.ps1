@@ -51,9 +51,11 @@ if (-not (Test-Path $manifestPath)) {
 $manifest = Get-Content -Raw -Path $manifestPath | ConvertFrom-Json
 $oldVersion = [string]$manifest.current_version
 $oldMainLogicFile = [string]$manifest.main_logic_file
-$newMainLogicFile = "versions/AgentLogic_{0}.md" -f $NewVersion
-$oldVersionToken = "AgentLogic_{0}" -f $oldVersion
-$newVersionToken = "AgentLogic_{0}" -f $NewVersion
+$oldVersionFileToken = ($oldVersion -replace '\.', '_')
+$newVersionFileToken = ($NewVersion -replace '\.', '_')
+$newMainLogicFile = "versions/AgentLogic_{0}.md" -f $newVersionFileToken
+$oldVersionToken = "AgentLogic_{0}" -f $oldVersionFileToken
+$newVersionToken = "AgentLogic_{0}" -f $newVersionFileToken
 
 if ($oldVersion -eq $NewVersion) {
     throw "NewVersion matches the current version '$oldVersion'."

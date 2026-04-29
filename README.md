@@ -58,7 +58,7 @@ For repository work, also read:
 
 Hosts should bind to `MAIN.md` or to a generated bundle built from `manifest.json`.
 
-Hosts should not bind directly to `versions/AgentLogic_V6.md` or any future versioned file name.
+Hosts should not bind directly to `versions/AgentLogic_V6_5.md` or any future versioned file name.
 
 ## Architecture
 

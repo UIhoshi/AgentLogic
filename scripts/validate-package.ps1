@@ -123,7 +123,8 @@ foreach ($outputProperty in $manifest.host_outputs.PSObject.Properties) {
     }
 }
 
-$expectedMainLogic = "versions/AgentLogic_{0}.md" -f $manifest.current_version
+$versionFileToken = ($manifest.current_version -replace '\.', '_')
+$expectedMainLogic = "versions/AgentLogic_{0}.md" -f $versionFileToken
 if ($manifest.main_logic_file -ne $expectedMainLogic) {
     Fail "main_logic_file '$($manifest.main_logic_file)' does not match current_version '$($manifest.current_version)'. Expected '$expectedMainLogic'."
 }
