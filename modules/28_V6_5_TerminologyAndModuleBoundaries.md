@@ -1,7 +1,7 @@
-# V6.5 Draft Module: Terminology And Module Boundaries
+# V6.5 Stable Module: Terminology And Module Boundaries
 
-Status: draft only.
-This module exists to reduce vocabulary drift and overlap inside the V6.5 draft line.
+Status: stable V6.5 support module.
+This module exists to reduce vocabulary drift and overlap inside the V6.5 stable line.
 
 ---
 
@@ -13,7 +13,7 @@ A draft line becomes hard to promote when:
 - one concept appears in too many modules
 - readers cannot tell which file is normative for which question
 
-This module defines the preferred vocabulary and the intended ownership boundary of each V6.5 draft module.
+This module defines the preferred vocabulary and the intended ownership boundary of each V6.5 stable module.
 
 ---
 
@@ -352,3 +352,4 @@ Does not own:
 - the full decision matrix for normal tool selection
 - the full question-boundary model
 - the full permission/risk model
+`n---`n`n## 4. Provider Neutrality Rule`n`nV6.5 adopts the principle of **Provider Neutrality** in its architectural descriptions.`n`n### 4.1 Reasoning`nLarge systems like claude-code are designed to be provider-agnostic (supporting Anthropic, OpenAI, Gemini, etc.). AgentLogic should follow this by describing features in terms of their **Agentic Role** rather than a specific LLM brand.`n`n### 4.2 Application`n- Do **not** write: \"Claude will call the tool.\"`n- **Do** write: \"The LLM Provider will receive the tool definition and return a call request.\"`n- Do **not** write: \"Store this in Claude's memory.\"`n- **Do** write: \"Store this in the Agentic Memory Layer.\"`n`n### 4.3 Contract-First Design`nWhen documenting new modules, define the **Data Contract** (JSON schema, message format) first. This ensures the logic remains valid even if the underlying model or provider is swapped.

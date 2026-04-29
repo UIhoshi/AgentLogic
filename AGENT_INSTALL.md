@@ -17,58 +17,55 @@ Do not continue deeper reading, modify files, delete files, perform write action
 or begin implementation before the logic-entry loop above has been completed.
 -->
 
-# Agent Installation Guide
+# Agent Installation Guide (V6.5 Stable)
 
-This is the shortest installation path for AI agents.
+This is the shortest installation path for AI agents. 
 
-Goal: install AgentLogic into the current local AI host without guessing the entrypoint, target bundle, or validation command.
+Goal: Install **AgentLogic V6.5** into the current local host without guessing the entrypoint, target bundle, or validation command.
 
 ## Do Not Guess
 
 Before installing, identify:
 
-1. whether the current directory is the AgentLogic repository root;
-2. the target host: `codex`, `claude`, `gemini`, or `generic`;
-3. the selected profile, normally `core-enhanced`;
-4. whether the host should bind to `MAIN.md` directly or to a generated bundle.
+1.  Whether the current directory is the AgentLogic repository root.
+2.  The target host: `codex`, `claude`, `gemini`, or `generic`.
+3.  The selected profile: **`core-enhanced`** is mandatory for full V6.5 governance support.
+4.  Whether the host should bind to `MAIN.md` directly or to a generated bundle.
 
-If uncertain, run the doctor first.
+If uncertain, run the doctor first:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\doctor.ps1
 ```
 
-## Stable Facts
+## V6.5 Stable Facts
 
-- Repository role: primary local logic package.
-- Stable host entry: `MAIN.md`.
-- Default profile: `core-enhanced`.
-- Machine-readable contract: `manifest.json`.
-- Root installer: `install.ps1`.
-- Validation command: `scripts/validate-package.ps1`.
+- **Current Version**: V6.5 (The "Tool Governance & Verification" Expansion).
+- **Repository Role**: Primary local logic package (Method Layer).
+- **Stable Host Entry**: `MAIN.md`.
+- **Default Profile**: `core-enhanced` (Includes modules 20-34 for advanced governance).
+- **Machine-readable Contract**: `manifest.json`.
+- **Root Installer**: `install.ps1`.
+- **Validation Command**: `scripts/validate-package.ps1`.
 
 ## Install Commands
 
 ### Codex
-
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost codex
 ```
 
 ### Claude
-
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost claude
 ```
 
 ### Gemini
-
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost gemini
 ```
 
 ### Generic
-
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost generic
 ```
@@ -79,14 +76,18 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost ge
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\validate-package.ps1
 ```
 
-## Agent Decision Rule
+## Agent Decision Rule (V6.5)
 
-If the user asks to "load", "install", "mount", "bind", or "use this logic locally", do this:
+If the user asks to "load", "install", "mount", "bind", or "use this logic locally", the agent **MUST** follow this protocol:
 
-1. run `scripts/doctor.ps1`;
-2. choose the target host from local context or the user request;
-3. run the matching `install.ps1 -TargetHost ...` command;
-4. run `scripts/validate-package.ps1`;
-5. report the installed host, profile, output path, and any remaining manual binding step.
+1.  **Doctor Check**: Run `scripts/doctor.ps1` to verify environment and path integrity.
+2.  **Target Selection**: Choose the target host (`codex`, `claude`, `gemini`, or `generic`) based on the current environment.
+3.  **Install**: Run the matching `install.ps1 -TargetHost ...` command using the `core-enhanced` profile.
+4.  **Validation**: Run `scripts/validate-package.ps1`.
+5.  **Adoption**: Immediately after installation, the agent must:
+    -   Read `versions/AgentLogic_V6_5.md` to understand the new line.
+    -   Adopt the **Mandatory Verification Matrix** (Module 29) for all subsequent claims.
+    -   Adopt the **4-Tier Memory Taxonomy** (User, Feedback, Project, Reference) for project notes.
+6.  **Report**: State the installed host, version (V6.5), profile, and confirmation that the new governance rules are active.
 
 Do not search through unrelated project files or treat the AgentLogic repository as a business workspace.

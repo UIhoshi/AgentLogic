@@ -32,7 +32,22 @@
         "modules/05_PermissionsAndSafety.md",
         "modules/12_AgentEnforcement.md",
         "modules/13_MandatoryLogicGateTemplate.md",
-        "modules/15_LogicEntryChecklist.md"
+        "modules/15_LogicEntryChecklist.md",
+        "modules/20_V6_5_RuntimeModes.md",
+        "modules/21_V6_5_ToolUsageAndSelection.md",
+        "modules/22_V6_5_HookLifecycle.md",
+        "modules/23_V6_5_PermissionAndOutputPipeline.md",
+        "modules/24_V6_5_ToolUsageMatrix.md",
+        "modules/25_V6_5_ToolCapabilityMapping.md",
+        "modules/26_V6_5_INDEX.md",
+        "modules/27_V6_5_ToolPermissionRiskMatrix.md",
+        "modules/28_V6_5_TerminologyAndModuleBoundaries.md",
+        "modules/29_V6_5_MandatoryVerificationMatrix.md",
+        "modules/30_V6_5_ToolQuestionBoundaryMatrix.md",
+        "modules/31_V6_5_ToolMisuseAndAntiPatternMatrix.md",
+        "modules/32_V6_5_ContextAssemblyAndInstructionStacking.md",
+        "modules/33_V6_5_BackgroundConsolidationAndIdleLifecycle.md",
+        "modules/34_V6_5_ProjectFactMap_V2.md"
       ]
     },
     "github-publishing": {
@@ -53,7 +68,22 @@
         "modules/16_GitHubREADMETemplate_V1.md",
         "modules/17_GitHubREADMEStyleRules_V1.md",
         "modules/18_GitHubREADMEExamples_V1.md",
-        "modules/19_GitHubREADMEReviewChecklist_V1.md"
+        "modules/19_GitHubREADMEReviewChecklist_V1.md",
+        "modules/20_V6_5_RuntimeModes.md",
+        "modules/21_V6_5_ToolUsageAndSelection.md",
+        "modules/22_V6_5_HookLifecycle.md",
+        "modules/23_V6_5_PermissionAndOutputPipeline.md",
+        "modules/24_V6_5_ToolUsageMatrix.md",
+        "modules/25_V6_5_ToolCapabilityMapping.md",
+        "modules/26_V6_5_INDEX.md",
+        "modules/27_V6_5_ToolPermissionRiskMatrix.md",
+        "modules/28_V6_5_TerminologyAndModuleBoundaries.md",
+        "modules/29_V6_5_MandatoryVerificationMatrix.md",
+        "modules/30_V6_5_ToolQuestionBoundaryMatrix.md",
+        "modules/31_V6_5_ToolMisuseAndAntiPatternMatrix.md",
+        "modules/32_V6_5_ContextAssemblyAndInstructionStacking.md",
+        "modules/33_V6_5_BackgroundConsolidationAndIdleLifecycle.md",
+        "modules/34_V6_5_ProjectFactMap_V2.md"
       ]
     }
   },

@@ -1,6 +1,6 @@
-# V6.5 Draft Module: Tool Usage Matrix
+# V6.5 Stable Module: Tool Usage Matrix
 
-Status: draft only.
+Status: stable V6.5 module.
 This module operationalizes tool governance into reusable matrices.
 
 ---

@@ -1,6 +1,6 @@
-# V6.5 Draft Module: Tool Capability Mapping
+# V6.5 Stable Module: Tool Capability Mapping
 
-Status: draft only.
+Status: stable V6.5 module.
 This module maps tool families to the kinds of questions they are appropriate to answer.
 
 ---

@@ -1,6 +1,6 @@
-# V6.5 Draft Module: Permission And Output Pipeline
+# V6.5 Stable Module: Permission And Output Pipeline
 
-Status: draft only.
+Status: stable V6.5 module.
 
 ---
 

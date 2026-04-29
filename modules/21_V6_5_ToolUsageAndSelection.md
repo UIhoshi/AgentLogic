@@ -1,6 +1,6 @@
-# V6.5 Draft Module: Tool Usage And Selection
+# V6.5 Stable Module: Tool Usage And Selection
 
-Status: draft only.
+Status: stable V6.5 module.
 This module is the main V6.5 expansion for tool timing, tool choice, and tool choreography.
 
 ---

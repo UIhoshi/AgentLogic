@@ -1,6 +1,6 @@
-# V6.5 Draft Module: Tool Permission Risk Matrix
+# V6.5 Stable Module: Tool Permission Risk Matrix
 
-Status: draft only.
+Status: stable V6.5 module.
 This module links tool families to permission expectations, risk class, and execution constraints.
 
 ---

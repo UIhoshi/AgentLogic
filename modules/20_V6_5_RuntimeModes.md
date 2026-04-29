@@ -1,7 +1,7 @@
-# V6.5 Draft Module: Runtime Mode Taxonomy
+# V6.5 Stable Module: Runtime Mode Taxonomy
 
-Status: draft only.
-This module extends `AgentLogic_V6` by making runtime modes explicit in large agentic systems.
+Status: stable V6.5 module.
+This module extends the stable V6.5 line by making runtime modes explicit in large agentic systems.
 
 ---
 

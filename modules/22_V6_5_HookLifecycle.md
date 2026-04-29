@@ -1,6 +1,6 @@
-# V6.5 Draft Module: Agent Loop Hook Lifecycle
+# V6.5 Stable Module: Agent Loop Hook Lifecycle
 
-Status: draft only.
+Status: stable V6.5 module.
 
 ---
 
