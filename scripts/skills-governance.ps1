@@ -19,6 +19,77 @@ $recommendedActive = @(
     "gh-fix-ci"
 )
 
+
+$recommendedGeminiFlatKeep = @(
+    "agent-designer",
+    "agent-protocol",
+    "agent-workflow-designer",
+    "api-design-reviewer",
+    "api-test-suite-builder",
+    "aws-solution-architect",
+    "browserstack",
+    "changelog-generator",
+    "ci-cd-pipeline-builder",
+    "code-reviewer",
+    "codebase-onboarding",
+    "context-engine",
+    "coverage",
+    "database-designer",
+    "database-schema-designer",
+    "dependency-auditor",
+    "engineering-bundle",
+    "engineering-main",
+    "engineering-team-bundle",
+    "env-secrets-manager",
+    "extract",
+    "fix",
+    "generate",
+    "git-worktree-manager",
+    "incident-commander",
+    "init",
+    "mcp-server-builder",
+    "migrate",
+    "migration-architect",
+    "monorepo-navigator",
+    "observability-designer",
+    "performance-profiler",
+    "playwright-pro",
+    "pr-review-expert",
+    "promote",
+    "rag-architect",
+    "release-manager",
+    "remember",
+    "report",
+    "review",
+    "runbook-generator",
+    "self-improving-agent",
+    "senior-architect",
+    "senior-backend",
+    "senior-computer-vision",
+    "senior-data-engineer",
+    "senior-data-scientist",
+    "senior-devops",
+    "senior-frontend",
+    "senior-fullstack",
+    "senior-ml-engineer",
+    "senior-prompt-engineer",
+    "senior-qa",
+    "senior-secops",
+    "senior-security",
+    "skill-security-auditor",
+    "skills-review",
+    "skill-tester",
+    "status",
+    "stripe-integration-expert",
+    "tdd",
+    "tdd-guide",
+    "tech-debt",
+    "tech-debt-tracker",
+    "tech-stack-evaluator",
+    "testrail",
+    "ui-design-system"
+)
+
 $recommendedArchive = @(
     "business-growth",
     "c-level-advisor",
@@ -44,20 +115,57 @@ function Get-SkillsRoot {
 }
 
 function Get-SkillInventory {
-    param([string]$SkillsRoot)
+    param(
+        [string]$SkillsRoot,
+        [string]$TargetName
+    )
 
     if (-not $SkillsRoot -or -not (Test-Path $SkillsRoot)) {
         return @()
     }
 
+    $dirs = Get-ChildItem -Path $SkillsRoot -Directory | Sort-Object Name
+    $counts = @{}
+    foreach ($dir in $dirs) {
+        $counts[$dir.Name] = (Get-ChildItem -Path $dir.FullName -Recurse -Filter SKILL.md -File -ErrorAction SilentlyContinue | Measure-Object).Count
+    }
+
+    $isGeminiFlatMode = $false
+    if ($TargetName -eq "gemini") {
+        $singleCount = ($counts.Values | Where-Object { $_ -eq 1 } | Measure-Object).Count
+        if ($dirs.Count -ge 80 -and $singleCount -ge [Math]::Floor($dirs.Count * 0.9)) {
+            $isGeminiFlatMode = $true
+        }
+    }
+
     $items = @()
-    foreach ($dir in Get-ChildItem -Path $SkillsRoot -Directory | Sort-Object Name) {
-        $count = (Get-ChildItem -Path $dir.FullName -Recurse -Filter SKILL.md -File -ErrorAction SilentlyContinue | Measure-Object).Count
+    foreach ($dir in $dirs) {
+        $count = $counts[$dir.Name]
+        $action = "review-manually"
+
+        if ($recommendedArchive -contains $dir.Name) {
+            $action = "archive-default"
+        }
+        elseif ($recommendedActive -contains $dir.Name) {
+            $action = "keep-active"
+        }
+        elseif ($TargetName -eq "gemini" -and ($recommendedGeminiFlatKeep -contains $dir.Name)) {
+            $action = "keep-active"
+        }
+        elseif ($isGeminiFlatMode) {
+            if ($recommendedGeminiFlatKeep -contains $dir.Name) {
+                $action = "keep-active"
+            }
+            else {
+                $action = "archive-default"
+            }
+        }
+
         $items += [pscustomobject]@{
             Name = $dir.Name
             Path = $dir.FullName
             SkillCount = $count
-            RecommendedAction = if ($recommendedArchive -contains $dir.Name) { "archive-default" } elseif ($recommendedActive -contains $dir.Name) { "keep-active" } else { "review-manually" }
+            RecommendedAction = $action
         }
     }
 
@@ -70,7 +178,7 @@ function Invoke-ArchivePlan {
         [array]$Inventory
     )
 
-    $archiveRoot = Join-Path (Split-Path -Parent $SkillsRoot) ("skills-archive\{0}" -f (Get-Date -Format "yyyy-MM-dd-AgentLogic-host-local"))
+    $archiveRoot = Join-Path (Split-Path -Parent $SkillsRoot) ("skills-archive\{0}" -f ((Get-Date -Format "yyyy-MM-dd") + "-AgentLogic-host-local"))
     New-Item -ItemType Directory -Force -Path $archiveRoot | Out-Null
 
     $moved = @()
@@ -117,8 +225,9 @@ if (-not $skillsRoot) {
 
 Write-Host "Skills root: $skillsRoot"
 Write-Host "Portable logic-carried skills: not governed by this pass unless AgentLogic explicitly ships them in a future version."
+Write-Host "Flat Gemini inventories are treated with a stricter engineering-first active set by default."
 
-$inventory = Get-SkillInventory -SkillsRoot $skillsRoot
+$inventory = Get-SkillInventory -SkillsRoot $skillsRoot -TargetName $TargetHost
 
 if ($inventory.Count -eq 0) {
     Write-Host "No skills directory found or no skill families detected."
