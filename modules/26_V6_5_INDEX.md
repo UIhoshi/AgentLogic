@@ -22,6 +22,7 @@ These modules define how the agent should act.
 8.  **Instruction Stacking**: `modules/32_V6_5_ContextAssemblyAndInstructionStacking.md`
 9.  **Post-Task Consolidation**: `modules/33_V6_5_BackgroundConsolidationAndIdleLifecycle.md`
 10. **Fact Mapping**: `modules/34_V6_5_ProjectFactMap_V2.md`
+11. **Skill Governance**: `modules/35_V6_5_SkillGovernanceAndMandatoryUse.md`
 
 ---
 

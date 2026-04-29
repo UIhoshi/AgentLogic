@@ -47,6 +47,22 @@ Skills 是对执行策略和知识片段的再封装。
 - skill 如何被调用
 - skill 与工具权限之间是什么关系
 
+### 3.1 V6.5 skill governance supplement
+
+For the V6.5 line, skills are governed execution amplifiers rather than free-floating add-ons.
+
+- The main logic package remains the authority layer.
+- Skills may add operational wrappers, scripts, templates, or domain playbooks.
+- A skill should only be deleted as a duplicate when it adds no unique operational value beyond the logic package.
+- Large domain packs may be archived off-by-default when they degrade the visible-skill budget without helping the normal coding workflow.
+
+Use `modules/35_V6_5_SkillGovernanceAndMandatoryUse.md` when the task is about:
+
+- skill deduplication
+- active vs archived skill policy
+- deciding whether a skill should stay external or be registered as a governed execution layer
+- deciding which skill-use situations are mandatory rather than optional
+
 ## 4. Custom Agents
 
 当前项目支持通过 Markdown 定义 Agent。

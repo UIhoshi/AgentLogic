@@ -47,7 +47,8 @@
         "modules/31_V6_5_ToolMisuseAndAntiPatternMatrix.md",
         "modules/32_V6_5_ContextAssemblyAndInstructionStacking.md",
         "modules/33_V6_5_BackgroundConsolidationAndIdleLifecycle.md",
-        "modules/34_V6_5_ProjectFactMap_V2.md"
+        "modules/34_V6_5_ProjectFactMap_V2.md",
+        "modules/35_V6_5_SkillGovernanceAndMandatoryUse.md"
       ]
     },
     "github-publishing": {
@@ -83,7 +84,8 @@
         "modules/31_V6_5_ToolMisuseAndAntiPatternMatrix.md",
         "modules/32_V6_5_ContextAssemblyAndInstructionStacking.md",
         "modules/33_V6_5_BackgroundConsolidationAndIdleLifecycle.md",
-        "modules/34_V6_5_ProjectFactMap_V2.md"
+        "modules/34_V6_5_ProjectFactMap_V2.md",
+        "modules/35_V6_5_SkillGovernanceAndMandatoryUse.md"
       ]
     }
   },

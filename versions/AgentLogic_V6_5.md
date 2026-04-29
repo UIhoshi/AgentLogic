@@ -44,6 +44,9 @@ The V6.5 line is supported by a modular suite of governance rules:
 ### 2.4 Project Fact Mapping
 - `modules/34_V6_5_ProjectFactMap_V2.md`: Standardized 4-tier fact map (User, Feedback, Project, Reference).
 
+### 2.5 Skill Governance
+- `modules/35_V6_5_SkillGovernanceAndMandatoryUse.md`: Deduplication policy, active-vs-archived skill posture, and mandatory skill-use situations.
+
 ---
 
 ## 3. Stable Promotion Summary
@@ -72,6 +75,22 @@ This reference source informed the V6.5 additions around:
 - mandatory verification
 - question-boundary mapping
 - tool anti-pattern detection
+
+## 6. Skill-System Integration Rule
+
+V6.5 treats host-local skills as a governed execution layer rather than a loose add-on.
+
+Key stable rules:
+
+- logic package rules outrank skills
+- skills may accelerate execution but may not weaken evidence requirements
+- full-duplicate skills may be deleted, but partial-overlap skills should be kept when they add unique workflows, scripts, templates, or reference layers
+- broad domain skill packs may be archived off-by-default to protect skill context budget quality
+- mandatory skill-use situations must be recorded whenever a skill is the strongest operational path for a recurring task class
+
+See:
+
+- `modules/35_V6_5_SkillGovernanceAndMandatoryUse.md`
 
 ## 5. Future Iteration Reference-Source Rule
 

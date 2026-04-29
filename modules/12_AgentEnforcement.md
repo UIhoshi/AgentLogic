@@ -220,6 +220,19 @@ Agent 至少必须完成：
   - run the correction recipe and finish the missing verification path, or
   - downgrade the conclusion label to partial / inferred / unverified.
 
+## 4.3.4 Mandatory Skill-Use Situations Must Not Be Skipped
+
+- If a host-local skill is the designated strongest execution path for a recurring task type, the agent must not ignore it and silently fall back to a weaker generic path.
+- This includes at minimum:
+  - `screenshot` for OS-level screenshot capture or visual proof when no better integrated capture path exists
+  - `playwright` for terminal-driven real browser interaction and browser-flow verification
+  - `security-best-practices` for explicit supported-stack security best-practices reviews
+  - `gh-fix-ci` for GitHub Actions PR-check investigation
+  - `.system/openai-docs` for official OpenAI product/API guidance
+  - `engineering/skill-security-auditor` before installing or trusting an untrusted external skill or plugin
+- A skill use does not replace normal verification obligations. It only provides the strongest operational route when the task matches.
+- Use `modules/35_V6_5_SkillGovernanceAndMandatoryUse.md` for the current deduplication policy, archive posture, and mandatory-skill map.
+
 ## 5. 为什么这是强制要求
 
 - 不同 Agent 进入项目时最容易出错的地方，不是能力不够，而是入口不一致。

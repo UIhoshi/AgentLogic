@@ -201,3 +201,18 @@ Use `31_ToolMisuseAndAntiPatternMatrix.md` when the task needs explicit examples
 - It should be used when an agent needs to explain why a conclusion is still only partial, inferred, or unsafe.
 - It is the anti-pattern companion to the mandatory verification and question-boundary matrices.
 
+## 13. Skills Are Not Logic Replacements
+
+Host-local skills should be treated as execution amplifiers rather than substitutes for the main logic package.
+
+- A skill may accelerate discovery, setup, inspection, or implementation.
+- A skill does not lower the evidence requirement for a claim.
+- A skill should only be deleted as a duplicate when it adds no unique scripts, templates, wrappers, or domain workflow beyond the logic package.
+- If a skill family is large but rarely relevant, it may be archived off-by-default for context-budget protection rather than deleted as duplicate logic.
+
+Use `modules/35_V6_5_SkillGovernanceAndMandatoryUse.md` when the task is about:
+
+- whether a skill overlaps with the logic package
+- whether a skill should remain active or archived
+- whether a recurring task should forcibly invoke a specific skill when available
+
