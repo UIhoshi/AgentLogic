@@ -2,9 +2,9 @@
 
 - Host target: generic
 - Profile: core-enhanced
-- Generated at: 2026-04-21T23:14:41+09:00
+- Generated at: 2026-04-29T14:54:59+09:00
 - Stable entry: MAIN.md
-- Version: V6
+- Version: V6.5
 
 This is a generated primary-logic bundle. Regenerate it from scripts/build-profile.ps1 instead of editing it by hand.
 
@@ -60,7 +60,7 @@ This file is logic, not project content.
 Before any formal planning, implementation, modification, validation, review, packaging, or rule synchronization work, the agent MUST fully read all of the following files from beginning to end in this exact order:
 
 1. `README.md`
-2. `versions/AgentLogic_V6.md`
+2. `versions/AgentLogic_V6_5.md`
 3. `modules/01_MasterLogic.md`
 4. `modules/15_LogicEntryChecklist.md`
 
@@ -258,58 +258,55 @@ Do not continue deeper reading, modify files, delete files, perform write action
 or begin implementation before the logic-entry loop above has been completed.
 -->
 
-# Agent Installation Guide
+# Agent Installation Guide (V6.5 Stable)
 
-This is the shortest installation path for AI agents.
+This is the shortest installation path for AI agents. 
 
-Goal: install AgentLogic into the current local AI host without guessing the entrypoint, target bundle, or validation command.
+Goal: Install **AgentLogic V6.5** into the current local host without guessing the entrypoint, target bundle, or validation command.
 
 ## Do Not Guess
 
 Before installing, identify:
 
-1. whether the current directory is the AgentLogic repository root;
-2. the target host: `codex`, `claude`, `gemini`, or `generic`;
-3. the selected profile, normally `core-enhanced`;
-4. whether the host should bind to `MAIN.md` directly or to a generated bundle.
+1.  Whether the current directory is the AgentLogic repository root.
+2.  The target host: `codex`, `claude`, `gemini`, or `generic`.
+3.  The selected profile: **`core-enhanced`** is mandatory for full V6.5 governance support.
+4.  Whether the host should bind to `MAIN.md` directly or to a generated bundle.
 
-If uncertain, run the doctor first.
+If uncertain, run the doctor first:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\doctor.ps1
 ```
 
-## Stable Facts
+## V6.5 Stable Facts
 
-- Repository role: primary local logic package.
-- Stable host entry: `MAIN.md`.
-- Default profile: `core-enhanced`.
-- Machine-readable contract: `manifest.json`.
-- Root installer: `install.ps1`.
-- Validation command: `scripts/validate-package.ps1`.
+- **Current Version**: V6.5 (The "Tool Governance & Verification" Expansion).
+- **Repository Role**: Primary local logic package (Method Layer).
+- **Stable Host Entry**: `MAIN.md`.
+- **Default Profile**: `core-enhanced` (Includes modules 20-34 for advanced governance).
+- **Machine-readable Contract**: `manifest.json`.
+- **Root Installer**: `install.ps1`.
+- **Validation Command**: `scripts/validate-package.ps1`.
 
 ## Install Commands
 
 ### Codex
-
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost codex
 ```
 
 ### Claude
-
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost claude
 ```
 
 ### Gemini
-
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost gemini
 ```
 
 ### Generic
-
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost generic
 ```
@@ -320,15 +317,19 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost ge
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\validate-package.ps1
 ```
 
-## Agent Decision Rule
+## Agent Decision Rule (V6.5)
 
-If the user asks to "load", "install", "mount", "bind", or "use this logic locally", do this:
+If the user asks to "load", "install", "mount", "bind", or "use this logic locally", the agent **MUST** follow this protocol:
 
-1. run `scripts/doctor.ps1`;
-2. choose the target host from local context or the user request;
-3. run the matching `install.ps1 -TargetHost ...` command;
-4. run `scripts/validate-package.ps1`;
-5. report the installed host, profile, output path, and any remaining manual binding step.
+1.  **Doctor Check**: Run `scripts/doctor.ps1` to verify environment and path integrity.
+2.  **Target Selection**: Choose the target host (`codex`, `claude`, `gemini`, or `generic`) based on the current environment.
+3.  **Install**: Run the matching `install.ps1 -TargetHost ...` command using the `core-enhanced` profile.
+4.  **Validation**: Run `scripts/validate-package.ps1`.
+5.  **Adoption**: Immediately after installation, the agent must:
+    -   Read `versions/AgentLogic_V6_5.md` to understand the new line.
+    -   Adopt the **Mandatory Verification Matrix** (Module 29) for all subsequent claims.
+    -   Adopt the **4-Tier Memory Taxonomy** (User, Feedback, Project, Reference) for project notes.
+6.  **Report**: State the installed host, version (V6.5), profile, and confirmation that the new governance rules are active.
 
 Do not search through unrelated project files or treat the AgentLogic repository as a business workspace.
 
@@ -398,7 +399,7 @@ For repository work, also read:
 
 Hosts should bind to `MAIN.md` or to a generated bundle built from `manifest.json`.
 
-Hosts should not bind directly to `versions/AgentLogic_V6.md` or any future versioned file name.
+Hosts should not bind directly to `versions/AgentLogic_V6_5.md` or any future versioned file name.
 
 ## Architecture
 
@@ -618,7 +619,7 @@ The current logic-entry chain is:
 
 1. `00_START_HERE.md`
 2. `README.md`
-3. `versions/AgentLogic_V6.md`
+3. `versions/AgentLogic_V6_5.md`
 4. `modules/01_MasterLogic.md`
 5. `modules/15_LogicEntryChecklist.md`
 
@@ -644,1869 +645,80 @@ This repository is logic infrastructure, not a business-project workspace.
 
 - Human-first entry: `00_START_HERE.md`
 - Stable host binding entry: `MAIN.md`
-- Versioned main logic source: `versions/AgentLogic_V6.md`
+- Versioned main logic source: `versions/AgentLogic_V6_5.md`
 
 ## END FILE: AGENTS.md
 
 ---
 
-## BEGIN FILE: versions/AgentLogic_V6.md
+## BEGIN FILE: versions/AgentLogic_V6_5.md
 
-# AgentLogic V6
+# AgentLogic V6.5
 
-鏈枃浠舵槸閫氱敤鍨?AI 宸ョ▼鍗忎綔鍗忚锛岀敤浜庡湪寮€濮嬮」鐩€佸鏍搁」鐩€佷慨澶嶉」鐩€侀噸鏋勯」鐩€佹墦鍖呴」鐩拰鍙戝竷椤圭洰鏃讹紝缁熶竴 AI 鐨勫伐浣滄柟寮忋€佹枃妗ｇ邯寰嬩笌浜や粯杈圭晫銆?
+Status: **Current Stable V6.5 Line**.
+Promoted from the comparative research of advanced agentic CLI systems (including `claude-code`).
 
----
-
-## 1. 鏍稿績鐩爣
-
-- 闄嶄綆澶ч」鐩腑鐨勪笂涓嬫枃娣蜂贡銆佽鑹查敊浣嶅拰鏂囨。澶辩湡銆?
-- 淇濊瘉 AI 鍦ㄤ慨鏀逛唬鐮佸墠鍏堟帉鎻℃灦鏋勩€佸巻鍙层€佽竟鐣屽拰鍙戝竷瑙勫垯銆?
-- 淇濊瘉鎵€鏈変慨澶嶃€侀噸鏋勩€佹墦鍖呭拰鍙戝竷鍔ㄤ綔閮借兘褰㈡垚鍙洖婧棴鐜€?
+This file defines the stable V6.5 logic line. It operationalizes the core V6 philosophy with deeper rules for tool governance, runtime awareness, and mandatory verification.
 
 ---
 
-## 2. 涓夊眰鍒嗗眰妯″瀷
+## 1. The V6.5 Mandate
 
-### L1锛氭垬鐣ヤ笌鍏ュ彛灞?
+V6.5 is a **mid-line expansion** designed for high-scale agentic systems where "code exists" is insufficient proof of "capability is available."
 
-- 鑱岃矗锛氬畾涔夐」鐩綋鍓嶆墍澶勭姸鎬佷笌涓诲叆鍙ｃ€?
-- 鍏虫敞鍐呭锛歋tatus銆丅lueprint銆丠istory銆侀」鐩富 README銆佷氦浠樿鍒欍€佸彂甯冭鍒欍€?
-- 浣跨敤鐩殑锛氬厛鍒ゆ柇浠诲姟灞炰簬鈥滅悊瑙ｇ幇鐘垛€濃€滆鍒掗噸鏋勨€濊繕鏄€滄墽琛屼慨鏀光€濄€?
-
-### L2锛氶鍩熸灦鏋勫眰
-
-- 鑱岃矗锛氬畾涔夋ā鍧楄竟鐣屻€佽璁″師鍒欍€佷氦浜掔害鏉熴€佹€ц兘鏂瑰悜銆侀儴缃茬害鏉熴€?
-- 鍏虫敞鍐呭锛氭ā鍧楃粨鏋勩€侀€氫俊閾捐矾銆佽矾寰勬ā鍨嬨€佺姸鎬佹満銆佽璁℃ā寮忋€佽繍琛屾ā鍨嬨€?
-- 浣跨敤鐩殑锛氱‘淇濇敼鍔ㄧ鍚堢郴缁熺骇宸ョ▼閫昏緫锛岃€屼笉鏄彧鍦ㄥ眬閮ㄢ€滀慨濂解€濄€?
-
-### L3锛氬師瀛愭墽琛屽眰
-
-- 鑱岃矗锛氳惤瀹炲埌鏂囦欢銆佸嚱鏁般€佸叆鍙ｃ€佸懡浠ゃ€佹瀯寤哄弬鏁板拰楠岃瘉鍔ㄤ綔銆?
-- 鍏虫敞鍐呭锛氬叿浣撴枃浠躲€佸嚱鏁拌亴璐ｃ€佹瀯寤哄懡浠ゃ€佹棩蹇楄惤鐐广€侀獙璇佹柟娉曘€佷慨澶嶇墿鐞嗕綅缃€?
-- 浣跨敤鐩殑锛氭秷闄や慨鏀规涔夛紝纭繚鍙墽琛屻€佸彲楠岃瘉銆佸彲鍥炲啓鏂囨。銆?
+Key Enhancements:
+- **Runtime Mode Taxonomy**: Explicitly distinguishes between REPL, Headless, SDK, Daemon, Bridge, and Packaging modes.
+- **Tool Governance Matrix**: Standardizes tool choice by task type, phase, and risk level.
+- **Mandatory Verification**: Requires explicit evidence chains (build, runtime, or visual) before declaring a task "Verified."
+- **Permission & Output Pipelines**: Models trust and result delivery as end-to-end pipelines.
+- **Architecture Debt Diagnosis**: Mandates the recording of "God Components" and oversized files as formal debt.
 
 ---
 
-## 3. 椤圭洰鎺ュ叆鍓嶅己鍒惰鍒?
+## 2. Core Governance Modules
 
-### 3.1 椤圭洰鏂囨。鍏堣鍚庡姩
+The V6.5 line is supported by a modular suite of governance rules:
 
-- 姣忔寮€濮嬩竴涓」鐩€佸鏍镐竴涓」鐩紝鎴栦慨澶嶄竴涓」鐩箣鍓嶏紝蹇呴』鍏堥槄璇昏椤圭洰鍏ㄩ儴 `.md` 鏂囨。锛屽啀杩涘叆鍒嗘瀽銆佷慨鏀广€佹墦鍖呮垨鍙戝竷闃舵銆?
-- 璇绘枃妗ｇ殑鐩殑涓嶆槸褰㈠紡鍖栨祦绋嬶紝鑰屾槸鍏堟帉鎻★細
-  - 椤圭洰鏋舵瀯瀹氫箟
-  - 鐩綍杈圭晫
-  - 鍘嗗彶婕旇繘
-  - 閮ㄧ讲瑙勫垯
-  - 鍙戝竷绾︽潫
-  - 鏃㈡湁鎺掗殰缁忛獙
-- 鏈畬鎴愭枃妗ｉ槄璇诲墠锛屼笉搴旂洿鎺ュ鏋舵瀯銆侀儴缃叉柟寮忋€佹墦鍖呯洰褰曘€佽繍琛屾ā鍨嬨€佽处鍙疯鍒欍€佺ǔ瀹氬熀绾垮仛鍋囪銆?
+### 2.1 Tool Execution & Mapping
+- `modules/21_V6_5_ToolUsageAndSelection.md`: General principles and tool choreography.
+- `modules/24_V6_5_ToolUsageMatrix.md`: Decision table for preferred tools.
+- `modules/25_V6_5_ToolCapabilityMapping.md`: Maps tool families to specific question types.
+- `modules/30_V6_5_ToolQuestionBoundaryMatrix.md`: Defines tool-family strength and forbidden-alone claims.
 
-### 3.2 椤圭洰鏂囨。涓诲叆鍙ｄ紭鍏堢骇
+### 2.2 Risk & Verification
+- `modules/27_V6_5_ToolPermissionRiskMatrix.md`: Permission posture and risk class gating.
+- `modules/29_V6_5_MandatoryVerificationMatrix.md`: Mapping of conclusion types to required evidence tools.
+- `modules/31_V6_5_ToolMisuseAndAntiPatternMatrix.md`: Anti-pattern detection, correction recipes, and downgrade labels.
 
-- 鑻ラ」鐩瓨鍦ㄧ粺涓€鏂囨。涓績锛屽繀椤讳紭鍏堜粠鏂囨。涓績杩涘叆锛岃€屼笉鏄浂鏁ｆ壂鎻忓崟涓鏄庢枃浠躲€?
-- 鑻ラ」鐩瓨鍦ㄢ€淩EADME 鎬绘帶椤?/ 鏂囨。瀵艰埅椤?/ 椤圭洰鎸囨尌涓績鈥濓紝搴旇涓虹涓€鍏ュ彛銆?
+### 2.3 Context & Lifecycle
+- `modules/20_V6_5_RuntimeModes.md`: Operational awareness of the current execution surface.
+- `modules/22_V6_5_HookLifecycle.md`: Mapping of event hooks and side-effect points.
+- `modules/32_V6_5_ContextAssemblyAndInstructionStacking.md`: Priority-based layering of instructions and memories.
+- `modules/33_V6_5_BackgroundConsolidationAndIdleLifecycle.md`: The "Dream Phase" for post-task memory extraction and cleanup.
 
-### 3.2.1 V6 涓庨」鐩簨瀹炲繀椤诲垎灞?
-
-- `AgentLogic_V6` 璐熻矗瀹氫箟鈥滃浣曞紑濮嬨€佸浣曟€濊€冦€佸浣曡鍒掋€佸浣曢獙璇併€佸浣曞洖鍐欌€濈殑琛屼负鍑嗗垯銆?
-- 椤圭洰鑷韩鐨?`README`銆佽璁℃枃妗ｃ€佹ā鍧楁枃妗ｃ€佹帴鍙ｆ枃妗ｃ€佸彉鏇磋褰曚互鍙婇」鐩簮鐮侊紝鎵嶈礋璐ｅ畾涔夆€滆繖涓」鐩槸浠€涔堛€佸綋鍓嶇姸鎬佹槸浠€涔堛€佹湁鍝簺鏂囦欢銆佹ā鍧楀湪鍝噷銆佸嚱鏁板湪鍝噷銆佺湡瀹炲叆鍙ｆ槸浠€涔堛€佸綋鍓嶅疄鐜版槸浠€涔堚€濄€?
-- 鍥犳锛孷6 涓嶆槸椤圭洰浜嬪疄鏈韩锛屼篃涓嶆浛浠ｉ」鐩嚜宸辩殑 md 涓庢簮鐮併€?
-- Agent 杩涘叆椤圭洰鏃讹紝蹇呴』鏄庣‘鍖哄垎锛?
-  - `V6` 鏄柟娉曞眰銆佽鍒欏眰銆佽涓哄眰
-  - 椤圭洰 md 涓庢簮鐮佹槸涓氬姟浜嬪疄灞傘€佸疄鐜颁簨瀹炲眰銆佸綋鍓嶇姸鎬佸眰
-- 濡傛灉 Agent 鎶?V6 褰撲綔椤圭洰璇存槑涔︺€佹妸椤圭洰 README 褰撲綔涓婚€昏緫鏇夸唬鐗┿€佹垨鎶婁袱鑰呮贩涓轰竴浣擄紝鍒欒涓烘帴鍏ラ敊璇€?
-
-### 3.2.2 椤圭洰浜嬪疄浼樺厛浜庢娊璞℃帹鏂?
-
-- 瀵光€滈」鐩槸骞蹭粈涔堢殑鈥濃€滃綋鍓嶆ā鍧楄亴璐ｆ槸浠€涔堚€濃€滃嚱鏁板疄闄呰惤鐐瑰湪鍝€濃€滅湡瀹炲叆鍙ｆ槸浠€涔堚€濊繖绫婚棶棰橈紝榛樿蹇呴』浠ラ」鐩嚜韬?md 鍜屾簮鐮佷负鍑嗭紝鑰屼笉鏄敤 V6 鐨勬娊璞＄粡楠岀洿鎺ユ浛浠ｃ€?
-- V6 璐熻矗瑙勫畾鈥滃簲璇ュ浣曞幓璇昏繖浜涗簨瀹炩€濓紝浣嗕笉鐩存帴鐢熸垚椤圭洰涓氬姟鐪熺浉銆?
-- 鑻?V6 鐨勬娊璞＄悊瑙ｄ笌椤圭洰褰撳墠鏂囨。鎴栨簮鐮佷笉涓€鑷达紝榛樿澶勭悊椤哄簭搴旀槸锛?
-  - 鍏堜互椤圭洰褰撳墠鐪熷疄鏂囨。涓庢簮鐮侀摼璺负鍑?
-  - 鍐嶆爣璁拌鍐茬獊灞炰簬鈥滄柟娉曠悊瑙ｅ亸宸€濊繕鏄€滈」鐩枃妗ｈ繃鏈熲€?
-  - 蹇呰鏃跺垎鍒洖鍐欓」鐩枃妗ｆ垨 V6
-
-### 3.2.3 椤圭洰鍚姩鍓嶅繀椤荤‘璁?Agent 閫昏緫鏂囦欢浣嶇疆
-
-- 褰?Agent 閲嶆柊寮€濮嬩竴涓」鐩椂锛岄粯璁や細鍏堥槄璇婚」鐩富 md锛屼緥濡?`README`銆佹枃妗ｅ鑸〉鎴栭」鐩寚鎸ヤ腑蹇冦€?
-- 浣嗗湪姝ｅ紡寮€濮嬮」鐩箣鍓嶏紝杩樺繀椤婚澶栫‘璁わ細褰撳墠椤圭洰鐩綍涓嬫槸鍚﹀凡缁忓瓨鍦?Agent 閫昏緫鏂囦欢銆佷富閫昏緫鏂囦欢銆佽鍒欐枃浠舵垨绛変环鐨勯€昏緫鍏ュ彛鏂囦欢銆?
-- 杩欓噷涓嶅簲鎶婄増鏈啓姝讳负 `V6`锛屽洜涓哄悗缁増鏈彲鑳藉凡缁忓崌绾т负 `V7`銆乣V8` 鎴栧叾浠栧懡鍚嶃€?
-- 鍥犳锛孉gent 搴旀鏌ョ殑鏄€滄槸鍚﹀瓨鍦ㄥ綋鍓嶉」鐩疄闄呬娇鐢ㄧ殑閫昏緫鏂囦欢鈥濓紝鑰屼笉鏄彧鎸夋煇涓浐瀹氱増鏈悕鎼滅储銆?
-- 鑻ラ」鐩洰褰曚笅宸插瓨鍦ㄩ€昏緫鏂囦欢锛屽垯搴斾紭鍏堟帴鍏ヨ閫昏緫鏂囦欢锛屽啀寮€濮嬪悗缁」鐩簨瀹炶鍙栦笌瑙勫垝銆?
-- 鑻ラ」鐩洰褰曚笅涓嶅瓨鍦ㄩ€昏緫鏂囦欢锛孉gent 涓嶅緱鐩存帴鍋囪鈥滄病鏈変富閫昏緫涔熷彲浠ョ户缁€濓紝鑰屽簲鍏堣闂細
-  - 褰撳墠椤圭洰浣跨敤鐨?Agent 閫昏緫鏂囦欢鍦ㄥ摢閲?
-  - 鏄惁瀛樺湪鐙珛缁存姢鐨勪富閫昏緫鍏ュ彛
-  - 鏄惁闇€瑕佸厛鎸傛帴澶栭儴閫昏緫鍖呭啀缁х画
-- 鍙湁鍦ㄩ€昏緫鍏ュ彛浣嶇疆宸茬‘璁ゅ悗锛屾墠鍙繘鍏ユ寮忛」鐩帴鍏ャ€佽鍒掍笌瀹炵幇闃舵銆?
-
-### 3.3 瑙掕壊杈圭晫鍏堟槑纭?
-
-- 鎺ュ叆椤圭洰鍚庯紝搴斿厛鏄庣‘褰撳墠浠诲姟鏄細
-  - L1锛氱悊瑙ｃ€佹⒊鐞嗐€佽鍒?
-  - L2锛氭柟妗堛€佹灦鏋勩€佷氦浜掋€佽竟鐣?
-  - L3锛氫唬鐮佷慨鏀广€佹瀯寤恒€侀獙璇併€佸彂甯?
-- 鏈‘璁や换鍔¤竟鐣屽墠锛屼笉搴旀搮鑷墿澶ц寖鍥存垨棰濆杩藉姞鍔熻兘銆?
-
-### 3.4 鍏ㄩ儴 Agent 寮哄埗閬靛惊涓婚€昏緫鎺ュ叆
-
-- 鍙鏄紑濮嬩竴涓柊椤圭洰銆佹帴鎵嬩竴涓柊妯″潡銆佽繘鍏ヤ竴涓柊瀛愮郴缁熴€佹垨鍒囧叆涓€涓柊闃舵锛屾墍鏈?Agent 閮藉繀椤诲厛閬靛惊涓婚€昏緫鐨勬帴鍏ヤ笌瑙勫垝娴佺▼锛岃€屼笉鏄洿鎺ュ紑濮嬪疄鐜般€佷慨鏀规垨鎵ц鍛戒护銆?
-- 杩欓噷鐨勨€滄墍鏈?Agent鈥濆寘鎷絾涓嶉檺浜庯細
-  - 涓荤嚎绋?Agent
-  - 瀛?Agent
-  - 骞惰 Agent
-  - 妯″潡涓撶敤 Agent
-  - review / verification / planning Agent
-- 寮哄埗鎺ュ叆娴佺▼榛樿鑷冲皯鍖呮嫭锛?
-  - 璇嗗埆椤圭洰鏂囨。涓诲叆鍙?
-  - 纭椤圭洰鐩綍涓嬫槸鍚﹀瓨鍦ㄥ綋鍓嶉」鐩娇鐢ㄧ殑 Agent 閫昏緫鏂囦欢
-  - 璇诲彇鐩稿叧 md 涓庡叧閿叆鍙ｆ簮鐮?
-  - 鍒ゆ柇褰撳墠浠诲姟灞炰簬 L1銆丩2 杩樻槸 L3
-  - 缁欏嚭褰撳墠闃舵鐨勬墽琛岄『搴忋€佽竟鐣屽拰椋庨櫓鍒ゆ柇
-- 濡傛灉浠诲姟鏄€滄柊澧炴ā鍧椻€濊€屼笉鏄€滀慨澶嶅凡鏈夋ā鍧椻€濓紝鍒欏繀椤婚澶栬ˉ涓€灞傛ā鍧楃骇瑙勫垝锛?
-  - 妯″潡鐩爣
-  - 妯″潡杈圭晫
-  - 涓庣幇鏈夌郴缁熺殑鍏崇郴
-  - 鍏ュ彛涓庤惤鐐?
-  - 楠岃瘉鏂瑰紡
-- 鍦ㄨ繘鍏ュ疄鐜板墠锛岄櫎涓婚€昏緫鎺ュ叆澶栵紝杩樺繀椤诲缓绔嬩竴浠芥渶灏忊€滈」鐩簨瀹炲湴鍥锯€濄€?
-- 椤圭洰浜嬪疄鍦板浘榛樿鑷冲皯搴斿洖绛旓細
-  - 杩欎釜椤圭洰褰撳墠鏄仛浠€涔堢殑
-  - 椤圭洰涓绘枃妗ｅ叆鍙ｆ槸浠€涔?
-  - 褰撳墠椤圭洰閫昏緫鍏ュ彛鏄惁宸茬‘璁?
-  - 褰撳墠浠诲姟瀵瑰簲鐨勬ā鍧楁垨瀛愮郴缁熸槸浠€涔?
-  - 鐩稿叧鍏ュ彛鏂囦欢鏄粈涔?
-  - 鐩稿叧鍏抽敭鍑芥暟鎴栧叧閿被鏄粈涔?
-  - 褰撳墠浠诲姟渚濊禆鍝簺椤圭洰浜嬪疄浠嶆湭纭
-- 鑻ユ潯浠跺厑璁革紝椤圭洰浜嬪疄鍦板浘搴斿敖閲忔寜鍥哄畾妯℃澘杈撳嚭锛岃€屼笉鏄瘡娆′复鏃剁粍缁囥€?
-- 鎺ㄨ崘鏈€灏忔ā鏉垮涓嬶細
-  - 椤圭洰鐩爣
-  - 椤圭洰涓绘枃妗ｅ叆鍙?
-  - 褰撳墠椤圭洰閫昏緫鍏ュ彛
-  - 褰撳墠浠诲姟鐩爣
-  - 褰撳墠浠诲姟鎵€灞炴ā鍧?/ 瀛愮郴缁?
-  - 鍏抽敭鍏ュ彛鏂囦欢
-  - 鍏抽敭鍑芥暟 / 绫?
-  - 褰撳墠杈圭晫涓庨闄?
-  - 褰撳墠鏈‘璁や簨瀹炵偣
-- 鑻ュ凡瀛樺湪鏍囧噯杈撳嚭浠讹紝渚嬪椤圭洰浜嬪疄鍦板浘妯℃澘鏂囦欢锛屽垯搴斾紭鍏堝鐢ㄦ爣鍑嗘ā鏉匡紝鑰屼笉鏄噸鏂板彂鏄庢牸寮忋€?
-- 鏈畬鎴愯繖涓€姝ュ墠锛孉gent 涓嶅簲鐩存帴杩涘叆瀹炵幇鐘舵€侊紝闄ら潪鐢ㄦ埛鏄庣‘瑕佹眰璺宠繃锛屼笖璇ヨ烦杩囪涓哄凡琚褰曚负椋庨櫓銆?
-
-### 3.4.1 閫昏緫鍏ュ彛妫€鏌ユ竻鍗?
-
-- 鍦ㄦ寮忓紑濮嬮」鐩墠锛孉gent 搴旀寜鍥哄畾娓呭崟妫€鏌ラ€昏緫鍏ュ彛锛岃€屼笉鏄嚟鎰熻鍒ゆ柇鈥滃簲璇ュ樊涓嶅鍙互寮€濮嬧€濄€?
-- 鎺ㄨ崘鏈€灏忔鏌ユ竻鍗曞涓嬶細
-  - 鏄惁宸插畾浣嶉」鐩富 md / 涓?README
-  - 鏄惁宸叉鏌ュ綋鍓嶉」鐩洰褰曚笅鏈夋棤 Agent 閫昏緫鏂囦欢
-  - 鑻ラ」鐩洰褰曞唴娌℃湁閫昏緫鏂囦欢锛屾槸鍚﹀凡璇㈤棶閫昏緫鏂囦欢浣嶇疆
-  - 鏄惁宸茬‘璁ゅ綋鍓嶉」鐩娇鐢ㄧ殑鏄摢涓€浠介€昏緫鍏ュ彛锛岃€屼笉鏄粯璁ゆ部鐢ㄦ棫鐗堟湰鍚?
-  - 鏄惁宸插尯鍒嗗綋鍓嶉€昏緫鍏ュ彛灞炰簬浠撳簱鍐呮枃浠惰繕鏄閮ㄩ€昏緫鍖?
-  - 鏄惁宸插湪杩涘叆瀹炵幇鍓嶅畬鎴愮洰褰曞璁?
-- 鑻ュ凡瀛樺湪鏍囧噯杈撳嚭浠讹紝渚嬪閫昏緫鍏ュ彛妫€鏌ユ竻鍗曟ā鏉挎枃浠讹紝鍒欏簲浼樺厛鐩存帴浣跨敤銆?
-- 鍙湁鍦ㄨ繖浠芥竻鍗曢€氳繃鍚庯紝鎵嶅彲瑙嗕负鐪熸杩涘叆姝ｅ紡椤圭洰鎺ュ叆闃舵銆?
-
-### 3.5 涓婚€昏緫浼樺厛浜庡眬閮ㄤ範鎯?
-
-- 褰撻」鐩唴瀛樺湪闆舵暎涔犳儻銆佷复鏃惰鏄庛€佹棫娉ㄩ噴銆佸眬閮ㄦā鍧楃害瀹氭椂锛屾墍鏈?Agent 搴斾紭鍏堜互涓婚€昏緫涓烘渶楂樺崗浣滆鍒欙紝鍐嶇粨鍚堥」鐩綋鍓嶇湡瀹炵粨鏋勫仛灞€閮ㄩ€傞厤銆?
-- 灞€閮ㄨ鍒欏彲浠ヨˉ鍏呬富閫昏緫锛屼絾涓嶅簲缁曞紑涓婚€昏緫鐨勬帴鍏ャ€佸垎灞傘€侀獙璇佷笌鍥炲啓瑕佹眰銆?
-- 涓婚€昏緫鐨勪环鍊煎湪浜庤涓嶅悓 Agent 鍦ㄤ笉鍚屾椂闂磋繘鍏ラ」鐩椂锛屼粛鑳芥部鍚屼竴鏉＄ǔ瀹氭柟娉曡繘鍏ョ郴缁燂紝浠庤€屾樉钁楅檷浣庨敊璇巼鍜岀粨鏋勫亸绉汇€?
-
-### 3.6 涓婚€昏緫蹇呴』瀹屾暣闃呰锛屼笉寰楁埅鏂悊瑙?
-
-- Agent 瀵逛富閫昏緫鐨勯槄璇诲繀椤绘槸瀹屾暣闃呰锛岃€屼笉鏄彧璇诲墠鍗婇儴鍒嗐€佸彧璇诲懡涓殑灏戞暟鏉℃銆佹垨鍙湅鍒?`1`銆乣2`銆乣3` 灏遍粯璁ゅ悗闈㈢殑 `11`銆乣12`銆乣13` 鍙互蹇界暐銆?
-- 涓婚€昏緫涓殑鍚庣画绔犺妭閫氬父鎵挎媴锛?
-  - 绂佹浜嬮」
-  - 鍥炲啓瑕佹眰
-  - 鎵撳寘瑙勫垯
-  - 椋庨櫓杈圭晫
-  - 鐗堟湰缁存姢瑙勫垯
-- 濡傛灉杩欎簺鍐呭琚烦杩囷紝鍓嶆湡鐪嬩技鏇村揩锛屽悗鏈熷啀鍥炴潵瀵归綈浼氭樉钁楀鍔犺繑宸ユ垚鏈€佺粨鏋勫亸绉诲拰瑙勫垯鍐茬獊銆?
-- 鍥犳锛孉gent 鍦ㄥ０绉扳€滃凡瀹屾垚涓婚€昏緫鎺ュ叆鈥濆墠锛岄粯璁ゅ繀椤绘弧瓒筹細
-  - 宸叉寜椤哄簭瀹屾暣闃呰涓婚€昏緫
-  - 宸茬‘璁ゅ悗閮ㄧ珷鑺傛病鏈変笌褰撳墠浠诲姟鐩存帴鐩稿叧鐨勭害鏉?
-  - 宸插皢鍚庨儴绔犺妭涓殑寮哄埗鏉℃绾冲叆褰撳墠鎵ц鍒ゆ柇
-- 瀵逛富閫昏緫鐨勯槄璇伙紝涓嶅簲鍙仛鍏抽敭璇嶅懡涓紡璇诲彇锛岃€屽簲鍋氬叏閲忕粨鏋勫寲璇诲彇銆?
-
-### 3.7 V6 閫昏緫鍖呬笉鏄」鐩伐浣滅洰褰?
-
-- `AgentLogic_V6`銆乣AgentLogic_V6.zip` 浠ュ強瀹冧滑鎵€鍦ㄧ殑閫昏緫鍖呯洰褰曪紝榛樿鍙綔涓哄鎸傞€昏緫鑴戙€佽鍒欏熀绾裤€佽兘鍔涙槧灏勫寘鍜屽璁″弬鑰冨寘瀛樺湪銆?
-- 杩欎簺鐩綍鍜屽帇缂╁寘涓嶅睘浜庝笟鍔￠」鐩湰浣擄紝涓嶅簲鐢ㄤ綔浠讳綍鏂伴」鐩€佹柊妯″潡銆佹柊瀛愮郴缁熺殑瀹為檯宸ヤ綔鐩綍銆?
-- Agent 寮€濮嬮」鐩椂锛屽彲浠ヨ鍙栥€佸紩鐢ㄣ€佹槧灏勩€佸鍒跺叾涓殑瑙勫垯缁撴瀯锛屼絾涓嶅緱鎶婃柊椤圭洰鏂囦欢鐩存帴鍒涘缓鍦?`AgentLogic_V6` 鐩綍涓嬨€?
-- 鍚屾牱涓嶅緱鎶婁互涓嬪唴瀹瑰啓鍏?V6 閫昏緫鍖呯洰褰曪細
-  - 鏂伴」鐩簮鐮?
-  - 鏂版ā鍧楁枃浠?
-  - 鏋勫缓浜х墿
-  - 涓存椂娴嬭瘯鏂囦欢
-  - 杩愯鏃ュ織
-  - 椤圭洰绉佹湁閰嶇疆
-- 鑻ヨ鍚姩鏂伴」鐩紝搴斿厛鍦ㄧ嫭绔嬮」鐩洰褰曚腑鍒涘缓宸ヤ綔鍖猴紝鍐嶅皢 V6 浣滀负澶栨寕瑙勫垯鍖呮帴鍏ワ紝鑰屼笉鏄妸 V6 鐩綍鏈韩褰撲綔椤圭洰鐩綍浣跨敤銆?
-- 鑻?Agent 鍙戠幇鑷繁褰撳墠姝ｅ噯澶囧湪 V6 鐩綍鍐呭垱寤轰笟鍔℃枃浠躲€佸垵濮嬪寲浠撳簱銆佸畨瑁呴」鐩緷璧栨垨鐢熸垚妯″潡缁撴瀯锛屽簲绔嬪嵆鍋滄锛屽苟鍏堝垏鎹㈠埌鐙珛椤圭洰鐩綍鍚庡啀缁х画銆?
-
-### 3.8 鍚姩鍓嶅繀椤绘墽琛岀洰褰曞璁?
-
-- 浠讳綍 Agent 鍦ㄥ紑濮嬩竴涓柊椤圭洰銆佹柊妯″潡銆佹柊瀛愮郴缁熸垨浠讳綍浼氬垱寤轰笟鍔℃枃浠剁殑浠诲姟鍓嶏紝蹇呴』鍏堝仛涓€娆＄洰褰曞璁°€?
-- 鐩綍瀹¤鑷冲皯蹇呴』鍒ゆ柇锛?
-  - 褰撳墠宸ヤ綔璺緞鏄惁浣嶄簬 `AgentLogic_V6` 閫昏緫鍖呯洰褰曞唴
-  - 褰撳墠璺緞鏄惁鏄€昏緫鍖呭帇缂╁寘瑙ｅ帇鐩綍銆侀€昏緫鍖呴暅鍍忕洰褰曟垨閫昏緫鍖呯淮鎶ょ洰褰?
-  - 褰撳墠浠诲姟鏄惁鍖呭惈鍒涘缓婧愮爜銆佷緷璧栥€侀厤缃€佹瀯寤轰骇鐗┿€佹棩蹇楁垨娴嬭瘯鏂囦欢鐨勫姩浣?
-- 鍙鐩綍瀹¤鍛戒腑鈥滃綋鍓嶈矾寰勫睘浜?V6 閫昏緫鍖呰寖鍥达紝涓斾换鍔¤鍒涘缓涓氬姟鏂囦欢鈥濓紝鍒欏繀椤荤珛鍗冲仠姝㈠綋鍓嶈矾寰勪笅鐨勬墽琛屻€?
-- 鍋滄鍚庨粯璁ゅ姩浣滃簲鏄細
-  - 鏂板缓鎴栧垏鎹㈠埌鐙珛椤圭洰鐩綍
-  - 鍦ㄧ嫭绔嬬洰褰曚腑缁х画椤圭洰鍒濆鍖?
-  - 鎶?V6 浣滀负澶栨寕閫昏緫鑴戞帴鍏ワ紝鑰屼笉鏄綔涓鸿惤鐩樼洰褰?
-- 鐩綍瀹¤灞炰簬鍚姩鍓嶅己鍒舵楠わ紝涓嶅緱鐪佺暐锛屼笉寰椾互鍚庤ˉ鍋氾紝涔熶笉寰楀湪宸茬粡钀界洏涓氬姟鏂囦欢鍚庡啀琛ュ璁°€?
+### 2.4 Project Fact Mapping
+- `modules/34_V6_5_ProjectFactMap_V2.md`: Standardized 4-tier fact map (User, Feedback, Project, Reference).
 
 ---
 
-## 4. 鍚屾涓庨棴鐜崗璁?
+## 3. Stable Promotion Summary
 
-### 4.1 鍏堣鍚庡啓
+The V6.5 line is now promoted from draft status.
+- **Stable Entry**: `MAIN.md`
+- **Current Version**: `V6.5`
+- **Default Profile**: `core-enhanced` (now includes all V6.5 modules)
 
-- 淇敼浠ｇ爜鍓嶏紝蹇呴』鍏堣鍙栫浉鍏虫枃妗ｄ笌鐩稿叧浠ｇ爜銆?
-- 涓嶅厑璁稿彧鐪嬫姤閿欑幇璞″氨鐩存帴涓嬫墜鏀广€?
+Agents adopting this line must strictly follow the **Mandatory Verification Matrix** and the **Tool Usage Choreography** defined in the modules above.
 
-### 4.2 鎴愬姛鍗冲悓姝?
-
-- 鍙浠ｇ爜宸叉垚鍔熶慨鏀广€侀獙璇併€佺‘璁わ紝灏卞繀椤诲悓姝ユ洿鏂扮浉鍏?md銆?
-- 涓嶅厑璁告妸鍏抽敭缁忛獙鍙暀鍦ㄤ細璇濋噷銆?
-
-### 4.3 鏂囨。蹇呴』璁板綍鐨勬渶灏忛泦鍚?
-
-- 瑙﹀彂鐜拌薄
-- 褰卞搷鑼冨洿
-- 鏍瑰洜鍒ゆ柇
-- 淇敼鏂囦欢
-- 淇敼鏂瑰紡
-- 楠岃瘉鏂瑰紡
-- 鑻ユ秹鍙婃瀯寤猴紝杩樺簲琛ワ細
-  - build 鍛戒护
-  - 鏋勫缓鍙傛暟
-  - 浜х墿鏃堕棿鎴?
-  - 瀹夎鐩綍鎴栬繍琛岀洰褰曢獙璇佺粨鏋?
-
-### 4.4 缁撴瀯钀界洏
-
-- 鍑℃槸宸茬粡璇昏繃銆佹敼杩囥€侀獙璇佽繃鐨勫叧閿粨鏋勶紝閮藉繀椤诲敖閲忚惤鍒?md锛?
-  - 鍏ュ彛鏂囦欢
-  - 妯″潡鍏崇郴
-  - 鍏抽敭鍑芥暟鑱岃矗
-  - 璺緞妯″瀷
-  - 鏁版嵁娴?
-  - 閫氫俊娴?
-  - 渚濊禆娴?
-
-### 4.5 鏁呴殰绱㈠紩鍖?
-
-- 姣忔 build 鍚庡嚭鐜扮殑鏁呴殰銆佸洖褰掋€侀鏈熼闄╁拰淇鍔ㄤ綔锛岄兘瑕佸啓鍏?md銆?
-- 鏂囨。鐩爣涓嶆槸鈥滄€荤粨鈥濓紝鑰屾槸褰㈡垚鍙绱㈢殑鏁呴殰绱㈠紩銆?
-
----
-
-## 5. 宸ョ▼鎵ц瑙勫垯
-
-### 5.1 璁″垝鍏堣
-
-- 浠诲姟瓒呰繃 3 姝ャ€佹秹鍙婂妯″潡銆佹秹鍙婇噸鏋勩€佹秹鍙婇儴缃叉垨鍙戝竷鏃讹紝蹇呴』鍏堝舰鎴愭竻鏅版墽琛岄『搴忋€?
-
-### 5.2 楠岃瘉鍏堜簬瀹屾垚
-
-- 鏈獙璇佹湁鏁堬紝涓嶅緱鏍囪涓哄畬鎴愩€?
-- 楠岃瘉鍙互鏄細
-  - 璇硶妫€鏌?
-  - 鏋勫缓鎴愬姛
-  - 杩愯鎴愬姛
-  - 璺緞楠岃瘉
-  - 鏃ュ織楠岃瘉
-  - 瀹炴満楠岃瘉
-
-### 5.3 浼橀泤浼樺厛
-
-- 涓嶆帴鍙楀彧涓轰复鏃堕€氳繃鐨勮ˉ涓佸紡淇銆?
-- 搴斾紭鍏堥€夋嫨缁撴瀯娓呮櫚銆佽竟鐣岀ǔ瀹氥€佸悗缁彲缁存姢鐨勬柟妗堛€?
-
-### 5.4 鑷富鎺掗殰
-
-- 瀵规槑纭彲瀹氫綅鐨勯棶棰橈紝搴斾富鍔ㄦ部鏃ュ織銆佽矾寰勩€佸疄渚嬬姸鎬併€佹瀯寤洪摼璺户缁帓鏌ャ€?
-- 涓嶅簲鎶婃樉鐒惰兘缁х画鏌ユ竻鐨勯棶棰樿繃鏃╃敥鍥炵粰鐢ㄦ埛銆?
-
-### 5.4.1 宸ュ叿涓?Skills 鐨勪富鍔ㄨ瘎浼颁箟鍔?
-
-- 濡傛灉 AI 鏃犳硶纭畾褰撳墠浠诲姟鏈€閫傚悎浣跨敤浠€涔堝伐鍏枫€佷粈涔?skills锛屾垨鑰呮€€鐤戠幇鏈夐粯璁よ矾寰勬槑鏄句綆鏁堬紝灏变笉搴旀満姊版部鐢ㄦ棫璺緞銆?
-- 鍦ㄨ繖绉嶆儏鍐典笅锛孉I 搴斾富鍔ㄨ繘琛屽彈绾︽潫鐨勫伐鍏疯瘎浼帮紝鑷冲皯鍥炵瓟锛?
-  - 褰撳墠榛樿宸ュ叿鏄惁鍙槸鈥滆兘鐢ㄢ€濓紝鑰屼笉鏄€滄洿鍚堥€傗€?
-  - 褰撳墠浠诲姟鏄惁瀛樺湪鏇翠笓涓氥€佹洿楂樻晥銆佹洿绋冲畾鐨勫伐鍏锋垨 skills
-  - 鏇夸唬鏂规鏄惁鑳芥樉钁楁彁鍗囷細
-    - 闃呰鏁堢巼
-    - 鍒嗙被绮惧害
-    - 鎼滅储璐ㄩ噺
-    - 缁撴瀯鐞嗚В閫熷害
-    - 鑷姩鍖栫▼搴?
-- 杩欑涓诲姩璇勪及鐨勭洰鏍囷紝鏄伩鍏?AI 闂棬閫犺溅锛屽彧鍦ㄥ凡鏈変綆鏁堝伐鍏烽噷鍙嶅鍏滃湀锛岃€屽拷鐣ユ洿閫傚悎褰撳墠浠诲姟鐨勭幇鎴愬伐鍏枫€?
-
-### 5.4.2 澶栭儴鏇翠紭宸ュ叿鍙戠幇瑙勫垯
-
-- 褰?AI 鍦ㄥ紑濮嬫柊椤圭洰銆佹帴鎵嬫柊妯″潡銆佸缓绔嬫柊娴佺▼鏃讹紝鍙戠幇澶栭儴宸叉湁鏄庢樉鏇村悎閫傜殑宸ュ叿銆乻kills銆佸垎绫诲櫒銆佺储寮曞櫒銆侀槄璇诲櫒銆佸垎鏋愬櫒鎴栬嚜鍔ㄥ寲缁勪欢锛屽簲涓诲姩璁板綍骞舵彁鍑恒€?
-- 杩欓噷鐨勨€滀富鍔ㄦ彁鍑衡€濅笉鏄姹傜珛鍒绘搮鑷帴鍏ワ紝鑰屾槸瑕佹眰锛?
-  - 鍏堣鏄庝负浠€涔堢幇鏈夊伐鍏蜂笉澶熷ソ
-  - 鍐嶈鏄庡€欓€夊伐鍏蜂负浠€涔堟洿鍚堥€?
-  - 鍐嶈鏄庡畠褰撳墠灞炰簬锛?
-    - 鎺ㄨ崘椤?
-    - 鍊欓€夊寮洪」
-    - 宸叉寮忛泦鎴愰」
-- 鏈粡纭锛屼笉搴旀妸澶栭儴鍊欓€夊伐鍏风洿鎺ュ綋鎴愮幇鏈夋寮忚兘鍔涙弿杩般€?
-
-### 5.4.3 閬垮厤宸ュ叿淇濆畧涓讳箟
-
-- AI 涓嶅簲鍥犱负鎵嬪ご宸叉湁鏌愪釜鑰佸伐鍏枫€侀粯璁ゆ祻瑙堝櫒璺緞銆侀粯璁ゆ悳绱㈣矾寰勬垨鏃㈡湁鑴氭湰锛屽氨鑷姩鍋囪瀹冧粛鐒舵槸褰撳墠椤圭洰鐨勬渶浼樻柟妗堛€?
-- 鈥滃厛鐢ㄦ棫宸ュ叿鍑戝悎瀹屾垚鈥濆彲浠ユ槸鐭湡绛栫暐锛屼絾涓嶅簲闃绘 AI 璇嗗埆鍜屾彁鍑烘洿濂界殑宸ュ叿鏇夸唬鏂瑰悜銆?
-- 瀵归珮棰戙€佷綆鏁堛€侀噸澶嶃€侀暱鑰楁椂鐨勫伐浣滆矾寰勶紝AI 搴斾紭鍏堣€冭檻鏄惁瀛樺湪鏇村悎閫傜殑宸ュ叿鍖栨浛浠ｃ€?
-- 榛樿宸ュ叿浣庢晥鏃讹紝Agent 搴斾富鍔ㄥ鎵炬洿閫傚悎褰撳墠浠诲姟鐨勫伐鍏锋垨鏂规锛屼絾蹇呴』鍖哄垎姝ｅ紡鑳藉姏涓庡€欓€夊寮恒€?
-
-### 5.5 绂佹鎿呰嚜杩藉姞鍔熻兘
-
-- 鏈粡鐢ㄦ埛鏄庣‘纭锛屼笉寰楁搮鑷坊鍔犻渶姹傚鍔熻兘銆佷氦浜掋€佺姸鎬佹満鍙樺寲銆侀粯璁よ涓哄彉鍖栥€佽瑙夋敼閫犮€佹祦绋嬫敼閫犳垨鈥滈『鎵嬩紭鍖栤€濄€?
-- 濡傛灉鏈夋洿濂界殑鏂规锛屽彲浠ユ彁鍑猴紝浣嗗繀椤诲厛绛夌敤鎴风‘璁ゃ€?
-
----
-
-## 6. 鏂囨。绮惧害寮哄埗鏉℃
-
-### 6.1 鏂囨。涓嶆槸闄勫睘鍝?
-
-- md 涓嶆槸鈥滆鏄庝功闄勪欢鈥濓紝鑰屾槸椤圭洰杩愯鍦板浘銆佹帓闅滅储寮曞拰淇妗ｆ銆?
-
-### 6.2 绮惧害浼樺厛
-
-- 鍙鏃堕棿鍏佽锛屾枃妗ｅ簲鏇村叿浣擄紝鑰屼笉鏄洿鎶借薄銆?
-
-### 6.3 鐗╃悊瀹氫綅寮哄埗
-
-- 鏂囨。涓彧瑕佸嚭鐜板嚱鏁板悕銆佹柟娉曞悕銆佸懡浠ゅ悕銆佷簨浠跺悕锛岄粯璁ゅ氨搴旂粰鍑烘枃浠惰矾寰勩€?
-- 鏈€浼樺舰寮忔槸锛?
-  - `鍑芥暟鍚峘 + `鏂囦欢璺緞`
-  - 濡傛潯浠跺厑璁革紝鍐嶈ˉ杩戜技琛屽彿鎴栨悳绱㈤敋鐐?
-
-### 6.4 鍏宠仈閾捐姹?
-
-- 鍏抽敭鍑芥暟涓嶅簲鍙啓鍗曠偣鑱岃矗锛岃繕搴旇ˉ锛?
-  - 璋佽皟鐢ㄥ畠
-  - 瀹冨奖鍝嶈皝
-  - 瀵瑰簲鍝唤鏂囨。鎴栧摢娈甸摼璺?
-
-### 6.5 鏃ュ織钀界偣蹇呴』鏄庣‘
-
-- 鏃ュ織鍐欏叆鍝噷锛屽睘浜庢灦鏋勪簨瀹烇紝涓嶆槸瀹炵幇缁嗚妭銆?
-- 浠讳綍鏂板鎴栦慨鏀规棩蹇楅€昏緫鏃讹紝蹇呴』鍚屾妫€鏌ユ棩蹇楃墿鐞嗚惤鐐规槸鍚︿粛绗﹀悎椤圭洰瑙勫垯銆?
-- 濡傚洜鏉冮檺闂闇€瑕侀€€璺紝蹇呴』鏄惧紡璁板綍锛屼笉寰楅潤榛樻敼鍒板埆澶勩€?
-
----
-
-## 7. 鎵撳寘涓庤繍琛屽垎灞傚崗璁?
-
-### 7.1 榛樿鍙岃建
-
-- 杞ㄩ亾 A锛氭暎瑁呮祴璇曚骇鐗?
-  - 濡?`win-unpacked`銆佸彲鎵ц鐩綍銆乨ebug build銆佹湭瀹夎鍖?
-- 杞ㄩ亾 B锛氭渶缁堝畨瑁呭寘鎴栧彂甯冨寘
-  - 濡?`.exe`銆丯SIS銆丮SI銆乣.dmg`銆乣.AppImage`銆丄PK銆丄AB 绛?
-
-### 7.2 榛樿椤哄簭
-
-- 鍏堝湪杞ㄩ亾 A 楠岃瘉鍔熻兘閫昏緫銆佷氦浜掋€佺姸鎬佹満銆侀€氫俊閾捐矾銆?
-- 鍙湁鍦ㄤ互涓嬫儏鍐垫墠鍒囧埌杞ㄩ亾 B锛?
-  - 鐢ㄦ埛鏄庣‘瑕佹眰鏈€缁堝畨瑁呭寘
-  - 杩涘叆鎻愭祴銆侀獙鏀躲€佷氦浠橀樁娈?
-  - 闂鍙細鍑虹幇鍦ㄥ畨瑁呫€佺鍚嶃€佹墦鍖呫€佹潈闄愩€佸崌绾с€佸嵏杞介摼璺?
-
-### 7.3 鎵撳寘鍓嶅繀椤荤‘璁?
-
-- 褰撳墠鐩爣鏄祴璇曟暎鍖咃紝杩樻槸鏈€缁堜氦浠樺畨瑁呭寘锛?
-- 褰撳墠鐩爣鏄姛鑳介獙璇侊紝杩樻槸姝ｅ紡鍙戝竷锛?
-- 鑻ョ敤鎴锋湭鏄庣‘瑕佹眰鏈€缁堝畨瑁呭寘锛屽垯榛樿鍋滅暀鍦ㄦ暎瑁呴獙璇侀樁娈点€?
-
-### 7.4 鎵撳寘鍚庨珮椋庨櫓妫€鏌ラ」
-
-- 瀹夎鐩綍
-- 宸ヤ綔鐩綍
-- `app.asar`
-- 閰嶇疆鏂囦欢璇诲彇
-- 缂撳瓨鏄惁鍛戒腑鏃х増鏈?
-- 鑷惎鍔?
-- 璁″垝浠诲姟
-- 娈嬬暀杩涚▼
-- 鍗歌浇淇℃伅
-- 鏉冮檺銆佺鍚嶃€佹枃浠堕攣
-- 鍏变韩鐩綍鎴栫敤鎴风洰褰曡矾寰勬ā鍨?
-
-### 7.5 Release 璧勪骇瀹屾暣鎬ц鍒?
-
-- 褰撻」鐩繘鍏?GitHub release銆佹寮忓彂甯冦€佺ǔ瀹氱増褰掓。鎴栭噷绋嬬鐗堟湰浜や粯闃舵鏃讹紝release 涓嶅簲鍙笂浼犲畨瑁呭寘鎴栧彲鎵ц浜х墿銆?
-- release 榛樿杩樺繀椤诲悓姝ヤ笂浼犫€滄湰娆″彂甯冪増鏈搴旂殑婧愮爜鍖呪€濄€?
-- 杩欓噷鐨勨€滄簮鐮佸寘鈥濇寚涓庢湰娆?tag / release 瀵瑰簲鐨勭増鏈簮鐮佸綊妗ｏ紝鑰屼笉鏄殢鎵嬫墦鍖呯殑褰撳墠宸ヤ綔鐩綍蹇収銆?
-- 鑻ラ」鐩悓鏃舵彁渚涳細
-  - 瀹夎鍖?
-  - 鍙墽琛屾暎鍖?
-  - 婧愮爜鍖?
-  鍒欏簲浼樺厛淇濊瘉婧愮爜鍖呬篃杩涘叆鍚屼竴 release锛屽舰鎴愬畬鏁寸殑鐗堟湰闂幆銆?
-- 杩欐牱鍋氱殑鐩殑鍖呮嫭锛?
-  - 渚夸簬鍚庣画鍥為€€
-  - 渚夸簬鐗堟湰瀹¤
-  - 渚夸簬绂荤嚎褰掓。
-  - 渚夸簬鍦?release 椤甸潰鐩存帴鍙栧緱涓庡畨瑁呭寘涓ユ牸瀵瑰簲鐨勬簮鐮佺増鏈?
-- 鑻ュ彧鏄棩甯稿皬淇皬琛ヤ笖鏈繘鍏ユ寮?release锛屽垯涓嶅己鍒舵墜宸ラ檮鍔犳簮鐮佸寘锛涗絾涓€鏃﹁繘鍏モ€滃彂甯冪増鏈€濆姩浣滐紝婧愮爜鍖呭簲瑙嗕负鏍囧噯璧勪骇銆?
-
----
-
-## 8. 瀹炰緥鍐茬獊涓庢竻鐞嗚鍒?
-
-### 8.1 瀹㈡埛绔疄渚嬪啿绐佹竻鐞嗚鍒?
-
-- 鍚屼竴鍙版満鍣ㄨ嫢鍚屾椂瀛樺湪澶氫釜瀹㈡埛绔繍琛屽舰鎬侊紝渚嬪锛?
-  - 鏁ｅ寘鐗?
-  - 瀹夎鐗?
-  - 鏃х洰褰曞壇鏈?
-  - 娈嬬暀瀹夎鐘舵€?
-- 鍒欏彲鑳藉鑷达細
-  - UI 鏃犳硶鐐瑰嚮
-  - 淇濆瓨骞朵笅鍙戝悗涓嶆挱鏀?
-  - 閿欒瀹炰緥琚媺璧?
-  - 琛屼负鐪嬭捣鏉ュ儚鈥滀唬鐮佹病鏇存柊鈥?
-- 鍥犳瀹㈡埛绔惎鍔ㄩ摼璺繀椤婚粯璁ゅ叿澶囧啿绐佹竻鐞嗚兘鍔涖€?
-
-### 8.2 瀹㈡埛绔渶浣庢竻鐞嗚寖鍥?
-
-- 鏃?`AdvertisingScreenClient.exe` 杩涚▼
-- 鑷惎鍔ㄦ敞鍐岃〃椤?
-- 璁″垝浠诲姟
-- 鏃у畨瑁呯洰褰?
-- 鏃ф暎鍖呯洰褰?
-- 鏃ц繍琛屾椂鐩綍
-- 涓庡綋鍓嶅疄渚嬪啿绐佺殑鎺у埗鐩綍鍜屾湰鍦拌繍琛岀洰褰?
-
-### 8.3 鏈嶅姟绔瀹炰緥闃叉姢瑙勫垯
-
-- 鏈嶅姟绔繀椤诲叿澶囧崟瀹炰緥绾︽潫銆?
-- 榛樿绛栫暐搴斾负锛?
-  - 闃绘绗簩瀹炰緥
-  - 鍞ら啋鎴栨墦寮€鐜版湁瀹炰緥
-- 鏈嶅姟绔笉寰楀洜涓哄瀹炰緥闃叉姢鑰岄粯璁ゆ竻绌虹敤鎴蜂笟鍔℃暟鎹€?
-
-### 8.4 鍐茬獊娓呯悊杈圭晫瑙勫垯
-
-- 娓呯悊瀹炰緥鍐茬獊锛屼笉绛変簬娓呯┖鐢ㄦ埛閰嶇疆銆?
-- 鍙互鑷姩娓呯悊鐨勫璞★細
-  - 鍐茬獊杩涚▼
-  - 鑷惎鍔ㄩ」
-  - 璁″垝浠诲姟
-  - 鏃ц繍琛岀洰褰?
-  - 鏃ф暎鍖呯洰褰?
-  - 涓庡綋鍓嶅疄渚嬪啿绐佺殑瀹夎鐩綍
-- 榛樿涓嶅緱鑷姩娓呯悊鐨勫璞★細
-  - 鐢ㄦ埛閰嶇疆鏂囦欢
-  - 鏈嶅姟绔瓨鍌ㄦ暟鎹?
-  - 鎾斁鍗?
-  - 瀹℃壒璁板綍
-  - 绱犳潗搴?
-  - 瀹夎鍖呬粨搴?
-- 鍙湁鐢ㄦ埛鏄庣‘瑕佹眰鈥滈噸缃厤缃?/ 鎭㈠鍑哄巶 / 娓呯┖鏁版嵁鈥濇椂锛屾墠鍏佽鍒犻櫎閰嶇疆鍜屼笟鍔℃暟鎹€?
-
----
-
-## 9. UI / UX 涓?README 琛ㄧ幇瑙勫垯
-
-### 9.1 UI / UX 鏀瑰姩杈圭晫
-
-- UI 鏀瑰姩涓嶈兘鍙拷姹傗€滅湅璧锋潵鏇寸幇浠ｂ€濓紝蹇呴』绗﹀悎椤圭洰瀹為檯浜や簰涓庝骇鍝佽竟鐣屻€?
-- 浠讳綍鐘舵€佹満銆佸竷灞€缁撴瀯銆佺敤鎴锋搷浣滆矾寰勭殑鍙樺寲锛岄兘搴旇瑙嗕负浜у搧鏀瑰姩锛岃€屼笉鏄函瑙嗚鏀瑰姩銆?
-
-### 9.2 README 浣滀负椤圭洰棣栭〉
-
-- GitHub README 涓嶅彧鏄枃妗ｏ紝涔熷簲琚涓洪」鐩叕寮€棣栭〉鍜岀涓€灞備骇鍝佸嵃璞°€?
-- 褰撲换鍔℃秹鍙?README銆佷粨搴撻椤点€乺elease 椤点€侀」鐩粙缁嶉〉鏃讹紝涓嶈兘鍙ˉ淇℃伅瀵嗗害锛岃繕搴旇瘎浼帮細
-  - 棣栧睆鑺傚
-  - 鍒嗗尯灞傛
-  - 瑙嗚鍐插嚮鍔?
-  - 璁板繂鐐?
-- 鍏佽涓诲姩浼樺寲锛?
-  - Hero 鏍囬涓庡壇鏍囬
-  - badges
-  - feature matrix
-  - 鐗堟湰婕旇繘鏃堕棿绾?
-  - 鍙岃鎴栧璇叆鍙?
-  - 鏇存竻鏅扮殑 landing narrative
-- 鍓嶆彁鏄笉鏀瑰彉浜嬪疄锛屼笉鎿呰嚜铏氭瀯鑳藉姏銆?
-- README 蹇呴』榛樿鍖呭惈鈥滀娇鐢ㄨ鏄?/ Usage / Quick Start鈥濅竴绫诲叆鍙ｅ唴瀹广€?
-- 鍗充娇椤圭洰浠嶅湪杩唬銆佸姛鑳戒粛涓嶅畬鏁达紝README 涔熶笉搴斿彧鏈変粙缁嶅拰鏋舵瀯璇存槑锛涜嚦灏戣鍛婅瘔璇昏€咃細
-  - 杩欎釜浠撳簱濡備綍寮€濮嬩娇鐢?
-  - 涓昏鐩綍鍒嗗埆鍋氫粈涔?
-  - 瀹㈡埛绔拰鏈嶅姟绔浣曞惎鍔ㄦ垨楠岃瘉
-  - 瀹夎鍖呮垨 release 璧勪骇搴斾粠鍝噷鑾峰彇
-- README 鎴栭」鐩富 md 杩樺簲榛樿鎵挎媴鈥滈€昏緫鍏ュ彛璇存槑鈥濊亴璐ｏ紝鑷冲皯搴旀槑纭細
-  - 褰撳墠椤圭洰浣跨敤鐨?Agent 閫昏緫鍏ュ彛鏄惁鍦ㄤ粨搴撶洰褰曞唴
-  - 鑻ュ湪浠撳簱鍐咃紝閫昏緫鏂囦欢璺緞鏄粈涔?
-  - 鑻ヤ笉鍦ㄤ粨搴撳唴锛屽簲鍘诲摢閲岃幏鍙栨垨鎸傛帴
-  - 鍦ㄦ寮忓紑濮嬮」鐩墠锛屾槸鍚﹂渶瑕佸厛纭澶栭儴閫昏緫鍖呬綅缃?
-- 杩欐潯瑙勫垯涓嶅簲鎶婇€昏緫鐗堟湰鍐欐涓?`V6`锛岃€屽簲浣跨敤鐗堟湰鏃犲叧琛ㄨ揪锛屼互鍏煎鍚庣画鐨?`V7`銆乣V8` 鎴栧叾浠栧懡鍚嶃€?
-- 鐩爣鏄椤圭洰涓绘枃妗ｅ拰閫昏緫鍖呭舰鎴愭鍚戝惊鐜細
-  - 閫昏緫鍖呰姹?AI 鍏堢‘璁ら€昏緫鍏ュ彛
-  - 椤圭洰涓绘枃妗ｄ富鍔ㄨ鏄庨€昏緫鍏ュ彛
-  - 浠庤€屽噺灏?AI 鍥犻€昏緫鍏ュ彛缂哄け鑰屼骇鐢熺殑鎺ュ叆姝т箟
-- 濡傛灉椤圭洰褰撳墠鏇撮€傚悎鈥滃紑鍙戣€呬娇鐢ㄨ鏄庘€濊€屼笉鏄€滅粓绔敤鎴蜂娇鐢ㄨ鏄庘€濓紝涔熷繀椤绘槑纭啓鍑烘渶灏忓彲鎵ц姝ラ锛岃€屼笉鏄渷鐣ヤ娇鐢ㄩ儴鍒嗐€?
-- 褰?README 闇€瑕佸璇鏃讹紝榛樿涓嶈鎶婁腑鑻辨棩绛夊畬鏁村唴瀹瑰爢鍙犲湪鍚屼竴涓〉闈腑銆?
-- 澶氳 README 鐨勬帹鑽愮粨鏋勬槸锛?
-  - `README.md` 浣滀负榛樿涓诲叆鍙ｉ〉
-  - `README.zh-CN.md` 浣滀负涓枃椤?
-  - `README.ja.md` 浣滀负鏃ユ枃椤?
-  - 鑻ユ湁鍏朵粬璇█锛屽啀鎸夊悓鏍锋柟寮忔墿灞曠嫭绔嬫枃浠?
-- 姣忎釜璇█椤电殑椤堕儴閮藉繀椤绘彁渚涚粺涓€鐨勮法璇█瓒呴摼鎺ワ紝渚嬪锛?
-  - `English | 涓枃 | 鏃ユ湰瑾瀈
-- 榛樿涓?README 搴斾繚鐣欙細
-  - 鏍囬
-  - 绠€浠?
-  - badges
-  - 澶氳鍏ュ彛瓒呴摼鎺?
-  - 褰撳墠璇█鐗堟湰鐨勫畬鏁村唴瀹?
-  - 褰撳墠椤圭洰閫昏緫鍏ュ彛璇存槑
-- 鐩爣鏄棦淇濊瘉澶氳鏀寔锛屼篃淇濊瘉棣栭〉娓呮櫚锛屼笉瑕佽涓€涓?README 鍥犱笁璇叏鏂囧爢鍙犺€屽け鍘婚椤佃妭濂忎笌鍙鎬с€?
-- 褰?README 琚綔涓轰粨搴撻椤靛鐞嗘椂锛屽厑璁镐紭鍏堥噰鐢ㄥ眳涓帓鐗堟潵澧炲己瑙嗚缁熶竴鎰燂紝灏ゅ叾閫傜敤浜庯細
-  - 涓绘爣棰?
-  - 鍓爣棰?/ slogan
-  - badges
-  - 澶氳绉嶅垏鎹㈣秴閾炬帴
-- 杩欑被灞呬腑鎺掔増鐨勭洰鏍囦笉鏄楗帮紝鑰屾槸璁╀粨搴撻椤垫洿鍍忎骇鍝佸叆鍙ｉ〉鑰屼笉鏄櫘閫氭枃鏈〉銆?
-- 鑻ラ噰鐢ㄥ眳涓帓鐗堬紝搴斿敖閲忚椤堕儴缁撴瀯淇濇寔涓€鑷达細
-  - 灞呬腑鏍囬
-  - 灞呬腑鍓爣棰?
-  - 灞呬腑 badges
-  - 灞呬腑璇█鍒囨崲鍏ュ彛
-- 鍙涓嶅奖鍝嶅彲璇绘€т笌浜嬪疄琛ㄨ揪锛岃繖绉嶉《閮?Hero 鍖虹殑瑙嗚鏁寸悊搴旇瑙嗕负鎺ㄨ崘鍋氭硶锛岃€屼笉鏄澶栬楗般€?
-
----
-
-## 10. 瀹夊叏涓庨獙璇佸崗璁?
-
-### 10.1 鏁忔劅鎿嶄綔瑕佹湁鍥炴粴鐐?
-
-- 鍒犻櫎銆佺Щ鍔ㄣ€佽鐩栥€佸彂甯冦€佹浛鎹€佹竻鐞嗙瓑鏁忔劅鍔ㄤ綔锛屽繀椤讳繚鐣欏彲鎭㈠璺緞鎴栨槑纭洖婊氱偣銆?
-
-### 10.2 娣卞害楠岃瘉
-
-- 楠岃瘉涓嶈兘鍙仠鐣欏湪鈥滆兘鎵撳紑鈥濄€?
-- 搴旇鐩栵細
-  - 绌烘暟鎹?
-  - 闈炴硶杈撳叆
-  - 缃戠粶涓柇
-  - 绌洪棿涓嶈冻
-  - 璺緞閿欎綅
-  - 瀹夎娈嬬暀
-  - 鏃х紦瀛樺懡涓?
-
-### 10.3 浜や粯瑕侀檮甯﹀彲璇佹槑淇℃伅
-
-- 浜や粯鏃跺簲灏介噺鎻愪緵锛?
-  - 楠岃瘉鏂瑰紡
-  - 鍏抽敭缁撴灉
-  - 鏈獙璇侀儴鍒?
-  - 鍓╀綑椋庨櫓
-
----
-
-## 11. 鑷垜杩涘寲寰幆
-
-- 鐢ㄦ埛涓€鏃︾籂姝ｏ紝灏卞簲灏藉揩鎶婄粡楠屾矇娣€杩涙纭枃妗ｃ€?
-- 鏂颁細璇濆紑濮嬫椂锛屽簲浼樺厛澶嶆牳鍘嗗彶鏁欒鍜岄」鐩枃妗ｃ€?
-- 褰撲唬鐮佷笌 md 鐨勪俊鎭瘑搴︿笉瀵圭О鏃讹紝榛樿琛ュ叏鏂囨。锛岃€屼笉鏄噺灏戞枃妗ｃ€?
-
----
-
-## 12. 绂佹浜嬮」
-
-- 涓嶅緱鍦ㄦ湭璇诲畬椤圭洰 md 鍓嶏紝鎿呰嚜瀹氫箟椤圭洰鏋舵瀯銆?
-- 涓嶅緱鍦ㄦ湭纭褰撳墠浠诲姟杈圭晫鍓嶏紝鎿呰嚜鎵╂暎淇敼鑼冨洿銆?
-- 涓嶅緱鎶婇」鐩骇瑙勫垯鍐欒繘閿欒鐩綍銆?
-- 涓嶅緱鎶婃湰鍦扮鏈夎鍒欍€佷复鏃剁瑪璁版垨鏃犲叧鍓骇鐗╄涓婁紶鍒颁粨搴撱€?
-- 涓嶅緱鎶婇」鐩?A 鐨勪粨搴撲笓灞炶鍒欐満姊板鍒跺埌椤圭洰 B銆?
-
----
-
-## 13. 鎺ㄨ崘鎵ц椤哄簭
-
-1. 鍏堣椤圭洰鍏ㄩ儴 md銆?
-2. 纭椤圭洰鏂囨。涓诲叆鍙ｄ笌褰撳墠浠诲姟灞傜骇銆?
-3. 璇诲彇鐩稿叧浠ｇ爜涓庣浉鍏宠繍琛岀洰褰曘€?
-4. 褰㈡垚鎵ц椤哄簭涓庨闄╁垽鏂€?
-5. 淇敼浠ｇ爜鎴栨暣鐞嗗彂甯冪墿銆?
-6. 鎵ц楠岃瘉銆?
-7. 鍚屾鏇存柊姝ｇ‘浣嶇疆鐨?md銆?
-8. 鏈€鍚庡啀浜や粯缁撹銆佽矾寰勩€侀闄╀笌涓嬩竴姝ュ缓璁€?
-
----
-
-## 14. 婧愮爜椹卞姩閫昏緫鍖呯淮鎶ゅ崗璁?
-
-### 14.1 閫昏緫鍖呬笉鏄簮鐮佸浠?
-
-- 褰撲换鍔℃槸鈥滄暣鐞嗗綊绾冲綋鍓嶉」鐩苟杈撳嚭閫昏緫鍖呪€濇椂锛屼氦浠樼墿涓嶅簲绛夊悓浜庢暣涓簮鐮佺洰褰曠殑鍘熸牱澶嶅埗銆?
-- 閫昏緫鍖呭簲鏄洿缁曗€滃浣曠悊瑙ｃ€佽繘鍏ャ€佹墽琛屻€侀獙璇併€佹墿灞曡绯荤粺鈥濇瀯寤虹殑缁撴瀯鍖栫煡璇嗗寘銆?
-- 閫昏緫鍖呴粯璁よ嚦灏戝簲鍖呭惈锛?
-  - 鎬荤翰
-  - 鏋舵瀯鍒嗗眰
-  - 涓绘墽琛岄摼璺?
-  - 宸ュ叿鏁村悎娓呭崟
-  - 鏉冮檺涓庡畨鍏ㄦ満鍒?
-  - 鎵╁睍鏈哄埗
-  - 鍏抽敭婧愮爜鏄犲皠
-
-### 14.2 宸ュ叿蹇呴』鏁村悎鎴愮郴缁熻鍥?
-
-- 褰撻」鐩寘鍚唴缃伐鍏枫€佸閮ㄥ伐鍏枫€丮CP 宸ュ叿銆佹妧鑳姐€佸瓙 Agent銆佸懡浠ょ郴缁熸椂锛岄€昏緫鍖呬笉鑳藉彧鎸夌洰褰曠綏鍒椼€?
-- 蹇呴』鑷冲皯鍥炵瓟浠ヤ笅闂锛?
-  - 宸ュ叿浠庡摢閲屾敞鍐?
-  - 宸ュ叿濡備綍娉ㄥ叆缁欐ā鍨?
-  - 宸ュ叿濡備綍缁忚繃鏉冮檺鍒ゅ畾
-  - 宸ュ叿濡備綍鎵ц
-  - 宸ュ叿缁撴灉濡備綍鍥炴祦鍒颁細璇?
-  - 鍝簺宸ュ叿濮嬬粓鍙敤
-  - 鍝簺宸ュ叿鍙楀钩鍙般€佹潈闄愩€佺幆澧冨彉閲忔垨 feature flag 鎺у埗
-- 宸ュ叿鏁村悎鏂囨。搴斾紭鍏堝舰鎴愶細
-  - 宸ュ叿鍒嗙被
-  - 鍚敤鏉′欢
-  - 椋庨櫓绛夌骇
-  - 鍏抽敭婧愮爜璺緞
-
-### 14.3 閫昏緫鍖呭繀椤绘爣娉ㄦ簮鐮佷緷鎹?
-
-- 閫昏緫鍖呬腑鐨勬瘡涓叧閿粨璁猴紝榛樿閮藉簲鑳借拷婧埌瀹為檯婧愮爜鎴栭」鐩枃妗ｃ€?
-- 鍙鏉′欢鍏佽锛屽氨搴旀爣鍑猴細
-  - 瀵瑰簲 md 璺緞
-  - 瀵瑰簲婧愮爜璺緞
-  - 瀵瑰簲鍏ュ彛鏂囦欢
-  - 瀵瑰簲鍏抽敭鍑芥暟鎴栧叧閿ā鍧?
-- 鑻ユ煇鑳藉姏澶勪簬 stub銆佸崐瀹炵幇銆佹潯浠跺惎鐢ㄣ€佸钩鍙伴檺瀹氭垨 feature flag 鍏抽棴鐘舵€侊紝蹇呴』鏄惧紡鏍囨敞锛屼笉寰楁寜鈥滃畬鏁村彲鐢ㄢ€濊褰曘€?
-
-### 14.4 閫昏緫鍖呰緭鍑虹粨鏋勫缓璁?
-
-- 褰撻渶瑕佸舰鎴愮嫭绔嬮€昏緫鍖呮椂锛屽缓璁粯璁よ緭鍑猴細
-  - `00_README.md`
-  - `01_MasterLogic.md`
-  - `02_Architecture.md`
-  - `03_AgenticLoop.md`
-  - `04_Tools.md`
-  - `05_PermissionsAndSafety.md`
-  - `06_Extensibility.md`
-  - `07_CommandSurface.md`
-  - `08_SourceIndex.md`
-  - `manifest.json`
-- 濡傛灉宸叉湁涓婁綅鎬荤翰锛屼緥濡?`AgentLogic_V6.md`锛屽垯閫昏緫鍖呭簲淇濈暀璇ユ€荤翰骞跺彔鍔犲綋鍓嶉」鐩壒鏈夊唴瀹癸紝鑰屼笉鏄浛鎹㈠叾閫氱敤瑙勫垯浠峰€笺€?
-
-### 14.4.1 鍒嗗眰鎵撳寘寮哄埗寤鸿
-
-- 褰撻」鐩湰韬瓨鍦ㄥぇ閲忓伐鍏锋簮鐮併€佸伐鍏风紪鎺掓簮鐮併€佹潈闄愭簮鐮佹垨鍛戒护婧愮爜鏃讹紝閫昏緫鍖呬笉搴斿彧杈撳嚭鎶借薄璇存槑灞傘€?
-- 榛樿搴旈噰鐢ㄨ嚦灏戜笁灞傜粨鏋勶細
-  - 鎶借薄閫昏緫灞?
-  - 鍘熷婧愮爜灞?
-  - 绱㈠紩鏄犲皠灞?
-- 鎶借薄閫昏緫灞傝礋璐ｈВ閲婄郴缁熶负浠€涔堣繖鏍疯璁°€?
-- 鍘熷婧愮爜灞傝礋璐ｄ繚鐣欏叧閿兘鍔涚殑鐪熷疄瀹炵幇锛屽挨鍏舵槸宸ュ叿鏈綋銆?
-- 绱㈠紩鏄犲皠灞傝礋璐ｅ憡璇夊悗缁淮鎶よ€咃細
-  - 鍝簺婧愮爜蹇呴』浼樺厛闃呰
-  - 鍝簺婧愮爜鍙槸鏀拺灞?
-  - 鍝簺婧愮爜鐩墠鏄?stub銆佹鍒嗘敮鎴栨潯浠跺惎鐢?
-
-### 14.4.2 宸ュ叿鍏佽鐩存帴鎵撳寘
-
-- 瀵逛簬宸ュ叿绯荤粺锛屾湰瑙勫垯鍏佽鐩存帴灏嗗伐鍏锋簮鐮佺洰褰曟暣浣撶撼鍏ラ€昏緫鍖咃紝鑰屼笉鏄姹傛妸姣忎釜宸ュ叿閮介噸鏂版敼鍐欐垚鎽樿銆?
-- 浣嗗彧鎵撳寘宸ュ叿婧愮爜浠嶇劧涓嶅锛屽繀椤诲悓鏃惰ˉ涓€浠藉伐鍏锋€昏鏂囨。锛岃鏄庯細
-  - 宸ュ叿鍒嗙被
-  - 宸ュ叿鍏ュ彛
-  - 宸ュ叿娉ㄥ唽鐐?
-  - 宸ュ叿鎵ц鍩虹璁炬柦
-  - 宸ュ叿鏉冮檺杈圭晫
-  - 宸ュ叿鍚敤鏉′欢
-- 濡傛灉宸ュ叿鏁伴噺杈冨锛屽厑璁搁噰鐢ㄢ€滃伐鍏锋簮鐮佸師鏍蜂繚鐣?+ 鎬昏鏂囨。鍒嗗眰瑙ｉ噴鈥濈殑鏂瑰紡锛屼笉瑕佹眰鎶婃墍鏈夊伐鍏烽兘骞跺叆涓€浠藉ぇ琛ㄣ€?
-
-### 14.4.3 涓婚€昏緫鍙己鍒舵寚瀹氳緭鍑鸿竟鐣?
-
-- 褰撻€昏緫鍖呯洰鏍囦笉鍙槸闃呰锛岃€屾槸鍚庣画鎸佺画缁存姢涓庡鐢ㄦ椂锛屼富閫昏緫搴旀樉寮忓己鍒舵寚瀹氾細
-  - 鍝簺鐩綍蹇呴』杩涘寘
-  - 鍝簺鐩綍鍙渶瑕佺储寮曪紝涓嶉渶瑕佸叏鏂囧鍒?
-  - 鍝簺鐩綍鍙兘鍋氭憳瑕侊紝涓嶅疁鏁村寘澶嶅埗
-- 鍏稿瀷寮哄埗鎸囧畾鏂瑰紡鍖呮嫭锛?
-  - 宸ュ叿鐩綍蹇呴』鏁村寘淇濈暀
-  - 鏉冮檺鏍稿績鐩綍蹇呴』淇濈暀绱㈠紩鎴栧叧閿疄鐜?
-  - 鏂囨。鐩綍鍙互閫夋嫨鎬ф憳褰曡€屼笉鏄叏閮ㄥ鍒?
-  - UI 澶у瀷鐩綍鍙彧淇濈暀鍏ュ彛绱㈠紩涓庡叧閿摼璺鏄?
-- 鑻ユ湭寮哄埗鎸囧畾锛屽悗缁淮鎶よ€呭鏄撴妸閫昏緫鍖呭仛鎴愨€滃崐鎽樿鍗婁涪澶扁€濈殑涓嶇ǔ瀹氱粨鏋勩€?
-
-### 14.4.4 寤鸿鐨勫己鍒舵墦鍖呬紭鍏堢骇
-
-- 瀵逛簬 Agentic CLI銆佸伐鍏峰瀷绯荤粺銆佸甫鏉冮檺鎺у埗鐨勫伐绋嬮」鐩紝寤鸿榛樿鎸変互涓嬩紭鍏堢骇鍐冲畾鏄惁杩涘寘锛?
-  - P0 蹇呴』鏁村寘淇濈暀锛?
-    - 宸ュ叿鐩綍
-    - 宸ュ叿娉ㄥ唽涓庢墽琛屽熀纭€璁炬柦
-  - P1 蹇呴』淇濈暀鍏抽敭瀹炵幇鎴栨暣鍖呬繚鐣欙細
-    - 鏉冮檺绯荤粺
-    - 瀛?Agent / Agent 瀹氫箟绯荤粺
-    - MCP 鏍稿績鏈嶅姟
-    - Skills 鏍稿績绯荤粺
-  - P2 鍏佽鍙繚鐣欑储寮曚笌鏄犲皠锛?
-    - 鍛戒护闈?
-    - 涓婁笅鏂囨瀯寤哄眰
-    - 鐘舵€佸眰
-  - P3 榛樿鍙繚鐣欏叆鍙ｄ笌璇存槑锛?
-    - 澶у瀷 UI 缁勪欢灞?
-    - 涓婚銆佽瑙夈€佸睍绀烘€х粍浠?
-- 濡傛灉椤圭洰鐨勪富瑕佷环鍊兼濂介泦涓湪 UI锛屾湰浼樺厛绾у厑璁歌椤圭洰绾ч€昏緫瑕嗙洊銆?
-
-### 14.4.5 鑳藉姏鐘舵€佸繀椤诲叆鍖?
-
-- 閫昏緫鍖呬笉搴斿彧鍥炵瓟鈥滄湁娌℃湁杩欎釜鐩綍鈥濓紝杩樺繀椤诲洖绛斺€滆兘鍔涚幇鍦ㄥ浜庝粈涔堢姸鎬佲€濄€?
-- 鑷冲皯搴旀爣娉ㄤ互涓嬬姸鎬佷箣涓€锛?
-  - implemented
-  - enabled conditionally
-  - disabled by feature flag
-  - stub
-  - external-only
-- 鑻ユ病鏈夎兘鍔涚姸鎬佺煩闃碉紝鍚庣画缁存姢鑰呬細璇妸鈥滀唬鐮佸瓨鍦ㄢ€濆綋鎴愨€滆兘鍔涘彲鐢ㄢ€濄€?
-
-### 14.5 閫昏緫鍖呯増鏈凯浠ｈ鍒?
-
-- 鍙鍦ㄥ綋鍓嶉」鐩腑鍙戠幇鏇村噯纭殑鎵ц閾捐矾銆佸伐鍏疯竟鐣屻€佹潈闄愯涓恒€佹墦鍖呰鍒欐垨鎵╁睍妯″瀷锛屽氨搴斿洖鍐欏埌涓婚€昏緫鏂囦欢锛岃€屼笉鏄彧鏇存柊瀵煎嚭鍖呫€?
-- 涓婚€昏緫鏂囦欢涓庡鍑洪€昏緫鍖呬箣闂达紝搴斾繚鎸侊細
-  - 涓婚€昏緫璐熻矗鎶借薄瑙勫垯
-  - 椤圭洰閫昏緫鍖呰礋璐ｅ疄渚嬪寲鏄犲皠
-  - 鐗堟湰鍙烽€掑鏃讹紝搴旇鏄庢柊澧炰簡鍝簺缁撴瀯锛岃€屼笉鏄彧鏀规枃浠跺悕
-
----
-
-## 15. 鐗堟湰璇存槑
-
-- 鏈増涓?`AgentLogic_V6`
-- 鏈増鏄 `agentlogic.md` 涓?`agentlogic test1.md` 鐨勬暣鐞嗙増锛?
-  - 淇濈暀閫氱敤宸ョ▼瑙勫垯
-  - 淇濈暀鎵撳寘 / 鏂囨。 / 鍐茬獊娓呯悊 / README 琛ㄧ幇瑙勫垯
-  - 鍒犻櫎涓庡綋鍓嶉」鐩棤鍏崇殑鍏朵粬浠撳簱涓撳睘闄勫綍
-
----
-
-# AgentLogic V6 (English Version)
-
-This document is a general AI engineering collaboration protocol. It standardizes how AI should work when starting a project, reviewing a project, fixing a project, refactoring a project, packaging a project, or publishing a project.
-
----
-
-## 1. Core Goals
-
-- Reduce context confusion, role drift, and documentation distortion in large projects.
-- Ensure that AI understands architecture, history, boundaries, and release rules before modifying code.
-- Ensure that every fix, refactor, packaging action, and release action forms a traceable closed loop.
-
----
-
-## 2. Three-Layer Model
-
-### L1: Strategic Entry Layer
-
-- Responsibility: define the current state of the project and its main entry context.
-- Focus: Status, Blueprint, History, project README, delivery rules, and release rules.
-- Purpose: determine whether the task is about understanding, planning, or execution.
-
-### L2: Architectural Domain Layer
-
-- Responsibility: define module boundaries, design principles, interaction constraints, performance direction, and deployment constraints.
-- Focus: module structure, transport flows, path models, state machines, design patterns, and runtime models.
-- Purpose: ensure that changes match system-level engineering logic rather than only fixing a local symptom.
-
-### L3: Atomic Execution Layer
-
-- Responsibility: land work at the level of files, functions, entrypoints, commands, build parameters, and verification steps.
-- Focus: concrete files, function responsibilities, build commands, log locations, validation methods, and physical fix locations.
-- Purpose: remove ambiguity and make work executable, verifiable, and documentable.
-
----
-
-## 3. Mandatory Rules Before Entering a Project
-
-### 3.1 Read Project Markdown Before Acting
-
-- Every time you start, review, or repair a project, you must read all project `.md` files before entering analysis, modification, packaging, or publishing.
-- The purpose is not procedural formality; it is to understand:
-  - architecture definitions
-  - directory boundaries
-  - historical evolution
-  - deployment rules
-  - release constraints
-  - prior troubleshooting lessons
-- Before the documentation has been read, do not make assumptions about architecture, deployment, packaging layout, runtime model, account rules, or stable baselines.
-
-### 3.2 Respect the Documentation Entry Hierarchy
-
-- If a project has a unified documentation center, start there instead of scanning random markdown files first.
-- If the project has a master README, guide page, or control-center document, treat it as the first entrypoint.
-
-### 3.3 Clarify Task Scope First
-
-- After entering a project, determine whether the current task belongs to:
-  - L1: understanding, mapping, planning
-  - L2: solution design, architecture, interaction, constraints
-  - L3: code changes, builds, validation, release
-- Before the task boundary is clear, do not expand scope or add extra work on your own.
-
-### 3.4 Every Agent Must Follow the Master Logic on Entry
-
-- Whenever an agent starts a new project, takes over a new module, enters a new subsystem, or moves into a new phase, it must first follow the master-logic onboarding and planning flow instead of directly implementing, editing, or executing commands.
-- 鈥淓very agent鈥?includes, but is not limited to:
-  - the main-thread agent
-  - sub-agents
-  - parallel agents
-  - module-specific agents
-  - review, verification, and planning agents
-- The mandatory onboarding flow should include at least:
-  - identifying the documentation entrypoint
-  - reading the relevant markdown and key entrypoint source files
-  - determining whether the task is L1, L2, or L3
-  - defining the execution order, current scope boundary, and risk judgment
-- If the task is 鈥渁dding a new module鈥?rather than 鈥渇ixing an existing module鈥? the agent must also add a module-level plan:
-  - module objective
-  - module boundary
-  - relationship to the existing system
-  - entrypoints and landing points
-  - validation method
-- Until this step is completed, the agent should not move into direct implementation unless the user explicitly asks to skip it and that skip has been recorded as a risk.
-
-### 3.5 The Master Logic Takes Priority Over Local Habits
-
-- When a project contains scattered conventions, temporary notes, stale comments, or local module habits, all agents should treat the master logic as the highest collaboration rule and then adapt to the real project structure.
-- Local rules may refine the master logic, but they should not bypass the master logic鈥檚 onboarding, layering, validation, and documentation-sync requirements.
-- The value of the master logic is that different agents can enter the project at different times and still follow the same stable path into the system, which significantly reduces error rate and structural drift.
-
-### 3.6 The Master Logic Must Be Read in Full
-
-- An agent must read the master logic in full. It is not acceptable to read only the front section, only a few matching clauses, or to assume that once sections `1`, `2`, and `3` are seen, later sections such as `11`, `12`, and `13` can be ignored.
-- Later sections of the master logic often contain:
-  - prohibitions
-  - documentation-sync requirements
-  - packaging rules
-  - risk boundaries
-  - version-maintenance rules
-- Skipping those sections may look faster in the beginning, but it substantially increases later realignment cost, structural drift, and rule conflicts.
-- Therefore, before an agent claims that master-logic onboarding is complete, it should by default satisfy all of the following:
-  - it has read the full master logic in order
-  - it has confirmed that later sections do not contain constraints relevant to the current task
-  - it has incorporated the mandatory clauses from later sections into the current execution judgment
-- Reading the master logic should not be treated as keyword matching; it should be treated as a full structured read.
-
----
-
-## 4. Synchronization and Closed-Loop Rules
-
-### 4.1 Read Before Writing
-
-- Read relevant documentation and relevant code before modifying anything.
-- Do not change code based only on the surface symptom.
-
-### 4.2 Sync Immediately After Success
-
-- Once code changes are successful, validated, and confirmed, update the relevant markdown immediately.
-- Important lessons must not remain only in the chat history.
-
-### 4.3 Minimum Documentation Set
-
-- triggering symptom
-- impact scope
-- root cause assessment
-- modified files
-- modification method
-- validation method
-- if build-related, also include:
-  - build command
-  - build parameters
-  - artifact timestamps
-  - install-directory or runtime-directory verification result
-
-### 4.4 Persist Structure Into Markdown
-
-- Any critical structure that has been read, changed, or verified should be written into markdown as precisely as practical:
-  - entry files
-  - module relationships
-  - key function responsibilities
-  - path models
-  - data flow
-  - communication flow
-  - dependency flow
-
-### 4.5 Index Failures
-
-- Every build failure, regression, expected risk, and repair action after packaging should be written into markdown.
-- The goal is not to 鈥渟ummarize鈥? the goal is to create a searchable failure index.
-
----
-
-## 5. Engineering Execution Rules
-
-### 5.1 Plan First
-
-- If the task has more than 3 steps, spans multiple modules, involves refactoring, or touches deployment or release, form a clear execution sequence first.
-
-### 5.2 Verify Before Marking Done
-
-- Nothing is complete until it is validated.
-- Validation may include:
-  - syntax checks
-  - successful builds
-  - successful runtime behavior
-  - path verification
-  - log verification
-  - device or machine verification
-
-### 5.3 Prefer Elegant Solutions
-
-- Do not accept patchy temporary fixes as the default.
-- Prefer solutions with clean structure, stable boundaries, and maintainable follow-up behavior.
-
-### 5.4 Troubleshoot Proactively
-
-- When a problem can be traced through logs, paths, instance state, or build chains, keep moving until the likely cause is clear.
-- Do not hand obvious next-step troubleshooting back to the user too early.
-
-### 5.4.1 Duty to Evaluate Tools and Skills Proactively
-
-- If AI cannot determine which tool or skill is most appropriate for the current task, or if the default path appears clearly inefficient, it should not mechanically keep using the old path.
-- In that situation, AI should perform a constrained tool evaluation and answer at least:
-  - whether the current default tool is merely usable instead of actually appropriate
-  - whether the task has a more specialized, efficient, or stable tool or skill available
-  - whether the alternative can materially improve:
-    - reading efficiency
-    - classification accuracy
-    - search quality
-    - structural understanding speed
-    - automation level
-- The purpose of this proactive evaluation is to prevent AI from operating in a closed loop with weak default tools while overlooking better-fit tools that already exist.
-
-### 5.4.2 External Better-Tool Discovery Rule
-
-- When AI starts a new project, takes over a new module, or establishes a new workflow, and finds that an external tool, skill, classifier, indexer, reader, analyzer, or automation component is clearly better suited, it should proactively record and propose it.
-- 鈥淧roactively propose鈥?does not mean silently integrating it immediately. It means:
-  - first explain why the current tool path is insufficient
-  - then explain why the candidate tool is a better fit
-  - then explicitly classify it as one of:
-    - recommended
-    - candidate enhancement
-    - already integrated
-- Without confirmation, AI should not describe an external candidate tool as if it were already part of the current system.
-
-### 5.4.3 Avoid Tool Conservatism
-
-- AI should not assume that an old tool, default browser path, default search path, or inherited script is still the best current option just because it already exists.
-- 鈥淯se the old tool to get something done first鈥?can be a temporary tactic, but it should not prevent AI from recognizing and proposing better tool directions.
-- For high-frequency, inefficient, repetitive, or long-running workflows, AI should actively consider whether a better tool-based alternative exists.
-- When the default tool path is inefficient, the agent should actively look for a more appropriate tool or approach for the task, but it must distinguish between officially integrated capabilities and candidate enhancements.
-
-### 5.5 No Unapproved Feature Additions
-
-- Do not add out-of-scope functionality, interactions, state-machine changes, default-behavior changes, visual redesigns, workflow changes, or 鈥渟mall optimizations鈥?without explicit user approval.
-- Better options may be proposed, but they must wait for user confirmation before implementation.
-
----
-
-## 6. Documentation Precision Rules
-
-### 6.1 Markdown Is Not Auxiliary
-
-- Markdown is not an attachment; it is the runtime map, troubleshooting index, and repair archive of the project.
-
-### 6.2 Prefer Precision
-
-- When time allows, documentation should become more specific, not more abstract.
-
-### 6.3 Physical Location Requirement
-
-- Whenever markdown references a function, method, command, or event, it should also provide a file path by default.
-- Best form:
-  - `function name` + `file path`
-  - and when practical, an approximate line or search anchor
-
-### 6.4 Relationship Chains Matter
-
-- Key functions should not be documented only as isolated points.
-- Also document:
-  - who calls them
-  - what they affect next
-  - which document section or chain they belong to
-
-### 6.5 Log Location Must Be Explicit
-
-- Log placement is an architectural fact, not an implementation footnote.
-- Whenever log behavior changes, verify and document the physical log location.
-- If permissions require a fallback path, record it explicitly; never silently change the default destination.
-
----
-
-## 7. Packaging vs Runtime Verification Protocol
-
-### 7.1 Default Dual Track
-
-- Track A: unpacked testing artifacts
-  - such as `win-unpacked`, runnable directories, debug builds, or uninstalled bundles
-- Track B: final installers or release packages
-  - such as `.exe`, NSIS, MSI, `.dmg`, `.AppImage`, APK, or AAB
-
-### 7.2 Default Order
-
-- Validate feature logic, interactions, state machines, and communication chains in Track A first.
-- Move to Track B only when:
-  - the user explicitly asks for the final installer
-  - the work has reached QA, acceptance, or delivery stage
-  - the issue exists specifically in installation, signing, packaging, permissions, upgrade, or uninstall flows
-
-### 7.3 Confirm Packaging Intent First
-
-- Are we testing an unpacked build or producing the final installer?
-- Is the current goal feature validation or formal delivery?
-- If the user does not explicitly require the final installer, remain in the unpacked-validation stage by default.
-
-### 7.4 High-Risk Checks After Packaging
-
-- install directory
-- working directory
-- `app.asar`
-- config loading
-- stale cache hits
-- auto-start entries
-- scheduled tasks
-- leftover processes
-- uninstall metadata
-- permissions, signing, and file locks
-- shared-directory or user-directory path models
-
-### 7.5 Release Asset Completeness Rule
-
-- When a project reaches the stage of GitHub release publication, formal delivery, stable-version archiving, or milestone-version delivery, the release should not contain only installers or executable artifacts.
-- By default, the release must also include the source package that corresponds to the exact version being published.
-- The 鈥渟ource package鈥?here means a version-aligned source archive for the current tag or release, not an arbitrary snapshot of the current working directory.
-- If a project provides:
-  - installers
-  - unpacked executable bundles
-  - source packages
-  then the source package should also be included in the same release whenever possible.
-- The reasons include:
-  - easier rollback
-  - easier version auditing
-  - easier offline archiving
-  - direct access from the release page to the exact source version that matches the installers
-- For everyday small fixes that are not entering a formal release flow, a manually attached source package is not mandatory. But once the work becomes a published release, the source package should be treated as a standard release asset.
-- After the source package has been uploaded successfully to the GitHub release, any temporary local source zip created only for that upload must be deleted immediately.
-- Do not keep ad hoc local source zip files in the workspace, release folder, or staging folders after upload, because they easily accumulate and create version confusion about which archive is the canonical release asset.
-
----
-
-## 8. Instance Conflict and Cleanup Rules
-
-### 8.1 Client Instance Conflict Rule
-
-- If the same machine keeps multiple client forms at the same time, for example:
-  - portable build
-  - installed build
-  - old copied directory
-  - stale installed state
-- it may lead to:
-  - unclickable UI
-  - playlist delivery appearing to succeed while playback does not start
-  - the wrong instance being launched
-  - behavior that looks like the code was never updated
-- Therefore the client startup chain must include conflict cleanup by default.
-
-### 8.2 Minimum Client Cleanup Scope
-
-- old `AdvertisingScreenClient.exe` processes
-- auto-start registry entries
-- scheduled tasks
-- old installation directories
-- old portable directories
-- old runtime directories
-- control directories and local runtime directories that conflict with the current instance
-
-### 8.3 Server Multi-Instance Protection Rule
-
-- The server must enforce single-instance behavior.
-- Default strategy:
-  - block the second instance
-  - wake or open the existing instance
-- Multi-instance protection must not automatically erase user business data.
-
-### 8.4 Cleanup Boundary Rule
-
-- Cleaning instance conflicts is not the same thing as clearing user configuration.
-- Safe-to-clean targets:
-  - conflicting processes
-  - auto-start items
-  - scheduled tasks
-  - old runtime directories
-  - old portable directories
-  - installation directories that conflict with the current instance
-- Do not auto-delete by default:
-  - user config files
-  - server storage data
-  - playlists
-  - approval records
-  - media libraries
-  - installer repositories
-- Only delete config and business data when the user explicitly requests a reset, factory reset, or data wipe.
-
----
-
-## 9. UI / UX and README Presentation Rules
-
-### 9.1 UI / UX Boundary Rule
-
-- UI changes must not pursue 鈥渕odernization鈥?in isolation; they must match actual product boundaries and interaction reality.
-- Any change to state machines, layout structure, or user flow should be treated as a product change, not just a visual change.
-
-### 9.2 README as the Public Landing Page
-
-- A GitHub README is not only documentation; it should also function as the public landing page and first product impression.
-- When the task involves the README, repository homepage, release page, or project introduction, do not only increase text density. Also evaluate:
-  - first-screen pacing
-  - section hierarchy
-  - visual impact
-  - memorability
-- It is acceptable to improve:
-  - hero titles and subtitles
-  - badges
-  - feature matrices
-  - version timelines
-  - bilingual or multilingual entry points
-  - clearer landing-page narrative
-- But do not change facts or invent capabilities.
-- A README must include a practical 鈥淯sage鈥? 鈥淨uick Start鈥? or equivalent section by default.
-- Even if the project is still evolving, the README should not stop at overview and architecture. At minimum, it should tell the reader:
-  - how to start using the repository
-  - what the main directories are for
-  - how to launch or validate the client and server
-  - where installer assets or release artifacts are obtained
-- If the project is currently more suitable for developer-oriented usage instructions than end-user instructions, the README must still include the minimum executable steps instead of omitting usage entirely.
-- When a README needs multilingual support, do not stack full Chinese, English, Japanese, or other full-language content into a single page by default.
-- The preferred multilingual README structure is:
-  - `README.md` as the primary entry page
-  - `README.zh-CN.md` as the Chinese page
-  - `README.ja.md` as the Japanese page
-  - additional languages following the same independent-file pattern
-- Each language page must provide the same language-switch links near the top, for example:
-  - `English | 涓枃 | 鏃ユ湰瑾瀈
-- The default README should still preserve:
-  - title
-  - summary
-  - badges
-  - multilingual entry links
-  - the full content of its own language version
-- The goal is to support multilingual readers without destroying the landing-page rhythm or readability of the repository homepage.
-- When a README is acting as the repository landing page, centered presentation is allowed and recommended for visual coherence, especially for:
-  - the main title
-  - the subtitle or slogan
-  - badges
-  - multilingual navigation links
-- The purpose of this centered layout is not decoration for its own sake; it is to make the repository homepage feel more like a product landing page than a plain text document.
-- If centered presentation is used, the top section should stay structurally consistent when practical:
-  - centered title
-  - centered subtitle
-  - centered badges
-  - centered language switch links
-- As long as readability and factual clarity are preserved, this top-level Hero-style presentation should be treated as a recommended pattern rather than an optional flourish.
-
----
-
-## 10. Safety and Validation Protocol
-
-### 10.1 Sensitive Actions Need Rollback Paths
-
-- Deletion, movement, replacement, publishing, cleanup, and overwrite actions must preserve a recovery path or a clearly defined rollback point.
-
-### 10.2 Deep Validation
-
-- Validation must not stop at 鈥渋t opens鈥?
-- It should cover:
-  - empty data
-  - invalid input
-  - network interruptions
-  - low disk space
-  - path mismatches
-  - installation leftovers
-  - stale cache hits
-
-### 10.3 Delivery Must Include Proof
-
-- Delivery should include as much of the following as practical:
-  - validation method
-  - key results
-  - what was not validated
-  - remaining risks
-
----
-
-## 11. Self-Improvement Loop
-
-- Once the user corrects something, the lesson should be written into the correct document quickly.
-- At the start of new sessions, review prior lessons and project documentation first.
-- When code and markdown differ in information density, prefer enriching the documentation.
-
----
-
-## 12. Prohibitions
-
-- Do not define the project architecture before reading the project markdown.
-- Do not expand the scope before confirming the current task boundary.
-- Do not write project-level rules into the wrong directory.
-- Do not upload local private notes, temporary notes, or unrelated artifacts into a repository.
-- Do not mechanically copy repository-specific rules from project A into project B.
-
----
-
-## 13. Recommended Execution Order
-
-1. Read all project markdown files first.
-2. Confirm the project documentation entrypoint and the current task layer.
-3. Read the relevant code and runtime directories.
-4. Form the execution sequence and risk judgment.
-5. Modify code or prepare release artifacts.
-6. Validate the result.
-7. Update the correct markdown files.
-8. Deliver the conclusion, paths, risks, and next-step suggestions.
-
----
-
-## 14. Source-Driven Logic Package Maintenance Protocol
-
-### 14.1 A Logic Package Is Not a Raw Source Backup
-
-- When the task is to organize a project into a logic package, the deliverable should not be a blind copy of the entire repository.
-- A logic package should be a structured knowledge package focused on how to understand, enter, execute, validate, and extend the system.
-- By default, it should include at least:
-  - a master logic file
-  - architecture layers
-  - the main execution flow
-  - a tool integration inventory
-  - permissions and safety mechanisms
-  - extensibility mechanisms
-  - key source mappings
-
-### 14.2 Tools Must Be Integrated as a System View
-
-- When a project contains built-in tools, external tools, MCP tools, skills, sub-agents, or command systems, the logic package must not only list directories.
-- It should answer at least:
-  - where tools are registered
-  - how tools are exposed to the model
-  - how tool permissions are evaluated
-  - how tools execute
-  - how tool results flow back into the conversation
-  - which tools are always available
-  - which tools are controlled by platform, permissions, environment variables, or feature flags
-- The tool integration document should preferentially provide:
-  - tool categories
-  - enablement conditions
-  - risk levels
-  - key source paths
-
-### 14.3 Every Logic Package Must Cite Source Evidence
-
-- Every key conclusion in the logic package should be traceable to real source files or project markdown.
-- When practical, include:
-  - markdown paths
-  - source code paths
-  - entry files
-  - key functions or modules
-- If a capability is stubbed, partially implemented, conditionally enabled, platform-limited, or feature-flagged off, this must be stated explicitly.
-
-### 14.4 Recommended Logic Package Structure
-
-- When producing an independent logic package, the default output should be:
-  - `00_README.md`
-  - `01_MasterLogic.md`
-  - `02_Architecture.md`
-  - `03_AgenticLoop.md`
-  - `04_Tools.md`
-  - `05_PermissionsAndSafety.md`
-  - `06_Extensibility.md`
-  - `07_CommandSurface.md`
-  - `08_SourceIndex.md`
-  - `manifest.json`
-- If a higher-level master logic file already exists, such as `AgentLogic_V6.md`, the package should retain that master logic and layer project-specific structure on top of it instead of replacing its generic engineering value.
-
-### 14.4.1 Layered Packaging Should Be Treated as the Default
-
-- When a project contains substantial tool source code, tool orchestration code, permission code, or command code, the logic package should not stop at the abstract documentation layer.
-- By default, it should use at least three layers:
-  - the abstract logic layer
-  - the raw source layer
-  - the index and mapping layer
-- The abstract logic layer explains why the system is structured the way it is.
-- The raw source layer preserves the real implementation of critical capabilities, especially the tool system.
-- The index and mapping layer tells future maintainers:
-  - which sources must be read first
-  - which sources are support layers
-  - which sources are currently stubs, dead branches, or conditionally enabled
-
-### 14.4.2 Tool Source Is Allowed to Be Packaged Directly
-
-- For the tool system, this protocol explicitly allows the tool source directories to be included directly in the logic package.
-- But raw tool source alone is insufficient; the package must also include a tool overview document that explains:
-  - tool categories
-  - tool entrypoints
-  - tool registration points
-  - tool execution infrastructure
-  - tool permission boundaries
-  - tool enablement conditions
-- When there are many tools, it is acceptable to use a layered approach of 鈥渞aw tool source preserved as-is + overview documentation with system-level explanation鈥?instead of rewriting every tool into one oversized summary.
-
-### 14.4.3 The Master Logic May Explicitly Enforce Packaging Boundaries
-
-- When the package is intended not only for reading but also for ongoing maintenance and reuse, the master logic should explicitly enforce:
-  - which directories must be included
-  - which directories only need indexed references
-  - which directories should be summarized instead of copied wholesale
-- Typical enforced rules include:
-  - tool directories must be preserved as a package layer
-  - core permission directories must be preserved through either raw copies or key implementation slices
-  - documentation directories may be selectively extracted rather than fully copied
-  - large UI directories may be represented by entrypoint indexes and key execution-flow explanations
-- Without explicit enforcement, future maintainers often produce unstable packages that are half-summary and half-loss.
-
-### 14.4.4 Recommended Packaging Priority
-
-- For agentic CLI systems, tool-centric systems, and permission-bound engineering projects, the default packaging priority should be:
-  - P0 must be preserved as raw package layers:
-    - tool directories
-    - tool registration and execution infrastructure
-  - P1 must preserve either key implementations or full raw copies:
-    - permission systems
-    - sub-agent and agent-definition systems
-    - MCP core services
-    - skill systems
-  - P2 may be preserved as indexes and mappings:
-    - command surfaces
-    - context-building layers
-    - state layers
-  - P3 should default to entrypoints and explanations only:
-    - large UI component layers
-    - theme, presentation, and display-oriented components
-- If the main value of the project is the UI itself, the project-specific logic may override this priority.
-
-### 14.4.5 Capability Status Must Be Captured
-
-- A logic package should not only answer 鈥渄oes this directory exist鈥? it must also answer 鈥渨hat is the current capability state鈥?
-- At minimum, one of the following states should be recorded:
-  - implemented
-  - enabled conditionally
-  - disabled by feature flag
-  - stub
-  - external-only
-- Without a capability-state matrix, future maintainers will incorrectly treat 鈥渃ode exists鈥?as 鈥渃apability is available鈥?
-
-### 14.5 Version Iteration Rules for Logic Packages
-
-- When a project reveals more accurate execution flows, tool boundaries, permission behavior, packaging rules, or extensibility models, those lessons should be written back into the main logic file instead of only updating the exported package.
-- The relationship should remain:
-  - the master logic defines abstract rules
-  - the project logic package defines project-specific mappings
-  - when the version increases, the documentation should state what structural value was added instead of only changing the file name
-
-### 14.6 Validation Artifact and Repository Sync Rules
-
-- For UI, layout, rendering, window-behavior, and visual-regression work, screenshot-based visual verification is a required validation tool, not an optional extra.
-- The agent must not rely only on code reading or build success when the problem is visibly behavioral.
-- When UI verification depends on screenshots, screenshots may be generated as temporary validation artifacts.
-- After the screenshot has completed its debugging or confirmation purpose, the temporary screenshot file must be deleted immediately.
-- Temporary UI screenshots must not remain in `dist`, release folders, staging folders, or the repository root after verification is complete.
-- The main logic must not absorb every useful discovery by default.
-- Project-specific discoveries, task-specific notes, and temporary working patterns should stay in project markdown, task notes, or local structure unless the user explicitly asks for main-logic promotion.
-- Only when the user explicitly says that a rule should enter the main logic should that rule be written back into `AgentLogic_V6`.
-- When the user explicitly asks for a main-logic update, the updated main logic must be synchronized not only to the current project repository but also to the dedicated rules repository: `https://github.com/UIhoshi/AgentLogic`.
-- That cross-repository sync applies specifically to main-logic updates, not to every project-layer change by default.
-- After the rule has been written back, the repository must be synchronized in the same round unless a concrete blocker exists.
-- Routine logic additions do not justify a major-version jump such as `V6 -> V7`.
-- Unless the change is a real major logic-generation upgrade, updates should remain within the current logic version line.
-- If the repository already contains a release archive for the current logic version, the same-version archive should be replaced instead of creating an arbitrary new major version.
-- If no tag, release, or release-archive baseline exists yet, do not fabricate a fake release flow. In that case, keep normal repository synchronization and preserve the current version line.
-
-### 14.6.1 Primary Logic Source Precedence Rule
-
-- If a workspace or project explicitly declares one current primary logic source, that source must take precedence over older local logic notes, stale helper files, or ad hoc workspace reminders when they conflict.
-- This precedence rule applies especially when:
-  - the workspace has an installed main logic package
-  - the project points to a dedicated logic repository
-  - older local notes survive from earlier iterations
-- In that situation, the agent must treat the declared current primary logic source as the logic truth baseline for future work.
-- Older local logic notes may still help as supporting context, but they must not silently override the current main logic.
-
-### 14.6.2 Upload Boundary Rule For Logic Files And Build Byproducts
-
-- Ordinary project repositories must not absorb logic-control files that belong to the logic system itself unless the task is explicitly to update the logic repository.
-- By default, the following must not be uploaded into ordinary project repositories:
-  - logic-package markdown directly related to the main logic repository
-  - private rule bundles
-  - local logic-entry control files
-  - workspace-only logic notes
-  - build byproducts
-  - generated intermediates
-  - machine-specific runtime artifacts
-  - temporary packaging leftovers
-- By default, files that are normally acceptable to upload into ordinary project repositories are:
-  - project-related markdown
-  - project source code
-  - release versions or release assets that are actually intended for publication
-- If the task is specifically to update the logic repository itself, then logic-related markdown belongs in that logic repository rather than in the ordinary project repository.
-
-### 14.7 Startup Re-Read Loop for Main Logic
-
-- Before every new work round, the agent must re-read the current project's main logic entry before executing.
-- "Every new work round" includes returning after interruption, starting a new user request, entering a new module, or resuming after a failed attempt.
-- The purpose is not ceremonial reading. The purpose is to refresh the current behavioral constraints, validation rules, packaging rules, and repository-sync rules before action.
-- This startup re-read loop must be reflected not only in the logic package itself, but also in the project's own top-level markdown so the project can remind future agents locally.
-- If the project already declares its logic entry path, the startup loop should explicitly point back to that path.
-
-### 14.7.0 A Logic Package May Define One Absolute First-Entry File
-
-- A logic package may explicitly define one absolute first-entry file, such as `00_START_HERE.md`.
-- If such a file exists, the agent must read that file first before treating any other markdown, checklist, or logic file as the initial entrypoint.
-- The purpose of this file is not to become a second README. Its purpose is to force the correct reading order and reduce ambiguity about where formal work may begin.
-- This file should define:
-  - the mandatory reading chain
-  - whether the reading order is fixed
-  - the conditions for formal implementation readiness
-  - the startup chain for new coding rounds when needed
-- If the logic package declares such a file, other entry docs should point back to it instead of competing with it.
-
-### 14.7.0.1 The First-Entry File Is Logic, Not Project Content
-
-- A dedicated first-entry file such as `00_START_HERE.md` must be treated as logic-entry control, not as normal project content.
-- The agent must not use that file to record routine project changes, temporary notes, implementation details, or business-facing summaries.
-- Unless the user explicitly authorizes a logic update or rule update, the agent must not modify that first-entry file as part of ordinary project work.
-- For normal project tasks, the correct behavior is:
-  - read the first-entry file
-  - complete the mandatory reading chain
-  - continue into the project's own files
-- This boundary exists to prevent the first-entry file from gradually turning into a mixed document that weakens the logic-entry role.
-
-### 14.7.0.2 A Mandatory Full-Read Chain May Be Declared
-
-- A logic package may explicitly declare a mandatory full-read chain.
-- If such a chain is declared, the agent must not replace it with:
-  - skimming
-  - partial reading
-  - keyword-only reading
-  - summary-based substitution
-  - previous-session memory
-- If the chain says files must be fully read from beginning to end, that requirement is mandatory.
-- Until the declared full-read chain is completed, the agent must not treat itself as ready for formal planning, implementation, modification, validation, review, or rule synchronization.
-
-### 14.7.1 Highest-Priority Startup Chain For New Coding Rounds
-
-- The startup chain below is a highest-priority mandatory rule, not an optional heuristic.
-- Before any new coding round, new feature round, or resumed implementation round, the agent must execute this exact order:
-  1. confirm the current logic entry
-  2. judge whether the new task is an extension of the previous coding round
-  3. if it is not an extension, the agent must ask the user whether to forget/compress context before continuing
-- Step 3 has the same priority level as step 1 and step 2.
-- This means the agent must not silently carry old context into a new coding track when the new task is not clearly an extension of the previous one.
-- If the answer is to forget/compress context, the agent must first externalize the current valid state into structured records before reducing the working context.
-- At minimum, the externalized state should include:
-  - current task goal
-  - current boundary
-  - current module or subsystem
-  - completed work
-  - next action
-  - unconfirmed facts
-  - remaining risks
-- Until this startup chain is satisfied, the agent should not treat itself as ready to enter formal implementation.
-
-### 14.8 Structured External-Brain Rule
-
-- Do not assume that stable execution comes from internal memory alone.
-- The preferred working model is an externalized memory model: methods, decisions, exceptions, and learned procedures should be written into structured records and revisited before execution.
-- Spreadsheet-like structure is a valid and preferred form of external memory when the user's working style depends on collecting many facts into one navigable structure.
-- When the user describes a workflow similar to an Excel habit, the agent should interpret that as a preference for:
-  - structured aggregation
-  - repeatable lookup
-  - reusable execution patterns
-  - low-memory-dependence workflows
-- Therefore, when the agent encounters uncertainty, difficulty, or a recurring task, the default response should be:
-  - look back at the recorded structure first
-  - reuse the recorded method if it exists
-  - only improvise when the structured record does not already provide a usable path
-- This rule applies both to the user's own documented working style and to the agent's collaboration behavior in the repository.
-
-### 14.9 Logic-Project Closed Loop Rule
-
-- Project work must form a closed loop between the main logic and the project's own structure documents.
-- The default loop is:
-  - read the main logic first
-  - read the relevant project markdown and structure files
-  - before making the formal update, return once more to the main logic
-  - then decide how to implement the project change
-- This means the main logic is not only a startup reference. It is also a pre-implementation calibration layer.
-- When the task is to update, refactor, or extend the project, the agent must not jump directly from reading project files into implementation.
-- The agent must first re-check the change through the main-logic lens before editing code, packaging artifacts, or project documentation.
-- The purpose of this loop is:
-  - prevent local project drift
-  - prevent implementation choices from bypassing collaboration rules
-- ensure project updates still obey the same higher-order method
-- keep project facts and execution rules continuously aligned
-- This closed loop should also be reflected in the project's own top-level markdown so the project locally reminds future agents how updates must be performed.
-
-### 14.10 Real Entry / Starting Source Files Should Carry Logic Reminders
-
-- When a project depends on an external logic package or a dedicated logic-entry workflow, the reminder should not exist only in chat memory or only in top-level markdown.
-- The project should also place a short logic-entry reminder at the top of its real entry / starting source files.
-- The purpose of these reminders is to increase the chance that the agent sees the logic-entry rule at the exact point where work usually starts, especially in long multi-round sessions.
-- These reminders should cover all real source-level starting points where an agent is likely to begin reading, changing, routing, bootstrapping, or controlling execution.
-- They should not be mechanically added to every source file in the repository.
-- Typical targets include:
-  - process entry files
-  - main backend control files
-  - route entry files
-  - preload bridge files
-  - major renderer entry files
-  - main admin UI entry files
-- The reminder text should stay short and low-noise.
-- The reminder should point to repository-relative entry documents such as `AGENTS.md` and `README.md`, not to machine-specific absolute paths.
-- The preferred chain is:
-  - code-file reminder points to repository entry docs
-  - repository entry docs point to the main logic package
-- This design keeps the code reminder stable across machines while keeping the actual logic path centralized in repository-level documentation.
-
-### 14.10.1 Repository-Level Enforcement Script Should Back The Reminder
-
-- A logic reminder only in markdown and source headers is stronger than chat memory, but it is still not a full engineering enforcement mechanism.
-- If the project wants stronger execution guarantees, it should add a repository-level enforcement script that mechanically checks whether:
-  - the repository entry docs still point to the current logic entry
-  - the real entry / starting source files still retain the logic reminder
-  - the reminder text still points to repository-relative docs rather than machine-specific paths
-- A recommended command pattern is:
-  - `node scripts/check-logic-entry.js`
-- This script does not replace the requirement to read the logic package.
-- Its role is to prevent silent drift, accidental deletion of reminders, and project-layer desynchronization after multiple implementation rounds.
-- Therefore the preferred enforcement stack becomes:
-  - logic package defines the rule
-  - repository markdown declares the entry path
-  - real entry / starting source files carry short reminders
-  - repository script checks the reminder chain mechanically
-
-### 14.10.2 Header-Level Mandatory Rules Should Default To English
-
-- When a project writes mandatory workflow rules into file headers, the default language for those header-level rules must be English.
-- This applies to header notices in:
-  - source files
-  - style files
-  - markup files
-  - project markdown files
-- The purpose is to maximize consistency across:
-  - different agents
-  - different language settings
-  - different model providers
-  - cross-project reuse
-- Local-language explanation is still allowed in normal project markdown body text.
-- But the short mandatory rule written into file headers should default to English unless the user explicitly requests a different default.
-- Therefore a project should not mix header-level mandatory rules between Chinese, English, and other languages by default.
-- The repository-level enforcement script should also validate the English header rule text if the project has standardized on it.
-
-### 14.10.3 A Logic Package May Carry A Default GitHub README Template
-
-- A logic package may include one repository-level default template for GitHub-facing `README.md` work.
-- If that template exists, it should be treated as the default baseline when:
-  - creating a new repository `README.md`
-  - rewriting an incomplete or placeholder README
-  - preparing a repository homepage for open-source publication
-- In this package, the default file is:
-  - `16_GitHubREADMETemplate_V1.md`
-- This template should integrate existing README presentation rules rather than compete with them.
-- At minimum, the integrated rule set should preserve:
-  - README as the public landing page and first product impression
-  - practical quick-start or usage content by default
-  - multilingual README split across files instead of stacking full languages into one page
-  - repository-relative links instead of machine-specific absolute paths
-- The template is a structure baseline, not permission to invent facts.
-- The agent must not fabricate:
-  - screenshots
-  - GIF demos
-  - release links
-  - commands
-  - technical claims
-  - platform support
-- If the project already has a stronger explicit repository-specific README standard, that project-specific standard may override the package default.
-- If no stronger README standard exists, the package template should be reused instead of rebuilding the structure from scratch.
-
-### 14.10.4 A Logic Package May Also Carry GitHub README Style Rules
-
-- A content template alone is insufficient when the goal is to keep repository homepages broadly consistent across many projects.
-- Therefore a logic package may carry a separate GitHub README style-rules file in addition to the README template.
-- In this package, the default style-rules file is:
-  - `17_GitHubREADMEStyleRules_V1.md`
-- When a future repository uses the GitHub README template, it should also check the style-rules file in the same round.
-- The purpose is not to force pixel-identical README pages.
-- The purpose is to preserve broad structural consistency across repositories, including:
-  - recognizable hero section
-  - early value explanation
-  - early quick-start or usage path
-  - stable preview or proof section treatment
-  - technical details in the lower half rather than replacing the landing-page layer
-- Project-specific variation is still allowed.
-- But a repository should not drift so far that its README structure becomes unrelated to the rest of the project set without a good reason.
-
-### 14.10.5 A Logic Package May Carry README Example Files
-
-- A template and a style-rules file are usually enough for policy, but example files are useful for execution consistency.
-- Therefore a logic package may also carry one or more README example files that show:
-  - a product-style repository homepage
-  - a developer-style repository homepage
-- In this package, the default example file is:
-  - `18_GitHubREADMEExamples_V1.md`
-- Example files are not the source of truth for project facts.
-- Their purpose is to reduce ambiguity about final page shape, section rhythm, and visual balance.
-- When the agent prepares a new repository README, it should preferably use:
-  - the template file for section structure
-  - the style-rules file for presentation constraints
-  - the examples file for finished-page reference
-- This three-layer README system should be treated as the default baseline unless the project explicitly declares a stronger repository-specific standard.
-
-### 14.10.6 A Logic Package May Carry A README Review Checklist
-
-- A README system is more stable when it includes not only generation assets but also a final review layer.
-- Therefore a logic package may carry a dedicated GitHub README review checklist.
-- In this package, the default review-checklist file is:
-  - `19_GitHubREADMEReviewChecklist_V1.md`
-- When the agent drafts, rewrites, or significantly restructures a repository README, it should preferably run through the checklist before treating the README as complete.
-- The checklist should verify at least:
-  - structural completeness
-  - style consistency
-  - badge sanity
-  - truthfulness of links, screenshots, commands, and claims
-  - presence of a practical quick-start path
-- The default README workflow in this package therefore becomes:
-  - template
-  - style rules
-  - examples
-  - review checklist
-- This four-layer README system should be treated as the normal baseline unless a repository-specific standard overrides it.
-
-### 14.10.7 GitHub Upload Or Publication Automatically Triggers The README System
-
-- When the task includes uploading a project to GitHub, preparing a repository for first public push, preparing a repository homepage for publication, or restructuring a repository immediately before GitHub publication, the README system must be triggered automatically.
-- In this trigger case, README work is not optional polish.
-- It is part of publication readiness.
-- The agent should automatically invoke the full README workflow in the same round:
-  - `16_GitHubREADMETemplate_V1.md`
-  - `17_GitHubREADMEStyleRules_V1.md`
-  - `18_GitHubREADMEExamples_V1.md`
-  - `19_GitHubREADMEReviewChecklist_V1.md`
-- The agent must not upload or publish the repository while ignoring an obviously weak, placeholder, structurally inconsistent, or unreviewed README when the repository homepage is part of the public GitHub presentation.
-- If the repository already has a strong repository-specific README standard, that standard may override the package defaults.
-- But the automatic trigger rule still applies: the agent must consciously pass through the repository's README system rather than skipping README judgment entirely.
-
-### 14.10.8 Product README Quick Start Should Preserve Real Entry Paths
-
-- For product-style repositories, `Quick Start` must describe the real supported user entry paths instead of flattening everything into a single developer-only flow.
-- If the project has multiple truthful entry paths, the README should preserve them explicitly when they help the user choose how to start.
-- Typical path categories include:
-  - release or installer path
-  - local source/runtime path
-  - browser-only or fallback path
-- The default ordering for product-style repositories should be:
-  1. normal user path
-  2. source or local runtime path
-  3. fallback or advanced path
-- The agent must not force `npm run dev` or equivalent to become the only visible path when most real users start from Releases or installers.
-
-### 14.10.9 Product README May Use Lightweight Version Evolution
-
-- A product-style repository may include a lightweight `Version Evolution`, `How It Evolved`, or equivalent section when release maturity helps explain the current product state.
-- This section should stay in the lower half of the README.
-- It should remain brief, usually 3 to 5 bullets, and summarize milestones rather than turning into a full changelog.
-- If the repository already has detailed release notes or a changelog, the README section should summarize and point outward rather than duplicate detail.
-- The purpose is to add product context without weakening the landing-page rhythm.
-
-### 14.10.10 Product Preview May Fall Back To Product Proof
-
-- Product-style repositories should aim to include an early visual preview section.
-- But if screenshots or GIFs do not exist yet, the agent must not fake visual assets just to preserve symmetry.
-- In that case, the agent should replace `Product Preview` with a truthful early proof section such as:
-  - `Product Proof`
-  - `Usage Proof`
-  - `Workflow Proof`
-- This fallback should still preserve the same top-half structure:
-  - hero
-  - early proof
-  - value
-  - quick start
-  - compact summary
-- The goal is structural consistency without fabricated assets.
-
-### 14.10.11 GitHub README Badge Selection Should Follow A Priority Matrix
-
-- A GitHub README should not choose badges ad hoc.
-- If the repository uses badges, badge selection should follow a stable priority matrix based on repository style mode.
-- For product-style repositories, the default badge priority should be:
-  1. release or version
-  2. license
-  3. platform
-  4. build status
-  5. stars
-- For developer-style repositories, the default badge priority should be:
-  1. package version or release
-  2. license
-  3. build status
-  4. runtime or language
-  5. coverage or docs status
-- For minimal repositories, the default badge priority should be:
-  1. license
-  2. version or release
-  3. build status
-- The agent should prefer omitting weak badges over padding the badge strip with low-value or vanity signals.
-- Badge count should normally remain within 3 to 5 and should not exceed 6 without a concrete reason.
-
-### 14.10.12 GitHub README Screenshot Assets Should Follow A Stable Structure
-
-- When a repository uses screenshots or GIFs in its README, the assets should follow a stable repository structure rather than ad hoc export naming.
-- The default asset directory should be:
-  - `screenshots/`
-- The default naming pattern should prefer stable, reusable names such as:
-  - `main.png`
-  - `demo.gif`
-  - `usage.png`
-  - `feature-01.png`
-  - `feature-02.png`
-- The agent should avoid committing noisy export filenames such as timestamped screenshot names, `image (12).png`, or `final-final-demo.gif`.
-- Screenshot references should stay repository-relative and stable across machines.
-- The top-half preview block should normally contain no more than 3 visual assets by default.
-- If a project needs more screenshots than that, the extra assets should move lower in the README or into dedicated docs instead of bloating the first screen.
-
-### 14.10.13 GitHub README Top-Half Section Order Should Be Mostly Locked
-
-- A shared README system loses value if repositories keep the same sections but shuffle the top-half order freely.
-- Therefore the top-half order should be treated as mostly locked by default:
-  1. hero
-  2. preview or proof
-  3. value or pain-point section
-  4. quick start
-  5. compact summary such as `At a Glance`
-- For product-style repositories, the agent should not move technical implementation above value or quick start.
-- For developer-style repositories, limited adjustment is allowed, but the first runnable path must still remain near the top.
-- Lower-half sections may swap more freely as long as the top-half landing-page rhythm remains intact.
-
-### 14.10.14 Multilingual README Files Should Be Structurally Mirrored
-
-- If a repository maintains multiple language README files, they should stay structurally mirrored by default.
-- Structural mirroring means:
-  - the same major section order
-  - the same top-half rhythm
-  - the same major proof assets when shared
-  - the same core repository links when shared
-- The purpose is not to force sentence-level literal translation.
-- Natural localization is allowed.
-- But accidental structure drift between `README.md`, `README.zh-CN.md`, `README.ja.md`, or other language files should be treated as a documentation inconsistency rather than accepted by default.
-- If one language intentionally diverges, that divergence should be conscious and justified by a real audience or platform reason.
-
-### 14.10.15 GitHub README Density Should Scale With Repository Maturity
-
-- Not every repository should carry the same README density.
-- The shared structure should stay recognizable, but optional depth should scale with repository maturity.
-- For early or newly public repositories:
-  - keep the README lean
-  - prioritize positioning, value, quick start, core features, basic technical shape, and license
-  - omit optional lower-half sections unless they already add real value
-- For active or mature repositories:
-  - the full normal skeleton may be used
-  - FAQ, roadmap, version evolution, and richer quick-start variants are appropriate when truthful
-- For maintenance-mode or stable repositories:
-  - keep the top half current and useful
-  - compress aspirational sections
-  - prefer status clarity, compatibility, limitations, and maintenance notes over expansion fluff
-- A sparse README is acceptable only when it is intentionally sparse for maturity reasons, not when it is simply incomplete.
-- A mature README should not hide important usage or compatibility information just to stay short.
-
-### 14.10.16 The Entry / Starting Source File Logic Gate Is Mandatory, Not Advisory
-
-- The logic notice placed at the top of real entry / starting source files must be treated as a mandatory execution gate, not as a suggestion, reminder, or stylistic comment.
-- This requirement exists because repeated testing shows that AI agents often begin practical work from entry files, control files, route files, renderer roots, and other high-frequency starting source files first.
-- Therefore the highest-leverage place to reduce entry errors is the exact file where implementation would otherwise begin.
-
-- The mandatory gate must block the following common failure modes:
-  - skipping repository entry documents
-  - silently treating a new task as a continuation of the previous coding round
-  - carrying stale context into a new task without explicit confirmation
-  - starting deeper reading, write operations, deletion, or implementation before the startup loop is complete
-
-- For that reason, every real entry / starting source file must carry the standardized Mandatory Logic Gate header.
-- This is not optional on real entry / starting source files.
-- Repositories should treat absence, weakening, or removal of that gate as a logic-entry integrity failure.
-
-- The Mandatory Logic Gate must enforce all of the following:
-  - read repository entry documents first
-  - follow the repository-declared logic-entry chain
-  - explicitly determine whether the current task extends the previous coding round
-  - if it does not, explicitly ask whether to forget/compress context first
-  - treat this startup loop as a blocking gate
-  - prohibit deeper reading, write actions, deletions, or implementation before the loop is complete
-
-- The gate should be short, English by default, and repository-relative in its path references.
-- It must not use machine-specific absolute paths.
-- It must not be downgraded into general prose or business-facing explanation.
-
-- Repositories should also provide a mechanical validation path, such as a repository-level checking script, so that the gate can be verified rather than assumed.
-
----
-
-## 15. Version Note
-
-- This version is `AgentLogic_V6`.
-- It is a consolidated version based on `agentlogic.md` and `agentlogic test1.md`.
-- It keeps:
-  - general engineering rules
-  - packaging and documentation rules
-  - instance-conflict cleanup rules
-  - README presentation rules
-- It removes repository-specific appendices that do not belong to the current project.
-
-
-### 14.7.1.1 Continuous Execution Authorization Must Suppress Repeated Confirmation
-
-- The purpose of the startup chain is to preserve logic continuity, prevent forgotten constraints, and avoid silent context drift.
-- It is **not** intended to force repeated confirmation during one continuous implementation track.
-- Therefore, if the user explicitly states any equivalent of:
-  - "unless I say stop, keep going"
-  - "keep following the plan"
-  - "do not stop to ask me again"
-  - "keep writing until I tell you to stop"
-  then the agent must treat that as an active continuous-execution authorization for the current task scope.
-- Under that authorization, the agent must default to treating subsequent work as part of the same implementation round unless a real task-boundary break appears.
-- This means the agent must not repeatedly re-ask for confirmation at ordinary boundaries such as:
-  - moving from reading to editing
-  - moving from one planned implementation step to the next
-  - running the next validation in the same planned chain
-  - fixing follow-up issues discovered during the same execution sequence
-- In this mode, the correct behavior is:
-  - keep following the planned order
-  - keep writing, validating, and progressing
-  - only pause when:
-    - the user explicitly says to stop
-    - the current plan is complete and a new strategic direction is required
-    - a true blocker exists that cannot be resolved from local context
-    - a high-risk irreversible action is about to be taken
-
-### 14.7.1.2 "Keep Going Until I Say Stop" Also Implies Pre-Test Build-Out Phase
-
-- When the user explicitly says "unless I say stop, keep going" or equivalent, the default interpretation is that the work is still in an implementation / build-out phase.
-- It should not be interpreted as formal product testing, acceptance testing, or a test-signoff phase unless the user explicitly says the task has entered testing.
-- Therefore the agent should continue building through the planned sequence instead of prematurely switching into a "pause and ask before each stage" testing posture.
-- The agent may still run local verification, builds, and sanity checks during continuous execution.
-- But those checks are part of continuous implementation progress, not evidence that the work has already entered formal product-test stage.
-
-## END FILE: versions/AgentLogic_V6.md
+## END FILE: versions/AgentLogic_V6_5.md
 
 ---
 
 ## BEGIN FILE: modules/01_MasterLogic.md
 
-# AgentLogic_V6 Master Logic
+# AgentLogic_V6_5 Master Logic
 
-鏈枃浠朵笉鏄浛浠?`AgentLogic_V6.md`锛岃€屾槸灏嗗綋鍓嶄富閫昏緫鏄犲皠鍒板綋鍓嶄粨搴擄紝褰㈡垚涓€浠介潰鍚?Claude Code 绫?Agentic CLI 绯荤粺鐨勯」鐩骇涓婚€昏緫鎽樿銆?
+鏈枃浠朵笉鏄浛浠?`AgentLogic_V6_5.md`锛岃€屾槸灏嗗綋鍓嶄富閫昏緫鏄犲皠鍒板綋鍓嶄粨搴擄紝褰㈡垚涓€浠介潰鍚?Claude Code 绫?Agentic CLI 绯荤粺鐨勯」鐩骇涓婚€昏緫鎽樿銆?
 
 ## 1. 褰撳墠椤圭洰瀹氫綅
 
@@ -2684,6 +896,20 @@ This document is a general AI engineering collaboration protocol. It standardize
   - 鏄惁瀛樺湪鏇存垚鐔熺殑澶栭儴鍊欓€夋柟妗?
   - 鍊欓€夋柟妗堝睘浜庢帹鑽愰」銆佸€欓€夊寮洪」杩樻槸姝ｅ紡闆嗘垚椤?
 
+## 4.6.1 Mandatory Tool Verification Summary
+
+- The main logic now treats some verification tool paths as mandatory rather than optional.
+- Local repository facts must be verified by local search/listing plus targeted reads.
+- Latest/current/remote facts must be verified by authoritative external read-only checks.
+- UI / visible behavior must be verified by screenshot or equivalent visual evidence.
+- Runtime / build / packaging claims must be verified by command, build, or runtime checks.
+- Path-sensitive writes, side-effecting commands, and external state changes must include pre-target confirmation and post-result confirmation.
+- Permission-sensitive execution must include permission-mode and allowance confirmation before execution.
+- If the matching verification tool was not used, the conclusion should not be treated as fully verified.
+- `29_MandatoryVerificationMatrix.md` should be treated as the hard mapping layer for conclusion type -> tool family -> minimum pass condition.
+- `30_ToolQuestionBoundaryMatrix.md` should be treated as the hard boundary layer for tool family -> allowed question types -> support-only question types -> forbidden-alone question types.
+- `31_ToolMisuseAndAntiPatternMatrix.md` should be treated as the anti-pattern layer for common invalid closure paths, their correction recipes, and the safe interim labels that should replace overconfident conclusions.
+
 ## 4.7 V6 鍙綔涓哄鎸傞€昏緫鍖咃紝涓嶄綔涓洪」鐩洰褰?
 
 - 褰撳墠椤圭洰宸茬粡璇佹槑锛氫富閫昏緫鍖呬笌涓氬姟椤圭洰鐩綍蹇呴』涓ユ牸鍒嗙銆?
@@ -2771,9 +997,12 @@ This document is a general AI engineering collaboration protocol. It standardize
 - 宸ュ叿绯荤粺蹇呴』鏁村悎鎴愬畬鏁磋鍥撅紝鑷冲皯娑电洊娉ㄥ唽銆佽繃婊ゃ€佹巿鏉冦€佹墽琛屻€佸洖娴併€?
 - 椤圭洰绾ч€昏緫鍖呴渶瑕佷繚鐣欌€滆兘鍔涚姸鎬佲€濈淮搴︼紝閬垮厤鎶?stub 鎴栨浠ｇ爜璇啓鎴愮湡瀹炶兘鍔涖€?
 - 鍙戠幇鏇村噯纭殑鏋舵瀯銆佸伐鍏枫€佹潈闄愩€佹墿灞曡竟鐣屾椂锛屽簲鍚屾鍙嶅摵涓婚€昏緫鏂囦欢銆?
-- 褰撻」鐩瓨鍦ㄧ湡瀹炲叆鍙?/ 璧锋墜婧愮爜鏂囦欢鏃讹紝杩欎簺鏂囦欢椤堕儴榛樿閮藉簲鏀剧疆鐭皬鐨勯€昏緫鍏ュ彛鎻愰啋銆?- 杩欐潯瑙勫垯鐨勯粯璁よ寖鍥翠笉鏄€滃彧闄愬叧閿叆鍙ｂ€濓紝鑰屾槸瑕嗙洊椤圭洰鍐呮墍鏈夌湡瀹炲叆鍙?/ 璧锋墜婧愮爜鏂囦欢锛涗絾涓嶅簲鏈烘閾烘弧宸ュ叿鍑芥暟銆佸彾瀛愮粍浠跺拰闈炲叆鍙ｅ疄鐜版枃浠躲€?- 鎻愰啋搴旀寚鍚戜粨搴撳唴鐨?`AGENTS.md`銆乣README.md` 绛夌浉瀵瑰叆鍙ｆ枃浠讹紝鑰屼笉鏄啓鍏ユ満鍣ㄧ浉鍏崇殑缁濆璺緞銆?
+- 褰撻」鐩瓨鍦ㄧ湡瀹炲叆鍙?/ 璧锋墜婧愮爜鏂囦欢鏃讹紝杩欎簺鏂囦欢椤堕儴榛樿閮藉簲鏀剧疆鐭皬鐨勯€昏緫鍏ュ彛鎻愰啋銆?
+- 杩欐潯瑙勫垯鐨勯粯璁よ寖鍥翠笉鏄€滃彧闄愬叧閿叆鍙ｂ€濓紝鑰屾槸瑕嗙洊椤圭洰鍐呮墍鏈夌湡瀹炲叆鍙?/ 璧锋墜婧愮爜鏂囦欢锛涗絾涓嶅簲鏈烘閾烘弧宸ュ叿鍑芥暟銆佸彾瀛愮粍浠跺拰闈炲叆鍙ｅ疄鐜版枃浠躲€?
+- 鎻愰啋搴旀寚鍚戜粨搴撳唴鐨?`AGENTS.md`銆乣README.md` 绛夌浉瀵瑰叆鍙ｆ枃浠讹紝鑰屼笉鏄啓鍏ユ満鍣ㄧ浉鍏崇殑缁濆璺緞銆?
 - 杩欐牱鍙互鎶娾€滀富閫昏緫鍥炶鈥濅粠椤跺眰鏂囨。寤朵几鍒扮湡瀹炲紑宸ョ偣锛岄檷浣庡杞璇濆悗鐨勪富閫昏緫婕傜Щ椋庨櫓銆?
-- 濡傛灉椤圭洰瑕佹妸杩欐潯瑙勫垯浠庘€滄枃妗ｈ鑼冣€濆崌绾т负鈥滃伐绋嬬害鏉熲€濓紝鍒欒繕搴旀彁渚涗粨搴撶骇鏍￠獙鑴氭湰锛岀敤浜庢満姊版鏌ユ墍鏈夌湡瀹炲叆鍙?/ 璧锋墜婧愮爜鏂囦欢涓庝富鏂囨。鏄惁浠嶄繚鐣欓€昏緫鍏ュ彛鎻愰啋銆?- 璇ョ被鑴氭湰搴斾紭鍏堟鏌ワ細
+- 濡傛灉椤圭洰瑕佹妸杩欐潯瑙勫垯浠庘€滄枃妗ｈ鑼冣€濆崌绾т负鈥滃伐绋嬬害鏉熲€濓紝鍒欒繕搴旀彁渚涗粨搴撶骇鏍￠獙鑴氭湰锛岀敤浜庢満姊版鏌ユ墍鏈夌湡瀹炲叆鍙?/ 璧锋墜婧愮爜鏂囦欢涓庝富鏂囨。鏄惁浠嶄繚鐣欓€昏緫鍏ュ彛鎻愰啋銆?
+- 璇ョ被鑴氭湰搴斾紭鍏堟鏌ワ細
   - 浠撳簱绾у叆鍙ｆ枃妗ｆ槸鍚︿粛鎸囧悜涓婚€昏緫鍏ュ彛
   - 鎵€鏈夌湡瀹炲叆鍙?/ 璧锋墜婧愮爜鏂囦欢椤堕儴鏄惁浠嶄繚鐣欑煭鎻愰啋
   - 鎻愰啋鍐呭鏄惁鎸囧洖浠撳簱鐩稿璺緞锛岃€屼笉鏄満鍣ㄧ粷瀵硅矾寰?
@@ -3057,8 +1286,13 @@ Agent 鑷冲皯蹇呴』瀹屾垚锛?
 
 ## 4.2.4 浠撳簱绾х‖绾︽潫鎺ㄨ崘钀界偣
 
-- 濡傛灉椤圭洰甯屾湜鎶婇€昏緫鍏ュ彛浠庘€滄枃妗ｈ鑼冣€濆崌绾т负鈥滃伐绋嬬骇绾︽潫鈥濓紝鑷冲皯搴旇ˉ浠ヤ笅涓夊眰锛?  - 浠撳簱涓绘枃妗ｅ０鏄庨€昏緫鍏ュ彛涓庢鏌ュ懡浠?  - 鎵€鏈夌湡瀹炲叆鍙?/ 璧锋墜婧愮爜鏂囦欢椤堕儴淇濈暀浣庡櫔澹版彁閱?  - 浠撳簱鎻愪緵鍙墽琛岃剼鏈鏌ヨ繖浜涙彁閱掓槸鍚︿粛瀛樺湪
-- 杩欑妫€鏌ヨ剼鏈殑鐩爣涓嶆槸鏇夸唬涓婚€昏緫闃呰锛岃€屾槸闃叉椤圭洰鍦ㄥ杞敼鍔ㄥ悗鎶婇€昏緫鍏ュ彛鎻愰啋鎮勬倓鍒犳帀銆?- 杩欓噷鐨勨€滃叆鍙?/ 璧锋墜婧愮爜鏂囦欢鈥濋粯璁や笉鍐嶅彧鎸囧皯鏁板叧閿叆鍙ｏ紝鑰屾槸鎸?Agent 寰堝彲鑳戒粠閭ｉ噷寮€濮嬮槄璇汇€佷慨鏀规垨瀹炴柦鐨勭湡瀹炰唬鐮佸叆鍙ｏ紱宸ュ叿鍑芥暟銆佸彾瀛愮粍浠跺拰闈炲叆鍙ｅ疄鐜版枃浠朵笉搴旇鏈烘绾冲叆銆?- 鎺ㄨ崘鍛戒护褰㈡€佺ず渚嬶細
+- 濡傛灉椤圭洰甯屾湜鎶婇€昏緫鍏ュ彛浠庘€滄枃妗ｈ鑼冣€濆崌绾т负鈥滃伐绋嬬骇绾︽潫鈥濓紝鑷冲皯搴旇ˉ浠ヤ笅涓夊眰锛?
+  - 浠撳簱涓绘枃妗ｅ０鏄庨€昏緫鍏ュ彛涓庢鏌ュ懡浠?
+  - 鎵€鏈夌湡瀹炲叆鍙?/ 璧锋墜婧愮爜鏂囦欢椤堕儴淇濈暀浣庡櫔澹版彁閱?
+  - 浠撳簱鎻愪緵鍙墽琛岃剼鏈鏌ヨ繖浜涙彁閱掓槸鍚︿粛瀛樺湪
+- 杩欑妫€鏌ヨ剼鏈殑鐩爣涓嶆槸鏇夸唬涓婚€昏緫闃呰锛岃€屾槸闃叉椤圭洰鍦ㄥ杞敼鍔ㄥ悗鎶婇€昏緫鍏ュ彛鎻愰啋鎮勬倓鍒犳帀銆?
+- 杩欓噷鐨勨€滃叆鍙?/ 璧锋墜婧愮爜鏂囦欢鈥濋粯璁や笉鍐嶅彧鎸囧皯鏁板叧閿叆鍙ｏ紝鑰屾槸鎸?Agent 寰堝彲鑳戒粠閭ｉ噷寮€濮嬮槄璇汇€佷慨鏀规垨瀹炴柦鐨勭湡瀹炰唬鐮佸叆鍙ｏ紱宸ュ叿鍑芥暟銆佸彾瀛愮粍浠跺拰闈炲叆鍙ｅ疄鐜版枃浠朵笉搴旇鏈烘绾冲叆銆?
+- 鎺ㄨ崘鍛戒护褰㈡€佺ず渚嬶細
   - `node scripts/check-logic-entry.js`
 - 鍙湁鍏峰杩欎笁灞傚悗锛岄€昏緫鍏ュ彛绾︽潫鎵嶅紑濮嬩粠鈥滆鑼冪骇鈥濆悜鈥滃伐绋嬬骇鈥濊繃娓°€?
 
@@ -3137,6 +1371,42 @@ Agent 鑷冲皯蹇呴』瀹屾垚锛?
 - 鏈粡纭锛屼笉寰楁妸鍊欓€夊伐鍏锋弿杩版垚褰撳墠椤圭洰鐨勬寮忚兘鍔涖€?
 - 榛樿宸ュ叿浣庢晥鏃讹紝Agent 搴斾富鍔ㄥ鎵炬洿閫傚悎褰撳墠浠诲姟鐨勫伐鍏锋垨鏂规锛屼絾蹇呴』鍖哄垎姝ｅ紡鑳藉姏涓庡€欓€夊寮恒€?
 
+## 4.3.1 Mandatory Tool Verification Must Not Be Skipped
+
+- When a task falls into a main-logic mandatory tool-use scenario, the agent must not bypass the corresponding verification tool and go directly to a conclusion.
+- This includes at least:
+  - local repository facts must be verified by local search/listing plus targeted reads
+  - latest/current/remote facts must be verified by authoritative external sources
+  - UI / visible behavior must be verified by screenshot or equivalent visual evidence
+  - runtime/build/packaging claims must be verified by command, build, or runtime tools
+  - path-sensitive writes and external state changes must include pre-target confirmation and post-result confirmation
+  - permission-sensitive execution must include permission-mode and allowance confirmation before execution
+- Without those verifications, the task should not be treated as fully verified.
+
+## 4.3.2 Weak Tool Families Must Not Over-Close Strong Questions
+
+- An agent must not let a weak evidence tool family answer a stronger question than that tool family can justify.
+- This means at minimum:
+  - search hits must not be treated as final implementation proof
+  - static reads must not be treated as runtime proof
+  - build success must not be treated as visual proof
+  - memory or stale notes must not be treated as current remote proof
+- If the current tool family can only support the question rather than close it, the answer must remain partial, inferred, or blocked on stronger verification.
+
+## 4.3.3 Known Tool Anti-Patterns Must Be Treated As Verification Failure
+
+- If the agent reaches a conclusion through a known tool anti-pattern, that path must be treated as a verification failure rather than a successful shortcut.
+- This includes at least:
+  - search-hit closure
+  - static-read closure on runtime claims
+  - build-success closure on UI-visible claims
+  - memory-based closure on current remote facts
+  - write-first diagnosis
+  - remote-change-first workflows
+- After such an anti-pattern, the agent must either:
+  - run the correction recipe and finish the missing verification path, or
+  - downgrade the conclusion label to partial / inferred / unverified.
+
 ## 5. 涓轰粈涔堣繖鏄己鍒惰姹?
 
 - 涓嶅悓 Agent 杩涘叆椤圭洰鏃舵渶瀹规槗鍑洪敊鐨勫湴鏂癸紝涓嶆槸鑳藉姏涓嶅锛岃€屾槸鍏ュ彛涓嶄竴鑷淬€?
@@ -3145,9 +1415,9 @@ Agent 鑷冲皯蹇呴』瀹屾垚锛?
 
 ## 6. 瀹為檯浣跨敤瑕佹眰
 
-- 姣忔鏂伴」鐩紑濮嬫椂锛屼紭鍏堣 `AgentLogic_V6.md`
+- 姣忔鏂伴」鐩紑濮嬫椂锛屼紭鍏堣 `AgentLogic_V6_5.md`
 - 姣忔椤圭洰绾х淮鎶ゆ椂锛屽啀缁撳悎鏈寘涓殑鍒嗗眰鏂囨。涓庡師濮嬪眰鐩綍
-- 濡傛灉鍚庣画鏂板鏇村噯纭殑瑙勫垯锛屽簲鍏堝洖鍐?`AgentLogic_V6.md`锛屽啀鍚屾鏈€昏緫鍖?
+- 濡傛灉鍚庣画鏂板鏇村噯纭殑瑙勫垯锛屽簲鍏堝洖鍐?`AgentLogic_V6_5.md`锛屽啀鍚屾鏈€昏緫鍖?
 
 ## END FILE: modules/12_AgentEnforcement.md
 
@@ -3538,7 +1808,7 @@ It must not be downgraded into a soft recommendation.
 This template does not replace:
 
 - `00_START_HERE.md`
-- `versions/AgentLogic_V6.md`
+- `versions/AgentLogic_V6_5.md`
 - `modules/01_MasterLogic.md`
 - `modules/12_AgentEnforcement.md`
 - `modules/15_LogicEntryChecklist.md`
@@ -3641,4 +1911,2618 @@ This stack should be treated as the default engineering baseline, not a special-
 - [ ] The current work is still being treated as implementation / build-out phase by default, not as formal product-test stage, unless the user explicitly said testing has begun
 
 ## END FILE: modules/15_LogicEntryChecklist.md
+
+---
+
+## BEGIN FILE: modules/20_V6_5_RuntimeModes.md
+
+# V6.5 Stable Module: Runtime Mode Taxonomy
+
+Status: stable V6.5 module.
+This module extends the stable V6.5 line by making runtime modes explicit in large agentic systems.
+
+---
+
+## 1. Why this module exists
+
+Many agentic repositories do not have one execution surface.
+They have several runtime modes with different constraints, risks, and output expectations.
+
+If the agent treats all of them as one generic "CLI", it will make wrong assumptions about:
+
+- permissions
+- tool availability
+- output formatting
+- validation strategy
+- where results are supposed to go
+
+---
+
+## 2. Runtime mode categories
+
+By default, V6.5 should distinguish at least the following modes:
+
+### 2.1 Interactive terminal / REPL mode
+
+Typical traits:
+
+- user is present live
+- interactive prompts are allowed
+- rich terminal UI may exist
+- permission `ask` flows are practical
+
+Default focus:
+
+- conversational flow
+- incremental reasoning
+- interactive approvals
+- high-visibility feedback
+
+### 2.2 Headless / pipe / structured-output mode
+
+Typical traits:
+
+- no human is watching each step live
+- output may be consumed by another program
+- extra prose may break the caller
+- permission prompts may be impossible or undesirable
+
+Default focus:
+
+- deterministic output
+- machine-readable response shape
+- explicit failure signaling
+- reduced interactivity assumptions
+
+### 2.3 SDK / programmatic mode
+
+Typical traits:
+
+- the system is embedded as a library or service dependency
+- host code expects stable contracts
+- response objects matter more than terminal presentation
+
+Default focus:
+
+- API contracts
+- event structure
+- backpressure / cancellation behavior
+- error surface stability
+
+### 2.4 Server / daemon / background-worker mode
+
+Typical traits:
+
+- long-running lifecycle
+- process supervision matters
+- restart and cleanup behavior matter
+- background state persistence matters
+
+Default focus:
+
+- startup / shutdown behavior
+- resource cleanup
+- worker isolation
+- resilience and diagnostics
+
+### 2.5 Bridge / remote-control / protocol mode
+
+Typical traits:
+
+- one process mediates another process or client
+- permissions may cross boundaries
+- transport and identity matter
+- event propagation matters
+
+Default focus:
+
+- request origin
+- trust boundary
+- transport behavior
+- permission propagation
+
+### 2.6 Packaging / installer / updater mode
+
+Typical traits:
+
+- build artifacts matter more than live interaction
+- path layout changes after packaging
+- installation leftovers and upgrades matter
+
+Default focus:
+
+- artifact correctness
+- path verification
+- install/uninstall behavior
+- update safety
+
+---
+
+## 3. Mandatory runtime-mode questions
+
+Before implementation or review, the agent should answer:
+
+1. Which runtime mode is active right now?
+2. Is this repository multi-mode or single-mode?
+3. Which files are the true entrypoints for each mode?
+4. Do permissions differ by mode?
+5. Do output requirements differ by mode?
+6. Does validation differ by mode?
+
+If these questions are not answered, the agent should not flatten mode-specific behavior into generic rules.
+
+---
+
+## 4. Documentation requirement
+
+For multi-mode systems, the project fact map should record at minimum:
+
+- mode name
+- real entrypoint file
+- expected user presence
+- output target
+- permission behavior
+- validation method
+
+---
+
+## 5. Important boundary
+
+This module does **not** say every project must support all modes.
+It says the agent must not assume one mode when the project clearly supports many.
+
+## END FILE: modules/20_V6_5_RuntimeModes.md
+
+---
+
+## BEGIN FILE: modules/21_V6_5_ToolUsageAndSelection.md
+
+# V6.5 Stable Module: Tool Usage And Selection
+
+Status: stable V6.5 module.
+This module is the main V6.5 expansion for tool timing, tool choice, and tool choreography.
+
+---
+
+## 1. Why this module exists
+
+In agentic engineering work, tool quality is not only about whether a tool exists.
+It is about:
+
+- when to use it
+- when not to use it
+- what must be known before using it
+- what evidence must be captured after using it
+- how multiple tools should be chained together
+
+Bad tool choice causes:
+
+- premature writes
+- noisy browsing
+- weak validation
+- accidental scope expansion
+- fake certainty
+
+Therefore V6.5 should treat tool selection as a first-class execution rule.
+
+---
+
+## 2. Five tool classes
+
+### 2.1 Local read-only tools
+
+Examples:
+
+- file read
+- grep
+- glob
+- tree / directory listing
+- source indexing
+- structure search
+
+Use them when:
+
+- locating entrypoints
+- building a project fact map
+- confirming module boundaries
+- checking whether a capability actually exists
+
+Do **not** skip them and jump directly into edits.
+
+### 2.2 External read-only tools
+
+Examples:
+
+- web search
+- web fetch
+- official documentation lookup
+- remote repository inspection
+
+Use them when:
+
+- facts may have changed
+- the user explicitly asks to look something up
+- the referenced page is not already available locally
+- current docs, releases, versions, or ecosystem status matter
+
+Do **not** use them as a substitute for reading the local repository when the answer should come from the codebase.
+
+### 2.3 Local state-changing tools
+
+Examples:
+
+- file write
+- file edit
+- shell commands that modify files
+- build commands
+- package install
+- formatting and codemods
+
+Use them only after:
+
+- the relevant docs were read
+- the target paths are known
+- the change boundary is clear
+- the rollback path is understood
+
+These tools are never the first step in a new repository round.
+
+### 2.4 External state-changing tools
+
+Examples:
+
+- git push
+- release publication
+- remote configuration change
+- external service mutation
+- repository visibility or settings changes
+
+Use them only when:
+
+- the user clearly wants the external state to change
+- the target is confirmed
+- the change is reversible or the risk is explicitly understood
+
+These tools are the highest-risk class by default.
+
+### 2.5 Delegation / orchestration tools
+
+Examples:
+
+- sub-agent spawning
+- plan mode entry/exit
+- worktree switching
+- task queues
+- teammate/remote worker dispatch
+
+Use them when:
+
+- the task truly benefits from decomposition
+- boundaries are explicit
+- ownership is clear
+- the host actually allows delegation
+
+Do **not** use them just because the repository contains them.
+
+---
+
+## 3. Default tool-use order
+
+Unless the task clearly demands otherwise, the preferred order is:
+
+1. locate documentation entrypoint
+2. inspect directory / entry files
+3. search for relevant symbols and paths
+4. read the smallest sufficient set of source files
+5. decide task layer and boundary
+6. choose the lowest-risk tool that can answer the next question
+7. edit only after the target and effect are understood
+8. validate with the narrowest meaningful verification first
+9. broaden validation if risk is high
+10. sync documentation
+
+This order exists to minimize irreversible mistakes.
+
+---
+
+## 4. Tool choice hierarchy when multiple tools overlap
+
+When more than one tool can answer the same question, prefer:
+
+1. the **highest-signal read-only local** tool
+2. then the **targeted local edit** tool
+3. then the **targeted command** tool
+4. then external lookup
+5. then broad or expensive orchestration
+
+Examples:
+
+- prefer grep/glob before opening random files
+- prefer reading a specific file before launching builds
+- prefer a targeted edit before a large script-based rewrite
+- prefer official docs before forum summaries
+
+---
+
+## 5. Tool timing matrix
+
+### 5.1 Before planning
+
+Allowed preference:
+
+- local read-only tools
+- targeted external read-only tools when freshness matters
+
+Avoid:
+
+- write tools
+- destructive shell commands
+- broad refactors
+
+### 5.2 During planning
+
+Allowed preference:
+
+- structure search
+- entrypoint inspection
+- package and dependency mapping
+- plan-mode/orchestration tools if the host supports them
+
+Avoid:
+
+- implementation disguised as planning
+
+### 5.3 During implementation
+
+Allowed preference:
+
+- targeted file edit/write
+- constrained shell commands
+- tests/builds for the modified boundary
+
+Avoid:
+
+- unrelated browsing
+- broad repo-wide rewrites without recorded reason
+
+### 5.4 During validation
+
+Allowed preference:
+
+- build/test commands
+- runtime smoke checks
+- screenshot or UI verification for visible behavior
+- log/path verification
+
+Avoid:
+
+- declaring success from code inspection alone when behavior is what matters
+
+### 5.5 During release/publication
+
+Allowed preference:
+
+- packaging commands
+- artifact verification
+- release metadata checks
+- source-archive completeness checks
+
+Avoid:
+
+- mixing release work with unrelated refactors
+
+---
+
+## 6. Specific guidance by tool family
+
+### 6.1 Search tools
+
+Use when:
+
+- you need symbol locations
+- you need entrypoint discovery
+- you need to compare repeated patterns
+
+Do not use search output alone as proof of behavior.
+Search must usually be followed by direct file reading.
+
+### 6.2 File read tools
+
+Use when:
+
+- confirming exact implementation
+- verifying contracts
+- checking header rules or entry reminders
+
+Prefer direct reads of specific files over unfocused large-file scanning when possible.
+
+### 6.3 File edit/write tools
+
+Use when:
+
+- the landing file is already known
+- the exact change boundary is small enough to describe
+- docs or source already justify the change
+
+Do not use them to explore.
+Writing is not discovery.
+
+### 6.4 Shell/command tools
+
+Use when:
+
+- builds, tests, installs, or repository operations are required
+- the command gives higher-fidelity truth than static reading
+- platform-specific behavior must be verified
+
+Requirements:
+
+- record working directory
+- know whether the command is read-only or state-changing
+- know whether it can escape the intended target
+- prefer native shell-safe operations over string-built destructive chains
+
+### 6.5 Web tools
+
+Use when:
+
+- current versions, releases, docs, or remote facts matter
+- the user explicitly asks to verify online
+- local docs are missing or stale
+
+Avoid:
+
+- substituting web summaries for repository facts
+- browsing when the fact is stable and already local
+
+### 6.6 Planning tools
+
+Use when:
+
+- the task is multi-step or multi-module
+- the project supports explicit plan state
+- you need to separate exploration from execution
+
+Do not enter plan mode just as ritual.
+Use it when it clarifies execution.
+
+### 6.7 Worktree / environment-switch tools
+
+Use when:
+
+- isolation is needed
+- parallel lines of work need separation
+- release or experiment boundaries must not mix
+
+Avoid using them if a simple local branch or current workspace suffices.
+
+### 6.8 Sub-agent / worker / teammate tools
+
+Use only when all are true:
+
+- the host explicitly allows delegation
+- the user request or task context justifies parallel work
+- ownership boundaries are explicit
+- the result will materially advance the main task
+
+Do not treat repository support for agents as automatic permission to delegate.
+
+---
+
+## 7. Tool choreography patterns
+
+### 7.1 Repository onboarding pattern
+
+- directory listing
+- README / entry markdown read
+- entrypoint search
+- targeted file reads
+- task-layer judgment
+- project fact map output
+
+### 7.2 Bug-fix pattern
+
+- symptom capture
+- log/search inspection
+- relevant source read
+- narrow fix
+- local verification
+- documentation sync
+
+### 7.3 Refactor pattern
+
+- boundary map
+- dependency/search pass
+- explicit plan
+- staged edits
+- broad validation
+- updated architectural docs
+
+### 7.4 Release pattern
+
+- build path confirmation
+- artifact generation
+- unpacked verification first
+- installer/release verification second
+- release asset completeness check
+- cleanup of temporary artifacts
+
+---
+
+## 8. Tool evidence requirement
+
+After meaningful tool use, the agent should be able to state:
+
+- which tool was used
+- why that tool was chosen instead of a lower-risk alternative
+- what fact it confirmed
+- what remains uncertain
+- whether the result came from local truth, remote truth, or inference
+
+---
+
+## 9. Tool misuse patterns that V6.5 should reject
+
+Reject these patterns by default:
+
+- editing before reading
+- broad shell mutation before path verification
+- using web search to answer local code questions
+- treating search hits as implementation proof
+- using sub-agents without explicit host/user allowance
+- declaring a UI fix from build success alone
+- using high-risk tools because they are convenient rather than necessary
+
+---
+
+## 10. Minimal tool matrix for project fact maps
+
+For tool-centric repositories, record at least:
+
+- tool family
+- source of registration
+- default visibility
+- default availability
+- permission mode
+- parallel-safety status
+- expected output form
+- main risks
+
+
+---
+
+## 11. Relationship to the tool matrix module
+
+This module defines the principles.
+The executable matrix version lives in:
+
+- `modules/24_V6_5_ToolUsageMatrix_DRAFT.md`
+
+The intended relationship is:
+
+- `21_...ToolUsageAndSelection...` explains the rules and reasoning
+- `24_...ToolUsageMatrix...` turns those rules into fast operational choices
+
+Future stable promotion should usually preserve both layers rather than collapsing them into one file.
+
+## END FILE: modules/21_V6_5_ToolUsageAndSelection.md
+
+---
+
+## BEGIN FILE: modules/22_V6_5_HookLifecycle.md
+
+# V6.5 Stable Module: Agent Loop Hook Lifecycle
+
+Status: stable V6.5 module.
+
+---
+
+## 1. Why this module exists
+
+Large agentic systems usually become extensible through hook points long before they become cleanly modular.
+If the hooks are undocumented, future maintainers cannot tell where safe extension actually belongs.
+
+---
+
+## 2. Default lifecycle map
+
+V6.5 should encourage recording these hook stages when they exist:
+
+1. session start
+2. pre-query context assembly
+3. query dispatch
+4. stream/event normalization
+5. pre-tool-use
+6. permission decision
+7. tool execution
+8. post-tool-use
+9. result budgeting / storage / compaction
+10. post-compact
+11. user-visible output emission
+12. session end / abort / recovery
+
+---
+
+## 3. Why this matters
+
+This model clarifies:
+
+- where side effects happen
+- where permission checks belong
+- where notifications belong
+- where telemetry belongs
+- where recovery or cancellation belongs
+
+Without this map, repositories often grow hidden coupling between query logic, tool logic, UI logic, and persistence.
+
+---
+
+## 4. Documentation rule
+
+When a project has hook-based extension or lifecycle interception, the logic package should record:
+
+- hook name or stage
+- trigger condition
+- input context
+- side effects allowed
+- output/result path
+- whether failure at this stage is recoverable
+
+## END FILE: modules/22_V6_5_HookLifecycle.md
+
+---
+
+## BEGIN FILE: modules/23_V6_5_PermissionAndOutputPipeline.md
+
+# V6.5 Stable Module: Permission And Output Pipeline
+
+Status: stable V6.5 module.
+
+---
+
+## 1. Why this module exists
+
+In advanced agentic systems, permission behavior and output behavior are not side notes.
+They define what the system is allowed to do and where the result is allowed to appear.
+
+---
+
+## 2. Permission pipeline model
+
+V6.5 should recommend modeling permissions as a pipeline:
+
+1. request origin
+2. requested action or tool
+3. classification of risk
+4. rule or policy match
+5. allow / ask / deny decision
+6. fallback or alternate path
+7. denial tracking or adaptive behavior
+8. propagation to other runtime modes or bridges
+
+This model is stronger than simply listing permission files.
+
+---
+
+## 3. Output pipeline model
+
+V6.5 should also recommend output-target mapping:
+
+- terminal output
+- machine-readable output
+- remote protocol output
+- silent/background state update
+- notification output
+- persistent artifact output
+
+For each target, the project should state:
+
+- who consumes it
+- whether formatting is strict or human-facing
+- whether extra prose is allowed
+- whether failures must be serialized explicitly
+
+---
+
+## 4. Integration rule
+
+When the same action can be triggered from multiple modes, the agent should ask:
+
+- does permission behavior stay the same across modes?
+- does output behavior stay the same across modes?
+- if not, where is the translation layer?
+
+If this is not recorded, cross-mode bugs become likely.
+
+## END FILE: modules/23_V6_5_PermissionAndOutputPipeline.md
+
+---
+
+## BEGIN FILE: modules/24_V6_5_ToolUsageMatrix.md
+
+# V6.5 Stable Module: Tool Usage Matrix
+
+Status: stable V6.5 module.
+This module operationalizes tool governance into reusable matrices.
+
+---
+
+## 1. Why this module exists
+
+Narrative rules are useful, but agents need something more executable.
+A matrix helps answer quickly:
+
+- which tool family should be preferred first
+- which tool family is allowed but secondary
+- which tool family should be delayed
+- which tool family should be avoided by default
+
+---
+
+## 2. Legend
+
+- **P1 Preferred first**: default first choice
+- **P2 Preferred after local confirmation**: good second-step tool
+- **P3 Allowed but not default**: use only with reason
+- **H High-risk / delayed**: do not use early
+- **X Avoid by default**: only if the task explicitly requires it
+
+Tool families used in this matrix:
+
+- **LS** = local search/listing (`grep`, `glob`, tree, symbol search)
+- **LR** = local file read
+- **LE** = local edit/write
+- **LC** = local commands/build/test/shell
+- **ER** = external read-only lookup (web/docs/remote repo)
+- **EW** = external write/change (push/release/settings mutation)
+- **OR** = orchestration / plan / worktree / delegation tools
+
+---
+
+## 3. Matrix by task type
+
+| Task Type | LS | LR | LE | LC | ER | EW | OR |
+|---|---|---|---|---|---|---|---|
+| New repo onboarding | P1 | P1 | X | P3 | P2 | X | P3 |
+| Bug investigation | P1 | P1 | P2 | P2 | P3 | X | P3 |
+| Small local fix | P2 | P1 | P1 | P2 | X | X | X |
+| Multi-module refactor | P1 | P1 | P2 | P2 | P3 | X | P2 |
+| Runtime/build failure | P2 | P2 | P3 | P1 | P3 | X | X |
+| UI/visual regression | P2 | P2 | P2 | P2 | X | X | P3 |
+| Dependency/version verification | P2 | P2 | P3 | P2 | P1 | X | X |
+| Release packaging | P2 | P2 | P3 | P1 | P2 | P2 | P3 |
+| Publication/repo settings | P3 | P2 | X | P3 | P2 | P1 | X |
+| Architecture analysis | P1 | P1 | X | P3 | P3 | X | P2 |
+
+---
+
+## 4. Matrix by execution phase
+
+| Phase | LS | LR | LE | LC | ER | EW | OR |
+|---|---|---|---|---|---|---|---|
+| Pre-entry | P1 | P1 | X | X | P2 | X | X |
+| Fact mapping | P1 | P1 | X | P3 | P2 | X | P2 |
+| Planning | P2 | P1 | X | P3 | P2 | X | P2 |
+| Implementation | P2 | P2 | P1 | P2 | X | X | P3 |
+| Validation | P2 | P2 | P3 | P1 | P2 | X | X |
+| Packaging | P2 | P2 | P3 | P1 | P2 | P3 | P3 |
+| Publication | P3 | P2 | X | P3 | P2 | P1 | X |
+
+---
+
+## 5. Matrix by risk level
+
+### 5.1 Low-risk questions
+
+Examples:
+
+- where is the entrypoint?
+- which file owns this behavior?
+- does this symbol exist?
+
+Preferred:
+
+- LS, LR
+
+Avoid:
+
+- LE, EW
+
+### 5.2 Medium-risk changes
+
+Examples:
+
+- bounded code fix
+- config update
+- small refactor with local verification
+
+Preferred sequence:
+
+- LS -> LR -> LE -> LC
+
+Add ER only if freshness matters.
+
+### 5.3 High-risk operations
+
+Examples:
+
+- release publishing
+- repository visibility changes
+- destructive file operations
+- cross-environment configuration changes
+
+Preferred sequence:
+
+- LS -> LR -> LC/ER for confirmation -> EW only at the end
+
+Never start with EW.
+
+---
+
+## 6. Matrix by runtime mode
+
+| Runtime Mode | LS | LR | LE | LC | ER | EW | OR | Notes |
+|---|---|---|---|---|---|---|---|---|
+| REPL / interactive | P1 | P1 | P2 | P2 | P2 | H | P2 | ask/confirm flows are practical |
+| Headless / pipe | P2 | P1 | P2 | P2 | P2 | H | X | output discipline is stricter |
+| SDK / programmatic | P2 | P1 | P3 | P2 | P2 | X | X | stable contracts matter more than UI |
+| Daemon / background | P2 | P1 | P2 | P1 | P2 | H | P2 | lifecycle, cleanup, logs matter |
+| Bridge / remote | P2 | P1 | P3 | P2 | P2 | H | P2 | cross-boundary permission propagation matters |
+| Packaging / installer | P2 | P2 | P3 | P1 | P2 | P2 | X | artifact/path verification first |
+
+---
+
+## 7. Tool-family playbooks
+
+### 7.1 Search-first playbook
+
+Use when the question is still structural.
+
+Pattern:
+
+1. locate path candidates with LS
+2. open the most likely files with LR
+3. only then decide whether LE or LC is necessary
+
+### 7.2 Read-before-edit playbook
+
+Use for nearly all code changes.
+
+Pattern:
+
+1. LR the owning file
+2. LR at least one caller or adjacent dependency if the behavior spans boundaries
+3. LE only after the landing change is obvious
+4. LC to validate
+
+### 7.3 Verify-before-publish playbook
+
+Use for release/public changes.
+
+Pattern:
+
+1. LR packaging docs and targets
+2. LC build/package locally
+3. LC or runtime verification of artifact
+4. ER if remote release metadata needs current confirmation
+5. EW only last
+
+### 7.4 Remote-fact confirmation playbook
+
+Use when the answer may have changed recently.
+
+Pattern:
+
+1. confirm whether local files are insufficient
+2. use ER against the most authoritative source
+3. explicitly mark what came from remote truth versus local truth
+4. do not let ER replace repository reading if the local code still decides the implementation
+
+---
+
+## 8. Matrix for delegation/orchestration tools
+
+| Situation | OR Guidance |
+|---|---|
+| Small single-file fix | X |
+| Medium multi-step task in one repo | P3 unless explicit plan tooling helps |
+| Large multi-module refactor | P2 |
+| Parallelizable research across separate questions | P2 |
+| Critical-path blocking local task | X or delayed |
+| Host does not explicitly allow delegation | X |
+
+Key rule:
+
+Delegation is a force multiplier, not a permission substitute.
+
+---
+
+## 9. Anti-pattern matrix
+
+| Anti-pattern | Why rejected |
+|---|---|
+| LE before LR | writing without evidence |
+| LC mutation before path confirmation | accidental scope damage |
+| ER before local code read for repository facts | source-of-truth inversion |
+| EW before local validation | externalizes mistakes |
+| OR before task boundary clarity | multiplies confusion |
+| build success used as proof of UI correctness | wrong validation mode |
+
+---
+
+## 10. Fast default recipes
+
+### New repository
+
+`LS -> LR -> LR -> PFM/project fact map -> OR only if clearly useful`
+
+### Small bug fix
+
+`LS -> LR -> LR -> LE -> LC -> doc sync`
+
+### Current-version verification
+
+`LR -> ER -> LR -> conclusion`
+
+### Packaging/release
+
+`LR -> LC build -> LC verify -> ER remote metadata if needed -> EW`
+
+### Large architecture task
+
+`LS -> LR -> LR -> OR(plan) -> staged LE/LC -> doc sync`
+
+---
+
+## 11. Promotion rule
+
+If this matrix proves stable across multiple repositories, it should be promoted into the future stable V6.x line as one of the practical "how the agent uses its hands" modules.
+
+## END FILE: modules/24_V6_5_ToolUsageMatrix.md
+
+---
+
+## BEGIN FILE: modules/25_V6_5_ToolCapabilityMapping.md
+
+# V6.5 Stable Module: Tool Capability Mapping
+
+Status: stable V6.5 module.
+This module maps tool families to the kinds of questions they are appropriate to answer.
+
+---
+
+## 1. Why this module exists
+
+A tool is not just "available" or "unavailable".
+A tool has an appropriate question shape.
+
+If the agent uses the wrong tool for the wrong question, failure usually looks like one of these:
+
+- weak evidence
+- fake certainty
+- wasted latency
+- unnecessary risk
+- correct tool, wrong time
+
+Therefore V6.5 should map each tool family to:
+
+- what question it is good at answering
+- what must be true before it is used
+- what it should not be used for
+- what evidence it produces
+
+---
+
+## 2. Search and listing tools
+
+Examples:
+
+- grep
+- glob
+- tree / directory listing
+- symbol search
+- route search
+
+### Best at answering
+
+- Where is the likely entrypoint?
+- Which files mention this symbol or concept?
+- How many times does this pattern appear?
+- Which directories probably own this behavior?
+- Is this capability likely centralized or scattered?
+
+### Preconditions
+
+- the repository path is known
+- the search pattern is meaningful enough to narrow the field
+
+### Do not use for
+
+- proving exact runtime behavior by itself
+- proving call order by itself
+- proving a capability is actually enabled by itself
+
+### Evidence produced
+
+- candidate file set
+- pattern distribution
+- likely ownership surface
+
+### Follow-up tool normally required
+
+- local file read
+
+---
+
+## 3. Local file read tools
+
+Examples:
+
+- direct file open/read
+- targeted source excerpt inspection
+- config / markdown inspection
+
+### Best at answering
+
+- What does this implementation actually do?
+- What arguments or contracts exist here?
+- What does the entry file say?
+- What does the README or module doc require?
+- What is the real boundary of this function/module?
+
+### Preconditions
+
+- the candidate file is already known or strongly suspected
+
+### Do not use for
+
+- repo-wide discovery when no target exists yet
+- validating runtime behavior that only execution can prove
+
+### Evidence produced
+
+- direct implementation truth
+- direct documentation truth
+- contract detail
+
+### Follow-up tools often required
+
+- additional file read
+- edit/write
+- command validation
+
+---
+
+## 4. Local edit/write tools
+
+Examples:
+
+- file edit
+- file write
+- patch application
+- targeted codemod
+
+### Best at answering
+
+These tools do **not** answer questions well.
+They exist to implement already-justified changes.
+
+### Preconditions
+
+- the owning file is known
+- the required change is understood
+- the task boundary is explicit
+- the rollback path is understood
+
+### Do not use for
+
+- discovery
+- speculation
+- "trying random things"
+
+### Evidence produced
+
+- changed state only
+
+### Required follow-up
+
+- command/runtime/build/test validation
+- documentation sync when appropriate
+
+---
+
+## 5. Local command tools
+
+Examples:
+
+- build
+- test
+- lint
+- runtime launch
+- package install
+- git status / diff / log
+- shell inspection commands
+
+### Best at answering
+
+- Does it build?
+- Does it run?
+- Which files actually changed?
+- Is the environment missing something?
+- Does the package manager or runtime agree with the code reading?
+- What happens on this platform in practice?
+
+### Preconditions
+
+- working directory is correct
+- command effect is understood
+- read-only vs state-changing behavior is known
+
+### Do not use for
+
+- replacing local source reading when implementation facts are needed
+- broad destructive mutation before path verification
+
+### Evidence produced
+
+- build truth
+- runtime truth
+- environment truth
+- concrete failure logs
+
+### Special note
+
+Commands are often the strongest validation tool, but not always the correct first discovery tool.
+
+---
+
+## 6. External read-only tools
+
+Examples:
+
+- web search
+- official docs lookup
+- release notes lookup
+- remote repository inspection
+
+### Best at answering
+
+- What is the current upstream version?
+- What does the official documentation say now?
+- Has this release/API/library changed recently?
+- What is the current public state of the remote repository?
+
+### Preconditions
+
+- there is a real chance the answer changed recently
+- local files are insufficient for the question
+- the source authority matters
+
+### Do not use for
+
+- replacing codebase reading for local implementation truth
+- answering stable local questions that the repository already contains
+
+### Evidence produced
+
+- current remote truth
+- authoritative documentation truth
+
+### Required follow-up
+
+- explicitly separate remote fact from local fact
+
+---
+
+## 7. External write/change tools
+
+Examples:
+
+- push
+- release publish
+- repository setting changes
+- visibility changes
+- remote configuration mutation
+
+### Best at answering
+
+These tools do not answer investigative questions.
+They apply confirmed decisions to external state.
+
+### Preconditions
+
+- the user wants the external state changed
+- the target is confirmed
+- local validation already happened
+- risk/rollback is understood
+
+### Do not use for
+
+- exploration
+- trial-and-error validation
+- "let's see if production accepts it"
+
+### Evidence produced
+
+- changed remote state
+
+### Required follow-up
+
+- post-change verification
+- path/URL/visibility confirmation
+
+---
+
+## 8. Planning and orchestration tools
+
+Examples:
+
+- explicit plan mode
+- worktree switching
+- task queues
+- sub-agent delegation
+- teammate or swarm dispatch
+
+### Best at answering
+
+- How should this work be decomposed?
+- Which parts are independent?
+- What should happen in parallel versus serially?
+- Where should boundaries and ownership live?
+
+### Preconditions
+
+- the task is complex enough to justify orchestration
+- the host allows these tools
+- delegation boundaries are explicit
+
+### Do not use for
+
+- avoiding local responsibility for the critical-path task
+- replacing direct thinking with procedure theater
+
+### Evidence produced
+
+- structure of work
+- ownership map
+- sequencing plan
+
+---
+
+## 9. Capability-to-question cheat sheet
+
+| Question Type | Best Tool Family |
+|---|---|
+| "Where is this implemented?" | Search/listing |
+| "What exactly does this file do?" | Local file read |
+| "Can I safely change this now?" | Local read first, then edit |
+| "Does it actually build/run?" | Local commands |
+| "What is the latest official version/rule/doc?" | External read-only |
+| "Can I publish or push now?" | External write only after local validation |
+| "How should I split this complex task?" | Planning/orchestration |
+
+---
+
+## 10. Minimum question discipline
+
+Before choosing a tool, the agent should ask internally:
+
+1. Is this a location question, truth question, mutation question, runtime question, current-remote-fact question, or decomposition question?
+2. Which tool family is naturally aligned with that question?
+3. Is there a lower-risk tool that can answer it first?
+4. What evidence will this tool actually produce?
+
+That short internal check is usually enough to prevent most poor tool choices.
+
+## END FILE: modules/25_V6_5_ToolCapabilityMapping.md
+
+---
+
+## BEGIN FILE: modules/26_V6_5_INDEX.md
+
+# V6.5 Module Index
+
+Status: **Stable V6.5 Line**.
+This file is the index for the V6.5 governance and structural modules.
+
+---
+
+## 1. Overview
+The V6.5 line captures structural lessons from advanced agentic CLI systems. It focuses on tool governance, mandatory verification, and runtime awareness.
+
+---
+
+## 2. Governance Modules (Execution Rules)
+These modules define how the agent should act.
+1.  **Tool Choice**: `modules/21_V6_5_ToolUsageAndSelection.md`
+2.  **Usage Matrix**: `modules/24_V6_5_ToolUsageMatrix.md`
+3.  **Capability Mapping**: `modules/25_V6_5_ToolCapabilityMapping.md`
+4.  **Risk Gating**: `modules/27_V6_5_ToolPermissionRiskMatrix.md`
+5.  **Evidence Matrix**: `modules/29_V6_5_MandatoryVerificationMatrix.md`
+6.  **Question Boundaries**: `modules/30_V6_5_ToolQuestionBoundaryMatrix.md`
+7.  **Anti-Pattern Rejection**: `modules/31_V6_5_ToolMisuseAndAntiPatternMatrix.md`
+8.  **Instruction Stacking**: `modules/32_V6_5_ContextAssemblyAndInstructionStacking.md`
+9.  **Post-Task Consolidation**: `modules/33_V6_5_BackgroundConsolidationAndIdleLifecycle.md`
+10. **Fact Mapping**: `modules/34_V6_5_ProjectFactMap_V2.md`
+
+---
+
+## 3. Structural Modules (Context & Architecture)
+These modules explain the system context that governance depends on.
+1.  **Runtime Modes**: `modules/20_V6_5_RuntimeModes.md`
+2.  **Hook Lifecycle**: `modules/22_V6_5_HookLifecycle.md`
+3.  **Permission/Output Pipeline**: `modules/23_V6_5_PermissionAndOutputPipeline.md`
+4.  **Terminology**: `modules/28_V6_5_TerminologyAndModuleBoundaries.md`
+
+---
+
+## 4. Reading Priority
+- For **Behavior Improvements**: Read the **Governance Modules (1-10)** first.
+- For **System Modeling**: Read the **Structural Modules (1-4)** second.
+
+## END FILE: modules/26_V6_5_INDEX.md
+
+---
+
+## BEGIN FILE: modules/27_V6_5_ToolPermissionRiskMatrix.md
+
+# V6.5 Stable Module: Tool Permission Risk Matrix
+
+Status: stable V6.5 module.
+This module links tool families to permission expectations, risk class, and execution constraints.
+
+---
+
+## 1. Why this module exists
+
+A tool is not only defined by what it can do.
+It is also defined by:
+
+- what permission posture it should default to
+- what kinds of damage it can cause
+- what verification is required before and after using it
+- whether the same tool becomes more dangerous in different runtime modes
+
+Without this layer, an agent may have many tools but no reliable sense of:
+
+- which ones are effectively read-only
+- which ones cross trust boundaries
+- which ones should be delayed
+- which ones should be blocked until preconditions are satisfied
+
+---
+
+## 2. Core model
+
+Each meaningful tool family should be evaluated on at least these dimensions:
+
+1. **Mutation level**
+   - read-only
+   - local state-changing
+   - external state-changing
+2. **Permission posture**
+   - allow by default
+   - ask by default
+   - deny by default unless explicitly required
+3. **Risk class**
+   - low
+   - medium
+   - high
+   - irreversible/high-impact
+4. **Scope radius**
+   - single file
+   - repository
+   - workspace
+   - external system
+5. **Evidence requirement**
+   - none/minimal
+   - pre-read required
+   - path confirmation required
+   - runtime verification required
+   - post-change verification required
+
+---
+
+## 3. Default family-level matrix
+
+| Tool Family | Mutation | Default Permission Posture | Risk | Typical Scope | Minimum Preconditions |
+|---|---|---|---|---|---|
+| Search/listing | Read-only | Allow | Low | repo/workspace | correct root path |
+| Local file read | Read-only | Allow | Low | single file/repo | target file known or strongly suspected |
+| Local edit/write | Local state-changing | Ask/guarded by reasoning | Medium to High | single file/repo | pre-read + boundary clarity + rollback awareness |
+| Local shell read-only | Read-only | Allow | Low to Medium | repo/workspace | command effect understood |
+| Local shell mutating | Local state-changing | Ask/guarded by reasoning | High | repo/workspace | path confirmation + command effect understood |
+| Build/test/verification commands | Usually local state-changing but controlled | Allow or Ask depending on environment | Medium | repo/workspace | target runtime/build path known |
+| External read-only lookup | Read-only external | Allow when freshness matters | Low to Medium | remote docs/repos | local insufficiency or recency need |
+| External write/change | External state-changing | Ask or explicit user intent only | High to Irreversible | external system | target confirmed + local validation complete |
+| Delegation/orchestration | Indirect state change / coordination | Ask conceptually unless host/user has allowed | Medium to High | task graph/system | boundary, ownership, and host permission clear |
+
+---
+
+## 4. Permission posture by runtime mode
+
+### 4.1 REPL / interactive
+
+Defaults:
+
+- read-only local tools: normally allow
+- local writes: often acceptable with strong reasoning and visible continuity
+- high-risk external writes: delay until explicit intent is clear
+- ask flows are practical here
+
+### 4.2 Headless / pipe
+
+Defaults:
+
+- read-only local tools: allow
+- local writes: stricter than REPL because interactive clarification is weaker
+- external writes: strongly delayed
+- output formatting requirements increase the cost of exploratory tool use
+
+### 4.3 SDK / programmatic
+
+Defaults:
+
+- read-only inspection: allow
+- local mutation: only if clearly part of the contract
+- interactive ask flows may not exist
+- unexpected side effects are especially dangerous
+
+### 4.4 Daemon / background worker
+
+Defaults:
+
+- commands that affect lifecycle, scheduling, logs, or persisted state become higher risk
+- repeated automatic tool use must be treated more strictly than one-off REPL use
+- cleanup and idempotency matter more
+
+### 4.5 Bridge / remote
+
+Defaults:
+
+- permission posture should become stricter across trust boundaries
+- request origin must be considered part of the permission decision
+- tools that are safe locally may become medium/high risk remotely
+
+### 4.6 Packaging / installer
+
+Defaults:
+
+- build and artifact commands are central and expected
+- destructive cleanup commands are still high risk
+- path verification is mandatory because packaging often changes path models
+
+---
+
+## 5. Execution gates by risk class
+
+### 5.1 Low-risk tools
+
+Examples:
+
+- search
+- listing
+- file read
+- clearly read-only status commands
+
+Required gate:
+
+- correct target path
+
+### 5.2 Medium-risk tools
+
+Examples:
+
+- bounded file edits
+- controlled test/build commands
+- local config changes
+
+Required gates:
+
+- relevant docs/source read
+- target file/path known
+- expected effect understood
+
+### 5.3 High-risk tools
+
+Examples:
+
+- mutating shell commands
+- broad codemods
+- repository-wide writes
+- environment or dependency mutation
+
+Required gates:
+
+- path confirmation
+- mutation scope understood
+- rollback or recovery path known
+- validation plan known before execution
+
+### 5.4 Irreversible/high-impact tools
+
+Examples:
+
+- release publication
+- remote visibility/settings changes
+- remote destructive configuration changes
+
+Required gates:
+
+- explicit user intent
+- exact target confirmation
+- local validation already complete
+- post-change verification plan
+
+---
+
+## 6. Tool-family constraints
+
+### 6.1 Search/listing tools
+
+Permission posture:
+
+- allow by default
+
+Risk notes:
+
+- low direct risk
+- high indirect risk only if the agent treats search output as proof instead of a candidate set
+
+Constraint:
+
+- must usually be followed by file read before conclusions are treated as implementation truth
+
+### 6.2 Local file read tools
+
+Permission posture:
+
+- allow by default
+
+Risk notes:
+
+- low direct risk
+- can still create false confidence if only one isolated file is read in a cross-file behavior chain
+
+Constraint:
+
+- when behavior crosses modules, read at least one adjacent caller, callee, or config file
+
+### 6.3 Local edit/write tools
+
+Permission posture:
+
+- not first-step tools
+- effectively ask/guarded by reasoning
+
+Risk notes:
+
+- medium for bounded edits
+- high when touching entrypoints, shared config, or cross-cutting modules
+
+Constraints:
+
+- do not use before reading
+- do not use for speculation
+- do not use broad write tools when a bounded edit is sufficient
+
+### 6.4 Local shell read-only commands
+
+Permission posture:
+
+- allow if truly read-only
+
+Risk notes:
+
+- many commands only look read-only but may mutate caches, lockfiles, or state
+
+Constraint:
+
+- classify the command before using it, not after
+
+### 6.5 Local shell mutating commands
+
+Permission posture:
+
+- high-risk guarded
+
+Risk notes:
+
+- scope damage can exceed the intended target quickly
+
+Constraints:
+
+- confirm working directory
+- confirm target path
+- avoid shell-composed destructive chains when safer native commands exist
+- know whether the command is recursive, external, or cross-directory
+
+### 6.6 Build/test/verification commands
+
+Permission posture:
+
+- usually allowed if they are the normal project validation path
+
+Risk notes:
+
+- may generate artifacts, caches, logs, lockfiles, or downloads
+
+Constraints:
+
+- know what byproducts are acceptable
+- clean temporary validation artifacts when required
+- do not confuse build success with behavior correctness when runtime/UI verification is needed
+
+### 6.7 External read-only tools
+
+Permission posture:
+
+- allow when justified by freshness or missing local context
+
+Risk notes:
+
+- source-of-truth inversion if used too early
+- recommendation drift if relying on weak sources
+
+Constraints:
+
+- prefer authoritative sources
+- explicitly label remote fact vs local fact vs inference
+
+### 6.8 External write/change tools
+
+Permission posture:
+
+- explicit-intent only
+
+Risk notes:
+
+- highest impact because mistakes leave the local sandbox
+
+Constraints:
+
+- never first-step tools
+- never substitute for local validation
+- always verify result after the change
+
+### 6.9 Delegation/orchestration tools
+
+Permission posture:
+
+- conditional on host capability and task fit
+
+Risk notes:
+
+- can multiply confusion faster than they multiply productivity if used too early
+
+Constraints:
+
+- do not delegate the immediate blocking task just to avoid local work
+- do not delegate without ownership boundaries
+- do not assume repository support equals permission to use
+
+---
+
+## 7. Required preflight checks before high-risk tool use
+
+Before any high-risk or external-write tool use, the agent should be able to answer:
+
+1. What exact state will change?
+2. What is the narrowest possible target?
+3. What local evidence justifies the change?
+4. What verification will prove the change worked?
+5. What is the recovery path if the result is wrong?
+
+If these are not answerable, the high-risk tool use should be delayed.
+
+---
+
+## 8. Required post-use checks by family
+
+| Tool Family | Required Post-Use Check |
+|---|---|
+| Search/listing | confirm with file read before making strong claims |
+| File read | note what is still unconfirmed |
+| Edit/write | run validation and update docs if needed |
+| Shell mutate | inspect outputs/logs/path effects |
+| Build/test | record pass/fail scope and remaining gaps |
+| External read-only | separate source-backed fact from inference |
+| External write/change | verify target state actually changed correctly |
+| Delegation/orchestration | integrate result and verify ownership boundaries stayed clean |
+
+---
+
+## 9. Fast risk recipes
+
+### Safe discovery recipe
+
+`search/list -> file read -> file read -> conclusion`
+
+### Controlled implementation recipe
+
+`search/list -> file read -> bounded edit -> local validation -> doc sync`
+
+### High-risk mutation recipe
+
+`file read -> path confirmation -> command/edit -> validation -> cleanup/recovery check`
+
+### External publication recipe
+
+`local validation -> remote target confirmation -> external change -> post-change verification`
+
+---
+
+## 10. Promotion value
+
+This module is one of the strongest candidates for future stable promotion because it converts vague caution into explicit execution gates.
+It is especially useful for making the agent's "hands and feet" more capable without making them uncontrolled.
+
+## END FILE: modules/27_V6_5_ToolPermissionRiskMatrix.md
+
+---
+
+## BEGIN FILE: modules/28_V6_5_TerminologyAndModuleBoundaries.md
+
+# V6.5 Stable Module: Terminology And Module Boundaries
+
+Status: stable V6.5 support module.
+This module exists to reduce vocabulary drift and overlap inside the V6.5 stable line.
+
+---
+
+## 1. Why this module exists
+
+A draft line becomes hard to promote when:
+
+- several files use near-synonyms inconsistently
+- one concept appears in too many modules
+- readers cannot tell which file is normative for which question
+
+This module defines the preferred vocabulary and the intended ownership boundary of each V6.5 stable module.
+
+---
+
+## 2. Preferred terminology
+
+### 2.1 Runtime mode
+
+Use this term for the execution surface the system is currently operating in.
+
+Preferred examples:
+
+- REPL / interactive
+- headless / pipe
+- SDK / programmatic
+- daemon / background worker
+- bridge / remote
+- packaging / installer
+
+Do not casually replace this with:
+
+- channel
+- environment
+- interface
+- output mode
+
+unless the project truly means something narrower.
+
+### 2.2 Tool family
+
+Use this term for a class of tools that share similar behavior and risk.
+
+Preferred examples:
+
+- search/listing
+- local file read
+- local edit/write
+- local shell read-only
+- local shell mutating
+- external read-only lookup
+- external write/change
+- delegation/orchestration
+
+Do not mix this up with:
+
+- one concrete tool implementation
+- one provider-specific command
+- one repository-specific feature name
+
+### 2.3 Permission posture
+
+Use this term for the default approval stance a tool family should have.
+
+Preferred values:
+
+- allow by default
+- ask by default
+- deny by default unless explicitly required
+
+This is different from:
+
+- risk class
+- tool capability
+- trust boundary
+
+### 2.4 Risk class
+
+Use this term for the expected damage potential of a tool action.
+
+Preferred values:
+
+- low
+- medium
+- high
+- irreversible / high-impact
+
+Risk class answers:
+
+- how dangerous is this action if it goes wrong?
+
+It does **not** answer:
+
+- whether the tool is useful
+- whether the tool is available
+- whether the action is currently authorized
+
+### 2.5 Evidence requirement
+
+Use this term for what must be known before and after tool use.
+
+Typical examples:
+
+- pre-read required
+- path confirmation required
+- runtime verification required
+- post-change verification required
+
+This is one of the most important practical V6.5 terms.
+
+### 2.6 Output target
+
+Use this term for where a result is meant to go.
+
+Preferred examples:
+
+- terminal output
+- machine-readable output
+- remote protocol output
+- background state update
+- notification output
+- persistent artifact output
+
+### 2.7 Capability mapping
+
+Use this term for the relationship between a tool family and the question types it is best suited to answer.
+
+This is different from a usage matrix.
+
+### 2.8 Usage matrix
+
+Use this term for a decision table showing preferred tool families by:
+
+- task type
+- execution phase
+- runtime mode
+- risk level
+
+### 2.9 Governance module
+
+Use this term for a module that directly constrains how an agent should act.
+
+Current V6.5 governance modules are:
+
+- tool usage and selection
+- tool usage matrix
+- tool capability mapping
+- tool permission risk matrix
+
+### 2.10 Supporting structural module
+
+Use this term for a module that explains architectural context rather than directly giving first-step behavior rules.
+
+Current V6.5 supporting structural modules are:
+
+- runtime modes
+- hook lifecycle
+- permission/output pipeline
+
+---
+
+
+### 2.6 Verification matrix
+
+Use this term for a hard mapping from conclusion type to:
+
+- required tool family
+- minimum pass condition
+- default failure state
+
+This term is narrower than general tool policy.
+It answers what verification is mandatory for a given claim category.
+
+### 2.7 Question-boundary matrix
+
+Use this term for a hard mapping from tool family to:
+
+- strongly answerable question types
+- support-only question types
+- forbidden-alone question types
+
+This term answers what a tool family is strong enough to conclude by itself.
+
+### 2.8 Anti-pattern matrix
+
+Use this term for a structured list of invalid closure paths, correction recipes, and downgrade labels.
+
+This term answers how to recognize false certainty and what to do after it appears.
+
+## 3. Module ownership boundaries
+
+### 3.1 `20_V6_5_RuntimeModes_DRAFT.md`
+
+Owns:
+
+- definition of runtime modes
+- multi-mode vs single-mode distinction
+- mode-specific validation/permission/output awareness
+
+Does **not** own:
+
+- detailed tool matrices
+- detailed permission posture by tool family
+
+### 3.2 `21_V6_5_ToolUsageAndSelection_DRAFT.md`
+
+Owns:
+
+- general principles for tool choice
+- sequencing logic
+- what kinds of tool misuse are prohibited
+- broad guidance on when to prefer low-risk tools
+
+Does **not** own:
+
+- the dense matrix tables
+- the per-question capability map
+- the full permission-risk gating table
+
+### 3.3 `24_V6_5_ToolUsageMatrix_DRAFT.md`
+
+Owns:
+
+- decision-table style guidance
+- tool preference by task type, phase, runtime mode, and risk level
+
+Does **not** own:
+
+- deep narrative rationale
+- full capability explanations
+- full permission posture detail
+
+### 3.4 `25_V6_5_ToolCapabilityMapping_DRAFT.md`
+
+Owns:
+
+- which question types each tool family answers well
+- what evidence each family tends to produce
+- what follow-up tool is usually needed
+
+Does **not** own:
+
+- phase matrix logic
+- runtime-mode matrix logic
+- permission posture table
+
+### 3.5 `27_V6_5_ToolPermissionRiskMatrix_DRAFT.md`
+
+Owns:
+
+- permission posture by tool family
+- risk class by tool family
+- high-risk execution gates
+- runtime-mode-sensitive risk tightening
+
+Does **not** own:
+
+- question-to-tool matching logic
+- general onboarding sequence rules
+- full output-target taxonomy outside its permission/output interaction scope
+
+### 3.6 `22_V6_5_HookLifecycle_DRAFT.md`
+
+Owns:
+
+- lifecycle stages
+- hook-point mapping
+- side-effect placement awareness
+
+Does **not** own:
+
+- tool family selection rules
+
+### 3.7 `23_V6_5_PermissionAndOutputPipeline_DRAFT.md`
+
+Owns:
+
+- permission pipeline shape
+- output target pipeline shape
+- cross-boundary propagation questions
+
+Does **not** own:
+
+- the detailed tool-family risk table
+
+---
+
+## 4. Preferred reading model
+
+When the question is:
+
+- "What mode am I in?" -> read `20`
+- "How should I generally choose tools?" -> read `21`
+- "Which tool family is preferred here?" -> read `24`
+- "What question is this tool family good at answering?" -> read `25`
+- "How dangerous is this tool family and what gates apply?" -> read `27`
+- "Where are lifecycle interception points?" -> read `22`
+- "How do permissions and outputs cross boundaries?" -> read `23`
+
+---
+
+## 5. Consolidation rule
+
+If future promotion happens, the stable V6.5 line should preserve these ownership boundaries as much as possible.
+The goal is not to maximize file count.
+The goal is to keep each governance question answerable from one primary place.
+
+
+### 3.8 `29_V6_5_MandatoryVerificationMatrix_DRAFT.md`
+
+Owns:
+
+- conclusion type -> required tool family mapping
+- minimum pass conditions
+- default failure states when verification is incomplete
+
+Does not own:
+
+- question-strength boundaries for tool families
+- anti-pattern catalogs
+- broader runtime-mode modeling
+
+### 3.9 `30_V6_5_ToolQuestionBoundaryMatrix_DRAFT.md`
+
+Owns:
+
+- tool family -> strongly answerable question types
+- tool family -> support-only question types
+- tool family -> forbidden-alone question types
+
+Does not own:
+
+- required verification pass criteria for each conclusion type
+- correction recipes after anti-patterns occur
+- permission posture tables
+
+### 3.10 `31_V6_5_ToolMisuseAndAntiPatternMatrix_DRAFT.md`
+
+Owns:
+
+- common invalid closure paths
+- why those paths are invalid
+- correction recipes
+- safe downgrade labels
+
+Does not own:
+
+- the full decision matrix for normal tool selection
+- the full question-boundary model
+- the full permission/risk model
+`n---`n`n## 4. Provider Neutrality Rule`n`nV6.5 adopts the principle of **Provider Neutrality** in its architectural descriptions.`n`n### 4.1 Reasoning`nLarge systems like claude-code are designed to be provider-agnostic (supporting Anthropic, OpenAI, Gemini, etc.). AgentLogic should follow this by describing features in terms of their **Agentic Role** rather than a specific LLM brand.`n`n### 4.2 Application`n- Do **not** write: \"Claude will call the tool.\"`n- **Do** write: \"The LLM Provider will receive the tool definition and return a call request.\"`n- Do **not** write: \"Store this in Claude's memory.\"`n- **Do** write: \"Store this in the Agentic Memory Layer.\"`n`n### 4.3 Contract-First Design`nWhen documenting new modules, define the **Data Contract** (JSON schema, message format) first. This ensures the logic remains valid even if the underlying model or provider is swapped.
+
+## END FILE: modules/28_V6_5_TerminologyAndModuleBoundaries.md
+
+---
+
+## BEGIN FILE: modules/29_V6_5_MandatoryVerificationMatrix.md
+
+# V6.5 Mandatory Verification Matrix Draft
+
+## 1. Purpose
+
+This draft module turns the V6.5 mandatory tool-use policy into a concrete verification matrix.
+It answers three questions for each conclusion type:
+
+- which tool family must be used
+- what minimum evidence must be produced
+- when the result is still not strong enough to count as verified
+
+## 2. Core Rule
+
+If a conclusion belongs to one of the categories below, and the matching verification tool was not used, the conclusion must not be treated as fully verified.
+
+## 3. Matrix
+
+| Conclusion type | Mandatory tool family | Minimum pass condition | Still not verified when |
+| --- | --- | --- | --- |
+| Local repository fact | Local search/listing + targeted file reads | The relevant file path(s) are identified and the specific implementation location has been read directly | The conclusion is based only on memory, summaries, filenames, or search hits without direct reads |
+| Latest/current/remote fact | Authoritative external read-only verification | The current fact is checked against an authoritative live source | The conclusion is based on memory, stale notes, or non-authoritative secondary references |
+| UI / visible behavior | Screenshot or equivalent visual verification | A screenshot or equivalent visual artifact shows the actual state being claimed | The claim is based only on code reading, styling assumptions, or build success |
+| Runtime / build / packaging claim | Command, build, or runtime verification | The relevant command or runtime path has actually been executed and its result inspected | The claim is inferred only from static files, config, or expected behavior |
+| Path-sensitive write or side-effecting local command | Target-path confirmation + post-change inspection | The working directory and target path are confirmed before execution, and the changed result is inspected afterward | The command was run without target confirmation, or the post-change result was not checked |
+| External state change | Local validation + remote-target confirmation + post-change verification | The change is validated locally first, the remote target is confirmed second, the remote change is executed last, and the final remote state is checked | The remote change was made first, or the final remote state was not checked |
+| Permission-sensitive execution | Permission-mode and allowance verification | The current permission mode and actual allow/ask/deny posture are checked before execution | The tool was used without confirming the active permission posture |
+| Behavior with ambiguous evidence | At least two independent evidence paths | Two independent evidence sources agree, such as file read + runtime result, or runtime log + screenshot | Only one weak evidence path exists and the behavior remains ambiguous |
+
+## 4. Escalation Rule
+
+The higher the consequence of being wrong, the stronger the verification path must be.
+
+- low-impact conclusions may pass with one strong evidence path
+- medium-impact conclusions should usually include both source evidence and execution evidence
+- high-impact or irreversible conclusions should include precondition confirmation, execution evidence, and post-result verification
+
+## 5. Tool-Evidence Matching Guidance
+
+### 5.1 Search tools
+
+Use them to identify candidate locations, not to close the case.
+A search hit is a pointer, not proof.
+
+### 5.2 Read tools
+
+Use them to confirm actual implementation facts, call sites, configuration, and boundaries.
+
+### 5.3 Command / runtime tools
+
+Use them when the claim concerns execution, build success, runtime behavior, packaging output, or path effects.
+
+### 5.4 Visual verification tools
+
+Use them when the result is meant to be seen by a user.
+If the claim is visual, the proof must also be visual.
+
+### 5.5 External read-only tools
+
+Use them for current facts, remote states, hosted settings, release metadata, or any fact that can drift over time.
+
+## 6. Default Failure Rule
+
+If the agent cannot show the matching evidence class for the conclusion type, the default status should be one of the following instead of "verified":
+
+- unverified
+- partially verified
+- inferred but not confirmed
+- blocked on required verification tool
+
+## END FILE: modules/29_V6_5_MandatoryVerificationMatrix.md
+
+---
+
+## BEGIN FILE: modules/30_V6_5_ToolQuestionBoundaryMatrix.md
+
+# V6.5 Tool Question-Boundary Matrix Draft
+
+## 1. Purpose
+
+This draft module defines which question types each tool family is allowed to answer strongly, which question types it may only support indirectly, and which question types it must not answer alone.
+
+The goal is to prevent tool waste in one direction and false certainty in the other:
+
+- do not ignore tools that are required for good verification
+- do not let a weak tool family pretend to answer a stronger question than it can actually justify
+
+## 2. Core Rule
+
+A tool family may only close a question type when its evidence class is strong enough for that question.
+If the evidence class is weaker than the question requires, the tool may assist but must not close the question by itself.
+
+## 3. Matrix
+
+| Tool family | Strongly allowed question types | Support-only question types | Must not answer alone |
+| --- | --- | --- | --- |
+| Local search / listing | Where is the likely entrypoint? Which files mention this symbol or pattern? Which directory likely owns this behavior? | What is the actual implementation? What is the true runtime path? | Final implementation facts, runtime behavior, UI-visible outcome, current remote state |
+| Targeted local reads | What does this file or function actually do? What config or boundary is explicitly declared? | Does the whole system truly behave this way at runtime? | UI-visible outcome, runtime execution result, current remote state |
+| Command / runtime / build tools | Does it build? Does the command run? What artifact was produced? What runtime path actually happened? | Why is the code written this way? Which design rule should govern it? | Final UI visual quality, current remote setting unless the command actually queries it authoritatively |
+| Screenshot / visual verification | What does the user-visible state actually look like right now? Did the UI regress visually? | Why the UI looks this way in code | Hidden internal logic, invisible state transitions without visual evidence |
+| External read-only verification | What is the current remote fact, release state, hosted setting, or live metadata? | How is the local implementation structured? | Local implementation facts, local runtime claims, local path effects |
+| Local edit / write tools | Applying a change after the question has already been answered by stronger evidence | Testing whether a candidate fix changes behavior when combined with verification tools | Discovery, fact-finding, current remote fact verification |
+| External write / change tools | Applying a confirmed remote change after local and target validation | Verifying whether a planned remote update is technically possible | Fact discovery, first-pass diagnosis, proof of safety by themselves |
+| Planning / orchestration tools | Decomposing work, sequencing tools, assigning verification paths | Summarizing already gathered evidence | Closing factual questions without the underlying evidence tools |
+
+## 4. Common Failure Patterns
+
+### 4.1 Search-hit closure
+
+Failure pattern:
+- a symbol is found by search
+- the agent treats the search hit as proof of implementation
+
+Correct posture:
+- search narrows the candidate set
+- targeted reads confirm the actual fact
+
+### 4.2 Read-only closure on runtime questions
+
+Failure pattern:
+- config or code looks correct
+- the agent treats expected behavior as observed behavior
+
+Correct posture:
+- if the claim is about execution, use execution evidence
+
+### 4.3 Build-success closure on UI questions
+
+Failure pattern:
+- the build passes
+- the agent concludes the visible behavior is fixed
+
+Correct posture:
+- if the claim is visual, the proof must be visual
+
+### 4.4 Remote-memory closure
+
+Failure pattern:
+- the agent remembers a release state, setting, or hosted fact
+- the agent answers without current authoritative verification
+
+Correct posture:
+- if the fact can drift over time, verify it live
+
+## 5. Escalation Rule
+
+When the first tool family cannot close the question safely, escalate to the next stronger evidence class rather than forcing a weak tool to over-answer.
+
+Typical escalation patterns:
+
+- search -> read
+- read -> runtime/build
+- read -> screenshot
+- local validation -> external verification
+- planning -> actual evidence tools
+
+## 6. Default Output Labels
+
+If the current tool family can only support but not close the question, the answer should use a weaker label such as:
+
+- likely location only
+- implementation suggests
+- inferred from static read
+- needs runtime confirmation
+- needs visual confirmation
+- needs authoritative remote verification
+
+## END FILE: modules/30_V6_5_ToolQuestionBoundaryMatrix.md
+
+---
+
+## BEGIN FILE: modules/31_V6_5_ToolMisuseAndAntiPatternMatrix.md
+
+# V6.5 Tool Misuse And Anti-Pattern Matrix Draft
+
+## 1. Purpose
+
+This draft module records common tool-usage mistakes that create false certainty, weak verification, or unsafe execution.
+
+It exists to answer four questions:
+
+- what the anti-pattern looks like
+- why it is invalid
+- what stronger path should replace it
+- what status label should be used until the stronger path is completed
+
+## 2. Core Rule
+
+If the agent followed an anti-pattern below, the result must not be labeled as fully verified, fixed, safe, or complete.
+
+## 3. Matrix
+
+| Anti-pattern | What it looks like | Why it is invalid | Required correction | Safe interim label |
+| --- | --- | --- | --- | --- |
+| Search-hit closure | A grep/search hit is treated as proof that the implementation fact is settled | Search only identifies candidates; it does not prove the actual logic or path | Read the concrete file/function/config directly | likely location only |
+| Static-read closure on runtime claims | Code/config looks correct, so the runtime claim is treated as verified | Expected behavior is not observed behavior | Run the relevant command/runtime/build path and inspect the result | inferred from static read |
+| Build-success closure on visual claims | The build passes, so the UI fix is treated as complete | Build success does not prove visible behavior | Use screenshot or equivalent visual verification | needs visual confirmation |
+| Visual-only closure on hidden logic | The screen looks right, so hidden internal behavior is assumed correct | A visible state may hide incorrect data flow or wrong transitions | Add source read, logs, runtime inspection, or state inspection | visually plausible only |
+| Memory-based current-fact answer | The agent answers a current remote/release/settings question from memory | Current facts drift over time | Use authoritative external read-only verification | needs authoritative remote verification |
+| Stale-local-note closure | Old markdown/task notes are treated as proof of current system state | Local notes may be outdated or project-specific | Re-read the current source/doc/remote fact directly | stale note not confirmed |
+| Write-first diagnosis | The agent edits files before proving where the fault actually is | Mutation before diagnosis increases noise and drift | Search, read, and verify the failure path first | diagnosis incomplete |
+| Broad-shell mutation without target confirmation | A side-effecting command is run before the directory/path/target is checked | The command may affect the wrong scope | Confirm working directory and exact target before execution | target not confirmed |
+| Remote-change-first workflow | A remote setting/repo/release state is changed before local validation and target confirmation | It raises avoidable external risk and may change the wrong target | Validate locally first, confirm remote target second, then change and post-verify | remote change not yet justified |
+| Permission-blind execution | A sensitive tool is executed without checking allow/ask/deny posture | The execution may violate the active safety boundary | Check permission mode and tool allowance before running | permission not confirmed |
+| Planner-only factual closure | A plan/orchestration step is treated as proof of the underlying fact | Planning sequences work; it does not produce factual evidence | Use actual evidence tools for the factual layer | plan only, not verified |
+| Single-weak-evidence closure on ambiguous behavior | One weak signal is treated as enough in an ambiguous case | Ambiguous behavior needs stronger or independent evidence | Add a second independent evidence path | ambiguous, needs second evidence path |
+
+## 4. High-Frequency Failure Patterns
+
+### 4.1 Fast but fake certainty
+
+This happens when the agent reaches a conclusion with the fastest available tool instead of the strongest required tool.
+
+Typical symptoms:
+- strong wording after weak evidence
+- no artifact, no direct read, no screenshot, no runtime output
+- a conclusion that sounds settled but cannot be traced to a matching evidence path
+
+### 4.2 Tool skipping after partial evidence
+
+This happens when the agent starts with the right first tool but skips the required next one.
+
+Examples:
+- search was used, but read was skipped
+- read was used, but runtime verification was skipped
+- runtime verification was used, but visual verification was skipped for a UI claim
+
+### 4.3 Correct tool, wrong question strength
+
+This happens when the chosen tool is valid in general but too weak for the specific question being closed.
+
+Examples:
+- static file reads used to answer a runtime-execution question
+- build output used to answer a visual-quality question
+- screenshot used to answer a hidden internal-state question
+
+## 5. Correction Recipes
+
+### 5.1 Repository fact recipe
+
+- search/list candidates
+- targeted read
+- if needed, follow the call/config chain
+- only then state the implementation fact strongly
+
+### 5.2 Runtime claim recipe
+
+- read the relevant implementation/config
+- run the command or runtime path
+- inspect the result/log/artifact
+- only then state the runtime claim strongly
+
+### 5.3 UI claim recipe
+
+- read the likely UI path if needed
+- run/build the relevant target
+- capture screenshot or equivalent visual proof
+- only then state the visual claim strongly
+
+### 5.4 Remote/current fact recipe
+
+- identify the exact remote target
+- query an authoritative live source
+- answer with current-state wording tied to that source
+
+## 6. Enforcement Labels
+
+When an anti-pattern occurred and correction has not yet happened, the answer should prefer labels such as:
+
+- unverified
+- partially verified
+- inferred from static read
+- likely location only
+- needs runtime confirmation
+- needs visual confirmation
+- needs authoritative remote verification
+- blocked on required verification path
+
+## END FILE: modules/31_V6_5_ToolMisuseAndAntiPatternMatrix.md
+
+---
+
+## BEGIN FILE: modules/32_V6_5_ContextAssemblyAndInstructionStacking.md
+
+# V6.5 Stable Module: Context Assembly and Instruction Stacking
+
+Status: stable V6.5 module.
+This module defines how to layer multiple instruction sources into a single coherent context without bloating or contradiction.
+
+---
+
+## 1. Why this module exists
+
+Advanced agentic systems pull instructions from many sources:
+- global personal preferences
+- workspace-wide mandates
+- subdirectory-specific rules
+- project-managed instruction files (CLAUDE.md / GEMINI.md)
+- automated memory entries (MEMORY.md)
+
+If these are not stacked in a predictable order, the agent may:
+- follow a global rule when a project-specific override exists
+- ignore a subdirectory rule in favor of a root rule
+- get confused by conflicting instructions
+
+---
+
+## 2. The Instruction Stack (Low to High Priority)
+
+Instructions should be layered such that **higher-numbered sources override lower-numbered ones**:
+
+1.  **Model/Provider Baseline**: The general knowledge and system prompt of the underlying LLM.
+2.  **Global Personal Memory**: Cross-project user preferences (e.g., "I always prefer TypeScript").
+3.  **Managed/Enterprise Policy**: Organizational rules enforced across all machines.
+4.  **Project Root Instructions**: Mandates for the entire repository (e.g., `GEMINI.md` at root).
+5.  **Subdirectory Instructions**: Overrides for specific modules (e.g., `src/api/GEMINI.md`).
+6.  **Private Project Memory**: Local, machine-specific notes (e.g., `MEMORY.md`).
+7.  **Dynamic Task Context**: Immediate instructions for the current coding round.
+
+---
+
+## 3. Stacking Rules
+
+### 3.1 Specificity Wins
+A rule at the `src/` level always overrides a rule at the project root level for files within `src/`.
+
+### 3.2 Private Beats Public
+`MEMORY.md` (private notes) overrides `GEMINI.md` (public repo instructions) for the current user's execution, as it often contains local environment-specific fixes.
+
+### 3.3 Task Context is Supreme
+If the user says "ignore the lint rule for this one file" in the current session, that instruction wins over all permanent rules for that specific task.
+
+---
+
+## 4. Anti-Pattern: The Bloated Prompt
+
+Do **not** include the full text of every instruction file if they overlap significantly.
+- Prefer **targeted inclusion**: only pull in the instructions relevant to the current directory and task.
+- Use **Instruction Pointers**: if a file is too large, the agent should read its summary/index first and only deep-read relevant sections.
+
+---
+
+## 5. Instruction Collision Resolution
+
+When two rules conflict:
+1.  Identify the source tier for each rule.
+2.  Apply the higher-tier rule.
+3.  Log the collision in the current session context to explain why the lower-tier rule was ignored.
+
+---
+
+## 6. Implementation for V6.5
+
+Agents should explicitly state their "Active Instruction Profile" when switching between subdirectories with different `GEMINI.md` files.
+
+## END FILE: modules/32_V6_5_ContextAssemblyAndInstructionStacking.md
+
+---
+
+## BEGIN FILE: modules/33_V6_5_BackgroundConsolidationAndIdleLifecycle.md
+
+# V6.5 Stable Module: Background Consolidation and Idle Lifecycle
+
+Status: stable V6.5 module.
+This module defines the "Dream Phase" 鈥?how an agent should act when a primary task is complete or during idle time.
+
+---
+
+## 1. Why this module exists
+
+In most systems, the agent stops immediately after "Validate". This leaves:
+- messy temporary files
+- fragmented memory entries
+- un-synced documentation
+- un-shared structural lessons
+
+V6.5 introduces the **Idle Lifecycle** to convert session noise into durable project knowledge.
+
+---
+
+## 2. The Post-Task "Dream" Lifecycle
+
+Once the user's primary directive is marked `Verified`, the agent should perform these steps (ideally in the background if supported, or as a final cleanup turn):
+
+### 2.1 Artifact Cleanup
+- Delete temporary log files, test snapshots, and build artifacts created during implementation.
+- Revert any non-essential environment changes (e.g., temporary `export` variables).
+
+### 2.2 Memory Extraction
+- Review the session history.
+- Identify new structural facts (e.g., "The auth service requires X header").
+- Identify new user preferences (e.g., "User prefers 4-space tabs").
+- Write these to the appropriate tier (Project Fact Map, MEMORY.md, or Global Memory).
+
+### 2.3 Documentation Sync
+- Check if the code changes invalidate existing `GEMINI.md` or `README.md` descriptions.
+- Propose or apply targeted updates to keep documentation in sync with reality.
+
+### 2.4 Structural Consolidation
+- If multiple small edits were made, look for a larger pattern (e.g., "We are consistently adding X to every route").
+- Propose a refactor or a new logic rule to automate this pattern in the future.
+
+---
+
+## 3. Memory Triage (The 4-Tier Model)
+
+When extracting memories, use the `claude-code` taxonomy:
+
+1.  **User**: Personal preferences, coding style, local machine quirks. (Save to Global or Private Local Memory).
+2.  **Feedback**: Methodological corrections or "lessons learned" from this specific session (e.g., "Don't use tool X for task Y").
+3.  **Project**: Hard facts about the codebase, architecture, and logic. (Save to `GEMINI.md` or Project Fact Map).
+4.  **Reference**: Pointers to external docs, APIs, or sibling services.
+
+---
+
+## 4. The "Idle" Prompt
+
+If the agent is waiting for user input for a long period, it may (if the host allows) perform "Internal Checkup":
+- Verify directory integrity.
+- Re-index symbols if many files changed.
+- Audit `MEMORY.md` for stale entries (> 90 days).
+
+---
+
+## 5. Enforcement
+
+A task is not truly `Finalized` until the **Consolidation Phase** is complete.
+The agent should be able to answer: "What did we learn in this session that should be saved forever?"
+
+## END FILE: modules/33_V6_5_BackgroundConsolidationAndIdleLifecycle.md
+
+---
+
+## BEGIN FILE: modules/34_V6_5_ProjectFactMap_V2.md
+
+# V6.5 Project Fact Map Template
+
+Status: stable V6.5 support template.
+This template incorporates the 4-tier memory taxonomy and mandatory verification tracking.
+
+---
+
+## 1. Project Identity & Logic Entry
+- **Project Name**:
+- **Logic Entry Point**: (e.g., D:\workspace\AgentLogic\MAIN.md)
+- **Logic Version**: V6.5 (Stable Line)
+- **Directory Audit Status**: [Verified/Unverified]
+
+## 2. The 4-Tier Fact Map
+
+### 2.1 Project Facts (Core Architecture & Logic)
+- **Primary Tech Stack**:
+- **Main Entrypoints**:
+- **Key Constraints**:
+- **Known Architectual Debt**: (e.g., Large files, God components)
+
+### 2.2 User Facts (Preferences & Local Setup)
+- **Preferred Coding Style**:
+- **Local Tool Paths**: (e.g., Browser path, custom shell)
+- **Machine Quirks**:
+
+### 2.3 Feedback Facts (Lessons from Previous Rounds)
+- **Successful Patterns**:
+- **Failed Attempts/Anti-Patterns to Avoid**:
+- **Tool Usage Lessons**:
+
+### 2.4 Reference Facts (External Systems)
+- **Upstream Documentation**:
+- **Dependency Versions**:
+- **Remote API Endpoints**:
+
+## 3. Current Task State
+
+### 3.1 Task Boundary
+- **Current Goal**:
+- **Affected Modules**:
+- **Risk Level**: [Low/Medium/High/Irreversible]
+
+### 3.2 Verification Tracker (Mandatory)
+| Feature/Claim | Evidence Tool Used | Result | Status |
+|---|---|---|---|
+| (e.g., Bug reproduction) | run_shell_command | Log attached | [Verified] |
+| (e.g., UI Fix) | screenshot | Image attached | [Pending] |
+
+## 4. Runtime Mode Context
+- **Active Mode**: [REPL / Headless / SDK / Server / Bridge / Packaging]
+- **Permission Posture**: [Allow / Ask / Deny]
+- **Output Target**:
+
+## 5. Unconfirmed Points (The "Audit List")
+- [ ] Point 1
+- [ ] Point 2
+
+---
+
+## 6. Cleanup & Consolidation Checklist
+- [ ] Temporary artifacts deleted?
+- [ ] New facts promoted to GEMINI.md or MEMORY.md?
+- [ ] Documentation synced?
+
+## END FILE: modules/34_V6_5_ProjectFactMap_V2.md
 
