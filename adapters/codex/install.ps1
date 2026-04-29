@@ -7,6 +7,7 @@ $ErrorActionPreference = "Stop"
 
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot "..\..")).Path
 $buildScript = Join-Path $repoRoot "scripts\build-profile.ps1"
+$skillsGovernanceScript = Join-Path $repoRoot "scripts\skills-governance.ps1"
 $targetDir = Join-Path $UserHome ".codex\agentlogic"
 $targetPath = Join-Path $targetDir "model_instructions.md"
 $configPath = Join-Path $UserHome ".codex\config.toml"
@@ -43,6 +44,9 @@ else {
 
 [System.IO.File]::WriteAllText($configPath, $updated, [System.Text.UTF8Encoding]::new($false))
 
+powershell -NoProfile -ExecutionPolicy Bypass -File $skillsGovernanceScript -TargetHost codex -UserHome $UserHome -Apply
+
 Write-Host "Installed AgentLogic into Codex."
 Write-Host "Instructions path: $targetPath"
 Write-Host "Updated config: $configPath"
+Write-Host "Skill governance audit: applied"

@@ -46,6 +46,7 @@ The V6.5 line is supported by a modular suite of governance rules:
 
 ### 2.5 Skill Governance
 - `modules/35_V6_5_SkillGovernanceAndMandatoryUse.md`: Deduplication policy, active-vs-archived skill posture, and mandatory skill-use situations.
+- `modules/36_V6_5_SkillZoneSeparation.md`: Separates host-local skill inventories from any future logic-carried skill layer so one machine does not redefine another by default.
 
 ---
 
@@ -76,7 +77,7 @@ This reference source informed the V6.5 additions around:
 - question-boundary mapping
 - tool anti-pattern detection
 
-## 6. Skill-System Integration Rule
+## 5. Skill-System Integration Rule
 
 V6.5 treats host-local skills as a governed execution layer rather than a loose add-on.
 
@@ -87,12 +88,14 @@ Key stable rules:
 - full-duplicate skills may be deleted, but partial-overlap skills should be kept when they add unique workflows, scripts, templates, or reference layers
 - broad domain skill packs may be archived off-by-default to protect skill context budget quality
 - mandatory skill-use situations must be recorded whenever a skill is the strongest operational path for a recurring task class
+- every fresh local installation and every local host update must run a host-local skill deduplication and organization pass before the install/update is treated as complete
 
 See:
 
 - `modules/35_V6_5_SkillGovernanceAndMandatoryUse.md`
+- `modules/36_V6_5_SkillZoneSeparation.md`
 
-## 5. Future Iteration Reference-Source Rule
+## 6. Future Iteration Reference-Source Rule
 
 For future logic iterations, a version line must explicitly record its external or comparative reference source when such a source materially influenced the update.
 

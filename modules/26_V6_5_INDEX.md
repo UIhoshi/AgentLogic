@@ -23,6 +23,7 @@ These modules define how the agent should act.
 9.  **Post-Task Consolidation**: `modules/33_V6_5_BackgroundConsolidationAndIdleLifecycle.md`
 10. **Fact Mapping**: `modules/34_V6_5_ProjectFactMap_V2.md`
 11. **Skill Governance**: `modules/35_V6_5_SkillGovernanceAndMandatoryUse.md`
+12. **Skill Zone Separation**: `modules/36_V6_5_SkillZoneSeparation.md`
 
 ---
 
@@ -36,13 +37,13 @@ These modules explain the system context that governance depends on.
 ---
 
 ## 4. Reading Priority
-- For **Behavior Improvements**: Read the **Governance Modules (1-10)** first.
+- For **Behavior Improvements**: Read the **Governance Modules (1-12)** first.
 - For **System Modeling**: Read the **Structural Modules (1-4)** second.
 
 
 ---
 
-## 12. Reference source baseline
+## 5. Reference source baseline
 
 The V6.5 line used the following primary external comparison source during promotion:
 

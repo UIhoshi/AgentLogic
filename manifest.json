@@ -48,7 +48,8 @@
         "modules/32_V6_5_ContextAssemblyAndInstructionStacking.md",
         "modules/33_V6_5_BackgroundConsolidationAndIdleLifecycle.md",
         "modules/34_V6_5_ProjectFactMap_V2.md",
-        "modules/35_V6_5_SkillGovernanceAndMandatoryUse.md"
+        "modules/35_V6_5_SkillGovernanceAndMandatoryUse.md",
+        "modules/36_V6_5_SkillZoneSeparation.md"
       ]
     },
     "github-publishing": {
@@ -85,7 +86,8 @@
         "modules/32_V6_5_ContextAssemblyAndInstructionStacking.md",
         "modules/33_V6_5_BackgroundConsolidationAndIdleLifecycle.md",
         "modules/34_V6_5_ProjectFactMap_V2.md",
-        "modules/35_V6_5_SkillGovernanceAndMandatoryUse.md"
+        "modules/35_V6_5_SkillGovernanceAndMandatoryUse.md",
+        "modules/36_V6_5_SkillZoneSeparation.md"
       ]
     }
   },

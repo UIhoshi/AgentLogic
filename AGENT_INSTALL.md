@@ -84,10 +84,51 @@ If the user asks to "load", "install", "mount", "bind", or "use this logic local
 2.  **Target Selection**: Choose the target host (`codex`, `claude`, `gemini`, or `generic`) based on the current environment.
 3.  **Install**: Run the matching `install.ps1 -TargetHost ...` command using the `core-enhanced` profile.
 4.  **Validation**: Run `scripts/validate-package.ps1`.
-5.  **Adoption**: Immediately after installation, the agent must:
+5.  **Skill Governance Audit**: Run install-time skill deduplication and organization for the target host. This is mandatory, not optional. The default install path now executes:
+    - `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\skills-governance.ps1 -TargetHost <host> -Apply`
+    The purpose is:
+    - archive budget-heavy domain skill packs by default
+    - preserve engineering-critical skills in the visible set
+    - prevent host-local skill sprawl from degrading model-visible skill quality
+6.  **Adoption**: Immediately after installation, the agent must:
     -   Read `versions/AgentLogic_V6_5.md` to understand the new line.
     -   Adopt the **Mandatory Verification Matrix** (Module 29) for all subsequent claims.
     -   Adopt the **4-Tier Memory Taxonomy** (User, Feedback, Project, Reference) for project notes.
-6.  **Report**: State the installed host, version (V6.5), profile, and confirmation that the new governance rules are active.
+7.  **Report**: State the installed host, version (V6.5), profile, and confirmation that the new governance rules are active.
+
+## Install-Time And Update-Time Skill Rule (V6.5)
+
+Every local installation **and every local logic update** of AgentLogic must perform a host-local skill audit and organization pass.
+
+This is required because:
+
+- each machine may have a different host-local skill inventory
+- old machines and old host installs may have accumulated stale or oversized host-local skill sets
+- large domain skill packs can crowd out the most useful engineering skills
+- duplicate-or-overlapping skill families must be classified instead of guessed
+- host-local skills must stay separate from any logic-carried skill layer so one machine's local packs do not become another machine's default logic state
+
+The V6.5 install/update rule is:
+
+1. identify the host-local skill zone for the target host
+2. keep that host-local zone separate from the logic-carried layer
+3. inspect only the host-local skills directory during the governance pass
+4. classify active-by-default vs archive-by-default families
+5. preserve engineering-critical skill families in the visible pool
+6. archive budget-heavy domain packs off-by-default unless the user explicitly wants them active
+
+Use:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\skills-governance.ps1 -TargetHost codex -Apply
+```
+
+Replace `codex` with `claude` or `gemini` when needed.
+
+The install/update governance pass is for the **host-local skill zone only**. It must not treat host-local skill state as portable repository truth.
+
+See also:
+- `modules/35_V6_5_SkillGovernanceAndMandatoryUse.md`
+- `modules/36_V6_5_SkillZoneSeparation.md`
 
 Do not search through unrelated project files or treat the AgentLogic repository as a business workspace.

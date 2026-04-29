@@ -4,11 +4,15 @@ Status: **Stable V6.5 Line**.
 
 This module defines how host-local skills should be treated under V6.5.
 
+Zone separation between host-local skills and any future logic-carried skill layer is defined in `modules/36_V6_5_SkillZoneSeparation.md`.
+
 ---
 
 ## 1. Core Distinction
 
 The logic package and the host-local skill system are not the same layer.
+
+This module governs the **host-local skill zone**. It does not redefine a future logic-carried skill zone as disposable user clutter.
 
 - **Logic package**
   - defines behavioral rules
