@@ -184,6 +184,8 @@
 - Local repository facts must be verified by local search/listing plus targeted reads.
 - Latest/current/remote facts must be verified by authoritative external read-only checks.
 - UI / visible behavior must be verified by screenshot or equivalent visual evidence.
+- All frontend layout changes that add or change text, fields, columns, badges, buttons, cards, grid/flex children, min-width, white-space, overflow, font size, or spacing must include a parent-child layout-boundary check so no child exceeds, pushes past, or visually breaks its parent container.
+- Frontend work is not complete until the visible result has been checked for overflow, truncation, wrapping, misalignment, and one-row-vs-two-row fit under the actual container width.
 - Runtime / build / packaging claims must be verified by command, build, or runtime checks.
 - Path-sensitive writes, side-effecting commands, and external state changes must include pre-target confirmation and post-result confirmation.
 - Permission-sensitive execution must include permission-mode and allowance confirmation before execution.

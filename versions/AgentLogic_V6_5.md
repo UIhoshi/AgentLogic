@@ -17,6 +17,7 @@ Key Enhancements:
 - **Mandatory Verification**: Requires explicit evidence chains (build, runtime, or visual) before declaring a task "Verified."
 - **Permission & Output Pipelines**: Models trust and result delivery as end-to-end pipelines.
 - **Architecture Debt Diagnosis**: Mandates the recording of "God Components" and oversized files as formal debt.
+- **Frontend Layout-Boundary Verification**: Makes parent-child layout containment and visible overflow checks mandatory for all frontend UI changes.
 
 ---
 

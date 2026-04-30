@@ -268,6 +268,17 @@ Use when:
 Do not use them to explore.
 Writing is not discovery.
 
+#### 6.3.1 Mandatory frontend layout-boundary check
+
+For any frontend/UI change that adds or changes text, fields, columns, buttons, badges, cards, grid/flex children, `min-width`, `white-space`, `overflow`, font size, or spacing, the agent must treat parent-child layout containment as a mandatory verification target.
+
+Required closure checks:
+
+- no child element may exceed or push past its parent container
+- the current container width must be checked for overflow, truncation, wrapping, and misalignment
+- if a one-row layout cannot safely hold the content, it must be changed to a two-row or adaptive layout
+- frontend work is not complete until this visible boundary check has been performed
+
 ### 6.4 Shell/command tools
 
 Use when:
