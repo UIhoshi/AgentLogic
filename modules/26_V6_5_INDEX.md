@@ -16,9 +16,9 @@ These modules define how the agent should act.
 2.  **Usage Matrix**: `modules/24_V6_5_ToolUsageMatrix.md`
 3.  **Capability Mapping**: `modules/25_V6_5_ToolCapabilityMapping.md`
 4.  **Risk Gating**: `modules/27_V6_5_ToolPermissionRiskMatrix.md`
-5.  **Evidence Matrix**: `modules/29_V6_5_MandatoryVerificationMatrix.md`
-6.  **Question Boundaries**: `modules/30_V6_5_ToolQuestionBoundaryMatrix.md`
-7.  **Anti-Pattern Rejection**: `modules/31_V6_5_ToolMisuseAndAntiPatternMatrix.md`
+5.  **Evidence Matrix**: `modules/29_MandatoryVerificationMatrix.md`
+6.  **Question Boundaries**: `modules/30_ToolQuestionBoundaryMatrix.md`
+7.  **Anti-Pattern Rejection**: `modules/31_ToolMisuseAndAntiPatternMatrix.md`
 8.  **Instruction Stacking**: `modules/32_V6_5_ContextAssemblyAndInstructionStacking.md`
 9.  **Post-Task Consolidation**: `modules/33_V6_5_BackgroundConsolidationAndIdleLifecycle.md`
 10. **Fact Mapping**: `modules/34_V6_5_ProjectFactMap_V2.md`

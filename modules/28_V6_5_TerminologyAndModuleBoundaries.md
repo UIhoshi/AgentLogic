@@ -310,7 +310,7 @@ The goal is not to maximize file count.
 The goal is to keep each governance question answerable from one primary place.
 
 
-### 3.8 `29_V6_5_MandatoryVerificationMatrix_DRAFT.md`
+### 3.8 `29_MandatoryVerificationMatrix.md`
 
 Owns:
 
@@ -324,7 +324,7 @@ Does not own:
 - anti-pattern catalogs
 - broader runtime-mode modeling
 
-### 3.9 `30_V6_5_ToolQuestionBoundaryMatrix_DRAFT.md`
+### 3.9 `30_ToolQuestionBoundaryMatrix.md`
 
 Owns:
 
@@ -338,7 +338,7 @@ Does not own:
 - correction recipes after anti-patterns occur
 - permission posture tables
 
-### 3.10 `31_V6_5_ToolMisuseAndAntiPatternMatrix_DRAFT.md`
+### 3.10 `31_ToolMisuseAndAntiPatternMatrix.md`
 
 Owns:
 

@@ -2,9 +2,9 @@
 
 - Host target: generic
 - Profile: core-enhanced
-- Generated at: 2026-04-29T14:54:59+09:00
+- Generated at: 2026-06-22T00:08:38+09:00
 - Stable entry: MAIN.md
-- Version: V6.5
+- Version: V6.6
 
 This is a generated primary-logic bundle. Regenerate it from scripts/build-profile.ps1 instead of editing it by hand.
 
@@ -60,7 +60,7 @@ This file is logic, not project content.
 Before any formal planning, implementation, modification, validation, review, packaging, or rule synchronization work, the agent MUST fully read all of the following files from beginning to end in this exact order:
 
 1. `README.md`
-2. `versions/AgentLogic_V6_5.md`
+2. `versions/AgentLogic_V6_6.md`
 3. `modules/01_MasterLogic.md`
 4. `modules/15_LogicEntryChecklist.md`
 
@@ -325,11 +325,52 @@ If the user asks to "load", "install", "mount", "bind", or "use this logic local
 2.  **Target Selection**: Choose the target host (`codex`, `claude`, `gemini`, or `generic`) based on the current environment.
 3.  **Install**: Run the matching `install.ps1 -TargetHost ...` command using the `core-enhanced` profile.
 4.  **Validation**: Run `scripts/validate-package.ps1`.
-5.  **Adoption**: Immediately after installation, the agent must:
-    -   Read `versions/AgentLogic_V6_5.md` to understand the new line.
+5.  **Skill Governance Audit**: Run install-time skill deduplication and organization for the target host. This is mandatory, not optional. The default install path now executes:
+    - `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\skills-governance.ps1 -TargetHost <host> -Apply`
+    The purpose is:
+    - archive budget-heavy domain skill packs by default
+    - preserve engineering-critical skills in the visible set
+    - prevent host-local skill sprawl from degrading model-visible skill quality
+6.  **Adoption**: Immediately after installation, the agent must:
+    -   Read `versions/AgentLogic_V6_6.md` to understand the new line.
     -   Adopt the **Mandatory Verification Matrix** (Module 29) for all subsequent claims.
     -   Adopt the **4-Tier Memory Taxonomy** (User, Feedback, Project, Reference) for project notes.
-6.  **Report**: State the installed host, version (V6.5), profile, and confirmation that the new governance rules are active.
+7.  **Report**: State the installed host, version (V6.5), profile, and confirmation that the new governance rules are active.
+
+## Install-Time And Update-Time Skill Rule (V6.5)
+
+Every local installation **and every local logic update** of AgentLogic must perform a host-local skill audit and organization pass.
+
+This is required because:
+
+- each machine may have a different host-local skill inventory
+- old machines and old host installs may have accumulated stale or oversized host-local skill sets
+- large domain skill packs can crowd out the most useful engineering skills
+- duplicate-or-overlapping skill families must be classified instead of guessed
+- host-local skills must stay separate from any logic-carried skill layer so one machine's local packs do not become another machine's default logic state
+
+The V6.5 install/update rule is:
+
+1. identify the host-local skill zone for the target host
+2. keep that host-local zone separate from the logic-carried layer
+3. inspect only the host-local skills directory during the governance pass
+4. classify active-by-default vs archive-by-default families
+5. preserve engineering-critical skill families in the visible pool
+6. archive budget-heavy domain packs off-by-default unless the user explicitly wants them active
+
+Use:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\skills-governance.ps1 -TargetHost codex -Apply
+```
+
+Replace `codex` with `claude` or `gemini` when needed.
+
+The install/update governance pass is for the **host-local skill zone only**. It must not treat host-local skill state as portable repository truth.
+
+See also:
+- `modules/35_V6_5_SkillGovernanceAndMandatoryUse.md`
+- `modules/36_V6_5_SkillZoneSeparation.md`
 
 Do not search through unrelated project files or treat the AgentLogic repository as a business workspace.
 
@@ -399,7 +440,7 @@ For repository work, also read:
 
 Hosts should bind to `MAIN.md` or to a generated bundle built from `manifest.json`.
 
-Hosts should not bind directly to `versions/AgentLogic_V6_5.md` or any future versioned file name.
+Hosts should not bind directly to `versions/AgentLogic_V6_6.md` or any future versioned file name.
 
 ## Architecture
 
@@ -619,7 +660,7 @@ The current logic-entry chain is:
 
 1. `00_START_HERE.md`
 2. `README.md`
-3. `versions/AgentLogic_V6_5.md`
+3. `versions/AgentLogic_V6_6.md`
 4. `modules/01_MasterLogic.md`
 5. `modules/15_LogicEntryChecklist.md`
 
@@ -645,50 +686,48 @@ This repository is logic infrastructure, not a business-project workspace.
 
 - Human-first entry: `00_START_HERE.md`
 - Stable host binding entry: `MAIN.md`
-- Versioned main logic source: `versions/AgentLogic_V6_5.md`
+- Versioned main logic source: `versions/AgentLogic_V6_6.md`
 
 ## END FILE: AGENTS.md
 
 ---
 
-## BEGIN FILE: versions/AgentLogic_V6_5.md
+## BEGIN FILE: versions/AgentLogic_V6_6.md
 
-# AgentLogic V6.5
+# AgentLogic V6.6
 
-Status: **Current Stable V6.5 Line**.
-Promoted from the comparative research of advanced agentic CLI systems (including `claude-code`).
+Status: **Current Stable V6.6 Line**.
+Promoted from the integration of Cybersecurity Skills Router (`reverse-skill`) and Spec-Driven Development Toolkit (`spec-kit`).
 
-This file defines the stable V6.5 logic line. It operationalizes the core V6 philosophy with deeper rules for tool governance, runtime awareness, and mandatory verification.
+This file defines the stable V6.6 logic line. It operationalizes the core V6 philosophy with deep integrations for cybersecurity routing and structured specification-driven workflows.
 
 ---
 
-## 1. The V6.5 Mandate
+## 1. The V6.6 Mandate
 
-V6.5 is a **mid-line expansion** designed for high-scale agentic systems where "code exists" is insufficient proof of "capability is available."
+V6.6 is a **major capability expansion** designed to bridge system-level operational discipline with specialized engineering domains:
 
 Key Enhancements:
-- **Runtime Mode Taxonomy**: Explicitly distinguishes between REPL, Headless, SDK, Daemon, Bridge, and Packaging modes.
-- **Tool Governance Matrix**: Standardizes tool choice by task type, phase, and risk level.
-- **Mandatory Verification**: Requires explicit evidence chains (build, runtime, or visual) before declaring a task "Verified."
-- **Permission & Output Pipelines**: Models trust and result delivery as end-to-end pipelines.
-- **Architecture Debt Diagnosis**: Mandates the recording of "God Components" and oversized files as formal debt.
+- **Cybersecurity Skills Routing**: Direct integration of `reverse-skill` domain-specific skill sets (APK reversing, malware analysis, frontend JS decryption, firmware analysis, and CTF solvers) and tool orchestration rules.
+- **Spec-Driven Development (SDD)**: Direct integration of `spec-kit` to enforce specifications as executable definitions of behavior, preventing "vibe coding."
+- **Expanded Core Governance Modules**: Incorporates modules 37 and 38 for cybersecurity and SDD lifecycle tracking.
 
 ---
 
 ## 2. Core Governance Modules
 
-The V6.5 line is supported by a modular suite of governance rules:
+The V6.6 line is supported by a modular suite of governance rules:
 
 ### 2.1 Tool Execution & Mapping
 - `modules/21_V6_5_ToolUsageAndSelection.md`: General principles and tool choreography.
 - `modules/24_V6_5_ToolUsageMatrix.md`: Decision table for preferred tools.
 - `modules/25_V6_5_ToolCapabilityMapping.md`: Maps tool families to specific question types.
-- `modules/30_V6_5_ToolQuestionBoundaryMatrix.md`: Defines tool-family strength and forbidden-alone claims.
+- `modules/30_ToolQuestionBoundaryMatrix.md`: Defines tool-family strength and forbidden-alone claims.
 
 ### 2.2 Risk & Verification
 - `modules/27_V6_5_ToolPermissionRiskMatrix.md`: Permission posture and risk class gating.
-- `modules/29_V6_5_MandatoryVerificationMatrix.md`: Mapping of conclusion types to required evidence tools.
-- `modules/31_V6_5_ToolMisuseAndAntiPatternMatrix.md`: Anti-pattern detection, correction recipes, and downgrade labels.
+- `modules/29_MandatoryVerificationMatrix.md`: Mapping of conclusion types to required evidence tools.
+- `modules/31_ToolMisuseAndAntiPatternMatrix.md`: Anti-pattern detection, correction recipes, and downgrade labels.
 
 ### 2.3 Context & Lifecycle
 - `modules/20_V6_5_RuntimeModes.md`: Operational awareness of the current execution surface.
@@ -699,26 +738,65 @@ The V6.5 line is supported by a modular suite of governance rules:
 ### 2.4 Project Fact Mapping
 - `modules/34_V6_5_ProjectFactMap_V2.md`: Standardized 4-tier fact map (User, Feedback, Project, Reference).
 
+### 2.5 Skill Governance
+- `modules/35_V6_5_SkillGovernanceAndMandatoryUse.md`: Deduplication policy, active-vs-archived skill posture, and mandatory skill-use situations.
+- `modules/36_V6_5_SkillZoneSeparation.md`: Separates host-local skill inventories from any logic-carried skill layer.
+
+### 2.6 Domain Integration Modules
+- `modules/37_V6_6_CybersecuritySkillsRouter.md`: Router configuration, security analysis toolchains, and field journal logging.
+- `modules/38_V6_6_SpecDrivenDevelopment.md`: Guidelines and lifecycle phases for Spec-Driven Development.
+
 ---
 
 ## 3. Stable Promotion Summary
 
-The V6.5 line is now promoted from draft status.
+The V6.6 line is now promoted to stable status.
 - **Stable Entry**: `MAIN.md`
-- **Current Version**: `V6.5`
-- **Default Profile**: `core-enhanced` (now includes all V6.5 modules)
+- **Current Version**: `V6.6`
+- **Default Profile**: `core-enhanced` (now includes all V6.6 modules, reverse-skill, and spec-kit references)
 
-Agents adopting this line must strictly follow the **Mandatory Verification Matrix** and the **Tool Usage Choreography** defined in the modules above.
+---
 
-## END FILE: versions/AgentLogic_V6_5.md
+## 4. Reference Source Registration
+
+The V6.6 stable line integrates the following external source repositories:
+
+- **Cybersecurity Skills Router**:
+  - Source URL: `https://github.com/zhaoxuya520/reverse-skill`
+  - Integration path: `skills/reverse-skill/`
+- **Spec Kit**:
+  - Source URL: `https://github.com/github/spec-kit`
+  - Integration path: `spec-kit/`
+
+---
+
+## 5. Skill-System Integration Rule
+
+V6.6 treats both general programming skills and cybersecurity domain skills as portable, logic-carried assets under the `skills/` directory. 
+
+Key stable rules:
+- Logic package rules outrank individual skills.
+- The Cybersecurity Skills Router governs reversing, CTFs, and security audits; it does not replace general verification rules but adds specific tool constraints.
+- Spec-Driven Development templates and presets are verified through code compilation and test runs.
+
+---
+
+## 6. Future Iteration Reference-Source Rule
+
+For future logic iterations, a version line must explicitly record its external or comparative reference source when such a source materially influenced the update. At minimum, record:
+- Source repository URL.
+- Local integration/comparison path.
+- Date of integration and target release tag.
+
+## END FILE: versions/AgentLogic_V6_6.md
 
 ---
 
 ## BEGIN FILE: modules/01_MasterLogic.md
 
-# AgentLogic_V6_5 Master Logic
+# AgentLogic_V6_6 Master Logic
 
-鏈枃浠朵笉鏄浛浠?`AgentLogic_V6_5.md`锛岃€屾槸灏嗗綋鍓嶄富閫昏緫鏄犲皠鍒板綋鍓嶄粨搴擄紝褰㈡垚涓€浠介潰鍚?Claude Code 绫?Agentic CLI 绯荤粺鐨勯」鐩骇涓婚€昏緫鎽樿銆?
+鏈枃浠朵笉鏄浛浠?`AgentLogic_V6_6.md`锛岃€屾槸灏嗗綋鍓嶄富閫昏緫鏄犲皠鍒板綋鍓嶄粨搴擄紝褰㈡垚涓€浠介潰鍚?Claude Code 绫?Agentic CLI 绯荤粺鐨勯」鐩骇涓婚€昏緫鎽樿銆?
 
 ## 1. 褰撳墠椤圭洰瀹氫綅
 
@@ -902,6 +980,8 @@ Agents adopting this line must strictly follow the **Mandatory Verification Matr
 - Local repository facts must be verified by local search/listing plus targeted reads.
 - Latest/current/remote facts must be verified by authoritative external read-only checks.
 - UI / visible behavior must be verified by screenshot or equivalent visual evidence.
+- All frontend layout changes that add or change text, fields, columns, badges, buttons, cards, grid/flex children, min-width, white-space, overflow, font size, or spacing must include a parent-child layout-boundary check so no child exceeds, pushes past, or visually breaks its parent container.
+- Frontend work is not complete until the visible result has been checked for overflow, truncation, wrapping, misalignment, and one-row-vs-two-row fit under the actual container width.
 - Runtime / build / packaging claims must be verified by command, build, or runtime checks.
 - Path-sensitive writes, side-effecting commands, and external state changes must include pre-target confirmation and post-result confirmation.
 - Permission-sensitive execution must include permission-mode and allowance confirmation before execution.
@@ -1407,6 +1487,19 @@ Agent 鑷冲皯蹇呴』瀹屾垚锛?
   - run the correction recipe and finish the missing verification path, or
   - downgrade the conclusion label to partial / inferred / unverified.
 
+## 4.3.4 Mandatory Skill-Use Situations Must Not Be Skipped
+
+- If a host-local skill is the designated strongest execution path for a recurring task type, the agent must not ignore it and silently fall back to a weaker generic path.
+- This includes at minimum:
+  - `screenshot` for OS-level screenshot capture or visual proof when no better integrated capture path exists
+  - `playwright` for terminal-driven real browser interaction and browser-flow verification
+  - `security-best-practices` for explicit supported-stack security best-practices reviews
+  - `gh-fix-ci` for GitHub Actions PR-check investigation
+  - `.system/openai-docs` for official OpenAI product/API guidance
+  - `engineering/skill-security-auditor` before installing or trusting an untrusted external skill or plugin
+- A skill use does not replace normal verification obligations. It only provides the strongest operational route when the task matches.
+- Use `modules/35_V6_5_SkillGovernanceAndMandatoryUse.md` for the current deduplication policy, archive posture, and mandatory-skill map.
+
 ## 5. 涓轰粈涔堣繖鏄己鍒惰姹?
 
 - 涓嶅悓 Agent 杩涘叆椤圭洰鏃舵渶瀹规槗鍑洪敊鐨勫湴鏂癸紝涓嶆槸鑳藉姏涓嶅锛岃€屾槸鍏ュ彛涓嶄竴鑷淬€?
@@ -1415,9 +1508,9 @@ Agent 鑷冲皯蹇呴』瀹屾垚锛?
 
 ## 6. 瀹為檯浣跨敤瑕佹眰
 
-- 姣忔鏂伴」鐩紑濮嬫椂锛屼紭鍏堣 `AgentLogic_V6_5.md`
+- 姣忔鏂伴」鐩紑濮嬫椂锛屼紭鍏堣 `AgentLogic_V6_6.md`
 - 姣忔椤圭洰绾х淮鎶ゆ椂锛屽啀缁撳悎鏈寘涓殑鍒嗗眰鏂囨。涓庡師濮嬪眰鐩綍
-- 濡傛灉鍚庣画鏂板鏇村噯纭殑瑙勫垯锛屽簲鍏堝洖鍐?`AgentLogic_V6_5.md`锛屽啀鍚屾鏈€昏緫鍖?
+- 濡傛灉鍚庣画鏂板鏇村噯纭殑瑙勫垯锛屽簲鍏堝洖鍐?`AgentLogic_V6_6.md`锛屽啀鍚屾鏈€昏緫鍖?
 
 ## END FILE: modules/12_AgentEnforcement.md
 
@@ -1808,7 +1901,7 @@ It must not be downgraded into a soft recommendation.
 This template does not replace:
 
 - `00_START_HERE.md`
-- `versions/AgentLogic_V6_5.md`
+- `versions/AgentLogic_V6_6.md`
 - `modules/01_MasterLogic.md`
 - `modules/12_AgentEnforcement.md`
 - `modules/15_LogicEntryChecklist.md`
@@ -2346,6 +2439,17 @@ Use when:
 
 Do not use them to explore.
 Writing is not discovery.
+
+#### 6.3.1 Mandatory frontend layout-boundary check
+
+For any frontend/UI change that adds or changes text, fields, columns, buttons, badges, cards, grid/flex children, `min-width`, `white-space`, `overflow`, font size, or spacing, the agent must treat parent-child layout containment as a mandatory verification target.
+
+Required closure checks:
+
+- no child element may exceed or push past its parent container
+- the current container width must be checked for overflow, truncation, wrapping, and misalignment
+- if a one-row layout cannot safely hold the content, it must be changed to a two-row or adaptive layout
+- frontend work is not complete until this visible boundary check has been performed
 
 ### 6.4 Shell/command tools
 
@@ -3238,12 +3342,14 @@ These modules define how the agent should act.
 2.  **Usage Matrix**: `modules/24_V6_5_ToolUsageMatrix.md`
 3.  **Capability Mapping**: `modules/25_V6_5_ToolCapabilityMapping.md`
 4.  **Risk Gating**: `modules/27_V6_5_ToolPermissionRiskMatrix.md`
-5.  **Evidence Matrix**: `modules/29_V6_5_MandatoryVerificationMatrix.md`
-6.  **Question Boundaries**: `modules/30_V6_5_ToolQuestionBoundaryMatrix.md`
-7.  **Anti-Pattern Rejection**: `modules/31_V6_5_ToolMisuseAndAntiPatternMatrix.md`
+5.  **Evidence Matrix**: `modules/29_MandatoryVerificationMatrix.md`
+6.  **Question Boundaries**: `modules/30_ToolQuestionBoundaryMatrix.md`
+7.  **Anti-Pattern Rejection**: `modules/31_ToolMisuseAndAntiPatternMatrix.md`
 8.  **Instruction Stacking**: `modules/32_V6_5_ContextAssemblyAndInstructionStacking.md`
 9.  **Post-Task Consolidation**: `modules/33_V6_5_BackgroundConsolidationAndIdleLifecycle.md`
 10. **Fact Mapping**: `modules/34_V6_5_ProjectFactMap_V2.md`
+11. **Skill Governance**: `modules/35_V6_5_SkillGovernanceAndMandatoryUse.md`
+12. **Skill Zone Separation**: `modules/36_V6_5_SkillZoneSeparation.md`
 
 ---
 
@@ -3257,8 +3363,20 @@ These modules explain the system context that governance depends on.
 ---
 
 ## 4. Reading Priority
-- For **Behavior Improvements**: Read the **Governance Modules (1-10)** first.
+- For **Behavior Improvements**: Read the **Governance Modules (1-12)** first.
 - For **System Modeling**: Read the **Structural Modules (1-4)** second.
+
+
+---
+
+## 5. Reference source baseline
+
+The V6.5 line used the following primary external comparison source during promotion:
+
+- `https://github.com/claude-code-best/claude-code`
+- Local comparison path: `D:\workspace\claude-code`
+
+Future V6.x iterations should preserve this practice and explicitly register their comparative source baselines.
 
 ## END FILE: modules/26_V6_5_INDEX.md
 
@@ -3975,7 +4093,7 @@ The goal is not to maximize file count.
 The goal is to keep each governance question answerable from one primary place.
 
 
-### 3.8 `29_V6_5_MandatoryVerificationMatrix_DRAFT.md`
+### 3.8 `29_MandatoryVerificationMatrix.md`
 
 Owns:
 
@@ -3989,7 +4107,7 @@ Does not own:
 - anti-pattern catalogs
 - broader runtime-mode modeling
 
-### 3.9 `30_V6_5_ToolQuestionBoundaryMatrix_DRAFT.md`
+### 3.9 `30_ToolQuestionBoundaryMatrix.md`
 
 Owns:
 
@@ -4003,7 +4121,7 @@ Does not own:
 - correction recipes after anti-patterns occur
 - permission posture tables
 
-### 3.10 `31_V6_5_ToolMisuseAndAntiPatternMatrix_DRAFT.md`
+### 3.10 `31_ToolMisuseAndAntiPatternMatrix.md`
 
 Owns:
 
@@ -4023,13 +4141,13 @@ Does not own:
 
 ---
 
-## BEGIN FILE: modules/29_V6_5_MandatoryVerificationMatrix.md
+## BEGIN FILE: modules/29_MandatoryVerificationMatrix.md
 
-# V6.5 Mandatory Verification Matrix Draft
+# Mandatory Verification Matrix
 
 ## 1. Purpose
 
-This draft module turns the V6.5 mandatory tool-use policy into a concrete verification matrix.
+This module turns the mandatory tool-use policy into a concrete verification matrix.
 It answers three questions for each conclusion type:
 
 - which tool family must be used
@@ -4047,6 +4165,7 @@ If a conclusion belongs to one of the categories below, and the matching verific
 | Local repository fact | Local search/listing + targeted file reads | The relevant file path(s) are identified and the specific implementation location has been read directly | The conclusion is based only on memory, summaries, filenames, or search hits without direct reads |
 | Latest/current/remote fact | Authoritative external read-only verification | The current fact is checked against an authoritative live source | The conclusion is based on memory, stale notes, or non-authoritative secondary references |
 | UI / visible behavior | Screenshot or equivalent visual verification | A screenshot or equivalent visual artifact shows the actual state being claimed | The claim is based only on code reading, styling assumptions, or build success |
+| Frontend layout / spacing / added-field UI change | Screenshot or equivalent visual verification | The changed UI is visually checked and confirms that no child element exceeds, pushes past, truncates incorrectly within, or otherwise breaks its parent container under the real container width | The change is closed from code/CSS reading alone, or without checking overflow, wrapping, truncation, misalignment, or one-row-vs-two-row fit |
 | Runtime / build / packaging claim | Command, build, or runtime verification | The relevant command or runtime path has actually been executed and its result inspected | The claim is inferred only from static files, config, or expected behavior |
 | Path-sensitive write or side-effecting local command | Target-path confirmation + post-change inspection | The working directory and target path are confirmed before execution, and the changed result is inspected afterward | The command was run without target confirmation, or the post-change result was not checked |
 | External state change | Local validation + remote-target confirmation + post-change verification | The change is validated locally first, the remote target is confirmed second, the remote change is executed last, and the final remote state is checked | The remote change was made first, or the final remote state was not checked |
@@ -4094,17 +4213,17 @@ If the agent cannot show the matching evidence class for the conclusion type, th
 - inferred but not confirmed
 - blocked on required verification tool
 
-## END FILE: modules/29_V6_5_MandatoryVerificationMatrix.md
+## END FILE: modules/29_MandatoryVerificationMatrix.md
 
 ---
 
-## BEGIN FILE: modules/30_V6_5_ToolQuestionBoundaryMatrix.md
+## BEGIN FILE: modules/30_ToolQuestionBoundaryMatrix.md
 
-# V6.5 Tool Question-Boundary Matrix Draft
+# Tool Question-Boundary Matrix
 
 ## 1. Purpose
 
-This draft module defines which question types each tool family is allowed to answer strongly, which question types it may only support indirectly, and which question types it must not answer alone.
+This module defines which question types each tool family is allowed to answer strongly, which question types it may only support indirectly, and which question types it must not answer alone.
 
 The goal is to prevent tool waste in one direction and false certainty in the other:
 
@@ -4191,17 +4310,17 @@ If the current tool family can only support but not close the question, the answ
 - needs visual confirmation
 - needs authoritative remote verification
 
-## END FILE: modules/30_V6_5_ToolQuestionBoundaryMatrix.md
+## END FILE: modules/30_ToolQuestionBoundaryMatrix.md
 
 ---
 
-## BEGIN FILE: modules/31_V6_5_ToolMisuseAndAntiPatternMatrix.md
+## BEGIN FILE: modules/31_ToolMisuseAndAntiPatternMatrix.md
 
-# V6.5 Tool Misuse And Anti-Pattern Matrix Draft
+# Tool Misuse And Anti-Pattern Matrix
 
 ## 1. Purpose
 
-This draft module records common tool-usage mistakes that create false certainty, weak verification, or unsafe execution.
+This module records common tool-usage mistakes that create false certainty, weak verification, or unsafe execution.
 
 It exists to answer four questions:
 
@@ -4221,6 +4340,7 @@ If the agent followed an anti-pattern below, the result must not be labeled as f
 | Search-hit closure | A grep/search hit is treated as proof that the implementation fact is settled | Search only identifies candidates; it does not prove the actual logic or path | Read the concrete file/function/config directly | likely location only |
 | Static-read closure on runtime claims | Code/config looks correct, so the runtime claim is treated as verified | Expected behavior is not observed behavior | Run the relevant command/runtime/build path and inspect the result | inferred from static read |
 | Build-success closure on visual claims | The build passes, so the UI fix is treated as complete | Build success does not prove visible behavior | Use screenshot or equivalent visual verification | needs visual confirmation |
+| Frontend layout closure without boundary check | A frontend change adds or changes columns, labels, counters, badges, controls, or spacing and is marked complete without checking whether children overflow or break the parent container | UI correctness includes containment and fit, not just code validity | Perform visual verification under the real container width and confirm overflow, truncation, wrapping, misalignment, and one-row-vs-two-row fit | layout not visually verified |
 | Visual-only closure on hidden logic | The screen looks right, so hidden internal behavior is assumed correct | A visible state may hide incorrect data flow or wrong transitions | Add source read, logs, runtime inspection, or state inspection | visually plausible only |
 | Memory-based current-fact answer | The agent answers a current remote/release/settings question from memory | Current facts drift over time | Use authoritative external read-only verification | needs authoritative remote verification |
 | Stale-local-note closure | Old markdown/task notes are treated as proof of current system state | Local notes may be outdated or project-specific | Re-read the current source/doc/remote fact directly | stale note not confirmed |
@@ -4302,7 +4422,7 @@ When an anti-pattern occurred and correction has not yet happened, the answer sh
 - needs authoritative remote verification
 - blocked on required verification path
 
-## END FILE: modules/31_V6_5_ToolMisuseAndAntiPatternMatrix.md
+## END FILE: modules/31_ToolMisuseAndAntiPatternMatrix.md
 
 ---
 
@@ -4525,4 +4645,360 @@ This template incorporates the 4-tier memory taxonomy and mandatory verification
 - [ ] Documentation synced?
 
 ## END FILE: modules/34_V6_5_ProjectFactMap_V2.md
+
+---
+
+## BEGIN FILE: modules/35_V6_5_SkillGovernanceAndMandatoryUse.md
+
+# V6.5 Skill Governance And Mandatory Use
+
+Status: **Stable V6.5 Line**.
+
+This module defines how host-local skills should be treated under V6.5.
+
+Zone separation between host-local skills and any future logic-carried skill layer is defined in `modules/36_V6_5_SkillZoneSeparation.md`.
+
+---
+
+## 1. Core Distinction
+
+The logic package and the host-local skill system are not the same layer.
+
+This module governs the **host-local skill zone**. It does not redefine a future logic-carried skill zone as disposable user clutter.
+
+- **Logic package**
+  - defines behavioral rules
+  - defines entry discipline
+  - defines verification standards
+  - defines tool/question/risk boundaries
+- **Skills**
+  - provide reusable domain workflows
+  - provide operational wrappers, scripts, templates, or reference packs
+  - accelerate execution in recurring task families
+
+The logic package is the operating method.
+Skills are optional execution amplifiers that must remain subordinate to the logic package.
+
+---
+
+## 2. Deduplication Rule
+
+A skill should be treated as a **full duplicate** and may be removed only when all of the following are true:
+
+1. it adds no unique workflow beyond the main logic
+2. it adds no unique scripts, templates, or operational wrappers
+3. it adds no domain-specific reference layer
+4. its practical behavior is fully replaced by existing logic-package modules
+
+If a skill overlaps conceptually with the logic package but still contributes unique operational value, it should be kept and classified as **partial overlap, not duplicate**.
+
+---
+
+## 3. Current Audit Result
+
+### 3.1 Full duplicates
+
+Current audit result:
+
+- **no active skill family was judged to be a full duplicate of the V6.5 logic package**
+
+Therefore, no skill family should be deleted on "duplicate-only" grounds at this time.
+
+### 3.2 Partial-overlap skills that should be kept
+
+These skills overlap with V6.5 logic but still provide unique operational value:
+
+- `screenshot`
+  - overlaps with mandatory visual verification
+  - still provides OS-level screenshot capture procedures and scripts
+- `playwright`
+  - overlaps with browser/UI verification
+  - still provides real browser automation workflow
+- `security-best-practices`
+  - overlaps with safety and verification philosophy
+  - still provides language/framework-specific security guidance
+- `gh-fix-ci`
+  - overlaps with validation/build discipline
+  - still provides GitHub Actions-specific inspection workflow
+- `.system/openai-docs`
+  - overlaps with official-doc verification rules
+  - still provides concrete OpenAI-doc workflow
+- `engineering/skill-security-auditor`
+  - overlaps with skill-governance and safety
+  - still provides a concrete audit workflow for untrusted skills
+- `figma` / `figma-implement-design`
+  - overlaps with UI verification and design handoff
+  - still provides design-specific execution guidance
+
+### 3.3 Archived-but-not-duplicate families
+
+The following families may remain archived/off-by-default for context-budget reasons, but they are not logic duplicates:
+
+- business-growth
+- c-level-advisor
+- finance
+- marketing-skill
+- product-team
+- project-management
+- ra-qm-team
+
+They are **budget-heavy domain packs**, not duplicate logic layers.
+
+---
+
+## 4. Active vs Archived Skill Policy
+
+### 4.1 Active-by-default
+
+Keep active-by-default only the skills that materially support the normal coding / debugging / review / verification workflow.
+
+Typical active-by-default families:
+
+- `.system`
+- `engineering`
+- `engineering-team`
+- `playwright`
+- `screenshot`
+- `security-best-practices`
+- `figma`
+- `figma-implement-design`
+- `gh-fix-ci`
+
+### 4.2 Archived-by-default
+
+Archive large domain packs by default when they:
+
+- inflate skill context budgets
+- are irrelevant to most coding rounds
+- dilute the chance that the most useful engineering skills stay visible
+
+Archived skills should be restored only when the current task clearly matches their domain.
+
+---
+
+## 5. Mandatory Skill-Use Situations
+
+The following are not just "nice to have" skill triggers. They should be treated as mandatory when the condition matches and the skill is available.
+
+### 5.1 Screenshot skill
+
+Use `screenshot` when:
+
+- the user explicitly asks for a desktop or system screenshot
+- an OS-level app/window/region capture is required
+- no better tool-specific capture path exists
+
+Do not replace this with code reading or build success claims.
+
+### 5.2 Playwright skill
+
+Use `playwright` when:
+
+- the task requires real browser interaction from the terminal
+- a live web flow must be inspected
+- browser UI behavior must be reproduced, clicked through, or captured
+
+Do not substitute static reads for this when the required proof is browser behavior.
+
+### 5.3 Security-best-practices skill
+
+Use `security-best-practices` when:
+
+- the user explicitly asks for security review or secure-by-default guidance
+- the task is a security best-practices review for supported stacks
+
+Do not downgrade this to generic code review when the request is explicitly security-scoped.
+
+### 5.4 Gh-fix-ci skill
+
+Use `gh-fix-ci` when:
+
+- the user asks to investigate or fix failing GitHub PR checks
+- the failure surface is GitHub Actions-centered
+
+Do not replace this with a generic "look at CI later" workflow if the problem is specifically PR checks.
+
+### 5.5 OpenAI-docs skill
+
+Use `.system/openai-docs` when:
+
+- the user asks how to use OpenAI products or APIs
+- current official OpenAI documentation is needed
+- a latest-model or latest-doc answer is required
+
+This matches the stable rule that OpenAI-product guidance should be grounded in official current sources.
+
+### 5.6 Skill-security-auditor
+
+Use `engineering/skill-security-auditor` when:
+
+- evaluating an untrusted third-party skill
+- installing a skill or plugin from a new external source
+- checking whether a skill contains dangerous scripts or prompt injection patterns
+
+This should be treated as the default pre-install safety gate for untrusted skill imports.
+
+### 5.7 Figma / Figma-implement-design
+
+Use `figma` or `figma-implement-design` when:
+
+- the task is explicitly design-to-implementation from Figma
+- the user expects design-source inspection rather than approximate recreation
+
+Do not treat plain code reading as sufficient when the real source of truth is the design surface.
+
+---
+
+## 6. Skills Must Not Weaken Verification
+
+A skill invocation does not bypass V6.5 verification rules.
+
+Even when a skill is used correctly:
+
+- `29_MandatoryVerificationMatrix.md` still applies
+- `30_ToolQuestionBoundaryMatrix.md` still applies
+- `31_ToolMisuseAndAntiPatternMatrix.md` still applies
+
+A skill may accelerate the path, but it does not lower the evidence requirement.
+
+---
+
+## 7. Restore Rule For Archived Skills
+
+If an archived skill family becomes relevant again:
+
+1. restore only the smallest relevant family or subfamily
+2. do not bulk-restore every archived pack
+3. verify that the restored set does not re-trigger skills context budget degradation
+4. if the restored family becomes a recurring requirement, document that promotion explicitly
+
+---
+
+## 8. Practical Judgment
+
+The preferred V6.5 posture is:
+
+- **keep the logic package lean and authoritative**
+- **keep only high-value execution skills active by default**
+- **archive broad domain packs unless currently needed**
+- **treat skills as execution amplifiers, not as replacements for logic**
+
+## END FILE: modules/35_V6_5_SkillGovernanceAndMandatoryUse.md
+
+---
+
+## BEGIN FILE: modules/36_V6_5_SkillZoneSeparation.md
+
+# V6.5 Skill Zone Separation
+
+Status: **Stable V6.5 Line**.
+
+This module defines the required separation between host-local skills and logic-package-governed skills.
+
+---
+
+## 1. Why The Separation Exists
+
+Different machines may have very different skill inventories.
+
+If AgentLogic does not distinguish:
+
+- skills that belong to the current machine and host
+- skills that belong to the logic package itself
+
+then a local machine's personal skill sprawl can be mistaken for portable logic state.
+
+That creates two failures:
+
+1. one machine pollutes another machine's installation expectations
+2. host-local skill cleanup accidentally mutates portable logic assets
+
+---
+
+## 2. The Two Required Skill Zones
+
+### 2.1 Host-Local Skill Zone
+
+This zone belongs to the current machine and current host installation.
+
+Examples:
+
+- `~/.codex/skills`
+- `~/.claude/skills`
+- `~/.gemini/skills`
+
+Properties:
+
+- machine-specific
+- host-specific
+- may differ across devices
+- may include user-installed third-party skills
+- must be audited during install and update
+
+### 2.2 Logic-Carried Skill Zone
+
+This zone belongs to the AgentLogic package itself.
+
+Properties:
+
+- repository-governed
+- portable across machines
+- versioned with the logic package
+- should contain only skills that are intentionally shipped as part of AgentLogic
+
+Current V6.5 posture:
+
+- **AgentLogic does not currently ship a normal large logic-bundled skill pack**
+- the main portable layer is still the logic modules themselves
+- any future bundled skill layer must be explicitly declared as logic-carried rather than inferred from a host-local skill directory
+
+---
+
+## 3. Governance Rule
+
+The install/update-time skill governance pass must operate only on the **host-local skill zone**.
+
+It must not:
+
+- treat host-local skill state as repository truth
+- copy one machine's host-local skill inventory into another machine by default
+- mutate a future logic-carried skill zone as if it were disposable user clutter
+
+---
+
+## 4. Install And Update Rule
+
+During AgentLogic installation or update:
+
+1. identify the target host-local skill zone
+2. audit only that host-local zone
+3. classify active-by-default vs archive-by-default host-local families
+4. leave the logic-carried layer untouched unless the logic package itself is being upgraded
+
+---
+
+## 5. Current V6.5 Practical Meaning
+
+For the current line:
+
+- host-local skills remain local
+- archived host-local skills remain local archives
+- AgentLogic logic modules remain the portable source of truth
+
+So a cleanup on one machine should not silently become the default skill set for another machine unless the user explicitly chooses to replicate it.
+
+---
+
+## 6. Future Expansion Rule
+
+If AgentLogic later ships its own portable bundled skills, that layer must be explicitly documented with:
+
+- the bundle path
+- its role
+- whether it is always installed or optional
+- whether host-local governance may inspect it or must ignore it
+
+Until then, host-local skills and logic-package modules must stay clearly separated.
+
+## END FILE: modules/36_V6_5_SkillZoneSeparation.md
 
