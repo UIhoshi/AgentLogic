@@ -49,7 +49,9 @@
                                                          "modules/33_V6_5_BackgroundConsolidationAndIdleLifecycle.md",
                                                          "modules/34_V6_5_ProjectFactMap_V2.md",
                                                          "modules/35_V6_5_SkillGovernanceAndMandatoryUse.md",
-                                                         "modules/36_V6_5_SkillZoneSeparation.md"
+                                                         "modules/36_V6_5_SkillZoneSeparation.md",
+                                                         "modules/37_V6_6_CybersecuritySkillsRouter.md",
+                                                         "modules/38_V6_6_SpecDrivenDevelopment.md"
                                                      ]
                                        },
                      "github-publishing":  {
@@ -87,7 +89,9 @@
                                                              "modules/33_V6_5_BackgroundConsolidationAndIdleLifecycle.md",
                                                              "modules/34_V6_5_ProjectFactMap_V2.md",
                                                              "modules/35_V6_5_SkillGovernanceAndMandatoryUse.md",
-                                                             "modules/36_V6_5_SkillZoneSeparation.md"
+                                                             "modules/36_V6_5_SkillZoneSeparation.md",
+                                                             "modules/37_V6_6_CybersecuritySkillsRouter.md",
+                                                             "modules/38_V6_6_SpecDrivenDevelopment.md"
                                                          ]
                                            }
                  },

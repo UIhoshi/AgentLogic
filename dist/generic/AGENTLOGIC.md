@@ -2,7 +2,7 @@
 
 - Host target: generic
 - Profile: core-enhanced
-- Generated at: 2026-06-22T00:12:02+09:00
+- Generated at: 2026-06-22T22:27:09+09:00
 - Stable entry: MAIN.md
 - Version: V6.6
 
@@ -5001,4 +5001,117 @@ If AgentLogic later ships its own portable bundled skills, that layer must be ex
 Until then, host-local skills and logic-package modules must stay clearly separated.
 
 ## END FILE: modules/36_V6_5_SkillZoneSeparation.md
+
+---
+
+## BEGIN FILE: modules/37_V6_6_CybersecuritySkillsRouter.md
+
+# V6.6 Cybersecurity Skills Router Integration
+
+Status: **Stable V6.6 Line**.
+
+This module defines the integration of the Cybersecurity Skills Router (from `reverse-skill`) as a core operating capability under AgentLogic V6.6.
+
+---
+
+## 1. Core Integration Mandate
+
+Cybersecurity and reverse-engineering tasks require specialized toolchains, strict execution playbooks, and structured feedback loops to prevent model hallucination and command stalling.
+
+AgentLogic V6.6 embeds the **Cybersecurity Skills Router** to provide:
+- A systematic workflow for APK analysis, binary reverse engineering, frontend JS signing, firmware testing, and CTF challenges.
+- Explicit tool orchestration mapping for `jadx`, `apktool`, `Frida`, `radare2`, `IDA`, `BurpSuite`, and browser automation.
+- Auto-validation of security tool availability.
+- A **Field Journal** system to save and reuse exploit patterns, commands, and lessons learned.
+
+---
+
+## 2. Classification & Routing Workflow
+
+For any cybersecurity or reverse-engineering task, the agent MUST execute the following sequence:
+
+1. **Classification**: Identify target type (APK, ELF/PE, JS, Web Traffic, CTF, Firmware) and user intent.
+2. **Routing**: Map to the appropriate skill directory under `skills/reverse-skill/skills/` (e.g., `apk-reverse`, `ida-reverse`, `malware-analysis`, etc.).
+3. **Pre-check**: Run tool detection scripts (e.g. `skills/reverse-skill/kali/` or `skills/reverse-skill/skills/scripts/bootstrap-reverse.sh`) to verify tool paths and versions.
+4. **Execution**: Perform static/dynamic analysis using precise, script-guided methods instead of "vibe guessing."
+5. **Post-result**: Save findings to the Field Journal (`skills/reverse-skill/skills/field-journal/`) and generate structured vulnerability/reversing reports.
+
+---
+
+## 3. Mandatory Security Verification Rules
+
+When executing tasks under this module, verification claims are bound to the following tools:
+
+| Reversing Claim | Mandatory Verification Tool / Method | Minimum Proof Required |
+|---|---|---|
+| Binary / APK structure | `jadx` / `readelf` / `file` command output | Decompiled class lists or section headers |
+| Exploit success / PoC | Local script execution in sandbox | Command stdout showing control/access (e.g. CTF flag) |
+| Web API signature / Encryption | BurpSuite MCP or Browser replay trace | Intercepted payload or dynamic trace |
+| EDR Bypass / Native Hooking | Frida hook logs or debugger registers | Hook activation logs showing memory override |
+
+---
+
+## 4. Location of Assets
+
+- **Cybersecurity Skills**: `skills/reverse-skill/skills/`
+- **MCP Server & Tooling**: `skills/reverse-skill/burp-mcp-full/`
+- **Sandbox Orchestrator**: `skills/reverse-skill/CTF-Sandbox-Orchestrator/`
+- **Kali Linux Helpers**: `skills/reverse-skill/kali/`
+- **Router Rules Reference**: `skills/reverse-skill/RULES.md`
+
+## END FILE: modules/37_V6_6_CybersecuritySkillsRouter.md
+
+---
+
+## BEGIN FILE: modules/38_V6_6_SpecDrivenDevelopment.md
+
+# V6.6 Spec-Driven Development (SDD) Integration
+
+Status: **Stable V6.6 Line (Mandatory operational protocol)**.
+
+This module defines the Spec-Driven Development (SDD) workflow powered by the integrated `spec-kit` layer. Under V6.6, SDD is promoted from an optional command-line toolkit to a **mandatory baseline development protocol** that must govern all codebase tasks.
+
+---
+
+## 1. Core SDD Mandate
+
+To eliminate "vibe coding" (writing arbitrary code without specifications or plans), AgentLogic V6.6 enforces Spec-Driven Development as a default operational normal. 
+
+All development tasks, new projects, and feature requests **MUST** go through the structured SDD pipeline automatically. Specifications are treated as executable definitions of behavior and must be written down before code is touched.
+
+---
+
+## 2. Mandatory SDD Lifecycle Phases
+
+When starting a project or introducing a new feature, the Agent MUST execute the following phases sequentially:
+
+1. **Constitution Phase**: Establish the project's governing principles, style rules, quality criteria, and performance guidelines.
+   - *Requirement*: The Agent must check if `.specify/constitution.md` (or equivalent) exists. If not, it MUST create it first.
+2. **Specify Phase**: Define user scenarios, requirements, and user stories in clear, natural language.
+   - *Requirement*: The specifications must be written to `.specify/spec.md` (or `.specify/specs/` directory).
+3. **Plan Phase**: Draft a technical implementation plan specifying architecture, tech stack, data schemas, and integration logic.
+   - *Requirement*: The plan must be saved in `.specify/plan.md`.
+4. **Tasks Phase**: Translate the plan into a checklist of granular, actionable tasks.
+   - *Requirement*: The task list must be saved in `.specify/tasks.md`.
+5. **Implement Phase**: Systematically execute the tasks in order, running build and test validation after each task.
+6. **Converge Phase**: Match the codebase state against the specs, plan, and tasks. Any discrepancy or remaining gap must be appended as new tasks to `.specify/tasks.md` until fully resolved.
+
+---
+
+## 3. Enforcement & Verification Rules
+
+- **Pre-Implementation Gate**: Writing production code before the **Specify** and **Plan** documents are created under `.specify/` is strictly prohibited.
+- **Zero Vibe-Coding**: Every single code change must trace back to a defined task in `.specify/tasks.md`.
+- **Command Fallbacks**: The slash commands (like `/speckit.specify`, `/speckit.plan`, etc.) provided by `spec-kit` are shortcuts. In normal Agentic loops, the Agent MUST execute these steps natively and automatically create the documents, without requiring manual trigger commands.
+
+---
+
+## 4. Location of Assets
+
+- **Specify CLI Codebase**: `spec-kit/src/`
+- **Extensions & Templates**: `spec-kit/extensions/`, `spec-kit/templates/`
+- **Presets & Workflows**: `spec-kit/presets/`, `spec-kit/workflows/`
+- **Specification Documentation**: `spec-kit/spec-driven.md`
+
+## END FILE: modules/38_V6_6_SpecDrivenDevelopment.md
 
