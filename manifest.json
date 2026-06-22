@@ -51,7 +51,8 @@
                                                          "modules/35_V6_5_SkillGovernanceAndMandatoryUse.md",
                                                          "modules/36_V6_5_SkillZoneSeparation.md",
                                                          "modules/37_V6_6_CybersecuritySkillsRouter.md",
-                                                         "modules/38_V6_6_SpecDrivenDevelopment.md"
+                                                         "modules/38_V6_6_SpecDrivenDevelopment.md",
+                                                         "modules/39_V6_6_TasteFrontendDesign.md"
                                                      ]
                                        },
                      "github-publishing":  {
@@ -91,7 +92,8 @@
                                                              "modules/35_V6_5_SkillGovernanceAndMandatoryUse.md",
                                                              "modules/36_V6_5_SkillZoneSeparation.md",
                                                              "modules/37_V6_6_CybersecuritySkillsRouter.md",
-                                                             "modules/38_V6_6_SpecDrivenDevelopment.md"
+                                                             "modules/38_V6_6_SpecDrivenDevelopment.md",
+                                                             "modules/39_V6_6_TasteFrontendDesign.md"
                                                          ]
                                            }
                  },

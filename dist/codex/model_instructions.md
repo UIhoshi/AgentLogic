@@ -2,7 +2,7 @@
 
 - Host target: codex
 - Profile: core-enhanced
-- Generated at: 2026-06-22T22:25:48+09:00
+- Generated at: 2026-06-22T22:37:02+09:00
 - Stable entry: MAIN.md
 - Version: V6.6
 
@@ -697,9 +697,9 @@ This repository is logic infrastructure, not a business-project workspace.
 # AgentLogic V6.6
 
 Status: **Current Stable V6.6 Line**.
-Promoted from the integration of Cybersecurity Skills Router (`reverse-skill`) and Spec-Driven Development Toolkit (`spec-kit`).
+Promoted from the integration of Cybersecurity Skills Router (`reverse-skill`), Spec-Driven Development Toolkit (`spec-kit`), and Taste Frontend Design Skill (`taste-skill`).
 
-This file defines the stable V6.6 logic line. It operationalizes the core V6 philosophy with deep integrations for cybersecurity routing and structured specification-driven workflows.
+This file defines the stable V6.6 logic line. It operationalizes the core V6 philosophy with deep integrations for cybersecurity routing, structured specification-driven workflows, and premium anti-slop frontend design rules.
 
 ---
 
@@ -710,7 +710,8 @@ V6.6 is a **major capability expansion** designed to bridge system-level operati
 Key Enhancements:
 - **Cybersecurity Skills Routing**: Direct integration of `reverse-skill` domain-specific skill sets (APK reversing, malware analysis, frontend JS decryption, firmware analysis, and CTF solvers) and tool orchestration rules.
 - **Spec-Driven Development (SDD)**: Direct integration of `spec-kit` to enforce specifications as executable definitions of behavior, preventing "vibe coding."
-- **Expanded Core Governance Modules**: Incorporates modules 37 and 38 for cybersecurity and SDD lifecycle tracking.
+- **Taste Frontend Design**: Direct integration of `taste-skill` to enforce anti-slop premium interface design system layouts, micro-interactions, spring animations (GSAP), and visual quality standards.
+- **Expanded Core Governance Modules**: Incorporates modules 37, 38, and 39 for cybersecurity routing, SDD lifecycle tracking, and premium design system controls.
 
 ---
 
@@ -745,6 +746,7 @@ The V6.6 line is supported by a modular suite of governance rules:
 ### 2.6 Domain Integration Modules
 - `modules/37_V6_6_CybersecuritySkillsRouter.md`: Router configuration, security analysis toolchains, and field journal logging.
 - `modules/38_V6_6_SpecDrivenDevelopment.md`: Guidelines and lifecycle phases for Spec-Driven Development.
+- `modules/39_V6_6_TasteFrontendDesign.md`: Aesthetic standards, visual dials tuning, and anti-slop UI/UX audit rules.
 
 ---
 
@@ -753,7 +755,7 @@ The V6.6 line is supported by a modular suite of governance rules:
 The V6.6 line is now promoted to stable status.
 - **Stable Entry**: `MAIN.md`
 - **Current Version**: `V6.6`
-- **Default Profile**: `core-enhanced` (now includes all V6.6 modules, reverse-skill, and spec-kit references)
+- **Default Profile**: `core-enhanced` (now includes all V6.6 modules, reverse-skill, spec-kit, and taste-skill references)
 
 ---
 
@@ -767,17 +769,21 @@ The V6.6 stable line integrates the following external source repositories:
 - **Spec Kit**:
   - Source URL: `https://github.com/github/spec-kit`
   - Integration path: `spec-kit/`
+- **Taste Skill**:
+  - Source URL: `https://github.com/Leonxlnx/taste-skill`
+  - Integration path: `skills/taste-skill/`
 
 ---
 
 ## 5. Skill-System Integration Rule
 
-V6.6 treats both general programming skills and cybersecurity domain skills as portable, logic-carried assets under the `skills/` directory. 
+V6.6 treats general programming skills, cybersecurity domain skills, and visual design skills as portable, logic-carried assets under the `skills/` directory. 
 
 Key stable rules:
 - Logic package rules outrank individual skills.
 - The Cybersecurity Skills Router governs reversing, CTFs, and security audits; it does not replace general verification rules but adds specific tool constraints.
 - Spec-Driven Development templates and presets are verified through code compilation and test runs.
+- The Taste Frontend Design skill enforces layout, motion, and typography standards on all visual interfaces.
 
 ---
 
@@ -5114,4 +5120,77 @@ When starting a project or introducing a new feature, the Agent MUST execute the
 - **Specification Documentation**: `spec-kit/spec-driven.md`
 
 ## END FILE: modules/38_V6_6_SpecDrivenDevelopment.md
+
+---
+
+## BEGIN FILE: modules/39_V6_6_TasteFrontendDesign.md
+
+# V6.6 Taste Frontend Design Integration
+
+Status: **Stable V6.6 Line**.
+
+This module defines the integration of the Taste Frontend Design Skill (from `taste-skill`) as a core visual-integrity capability under AgentLogic V6.6.
+
+---
+
+## 1. Core Integration Mandate
+
+To prevent the generation of boilerplate, repetitive, or "slop" user interfaces, AgentLogic V6.6 embeds the **Taste Skill** guidelines. These rules enforce premium, design-system-driven aesthetic standards, layout variance, spring-based motion, and visual density controls.
+
+For any user interface, website mockup, or frontend implementation task, the agent MUST prioritize premium aesthetics and avoid generic defaults.
+
+---
+
+## 2. Visual Dials & Parameters
+
+When implementing or auditing user interfaces, the agent should configure and tune three primary design dials (rated 1 to 10):
+
+1. **DESIGN_VARIANCE** (Default: 5): Controls layout experimentation.
+   - *Lower (1-3)*: Clean, centered, symmetric, editorial structures.
+   - *Higher (7-10)*: Modern, asymmetrical layouts, editorial overlaps, and bold branding.
+2. **MOTION_INTENSITY** (Default: 5): Controls animation depth and micro-interactions.
+   - *Lower (1-3)*: Standard transitions and elegant hover effects.
+   - *Higher (7-10)*: Scroll-triggered, magnetic, and spring-based animations (powered by GSAP).
+3. **VISUAL_DENSITY** (Default: 5): Controls whitespace and information distribution.
+   - *Lower (1-3)*: Spacious, minimal interfaces, soft contrast.
+   - *Higher (7-10)*: High-density dashboards, technical structures.
+
+---
+
+## 3. The Anti-Slop Redesign Workflow
+
+For redesigns or visual upgrades of existing projects, follow this checklist:
+1. **Audit Phase**: Conduct a full visual review to identify spacing inconsistency, low-contrast text, missing motion cues, or "default template" structures.
+2. **Token Set**: Declare a strict visual design system (typography scale, palette, spacing scale) before writing CSS.
+3. **Typography and Spacing**: Ensure proportional hierarchy (e.g. tracking/leading adjustments) and strict margin/padding boundaries.
+4. **Motion Enhancement**: Implement spring physics animations (preferably using GSAP or standard spring transitions) instead of linear ease functions.
+
+---
+
+## 4. Mandatory Design Verification Rules
+
+Verification of user interface changes is bound to the following rules:
+
+| Visual Aspect | Mandatory Verification Tool / Method | Minimum Proof Required |
+|---|---|---|
+| Bounding Overflows | Parent-child bounding-box container check | No text clipping, line wrapping errors, or overflow on standard device viewports |
+| Color / Contrast | Predefined HSL/RGB palette match check | CSS complies with contrast ratios and design token definitions |
+| Micro-interactions | Screenshot / Browser event replay test | Interactive hover/active states trigger expected visual classes |
+| Output Completeness | Post-edit full-code listing | Complete code files without truncated blocks or placeholder comments (e.g. `// TODO: implement rest`) |
+
+---
+
+## 5. Location of Assets
+
+- **Design & Coding Skills**: `skills/taste-skill/skills/`
+  - Default v2 Skill: `skills/taste-skill/skills/taste-skill/`
+  - Minimalist UI: `skills/taste-skill/skills/minimalist-skill/`
+  - Soft Visual Design: `skills/taste-skill/skills/soft-skill/`
+  - Brutalist UI: `skills/taste-skill/skills/brutalist-skill/`
+  - Stitch Rules: `skills/taste-skill/skills/stitch-skill/`
+- **Image Generation Skills**: `skills/taste-skill/skills/imagegen-frontend-web/`, `skills/taste-skill/skills/imagegen-frontend-mobile/`, `skills/taste-skill/skills/brandkit/`
+- **Research Findings (Laziness/Slop Root Causes)**: `skills/taste-skill/research/`
+- **Original Rules Reference**: `skills/taste-skill/README.md`
+
+## END FILE: modules/39_V6_6_TasteFrontendDesign.md
 

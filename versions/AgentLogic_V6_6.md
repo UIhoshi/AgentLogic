@@ -1,9 +1,9 @@
 # AgentLogic V6.6
 
 Status: **Current Stable V6.6 Line**.
-Promoted from the integration of Cybersecurity Skills Router (`reverse-skill`) and Spec-Driven Development Toolkit (`spec-kit`).
+Promoted from the integration of Cybersecurity Skills Router (`reverse-skill`), Spec-Driven Development Toolkit (`spec-kit`), and Taste Frontend Design Skill (`taste-skill`).
 
-This file defines the stable V6.6 logic line. It operationalizes the core V6 philosophy with deep integrations for cybersecurity routing and structured specification-driven workflows.
+This file defines the stable V6.6 logic line. It operationalizes the core V6 philosophy with deep integrations for cybersecurity routing, structured specification-driven workflows, and premium anti-slop frontend design rules.
 
 ---
 
@@ -14,7 +14,8 @@ V6.6 is a **major capability expansion** designed to bridge system-level operati
 Key Enhancements:
 - **Cybersecurity Skills Routing**: Direct integration of `reverse-skill` domain-specific skill sets (APK reversing, malware analysis, frontend JS decryption, firmware analysis, and CTF solvers) and tool orchestration rules.
 - **Spec-Driven Development (SDD)**: Direct integration of `spec-kit` to enforce specifications as executable definitions of behavior, preventing "vibe coding."
-- **Expanded Core Governance Modules**: Incorporates modules 37 and 38 for cybersecurity and SDD lifecycle tracking.
+- **Taste Frontend Design**: Direct integration of `taste-skill` to enforce anti-slop premium interface design system layouts, micro-interactions, spring animations (GSAP), and visual quality standards.
+- **Expanded Core Governance Modules**: Incorporates modules 37, 38, and 39 for cybersecurity routing, SDD lifecycle tracking, and premium design system controls.
 
 ---
 
@@ -49,6 +50,7 @@ The V6.6 line is supported by a modular suite of governance rules:
 ### 2.6 Domain Integration Modules
 - `modules/37_V6_6_CybersecuritySkillsRouter.md`: Router configuration, security analysis toolchains, and field journal logging.
 - `modules/38_V6_6_SpecDrivenDevelopment.md`: Guidelines and lifecycle phases for Spec-Driven Development.
+- `modules/39_V6_6_TasteFrontendDesign.md`: Aesthetic standards, visual dials tuning, and anti-slop UI/UX audit rules.
 
 ---
 
@@ -57,7 +59,7 @@ The V6.6 line is supported by a modular suite of governance rules:
 The V6.6 line is now promoted to stable status.
 - **Stable Entry**: `MAIN.md`
 - **Current Version**: `V6.6`
-- **Default Profile**: `core-enhanced` (now includes all V6.6 modules, reverse-skill, and spec-kit references)
+- **Default Profile**: `core-enhanced` (now includes all V6.6 modules, reverse-skill, spec-kit, and taste-skill references)
 
 ---
 
@@ -71,17 +73,21 @@ The V6.6 stable line integrates the following external source repositories:
 - **Spec Kit**:
   - Source URL: `https://github.com/github/spec-kit`
   - Integration path: `spec-kit/`
+- **Taste Skill**:
+  - Source URL: `https://github.com/Leonxlnx/taste-skill`
+  - Integration path: `skills/taste-skill/`
 
 ---
 
 ## 5. Skill-System Integration Rule
 
-V6.6 treats both general programming skills and cybersecurity domain skills as portable, logic-carried assets under the `skills/` directory. 
+V6.6 treats general programming skills, cybersecurity domain skills, and visual design skills as portable, logic-carried assets under the `skills/` directory. 
 
 Key stable rules:
 - Logic package rules outrank individual skills.
 - The Cybersecurity Skills Router governs reversing, CTFs, and security audits; it does not replace general verification rules but adds specific tool constraints.
 - Spec-Driven Development templates and presets are verified through code compilation and test runs.
+- The Taste Frontend Design skill enforces layout, motion, and typography standards on all visual interfaces.
 
 ---
 
