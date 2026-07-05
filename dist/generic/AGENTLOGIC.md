@@ -2,7 +2,7 @@
 
 - Host target: generic
 - Profile: core-enhanced
-- Generated at: 2026-07-05T16:34:10+09:00
+- Generated at: 2026-07-05T17:08:22+09:00
 - Stable entry: MAIN.md
 - Version: V6.65
 
@@ -258,11 +258,11 @@ Do not continue deeper reading, modify files, delete files, perform write action
 or begin implementation before the logic-entry loop above has been completed.
 -->
 
-# Agent Installation Guide (V6.6 Stable)
+# Agent Installation Guide (V6.65 Stable)
 
 This is the shortest installation path for AI agents. 
 
-Goal: Install **AgentLogic V6.6** into the current local host without guessing the entrypoint, target bundle, or validation command.
+Goal: Install **AgentLogic V6.65** into the current local host without guessing the entrypoint, target bundle, or validation command.
 
 ## Do Not Guess
 
@@ -270,7 +270,7 @@ Before installing, identify:
 
 1.  Whether the current directory is the AgentLogic repository root.
 2.  The target host: `codex`, `claude`, `gemini`, or `generic`.
-3.  The selected profile: **`core-enhanced`** is mandatory for full V6.6 governance support.
+3.  The selected profile: **`core-enhanced`** is mandatory for full V6.65 governance support.
 4.  Whether the host should bind to `MAIN.md` directly or to a generated bundle.
 
 If uncertain, run the doctor first:
@@ -279,12 +279,12 @@ If uncertain, run the doctor first:
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\doctor.ps1
 ```
 
-## V6.6 Stable Facts
+## V6.65 Stable Facts
 
-- **Current Version**: V6.6 (Reversing Router, Spec Kit, and Taste Design System integration).
+- **Current Version**: V6.65 (Reversing Router, Spec Kit, Taste Design System, and visual system matrix integration).
 - **Repository Role**: Primary local logic package (Method Layer).
 - **Stable Host Entry**: `MAIN.md`.
-- **Default Profile**: `core-enhanced` (Includes modules 20-39 for advanced governance and spec-driven workflows).
+- **Default Profile**: `core-enhanced` (Includes modules 20-40 for advanced governance and spec-driven workflows).
 - **Machine-readable Contract**: `manifest.json`.
 - **Root Installer**: `install.ps1`.
 - **Validation Command**: `scripts/validate-package.ps1`.
@@ -317,7 +317,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost ge
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\validate-package.ps1
 ```
 
-## Agent Decision Rule (V6.6)
+## Agent Decision Rule (V6.65)
 
 If the user asks to "load", "install", "mount", "bind", or "use this logic locally", the agent **MUST** follow this protocol:
 
@@ -337,9 +337,9 @@ If the user asks to "load", "install", "mount", "bind", or "use this logic local
     -   Adopt the **4-Tier Memory Taxonomy** (User, Feedback, Project, Reference) for project notes.
     -   Adopt the **Spec-Driven Development (SDD) Lifecycle** (Module 38) for technical tasks.
     -   Adopt the **Taste Frontend Design Standards** (Module 39) for interface and visual changes.
-7.  **Report**: State the installed host, version (V6.6), profile, and confirmation that the new governance rules are active.
+7.  **Report**: State the installed host, version (V6.65), profile, and confirmation that the new governance rules are active.
 
-## Install-Time And Update-Time Skill Rule (V6.6)
+## Install-Time And Update-Time Skill Rule (V6.65)
 
 Every local installation **and every local logic update** of AgentLogic must perform a host-local skill audit and organization pass.
 
@@ -351,7 +351,7 @@ This is required because:
 - duplicate-or-overlapping skill families must be classified instead of guessed
 - host-local skills must stay separate from any logic-carried skill layer so one machine's local packs do not become another machine's default logic state
 
-The V6.6 install/update rule is:
+The V6.65 install/update rule is:
 
 1. identify the host-local skill zone for the target host
 2. keep that host-local zone separate from the logic-carried layer
@@ -719,56 +719,72 @@ This repository is logic infrastructure, not a business-project workspace.
 
 ## BEGIN FILE: versions/AgentLogic_V6_65.md
 
-# AgentLogic V6.6
+# AgentLogic V6.65
 
-Status: **Current Stable V6.6 Line**.
-Promoted from the integration of Cybersecurity Skills Router (`reverse-skill`), Spec-Driven Development Toolkit (`spec-kit`), and Taste Frontend Design Skill (`taste-skill`).
+Status: **Current Stable V6.65 Line**.
+Promoted from the integration of Cybersecurity Skills Router (`reverse-skill`), Spec-Driven Development Toolkit (`spec-kit`), Taste Frontend Design Skill (`taste-skill`), and 4-Layer System Matrix Map (`modules/40_AgentLogicSystemMap.md`).
 
-This file defines the stable V6.6 logic line. It operationalizes the core V6 philosophy with deep integrations for cybersecurity routing, structured specification-driven workflows, and premium anti-slop frontend design rules.
+This file defines the stable V6.65 logic line. It operationalizes the core V6 philosophy with deep integrations for cybersecurity routing, structured specification-driven workflows, premium anti-slop frontend design rules, and visual system matrix mapping.
 
 ---
 
-## 1. The V6.6 Mandate
+## 1. The V6.65 Mandate
 
-V6.6 is a **major capability expansion** designed to bridge system-level operational discipline with specialized engineering domains:
+V6.65 is a **major capability expansion** designed to bridge system-level operational discipline with specialized engineering domains:
 
 Key Enhancements:
+- **4-Layer System Mapping & Code Matrix**: Inspired by the Linux Kernel Map to organize rules, tools, and execution flows into a clean 4-tier grid, integrating [11_CrossDirectoryMap.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/11_CrossDirectoryMap.md) and [40_AgentLogicSystemMap.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/40_AgentLogicSystemMap.md).
 - **Cybersecurity Skills Routing**: Direct integration of `reverse-skill` domain-specific skill sets (APK reversing, malware analysis, frontend JS decryption, firmware analysis, and CTF solvers) and tool orchestration rules.
 - **Spec-Driven Development (SDD)**: Direct integration of `spec-kit` to enforce specifications as executable definitions of behavior, preventing "vibe coding."
 - **Taste Frontend Design**: Direct integration of `taste-skill` to enforce anti-slop premium interface design system layouts, micro-interactions, spring animations (GSAP), and visual quality standards.
-- **Expanded Core Governance Modules**: Incorporates modules 37, 38, and 39 for cybersecurity routing, SDD lifecycle tracking, and premium design system controls.
+- **Expanded Core Governance Modules**: Incorporates modules 37, 38, 39, and 40 for cybersecurity routing, SDD lifecycle tracking, premium design system controls, and visual architecture matrix mapping.
 
 ---
 
 ## 2. Core Governance Modules
 
-The V6.6 line is supported by a modular suite of governance rules:
+The V6.65 line is supported by a modular suite of governance rules:
 
-### 2.1 Tool Execution & Mapping
+### 2.1 Entry & Master Logic
+- `modules/01_MasterLogic.md`: Master logic outlining project-level CLI loops and mappings.
+- `modules/03_AgenticLoop.md`: Execution loop orchestration details and context compacting.
+- `modules/12_AgentEnforcement.md`: Agent behavior enforcement, read obligations, and gate checking rules.
+- `modules/13_MandatoryLogicGateTemplate.md`: File-level Mandatory Logic Gate header template.
+- `modules/15_LogicEntryChecklist.md`: Mandatory startup checklist for project entry and reset gating.
+
+### 2.2 System & Code Mapping
+- `modules/11_CrossDirectoryMap.md`: The 4-layer (L1 to L4) codebase directory mapping matrix.
+- `modules/40_AgentLogicSystemMap.md`: The Linux Kernel Map-inspired visual grid matrix mapping subsystems to rows and columns.
+
+### 2.3 Tool Execution & Mapping
+- `modules/05_PermissionsAndSafety.md`: General safety boundaries, permissions, and command sandboxing.
 - `modules/21_V6_5_ToolUsageAndSelection.md`: General principles and tool choreography.
+- `modules/23_V6_5_PermissionAndOutputPipeline.md`: Permission gating implementation layer.
 - `modules/24_V6_5_ToolUsageMatrix.md`: Decision table for preferred tools.
 - `modules/25_V6_5_ToolCapabilityMapping.md`: Maps tool families to specific question types.
+- `modules/26_V6_5_INDEX.md`: Index of V6.5 files.
+- `modules/28_V6_5_TerminologyAndModuleBoundaries.md`: Definitions, terminology, and module boundaries.
 - `modules/30_ToolQuestionBoundaryMatrix.md`: Defines tool-family strength and forbidden-alone claims.
 
-### 2.2 Risk & Verification
+### 2.4 Risk & Verification
 - `modules/27_V6_5_ToolPermissionRiskMatrix.md`: Permission posture and risk class gating.
 - `modules/29_MandatoryVerificationMatrix.md`: Mapping of conclusion types to required evidence tools.
 - `modules/31_ToolMisuseAndAntiPatternMatrix.md`: Anti-pattern detection, correction recipes, and downgrade labels.
 
-### 2.3 Context & Lifecycle
+### 2.5 Context & Lifecycle
 - `modules/20_V6_5_RuntimeModes.md`: Operational awareness of the current execution surface.
 - `modules/22_V6_5_HookLifecycle.md`: Mapping of event hooks and side-effect points.
 - `modules/32_V6_5_ContextAssemblyAndInstructionStacking.md`: Priority-based layering of instructions and memories.
 - `modules/33_V6_5_BackgroundConsolidationAndIdleLifecycle.md`: The "Dream Phase" for post-task memory extraction and cleanup.
 
-### 2.4 Project Fact Mapping
+### 2.6 Project Fact Mapping
 - `modules/34_V6_5_ProjectFactMap_V2.md`: Standardized 4-tier fact map (User, Feedback, Project, Reference).
 
-### 2.5 Skill Governance
+### 2.7 Skill Governance
 - `modules/35_V6_5_SkillGovernanceAndMandatoryUse.md`: Deduplication policy, active-vs-archived skill posture, and mandatory skill-use situations.
 - `modules/36_V6_5_SkillZoneSeparation.md`: Separates host-local skill inventories from any logic-carried skill layer.
 
-### 2.6 Domain Integration Modules
+### 2.8 Domain Integration Modules
 - `modules/37_V6_6_CybersecuritySkillsRouter.md`: Router configuration, security analysis toolchains, and field journal logging.
 - `modules/38_V6_6_SpecDrivenDevelopment.md`: Guidelines and lifecycle phases for Spec-Driven Development.
 - `modules/39_V6_6_TasteFrontendDesign.md`: Aesthetic standards, visual dials tuning, and anti-slop UI/UX audit rules.
@@ -777,16 +793,16 @@ The V6.6 line is supported by a modular suite of governance rules:
 
 ## 3. Stable Promotion Summary
 
-The V6.6 line is now promoted to stable status.
+The V6.65 line is now promoted to stable status.
 - **Stable Entry**: `MAIN.md`
-- **Current Version**: `V6.6`
-- **Default Profile**: `core-enhanced` (now includes all V6.6 modules, reverse-skill, spec-kit, and taste-skill references)
+- **Current Version**: `V6.65`
+- **Default Profile**: `core-enhanced` (now includes all V6.65 modules, system maps, reverse-skill, spec-kit, and taste-skill references)
 
 ---
 
 ## 4. Reference Source Registration
 
-The V6.6 stable line integrates the following external source repositories:
+The V6.65 stable line integrates the following external source repositories:
 
 - **Cybersecurity Skills Router**:
   - Source URL: `https://github.com/zhaoxuya520/reverse-skill`
@@ -802,7 +818,7 @@ The V6.6 stable line integrates the following external source repositories:
 
 ## 5. Skill-System Integration Rule
 
-V6.6 treats general programming skills, cybersecurity domain skills, and visual design skills as portable, logic-carried assets under the `skills/` directory. 
+V6.65 treats general programming skills, cybersecurity domain skills, and visual design skills as portable, logic-carried assets under the `skills/` directory. 
 
 Key stable rules:
 - Logic package rules outrank individual skills.
@@ -1300,6 +1316,74 @@ For future logic iterations, a version line must explicitly record its external 
 
 ---
 
+## BEGIN FILE: modules/11_CrossDirectoryMap.md
+
+<!--
+MANDATORY LOGIC GATE
+
+Before making changes here, read `AGENTS.md` and `README.md` first.
+Then follow the repository-declared logic entry chain, including `00_START_HERE.md`,
+`modules/01_MasterLogic.md`, and `modules/15_LogicEntryChecklist.md` when applicable.
+
+Before every new coding round, explicitly decide whether the current task extends
+the previous coding round.
+If it does not, explicitly ask whether to forget/compress context before continuing.
+
+Treat this flow as a blocking gate, not as guidance, documentation, or a reminder.
+Do not infer continuation by yourself.
+Do not skip the context-reset question for efficiency.
+
+Do not continue deeper reading, modify files, delete files, perform write actions,
+or begin implementation before the logic-entry loop above has been completed.
+-->
+
+# Cross Directory Code Map (浠ｇ爜璺ㄧ洰褰曞湴鍥?
+
+鏈枃浠舵槸閽堝鏈郴缁熸簮鐮佺洰褰曡璁＄殑 **4灞備唬鐮佹灦鏋勪笌璺ㄧ洰褰曡皟鐢ㄥ湴鍥?*銆傚畠灏嗕笁灞傛墎骞崇粨鏋勯噸鏋勪负鍙?Linux 鍐呮牳鍚彂鐨?**L1 鉃?L2 鉃?L3 鉃?L4** 鍥涘眰娓愯繘浣撶郴锛屾竻鏅扮晫瀹氫簡浠庣敤鎴风粓绔晫闈㈠埌搴曞眰鎵ц椹卞姩鐨勪唬鐮佸垎甯冧笌鏁版嵁娴佽浆鍏崇郴銆?
+---
+
+## 1. 婧愮爜鍥涘眰鏄犲皠鐭╅樀 (4-Layer Code Architecture)
+
+| 浠ｇ爜灞傜骇 | 鏍稿績鑱岃矗 | 鍏宠仈鐨勫叧閿洰褰曚笌鏂囦欢 |
+| :--- | :--- | :--- |
+| **L1: Shell & CLI Surface**<br>(CLI 涓庝氦浜掑澹冲眰) | 璐熻矗 REPL 鍚姩銆佺敤鎴疯緭鍏ヨВ鏋愩€佸懡浠ゅ垎鍙戙€佺粓绔?UI 娓叉煋銆傜被浼间簬 Linux 鐨?TTY 缁堢涓庣郴缁熻皟鐢ㄦ帴鍙ｃ€?| - [cli.tsx](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/entrypoints/cli.tsx)<br>- [main.tsx](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/main.tsx)<br>- `src/screens/` 涓?`src/components/` (缁堢 React 缁勪欢)<br>- `src/ink/` (缁堢娓叉煋寮曟搸) |
+| **L2: Session & Loop Orchestration**<br>(浼氳瘽涓庡惊鐜紪鎺掑眰) | 璐熻矗鍗忚皟澶氳疆浼氳瘽鐘舵€併€佺鐞嗗綋鍓嶄細璇濅笂涓嬫枃浠ュ強鍗曡疆鎺ㄧ悊寰幆銆傜被浼间簬 Linux 鍐呮牳鐨勮繘绋嬭皟搴︿笌椤佃〃鏄犲皠銆?| - [QueryEngine.ts](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/QueryEngine.ts) (浼氳瘽缂栨帓)<br>- [query.ts](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/query.ts) (鍗曡疆鎬濊€?鎺ㄧ悊寮曟搸)<br>- [context.ts](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/context.ts) (涓婁笅鏂囧皝瑁?<br>- `src/state/` (浼氳瘽鐘舵€佺姸鎬佹満) |
+| **L3: Service & Mediation Control**<br>(鏈嶅姟缁勪欢涓庝腑浠嬫帶鍒跺眰) | 鎻愪緵缁熶竴鐨勬娊璞℃帴鍙ｏ紝璐熻矗宸ュ叿鐨勫姩鎬佺粍瑁呫€佹墽琛屾嫤鎴€佹潈闄愬垽瀹氬拰鎵╁睍鍗忚銆傜被浼间簬 Linux 鐨?VFS (铏氭嫙鏂囦欢绯荤粺) 鍜?Sockets 灞傘€?| - [Tool.ts](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/Tool.ts) & [tools.ts](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/tools.ts) (宸ュ叿涓粙涓庢敞鍐?<br>- `src/services/tools/` (宸ュ叿鎵ц涓?Hook 鐢熷懡鍛ㄦ湡缂栨帓)<br>- `src/utils/permissions/` (鏉冮檺鎷︽埅缃戝叧)<br>- `src/services/mcp/` (Model Context Protocol 瀹㈡埛绔?鏈嶅姟绔? |
+| **L4: Atomic Execution & Drivers**<br>(鍘熷瓙鎵ц涓庡簳灞傞┍鍔ㄥ眰) | 璐熻矗鍏蜂綋涓氬姟鍛戒护涓庡伐鍏风殑瀹為檯鎵ц锛屼笌鏈湴鐜銆佹枃浠剁郴缁熴€佺綉缁滀氦浜掋€傜被浼间簬 Linux 鐨勫叿浣撹澶囬┍鍔ㄤ笌鏂囦欢绯荤粺瀹炵幇銆?| - `src/commands/` (搴曞眰 CLI 鍛戒护瀹炵幇)<br>- `src/tools/` (鍘熷瓙宸ュ叿浠ｇ爜锛屽 `view_file`銆乣run_command` 绛夌殑瀹為檯 TypeScript 瀹炵幇)<br>- `skills/` (棰嗗煙鎶€鑳藉寘锛屼緥濡?`taste-skill` UI 瀹¤銆乣reverse-skill` 閫嗗悜鍒嗘瀽銆乣spec-kit` SDD 鎺у埗) |
+
+---
+
+## 2. 鍏抽敭璺ㄧ洰褰曚氦浜掍笌鏁版嵁娴佸悜
+
+褰撶敤鎴疯緭鍏ユ寚浠ゆ垨澶фā鍨嬩骇鐢熷伐鍏疯皟鐢ㄦ椂锛屼唬鐮佸皢鎸変互涓嬭矾寰勮法鐩綍娴佽浆锛?
+```
+L1: Surface (cli.tsx / React UI)
+       鈹?(1) 鎻愪氦鐢ㄦ埛鎸囦护 / 杈撳叆
+       鈻?L2: Loop (QueryEngine.ts 鉃?query.ts) 鈼勨攢鈹€鈹€鈹?       鈹?(2) 鍙戣捣妯″瀷鎺ㄧ悊锛岀敓鎴愬伐鍏疯皟鐢ㄨ姹? 鈹?(7) 鍥炰紶鎵ц缁撴灉
+       鈻?                                 鈹?L3: Service (tools.ts 鉃?toolExecution.ts) 鈹?       鈹?(3) 瑙﹀彂 Pre-Hook 骞惰姹傛潈闄愭牎楠?       鈹溾攢鈹€鈹€鈹€鈹€鈹€鈹€鈹€鉃?src/utils/permissions/ (鏉冮檺鍒ゅ畾)
+       鈹?(4) 鏉冮檺鏀捐锛屽紑濮嬫淳鍙戝伐鍏?       鈻?L4: Drivers (src/tools/* or skills/*)
+       鈹?(5) 瀹為檯鎵ц绯荤粺/缃戠粶/鏂囦欢鎿嶄綔
+       鈻?L3: Service (toolResultStorage.ts 鉃?Hook Lifecycle)
+         (6) 瑙﹀彂 Post-Hook & 寮哄埗楠岃瘉鐭╅樀楠岃瘉 (modules/29)
+```
+
+---
+
+## 3. 缁存姢涓庨槄璇婚『搴忓缓璁?
+瀵逛簬鎺ユ墜鎴栧弬涓庣郴缁熷紑鍙戠殑寮€鍙戣€咃紝鎺ㄨ崘鎸夌収濡備笅鐨勭郴缁熷寲璺緞杩涜浠ｇ爜闃呰锛?
+1. **鏍稿績閫昏緫鍏ュ彛**:
+   - `modules/01_MasterLogic.md` (涓绘灦鏋勭翰棰?
+   - `modules/40_AgentLogicSystemMap.md` (鏋舵瀯缃戞牸涓庢墽琛屾祦鍦板浘)
+2. **绗竴姝ワ細鐪嬪澹充氦浜?(L1)**:
+   - 浠?`src/main.tsx` 浜嗚В REPL 鍚姩锛岀劧鍚庣湅 `src/entrypoints/cli.tsx` 濡備綍澶勭悊棣栧抚娓叉煋涓庣粍浠舵寕杞姐€?3. **绗簩姝ワ細鐞嗕細璇濆惊鐜?(L2)**:
+   - 娣卞叆闃呰 `src/QueryEngine.ts` 鎺屾彙澶氳疆瀵硅瘽鐨勬寕璧蜂笌婵€娲伙紝鍐嶇湅 `src/query.ts` 鐞嗚В鍗曡疆 Agentic Loop 涓殑妯″瀷璋冪敤绛栫暐銆?4. **绗笁姝ワ細鐪嬪伐鍏锋湇鍔′笌瀹夊叏 (L3)**:
+   - 闃呰 `src/Tool.ts` 鎶借薄绫伙紝鎺ョ潃鐪?`src/services/tools/toolExecution.ts` 濡備綍绠＄悊鐢熷懡鍛ㄦ湡 Hook 浠ュ強濡備綍鎺ュ叆 `src/utils/permissions/` 杩涜瀹夊叏鎷︽埅銆?5. **绗洓姝ワ細鐪嬮┍鍔ㄤ笌钀藉湴 (L4)**:
+   - 鏌ョ湅 `src/tools/` 鐩綍涓嬬殑搴曞眰鎵ц閫昏緫锛岀劧鍚庣湅澶栭儴鎵╁睍鎶€鑳藉寘 `skills/` 濡備綍鍙嶅摵鏍稿績寮曟搸銆?
+
+## END FILE: modules/11_CrossDirectoryMap.md
+
+---
+
 ## BEGIN FILE: modules/12_AgentEnforcement.md
 
 # Agent Enforcement
@@ -1339,7 +1423,7 @@ Agent 鑷冲皯蹇呴』瀹屾垚锛?
 1. 璇嗗埆椤圭洰鏂囨。涓诲叆鍙?
 2. 纭椤圭洰鐩綍涓嬫槸鍚﹀瓨鍦ㄥ綋鍓嶉」鐩娇鐢ㄧ殑 Agent 閫昏緫鏂囦欢锛涜嫢涓嶅瓨鍦紝鍏堣闂€昏緫鍏ュ彛浣嶇疆
 3. 鍒ゆ柇褰撳墠浠诲姟鏄惁灞炰簬涓婁竴杞?coding 鐨勫欢鐢?
-4. 鑻ヤ笉灞炰簬涓婁竴杞欢鐢筹紝鍏堣闂敤鎴锋槸鍚﹂渶瑕?`forget/compress context`
+4. 鑻ヤ笉灞炰簬涓婁竴杞欢鐢筹紝涓斾細璇?Token 鍗犵敤宸茶秴杩?15%锛屽厛璇㈤棶鐢ㄦ埛鏄惁闇€瑕?`forget/compress context`锛堣嫢 Token 鍗犵敤鏋佷綆 <15% 涓斿寘鍚槑纭殑涓婁笅鏂囪竟鐣岋紝鍙嚜鍔ㄩ潤榛樺拷鐣ヨ鎻愰棶锛?
 5. 鑻ヨ鏀剁缉涓婁笅鏂囷紝鍏堟妸褰撳墠鏈夋晥鐘舵€佸洖鍐欏埌缁撴瀯鍖栬浇浣?
 6. 璇诲彇鐩稿叧 md 涓庡叧閿叆鍙ｆ簮鐮?
 7. 鍒ゆ柇褰撳墠浠诲姟浣嶄簬 L1 / L2 / L3 / L4 鍝竴灞?
@@ -1474,8 +1558,8 @@ Agent 鑷冲皯蹇呴』瀹屾垚锛?
 - 姝ｇ‘椤哄簭蹇呴』鍥哄畾涓猴細
   1. 鍏堢‘璁ら€昏緫鍏ュ彛
   2. 鍐嶅垽鏂槸鍚﹀睘浜庝笂涓€杞欢鐢?
-  3. 鑻ヤ笉鏄欢鐢筹紝蹇呴』鍏堣闂槸鍚﹂渶瑕?`forget/compress context`
-- 鑻ョ 3 姝ユ湭瀹屾垚锛屼笉寰楃洿鎺ヨ繘鍏ユ寮忓疄鐜般€?
+  3. 鑻ヤ笉鏄欢鐢筹紝涓斾細璇?Token 鍗犵敤瓒呰繃 15%锛屽繀椤诲厛璇㈤棶鏄惁闇€瑕?`forget/compress context`锛堣嫢 Token 鏋佸叾鍏呰冻 <15% 涓旇竟鐣屾竻鏅帮紝鍙潤榛樺拷鐣ユ彁闂苟鐩存帴缁х画锛?
+- 鑻ョ 3 姝ユ湭瀹屾垚涓旀湭婊¤冻蹇界暐鏉′欢锛屼笉寰楃洿鎺ヨ繘鍏ユ寮忓疄鐜般€?
 - 鑻ョ敤鎴风‘璁ら渶瑕佹敹缂╀笂涓嬫枃锛孉gent 蹇呴』鍏堝洖鍐欑粨鏋勫寲鐘舵€侊紝鍐嶅噺灏戝伐浣滀笂涓嬫枃銆?
 
 ## 4.3 澶栭儴鏇翠紭宸ュ叿鐨勬彁鍑轰箟鍔?
@@ -2008,18 +2092,20 @@ This stack should be treated as the default engineering baseline, not a special-
 - [ ] 宸插畬鎴愮洰褰曞璁?
 - [ ] 宸茬‘璁ゅ綋鍓嶇洰褰曚笉鏄€昏緫鍖呭伐浣滅洰褰?
 - [ ] 鑻ヤ换鍔￠渶瑕佸垱寤轰笟鍔℃枃浠讹紝宸插垏鎹㈠埌鐙珛椤圭洰鐩綍
+- [ ] 纭鎵ц鍛戒护鏃剁殑 Cwd 鏄惁姝ｇ‘澶勪簬宸ヤ綔鍖烘牴鐩綍锛屼互闃叉璇垹闄?璇鐩?
 
 ## 5. 涓婁笅鏂囧欢鐢充笌閲嶇疆鍒ゆ柇
 
 - [ ] 宸插垽鏂綋鍓嶆柊浠诲姟鏄惁灞炰簬涓婁竴杞?coding 鐨勫欢鐢?
-- [ ] 鑻ヤ笉灞炰簬涓婁竴杞欢鐢筹紝宸插厛璇㈤棶鏄惁闇€瑕?`forget/compress context`
+- [ ] 鑻ヤ笉灞炰簬涓婁竴杞欢鐢筹紝涓斾細璇?Token 鍗犵敤瓒呰繃 15%锛屽凡璇㈤棶鏄惁闇€瑕?`forget/compress context`锛堣嫢 Token 鍗犵敤鏋佷綆 <15% 涓斿寘鍚槑纭殑涓婁笅鏂囪竟鐣岋紝鍙潤榛樺拷鐣ヨ鎻愰棶锛?
 - [ ] 鑻ラ渶瑕佹敹缂╀笂涓嬫枃锛屽凡鍏堝洖鍐欑粨鏋勫寲鐘舵€侊紝鍐嶅噺灏戝伐浣滀笂涓嬫枃
 
 ## 6. 寮€濮嬮」鐩墠鐨勬渶缁堢粨璁?
 
 - [ ] 宸插畬鎴愪富閫昏緫鎺ュ叆
 - [ ] 宸插畬鎴愰€昏緫鍏ュ彛纭
-- [ ] 宸插畬鎴愪笂涓嬫枃寤剁敵鍒ゆ柇涓庡繀瑕佺殑涓婁笅鏂囬噸缃彁闂?
+- [ ] 鑻ユ娴嬪埌鏈湴涓婚€昏緫鏂囦欢鏈夊彉鏇达紝宸茶繍琛?scripts/validate-package.ps1 杩涜涓€鑷存€ч獙璇?
+- [ ] 宸插畬鎴愪笂涓嬫枃寤剁敵鍒ゆ柇涓庡繀瑕佺殑涓婁笅鏂囬噸缃彁闂紙鎴栨弧瓒抽潤榛樺拷鐣ユ潯浠讹級
 - [ ] 宸插缓绔嬮」鐩簨瀹炲湴鍥?
 - [ ] 鑻ラ」鐩凡鎻愪緵浠撳簱绾ч€昏緫鍏ュ彛鏍￠獙鑴氭湰锛屽凡瀹為檯杩愯锛堜緥濡傦細`node scripts/check-logic-entry.js`锛?
 - [ ] 褰撳墠鍙互杩涘叆姝ｅ紡瑙勫垝 / 瀹炵幇 / 楠岃瘉闃舵
@@ -5258,7 +5344,7 @@ or begin implementation before the logic-entry loop above has been completed.
 鏈煩闃靛皢澶嶆潅鐨勭郴缁熻兘鍔涙寜鈥滀笂涓嬪垎灞傦紙灞傜骇锛夆€濆拰鈥滃乏鍙冲垎娌伙紙瀛愮郴缁燂級鈥濈殑褰㈠紡杩涜鏄犲皠锛?
 | 鎶借薄灞傜骇 \ 瀛愮郴缁?| **浼氳瘽涓庣敓鍛藉懆鏈?(Session & Lifecycle)** | **鑳藉姏涓庤矾鐢?(Capabilities & Routing)** | **宸ュ叿涓庢墿灞?(Tools & Extensions)** | **瀹夊叏涓庢不鐞?(Security & Governance)** | **鐘舵€佷笌璁板繂 (State & Memory)** |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **L1: 鎴樼暐涓庡叆鍙ｅ眰 (Strategy & Entry)** | [cli.tsx](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/entrypoints/cli.tsx)<br>[main.tsx](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/main.tsx)<br>鍚姩涓庣幆澧冩敞鍏?| [00_START_HERE.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/00_START_HERE.md)<br>[AGENTS.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/AGENTS.md)<br>閫昏緫鎺ュ叆鍏ュ彛纭 | [README.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/README.md)<br>涓讳粨搴撴枃妗ｅ鑸笌璇存槑 | [15_LogicEntryChecklist.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/15_LogicEntryChecklist.md)<br>閫昏緫鍏ュ彛妫€鏌ユ竻鍗?| [13_MandatoryLogicGateTemplate.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/13_MandatoryLogicGateTemplate.md)<br>鍏ㄥ眬閫昏緫鎷︽埅妫€鏌?|
+| **L1: 鎴樼暐涓庡叆鍙ｅ眰 (Strategy & Entry)** | [cli.tsx](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/entrypoints/cli.tsx)<br>[main.tsx](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/main.tsx)<br>鍚姩涓庣幆澧冩敞鍏?| [00_START_HERE.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/00_START_HERE.md)<br>[AGENTS.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/AGENTS.md)<br>閫昏緫鎺ュ叆鍏ュ彛纭 | [README.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/README.md)<br>涓讳粨搴撴枃妗ｅ鑸鏄?br>[11_CrossDirectoryMap.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/11_CrossDirectoryMap.md)<br>浠ｇ爜璺ㄧ洰褰曞湴鍥?| [15_LogicEntryChecklist.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/15_LogicEntryChecklist.md)<br>閫昏緫鍏ュ彛妫€鏌ユ竻鍗?br>[13_MandatoryLogicGateTemplate.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/13_MandatoryLogicGateTemplate.md)<br>鍏ㄥ眬閫昏緫鎷︽埅妫€鏌?| [MAIN.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/MAIN.md)<br>瀹夸富閫昏緫缁戝畾鍏ュ彛 |
 | **L2: 棰嗗煙涓庡惊鐜眰 (Domain & Loop)** | [QueryEngine.ts](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/QueryEngine.ts)<br>澶氳疆浼氳瘽娴佺紪鎺?| [query.ts](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/query.ts)<br>鍗曡疆 Agentic 鎵ц寰幆 | [38_V6_6_SpecDrivenDevelopment.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/38_V6_6_SpecDrivenDevelopment.md)<br>[spec-kit/](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/spec-kit/) 瑙勬牸椹卞姩寮€鍙?| [12_AgentEnforcement.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/12_AgentEnforcement.md)<br>琛屼负寮哄埗瀹¤涓庡噯鍒欑害鏉?| [32_V6_5_ContextAssemblyAndInstructionStacking.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/32_V6_5_ContextAssemblyAndInstructionStacking.md)<br>涓婁笅鏂囩粍瑁呬笌鎸囦护鍫嗗彔 |
 | **L3: 鎵ц涓庢帶鍒跺眰 (Execution & Control)** | [22_V6_5_HookLifecycle.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/22_V6_5_HookLifecycle.md)<br>Hook 鐢熷懡鍛ㄦ湡绠＄悊 | [37_V6_6_CybersecuritySkillsRouter.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/37_V6_6_CybersecuritySkillsRouter.md)<br>閫嗗悜瀹夊叏涓?CTF 璺敱鍒嗗彂 | [Tool.ts](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/Tool.ts)<br>[tools.ts](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/tools.ts)<br>宸ュ叿鍔ㄦ€佺粍瑁呬笌绠＄悊 | [23_V6_5_PermissionAndOutputPipeline.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/23_V6_5_PermissionAndOutputPipeline.md)<br>鏉冮檺鎷︽埅涓庤緭鍑虹閬?| [34_V6_5_ProjectFactMap_V2.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/34_V6_5_ProjectFactMap_V2.md)<br>[14_ProjectFactMapTemplate.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/14_ProjectFactMapTemplate.md)<br>4-Tier 缁撴瀯鍖栦簨瀹炲湴鍥?|
 | **L4: 鍩哄簳涓庡弬鑰冨眰 (Base & Reference)** | [33_V6_5_BackgroundConsolidationAndIdleLifecycle.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/33_V6_5_BackgroundConsolidationAndIdleLifecycle.md)<br>姊﹀鏈熸竻鐞嗕笌鍚庡彴宸╁浐 | [35_V6_5_SkillGovernanceAndMandatoryUse.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/35_V6_5_SkillGovernanceAndMandatoryUse.md)<br>[36_V6_5_SkillZoneSeparation.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/36_V6_5_SkillZoneSeparation.md)<br>鎶€鑳藉幓閲嶄笌鏈湴鎶€鑳介殧绂?| [skills/](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/skills/) 棰嗗煙鎵╁睍鎶€鑳藉寘<br>[raw_tools/](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/reference/raw_tools/) 鍘熷宸ュ叿灞?| [27_V6_5_ToolPermissionRiskMatrix.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/27_V6_5_ToolPermissionRiskMatrix.md)<br>[29_MandatoryVerificationMatrix.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/29_MandatoryVerificationMatrix.md)<br>鏉冮檺椋庨櫓鍙婂己鍒舵牎楠岀煩闃?| [raw_permissions/](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/reference/raw_permissions/) 鍘熷鏉冮檺鍖?|
