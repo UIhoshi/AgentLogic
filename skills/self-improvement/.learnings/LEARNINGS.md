@@ -27,3 +27,28 @@ Whenever editing README.md or 00_README.md, immediately edit the corresponding p
 - Recurrence-Count: 1
 
 ---
+
+## [LRN-20260705-002] design.profile_vs_project
+
+**Logged**: 2026-07-05T20:36:00Z
+**Priority**: high
+**Status**: pending
+**Area**: design
+
+### Summary
+Differentiate between Personal Profile design (minimalist business card) and Project README design (detailed project specification).
+
+### Details
+Personal profiles represent the person's identity and should act like a clean, minimalist business card (名片) — focusing on personal tone, lightweight lists, and a warm introductory flow without heavy tables, specifications, or excessive structural complexity. Conversely, project READMEs must have highlights, detailed architecture maps, quickstart instructions, and target scenario tables.
+
+### Suggested Action
+* For personal profile READMEs (e.g. user homepage): Keep text humanized, low-friction, extremely minimal, and avoid formal tables/spec blocks.
+* For project READMEs: Ensure detailed structural layout, comparative tables, and comprehensive details are included.
+
+### Metadata
+- Source: user_feedback
+- Tags: design, profile, readme, taste
+- Pattern-Key: design.profile_vs_project
+- Recurrence-Count: 1
+
+---
