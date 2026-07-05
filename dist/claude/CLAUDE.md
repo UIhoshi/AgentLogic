@@ -2,7 +2,7 @@
 
 - Host target: claude
 - Profile: core-enhanced
-- Generated at: 2026-07-05T20:09:05+09:00
+- Generated at: 2026-07-05T20:15:53+09:00
 - Stable entry: MAIN.md
 - Version: V6.65
 
@@ -409,239 +409,104 @@ Do not continue deeper reading, modify files, delete files, perform write action
 or begin implementation before the logic-entry loop above has been completed.
 -->
 
-# AgentLogic
+# 馃寣 AgentLogic: Autonomous Evolving Rule Engine (V6.65)
 
-AgentLogic is a versioned primary-logic package intended to be pulled into local AI coding hosts and used as their default operating logic.
+[![Agentic Code](https://img.shields.io/badge/Agent-Autonomous-blueviolet?style=flat-square)](https://github.com/UIhoshi/AgentLogic)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+[![Version](https://img.shields.io/badge/Version-V6.65_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_65.md)
 
-## Install Locally First
+AgentLogic is a versioned primary-logic package designed to be pulled into local AI coding hosts (such as Codex, Claude Code, Gemini Pro) and used as their default operating mind. It consolidates multi-turn session workflows, tool selection matrix, security sandbox auditing, and dynamic domain extensions.
 
-If the goal is to load AgentLogic onto this computer, start here:
+> [!IMPORTANT]
+> **Repository Gating Warning**: This repository represents core logic infrastructure, not a generic business workspace.
+> Before starting any code modifications or host installations, AI agents **MUST** anchor to `00_START_HERE.md` and complete the mandatory startup logic entry check.
 
-- Human installation guide: [`INSTALL.md`](./INSTALL.md)
-- AI-agent installation guide: [`AGENT_INSTALL.md`](./AGENT_INSTALL.md)
-- Diagnostic command:
+---
 
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\doctor.ps1
+## 馃殌 Quick Start & Deployment
+
+For local diagnostic runs and host deployment, execute the following commands in sequence:
+
+| Step | PowerShell Command | Primary Purpose |
+| :--- | :--- | :--- |
+| **1. Diagnosis** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\doctor.ps1` | Analyzes repository layout, checks manifests, and recommends installers |
+| **2. Install** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost gemini` | Safely removes legacy override files and deploys the fresh host-ready ruleset |
+| **3. Validation** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\maintainer-check.ps1` | Verifies structural link integrity and validates the compiled adapter bundles |
+
+---
+
+## 馃彈锔?4-Layer Architecture Matrix (Grid & Subsystems)
+
+We organize rules and code into a **4-layer progressive abstraction model** to prevent context budget bloat:
+
+```mermaid
+graph TD
+    subgraph L1 [L1: Strategy & Entry Layer]
+        Entry[MAIN.md / AGENTS.md] --> Startup{Startup Gate}
+        Startup --> Check[00_START_HERE.md]
+    end
+    subgraph L2 [L2: Session & Loop Layer]
+        Check --> Loop[03_AgenticLoop.md]
+        Loop --> SDD[38_SpecDrivenDevelopment.md]
+    end
+    subgraph L3 [L3: Control & Auditing Layer]
+        SDD --> Verify[29_MandatoryVerificationMatrix.md]
+        Verify --> Taste[39_TasteFrontendDesign.md]
+    end
+    subgraph L4 [L4: Base & Drivers Layer]
+        Taste --> Skills[skills/ agent-browser & nano-banana-pro]
+    end
 ```
 
-It is designed to govern:
+### Detailed Module Mapping
 
-- project starts
-- project updates
-- version iteration
-- refactors
-- reviews
-- release preparation
-- forget/compress-context decisions
+| Abstraction Layer | Primary Core Responsibility | Included Files / Directories |
+| :--- | :--- | :--- |
+| **L1: Strategy & Entry** | Defines entrypoints, environment injection, REPL startup gates, and context forget/reset rules. | - [00_START_HERE.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/00_START_HERE.md) (璧锋墜寮?<br>- [MAIN.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/MAIN.md) (Stable Host Binding)<br>- [AGENTS.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/AGENTS.md) (Agent Entry)<br>- [15_LogicEntryChecklist.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/15_LogicEntryChecklist.md) (Gate Checklist)<br>- [13_MandatoryLogicGateTemplate.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/13_MandatoryLogicGateTemplate.md) (Header Gating) |
+| **L2: Session & Loop** | Manages the single-turn execution cycle, prevents vibe-coding, and structures the SDD lifecycle. | - [03_AgenticLoop.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/03_AgenticLoop.md) (Agentic Cycle)<br>- [38_SpecDrivenDevelopment.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/38_V6_6_SpecDrivenDevelopment.md) (SDD Lifecycle)<br>- [20_V6_5_RuntimeModes.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/20_V6_5_RuntimeModes.md) (Context Adaptation)<br>- [28_V6_5_TerminologyAndModuleBoundaries.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/28_V6_5_TerminologyAndModuleBoundaries.md) (Boundary Rules) |
+| **L3: Control & Auditing** | Establishes high-friction verification rules, security-risk matrix, and visual frontend taste checks. | - [29_MandatoryVerificationMatrix.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/29_MandatoryVerificationMatrix.md) (Verification Matrix)<br>- [39_TasteFrontendDesign.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/39_V6_6_TasteFrontendDesign.md) (Aesthetic & Spacing Audit)<br>- [30_ToolQuestionBoundaryMatrix.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/30_ToolQuestionBoundaryMatrix.md) (Credential Boundary)<br>- [31_ToolMisuseAndAntiPatternMatrix.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/31_ToolMisuseAndAntiPatternMatrix.md) (Anti-Pattern Gating) |
+| **L4: Base & Drivers** | Low-level command execution, raw tool controllers, and active portable skill files. | - `skills/` (Logic-Carried Domain Skills)<br>  * [agent-browser](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/skills/agent-browser/) (Accessibility Browser CLI)<br>  * [nano-banana-pro](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/skills/nano-banana-pro/) (Gemini Mockup Engine)<br>  * [self-improvement](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/skills/self-improvement/) (Error Log & Self-Correction)<br>- [35_V6_5_SkillGovernanceAndMandatoryUse.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/35_V6_5_SkillGovernanceAndMandatoryUse.md) (Governance Rules) |
 
-## Stable Entry
+---
 
-The stable machine-facing entrypoint is:
+## 馃洜锔?Self-Improvement & Learning Feed
 
-- `MAIN.md`
+This rule package supports **automated self-evolution** and developer logging:
 
-## Repository Agent Entry
-
-For repository work, also read:
-
-- `AGENTS.md`
-- `00_START_HERE.md`
-
-Hosts should bind to `MAIN.md` or to a generated bundle built from `manifest.json`.
-
-Hosts should not bind directly to `versions/AgentLogic_V6_65.md` or any future versioned file name.
-
-## Architecture
-
-This repository now has four responsibilities:
-
-- source logic
-  versioned logic files and supporting rule documents
-- profile definition
-  machine-readable bundle membership in `manifest.json`
-- host adaptation
-  installation scripts in `adapters/`
-- bundle generation
-  host-ready outputs built by `scripts/build-profile.ps1`
-
-## Reference Sources
-
-During its evolution to the `V6.65` release, AgentLogic has referenced and integrated concepts from the following open-source projects on GitHub:
-
-1. **Linux Kernel Map**:
-   - Repository: [makelinux/linux_kernel_map](https://github.com/makelinux/linux_kernel_map)
-   - Contribution: Inspired the V6.65 transition to a 4-layer grid architecture mapping subsystems and layers ([40_AgentLogicSystemMap.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/40_AgentLogicSystemMap.md)).
-2. **Cybersecurity Skills Router**:
-   - Repository: [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill)
-   - Contribution: Provided domain-specific rules and routing structures for cybersecurity, reverse-engineering, and CTF solvers.
-3. **Spec Kit**:
-   - Repository: [github/spec-kit](https://github.com/github/spec-kit)
-   - Contribution: Established Spec-Driven Development (SDD) contract checks and coding lifecycle validations.
-4. **Taste Skill**:
-   - Repository: [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill)
-   - Contribution: Defined high-aesthetic visual indicators, premium UI spring animation standards, and anti-slop interface audits.
-5. **Claude Code Base**:
-   - Repository: [claude-code-best/claude-code](https://github.com/claude-code-best/claude-code)
-   - Contribution: Served as the structural reference base to align CLI QueryEngine loop mechanics, REPL bootstrap paths, and permissions/sandbox interfaces.
-6. **Agent Browser**:
-   - Repository: [vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser)
-   - Contribution: Provided deterministic ref-based headless browser automation optimized for AI agents.
-7. **Nano Banana Pro**:
-   - Repository: [google-gemini/imagen](https://ai.google.dev/)
-   - Contribution: Supported high-fidelity visual UI mockup generation and layout prototyping for design-first E2E workflows.
-8. **Self-Improvement Agent**:
-   - Repository: [peterskoett/self-improving-agent](https://github.com/peterskoett/self-improving-agent)
-   - Contribution: Enabled structured error logging, user-correction tracking, and recursive pattern hardening for AI agent self-learning.
-
-## Current Default Profile
-
-- `core-enhanced`
-
-This profile is the recommended default for general coding work and includes:
-
-- startup chain rules
-- project update rules
-- version iteration rules
-- forget/compress-context rules
-- agentic loop rules
-- permissions and safety rules
-- enforcement rules
-
-## Repository Layout
-
-- `MAIN.md`
-  - stable host binding entrypoint
-- `AGENTS.md`
-  - repository-level agent entry document
-- `manifest.json`
-  - machine-readable package contract
-- `profiles/`
-  - profile documentation
-- `adapters/`
-  - host installation layer
-- `scripts/`
-  - bundle generation
-- `versions/`
-  current stable and future versioned logic sources
-- `modules/`
-  core operating rules and optional publishing modules
-- `reference/raw_tools/`, `reference/raw_tooling/`, `reference/raw_permissions/`, `reference/raw_extensions/`, `reference/raw_commands/`
-  reference layers, not default prompt material
-
-## One-Command Host Setup
-
-For the guided path, read `INSTALL.md` or run `scripts/doctor.ps1` first.
-
-Install into any supported host through the root installer:
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost codex
+```
+[Unexpected Error / User Correction / Best Practice Found]
+                      鈹?                      鈻?(1) Automatically log to:
+       .learnings/ (LEARNINGS.md / ERRORS.md)
+                      鈹?                      鈻?(2) Exceeds threshold (Recurrence >= 3)
+      Systemic rules extracted and merged into:
+            CLAUDE.md / AGENTS.md
 ```
 
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost claude
-```
+> [!TIP]
+> **Design-First Prototyping Gate**: When building frontend interfaces or layouts, the agent is forced to use the `generate_image` tool via Gemini 3 Pro Image to generate a mockup first. Code implementation only starts after you approve the design's aesthetics.
 
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost gemini
-```
+---
 
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost generic
-```
+## 馃摎 External References & Integrated Sources
 
-Shell environments can use the same installer through `install.sh`:
+During its evolutionary cycles, AgentLogic has integrated concepts and structures from the following open-source GitHub projects:
 
-```bash
-./install.sh --host codex
-```
+| Project Source | GitHub Repository | Primary Concept Integrated |
+| :--- | :--- | :--- |
+| **Linux Kernel Map** | [makelinux/linux_kernel_map](https://github.com/makelinux/linux_kernel_map) | Inspired the 4-layer structural system layout grid ([40_AgentLogicSystemMap.md](./modules/40_AgentLogicSystemMap.md)) |
+| **Agent Browser** | [vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser) | Provided deterministic ref-based headless browser automation optimized for AI agents |
+| **Nano Banana Pro** | [google-gemini/imagen](https://ai.google.dev/) | Supported high-fidelity visual UI mockup generation and layout prototyping for design-first workflows |
+| **Self-Improvement Agent** | [peterskoett/self-improving-agent](https://github.com/peterskoett/self-improving-agent) | Enabled structured error logging, user-correction tracking, and recursive pattern hardening |
+| **Spec Kit** | [github/spec-kit](https://github.com/github/spec-kit) | Formulated Spec-Driven Development (SDD) code-writing phases and task constraints |
+| **Taste Skill** | [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill) | Outlined physics spring animations, HSL palette controls, and typographical kerning guidelines |
 
-Direct host adapter calls remain available when a host needs custom target paths.
+---
 
-Build a host-ready bundle directly:
+## 鈿栵笍 Maintenance Constraints
 
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\build-profile.ps1 -ProfileName core-enhanced -TargetHost generic
-```
-
-Install into Codex:
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\adapters\codex\install.ps1
-```
-
-Build a Claude-ready bundle:
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\adapters\claude\install.ps1
-```
-
-Build a Gemini-ready bundle:
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\adapters\gemini\install.ps1
-```
-
-## Usage Rules
-
-For any host using AgentLogic as its primary local logic:
-
-1. Sync the repository.
-2. Read `manifest.json`.
-3. Build the selected profile bundle.
-4. Bind that bundle to the host's primary instruction surface.
-5. Rebuild and refresh on future updates.
-
-## Package Validation
-
-Validate the package contract after any refactor, version bump, or profile change:
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\validate-package.ps1
-```
-
-The validation checks:
-
-- stable entry and human entry exist
-- `manifest.json` and `manifest.schema.json` stay aligned
-- every declared profile file exists
-- optional modules and adapters resolve
-- `current_version` matches `main_logic_file`
-
-For maintainers, run the full lightweight local gate:
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\maintainer-check.ps1
-```
-
-## Version Release
-
-Prepare the next version by copying the current version file, updating the manifest, and rewriting active documentation references:
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\release-version.ps1 -NewVersion V7
-```
-
-Then run validation again:
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\validate-package.ps1
-```
-
-GitHub Actions also runs package validation and one default bundle build on every push and pull request through `.github/workflows/validate-package.yml`.
-
-## Contribution Contract
-
-Maintenance rules for entry surfaces, version bumps, and required local checks are documented in `CONTRIBUTING.md`.
-
-## Important Boundaries
-
-- This repository is logic infrastructure, not a business project workspace.
-- `00_START_HERE.md` remains the human-readable mandatory first-entry control file for the logic source.
-- `MAIN.md` is the stable host entrypoint.
-- Versioned logic should remain versioned; the stable host binding should remain version-agnostic.
-- Reference raw layers must not be injected as default prompt material unless a host or user explicitly opts in.
+1. **Keep it Pure**: No business logic or project-specific implementations should be written into `AgentLogic` rule files.
+2. **Specify Before Writing**: Always compile technical blueprints to `.specify/spec.md` and `.specify/plan.md` before touching code.
+3. **Generate via Bundle**: Never edit `dist/` bundles manually. Always write updates to version files (e.g. `versions/AgentLogic_V6_65.md`), then run `build-profile.ps1` to rebuild the adapter targets.
 
 ## END FILE: README.md
 
