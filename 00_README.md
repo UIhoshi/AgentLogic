@@ -142,6 +142,16 @@
 5. **Claude Code Base** (宿主 CLI 基础架构参考)
    - 仓库地址: [claude-code-best/claude-code](https://github.com/claude-code-best/claude-code)
    - 借鉴点: 作为系统底层与能力对齐的基线参考，用以映射和规范 CLI QueryEngine 循环、REPL 引导和权限沙箱的源码设计。
+6. **Agent Browser** (智能体无头浏览器控制)
+   - 仓库地址: [vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser)
+   - 借鉴点: 整合了针对大模型智能体优化的无头浏览器操作，采用 AOM 辅助功能树减少 Token 损耗并实现网页控制。
+7. **Nano Banana Pro** (多模态图片生成原型)
+   - 仓库地址: [google-gemini/imagen](https://ai.google.dev/)
+   - 借鉴点: 支持高逼真的 UI 草图与网页视觉效果生成，提供先确认设计图再进行前端代码开发的前置确认工作流。
+8. **Self-Improvement Agent** (智能体自纠错与自学习)
+   - 仓库地址: [peterskoett/self-improving-agent](https://github.com/peterskoett/self-improving-agent)
+   - 借鉴点: 提供了结构化的日志归档、缺陷纠偏记录以及针对频发问题的自适应总结和沉淀，用以提升智能体持续迭代能力。
+
 
 ## 当前输出来源
 

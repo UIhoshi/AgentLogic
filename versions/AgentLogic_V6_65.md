@@ -95,6 +95,12 @@ The V6.65 stable line integrates the following external source repositories:
 - **Agent Browser**:
   - Source URL: `https://github.com/vercel-labs/agent-browser`
   - Integration path: `skills/agent-browser/`
+- **Nano Banana Pro**:
+  - Source URL: `https://ai.google.dev/`
+  - Integration path: `skills/nano-banana-pro/`
+- **Self-Improvement Agent**:
+  - Source URL: `https://github.com/peterskoett/self-improving-agent`
+  - Integration path: `skills/self-improvement/`
 
 ---
 

@@ -92,6 +92,15 @@ During its evolution to the `V6.65` release, AgentLogic has referenced and integ
 5. **Claude Code Base**:
    - Repository: [claude-code-best/claude-code](https://github.com/claude-code-best/claude-code)
    - Contribution: Served as the structural reference base to align CLI QueryEngine loop mechanics, REPL bootstrap paths, and permissions/sandbox interfaces.
+6. **Agent Browser**:
+   - Repository: [vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser)
+   - Contribution: Provided deterministic ref-based headless browser automation optimized for AI agents.
+7. **Nano Banana Pro**:
+   - Repository: [google-gemini/imagen](https://ai.google.dev/)
+   - Contribution: Supported high-fidelity visual UI mockup generation and layout prototyping for design-first E2E workflows.
+8. **Self-Improvement Agent**:
+   - Repository: [peterskoett/self-improving-agent](https://github.com/peterskoett/self-improving-agent)
+   - Contribution: Enabled structured error logging, user-correction tracking, and recursive pattern hardening for AI agent self-learning.
 
 ## Current Default Profile
 

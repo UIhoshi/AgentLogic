@@ -2,7 +2,7 @@
 
 - Host target: claude
 - Profile: core-enhanced
-- Generated at: 2026-07-05T20:07:23+09:00
+- Generated at: 2026-07-05T20:09:05+09:00
 - Stable entry: MAIN.md
 - Version: V6.65
 
@@ -484,6 +484,15 @@ During its evolution to the `V6.65` release, AgentLogic has referenced and integ
 5. **Claude Code Base**:
    - Repository: [claude-code-best/claude-code](https://github.com/claude-code-best/claude-code)
    - Contribution: Served as the structural reference base to align CLI QueryEngine loop mechanics, REPL bootstrap paths, and permissions/sandbox interfaces.
+6. **Agent Browser**:
+   - Repository: [vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser)
+   - Contribution: Provided deterministic ref-based headless browser automation optimized for AI agents.
+7. **Nano Banana Pro**:
+   - Repository: [google-gemini/imagen](https://ai.google.dev/)
+   - Contribution: Supported high-fidelity visual UI mockup generation and layout prototyping for design-first E2E workflows.
+8. **Self-Improvement Agent**:
+   - Repository: [peterskoett/self-improving-agent](https://github.com/peterskoett/self-improving-agent)
+   - Contribution: Enabled structured error logging, user-correction tracking, and recursive pattern hardening for AI agent self-learning.
 
 ## Current Default Profile
 
@@ -821,6 +830,12 @@ The V6.65 stable line integrates the following external source repositories:
 - **Agent Browser**:
   - Source URL: `https://github.com/vercel-labs/agent-browser`
   - Integration path: `skills/agent-browser/`
+- **Nano Banana Pro**:
+  - Source URL: `https://ai.google.dev/`
+  - Integration path: `skills/nano-banana-pro/`
+- **Self-Improvement Agent**:
+  - Source URL: `https://github.com/peterskoett/self-improving-agent`
+  - Integration path: `skills/self-improvement/`
 
 ---
 
