@@ -428,7 +428,7 @@ For tool-centric repositories, record at least:
 This module defines the principles.
 The executable matrix version lives in:
 
-- `modules/24_V6_5_ToolUsageMatrix_DRAFT.md`
+- `modules/24_V6_5_ToolUsageMatrix.md`
 
 The intended relationship is:
 

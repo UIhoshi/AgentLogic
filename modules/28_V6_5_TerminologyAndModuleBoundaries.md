@@ -193,7 +193,7 @@ This term answers how to recognize false certainty and what to do after it appea
 
 ## 3. Module ownership boundaries
 
-### 3.1 `20_V6_5_RuntimeModes_DRAFT.md`
+### 3.1 `20_V6_5_RuntimeModes.md`
 
 Owns:
 
@@ -206,7 +206,7 @@ Does **not** own:
 - detailed tool matrices
 - detailed permission posture by tool family
 
-### 3.2 `21_V6_5_ToolUsageAndSelection_DRAFT.md`
+### 3.2 `21_V6_5_ToolUsageAndSelection.md`
 
 Owns:
 
@@ -221,7 +221,7 @@ Does **not** own:
 - the per-question capability map
 - the full permission-risk gating table
 
-### 3.3 `24_V6_5_ToolUsageMatrix_DRAFT.md`
+### 3.3 `24_V6_5_ToolUsageMatrix.md`
 
 Owns:
 
@@ -234,7 +234,7 @@ Does **not** own:
 - full capability explanations
 - full permission posture detail
 
-### 3.4 `25_V6_5_ToolCapabilityMapping_DRAFT.md`
+### 3.4 `25_V6_5_ToolCapabilityMapping.md`
 
 Owns:
 
@@ -248,7 +248,7 @@ Does **not** own:
 - runtime-mode matrix logic
 - permission posture table
 
-### 3.5 `27_V6_5_ToolPermissionRiskMatrix_DRAFT.md`
+### 3.5 `27_V6_5_ToolPermissionRiskMatrix.md`
 
 Owns:
 
@@ -263,7 +263,7 @@ Does **not** own:
 - general onboarding sequence rules
 - full output-target taxonomy outside its permission/output interaction scope
 
-### 3.6 `22_V6_5_HookLifecycle_DRAFT.md`
+### 3.6 `22_V6_5_HookLifecycle.md`
 
 Owns:
 
@@ -275,7 +275,7 @@ Does **not** own:
 
 - tool family selection rules
 
-### 3.7 `23_V6_5_PermissionAndOutputPipeline_DRAFT.md`
+### 3.7 `23_V6_5_PermissionAndOutputPipeline.md`
 
 Owns:
 
@@ -351,5 +351,20 @@ Does not own:
 
 - the full decision matrix for normal tool selection
 - the full question-boundary model
-- the full permission/risk model
-`n---`n`n## 4. Provider Neutrality Rule`n`nV6.5 adopts the principle of **Provider Neutrality** in its architectural descriptions.`n`n### 4.1 Reasoning`nLarge systems like claude-code are designed to be provider-agnostic (supporting Anthropic, OpenAI, Gemini, etc.). AgentLogic should follow this by describing features in terms of their **Agentic Role** rather than a specific LLM brand.`n`n### 4.2 Application`n- Do **not** write: \"Claude will call the tool.\"`n- **Do** write: \"The LLM Provider will receive the tool definition and return a call request.\"`n- Do **not** write: \"Store this in Claude's memory.\"`n- **Do** write: \"Store this in the Agentic Memory Layer.\"`n`n### 4.3 Contract-First Design`nWhen documenting new modules, define the **Data Contract** (JSON schema, message format) first. This ensures the logic remains valid even if the underlying model or provider is swapped.
+---
+
+## 4. Provider Neutrality Rule
+
+V6.5 adopts the principle of **Provider Neutrality** in its architectural descriptions.
+
+### 4.1 Reasoning
+Large systems like claude-code are designed to be provider-agnostic (supporting Anthropic, OpenAI, Gemini, etc.). AgentLogic should follow this by describing features in terms of their **Agentic Role** rather than a specific LLM brand.
+
+### 4.2 Application
+- Do **not** write: "Claude will call the tool."
+- **Do** write: "The LLM Provider will receive the tool definition and return a call request."
+- Do **not** write: "Store this in Claude's memory."
+- **Do** write: "Store this in the Agentic Memory Layer."
+
+### 4.3 Contract-First Design
+When documenting new modules, define the **Data Contract** (JSON schema, message format) first. This ensures the logic remains valid even if the underlying model or provider is swapped.

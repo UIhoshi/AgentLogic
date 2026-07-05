@@ -50,6 +50,50 @@
   项目事实地图标准模板，可直接复制用于新项目接入。
 - `15_LogicEntryChecklist.md`
   逻辑入口检查清单标准模板，可直接复制用于启动前核对。
+- `16_GitHubREADMETemplate_V1.md` / `17_GitHubREADMEStyleRules_V1.md` / `18_GitHubREADMEExamples_V1.md` / `19_GitHubREADMEReviewChecklist_V1.md`
+  GitHub README 编写规范与评审工具包。
+- `20_V6_5_RuntimeModes.md`
+  当前系统运行模式（REPL、Headless、SDK、Daemon 等）的认知与环境差异适配。
+- `21_V6_5_ToolUsageAndSelection.md`
+  通用工具选择的基本原则与防误用规约。
+- `22_V6_5_HookLifecycle.md`
+  工具执行的前置（Pre-execute）与后置（Post-execute）Hook 生命周期钩子。
+- `23_V6_5_PermissionAndOutputPipeline.md`
+  权限拦截与多模式输出管道的实现路径。
+- `24_V6_5_ToolUsageMatrix.md`
+  基于任务类型、阶段与风险等级的工具首选矩阵决策表。
+- `25_V6_5_ToolCapabilityMapping.md`
+  工具大类与具体提问类型之间的强弱能力映射表。
+- `26_V6_5_INDEX.md`
+  V6.5 治理与结构模块索引。
+- `27_V6_5_ToolPermissionRiskMatrix.md`
+  工具的安全授权姿态与风险拦截分级网关。
+- `28_V6_5_TerminologyAndModuleBoundaries.md`
+  标准专业词汇表与各个规则模块之间的边界权责界定。
+- `29_MandatoryVerificationMatrix.md`
+  结论类型到强制校验工具与证据要求的硬性映射矩阵。
+- `30_ToolQuestionBoundaryMatrix.md`
+  限制单一工具凭证闭环的强度边界矩阵，防止越权推论。
+- `31_ToolMisuseAndAntiPatternMatrix.md`
+  识别并纠正模型在工具使用中“强行闭环”等反模式的校验失败与标签降级机制。
+- `32_V6_5_ContextAssemblyAndInstructionStacking.md`
+  上下文指令优先级分层堆叠与记忆加载。
+- `33_V6_5_BackgroundConsolidationAndIdleLifecycle.md`
+  多轮对话结束后的“梦境期”后台数据巩固与闲置清理。
+- `34_V6_5_ProjectFactMap_V2.md`
+  结构化 4-Tier 事实地图在多轮会话中的演进机制。
+- `35_V6_5_SkillGovernanceAndMandatoryUse.md`
+  本地技能去重、审计与特定场景下强制使用技能的分配。
+- `36_V6_5_SkillZoneSeparation.md`
+  明确划分宿主本地私有技能与便携式仓库逻辑技能的隔离规则。
+- `37_V6_6_CybersecuritySkillsRouter.md`
+  逆向安全、Kali 辅助脚本、CTF 渗透分析与漏洞 Field Journal 的集成路由。
+- `38_V6_6_SpecDrivenDevelopment.md`
+  规格说明驱动开发（SDD）的六个 mandatory 生命周期执行阶段。
+- `39_V6_6_TasteFrontendDesign.md`
+  拒绝 UI Slop（粗制滥造前端）的设计参数 dials 微调、 spring 弹簧动画与溢出审计标准。
+- `40_AgentLogicSystemMap.md`
+  受 Linux 内核地图启发的 Agentic CLI 架构网格与单轮执行流 Mermaid 地图。
 - `raw_tools/`
   直接保留的工具源码层。
 - `raw_tooling/`

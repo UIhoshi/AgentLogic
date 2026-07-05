@@ -2,7 +2,7 @@
 
 - Host target: generic
 - Profile: core-enhanced
-- Generated at: 2026-07-05T17:08:22+09:00
+- Generated at: 2026-07-05T17:16:14+09:00
 - Stable entry: MAIN.md
 - Version: V6.65
 
@@ -2723,7 +2723,7 @@ For tool-centric repositories, record at least:
 This module defines the principles.
 The executable matrix version lives in:
 
-- `modules/24_V6_5_ToolUsageMatrix_DRAFT.md`
+- `modules/24_V6_5_ToolUsageMatrix.md`
 
 The intended relationship is:
 
@@ -4099,7 +4099,7 @@ This term answers how to recognize false certainty and what to do after it appea
 
 ## 3. Module ownership boundaries
 
-### 3.1 `20_V6_5_RuntimeModes_DRAFT.md`
+### 3.1 `20_V6_5_RuntimeModes.md`
 
 Owns:
 
@@ -4112,7 +4112,7 @@ Does **not** own:
 - detailed tool matrices
 - detailed permission posture by tool family
 
-### 3.2 `21_V6_5_ToolUsageAndSelection_DRAFT.md`
+### 3.2 `21_V6_5_ToolUsageAndSelection.md`
 
 Owns:
 
@@ -4127,7 +4127,7 @@ Does **not** own:
 - the per-question capability map
 - the full permission-risk gating table
 
-### 3.3 `24_V6_5_ToolUsageMatrix_DRAFT.md`
+### 3.3 `24_V6_5_ToolUsageMatrix.md`
 
 Owns:
 
@@ -4140,7 +4140,7 @@ Does **not** own:
 - full capability explanations
 - full permission posture detail
 
-### 3.4 `25_V6_5_ToolCapabilityMapping_DRAFT.md`
+### 3.4 `25_V6_5_ToolCapabilityMapping.md`
 
 Owns:
 
@@ -4154,7 +4154,7 @@ Does **not** own:
 - runtime-mode matrix logic
 - permission posture table
 
-### 3.5 `27_V6_5_ToolPermissionRiskMatrix_DRAFT.md`
+### 3.5 `27_V6_5_ToolPermissionRiskMatrix.md`
 
 Owns:
 
@@ -4169,7 +4169,7 @@ Does **not** own:
 - general onboarding sequence rules
 - full output-target taxonomy outside its permission/output interaction scope
 
-### 3.6 `22_V6_5_HookLifecycle_DRAFT.md`
+### 3.6 `22_V6_5_HookLifecycle.md`
 
 Owns:
 
@@ -4181,7 +4181,7 @@ Does **not** own:
 
 - tool family selection rules
 
-### 3.7 `23_V6_5_PermissionAndOutputPipeline_DRAFT.md`
+### 3.7 `23_V6_5_PermissionAndOutputPipeline.md`
 
 Owns:
 
@@ -4257,8 +4257,23 @@ Does not own:
 
 - the full decision matrix for normal tool selection
 - the full question-boundary model
-- the full permission/risk model
-`n---`n`n## 4. Provider Neutrality Rule`n`nV6.5 adopts the principle of **Provider Neutrality** in its architectural descriptions.`n`n### 4.1 Reasoning`nLarge systems like claude-code are designed to be provider-agnostic (supporting Anthropic, OpenAI, Gemini, etc.). AgentLogic should follow this by describing features in terms of their **Agentic Role** rather than a specific LLM brand.`n`n### 4.2 Application`n- Do **not** write: \"Claude will call the tool.\"`n- **Do** write: \"The LLM Provider will receive the tool definition and return a call request.\"`n- Do **not** write: \"Store this in Claude's memory.\"`n- **Do** write: \"Store this in the Agentic Memory Layer.\"`n`n### 4.3 Contract-First Design`nWhen documenting new modules, define the **Data Contract** (JSON schema, message format) first. This ensures the logic remains valid even if the underlying model or provider is swapped.
+---
+
+## 4. Provider Neutrality Rule
+
+V6.5 adopts the principle of **Provider Neutrality** in its architectural descriptions.
+
+### 4.1 Reasoning
+Large systems like claude-code are designed to be provider-agnostic (supporting Anthropic, OpenAI, Gemini, etc.). AgentLogic should follow this by describing features in terms of their **Agentic Role** rather than a specific LLM brand.
+
+### 4.2 Application
+- Do **not** write: "Claude will call the tool."
+- **Do** write: "The LLM Provider will receive the tool definition and return a call request."
+- Do **not** write: "Store this in Claude's memory."
+- **Do** write: "Store this in the Agentic Memory Layer."
+
+### 4.3 Contract-First Design
+When documenting new modules, define the **Data Contract** (JSON schema, message format) first. This ensures the logic remains valid even if the underlying model or provider is swapped.
 
 ## END FILE: modules/28_V6_5_TerminologyAndModuleBoundaries.md
 
@@ -5344,10 +5359,10 @@ or begin implementation before the logic-entry loop above has been completed.
 鏈煩闃靛皢澶嶆潅鐨勭郴缁熻兘鍔涙寜鈥滀笂涓嬪垎灞傦紙灞傜骇锛夆€濆拰鈥滃乏鍙冲垎娌伙紙瀛愮郴缁燂級鈥濈殑褰㈠紡杩涜鏄犲皠锛?
 | 鎶借薄灞傜骇 \ 瀛愮郴缁?| **浼氳瘽涓庣敓鍛藉懆鏈?(Session & Lifecycle)** | **鑳藉姏涓庤矾鐢?(Capabilities & Routing)** | **宸ュ叿涓庢墿灞?(Tools & Extensions)** | **瀹夊叏涓庢不鐞?(Security & Governance)** | **鐘舵€佷笌璁板繂 (State & Memory)** |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **L1: 鎴樼暐涓庡叆鍙ｅ眰 (Strategy & Entry)** | [cli.tsx](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/entrypoints/cli.tsx)<br>[main.tsx](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/main.tsx)<br>鍚姩涓庣幆澧冩敞鍏?| [00_START_HERE.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/00_START_HERE.md)<br>[AGENTS.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/AGENTS.md)<br>閫昏緫鎺ュ叆鍏ュ彛纭 | [README.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/README.md)<br>涓讳粨搴撴枃妗ｅ鑸鏄?br>[11_CrossDirectoryMap.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/11_CrossDirectoryMap.md)<br>浠ｇ爜璺ㄧ洰褰曞湴鍥?| [15_LogicEntryChecklist.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/15_LogicEntryChecklist.md)<br>閫昏緫鍏ュ彛妫€鏌ユ竻鍗?br>[13_MandatoryLogicGateTemplate.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/13_MandatoryLogicGateTemplate.md)<br>鍏ㄥ眬閫昏緫鎷︽埅妫€鏌?| [MAIN.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/MAIN.md)<br>瀹夸富閫昏緫缁戝畾鍏ュ彛 |
-| **L2: 棰嗗煙涓庡惊鐜眰 (Domain & Loop)** | [QueryEngine.ts](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/QueryEngine.ts)<br>澶氳疆浼氳瘽娴佺紪鎺?| [query.ts](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/query.ts)<br>鍗曡疆 Agentic 鎵ц寰幆 | [38_V6_6_SpecDrivenDevelopment.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/38_V6_6_SpecDrivenDevelopment.md)<br>[spec-kit/](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/spec-kit/) 瑙勬牸椹卞姩寮€鍙?| [12_AgentEnforcement.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/12_AgentEnforcement.md)<br>琛屼负寮哄埗瀹¤涓庡噯鍒欑害鏉?| [32_V6_5_ContextAssemblyAndInstructionStacking.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/32_V6_5_ContextAssemblyAndInstructionStacking.md)<br>涓婁笅鏂囩粍瑁呬笌鎸囦护鍫嗗彔 |
-| **L3: 鎵ц涓庢帶鍒跺眰 (Execution & Control)** | [22_V6_5_HookLifecycle.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/22_V6_5_HookLifecycle.md)<br>Hook 鐢熷懡鍛ㄦ湡绠＄悊 | [37_V6_6_CybersecuritySkillsRouter.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/37_V6_6_CybersecuritySkillsRouter.md)<br>閫嗗悜瀹夊叏涓?CTF 璺敱鍒嗗彂 | [Tool.ts](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/Tool.ts)<br>[tools.ts](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/tools.ts)<br>宸ュ叿鍔ㄦ€佺粍瑁呬笌绠＄悊 | [23_V6_5_PermissionAndOutputPipeline.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/23_V6_5_PermissionAndOutputPipeline.md)<br>鏉冮檺鎷︽埅涓庤緭鍑虹閬?| [34_V6_5_ProjectFactMap_V2.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/34_V6_5_ProjectFactMap_V2.md)<br>[14_ProjectFactMapTemplate.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/14_ProjectFactMapTemplate.md)<br>4-Tier 缁撴瀯鍖栦簨瀹炲湴鍥?|
-| **L4: 鍩哄簳涓庡弬鑰冨眰 (Base & Reference)** | [33_V6_5_BackgroundConsolidationAndIdleLifecycle.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/33_V6_5_BackgroundConsolidationAndIdleLifecycle.md)<br>姊﹀鏈熸竻鐞嗕笌鍚庡彴宸╁浐 | [35_V6_5_SkillGovernanceAndMandatoryUse.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/35_V6_5_SkillGovernanceAndMandatoryUse.md)<br>[36_V6_5_SkillZoneSeparation.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/36_V6_5_SkillZoneSeparation.md)<br>鎶€鑳藉幓閲嶄笌鏈湴鎶€鑳介殧绂?| [skills/](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/skills/) 棰嗗煙鎵╁睍鎶€鑳藉寘<br>[raw_tools/](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/reference/raw_tools/) 鍘熷宸ュ叿灞?| [27_V6_5_ToolPermissionRiskMatrix.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/27_V6_5_ToolPermissionRiskMatrix.md)<br>[29_MandatoryVerificationMatrix.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/29_MandatoryVerificationMatrix.md)<br>鏉冮檺椋庨櫓鍙婂己鍒舵牎楠岀煩闃?| [raw_permissions/](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/reference/raw_permissions/) 鍘熷鏉冮檺鍖?|
+| **L1: 鎴樼暐涓庡叆鍙ｅ眰 (Strategy & Entry)** | [cli.tsx](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/entrypoints/cli.tsx)<br>[main.tsx](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/main.tsx)<br>鍚姩涓庣幆澧冩敞鍏?| [00_START_HERE.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/00_START_HERE.md)<br>[AGENTS.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/AGENTS.md)<br>[MAIN.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/MAIN.md)<br>閫昏緫鎺ュ叆纭涓庡涓荤粦瀹氬叆鍙?| [README.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/README.md)<br>涓讳粨搴撴枃妗ｅ鑸鏄?br>[11_CrossDirectoryMap.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/11_CrossDirectoryMap.md)<br>浠ｇ爜璺ㄧ洰褰曞湴鍥?| [15_LogicEntryChecklist.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/15_LogicEntryChecklist.md)<br>閫昏緫鍏ュ彛妫€鏌ユ竻鍗?br>[13_MandatoryLogicGateTemplate.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/13_MandatoryLogicGateTemplate.md)<br>鍏ㄥ眬閫昏緫鎷︽埅妫€鏌?| `manifest.json`<br>闈欐€佸厓鏁版嵁涓庢墦鍖呴厤缃枃浠堕厤缃?(杩愯鏃跺姩鎬佽蹇嗗眰 N/A) |
+| **L2: 棰嗗煙涓庡惊鐜眰 (Domain & Loop)** | [QueryEngine.ts](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/QueryEngine.ts)<br>澶氳疆浼氳瘽娴佺紪鎺?br>[20_V6_5_RuntimeModes.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/20_V6_5_RuntimeModes.md)<br>杩愯鐜鎰熺煡涓庢ā寮忛€傞厤 | [query.ts](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/query.ts)<br>鍗曡疆 Agentic 鎵ц寰幆<br>[28_V6_5_TerminologyAndModuleBoundaries.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/28_V6_5_TerminologyAndModuleBoundaries.md)<br>鏍囧噯鏈涓庤鍒欐ā鍧楄竟鐣?| [38_V6_6_SpecDrivenDevelopment.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/38_V6_6_SpecDrivenDevelopment.md)<br>[spec-kit/](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/spec-kit/) 瑙勬牸椹卞姩寮€鍙?br>[21_V6_5_ToolUsageAndSelection.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/21_V6_5_ToolUsageAndSelection.md)<br>[24_V6_5_ToolUsageMatrix.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/24_V6_5_ToolUsageMatrix.md)<br>[25_V6_5_ToolCapabilityMapping.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/25_V6_5_ToolCapabilityMapping.md)<br>[26_V6_5_INDEX.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/26_V6_5_INDEX.md)<br>宸ュ叿棣栭€夌煩闃典笌鑳藉姏鏄犲皠绱㈠紩 | [12_AgentEnforcement.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/12_AgentEnforcement.md)<br>琛屼负寮哄埗瀹¤涓庡噯鍒欑害鏉?| [32_V6_5_ContextAssemblyAndInstructionStacking.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/32_V6_5_ContextAssemblyAndInstructionStacking.md)<br>涓婁笅鏂囩粍瑁呬笌鎸囦护鍫嗗彔 |
+| **L3: 鎵ц涓庢帶鍒跺眰 (Execution & Control)** | [22_V6_5_HookLifecycle.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/22_V6_5_HookLifecycle.md)<br>Hook 鐢熷懡鍛ㄦ湡绠＄悊 | [37_V6_6_CybersecuritySkillsRouter.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/37_V6_6_CybersecuritySkillsRouter.md)<br>閫嗗悜瀹夊叏涓?CTF 璺敱鍒嗗彂 | [Tool.ts](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/Tool.ts)<br>[tools.ts](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/tools.ts)<br>宸ュ叿涓粙鎺у埗涓庡姩鎬佺粍瑁?br>[39_V6_6_TasteFrontendDesign.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/39_V6_6_TasteFrontendDesign.md)<br>[skills/taste-skill/](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/skills/taste-skill/)<br>鍓嶇璁捐瀹＄編涓?UI Slop 娌荤悊 | [23_V6_5_PermissionAndOutputPipeline.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/23_V6_5_PermissionAndOutputPipeline.md)<br>鏉冮檺鎷︽埅涓庤緭鍑虹閬?br>[30_ToolQuestionBoundaryMatrix.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/30_ToolQuestionBoundaryMatrix.md)<br>鎻愰棶鍑瘉寮哄害杈圭晫鎺у埗<br>[31_ToolMisuseAndAntiPatternMatrix.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/31_ToolMisuseAndAntiPatternMatrix.md)<br>鍙嶆ā寮忔牎楠屽け璐ヤ笌绾犲亸鏈哄埗 | [34_V6_5_ProjectFactMap_V2.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/34_V6_5_ProjectFactMap_V2.md)<br>[14_ProjectFactMapTemplate.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/14_ProjectFactMapTemplate.md)<br>4-Tier 浜嬪疄鍦板浘涓庢爣鍑嗘ā鏉?|
+| **L4: 鍩哄簳涓庡弬鑰冨眰 (Base & Reference)** | [33_V6_5_BackgroundConsolidationAndIdleLifecycle.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/33_V6_5_BackgroundConsolidationAndIdleLifecycle.md)<br>姊﹀鏈熸竻鐞嗕笌鍚庡彴宸╁浐 | [35_V6_5_SkillGovernanceAndMandatoryUse.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/35_V6_5_SkillGovernanceAndMandatoryUse.md)<br>[36_V6_5_SkillZoneSeparation.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/36_V6_5_SkillZoneSeparation.md)<br>鎶€鑳藉幓閲嶄笌鏈湴鎶€鑳介殧绂?| [skills/](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/skills/) 棰嗗煙鎵╁睍鎶€鑳藉寘<br>[raw_tools/](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/reference/raw_tools/) 鍘熷宸ュ叿灞?| [27_V6_5_ToolPermissionRiskMatrix.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/27_V6_5_ToolPermissionRiskMatrix.md)<br>[29_MandatoryVerificationMatrix.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/29_MandatoryVerificationMatrix.md)<br>鏉冮檺椋庨櫓涓庡己鍒舵牎楠岀煩闃?br>[raw_permissions/](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/reference/raw_permissions/) 鍘熷瀹夊叏鏉冮檺鍖?| `src/state/`<br>杩愯鏃朵細璇濈姸鎬佺姸鎬佹満涓庢湰鍦拌惤鍦板眰 |
 
 ---
 
@@ -5387,7 +5402,10 @@ graph TD
         RawTools --> VerifyGate{Mandatory Verification Check<br>29_MandatoryVerificationMatrix.md}
         
         VerifyGate -- Evidence Fail --> Downgrade[Apply Corrective Downgrade<br>31_ToolMisuseAndAntiPatternMatrix.md]
-        VerifyGate -- Evidence Pass --> HookPost[Hook Lifecycle: Post-execute<br>22_HookLifecycle.md]
+        VerifyGate -- Evidence Pass --> TasteGate{UI Design Taste Audit<br>39_TasteFrontendDesign.md}
+        
+        TasteGate -- Slop / Overflow / Wrapping Error --> Downgrade
+        TasteGate -- Clean UI / Compliant --> HookPost[Hook Lifecycle: Post-execute<br>22_HookLifecycle.md]
         
         Downgrade --> HookPost
         HookPost --> FactMapUpdate[Update Fact Map<br>34_ProjectFactMap_V2.md]
@@ -5417,7 +5435,7 @@ graph TD
 
 ## 4. 鍚庣画杩藉姞涓庤凯浠ｅ噯鍒?(Maintenance Guidelines)
 
-1. **鍦板浘涓庝唬鐮佸己缁戝畾**锛?   - 浠讳綍鏂板鐨?`modules/*.md` 鎴?`src/` 涓嬬殑鏍稿績婧愮爜妯″潡锛屽繀椤诲悓姝ュ湪姝ゆ枃浠朵腑鐨?**鏋舵瀯涓庤祫婧愮綉鏍煎湴鍥?* 鐨勭浉搴旂綉鏍煎崟鍏冧腑杩涜娉ㄥ唽銆?   - 缃戞牸涓敞鍐岀殑鏂囦欢蹇呴』鍖呭惈绗﹀悎 Antigravity 瑙勮寖鐨勫畬鏁存湰鍦扮粷瀵硅矾寰勬垨鐩稿璺緞瓒呴摼鎺ワ紙濡?`file:///...`锛夛紝瀹炵幇 LXR 寮忕殑鈥滀竴閿洿杈炬簮鐮佲€濄€?
+1. **鍦板浘涓庝唬鐮佸己缁戝畾**锛?   - 浠讳綍鏂板 of `modules/*.md` 鎴?`src/` 涓嬬殑鏍稿績婧愮爜妯″潡锛屽繀椤诲悓姝ュ湪姝ゆ枃浠朵腑鐨?**鏋舵瀯涓庤祫婧愮綉鏍煎湴鍥?* 鐨勭浉搴旂綉鏍煎崟鍏冧腑杩涜娉ㄥ唽銆?   - 缃戞牸涓敞鍐岀殑鏂囦欢蹇呴』鍖呭惈绗﹀悎 Antigravity 瑙勮寖鐨勫畬鏁存湰鍦扮粷瀵硅矾寰勬垨鐩稿璺緞瓒呴摼鎺ワ紙濡?`file:///...`锛夛紝瀹炵幇 LXR 寮忕殑鈥滀竴閿洿杈炬簮鐮佲€濄€?
 2. **鎵ц娴佹紨杩?*锛?   - 濡傛灉绯荤粺鐨勫崟杞惊鐜鍔犱簡鏂扮殑鍓嶇疆/鍚庣疆瀹¤鎷︽埅鐐癸紙渚嬪锛氭柊澧炲ぇ妯″瀷瀹夊叏鎶ゆ爮杩囨护銆佸浠ｇ悊鍗忓悓缂栨帓绛夛級锛屽繀椤诲悓姝ユ洿鏂版湰鏂囦欢绗?2 鑺傜殑 **鍗曡疆 Agentic 鎵ц娴佽拷韪湴鍥?* (Mermaid)銆?
 3. **鍔ㄦ€佺敓鎴愭妧鏈€欓€?(Future Enhancement)**锛?   - 鍦ㄦ湭鏉ョ殑鐗堟湰锛堝 V7.0锛変腑锛屽缓璁紑鍙?`scripts/generate-system-map.js` 鑴氭湰锛岃嚜鍔ㄨ鍙?`manifest.json` 涓厤缃殑 profile 鍜屾ā鍧楀叧绯伙紝鍔ㄦ€佹覆鏌撳苟瀵煎嚭鏈枃浠剁殑 SVG 鎴?Markdown 缃戞牸鍥撅紝闄嶄綆浜哄伐缁存姢鐨勫亸宸€?
 
