@@ -15,6 +15,32 @@ if (-not (Test-Path $adapterScript)) {
     throw "Unsupported host adapter: $TargetHost"
 }
 
+# Legacy logic detection & cleanup block (mandatory step during installation)
+if (-not $TargetPath) {
+    $legacyFiles = @()
+    if ($TargetHost -eq "gemini") {
+        $legacyFiles += Join-Path $UserHome ".gemini\GEMINI.md"
+    } elseif ($TargetHost -eq "claude") {
+        $legacyFiles += Join-Path $UserHome ".claude\CLAUDE.md"
+    } elseif ($TargetHost -eq "codex") {
+        $legacyFiles += Join-Path $UserHome ".codex\model_instructions.md"
+    }
+
+    foreach ($legacyFile in $legacyFiles) {
+        if (Test-Path $legacyFile) {
+            Write-Host "WARNING: Legacy logic file detected at '$legacyFile'" -ForegroundColor Yellow
+            Write-Host "Cleaning up legacy logic file to prevent configuration conflicts..." -ForegroundColor Cyan
+            try {
+                Remove-Item -Path $legacyFile -Force -ErrorAction Stop
+                Write-Host "Cleanup successful: Legacy logic file removed." -ForegroundColor Green
+            } catch {
+                Write-Warning "Could not remove legacy logic file: $_"
+            }
+        }
+    }
+}
+
+
 $arguments = @(
     "-NoProfile",
     "-ExecutionPolicy", "Bypass",

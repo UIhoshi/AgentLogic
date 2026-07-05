@@ -82,7 +82,7 @@ If the user asks to "load", "install", "mount", "bind", or "use this logic local
 
 1.  **Doctor Check**: Run `scripts/doctor.ps1` to verify environment and path integrity.
 2.  **Target Selection**: Choose the target host (`codex`, `claude`, `gemini`, or `generic`) based on the current environment.
-3.  **Install**: Run the matching `install.ps1 -TargetHost ...` command using the `core-enhanced` profile.
+3.  **Install & Legacy Cleanup**: Check for and remove any legacy logic files (such as root-level `.gemini/GEMINI.md` or `.claude/CLAUDE.md` in the user profile directory) to prevent them from overriding the new profile path. Then run the matching `install.ps1 -TargetHost ...` command using the `core-enhanced` profile.
 4.  **Validation**: Run `scripts/validate-package.ps1`.
 5.  **Skill Governance Audit**: Run install-time skill deduplication and organization for the target host. This is mandatory, not optional. The default install path now executes:
     - `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\skills-governance.ps1 -TargetHost <host> -Apply`

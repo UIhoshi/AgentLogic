@@ -2,7 +2,7 @@
 
 - Host target: claude
 - Profile: core-enhanced
-- Generated at: 2026-07-05T17:16:08+09:00
+- Generated at: 2026-07-05T19:32:21+09:00
 - Stable entry: MAIN.md
 - Version: V6.65
 
@@ -168,6 +168,11 @@ The default profile is:
 
 - `core-enhanced`
 
+## Legacy Logic Detection & Cleanup (Mandatory Step)
+
+To prevent conflicts where the AI client loads stale or outdated rules (e.g. from an old version location), the `install.ps1` script automatically performs a legacy file check. If old logic files are detected at root levels (such as `.gemini/GEMINI.md` or `.claude/CLAUDE.md`), they will be automatically removed/cleaned up during the install process.
+
+
 ## First Diagnostic Command
 
 Run this before guessing which command to use:
@@ -323,7 +328,7 @@ If the user asks to "load", "install", "mount", "bind", or "use this logic local
 
 1.  **Doctor Check**: Run `scripts/doctor.ps1` to verify environment and path integrity.
 2.  **Target Selection**: Choose the target host (`codex`, `claude`, `gemini`, or `generic`) based on the current environment.
-3.  **Install**: Run the matching `install.ps1 -TargetHost ...` command using the `core-enhanced` profile.
+3.  **Install & Legacy Cleanup**: Check for and remove any legacy logic files (such as root-level `.gemini/GEMINI.md` or `.claude/CLAUDE.md` in the user profile directory) to prevent them from overriding the new profile path. Then run the matching `install.ps1 -TargetHost ...` command using the `core-enhanced` profile.
 4.  **Validation**: Run `scripts/validate-package.ps1`.
 5.  **Skill Governance Audit**: Run install-time skill deduplication and organization for the target host. This is mandatory, not optional. The default install path now executes:
     - `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\skills-governance.ps1 -TargetHost <host> -Apply`
@@ -825,6 +830,8 @@ Key stable rules:
 - The Cybersecurity Skills Router governs reversing, CTFs, and security audits; it does not replace general verification rules but adds specific tool constraints.
 - Spec-Driven Development templates and presets are verified through code compilation and test runs.
 - The Taste Frontend Design skill enforces layout, motion, and typography standards on all visual interfaces.
+- The installer automatically detects and cleans up legacy/duplicate logic files (e.g. root-level `.gemini/GEMINI.md` or `.claude/CLAUDE.md` in the user profile directory) to prevent stale rules from overriding the new install.
+
 
 ---
 
