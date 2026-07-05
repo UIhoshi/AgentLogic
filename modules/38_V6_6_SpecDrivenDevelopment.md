@@ -22,6 +22,7 @@ When starting a project or introducing a new feature, the Agent MUST execute the
    - *Requirement*: The Agent must check if `.specify/constitution.md` (or equivalent) exists. If not, it MUST create it first.
 2. **Specify Phase**: Define user scenarios, requirements, and user stories in clear, natural language.
    - *Requirement*: The specifications must be written to `.specify/spec.md` (or `.specify/specs/` directory).
+   - *UI/UX Prototyping Gate*: For frontend layout, visual styles, or app UI tasks, the Agent MUST generate a visual design mockup using the `generate_image` tool (via the `nano-banana-pro` skill) and present it as an artifact for user approval before moving to the Plan phase.
 3. **Plan Phase**: Draft a technical implementation plan specifying architecture, tech stack, data schemas, and integration logic.
    - *Requirement*: The plan must be saved in `.specify/plan.md`.
 4. **Tasks Phase**: Translate the plan into a checklist of granular, actionable tasks.

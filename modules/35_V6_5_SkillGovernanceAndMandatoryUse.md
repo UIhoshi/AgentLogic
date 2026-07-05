@@ -80,6 +80,13 @@ These skills overlap with V6.5 logic but still provide unique operational value:
 - `agent-browser`
   - overlaps with static page fetching (`read_url_content`) and playwright-based UI verification
   - still provides high-performance, deterministic ref-based headless browser automation optimized for AI agents
+- `nano-banana-pro`
+  - overlaps with general UI/UX drafting
+  - still provides Gemini 3 Pro Image (Nano Banana Pro) visual mockup generation for design-first E2E workflows
+- `self-improvement`
+  - overlaps with context assembly and error correction
+  - still provides structured .learnings/ logging and promotion gates to harden recurring developer patterns
+
 
 ### 3.3 Archived-but-not-duplicate families
 
@@ -115,6 +122,8 @@ Typical active-by-default families:
 - `figma-implement-design`
 - `gh-fix-ci`
 - `agent-browser`
+- `nano-banana-pro`
+- `self-improvement`
 
 ### 4.2 Archived-by-default
 
@@ -205,6 +214,23 @@ Use `agent-browser` when:
 
 - the task requires dynamic web interaction, page navigation, clicking elements, filling forms, session-isolated browsing, or executing client-side JavaScript from the terminal.
 - standard static url fetching (`read_url_content`) is insufficient due to Single Page Application (SPA) rendering or multi-step user flow requirements.
+
+### 5.9 Nano-banana-pro skill
+
+Use `nano-banana-pro` when:
+
+- the task is designing or modifying a web page frontend, application UI, or dashboard component. In this case, the Agent must first formulate a design prompt, run `generate_image.py` (via Gemini 3 Pro Image), save the output mockup image, and present it for user review before writing any frontend code.
+- custom assets, brand kits, or visual layouts are requested.
+
+### 5.10 Self-improvement skill
+
+Use `self-improvement` when:
+
+- a shell command or compilation step fails unexpectedly. In this case, log details to `.learnings/ERRORS.md`.
+- the user corrects the Agent's reasoning or code. Log the correction to `.learnings/LEARNINGS.md` with category `correction`.
+- the user requests a missing capability or makes a feature request. Log it to `.learnings/FEATURE_REQUESTS.md`.
+- systemic developer patterns need to be simplified or hardened based on recurrence (e.g. promoting rules to CLAUDE.md/AGENTS.md after 3+ occurrences).
+
 
 ---
 
