@@ -2,7 +2,7 @@
 
 - Host target: gemini
 - Profile: core-enhanced
-- Generated at: 2026-07-05T20:03:57+09:00
+- Generated at: 2026-07-05T20:07:23+09:00
 - Stable entry: MAIN.md
 - Version: V6.65
 
@@ -1361,7 +1361,7 @@ or begin implementation before the logic-entry loop above has been completed.
 | **L1: Shell & CLI Surface**<br>(CLI 涓庝氦浜掑澹冲眰) | 璐熻矗 REPL 鍚姩銆佺敤鎴疯緭鍏ヨВ鏋愩€佸懡浠ゅ垎鍙戙€佺粓绔?UI 娓叉煋銆傜被浼间簬 Linux 鐨?TTY 缁堢涓庣郴缁熻皟鐢ㄦ帴鍙ｃ€?| - [cli.tsx](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/entrypoints/cli.tsx)<br>- [main.tsx](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/main.tsx)<br>- `src/screens/` 涓?`src/components/` (缁堢 React 缁勪欢)<br>- `src/ink/` (缁堢娓叉煋寮曟搸) |
 | **L2: Session & Loop Orchestration**<br>(浼氳瘽涓庡惊鐜紪鎺掑眰) | 璐熻矗鍗忚皟澶氳疆浼氳瘽鐘舵€併€佺鐞嗗綋鍓嶄細璇濅笂涓嬫枃浠ュ強鍗曡疆鎺ㄧ悊寰幆銆傜被浼间簬 Linux 鍐呮牳鐨勮繘绋嬭皟搴︿笌椤佃〃鏄犲皠銆?| - [QueryEngine.ts](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/QueryEngine.ts) (浼氳瘽缂栨帓)<br>- [query.ts](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/query.ts) (鍗曡疆鎬濊€?鎺ㄧ悊寮曟搸)<br>- [context.ts](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/context.ts) (涓婁笅鏂囧皝瑁?<br>- `src/state/` (浼氳瘽鐘舵€佺姸鎬佹満) |
 | **L3: Service & Mediation Control**<br>(鏈嶅姟缁勪欢涓庝腑浠嬫帶鍒跺眰) | 鎻愪緵缁熶竴鐨勬娊璞℃帴鍙ｏ紝璐熻矗宸ュ叿鐨勫姩鎬佺粍瑁呫€佹墽琛屾嫤鎴€佹潈闄愬垽瀹氬拰鎵╁睍鍗忚銆傜被浼间簬 Linux 鐨?VFS (铏氭嫙鏂囦欢绯荤粺) 鍜?Sockets 灞傘€?| - [Tool.ts](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/Tool.ts) & [tools.ts](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/tools.ts) (宸ュ叿涓粙涓庢敞鍐?<br>- `src/services/tools/` (宸ュ叿鎵ц涓?Hook 鐢熷懡鍛ㄦ湡缂栨帓)<br>- `src/utils/permissions/` (鏉冮檺鎷︽埅缃戝叧)<br>- `src/services/mcp/` (Model Context Protocol 瀹㈡埛绔?鏈嶅姟绔? |
-| **L4: Atomic Execution & Drivers**<br>(鍘熷瓙鎵ц涓庡簳灞傞┍鍔ㄥ眰) | 璐熻矗鍏蜂綋涓氬姟鍛戒护涓庡伐鍏风殑瀹為檯鎵ц锛屼笌鏈湴鐜銆佹枃浠剁郴缁熴€佺綉缁滀氦浜掋€傜被浼间簬 Linux 鐨勫叿浣撹澶囬┍鍔ㄤ笌鏂囦欢绯荤粺瀹炵幇銆?| - `src/commands/` (搴曞眰 CLI 鍛戒护瀹炵幇)<br>- `src/tools/` (鍘熷瓙宸ュ叿浠ｇ爜锛屽 `view_file`銆乣run_command` 绛夌殑瀹為檯 TypeScript 瀹炵幇)<br>- `skills/` (棰嗗煙鎶€鑳藉寘锛屼緥濡?`taste-skill` UI 瀹¤銆乣reverse-skill` 閫嗗悜鍒嗘瀽銆乣spec-kit` SDD 鎺у埗) |
+| **L4: Atomic Execution & Drivers**<br>(鍘熷瓙鎵ц涓庡簳灞傞┍鍔ㄥ眰) | 璐熻矗鍏蜂綋涓氬姟鍛戒护涓庡伐鍏风殑瀹為檯鎵ц锛屼笌鏈湴鐜銆佹枃浠剁郴缁熴€佺綉缁滀氦浜掋€傜被浼间簬 Linux 鐨勫叿浣撹澶囬┍鍔ㄤ笌鏂囦欢绯荤粺瀹炵幇銆?| - `src/commands/` (搴曞眰 CLI 鍛戒护瀹炵幇)<br>- `src/tools/` (鍘熷瓙宸ュ叿浠ｇ爜锛屽 `view_file`銆乣run_command` 绛夌殑瀹為檯 TypeScript 瀹炵幇)<br>- `skills/` (棰嗗煙鎶€鑳藉寘锛屼緥濡?`taste-skill` UI 瑙嗚鎺у埗銆乣reverse-skill` 閫嗗悜鍒嗘瀽銆乣agent-browser` 缃戦〉鑷姩鍖栨帶鍒躲€乣nano-banana-pro` 澶氭ā鎬佺敾鍥惧師鍨嬨€乣self-improvement` 缂洪櫡鑷籂鑷渷銆乣spec-kit` SDD 鎺у埗) |
 
 ---
 

@@ -16,7 +16,10 @@ $recommendedActive = @(
     "security-best-practices",
     "figma",
     "figma-implement-design",
-    "gh-fix-ci"
+    "gh-fix-ci",
+    "agent-browser",
+    "nano-banana-pro",
+    "self-improvement"
 )
 
 
@@ -63,6 +66,9 @@ $recommendedGeminiFlatKeep = @(
     "review",
     "runbook-generator",
     "self-improving-agent",
+    "self-improvement",
+    "agent-browser",
+    "nano-banana-pro",
     "senior-architect",
     "senior-backend",
     "senior-computer-vision",
