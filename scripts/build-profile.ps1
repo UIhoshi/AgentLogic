@@ -77,6 +77,7 @@ function Build-Bundle {
         }
 
         $content = Get-Content -Raw -Path $fullPath
+        $content = $content -replace 'file:///REPO_ROOT_PLACEHOLDER/', "file:///$($RepoRoot.Replace('\', '/'))/"
         [void]$builder.AppendLine("---")
         [void]$builder.AppendLine()
         [void]$builder.AppendLine("## BEGIN FILE: $relativePath")

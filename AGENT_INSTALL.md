@@ -17,11 +17,11 @@ Do not continue deeper reading, modify files, delete files, perform write action
 or begin implementation before the logic-entry loop above has been completed.
 -->
 
-# Agent Installation Guide (V6.5 Stable)
+# Agent Installation Guide (V6.6 Stable)
 
 This is the shortest installation path for AI agents. 
 
-Goal: Install **AgentLogic V6.5** into the current local host without guessing the entrypoint, target bundle, or validation command.
+Goal: Install **AgentLogic V6.6** into the current local host without guessing the entrypoint, target bundle, or validation command.
 
 ## Do Not Guess
 
@@ -29,7 +29,7 @@ Before installing, identify:
 
 1.  Whether the current directory is the AgentLogic repository root.
 2.  The target host: `codex`, `claude`, `gemini`, or `generic`.
-3.  The selected profile: **`core-enhanced`** is mandatory for full V6.5 governance support.
+3.  The selected profile: **`core-enhanced`** is mandatory for full V6.6 governance support.
 4.  Whether the host should bind to `MAIN.md` directly or to a generated bundle.
 
 If uncertain, run the doctor first:
@@ -38,12 +38,12 @@ If uncertain, run the doctor first:
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\doctor.ps1
 ```
 
-## V6.5 Stable Facts
+## V6.6 Stable Facts
 
-- **Current Version**: V6.5 (The "Tool Governance & Verification" Expansion).
+- **Current Version**: V6.6 (Reversing Router, Spec Kit, and Taste Design System integration).
 - **Repository Role**: Primary local logic package (Method Layer).
 - **Stable Host Entry**: `MAIN.md`.
-- **Default Profile**: `core-enhanced` (Includes modules 20-34 for advanced governance).
+- **Default Profile**: `core-enhanced` (Includes modules 20-39 for advanced governance and spec-driven workflows).
 - **Machine-readable Contract**: `manifest.json`.
 - **Root Installer**: `install.ps1`.
 - **Validation Command**: `scripts/validate-package.ps1`.
@@ -76,7 +76,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost ge
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\validate-package.ps1
 ```
 
-## Agent Decision Rule (V6.5)
+## Agent Decision Rule (V6.6)
 
 If the user asks to "load", "install", "mount", "bind", or "use this logic locally", the agent **MUST** follow this protocol:
 
@@ -91,12 +91,14 @@ If the user asks to "load", "install", "mount", "bind", or "use this logic local
     - preserve engineering-critical skills in the visible set
     - prevent host-local skill sprawl from degrading model-visible skill quality
 6.  **Adoption**: Immediately after installation, the agent must:
-    -   Read `versions/AgentLogic_V6_6.md` to understand the new line.
+    -   Read `versions/AgentLogic_V6_65.md` to understand the new line.
     -   Adopt the **Mandatory Verification Matrix** (Module 29) for all subsequent claims.
     -   Adopt the **4-Tier Memory Taxonomy** (User, Feedback, Project, Reference) for project notes.
-7.  **Report**: State the installed host, version (V6.5), profile, and confirmation that the new governance rules are active.
+    -   Adopt the **Spec-Driven Development (SDD) Lifecycle** (Module 38) for technical tasks.
+    -   Adopt the **Taste Frontend Design Standards** (Module 39) for interface and visual changes.
+7.  **Report**: State the installed host, version (V6.6), profile, and confirmation that the new governance rules are active.
 
-## Install-Time And Update-Time Skill Rule (V6.5)
+## Install-Time And Update-Time Skill Rule (V6.6)
 
 Every local installation **and every local logic update** of AgentLogic must perform a host-local skill audit and organization pass.
 
@@ -108,7 +110,7 @@ This is required because:
 - duplicate-or-overlapping skill families must be classified instead of guessed
 - host-local skills must stay separate from any logic-carried skill layer so one machine's local packs do not become another machine's default logic state
 
-The V6.5 install/update rule is:
+The V6.6 install/update rule is:
 
 1. identify the host-local skill zone for the target host
 2. keep that host-local zone separate from the logic-carried layer
@@ -130,5 +132,8 @@ The install/update governance pass is for the **host-local skill zone only**. It
 See also:
 - `modules/35_V6_5_SkillGovernanceAndMandatoryUse.md`
 - `modules/36_V6_5_SkillZoneSeparation.md`
+- `modules/37_V6_6_CybersecuritySkillsRouter.md`
+- `modules/38_V6_6_SpecDrivenDevelopment.md`
+- `modules/39_V6_6_TasteFrontendDesign.md`
 
 Do not search through unrelated project files or treat the AgentLogic repository as a business workspace.

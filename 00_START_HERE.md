@@ -46,7 +46,7 @@ This file is logic, not project content.
 Before any formal planning, implementation, modification, validation, review, packaging, or rule synchronization work, the agent MUST fully read all of the following files from beginning to end in this exact order:
 
 1. `README.md`
-2. `versions/AgentLogic_V6_6.md`
+2. `versions/AgentLogic_V6_65.md`
 3. `modules/01_MasterLogic.md`
 4. `modules/15_LogicEntryChecklist.md`
 

@@ -94,6 +94,34 @@ function checkEntryFileGate(relPath) {
   ok(`Mandatory logic gate header verified: ${relPath}`);
 }
 
+function checkMapLinks() {
+  const mapFiles = ['modules/11_CrossDirectoryMap.md', 'modules/40_AgentLogicSystemMap.md'];
+  for (const relPath of mapFiles) {
+    const content = readFileSafe(relPath);
+    if (!content) continue;
+
+    const regex = /file:\/\/\/REPO_ROOT_PLACEHOLDER\/([^\s\)\>\"\#\`]+)/g;
+    let match;
+    let found = 0;
+    while ((match = regex.exec(content)) !== null) {
+      const linkPath = match[1];
+      if (linkPath.startsWith('src/')) {
+        found++;
+        continue;
+      }
+      const targetFilePath = path.join(ROOT, linkPath);
+      if (!fs.existsSync(targetFilePath)) {
+        fail(`Link in ${relPath} points to non-existent file: ${linkPath}`);
+      } else {
+        found++;
+      }
+    }
+    if (found > 0) {
+      ok(`Verified ${found} map links in ${relPath} successfully.`);
+    }
+  }
+}
+
 function main() {
   console.log('Checking repository logic-entry enforcement...\n');
 
@@ -103,6 +131,8 @@ function main() {
   for (const relPath of ENTRY_FILES) {
     checkEntryFileGate(relPath);
   }
+
+  checkMapLinks();
 
   if (hasError) {
     console.error('\nLogic-entry check FAILED.');

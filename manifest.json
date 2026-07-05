@@ -3,8 +3,8 @@
     "role":  "primary-local-logic",
     "description":  "Versioned primary logic package intended to be pulled into local AI coding hosts as the default operating logic.",
     "entry":  "MAIN.md",
-    "current_version":  "V6.6",
-    "main_logic_file":  "versions/AgentLogic_V6_6.md",
+    "current_version":  "V6.65",
+    "main_logic_file":  "versions/AgentLogic_V6_65.md",
     "default_profile":  "core-enhanced",
     "profiles":  {
                      "minimal":  {
@@ -15,7 +15,7 @@
                                                    "AGENT_INSTALL.md",
                                                    "README.md",
                                                    "AGENTS.md",
-                                                   "versions/AgentLogic_V6_6.md"
+                                                   "versions/AgentLogic_V6_65.md"
                                                ]
                                  },
                      "core-enhanced":  {
@@ -26,7 +26,7 @@
                                                          "AGENT_INSTALL.md",
                                                          "README.md",
                                                          "AGENTS.md",
-                                                         "versions/AgentLogic_V6_6.md",
+                                                         "versions/AgentLogic_V6_65.md",
                                                          "modules/01_MasterLogic.md",
                                                          "modules/03_AgenticLoop.md",
                                                          "modules/05_PermissionsAndSafety.md",
@@ -52,7 +52,8 @@
                                                          "modules/36_V6_5_SkillZoneSeparation.md",
                                                          "modules/37_V6_6_CybersecuritySkillsRouter.md",
                                                          "modules/38_V6_6_SpecDrivenDevelopment.md",
-                                                         "modules/39_V6_6_TasteFrontendDesign.md"
+                                                         "modules/39_V6_6_TasteFrontendDesign.md",
+                                                         "modules/40_AgentLogicSystemMap.md"
                                                      ]
                                        },
                      "github-publishing":  {
@@ -63,7 +64,7 @@
                                                              "AGENT_INSTALL.md",
                                                              "README.md",
                                                              "AGENTS.md",
-                                                             "versions/AgentLogic_V6_6.md",
+                                                             "versions/AgentLogic_V6_65.md",
                                                              "modules/01_MasterLogic.md",
                                                              "modules/03_AgenticLoop.md",
                                                              "modules/05_PermissionsAndSafety.md",
@@ -93,7 +94,8 @@
                                                              "modules/36_V6_5_SkillZoneSeparation.md",
                                                              "modules/37_V6_6_CybersecuritySkillsRouter.md",
                                                              "modules/38_V6_6_SpecDrivenDevelopment.md",
-                                                             "modules/39_V6_6_TasteFrontendDesign.md"
+                                                             "modules/39_V6_6_TasteFrontendDesign.md",
+                                                             "modules/40_AgentLogicSystemMap.md"
                                                          ]
                                            }
                  },

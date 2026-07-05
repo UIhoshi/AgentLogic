@@ -1,6 +1,6 @@
-# AgentLogic_V6_6 Master Logic
+# AgentLogic_V6_65 Master Logic
 
-本文件不是替代 `AgentLogic_V6_6.md`，而是将当前主逻辑映射到当前仓库，形成一份面向 Claude Code 类 Agentic CLI 系统的项目级主逻辑摘要。
+本文件不是替代 `AgentLogic_V6_65.md`，而是将当前主逻辑映射到当前仓库，形成一份面向 Claude Code 类 Agentic CLI 系统的项目级主逻辑摘要。
 
 ## 1. 当前项目定位
 
@@ -13,44 +13,50 @@
   - 工具系统
   - 权限与扩展体系
 
-## 2. 当前项目的三层映射
+## 2. 当前项目联动的四层源码映射
 
-### L1：战略与入口层
-
+### L1：CLI 与交互外壳层 (Shell & CLI Surface)
 - 主入口文档：
   - `README.md`
-  - `AIagent.md`
   - `AGENTS.md`
+  - `00_START_HERE.md`
   - `docs/introduction/architecture-overview.mdx`
-- 主入口代码：
+- 主入口与 REPL 启动：
   - `src/entrypoints/cli.tsx`
   - `src/main.tsx`
   - `src/entrypoints/init.ts`
+- 终端与 UI 渲染组件：
+  - `src/screens/`
+  - `src/components/`
+  - `src/ink/`
 
-### L2：领域架构层
-
-- 核心会话编排：
+### L2：会话与执行循环编排层 (Session & Loop Orchestration)
+- 多轮会话编排：
   - `src/QueryEngine.ts`
+- 单轮 Agentic 循环引擎：
   - `src/query.ts`
-- 工具系统：
+- 上下文与会话状态：
+  - `src/context.ts`
+  - `src/state/`
+
+### L3：服务组件与中介控制层 (Service & Mediation Control)
+- 工具注册与动态组装：
   - `src/Tool.ts`
   - `src/tools.ts`
   - `src/services/tools/`
-- 权限与安全：
+- 权限判定与安全网关：
   - `src/utils/permissions/`
-  - `src/tools/BashTool/`
-  - `src/tools/PowerShellTool/`
-- 扩展系统：
+  - 核心特权工具拦截（如 `BashTool`、`PowerShellTool` 内部安全控制）
+- 扩展中介与协议驱动：
   - `src/services/mcp/`
-  - `src/skills/`
-  - `src/tools/AgentTool/`
 
-### L3：原子执行层
-
-- 工具目录：`src/tools/*`
-- 命令目录：`src/commands/*`
-- 状态与上下文：`src/state/`、`src/context.ts`
-- UI/终端渲染：`src/screens/`、`src/components/`、`src/ink/`
+### L4：原子执行与底层驱动层 (Atomic Execution & Drivers)
+- 具体底层命令实体：
+  - `src/commands/`
+- 具体原子工具实体：
+  - `src/tools/*` (如 `view_file`、`run_command` 等底层实现)
+- 领域扩展技能库：
+  - `skills/` (如逆向安全路由、Spec 驱动开发工具包、Taste 前端设计规范等)
 
 ## 3. 当前项目的核心工作对象
 
