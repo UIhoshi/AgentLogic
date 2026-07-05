@@ -77,6 +77,9 @@ These skills overlap with V6.5 logic but still provide unique operational value:
 - `figma` / `figma-implement-design`
   - overlaps with UI verification and design handoff
   - still provides design-specific execution guidance
+- `agent-browser`
+  - overlaps with static page fetching (`read_url_content`) and playwright-based UI verification
+  - still provides high-performance, deterministic ref-based headless browser automation optimized for AI agents
 
 ### 3.3 Archived-but-not-duplicate families
 
@@ -111,6 +114,7 @@ Typical active-by-default families:
 - `figma`
 - `figma-implement-design`
 - `gh-fix-ci`
+- `agent-browser`
 
 ### 4.2 Archived-by-default
 
@@ -195,6 +199,13 @@ Use `figma` or `figma-implement-design` when:
 
 Do not treat plain code reading as sufficient when the real source of truth is the design surface.
 
+### 5.8 Agent-browser skill
+
+Use `agent-browser` when:
+
+- the task requires dynamic web interaction, page navigation, clicking elements, filling forms, session-isolated browsing, or executing client-side JavaScript from the terminal.
+- standard static url fetching (`read_url_content`) is insufficient due to Single Page Application (SPA) rendering or multi-step user flow requirements.
+
 ---
 
 ## 6. Skills Must Not Weaken Verification
@@ -230,3 +241,20 @@ The preferred V6.5 posture is:
 - **keep only high-value execution skills active by default**
 - **archive broad domain packs unless currently needed**
 - **treat skills as execution amplifiers, not as replacements for logic**
+
+---
+
+## 9. Dynamic Context-Based Skill Selection (Context-Driven Routing)
+
+To eliminate manual activation and ensure skills are integrated seamlessly based on conversation flow, the agent must dynamically evaluate skill applicability:
+
+### 9.1 Dialog Intent Mapping
+Every turn, the agent MUST inspect the user's request and the conversation context to determine if they intersect with any active or archived skill domains:
+1. **Direct Action Mapping**: If the user asks for actions like web interaction, dynamic page testing, visual inspection, or exploit pattern tracking, the agent must automatically invoke the relevant skill (`agent-browser`, `playwright`, `screenshot`, or `reverse-skill`).
+2. **Implicit Need Detection**: If a task requires dynamic rendering or session persistence (e.g. logging into a site), the agent must dynamically activate the matching skill rather than asking the user to manually trigger it.
+
+### 9.2 Auto-Restoration protocol
+If the conversation context demands an archived skill, the agent should dynamically restore/activate it (by parsing its `SKILL.md` or loading its template) for the current task scope without user intervention.
+
+### 9.3 Codebase Tool Dominance
+When a skill introduces a specialized command-line utility (e.g. `agent-browser` CLI), the agent must automatically prefer utilizing it over writing custom scripts or ad-hoc wrappers, ensuring unified tool usage.
