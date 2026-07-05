@@ -73,6 +73,23 @@ This repository now has four responsibilities:
 - bundle generation
   host-ready outputs built by `scripts/build-profile.ps1`
 
+## Reference Sources
+
+During its evolution to the `V6.65` release, AgentLogic has referenced and integrated concepts from the following open-source projects on GitHub:
+
+1. **Linux Kernel Map**:
+   - Repository: [makelinux/linux_kernel_map](https://github.com/makelinux/linux_kernel_map)
+   - Contribution: Inspired the V6.65 transition to a 4-layer grid architecture mapping subsystems and layers ([40_AgentLogicSystemMap.md](file:///REPO_ROOT_PLACEHOLDER/modules/40_AgentLogicSystemMap.md)).
+2. **Cybersecurity Skills Router**:
+   - Repository: [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill)
+   - Contribution: Provided domain-specific rules and routing structures for cybersecurity, reverse-engineering, and CTF solvers.
+3. **Spec Kit**:
+   - Repository: [github/spec-kit](https://github.com/github/spec-kit)
+   - Contribution: Established Spec-Driven Development (SDD) contract checks and coding lifecycle validations.
+4. **Taste Skill**:
+   - Repository: [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill)
+   - Contribution: Defined high-aesthetic visual indicators, premium UI spring animation standards, and anti-slop interface audits.
+
 ## Current Default Profile
 
 - `core-enhanced`

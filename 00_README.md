@@ -79,6 +79,23 @@
 - `13_MandatoryLogicGateTemplate.md` 不是建议性注释模板，而是强制执行门模板；它必须加入每个真实入口 / 起手源码文件。
 - 该模板来源于 AI 阅读真实入口 / 起手源码文件时的真实行为模式与多轮测试结果，其目标是阻断错误的上下文延续判断、阻断跳过逻辑入口、并降低实现前误操作率。
 
+## 参考与借鉴的开源项目
+
+本仓库在从早期版本演进到最新的 `V6.65` 阶段中，借鉴与参考了以下优秀的 GitHub 开源项目，以强化系统的设计、安全审计及可视化展示：
+
+1. **Linux Kernel Map** (架构与地图设计借鉴)
+   - 仓库地址: [makelinux/linux_kernel_map](https://github.com/makelinux/linux_kernel_map)
+   - 借鉴点: 启发了 `V6.65` 将复杂的 Agent 规则与源码关系，重构为“横向子系统（Columns）与纵向抽象层（Rows）”的 4层矩阵式地图结构 ([40_AgentLogicSystemMap.md](file:///REPO_ROOT_PLACEHOLDER/modules/40_AgentLogicSystemMap.md))。
+2. **Cybersecurity Skills Router** (逆向与安全分析能力对齐)
+   - 仓库地址: [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill)
+   - 借鉴点: 整合了针对二进制逆向分析、CTF 渗透以及恶意软件检测等特定安全领域工具的路由控制规则。
+3. **Spec Kit** (规格驱动开发规范)
+   - 仓库地址: [github/spec-kit](https://github.com/github/spec-kit)
+   - 借鉴点: 引入了 Spec-Driven Development 规格化开发契约校验，规范了 Agentic Loop 编程规范。
+4. **Taste Skill** (前端界面艺术标准)
+   - 仓库地址: [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill)
+   - 借鉴点: 借鉴了其高标准的设计美学和反粗制滥造（Anti-Slop）的优质 UI 审计与页面渲染指标。
+
 ## 当前输出来源
 
 - 主逻辑基线：`AgentLogic_V6_65.md`
