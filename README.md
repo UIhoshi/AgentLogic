@@ -89,6 +89,9 @@ During its evolution to the `V6.65` release, AgentLogic has referenced and integ
 4. **Taste Skill**:
    - Repository: [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill)
    - Contribution: Defined high-aesthetic visual indicators, premium UI spring animation standards, and anti-slop interface audits.
+5. **Claude Code Base**:
+   - Repository: [claude-code-best/claude-code](https://github.com/claude-code-best/claude-code)
+   - Contribution: Served as the structural reference base to align CLI QueryEngine loop mechanics, REPL bootstrap paths, and permissions/sandbox interfaces.
 
 ## Current Default Profile
 

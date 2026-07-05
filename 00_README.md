@@ -95,6 +95,9 @@
 4. **Taste Skill** (前端界面艺术标准)
    - 仓库地址: [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill)
    - 借鉴点: 借鉴了其高标准的设计美学和反粗制滥造（Anti-Slop）的优质 UI 审计与页面渲染指标。
+5. **Claude Code Base** (宿主 CLI 基础架构参考)
+   - 仓库地址: [claude-code-best/claude-code](https://github.com/claude-code-best/claude-code)
+   - 借鉴点: 作为系统底层与能力对齐的基线参考，用以映射和规范 CLI QueryEngine 循环、REPL 引导和权限沙箱的源码设计。
 
 ## 当前输出来源
 
