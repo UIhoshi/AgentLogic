@@ -1,5 +1,5 @@
 param(
-    [ValidateSet("codex", "claude", "gemini", "generic")]
+    [ValidateSet("codex", "claude", "gemini", "antigravity", "generic")]
     [string]$TargetHost = "generic",
     [string]$ProfileName = "core-enhanced",
     [string]$TargetPath,
@@ -63,6 +63,14 @@ switch ($TargetHost) {
         }
     }
     "gemini" {
+        if ($TargetPath) {
+            $arguments += @("-TargetPath", $TargetPath)
+        }
+        if ($UserHome) {
+            $arguments += @("-UserHome", $UserHome)
+        }
+    }
+    "antigravity" {
         if ($TargetPath) {
             $arguments += @("-TargetPath", $TargetPath)
         }

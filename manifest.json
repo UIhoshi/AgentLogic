@@ -123,12 +123,14 @@
                          "codex":  "dist/codex/model_instructions.md",
                          "claude":  "dist/claude/CLAUDE.md",
                          "gemini":  "dist/gemini/GEMINI.md",
+                         "antigravity":  "dist/antigravity/AGENTS.md",
                          "generic":  "dist/generic/AGENTLOGIC.md"
                      },
     "adapters":  {
                      "codex":  "adapters/codex/install.ps1",
                      "claude":  "adapters/claude/install.ps1",
                      "gemini":  "adapters/gemini/install.ps1",
+                     "antigravity":  "adapters/antigravity/install.ps1",
                      "generic":  "adapters/generic/install.ps1"
                  },
     "notes":  [
@@ -162,6 +164,11 @@
                                                  "adapter":  "adapters/gemini/install.ps1",
                                                  "output":  "dist/gemini/GEMINI.md"
                                              },
+                                  "antigravity":  {
+                                                      "command":  "powershell -NoProfile -ExecutionPolicy Bypass -File .\\install.ps1 -TargetHost antigravity",
+                                                      "adapter":  "adapters/antigravity/install.ps1",
+                                                      "output":  "dist/antigravity/AGENTS.md"
+                                                  },
                                   "generic":  {
                                                   "command":  "powershell -NoProfile -ExecutionPolicy Bypass -File .\\install.ps1 -TargetHost generic",
                                                   "adapter":  "adapters/generic/install.ps1",
