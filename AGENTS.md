@@ -69,6 +69,14 @@ Before every new coding round:
 
 This startup gate is mandatory.
 
+## Mandatory Development Lifecycle Gates
+
+All coding agents working in this or associated workspaces **MUST** follow these three gates:
+
+1. **Spec-Driven Development (SDD) Gate** (`modules/38_V6_6_SpecDrivenDevelopment.md`): Tasks must proceed sequentially through the 8 SDD phases. The **Red-Team Gate** (Phase 4) is a non-negotiable blocking step to steelman and attack plan assumptions before creating tasks.
+2. **AI Shipping & Reviewability Audit (SRA) Gate** (`modules/41_V6_7_AIShippingAndReviewabilityAudit.md`): No codebase change may be merged without completing the Ship Phase SRA checklist and producing the 5 core shipping artifacts (`architecture.md`, `flows.md`, `permissions.md`, `variables.md`, `tests.md`) under `documentation/` or `.specify/ship/`.
+3. **Self-Refute First Audit Gate** (`modules/41_V6_7_AIShippingAndReviewabilityAudit.md` §3): All SRA findings (security, performance, architecture) must be run through a self-refutation verification using local code evidence. Only verified findings that survive self-refutation may be reported.
+
 ## Repository Boundary
 
 This repository is logic infrastructure, not a business-project workspace.

@@ -3,7 +3,7 @@
 Status: historical exploratory draft that fed the promoted stable V6.5 line.
 
 This file remains a local exploratory record.
-It does not replace the current stable file `versions/AgentLogic_V6_65.md`.
+It does not replace the current stable file `versions/AgentLogic_V6_7_0.md`.
 Its purpose is to preserve the draft-stage reasoning, comparisons, and module-shaping decisions that led to the promoted V6.5 line.
 
 ---
@@ -356,7 +356,7 @@ Promote only after confirming the same rules help at least:
 
 Only then consider:
 
-- a true `AgentLogic_V6_65.md`
+- a true `AgentLogic_V6_7_0.md`
 - updated module chain references
 - package validation changes if the draft becomes a stable line
 

@@ -24,7 +24,7 @@ Key Enhancements:
 
 ## 2. Core Governance Modules
 
-The V6.65 line is supported by a modular suite of governance rules:
+The V6.7.0 line is supported by a modular suite of governance rules:
 
 ### 2.1 Entry & Master Logic
 - `modules/01_MasterLogic.md`: Master logic outlining project-level CLI loops and mappings.
@@ -84,7 +84,7 @@ The V6.7.0 line is now promoted to stable status.
 
 ## 4. Reference Source Registration
 
-The V6.65 stable line integrates the following external source repositories:
+The V6.7.0 stable line integrates the following external source repositories:
 
 - **Cybersecurity Skills Router**:
   - Source URL: `https://github.com/zhaoxuya520/reverse-skill`
@@ -109,7 +109,7 @@ The V6.65 stable line integrates the following external source repositories:
 
 ## 5. Skill-System Integration Rule
 
-V6.65 treats general programming skills, cybersecurity domain skills, and visual design skills as portable, logic-carried assets under the `skills/` directory. 
+V6.7.0 treats general programming skills, cybersecurity domain skills, and visual design skills as portable, logic-carried assets under the `skills/` directory. 
 
 Key stable rules:
 - Logic package rules outrank individual skills.

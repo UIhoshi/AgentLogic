@@ -1,4 +1,4 @@
-# V6.65 AI Shipping & Reviewability Audit Integration
+# V6.7.0 AI Shipping & Reviewability Audit Integration
 
 Status: **Stable V6.7.0 Line (Mandatory shipping & verification protocol)**.
 

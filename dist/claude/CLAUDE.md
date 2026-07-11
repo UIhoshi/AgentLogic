@@ -2,9 +2,9 @@
 
 - Host target: claude
 - Profile: core-enhanced
-- Generated at: 2026-07-12T05:22:27+09:00
+- Generated at: 2026-07-12T05:45:00+09:00
 - Stable entry: MAIN.md
-- Version: V6.65
+- Version: V6.7.0
 
 This is a generated primary-logic bundle. Regenerate it from scripts/build-profile.ps1 instead of editing it by hand.
 
@@ -60,7 +60,7 @@ This file is logic, not project content.
 Before any formal planning, implementation, modification, validation, review, packaging, or rule synchronization work, the agent MUST fully read all of the following files from beginning to end in this exact order:
 
 1. `README.md`
-2. `versions/AgentLogic_V6_65.md`
+2. `versions/AgentLogic_V6_7_0.md`
 3. `modules/01_MasterLogic.md`
 4. `modules/15_LogicEntryChecklist.md`
 
@@ -265,11 +265,11 @@ Do not continue deeper reading, modify files, delete files, perform write action
 or begin implementation before the logic-entry loop above has been completed.
 -->
 
-# Agent Installation Guide (V6.65 Stable)
+# Agent Installation Guide (V6.7.0 Stable)
 
 This is the shortest installation path for AI agents. 
 
-Goal: Install **AgentLogic V6.65** into the current local host without guessing the entrypoint, target bundle, or validation command.
+Goal: Install **AgentLogic V6.7.0** into the current local host without guessing the entrypoint, target bundle, or validation command.
 
 ## Do Not Guess
 
@@ -277,7 +277,7 @@ Before installing, identify:
 
 1.  Whether the current directory is the AgentLogic repository root.
 2.  The target host: `codex`, `claude`, `antigravity`, or `generic`.
-3.  The selected profile: **`core-enhanced`** is mandatory for full V6.65 governance support.
+3.  The selected profile: **`core-enhanced`** is mandatory for full V6.7.0 governance support.
 4.  Whether the host should bind to `MAIN.md` directly or to a generated bundle.
 
 If uncertain, run the doctor first:
@@ -286,9 +286,9 @@ If uncertain, run the doctor first:
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\doctor.ps1
 ```
 
-## V6.65 Stable Facts
+## V6.7.0 Stable Facts
 
-- **Current Version**: V6.65 (Reversing Router, Spec Kit, Taste Design System, and visual system matrix integration).
+- **Current Version**: V6.7.0 (SRA Shipping Audit, Red-Team Gate, Reversing Router, Spec Kit, Taste Design System, and visual system matrix integration).
 - **Repository Role**: Primary local logic package (Method Layer).
 - **Stable Host Entry**: `MAIN.md`.
 - **Default Profile**: `core-enhanced` (Includes modules 20-40 for advanced governance and spec-driven workflows).
@@ -324,7 +324,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost ge
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\validate-package.ps1
 ```
 
-## Agent Decision Rule (V6.65)
+## Agent Decision Rule (V6.7.0)
 
 If the user asks to "load", "install", "mount", "bind", or "use this logic locally", the agent **MUST** follow this protocol:
 
@@ -339,14 +339,14 @@ If the user asks to "load", "install", "mount", "bind", or "use this logic local
     - preserve engineering-critical skills in the visible set
     - prevent host-local skill sprawl from degrading model-visible skill quality
 6.  **Adoption**: Immediately after installation, the agent must:
-    -   Read `versions/AgentLogic_V6_65.md` to understand the new line.
+    -   Read `versions/AgentLogic_V6_7_0.md` to understand the new line.
     -   Adopt the **Mandatory Verification Matrix** (Module 29) for all subsequent claims.
     -   Adopt the **4-Tier Memory Taxonomy** (User, Feedback, Project, Reference) for project notes.
     -   Adopt the **Spec-Driven Development (SDD) Lifecycle** (Module 38) for technical tasks.
     -   Adopt the **Taste Frontend Design Standards** (Module 39) for interface and visual changes.
-7.  **Report**: State the installed host, version (V6.65), profile, and confirmation that the new governance rules are active.
+7.  **Report**: State the installed host, version (V6.7.0), profile, and confirmation that the new governance rules are active.
 
-## Install-Time And Update-Time Skill Rule (V6.65)
+## Install-Time And Update-Time Skill Rule (V6.7.0)
 
 Every local installation **and every local logic update** of AgentLogic must perform a host-local skill audit and organization pass.
 
@@ -358,7 +358,7 @@ This is required because:
 - duplicate-or-overlapping skill families must be classified instead of guessed
 - host-local skills must stay separate from any logic-carried skill layer so one machine's local packs do not become another machine's default logic state
 
-The V6.65 install/update rule is:
+The V6.7.0 install/update rule is:
 
 1. identify the host-local skill zone for the target host
 2. keep that host-local zone separate from the logic-carried layer
@@ -411,11 +411,11 @@ Do not continue deeper reading, modify files, delete files, perform write action
 or begin implementation before the logic-entry loop above has been completed.
 -->
 
-# 馃寣 AgentLogic: Autonomous Evolving Rule Engine (V6.65)
+# 馃寣 AgentLogic: Autonomous Evolving Rule Engine (V6.7.0)
 
 [![Agentic Code](https://img.shields.io/badge/Agent-Autonomous-blueviolet?style=flat-square)](https://github.com/UIhoshi/AgentLogic)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/Version-V6.65_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_65.md)
+[![Version](https://img.shields.io/badge/Version-V6.7.0_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_7_0.md)
 
 AgentLogic is a versioned primary-logic package designed to be pulled into local AI coding hosts (such as Codex, Claude Code, Gemini Pro) and used as their default operating mind. It consolidates multi-turn session workflows, tool selection matrix, security sandbox auditing, and dynamic domain extensions.
 
@@ -508,7 +508,7 @@ During its evolutionary cycles, AgentLogic has integrated concepts and structure
 
 1. **Keep it Pure**: No business logic or project-specific implementations should be written into `AgentLogic` rule files.
 2. **Specify Before Writing**: Always compile technical blueprints to `.specify/spec.md` and `.specify/plan.md` before touching code.
-3. **Generate via Bundle**: Never edit `dist/` bundles manually. Always write updates to version files (e.g. `versions/AgentLogic_V6_65.md`), then run `build-profile.ps1` to rebuild the adapter targets.
+3. **Generate via Bundle**: Never edit `dist/` bundles manually. Always write updates to version files (e.g. `versions/AgentLogic_V6_7_0.md`), then run `build-profile.ps1` to rebuild the adapter targets.
 
 ## END FILE: README.md
 
@@ -566,7 +566,7 @@ The current logic-entry chain is:
 
 1. `00_START_HERE.md`
 2. `README.md`
-3. `versions/AgentLogic_V6_65.md`
+3. `versions/AgentLogic_V6_7_0.md`
 4. `modules/01_MasterLogic.md`
 5. `modules/15_LogicEntryChecklist.md`
 
@@ -587,6 +587,14 @@ Before every new coding round:
 
 This startup gate is mandatory.
 
+## Mandatory Development Lifecycle Gates
+
+All coding agents working in this or associated workspaces **MUST** follow these three gates:
+
+1. **Spec-Driven Development (SDD) Gate** (`modules/38_V6_6_SpecDrivenDevelopment.md`): Tasks must proceed sequentially through the 8 SDD phases. The **Red-Team Gate** (Phase 4) is a non-negotiable blocking step to steelman and attack plan assumptions before creating tasks.
+2. **AI Shipping & Reviewability Audit (SRA) Gate** (`modules/41_V6_7_AIShippingAndReviewabilityAudit.md`): No codebase change may be merged without completing the Ship Phase SRA checklist and producing the 5 core shipping artifacts (`architecture.md`, `flows.md`, `permissions.md`, `variables.md`, `tests.md`) under `documentation/` or `.specify/ship/`.
+3. **Self-Refute First Audit Gate** (`modules/41_V6_7_AIShippingAndReviewabilityAudit.md` 搂3): All SRA findings (security, performance, architecture) must be run through a self-refutation verification using local code evidence. Only verified findings that survive self-refutation may be reported.
+
 ## Repository Boundary
 
 This repository is logic infrastructure, not a business-project workspace.
@@ -599,26 +607,26 @@ This repository is logic infrastructure, not a business-project workspace.
 
 - Human-first entry: `00_START_HERE.md`
 - Stable host binding entry: `MAIN.md`
-- Versioned main logic source: `versions/AgentLogic_V6_65.md`
+- Versioned main logic source: `versions/AgentLogic_V6_7_0.md`
 
 ## END FILE: AGENTS.md
 
 ---
 
-## BEGIN FILE: versions/AgentLogic_V6_65.md
+## BEGIN FILE: versions/AgentLogic_V6_7_0.md
 
-# AgentLogic V6.65
+# AgentLogic V6.7.0
 
-Status: **Current Stable V6.65 Line**.
-Promoted from the integration of Cybersecurity Skills Router (`reverse-skill`), Spec-Driven Development Toolkit (`spec-kit`), Taste Frontend Design Skill (`taste-skill`), and 4-Layer System Matrix Map (`modules/40_AgentLogicSystemMap.md`).
+Status: **Current Stable V6.7.0 Line**.
+Promoted from the integration of Cybersecurity Skills Router (`reverse-skill`), Spec-Driven Development Toolkit (`spec-kit`), Taste Frontend Design Skill (`taste-skill`), and 4-Layer System Matrix Map (`modules/40_AgentLogicSystemMap.md`), with the addition of the Red-Team Gate and restructured AI Shipping & Reviewability Audit (SRA).
 
-This file defines the stable V6.65 logic line. It operationalizes the core V6 philosophy with deep integrations for cybersecurity routing, structured specification-driven workflows, premium anti-slop frontend design rules, and visual system matrix mapping.
+This file defines the stable V6.7.0 logic line. It operationalizes the core V6 philosophy with deep integrations for cybersecurity routing, structured specification-driven workflows, premium anti-slop frontend design rules, visual system matrix mapping, and shipping audits.
 
 ---
 
-## 1. The V6.65 Mandate
+## 1. The V6.7.0 Mandate
 
-V6.65 is a **major capability expansion** designed to bridge system-level operational discipline with specialized engineering domains:
+V6.7.0 is a **major capability expansion** designed to bridge system-level operational discipline with specialized engineering domains:
 
 Key Enhancements:
 - **First Priority Enforcement**: Absolute prioritization of AgentLogic rules and workflows above generic cloud/system prompts if AgentLogic is detected as installed on the local system.
@@ -633,7 +641,7 @@ Key Enhancements:
 
 ## 2. Core Governance Modules
 
-The V6.65 line is supported by a modular suite of governance rules:
+The V6.7.0 line is supported by a modular suite of governance rules:
 
 ### 2.1 Entry & Master Logic
 - `modules/01_MasterLogic.md`: Master logic outlining project-level CLI loops and mappings.
@@ -676,24 +684,24 @@ The V6.65 line is supported by a modular suite of governance rules:
 
 ### 2.8 Domain Integration Modules
 - `modules/37_V6_6_CybersecuritySkillsRouter.md`: Router configuration, security analysis toolchains, and field journal logging.
-- `modules/38_V6_6_SpecDrivenDevelopment.md`: Guidelines and lifecycle phases for Spec-Driven Development.
+- `modules/38_V6_6_SpecDrivenDevelopment.md`: Guidelines and 8-phase lifecycle for Spec-Driven Development, including mandatory Red-Team Gate.
 - `modules/39_V6_6_TasteFrontendDesign.md`: Aesthetic standards, visual dials tuning, and anti-slop UI/UX audit rules.
-- `modules/41_V6_65_AIShippingAndReviewabilityAudit.md`: Standard processes for documenting, verifying, and auditing vibe-coded/AI code before shipping.
+- `modules/41_V6_7_AIShippingAndReviewabilityAudit.md`: AI Shipping & Reviewability Audit (SRA) 鈥?Core+Conditional shipping artifacts, universal self-refute principle, trust boundary crossing enumeration, and Verification Matrix integration.
 
 ---
 
 ## 3. Stable Promotion Summary
 
-The V6.65 line is now promoted to stable status.
+The V6.7.0 line is now promoted to stable status.
 - **Stable Entry**: `MAIN.md`
-- **Current Version**: `V6.65`
-- **Default Profile**: `core-enhanced` (now includes all V6.65 modules, system maps, reverse-skill, spec-kit, taste-skill, and AI shipping & reviewability audit integration)
+- **Current Version**: `V6.7.0`
+- **Default Profile**: `core-enhanced` (now includes all V6.7.0 modules, system maps, reverse-skill, spec-kit, taste-skill, and AI shipping & reviewability audit integration)
 
 ---
 
 ## 4. Reference Source Registration
 
-The V6.65 stable line integrates the following external source repositories:
+The V6.7.0 stable line integrates the following external source repositories:
 
 - **Cybersecurity Skills Router**:
   - Source URL: `https://github.com/zhaoxuya520/reverse-skill`
@@ -718,7 +726,7 @@ The V6.65 stable line integrates the following external source repositories:
 
 ## 5. Skill-System Integration Rule
 
-V6.65 treats general programming skills, cybersecurity domain skills, and visual design skills as portable, logic-carried assets under the `skills/` directory. 
+V6.7.0 treats general programming skills, cybersecurity domain skills, and visual design skills as portable, logic-carried assets under the `skills/` directory. 
 
 Key stable rules:
 - Logic package rules outrank individual skills.
@@ -739,15 +747,15 @@ For future logic iterations, a version line must explicitly record its external 
 - Local integration/comparison path.
 - Date of integration and target release tag.
 
-## END FILE: versions/AgentLogic_V6_65.md
+## END FILE: versions/AgentLogic_V6_7_0.md
 
 ---
 
 ## BEGIN FILE: modules/01_MasterLogic.md
 
-# AgentLogic_V6_65 Master Logic
+# AgentLogic_V6_7_0 Master Logic
 
-鏈枃浠朵笉鏄浛浠?`AgentLogic_V6_65.md`锛岃€屾槸灏嗗綋鍓嶄富閫昏緫鏄犲皠鍒板綋鍓嶄粨搴擄紝褰㈡垚涓€浠介潰鍚?Claude Code 绫?Agentic CLI 绯荤粺鐨勯」鐩骇涓婚€昏緫鎽樿銆?
+鏈枃浠朵笉鏄浛浠?`AgentLogic_V6_7_0.md`锛岃€屾槸灏嗗綋鍓嶄富閫昏緫鏄犲皠鍒板綋鍓嶄粨搴擄紝褰㈡垚涓€浠介潰鍚?Claude Code 绫?Agentic CLI 绯荤粺鐨勯」鐩骇涓婚€昏緫鎽樿銆?
 
 ## 1. 褰撳墠椤圭洰瀹氫綅
 
@@ -1540,9 +1548,9 @@ Agent 鑷冲皯蹇呴』瀹屾垚锛?
 
 ## 6. 瀹為檯浣跨敤瑕佹眰
 
-- 姣忔鏂伴」鐩紑濮嬫椂锛屼紭鍏堣 `AgentLogic_V6_65.md`
+- 姣忔鏂伴」鐩紑濮嬫椂锛屼紭鍏堣 `AgentLogic_V6_7_0.md`
 - 姣忔椤圭洰绾х淮鎶ゆ椂锛屽啀缁撳悎鏈寘涓殑鍒嗗眰鏂囨。涓庡師濮嬪眰鐩綍
-- 濡傛灉鍚庣画鏂板鏇村噯纭殑瑙勫垯锛屽簲鍏堝洖鍐?`AgentLogic_V6_65.md`锛屽啀鍚屾鏈€昏緫鍖?
+- 濡傛灉鍚庣画鏂板鏇村噯纭殑瑙勫垯锛屽簲鍏堝洖鍐?`AgentLogic_V6_7_0.md`锛屽啀鍚屾鏈€昏緫鍖?
 
 ## END FILE: modules/12_AgentEnforcement.md
 
@@ -1933,7 +1941,7 @@ It must not be downgraded into a soft recommendation.
 This template does not replace:
 
 - `00_START_HERE.md`
-- `versions/AgentLogic_V6_65.md`
+- `versions/AgentLogic_V6_7_0.md`
 - `modules/01_MasterLogic.md`
 - `modules/12_AgentEnforcement.md`
 - `modules/15_LogicEntryChecklist.md`
@@ -5195,19 +5203,26 @@ When starting a project or introducing a new feature, the Agent MUST execute the
    - *UI/UX Prototyping Gate*: For frontend layout, visual styles, or app UI tasks, the Agent MUST generate a visual design mockup using the `generate_image` tool (via the `nano-banana-pro` skill) and present it as an artifact for user approval before moving to the Plan phase.
 3. **Plan Phase**: Draft a technical implementation plan specifying architecture, tech stack, data schemas, and integration logic.
    - *Requirement*: The plan must be saved in `.specify/plan.md`.
-4. **Tasks Phase**: Translate the plan into a checklist of granular, actionable tasks.
+4. **Red-Team Gate** *(mandatory)*: Attack the plan's load-bearing assumptions before committing to tasks.
+   - *Requirement*: The Agent MUST identify the load-bearing claims in `.specify/plan.md` 鈥?the assumptions that, if false, would cause the plan to fail.
+   - *Method*: For each load-bearing claim: (a) Steelman 鈥?state the strongest version of why it might be true. (b) Attack 鈥?attack that steelmanned version, not a strawman. (c) Write each failure mode as "Fails if ___." 鈥?concrete and falsifiable.
+   - *Ranking*: Rank failure modes by `(impact if wrong) 脳 (likelihood wrong) 脳 (cheapness to test)`. The top items are what to address *before* entering the Tasks phase.
+   - *Output*: Append a "Red-Team Results" section to `.specify/plan.md` with the ranked attack results. If any top-ranked failure mode lacks a mitigation or test, the plan MUST be revised before proceeding.
+   - *Skip Condition*: The Red-Team Gate may be skipped ONLY for trivial bug fixes or documentation-only changes where no architectural assumptions exist.
+5. **Tasks Phase**: Translate the plan into a checklist of granular, actionable tasks.
    - *Requirement*: The task list must be saved in `.specify/tasks.md`.
-5. **Implement Phase**: Systematically execute the tasks in order, running build and test validation after each task.
-6. **Converge Phase**: Match the codebase state against the specs, plan, and tasks. Any discrepancy or remaining gap must be appended as new tasks to `.specify/tasks.md` until fully resolved.
-7. **Ship Phase**: Perform the AI Shipping & Reviewability Audit (SRA) to document architecture, variables, flows, and tests, running static audits before merging. See [41_V6_65_AIShippingAndReviewabilityAudit.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/41_V6_65_AIShippingAndReviewabilityAudit.md).
+6. **Implement Phase**: Systematically execute the tasks in order, running build and test validation after each task.
+7. **Converge Phase**: Match the codebase state against the specs, plan, and tasks. Any discrepancy or remaining gap must be appended as new tasks to `.specify/tasks.md` until fully resolved.
+8. **Ship Phase**: Perform the AI Shipping & Reviewability Audit (SRA) to document architecture, flows, permissions, variables, and tests, running static audits before merging. See `modules/41_V6_7_AIShippingAndReviewabilityAudit.md`.
 
 ---
 
 ## 3. Enforcement & Verification Rules
 
 - **Pre-Implementation Gate**: Writing production code before the **Specify** and **Plan** documents are created under `.specify/` is strictly prohibited.
+- **Red-Team Gate**: Entering the Tasks phase without completing the Red-Team Gate (Phase 4) on the plan is prohibited, except when the skip condition applies (trivial bug fixes or documentation-only changes).
 - **Zero Vibe-Coding**: Every single code change must trace back to a defined task in `.specify/tasks.md`.
-- **Shipping Gate**: No feature may be merged without completing the **Ship Phase** SRA checklist and compiling a reviewer-ready shipping packet under `.specify/ship/`.
+- **Shipping Gate**: No feature may be merged without completing the **Ship Phase** SRA checklist and compiling a reviewer-ready shipping packet under `documentation/` (or `.specify/ship/`).
 - **Command Fallbacks**: The slash commands (like `/speckit.specify`, `/speckit.plan`, etc.) provided by `spec-kit` are shortcuts. In normal Agentic loops, the Agent MUST execute these steps natively and automatically create the documents, without requiring manual trigger commands.
 
 ---
@@ -5341,7 +5356,7 @@ or begin implementation before the logic-entry loop above has been completed.
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **L1: 鎴樼暐涓庡叆鍙ｅ眰 (Strategy & Entry)** | [cli.tsx](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/entrypoints/cli.tsx)<br>[main.tsx](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/main.tsx)<br>鍚姩涓庣幆澧冩敞鍏?| [00_START_HERE.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/00_START_HERE.md)<br>[AGENTS.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/AGENTS.md)<br>[MAIN.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/MAIN.md)<br>閫昏緫鎺ュ叆纭涓庡涓荤粦瀹氬叆鍙?| [README.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/README.md)<br>涓讳粨搴撴枃妗ｅ鑸鏄?br>[11_CrossDirectoryMap.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/11_CrossDirectoryMap.md)<br>浠ｇ爜璺ㄧ洰褰曞湴鍥?| [15_LogicEntryChecklist.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/15_LogicEntryChecklist.md)<br>閫昏緫鍏ュ彛妫€鏌ユ竻鍗?br>[13_MandatoryLogicGateTemplate.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/13_MandatoryLogicGateTemplate.md)<br>鍏ㄥ眬閫昏緫鎷︽埅妫€鏌?| `manifest.json`<br>闈欐€佸厓鏁版嵁涓庢墦鍖呴厤缃枃浠堕厤缃?(杩愯鏃跺姩鎬佽蹇嗗眰 N/A) |
 | **L2: 棰嗗煙涓庡惊鐜眰 (Domain & Loop)** | [QueryEngine.ts](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/QueryEngine.ts)<br>澶氳疆浼氳瘽娴佺紪鎺?br>[20_V6_5_RuntimeModes.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/20_V6_5_RuntimeModes.md)<br>杩愯鐜鎰熺煡涓庢ā寮忛€傞厤 | [query.ts](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/query.ts)<br>鍗曡疆 Agentic 鎵ц寰幆<br>[28_V6_5_TerminologyAndModuleBoundaries.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/28_V6_5_TerminologyAndModuleBoundaries.md)<br>鏍囧噯鏈涓庤鍒欐ā鍧楄竟鐣?| [38_V6_6_SpecDrivenDevelopment.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/38_V6_6_SpecDrivenDevelopment.md)<br>[spec-kit/](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/spec-kit/) 瑙勬牸椹卞姩寮€鍙?br>[21_V6_5_ToolUsageAndSelection.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/21_V6_5_ToolUsageAndSelection.md)<br>[24_V6_5_ToolUsageMatrix.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/24_V6_5_ToolUsageMatrix.md)<br>[25_V6_5_ToolCapabilityMapping.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/25_V6_5_ToolCapabilityMapping.md)<br>[26_V6_5_INDEX.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/26_V6_5_INDEX.md)<br>宸ュ叿棣栭€夌煩闃典笌鑳藉姏鏄犲皠绱㈠紩 | [12_AgentEnforcement.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/12_AgentEnforcement.md)<br>琛屼负寮哄埗瀹¤涓庡噯鍒欑害鏉?| [32_V6_5_ContextAssemblyAndInstructionStacking.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/32_V6_5_ContextAssemblyAndInstructionStacking.md)<br>涓婁笅鏂囩粍瑁呬笌鎸囦护鍫嗗彔 |
-| **L3: 鎵ц涓庢帶鍒跺眰 (Execution & Control)** | [22_V6_5_HookLifecycle.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/22_V6_5_HookLifecycle.md)<br>Hook 鐢熷懡鍛ㄦ湡绠＄悊 | [37_V6_6_CybersecuritySkillsRouter.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/37_V6_6_CybersecuritySkillsRouter.md)<br>閫嗗悜瀹夊叏涓?CTF 璺敱鍒嗗彂 | [Tool.ts](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/Tool.ts)<br>[tools.ts](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/tools.ts)<br>宸ュ叿涓粙鎺у埗涓庡姩鎬佺粍瑁?br>[39_V6_6_TasteFrontendDesign.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/39_V6_6_TasteFrontendDesign.md)<br>[skills/taste-skill/](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/skills/taste-skill/)<br>鍓嶇璁捐瀹＄編涓?UI Slop 娌荤悊 | [23_V6_5_PermissionAndOutputPipeline.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/23_V6_5_PermissionAndOutputPipeline.md)<br>鏉冮檺鎷︽埅涓庤緭鍑虹閬?br>[30_ToolQuestionBoundaryMatrix.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/30_ToolQuestionBoundaryMatrix.md)<br>鎻愰棶鍑瘉寮哄害杈圭晫鎺у埗<br>[31_ToolMisuseAndAntiPatternMatrix.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/31_ToolMisuseAndAntiPatternMatrix.md)<br>鍙嶆ā寮忔牎楠屽け璐ヤ笌绾犲亸鏈哄埗 | [34_V6_5_ProjectFactMap_V2.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/34_V6_5_ProjectFactMap_V2.md)<br>[14_ProjectFactMapTemplate.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/14_ProjectFactMapTemplate.md)<br>4-Tier 浜嬪疄鍦板浘涓庢爣鍑嗘ā鏉?|
+| **L3: 鎵ц涓庢帶鍒跺眰 (Execution & Control)** | [22_V6_5_HookLifecycle.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/22_V6_5_HookLifecycle.md)<br>Hook 鐢熷懡鍛ㄦ湡绠＄悊 | [37_V6_6_CybersecuritySkillsRouter.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/37_V6_6_CybersecuritySkillsRouter.md)<br>閫嗗悜瀹夊叏涓?CTF 璺敱鍒嗗彂 | [Tool.ts](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/Tool.ts)<br>[tools.ts](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/tools.ts)<br>宸ュ叿涓粙鎺у埗涓庡姩鎬佺粍瑁?br>[39_V6_6_TasteFrontendDesign.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/39_V6_6_TasteFrontendDesign.md)<br>[skills/taste-skill/](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/skills/taste-skill/)<br>鍓嶇璁捐瀹＄編涓?UI Slop 娌荤悊 | [23_V6_5_PermissionAndOutputPipeline.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/23_V6_5_PermissionAndOutputPipeline.md)<br>鏉冮檺鎷︽埅涓庤緭鍑虹閬?br>[30_ToolQuestionBoundaryMatrix.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/30_ToolQuestionBoundaryMatrix.md)<br>鎻愰棶鍑瘉寮哄害杈圭晫鎺у埗<br>[31_ToolMisuseAndAntiPatternMatrix.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/31_ToolMisuseAndAntiPatternMatrix.md)<br>鍙嶆ā寮忔牎楠屽け璐ヤ笌绾犲亸鏈哄埗<br>[41_V6_7_AIShippingAndReviewabilityAudit.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/41_V6_7_AIShippingAndReviewabilityAudit.md)<br>SRA 浜や粯瀹¤涓庤嚜璇侀潪鏍￠獙 | [34_V6_5_ProjectFactMap_V2.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/34_V6_5_ProjectFactMap_V2.md)<br>[14_ProjectFactMapTemplate.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/14_ProjectFactMapTemplate.md)<br>4-Tier 浜嬪疄鍦板浘涓庢爣鍑嗘ā鏉?|
 | **L4: 鍩哄簳涓庡弬鑰冨眰 (Base & Reference)** | [33_V6_5_BackgroundConsolidationAndIdleLifecycle.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/33_V6_5_BackgroundConsolidationAndIdleLifecycle.md)<br>姊﹀鏈熸竻鐞嗕笌鍚庡彴宸╁浐 | [35_V6_5_SkillGovernanceAndMandatoryUse.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/35_V6_5_SkillGovernanceAndMandatoryUse.md)<br>[36_V6_5_SkillZoneSeparation.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/36_V6_5_SkillZoneSeparation.md)<br>鎶€鑳藉幓閲嶄笌鏈湴鎶€鑳介殧绂?| [skills/](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/skills/) 棰嗗煙鎵╁睍鎶€鑳藉寘<br>[raw_tools/](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/reference/raw_tools/) 鍘熷宸ュ叿灞?| [27_V6_5_ToolPermissionRiskMatrix.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/27_V6_5_ToolPermissionRiskMatrix.md)<br>[29_MandatoryVerificationMatrix.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/29_MandatoryVerificationMatrix.md)<br>鏉冮檺椋庨櫓涓庡己鍒舵牎楠岀煩闃?br>[raw_permissions/](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/reference/raw_permissions/) 鍘熷瀹夊叏鏉冮檺鍖?| `src/state/`<br>杩愯鏃朵細璇濈姸鎬佺姸鎬佹満涓庢湰鍦拌惤鍦板眰 |
 
 ---
@@ -5385,7 +5400,11 @@ graph TD
         VerifyGate -- Evidence Pass --> TasteGate{UI Design Taste Audit<br>39_TasteFrontendDesign.md}
         
         TasteGate -- Slop / Overflow / Wrapping Error --> Downgrade
-        TasteGate -- Clean UI / Compliant --> HookPost[Hook Lifecycle: Post-execute<br>22_HookLifecycle.md]
+        TasteGate -- Clean UI / Compliant --> SRAGate{SRA Ship Audit<br>41_AIShippingAndReviewabilityAudit.md}
+        
+        SRAGate -- Ship Phase Active --> SRAExec[Self-Refute Audit Cycle<br>Core+Conditional Docs / Trust Boundary Check]
+        SRAExec --> HookPost
+        SRAGate -- No Ship Phase --> HookPost
         
         Downgrade --> HookPost
         HookPost --> FactMapUpdate[Update Fact Map<br>34_ProjectFactMap_V2.md]
@@ -5423,11 +5442,11 @@ graph TD
 
 ---
 
-## BEGIN FILE: modules/41_V6_65_AIShippingAndReviewabilityAudit.md
+## BEGIN FILE: modules/41_V6_7_AIShippingAndReviewabilityAudit.md
 
-# V6.65 AI Shipping & Reviewability Audit Integration
+# V6.7.0 AI Shipping & Reviewability Audit Integration
 
-Status: **Stable V6.65 Line (Mandatory shipping & verification protocol)**.
+Status: **Stable V6.7.0 Line (Mandatory shipping & verification protocol)**.
 
 This module defines the **AI Shipping & Reviewability Audit (SRA)** workflow, integrating concepts from the `pm-ai-shipping` framework. It addresses the critical gap in AI-assisted coding: while AI agents write code at extremely high speeds (the vibe-coding phase), they often leave no trace of design intent, security assumptions, variable maps, or test coverage. This protocol restores human reviewability and ensures safety before code is shipped.
 
@@ -5435,7 +5454,7 @@ This module defines the **AI Shipping & Reviewability Audit (SRA)** workflow, in
 
 ## 1. The SRA Core Mandate
 
-Every completed implementation, major refactor, or version release **MUST** pass through the **Ship & Audit Phase** before being merged or packaged. 
+Every completed implementation, major refactor, or version release **MUST** pass through the **Ship & Audit Phase** before being merged or packaged.
 
 The goal is to translate "vibe-coded" codebases into documented, verified, and audited systems where developers and PMs can confidently verify:
 1. What the code is *intended* to do (documented intent).
@@ -5446,62 +5465,131 @@ The goal is to translate "vibe-coded" codebases into documented, verified, and a
 
 ## 2. Standard Shipping Artifacts
 
-To compile a reviewer-ready **Shipping Packet** under `.specify/ship/` (or compiled as `.specify/shipping_packet.md`), the Agent must generate or update the following four core documentation modules:
+To compile a reviewer-ready **Shipping Packet** under `documentation/` (or `.specify/ship/`), the Agent must generate or update the following documents, organized as **Core** (always required) and **Conditional** (only when the capability exists).
 
-| Artifact File | Required Contents & Scope |
+### 2.1 Core Documents
+
+Every reviewable project **MUST** produce these five documents:
+
+| Artifact File | Purpose | Required Contents |
+| :--- | :--- | :--- |
+| **`architecture.md`** | What the system is and how it connects | Product overview, tech stack, auth/session flow, trust boundaries, **Known risks / assumptions** list (each entry citing where it shows up in the code), and a "Related Documents" index linking to every other shipping doc. This is the root document. |
+| **`flows.md`** | Runtime view of who does what, when, and in what order | Each load-bearing flow as: actor 鈫?precondition 鈫?success outcome. Step-by-step sequence across UI 鈫?server 鈫?data 鈫?jobs 鈫?providers 鈫?agents. The **authz check at each protected step** (which claim/role/scope, on which resource, and the expected *deny* case). The **trust-boundary crossings** at each step (see 搂5). State changes and side effects each step causes. |
+| **`permissions.md`** | Static declaration of access rules | User role matrices, RBAC/policy declarations, endpoint access rules, resource-level permission grants. This is the *declared* view; `flows.md` is the *runtime* view. Reviewers compare the two. |
+| **`variables.md`** | Environment variable and secret registry | Environment variable registries, third-party API configurations, strict validation rules, zero-hardcoded-credentials verification. |
+| **`tests.md`** | Derived verification map | **NOT** an inventory of existing tests. This document is **derived from** `architecture.md`, `flows.md`, and `permissions.md` by the `/derive-tests` workflow. It lists the tests that *should* exist based on documented intent, cross-references which currently exist, and highlights unverified gaps. |
+
+**Anti-PRD Rule**: A flow that does not touch permissions, data integrity, external side effects, or trust-boundary crossings is not worth documenting in `flows.md`. This prevents the shipping packet from inflating into a meaningless PRD.
+
+### 2.2 Conditional Documents
+
+Include a conditional document **only if** the application actually has that capability. If the capability does not exist, write a single line in `architecture.md` (e.g., "No scheduled work 鈥?no `cron.md`.") rather than creating an empty document. Reviewability comes from an honest map, and "we don't do X" is part of the map.
+
+| Conditional File | Trigger Condition |
 | :--- | :--- |
-| **`architecture.md`** | System topology, database schema mappings, external API dependencies, and high-level structural design. |
-| **`flows_and_permissions.md`** | User role matrices, endpoint access rules, API trust boundaries, and state transition validation. |
-| **`variables_and_secrets.md`** | Environment variable registries, third-party API configurations, and strict validation rules (ensuring zero hardcoded credentials). |
-| **`test_coverage_map.md`** | Inventory of existing tests (unit, integration, E2E) cross-referenced to user scenarios, identifying unverified gaps. |
+| **`cron.md`** | The application has any background scheduled tasks, cron jobs, or periodic workers |
+| **`emails.md`** | The application sends transactional or marketing emails, including templates and trigger rules |
+| **`seo.md`** | The application has SEO-critical pages, structured data, or sitemap generation |
+| **`agents.md`** | The application embeds AI agents, LLM calls, autonomous workflows, or tool-use chains |
 
 ---
 
-## 3. Operational SRA Workflows
+## 3. Universal Audit Principle: Self-Refute First
+
+**This principle applies to ALL audit workflows in this module, not just security.**
+
+For every finding reported by any audit workflow (搂4.1鈥撀?.4), the Agent **MUST**:
+1. **State the finding** with specific code location and evidence.
+2. **Try to disprove it** using local code evidence (a counter-argument grounded in actual implementation).
+3. **Report only findings that survive self-refutation** 鈥?i.e., risks backed by undeniable code proof that could not be disproven.
+
+Findings that can be disproven should be logged as "Investigated and cleared" with the disproving evidence, not silently dropped.
+
+This principle integrates with `modules/29_MandatoryVerificationMatrix.md` 搂4 (Escalation Rule): the higher the consequence of a false finding, the stronger the self-refutation attempt must be.
+
+---
+
+## 4. Operational SRA Workflows
 
 When executing the shipping phase, the Agent performs the following audit workflows natively:
 
-### 3.1 App Reverse-Engineering (`/document-app` workflow)
-If documentation is missing or outdated, the Agent must read the source code and reconstruct the system intent:
-- Document the actual database state, API schemas, and component architecture.
-- Identify conditional features (like background cron jobs, embedded AI agents, SEO structures, or email templates) and document their specific execution rules.
+### 4.1 App Reverse-Engineering (`/document-app` workflow)
 
-### 3.2 Intended vs. Implemented Gap Analysis (`/derive-tests` workflow)
+If documentation is missing or outdated, the Agent must read the source code and reconstruct the system intent:
+- Document the actual database state, API schemas, and component architecture into `architecture.md`.
+- Reconstruct the runtime flows into `flows.md`, explicitly marking each trust-boundary crossing (see 搂5).
+- Extract the static permission declarations into `permissions.md`.
+- Identify conditional capabilities (background cron jobs, embedded AI agents, SEO structures, email templates) and generate the corresponding conditional documents (搂2.2) only for capabilities that actually exist.
+- Apply the Self-Refute principle (搂3): any architectural assumption must be verified against code evidence.
+
+### 4.2 Intended vs. Implemented Gap Analysis (`/derive-tests` workflow)
+
 The Agent must match the documented specifications (from `.specify/spec.md` or earlier project docs) against the actual codebase implementation:
 - **Compare**: Search for features mentioned in specs that are missing in the code, or undocumented logic implemented in the codebase.
 - **Deduce**: Create a gap analysis report citing the exact lines of code or specs where divergence occurs.
-- **Cover**: Generate precise test scenarios for untested business logic and recommend a green-before-merge CI gate.
+- **Derive**: Generate `tests.md` as a **verification map** 鈥?listing the tests that *should* exist based on architecture, flows, and permissions documents, not merely inventorying existing tests.
+- **Cover**: For untested business logic, generate precise test scenarios and recommend a green-before-merge CI gate.
+- **Self-Refute** (搂3): For each reported gap, attempt to find code evidence that the gap does not actually exist (e.g., the feature is implemented under a different name or path).
 
-### 3.3 Static Security & Trust Boundary Audit (`/security-audit-static` workflow)
+### 4.3 Static Security & Trust Boundary Audit (`/security-audit-static` workflow)
+
 A disciplined, self-refuting security scan:
-- **Map Trust Boundaries**: Document who may read or write to specific folders, tables, or endpoints.
+- **Map Trust Boundaries**: Document who may read or write to specific folders, tables, or endpoints, using the trust-boundary crossing enumeration (搂5).
 - **Verify Secrets**: Scan for raw strings, hardcoded tokens, or unsafe exposure of `.env` configurations.
-- **Self-Refute Findings**: For every security finding, the Agent must try to disprove it using local code evidence. Report only risks that are backed by undeniable code proof.
+- **Self-Refute Findings** (搂3): For every security finding, the Agent must try to disprove it using local code evidence. Report only risks that are backed by undeniable code proof.
 
-### 3.4 Static Performance & Caching Audit (`/performance-audit-static` workflow)
+### 4.4 Static Performance & Caching Audit (`/performance-audit-static` workflow)
+
 A static analysis of application efficiency:
 - Detect N+1 query patterns, nested API requests (waterfalls), and database over-fetching.
 - Identify missing database indexes or redundant network roundtrips.
 - Recommend caching rules ranked by implementation effort and performance impact.
+- **Self-Refute** (搂3): For each performance finding, verify that the pattern actually executes in a hot path (not dead code or a rarely-hit branch).
 
 ---
 
-## 4. Gated Shipping Checklist (`/ship-check` execution)
+## 5. Trust Boundary Crossing Enumeration
 
-Before declaring a task finished and ready for human merge review, the Agent must run the `/ship-check` cycle:
+When documenting flows (搂2.1 `flows.md`) and performing security audits (搂4.3), the Agent must explicitly label each trust-boundary crossing using this structured enumeration:
+
+| Boundary Type | Example | What to verify |
+| :--- | :--- | :--- |
+| **browser 鈫?server** | Form submission, API call | Input validation, CSRF protection, auth token |
+| **server 鈫?database** | SQL query, ORM call | Query parameterization, permission scoping |
+| **server 鈫?provider** | Third-party API call | API key handling, response validation, timeout |
+| **job 鈫?app** | Background worker callback | Authentication of job origin, idempotency |
+| **agent 鈫?tool** | LLM calling an external tool | Tool permission boundary, output sanitization |
+| **webhook 鈫?app** | External service callback | Signature verification, replay protection |
+| **server 鈫?server** | Microservice-to-microservice | mTLS, service identity, scope propagation |
+
+Each crossing point is a potential security gap and must be explicitly annotated in `flows.md`.
+
+---
+
+## 6. Gated Shipping Checklist (`/ship-check` execution)
+
+Before declaring a task finished and ready for human merge review, the Agent **MUST** run the `/ship-check` cycle:
+
 - [ ] **Specs Sync**: Check if `.specify/spec.md` is aligned with the final code.
-- [ ] **Documentation compiled**: Verify that `.specify/ship/` contains updated architecture, variables, and permission flows.
-- [ ] **Security Clear**: Run static security audit and verify zero hardcoded secrets.
-- [ ] **Performance Approved**: Run performance audit and confirm no glaring waterfalls or N+1 queries.
-- [ ] **Tests Aligned**: Verify that all test files pass and gaps in the `test_coverage_map.md` are documented.
+- [ ] **Core Docs Compiled**: Verify that `documentation/` (or `.specify/ship/`) contains updated `architecture.md`, `flows.md`, `permissions.md`, `variables.md`.
+- [ ] **Tests Derived**: Verify that `tests.md` has been derived from the other core documents via 搂4.2, not merely copied from existing test files.
+- [ ] **Conditional Docs Honest**: Verify that conditional documents (搂2.2) exist only for capabilities that are present, and absent capabilities are declared in `architecture.md`.
+- [ ] **Security Clear**: Run static security audit (搂4.3) with self-refutation (搂3) and verify zero hardcoded secrets.
+- [ ] **Performance Approved**: Run performance audit (搂4.4) with self-refutation and confirm no glaring waterfalls or N+1 queries in hot paths.
+- [ ] **All Findings Self-Refuted**: Confirm that every reported finding has been through the self-refutation process (搂3).
 
 ---
 
-## 5. Location of SRA Templates
+## 7. Integration with Verification Matrix
 
-- **Audit Presets**: `spec-kit/presets/audit/`
-- **Shipping Checklists**: `spec-kit/presets/ship/`
-- **Gap Analysis Scanners**: `spec-kit/workflows/sra-gap.md`
+This module operates under the same evidence standards defined in `modules/29_MandatoryVerificationMatrix.md`:
 
-## END FILE: modules/41_V6_65_AIShippingAndReviewabilityAudit.md
+- **Security claims** are "Runtime / build / packaging claims" 鈫?require command/runtime verification, not just code reading.
+- **Performance claims** are "Behavior with ambiguous evidence" 鈫?require at least two independent evidence paths.
+- **Architecture claims** are "Local repository facts" 鈫?require targeted file reads confirming actual implementation.
+- The **Escalation Rule** (Module 29 搂4) applies: high-impact SRA findings demand precondition confirmation + execution evidence + post-result verification.
+
+The SRA module does not lower the evidence bar. It structures what must be documented; Module 29 governs how the documentation claims are verified.
+
+## END FILE: modules/41_V6_7_AIShippingAndReviewabilityAudit.md
 
