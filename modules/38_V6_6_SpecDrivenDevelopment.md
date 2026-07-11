@@ -33,7 +33,7 @@ When starting a project or introducing a new feature, the Agent MUST execute the
    - *Skip Condition*: The Red-Team Gate may be skipped ONLY for trivial bug fixes or documentation-only changes where no architectural assumptions exist.
 5. **Tasks Phase**: Translate the plan into a checklist of granular, actionable tasks.
    - *Requirement*: The task list must be saved in `.specify/tasks.md`.
-6. **Implement Phase**: Systematically execute the tasks in order, running build and test validation after each task.
+6. **Implement Phase**: Systematically execute the tasks in order, running build and test validation after each task. The Agent MUST apply the 7-Rung Lazy Developer's Ladder (see `modules/42_V6_7_PonytailLazySeniorDevLadder.md`) before writing or changing any line of code.
 7. **Converge Phase**: Match the codebase state against the specs, plan, and tasks. Any discrepancy or remaining gap must be appended as new tasks to `.specify/tasks.md` until fully resolved.
 8. **Ship Phase**: Perform the AI Shipping & Reviewability Audit (SRA) to document architecture, flows, permissions, variables, and tests, running static audits before merging. See `modules/41_V6_7_AIShippingAndReviewabilityAudit.md`.
 

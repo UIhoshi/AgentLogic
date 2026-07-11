@@ -2,7 +2,7 @@
 
 - Host target: codex
 - Profile: core-enhanced
-- Generated at: 2026-07-12T05:44:57+09:00
+- Generated at: 2026-07-12T06:03:50+09:00
 - Stable entry: MAIN.md
 - Version: V6.7.0
 
@@ -687,6 +687,7 @@ The V6.7.0 line is supported by a modular suite of governance rules:
 - `modules/38_V6_6_SpecDrivenDevelopment.md`: Guidelines and 8-phase lifecycle for Spec-Driven Development, including mandatory Red-Team Gate.
 - `modules/39_V6_6_TasteFrontendDesign.md`: Aesthetic standards, visual dials tuning, and anti-slop UI/UX audit rules.
 - `modules/41_V6_7_AIShippingAndReviewabilityAudit.md`: AI Shipping & Reviewability Audit (SRA) 鈥?Core+Conditional shipping artifacts, universal self-refute principle, trust boundary crossing enumeration, and Verification Matrix integration.
+- `modules/42_V6_7_PonytailLazySeniorDevLadder.md`: Ponytail Lazy Senior Developer's Ladder 鈥?7-rung YAGNI implementation ladder, root-cause bug-fixing rules, and SDD integration.
 
 ---
 
@@ -721,6 +722,9 @@ The V6.7.0 stable line integrates the following external source repositories:
 - **Self-Improvement Agent**:
   - Source URL: `https://github.com/peterskoett/self-improving-agent`
   - Integration path: `skills/self-improvement/`
+- **Ponytail**:
+  - Source URL: `https://github.com/DietrichGebert/ponytail`
+  - Integration path: `skills/ponytail/`
 
 ---
 
@@ -735,6 +739,7 @@ Key stable rules:
 - The Taste Frontend Design skill enforces layout, motion, and typography standards on all visual interfaces.
 - For Antigravity CLI (which relies on `~/.gemini/GEMINI.md` for rule loading and `~/.gemini/AgentLogic/GEMINI.md` for agent-level priority detection), the installer configures rule hooks at both paths simultaneously, while cleaning up any stale/duplicate legacy logic files during installation.
 - The `agent-browser` skill provides deterministic accessibility-tree browser automation, preferred dynamically when dynamic page rendering, multi-step actions, or session-isolated login tracking is required.
+- The `ponytail` skill channels a lazy senior developer, enforcing the 7-rung ladder (YAGNI, reuse, stdlib, native, dependency, one-line, min-code) to prevent vibe-coding slop and over-engineering.
 
 
 
@@ -5211,7 +5216,7 @@ When starting a project or introducing a new feature, the Agent MUST execute the
    - *Skip Condition*: The Red-Team Gate may be skipped ONLY for trivial bug fixes or documentation-only changes where no architectural assumptions exist.
 5. **Tasks Phase**: Translate the plan into a checklist of granular, actionable tasks.
    - *Requirement*: The task list must be saved in `.specify/tasks.md`.
-6. **Implement Phase**: Systematically execute the tasks in order, running build and test validation after each task.
+6. **Implement Phase**: Systematically execute the tasks in order, running build and test validation after each task. The Agent MUST apply the 7-Rung Lazy Developer's Ladder (see `modules/42_V6_7_PonytailLazySeniorDevLadder.md`) before writing or changing any line of code.
 7. **Converge Phase**: Match the codebase state against the specs, plan, and tasks. Any discrepancy or remaining gap must be appended as new tasks to `.specify/tasks.md` until fully resolved.
 8. **Ship Phase**: Perform the AI Shipping & Reviewability Audit (SRA) to document architecture, flows, permissions, variables, and tests, running static audits before merging. See `modules/41_V6_7_AIShippingAndReviewabilityAudit.md`.
 
@@ -5355,7 +5360,7 @@ or begin implementation before the logic-entry loop above has been completed.
 | 鎶借薄灞傜骇 \ 瀛愮郴缁?| **浼氳瘽涓庣敓鍛藉懆鏈?(Session & Lifecycle)** | **鑳藉姏涓庤矾鐢?(Capabilities & Routing)** | **宸ュ叿涓庢墿灞?(Tools & Extensions)** | **瀹夊叏涓庢不鐞?(Security & Governance)** | **鐘舵€佷笌璁板繂 (State & Memory)** |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **L1: 鎴樼暐涓庡叆鍙ｅ眰 (Strategy & Entry)** | [cli.tsx](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/entrypoints/cli.tsx)<br>[main.tsx](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/main.tsx)<br>鍚姩涓庣幆澧冩敞鍏?| [00_START_HERE.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/00_START_HERE.md)<br>[AGENTS.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/AGENTS.md)<br>[MAIN.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/MAIN.md)<br>閫昏緫鎺ュ叆纭涓庡涓荤粦瀹氬叆鍙?| [README.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/README.md)<br>涓讳粨搴撴枃妗ｅ鑸鏄?br>[11_CrossDirectoryMap.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/11_CrossDirectoryMap.md)<br>浠ｇ爜璺ㄧ洰褰曞湴鍥?| [15_LogicEntryChecklist.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/15_LogicEntryChecklist.md)<br>閫昏緫鍏ュ彛妫€鏌ユ竻鍗?br>[13_MandatoryLogicGateTemplate.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/13_MandatoryLogicGateTemplate.md)<br>鍏ㄥ眬閫昏緫鎷︽埅妫€鏌?| `manifest.json`<br>闈欐€佸厓鏁版嵁涓庢墦鍖呴厤缃枃浠堕厤缃?(杩愯鏃跺姩鎬佽蹇嗗眰 N/A) |
-| **L2: 棰嗗煙涓庡惊鐜眰 (Domain & Loop)** | [QueryEngine.ts](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/QueryEngine.ts)<br>澶氳疆浼氳瘽娴佺紪鎺?br>[20_V6_5_RuntimeModes.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/20_V6_5_RuntimeModes.md)<br>杩愯鐜鎰熺煡涓庢ā寮忛€傞厤 | [query.ts](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/query.ts)<br>鍗曡疆 Agentic 鎵ц寰幆<br>[28_V6_5_TerminologyAndModuleBoundaries.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/28_V6_5_TerminologyAndModuleBoundaries.md)<br>鏍囧噯鏈涓庤鍒欐ā鍧楄竟鐣?| [38_V6_6_SpecDrivenDevelopment.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/38_V6_6_SpecDrivenDevelopment.md)<br>[spec-kit/](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/spec-kit/) 瑙勬牸椹卞姩寮€鍙?br>[21_V6_5_ToolUsageAndSelection.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/21_V6_5_ToolUsageAndSelection.md)<br>[24_V6_5_ToolUsageMatrix.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/24_V6_5_ToolUsageMatrix.md)<br>[25_V6_5_ToolCapabilityMapping.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/25_V6_5_ToolCapabilityMapping.md)<br>[26_V6_5_INDEX.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/26_V6_5_INDEX.md)<br>宸ュ叿棣栭€夌煩闃典笌鑳藉姏鏄犲皠绱㈠紩 | [12_AgentEnforcement.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/12_AgentEnforcement.md)<br>琛屼负寮哄埗瀹¤涓庡噯鍒欑害鏉?| [32_V6_5_ContextAssemblyAndInstructionStacking.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/32_V6_5_ContextAssemblyAndInstructionStacking.md)<br>涓婁笅鏂囩粍瑁呬笌鎸囦护鍫嗗彔 |
+| **L2: 棰嗗煙涓庡惊鐜眰 (Domain & Loop)** | [QueryEngine.ts](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/QueryEngine.ts)<br>澶氳疆浼氳瘽娴佺紪鎺?br>[20_V6_5_RuntimeModes.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/20_V6_5_RuntimeModes.md)<br>杩愯鐜鎰熺煡涓庢ā寮忛€傞厤 | [query.ts](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/query.ts)<br>鍗曡疆 Agentic 鎵ц寰幆<br>[28_V6_5_TerminologyAndModuleBoundaries.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/28_V6_5_TerminologyAndModuleBoundaries.md)<br>鏍囧噯鏈涓庤鍒欐ā鍧楄竟鐣?| [38_V6_6_SpecDrivenDevelopment.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/38_V6_6_SpecDrivenDevelopment.md)<br>[spec-kit/](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/spec-kit/) 瑙勬牸椹卞姩寮€鍙?br>[21_V6_5_ToolUsageAndSelection.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/21_V6_5_ToolUsageAndSelection.md)<br>[24_V6_5_ToolUsageMatrix.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/24_V6_5_ToolUsageMatrix.md)<br>[25_V6_5_ToolCapabilityMapping.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/25_V6_5_ToolCapabilityMapping.md)<br>[26_V6_5_INDEX.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/26_V6_5_INDEX.md)<br>宸ュ叿棣栭€夌煩闃典笌鑳藉姏鏄犲皠绱㈠紩<br>[42_V6_7_PonytailLazySeniorDevLadder.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/42_V6_7_PonytailLazySeniorDevLadder.md)<br>鏈€鎳?Senior 寮€鍙戝紑鍙戦樁姊?| [12_AgentEnforcement.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/12_AgentEnforcement.md)<br>琛屼负寮哄埗瀹¤涓庡噯鍒欑害鏉?| [32_V6_5_ContextAssemblyAndInstructionStacking.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/32_V6_5_ContextAssemblyAndInstructionStacking.md)<br>涓婁笅鏂囩粍瑁呬笌鎸囦护鍫嗗彔 |
 | **L3: 鎵ц涓庢帶鍒跺眰 (Execution & Control)** | [22_V6_5_HookLifecycle.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/22_V6_5_HookLifecycle.md)<br>Hook 鐢熷懡鍛ㄦ湡绠＄悊 | [37_V6_6_CybersecuritySkillsRouter.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/37_V6_6_CybersecuritySkillsRouter.md)<br>閫嗗悜瀹夊叏涓?CTF 璺敱鍒嗗彂 | [Tool.ts](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/Tool.ts)<br>[tools.ts](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/tools.ts)<br>宸ュ叿涓粙鎺у埗涓庡姩鎬佺粍瑁?br>[39_V6_6_TasteFrontendDesign.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/39_V6_6_TasteFrontendDesign.md)<br>[skills/taste-skill/](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/skills/taste-skill/)<br>鍓嶇璁捐瀹＄編涓?UI Slop 娌荤悊 | [23_V6_5_PermissionAndOutputPipeline.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/23_V6_5_PermissionAndOutputPipeline.md)<br>鏉冮檺鎷︽埅涓庤緭鍑虹閬?br>[30_ToolQuestionBoundaryMatrix.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/30_ToolQuestionBoundaryMatrix.md)<br>鎻愰棶鍑瘉寮哄害杈圭晫鎺у埗<br>[31_ToolMisuseAndAntiPatternMatrix.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/31_ToolMisuseAndAntiPatternMatrix.md)<br>鍙嶆ā寮忔牎楠屽け璐ヤ笌绾犲亸鏈哄埗<br>[41_V6_7_AIShippingAndReviewabilityAudit.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/41_V6_7_AIShippingAndReviewabilityAudit.md)<br>SRA 浜や粯瀹¤涓庤嚜璇侀潪鏍￠獙 | [34_V6_5_ProjectFactMap_V2.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/34_V6_5_ProjectFactMap_V2.md)<br>[14_ProjectFactMapTemplate.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/14_ProjectFactMapTemplate.md)<br>4-Tier 浜嬪疄鍦板浘涓庢爣鍑嗘ā鏉?|
 | **L4: 鍩哄簳涓庡弬鑰冨眰 (Base & Reference)** | [33_V6_5_BackgroundConsolidationAndIdleLifecycle.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/33_V6_5_BackgroundConsolidationAndIdleLifecycle.md)<br>姊﹀鏈熸竻鐞嗕笌鍚庡彴宸╁浐 | [35_V6_5_SkillGovernanceAndMandatoryUse.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/35_V6_5_SkillGovernanceAndMandatoryUse.md)<br>[36_V6_5_SkillZoneSeparation.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/36_V6_5_SkillZoneSeparation.md)<br>鎶€鑳藉幓閲嶄笌鏈湴鎶€鑳介殧绂?| [skills/](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/skills/) 棰嗗煙鎵╁睍鎶€鑳藉寘<br>[raw_tools/](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/reference/raw_tools/) 鍘熷宸ュ叿灞?| [27_V6_5_ToolPermissionRiskMatrix.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/27_V6_5_ToolPermissionRiskMatrix.md)<br>[29_MandatoryVerificationMatrix.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/29_MandatoryVerificationMatrix.md)<br>鏉冮檺椋庨櫓涓庡己鍒舵牎楠岀煩闃?br>[raw_permissions/](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/reference/raw_permissions/) 鍘熷瀹夊叏鏉冮檺鍖?| `src/state/`<br>杩愯鏃朵細璇濈姸鎬佺姸鎬佹満涓庢湰鍦拌惤鍦板眰 |
 
@@ -5592,4 +5597,87 @@ This module operates under the same evidence standards defined in `modules/29_Ma
 The SRA module does not lower the evidence bar. It structures what must be documented; Module 29 governs how the documentation claims are verified.
 
 ## END FILE: modules/41_V6_7_AIShippingAndReviewabilityAudit.md
+
+---
+
+## BEGIN FILE: modules/42_V6_7_PonytailLazySeniorDevLadder.md
+
+# V6.7.0 Ponytail Lazy Senior Developer's Ladder
+
+Status: **Stable V6.7.0 Line (Mandatory implementation & refactoring protocol)**.
+
+This module integrates the core philosophy and the **7-Rung Ladder** from the `ponytail` framework. It targets a major efficiency gap in AI agent coding: the tendency of agents to over-build, introduce unnecessary helper abstractions, install redundant packages, or rewrite code that already exists elsewhere in the codebase. By enforcing a "lazy but safe" posture, this module cuts code bloat, reduces token costs, and increases execution speed while maintaining absolute system safety.
+
+---
+
+## 1. The Core Philosophy: "Boring is Better than Clever"
+
+"Lazy" means efficient and disciplined, not careless or negligent.
+- The best code is the code that is never written.
+- Delete over add. Reuse over rewrite.
+- Boring, plain code that can be read easily at 3 AM is infinitely better than clever, customized abstractions.
+- Never introduce speculative scaffolding or code "for later". Later can build for itself.
+
+---
+
+## 2. The 7-Rung Lazy Developer's Ladder
+
+Before writing, modifying, or refactoring any line of code, the Agent **MUST** evaluate this ladder. Stop at the first rung that holds:
+
+| Rung | Description | Operational Directive |
+| :--- | :--- | :--- |
+| **1. YAGNI (Need to Exist)** | Does this feature or abstraction need to exist at all? | If it is a speculative requirement or unrequested config, skip it. Explain in a single line to the user. |
+| **2. Codebase Reuse** | Does a helper, utility, component, or type already live here? | Look before you write. Search files nearby. Re-implementing a utility that is a few directories over is the most common slop. |
+| **3. Standard Library** | Does the language standard library cover this? | Reach for built-in library functions before writing custom parsing or logic wrappers. |
+| **4. Native Platform** | Does the native platform provide a feature for this? | Prefer native platform elements (e.g., `<input type="date">` over a calendar library, native CSS scroll-behavior over JS scroll scripts, DB constraints over app-level validation). |
+| **5. Existing Dependency** | Can an already-installed package solve it? | Reuse existing dependencies. Never add a new dependency for what a few lines of plain code or an existing library can do. |
+| **6. One-Liner** | Can this entire change be implemented in a single line? | If yes, write one line. |
+| **7. Minimum Viable Code** | If none of the above hold. | Write the absolute minimum amount of code that satisfies the specification. No unrequested abstractions, no interfaces with a single implementation, no factories for a single product. |
+
+---
+
+## 3. Bug-Fixing Rule: Root Cause vs. Symptom
+
+AI agents often write quick symptom patches because they only read the path named in the bug ticket. This is prohibited.
+
+When addressing a bug:
+1. **Analyze caller hierarchy**: Before editing, grep every caller of the function you are about to touch.
+2. **Fix at the root**: A single guard inside the shared function is a smaller, safer diff than a guard in every caller. Patching only the path the ticket names leaves sibling callers still broken.
+3. **No shallow guards**: Do not patch around the bug at the outermost level. Fix it where all callers route through.
+
+---
+
+## 4. Strict Safety Boundaries: Lazy but Safe
+
+The goal of the ladder is to eliminate code bloat, **not** to skip safety controls. The following surfaces are strictly excluded from YAGNI and are **never** on the chopping block:
+
+- **Security & Authorization**: Input sanitization, CSRF tokens, database query parameterization, and endpoint claim checks (Module 41 搂5) must be written thoroughly.
+- **Data Loss Prevention**: Idempotency checks, database transactions, confirmation dialogs for destructive actions, and backup validation.
+- **Accessibility (a11y)**: Proper ARIA labels, semantic HTML structure, keyboard navigation, and contrast compliance.
+- **Error Handling**: Graceful fallback states, detailed error logging, and user-facing notifications.
+
+"Lazy, not negligent." If a safety guard is missing, adding it is mandatory, even if it adds lines of code.
+
+---
+
+## 5. Integration with Spec-Driven Development (SDD)
+
+This ladder is integrated as a blocking gate during **SDD Phase 6 (Implement Phase)**:
+
+- **Pre-Task Check**: Before beginning any task from `.specify/tasks.md`, the Agent must state which rung of the Lazy Developer's Ladder is being used to address that task.
+- **Checklist**:
+  - [ ] Can we skip this task? (Rung 1)
+  - [ ] Can we reuse code? (Rung 2)
+  - [ ] Are we using stdlib/native? (Rungs 3 & 4)
+  - [ ] Are we using existing dependencies? (Rung 5)
+  - [ ] Is this the minimal working diff? (Rungs 6 & 7)
+
+---
+
+## 6. Integration with Taste Design & Verification
+
+- **Aesthetics (Module 39)**: Simple code must not lead to visual slop. The use of native elements (Rung 4) must still be styled to look premium and aligned with the CSS design system.
+- **Verification Matrix (Module 29)**: The evidence requirements for verification remain unchanged. A one-line implementation must still be validated with command execution or visual proof.
+
+## END FILE: modules/42_V6_7_PonytailLazySeniorDevLadder.md
 

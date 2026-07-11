@@ -70,6 +70,7 @@ The V6.7.0 line is supported by a modular suite of governance rules:
 - `modules/38_V6_6_SpecDrivenDevelopment.md`: Guidelines and 8-phase lifecycle for Spec-Driven Development, including mandatory Red-Team Gate.
 - `modules/39_V6_6_TasteFrontendDesign.md`: Aesthetic standards, visual dials tuning, and anti-slop UI/UX audit rules.
 - `modules/41_V6_7_AIShippingAndReviewabilityAudit.md`: AI Shipping & Reviewability Audit (SRA) — Core+Conditional shipping artifacts, universal self-refute principle, trust boundary crossing enumeration, and Verification Matrix integration.
+- `modules/42_V6_7_PonytailLazySeniorDevLadder.md`: Ponytail Lazy Senior Developer's Ladder — 7-rung YAGNI implementation ladder, root-cause bug-fixing rules, and SDD integration.
 
 ---
 
@@ -104,6 +105,9 @@ The V6.7.0 stable line integrates the following external source repositories:
 - **Self-Improvement Agent**:
   - Source URL: `https://github.com/peterskoett/self-improving-agent`
   - Integration path: `skills/self-improvement/`
+- **Ponytail**:
+  - Source URL: `https://github.com/DietrichGebert/ponytail`
+  - Integration path: `skills/ponytail/`
 
 ---
 
@@ -118,6 +122,7 @@ Key stable rules:
 - The Taste Frontend Design skill enforces layout, motion, and typography standards on all visual interfaces.
 - For Antigravity CLI (which relies on `~/.gemini/GEMINI.md` for rule loading and `~/.gemini/AgentLogic/GEMINI.md` for agent-level priority detection), the installer configures rule hooks at both paths simultaneously, while cleaning up any stale/duplicate legacy logic files during installation.
 - The `agent-browser` skill provides deterministic accessibility-tree browser automation, preferred dynamically when dynamic page rendering, multi-step actions, or session-isolated login tracking is required.
+- The `ponytail` skill channels a lazy senior developer, enforcing the 7-rung ladder (YAGNI, reuse, stdlib, native, dependency, one-line, min-code) to prevent vibe-coding slop and over-engineering.
 
 
 
