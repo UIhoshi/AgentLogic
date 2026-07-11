@@ -2,7 +2,7 @@
 
 - Host target: codex
 - Profile: core-enhanced
-- Generated at: 2026-07-11T22:07:25+09:00
+- Generated at: 2026-07-12T05:22:26+09:00
 - Stable entry: MAIN.md
 - Version: V6.65
 
@@ -678,6 +678,7 @@ The V6.65 line is supported by a modular suite of governance rules:
 - `modules/37_V6_6_CybersecuritySkillsRouter.md`: Router configuration, security analysis toolchains, and field journal logging.
 - `modules/38_V6_6_SpecDrivenDevelopment.md`: Guidelines and lifecycle phases for Spec-Driven Development.
 - `modules/39_V6_6_TasteFrontendDesign.md`: Aesthetic standards, visual dials tuning, and anti-slop UI/UX audit rules.
+- `modules/41_V6_65_AIShippingAndReviewabilityAudit.md`: Standard processes for documenting, verifying, and auditing vibe-coded/AI code before shipping.
 
 ---
 
@@ -686,7 +687,7 @@ The V6.65 line is supported by a modular suite of governance rules:
 The V6.65 line is now promoted to stable status.
 - **Stable Entry**: `MAIN.md`
 - **Current Version**: `V6.65`
-- **Default Profile**: `core-enhanced` (now includes all V6.65 modules, system maps, reverse-skill, spec-kit, and taste-skill references)
+- **Default Profile**: `core-enhanced` (now includes all V6.65 modules, system maps, reverse-skill, spec-kit, taste-skill, and AI shipping & reviewability audit integration)
 
 ---
 
@@ -5198,6 +5199,7 @@ When starting a project or introducing a new feature, the Agent MUST execute the
    - *Requirement*: The task list must be saved in `.specify/tasks.md`.
 5. **Implement Phase**: Systematically execute the tasks in order, running build and test validation after each task.
 6. **Converge Phase**: Match the codebase state against the specs, plan, and tasks. Any discrepancy or remaining gap must be appended as new tasks to `.specify/tasks.md` until fully resolved.
+7. **Ship Phase**: Perform the AI Shipping & Reviewability Audit (SRA) to document architecture, variables, flows, and tests, running static audits before merging. See [41_V6_65_AIShippingAndReviewabilityAudit.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/41_V6_65_AIShippingAndReviewabilityAudit.md).
 
 ---
 
@@ -5205,6 +5207,7 @@ When starting a project or introducing a new feature, the Agent MUST execute the
 
 - **Pre-Implementation Gate**: Writing production code before the **Specify** and **Plan** documents are created under `.specify/` is strictly prohibited.
 - **Zero Vibe-Coding**: Every single code change must trace back to a defined task in `.specify/tasks.md`.
+- **Shipping Gate**: No feature may be merged without completing the **Ship Phase** SRA checklist and compiling a reviewer-ready shipping packet under `.specify/ship/`.
 - **Command Fallbacks**: The slash commands (like `/speckit.specify`, `/speckit.plan`, etc.) provided by `spec-kit` are shortcuts. In normal Agentic loops, the Agent MUST execute these steps natively and automatically create the documents, without requiring manual trigger commands.
 
 ---
@@ -5417,4 +5420,88 @@ graph TD
 3. **鍔ㄦ€佺敓鎴愭妧鏈€欓€?(Future Enhancement)**锛?   - 鍦ㄦ湭鏉ョ殑鐗堟湰锛堝 V7.0锛変腑锛屽缓璁紑鍙?`scripts/generate-system-map.js` 鑴氭湰锛岃嚜鍔ㄨ鍙?`manifest.json` 涓厤缃殑 profile 鍜屾ā鍧楀叧绯伙紝鍔ㄦ€佹覆鏌撳苟瀵煎嚭鏈枃浠剁殑 SVG 鎴?Markdown 缃戞牸鍥撅紝闄嶄綆浜哄伐缁存姢鐨勫亸宸€?
 
 ## END FILE: modules/40_AgentLogicSystemMap.md
+
+---
+
+## BEGIN FILE: modules/41_V6_65_AIShippingAndReviewabilityAudit.md
+
+# V6.65 AI Shipping & Reviewability Audit Integration
+
+Status: **Stable V6.65 Line (Mandatory shipping & verification protocol)**.
+
+This module defines the **AI Shipping & Reviewability Audit (SRA)** workflow, integrating concepts from the `pm-ai-shipping` framework. It addresses the critical gap in AI-assisted coding: while AI agents write code at extremely high speeds (the vibe-coding phase), they often leave no trace of design intent, security assumptions, variable maps, or test coverage. This protocol restores human reviewability and ensures safety before code is shipped.
+
+---
+
+## 1. The SRA Core Mandate
+
+Every completed implementation, major refactor, or version release **MUST** pass through the **Ship & Audit Phase** before being merged or packaged. 
+
+The goal is to translate "vibe-coded" codebases into documented, verified, and audited systems where developers and PMs can confidently verify:
+1. What the code is *intended* to do (documented intent).
+2. What the code *actually* does (implemented reality).
+3. The exact *gap* between intent and implementation, backed by concrete evidence.
+
+---
+
+## 2. Standard Shipping Artifacts
+
+To compile a reviewer-ready **Shipping Packet** under `.specify/ship/` (or compiled as `.specify/shipping_packet.md`), the Agent must generate or update the following four core documentation modules:
+
+| Artifact File | Required Contents & Scope |
+| :--- | :--- |
+| **`architecture.md`** | System topology, database schema mappings, external API dependencies, and high-level structural design. |
+| **`flows_and_permissions.md`** | User role matrices, endpoint access rules, API trust boundaries, and state transition validation. |
+| **`variables_and_secrets.md`** | Environment variable registries, third-party API configurations, and strict validation rules (ensuring zero hardcoded credentials). |
+| **`test_coverage_map.md`** | Inventory of existing tests (unit, integration, E2E) cross-referenced to user scenarios, identifying unverified gaps. |
+
+---
+
+## 3. Operational SRA Workflows
+
+When executing the shipping phase, the Agent performs the following audit workflows natively:
+
+### 3.1 App Reverse-Engineering (`/document-app` workflow)
+If documentation is missing or outdated, the Agent must read the source code and reconstruct the system intent:
+- Document the actual database state, API schemas, and component architecture.
+- Identify conditional features (like background cron jobs, embedded AI agents, SEO structures, or email templates) and document their specific execution rules.
+
+### 3.2 Intended vs. Implemented Gap Analysis (`/derive-tests` workflow)
+The Agent must match the documented specifications (from `.specify/spec.md` or earlier project docs) against the actual codebase implementation:
+- **Compare**: Search for features mentioned in specs that are missing in the code, or undocumented logic implemented in the codebase.
+- **Deduce**: Create a gap analysis report citing the exact lines of code or specs where divergence occurs.
+- **Cover**: Generate precise test scenarios for untested business logic and recommend a green-before-merge CI gate.
+
+### 3.3 Static Security & Trust Boundary Audit (`/security-audit-static` workflow)
+A disciplined, self-refuting security scan:
+- **Map Trust Boundaries**: Document who may read or write to specific folders, tables, or endpoints.
+- **Verify Secrets**: Scan for raw strings, hardcoded tokens, or unsafe exposure of `.env` configurations.
+- **Self-Refute Findings**: For every security finding, the Agent must try to disprove it using local code evidence. Report only risks that are backed by undeniable code proof.
+
+### 3.4 Static Performance & Caching Audit (`/performance-audit-static` workflow)
+A static analysis of application efficiency:
+- Detect N+1 query patterns, nested API requests (waterfalls), and database over-fetching.
+- Identify missing database indexes or redundant network roundtrips.
+- Recommend caching rules ranked by implementation effort and performance impact.
+
+---
+
+## 4. Gated Shipping Checklist (`/ship-check` execution)
+
+Before declaring a task finished and ready for human merge review, the Agent must run the `/ship-check` cycle:
+- [ ] **Specs Sync**: Check if `.specify/spec.md` is aligned with the final code.
+- [ ] **Documentation compiled**: Verify that `.specify/ship/` contains updated architecture, variables, and permission flows.
+- [ ] **Security Clear**: Run static security audit and verify zero hardcoded secrets.
+- [ ] **Performance Approved**: Run performance audit and confirm no glaring waterfalls or N+1 queries.
+- [ ] **Tests Aligned**: Verify that all test files pass and gaps in the `test_coverage_map.md` are documented.
+
+---
+
+## 5. Location of SRA Templates
+
+- **Audit Presets**: `spec-kit/presets/audit/`
+- **Shipping Checklists**: `spec-kit/presets/ship/`
+- **Gap Analysis Scanners**: `spec-kit/workflows/sra-gap.md`
+
+## END FILE: modules/41_V6_65_AIShippingAndReviewabilityAudit.md
 

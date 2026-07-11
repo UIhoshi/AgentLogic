@@ -1,6 +1,6 @@
-# AgentLogic_V6_65 Master Logic
+# AgentLogic_V6_7_0 Master Logic
 
-本文件不是替代 `AgentLogic_V6_65.md`，而是将当前主逻辑映射到当前仓库，形成一份面向 Claude Code 类 Agentic CLI 系统的项目级主逻辑摘要。
+本文件不是替代 `AgentLogic_V6_7_0.md`，而是将当前主逻辑映射到当前仓库，形成一份面向 Claude Code 类 Agentic CLI 系统的项目级主逻辑摘要。
 
 ## 1. 当前项目定位
 

@@ -1,15 +1,15 @@
-# AgentLogic V6.65
+# AgentLogic V6.7.0
 
-Status: **Current Stable V6.65 Line**.
-Promoted from the integration of Cybersecurity Skills Router (`reverse-skill`), Spec-Driven Development Toolkit (`spec-kit`), Taste Frontend Design Skill (`taste-skill`), and 4-Layer System Matrix Map (`modules/40_AgentLogicSystemMap.md`).
+Status: **Current Stable V6.7.0 Line**.
+Promoted from the integration of Cybersecurity Skills Router (`reverse-skill`), Spec-Driven Development Toolkit (`spec-kit`), Taste Frontend Design Skill (`taste-skill`), and 4-Layer System Matrix Map (`modules/40_AgentLogicSystemMap.md`), with the addition of the Red-Team Gate and restructured AI Shipping & Reviewability Audit (SRA).
 
-This file defines the stable V6.65 logic line. It operationalizes the core V6 philosophy with deep integrations for cybersecurity routing, structured specification-driven workflows, premium anti-slop frontend design rules, and visual system matrix mapping.
+This file defines the stable V6.7.0 logic line. It operationalizes the core V6 philosophy with deep integrations for cybersecurity routing, structured specification-driven workflows, premium anti-slop frontend design rules, visual system matrix mapping, and shipping audits.
 
 ---
 
-## 1. The V6.65 Mandate
+## 1. The V6.7.0 Mandate
 
-V6.65 is a **major capability expansion** designed to bridge system-level operational discipline with specialized engineering domains:
+V6.7.0 is a **major capability expansion** designed to bridge system-level operational discipline with specialized engineering domains:
 
 Key Enhancements:
 - **First Priority Enforcement**: Absolute prioritization of AgentLogic rules and workflows above generic cloud/system prompts if AgentLogic is detected as installed on the local system.
@@ -67,17 +67,18 @@ The V6.65 line is supported by a modular suite of governance rules:
 
 ### 2.8 Domain Integration Modules
 - `modules/37_V6_6_CybersecuritySkillsRouter.md`: Router configuration, security analysis toolchains, and field journal logging.
-- `modules/38_V6_6_SpecDrivenDevelopment.md`: Guidelines and lifecycle phases for Spec-Driven Development.
+- `modules/38_V6_6_SpecDrivenDevelopment.md`: Guidelines and 8-phase lifecycle for Spec-Driven Development, including mandatory Red-Team Gate.
 - `modules/39_V6_6_TasteFrontendDesign.md`: Aesthetic standards, visual dials tuning, and anti-slop UI/UX audit rules.
+- `modules/41_V6_7_AIShippingAndReviewabilityAudit.md`: AI Shipping & Reviewability Audit (SRA) — Core+Conditional shipping artifacts, universal self-refute principle, trust boundary crossing enumeration, and Verification Matrix integration.
 
 ---
 
 ## 3. Stable Promotion Summary
 
-The V6.65 line is now promoted to stable status.
+The V6.7.0 line is now promoted to stable status.
 - **Stable Entry**: `MAIN.md`
-- **Current Version**: `V6.65`
-- **Default Profile**: `core-enhanced` (now includes all V6.65 modules, system maps, reverse-skill, spec-kit, and taste-skill references)
+- **Current Version**: `V6.7.0`
+- **Default Profile**: `core-enhanced` (now includes all V6.7.0 modules, system maps, reverse-skill, spec-kit, taste-skill, and AI shipping & reviewability audit integration)
 
 ---
 

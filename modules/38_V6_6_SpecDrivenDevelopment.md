@@ -25,17 +25,26 @@ When starting a project or introducing a new feature, the Agent MUST execute the
    - *UI/UX Prototyping Gate*: For frontend layout, visual styles, or app UI tasks, the Agent MUST generate a visual design mockup using the `generate_image` tool (via the `nano-banana-pro` skill) and present it as an artifact for user approval before moving to the Plan phase.
 3. **Plan Phase**: Draft a technical implementation plan specifying architecture, tech stack, data schemas, and integration logic.
    - *Requirement*: The plan must be saved in `.specify/plan.md`.
-4. **Tasks Phase**: Translate the plan into a checklist of granular, actionable tasks.
+4. **Red-Team Gate** *(mandatory)*: Attack the plan's load-bearing assumptions before committing to tasks.
+   - *Requirement*: The Agent MUST identify the load-bearing claims in `.specify/plan.md` — the assumptions that, if false, would cause the plan to fail.
+   - *Method*: For each load-bearing claim: (a) Steelman — state the strongest version of why it might be true. (b) Attack — attack that steelmanned version, not a strawman. (c) Write each failure mode as "Fails if ___." — concrete and falsifiable.
+   - *Ranking*: Rank failure modes by `(impact if wrong) × (likelihood wrong) × (cheapness to test)`. The top items are what to address *before* entering the Tasks phase.
+   - *Output*: Append a "Red-Team Results" section to `.specify/plan.md` with the ranked attack results. If any top-ranked failure mode lacks a mitigation or test, the plan MUST be revised before proceeding.
+   - *Skip Condition*: The Red-Team Gate may be skipped ONLY for trivial bug fixes or documentation-only changes where no architectural assumptions exist.
+5. **Tasks Phase**: Translate the plan into a checklist of granular, actionable tasks.
    - *Requirement*: The task list must be saved in `.specify/tasks.md`.
-5. **Implement Phase**: Systematically execute the tasks in order, running build and test validation after each task.
-6. **Converge Phase**: Match the codebase state against the specs, plan, and tasks. Any discrepancy or remaining gap must be appended as new tasks to `.specify/tasks.md` until fully resolved.
+6. **Implement Phase**: Systematically execute the tasks in order, running build and test validation after each task.
+7. **Converge Phase**: Match the codebase state against the specs, plan, and tasks. Any discrepancy or remaining gap must be appended as new tasks to `.specify/tasks.md` until fully resolved.
+8. **Ship Phase**: Perform the AI Shipping & Reviewability Audit (SRA) to document architecture, flows, permissions, variables, and tests, running static audits before merging. See `modules/41_V6_7_AIShippingAndReviewabilityAudit.md`.
 
 ---
 
 ## 3. Enforcement & Verification Rules
 
 - **Pre-Implementation Gate**: Writing production code before the **Specify** and **Plan** documents are created under `.specify/` is strictly prohibited.
+- **Red-Team Gate**: Entering the Tasks phase without completing the Red-Team Gate (Phase 4) on the plan is prohibited, except when the skip condition applies (trivial bug fixes or documentation-only changes).
 - **Zero Vibe-Coding**: Every single code change must trace back to a defined task in `.specify/tasks.md`.
+- **Shipping Gate**: No feature may be merged without completing the **Ship Phase** SRA checklist and compiling a reviewer-ready shipping packet under `documentation/` (or `.specify/ship/`).
 - **Command Fallbacks**: The slash commands (like `/speckit.specify`, `/speckit.plan`, etc.) provided by `spec-kit` are shortcuts. In normal Agentic loops, the Agent MUST execute these steps natively and automatically create the documents, without requiring manual trigger commands.
 
 ---
