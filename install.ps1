@@ -20,6 +20,7 @@ if (-not $TargetPath) {
     $legacyFiles = @()
     if ($TargetHost -eq "antigravity") {
         $legacyFiles += Join-Path $UserHome ".gemini\AgentLogic\GEMINI.md"
+        $legacyFiles += Join-Path $UserHome ".gemini\GEMINI.md"
     } elseif ($TargetHost -eq "claude") {
         $legacyFiles += Join-Path $UserHome ".claude\CLAUDE.md"
     } elseif ($TargetHost -eq "codex") {

@@ -11,7 +11,7 @@ $buildScript = Join-Path $repoRoot "scripts\build-profile.ps1"
 $skillsGovernanceScript = Join-Path $repoRoot "scripts\skills-governance.ps1"
 
 if (-not $TargetPath) {
-    $TargetPath = Join-Path $UserHome ".gemini\AgentLogic\GEMINI.md"
+    $TargetPath = Join-Path $UserHome ".gemini\GEMINI.md"
 }
 
 $bundlePath = Join-Path $UserHome ".gemini\antigravity-cli\AgentLogic\AGENTS_BUNDLE.md"
@@ -34,17 +34,30 @@ $hookContent = @"
 - The compiled master rules are stored in [AGENTS_BUNDLE.md](file:///$($bundlePath.Replace('\', '/'))). When AgentLogic is activated, the agent should read this bundle to align on all governance, validation, and design rules.
 "@
 
-if (Test-Path $TargetPath) {
-    $existingContent = Get-Content -Raw -Path $TargetPath
-    if ($existingContent -notmatch "Local AgentLogic Precedence Rule") {
-        Write-Host "Appending AgentLogic delegation hook to '$TargetPath'..." -ForegroundColor Cyan
-        Add-Content -Path $TargetPath -Value $hookContent -NoNewline
-    } else {
-        Write-Host "Delegation hook already present in '$TargetPath'." -ForegroundColor Green
+# 2. Add / Update the delegation hook in targets without overwriting other content
+$targets = @($TargetPath)
+if ($TargetPath -eq (Join-Path $UserHome ".gemini\GEMINI.md")) {
+    $legacyTarget = Join-Path $UserHome ".gemini\AgentLogic\GEMINI.md"
+    $legacyTargetDir = Split-Path -Parent $legacyTarget
+    if ($legacyTargetDir -and -not (Test-Path $legacyTargetDir)) {
+        New-Item -ItemType Directory -Force -Path $legacyTargetDir | Out-Null
     }
-} else {
-    Write-Host "Creating new '$TargetPath' with AgentLogic delegation hook..." -ForegroundColor Cyan
-    Set-Content -Path $TargetPath -Value $hookContent -NoNewline
+    $targets += $legacyTarget
+}
+
+foreach ($target in $targets) {
+    if (Test-Path $target) {
+        $existingContent = Get-Content -Raw -Path $target
+        if ($existingContent -notmatch "Local AgentLogic Precedence Rule") {
+            Write-Host "Appending AgentLogic delegation hook to '$target'..." -ForegroundColor Cyan
+            Add-Content -Path $target -Value $hookContent -NoNewline
+        } else {
+            Write-Host "Delegation hook already present in '$target'." -ForegroundColor Green
+        }
+    } else {
+        Write-Host "Creating new '$target' with AgentLogic delegation hook..." -ForegroundColor Cyan
+        Set-Content -Path $target -Value $hookContent -NoNewline
+    }
 }
 
 Write-Host "Built Antigravity-ready AgentLogic bundle."
