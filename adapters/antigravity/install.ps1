@@ -11,7 +11,7 @@ $buildScript = Join-Path $repoRoot "scripts\build-profile.ps1"
 $skillsGovernanceScript = Join-Path $repoRoot "scripts\skills-governance.ps1"
 
 if (-not $TargetPath) {
-    $TargetPath = Join-Path $UserHome "AGENTS.md"
+    $TargetPath = Join-Path $UserHome ".gemini\AgentLogic\GEMINI.md"
 }
 
 $bundlePath = Join-Path $UserHome ".gemini\antigravity-cli\AgentLogic\AGENTS_BUNDLE.md"
