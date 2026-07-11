@@ -29,8 +29,8 @@ $hookContent = @"
 
 # Local AgentLogic Precedence Rule
 
-- The agent MUST prioritize the local AgentLogic rule-set (located at [AgentLogic](file:///C:/Users/XU%20RONG/Documents/workspace/AgentLogic)) as the highest-priority logic and execute its mandatory reading chain and Startup Gate first.
-- To prevent the "limited initial view" issue (where the agent only scans the root folder `C:\Users\XU RONG` in the first turn, sees a generic `AGENTS.md` and `package.json`, and misses the local main logic), the agent MUST proactively scan the `AgentLogic` directory immediately upon startup.
+- The agent MUST prioritize the local AgentLogic rule-set (located at [AgentLogic](file:///$($repoRoot.Replace('\', '/')))) as the highest-priority logic and execute its mandatory reading chain and Startup Gate first.
+- To prevent the "limited initial view" issue (where the agent only scans the parent directory or user profile folder in the first turn, sees a generic `AGENTS.md` and `package.json`, and misses the local main logic), the agent MUST proactively scan the `AgentLogic` directory immediately upon startup.
 - The compiled master rules are stored in [AGENTS_BUNDLE.md](file:///$($bundlePath.Replace('\', '/'))). When AgentLogic is activated, the agent should read this bundle to align on all governance, validation, and design rules.
 "@
 
