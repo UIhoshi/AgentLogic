@@ -1,5 +1,5 @@
 param(
-    [ValidateSet("codex", "claude", "gemini", "antigravity", "generic")]
+    [ValidateSet("codex", "claude", "antigravity", "generic")]
     [string]$TargetHost = "generic",
     [string]$ProfileName = "core-enhanced",
     [string]$TargetPath,
@@ -18,8 +18,8 @@ if (-not (Test-Path $adapterScript)) {
 # Legacy logic detection & cleanup block (mandatory step during installation)
 if (-not $TargetPath) {
     $legacyFiles = @()
-    if ($TargetHost -eq "gemini") {
-        $legacyFiles += Join-Path $UserHome ".gemini\GEMINI.md"
+    if ($TargetHost -eq "antigravity") {
+        $legacyFiles += Join-Path $UserHome ".gemini\AgentLogic\GEMINI.md"
     } elseif ($TargetHost -eq "claude") {
         $legacyFiles += Join-Path $UserHome ".claude\CLAUDE.md"
     } elseif ($TargetHost -eq "codex") {
@@ -55,14 +55,6 @@ switch ($TargetHost) {
         }
     }
     "claude" {
-        if ($TargetPath) {
-            $arguments += @("-TargetPath", $TargetPath)
-        }
-        if ($UserHome) {
-            $arguments += @("-UserHome", $UserHome)
-        }
-    }
-    "gemini" {
         if ($TargetPath) {
             $arguments += @("-TargetPath", $TargetPath)
         }

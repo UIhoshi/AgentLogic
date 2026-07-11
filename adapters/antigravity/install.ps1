@@ -22,7 +22,7 @@ if ($bundleDir) {
 
 # 1. Build the profile bundle to the dedicated bundle path
 powershell -NoProfile -ExecutionPolicy Bypass -File $buildScript -ProfileName $ProfileName -TargetHost antigravity -OutputPath $bundlePath
-powershell -NoProfile -ExecutionPolicy Bypass -File $skillsGovernanceScript -TargetHost gemini -UserHome $UserHome -Apply
+powershell -NoProfile -ExecutionPolicy Bypass -File $skillsGovernanceScript -TargetHost antigravity -UserHome $UserHome -Apply
 
 # 2. Add / Update the delegation hook in target AGENTS.md without overwriting other content
 $hookContent = @"

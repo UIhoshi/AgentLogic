@@ -2,7 +2,7 @@
 
 - Host target: codex
 - Profile: core-enhanced
-- Generated at: 2026-07-11T21:23:25+09:00
+- Generated at: 2026-07-11T21:26:39+09:00
 - Stable entry: MAIN.md
 - Version: V6.65
 
@@ -201,10 +201,10 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost co
 powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost claude
 ```
 
-### Gemini
+### Antigravity
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost gemini
+powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost antigravity
 ```
 
 ### Generic bundle
@@ -276,7 +276,7 @@ Goal: Install **AgentLogic V6.65** into the current local host without guessing 
 Before installing, identify:
 
 1.  Whether the current directory is the AgentLogic repository root.
-2.  The target host: `codex`, `claude`, `gemini`, or `generic`.
+2.  The target host: `codex`, `claude`, `antigravity`, or `generic`.
 3.  The selected profile: **`core-enhanced`** is mandatory for full V6.65 governance support.
 4.  Whether the host should bind to `MAIN.md` directly or to a generated bundle.
 
@@ -308,9 +308,9 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost co
 powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost claude
 ```
 
-### Gemini
+### Antigravity
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost gemini
+powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost antigravity
 ```
 
 ### Generic
@@ -329,7 +329,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\validate-package.p
 If the user asks to "load", "install", "mount", "bind", or "use this logic locally", the agent **MUST** follow this protocol:
 
 1.  **Doctor Check**: Run `scripts/doctor.ps1` to verify environment and path integrity.
-2.  **Target Selection**: Choose the target host (`codex`, `claude`, `gemini`, or `generic`) based on the current environment.
+2.  **Target Selection**: Choose the target host (`codex`, `claude`, `antigravity`, or `generic`) based on the current environment.
 3.  **Install & Legacy Cleanup**: Check for and remove any legacy logic files (such as root-level `.gemini/GEMINI.md` or `.claude/CLAUDE.md` in the user profile directory) to prevent them from overriding the new profile path. Then run the matching `install.ps1 -TargetHost ...` command using the `core-enhanced` profile.
 4.  **Validation**: Run `scripts/validate-package.ps1`.
 5.  **Skill Governance Audit**: Run install-time skill deduplication and organization for the target host. This is mandatory, not optional. The default install path now executes:
@@ -373,7 +373,7 @@ Use:
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\skills-governance.ps1 -TargetHost codex -Apply
 ```
 
-Replace `codex` with `claude` or `gemini` when needed.
+Replace `codex` with `claude` or `antigravity` when needed.
 
 The install/update governance pass is for the **host-local skill zone only**. It must not treat host-local skill state as portable repository truth.
 

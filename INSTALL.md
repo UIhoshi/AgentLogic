@@ -70,10 +70,10 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost co
 powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost claude
 ```
 
-### Gemini
+### Antigravity
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost gemini
+powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost antigravity
 ```
 
 ### Generic bundle

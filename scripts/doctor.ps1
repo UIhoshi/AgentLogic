@@ -80,8 +80,8 @@ if ($env:CODEX_HOME -or (Test-Path (Join-Path $HOME ".codex"))) {
 if ($env:CLAUDE_CONFIG_DIR -or (Test-Path (Join-Path $HOME ".claude"))) {
     $detected += "claude"
 }
-if ($env:GEMINI_HOME -or (Test-Path (Join-Path $HOME ".gemini"))) {
-    $detected += "gemini"
+if (Test-Path (Join-Path $HOME ".gemini\antigravity-cli")) {
+    $detected += "antigravity"
 }
 
 Write-Host "Local host hints"

@@ -1,5 +1,5 @@
 param(
-    [ValidateSet("codex", "claude", "gemini", "generic")]
+    [ValidateSet("codex", "claude", "antigravity", "generic")]
     [string]$TargetHost = "generic",
     [string]$UserHome = $env:USERPROFILE,
     [switch]$Apply
@@ -116,6 +116,7 @@ function Get-SkillsRoot {
         "codex" { return Join-Path $UserRoot ".codex\skills" }
         "claude" { return Join-Path $UserRoot ".claude\skills" }
         "gemini" { return Join-Path $UserRoot ".gemini\skills" }
+        "antigravity" { return Join-Path $UserRoot ".gemini\skills" }
         default { return $null }
     }
 }
@@ -137,7 +138,7 @@ function Get-SkillInventory {
     }
 
     $isGeminiFlatMode = $false
-    if ($TargetName -eq "gemini") {
+    if ($TargetName -eq "gemini" -or $TargetName -eq "antigravity") {
         $singleCount = ($counts.Values | Where-Object { $_ -eq 1 } | Measure-Object).Count
         if ($dirs.Count -ge 80 -and $singleCount -ge [Math]::Floor($dirs.Count * 0.9)) {
             $isGeminiFlatMode = $true
@@ -155,7 +156,7 @@ function Get-SkillInventory {
         elseif ($recommendedActive -contains $dir.Name) {
             $action = "keep-active"
         }
-        elseif ($TargetName -eq "gemini" -and ($recommendedGeminiFlatKeep -contains $dir.Name)) {
+        elseif (($TargetName -eq "gemini" -or $TargetName -eq "antigravity") -and ($recommendedGeminiFlatKeep -contains $dir.Name)) {
             $action = "keep-active"
         }
         elseif ($isGeminiFlatMode) {
@@ -231,8 +232,8 @@ if (-not $skillsRoot) {
 
 Write-Host "Skills root: $skillsRoot"
 Write-Host "Portable logic-carried skills: not governed by this pass unless AgentLogic explicitly ships them in a future version."
-if ($TargetHost -eq "gemini") {
-    Write-Host "Flat Gemini inventories are treated with a stricter engineering-first active set by default."
+if ($TargetHost -eq "gemini" -or $TargetHost -eq "antigravity") {
+    Write-Host "Flat Gemini/Antigravity inventories are treated with a stricter engineering-first active set by default."
 }
 
 $inventory = Get-SkillInventory -SkillsRoot $skillsRoot -TargetName $TargetHost

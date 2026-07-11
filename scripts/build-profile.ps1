@@ -1,6 +1,6 @@
 param(
     [string]$ProfileName = "core-enhanced",
-    [ValidateSet("codex", "claude", "gemini", "antigravity", "generic")]
+    [ValidateSet("codex", "claude", "antigravity", "generic")]
     [string]$TargetHost = "generic",
     [string]$OutputPath
 )
