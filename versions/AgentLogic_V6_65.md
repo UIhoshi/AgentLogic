@@ -115,7 +115,7 @@ Key stable rules:
 - The Cybersecurity Skills Router governs reversing, CTFs, and security audits; it does not replace general verification rules but adds specific tool constraints.
 - Spec-Driven Development templates and presets are verified through code compilation and test runs.
 - The Taste Frontend Design skill enforces layout, motion, and typography standards on all visual interfaces.
-- The installer automatically detects and cleans up legacy/duplicate logic files (e.g. root-level `.gemini/GEMINI.md` or `.claude/CLAUDE.md` in the user profile directory) to prevent stale rules from overriding the new install.
+- For Antigravity CLI (which relies on `~/.gemini/GEMINI.md` for rule loading and `~/.gemini/AgentLogic/GEMINI.md` for agent-level priority detection), the installer configures rule hooks at both paths simultaneously, while cleaning up any stale/duplicate legacy logic files during installation.
 - The `agent-browser` skill provides deterministic accessibility-tree browser automation, preferred dynamically when dynamic page rendering, multi-step actions, or session-isolated login tracking is required.
 
 
