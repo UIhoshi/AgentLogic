@@ -108,6 +108,9 @@ AgentLogic 的演进离不开开源社区的启发。我们在设计中深度参
 | **Self-Improvement Agent** | [peterskoett/self-improving-agent](https://github.com/peterskoett/self-improving-agent) | 贡献了结构化日志自省与频发规则沉淀自进化框架 |
 | **Spec Kit** | [github/spec-kit](https://github.com/github/spec-kit) | SDD 规格驱动开发周期设计与质量契约自检 |
 | **Taste Skill** | [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill) | 物理弹簧运动、色彩明度标准与防 slop 排版规范 |
+| **PM Skills (AI Shipping)** | [phuryn/pm-skills](https://github.com/phuryn/pm-skills) | 引入 AI 交付与可评审性审计 (SRA) 机制，规范 vibe-coded 交付件 |
+| **Ponytail (Lazy Dev)** | [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) | 引入 7 步“最懒资深开发开发阶梯”（YAGNI、复用优先、原生优先）防代码膨胀 |
+| **Matt Pocock Skills** | [mattpocock/skills](https://github.com/mattpocock/skills) | 引入交互式单步 Grilling 拷问、`CONTEXT.md` 通用领域词汇表与 ADR 决策记录 |
 
 ---
 
