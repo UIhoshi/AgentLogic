@@ -87,6 +87,7 @@ Version bump expectations:
 - update `manifest.json`
 - update active documentation references
 - do not rewrite history by mutating old version files
+- allow retaining historical releases (suitable for the fast-iterating multimodal phase)
 
 ## Change Policy
 
