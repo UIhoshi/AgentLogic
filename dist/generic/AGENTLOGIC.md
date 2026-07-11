@@ -2,7 +2,7 @@
 
 - Host target: generic
 - Profile: core-enhanced
-- Generated at: 2026-07-12T06:04:00+09:00
+- Generated at: 2026-07-12T06:09:42+09:00
 - Stable entry: MAIN.md
 - Version: V6.7.0
 
@@ -688,6 +688,7 @@ The V6.7.0 line is supported by a modular suite of governance rules:
 - `modules/39_V6_6_TasteFrontendDesign.md`: Aesthetic standards, visual dials tuning, and anti-slop UI/UX audit rules.
 - `modules/41_V6_7_AIShippingAndReviewabilityAudit.md`: AI Shipping & Reviewability Audit (SRA) 鈥?Core+Conditional shipping artifacts, universal self-refute principle, trust boundary crossing enumeration, and Verification Matrix integration.
 - `modules/42_V6_7_PonytailLazySeniorDevLadder.md`: Ponytail Lazy Senior Developer's Ladder 鈥?7-rung YAGNI implementation ladder, root-cause bug-fixing rules, and SDD integration.
+- `modules/43_V6_7_MattPocockSkillsIntegration.md`: Matt Pocock Skills Integration 鈥?Grilling plan interview flow, CONTEXT.md ubiquitous vocabulary glossary, and Architectural Decision Records (ADRs) specifications.
 
 ---
 
@@ -725,6 +726,9 @@ The V6.7.0 stable line integrates the following external source repositories:
 - **Ponytail**:
   - Source URL: `https://github.com/DietrichGebert/ponytail`
   - Integration path: `skills/ponytail/`
+- **Matt Pocock Skills**:
+  - Source URL: `https://github.com/mattpocock/skills`
+  - Integration path: `skills/productivity/grilling/`, `skills/productivity/grill-me/`, `skills/engineering/grill-with-docs/`
 
 ---
 
@@ -740,6 +744,7 @@ Key stable rules:
 - For Antigravity CLI (which relies on `~/.gemini/GEMINI.md` for rule loading and `~/.gemini/AgentLogic/GEMINI.md` for agent-level priority detection), the installer configures rule hooks at both paths simultaneously, while cleaning up any stale/duplicate legacy logic files during installation.
 - The `agent-browser` skill provides deterministic accessibility-tree browser automation, preferred dynamically when dynamic page rendering, multi-step actions, or session-isolated login tracking is required.
 - The `ponytail` skill channels a lazy senior developer, enforcing the 7-rung ladder (YAGNI, reuse, stdlib, native, dependency, one-line, min-code) to prevent vibe-coding slop and over-engineering.
+- The `mattpocock/skills` integration mandates interactive grilling (single-question stress-testing), root-level `CONTEXT.md` vocabulary maps, and docs/adr/ numbered Architectural Decision Records.
 
 
 
@@ -5205,9 +5210,11 @@ When starting a project or introducing a new feature, the Agent MUST execute the
    - *Requirement*: The Agent must check if `.specify/constitution.md` (or equivalent) exists. If not, it MUST create it first.
 2. **Specify Phase**: Define user scenarios, requirements, and user stories in clear, natural language.
    - *Requirement*: The specifications must be written to `.specify/spec.md` (or `.specify/specs/` directory).
+   - *Domain Vocabulary*: The Agent must check if `CONTEXT.md` exists, establish domain terminology, and run the single-question Grilling session (see `modules/43_V6_7_MattPocockSkillsIntegration.md`) to align on requirements before proceeding.
    - *UI/UX Prototyping Gate*: For frontend layout, visual styles, or app UI tasks, the Agent MUST generate a visual design mockup using the `generate_image` tool (via the `nano-banana-pro` skill) and present it as an artifact for user approval before moving to the Plan phase.
 3. **Plan Phase**: Draft a technical implementation plan specifying architecture, tech stack, data schemas, and integration logic.
    - *Requirement*: The plan must be saved in `.specify/plan.md`.
+   - *Architectural Decisions*: If the plan involves hard-to-reverse trade-offs, they must be documented in a numbered ADR under `docs/adr/` (see `modules/43_V6_7_MattPocockSkillsIntegration.md`).
 4. **Red-Team Gate** *(mandatory)*: Attack the plan's load-bearing assumptions before committing to tasks.
    - *Requirement*: The Agent MUST identify the load-bearing claims in `.specify/plan.md` 鈥?the assumptions that, if false, would cause the plan to fail.
    - *Method*: For each load-bearing claim: (a) Steelman 鈥?state the strongest version of why it might be true. (b) Attack 鈥?attack that steelmanned version, not a strawman. (c) Write each failure mode as "Fails if ___." 鈥?concrete and falsifiable.
@@ -5360,7 +5367,7 @@ or begin implementation before the logic-entry loop above has been completed.
 | 鎶借薄灞傜骇 \ 瀛愮郴缁?| **浼氳瘽涓庣敓鍛藉懆鏈?(Session & Lifecycle)** | **鑳藉姏涓庤矾鐢?(Capabilities & Routing)** | **宸ュ叿涓庢墿灞?(Tools & Extensions)** | **瀹夊叏涓庢不鐞?(Security & Governance)** | **鐘舵€佷笌璁板繂 (State & Memory)** |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **L1: 鎴樼暐涓庡叆鍙ｅ眰 (Strategy & Entry)** | [cli.tsx](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/entrypoints/cli.tsx)<br>[main.tsx](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/main.tsx)<br>鍚姩涓庣幆澧冩敞鍏?| [00_START_HERE.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/00_START_HERE.md)<br>[AGENTS.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/AGENTS.md)<br>[MAIN.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/MAIN.md)<br>閫昏緫鎺ュ叆纭涓庡涓荤粦瀹氬叆鍙?| [README.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/README.md)<br>涓讳粨搴撴枃妗ｅ鑸鏄?br>[11_CrossDirectoryMap.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/11_CrossDirectoryMap.md)<br>浠ｇ爜璺ㄧ洰褰曞湴鍥?| [15_LogicEntryChecklist.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/15_LogicEntryChecklist.md)<br>閫昏緫鍏ュ彛妫€鏌ユ竻鍗?br>[13_MandatoryLogicGateTemplate.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/13_MandatoryLogicGateTemplate.md)<br>鍏ㄥ眬閫昏緫鎷︽埅妫€鏌?| `manifest.json`<br>闈欐€佸厓鏁版嵁涓庢墦鍖呴厤缃枃浠堕厤缃?(杩愯鏃跺姩鎬佽蹇嗗眰 N/A) |
-| **L2: 棰嗗煙涓庡惊鐜眰 (Domain & Loop)** | [QueryEngine.ts](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/QueryEngine.ts)<br>澶氳疆浼氳瘽娴佺紪鎺?br>[20_V6_5_RuntimeModes.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/20_V6_5_RuntimeModes.md)<br>杩愯鐜鎰熺煡涓庢ā寮忛€傞厤 | [query.ts](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/query.ts)<br>鍗曡疆 Agentic 鎵ц寰幆<br>[28_V6_5_TerminologyAndModuleBoundaries.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/28_V6_5_TerminologyAndModuleBoundaries.md)<br>鏍囧噯鏈涓庤鍒欐ā鍧楄竟鐣?| [38_V6_6_SpecDrivenDevelopment.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/38_V6_6_SpecDrivenDevelopment.md)<br>[spec-kit/](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/spec-kit/) 瑙勬牸椹卞姩寮€鍙?br>[21_V6_5_ToolUsageAndSelection.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/21_V6_5_ToolUsageAndSelection.md)<br>[24_V6_5_ToolUsageMatrix.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/24_V6_5_ToolUsageMatrix.md)<br>[25_V6_5_ToolCapabilityMapping.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/25_V6_5_ToolCapabilityMapping.md)<br>[26_V6_5_INDEX.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/26_V6_5_INDEX.md)<br>宸ュ叿棣栭€夌煩闃典笌鑳藉姏鏄犲皠绱㈠紩<br>[42_V6_7_PonytailLazySeniorDevLadder.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/42_V6_7_PonytailLazySeniorDevLadder.md)<br>鏈€鎳?Senior 寮€鍙戝紑鍙戦樁姊?| [12_AgentEnforcement.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/12_AgentEnforcement.md)<br>琛屼负寮哄埗瀹¤涓庡噯鍒欑害鏉?| [32_V6_5_ContextAssemblyAndInstructionStacking.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/32_V6_5_ContextAssemblyAndInstructionStacking.md)<br>涓婁笅鏂囩粍瑁呬笌鎸囦护鍫嗗彔 |
+| **L2: 棰嗗煙涓庡惊鐜眰 (Domain & Loop)** | [QueryEngine.ts](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/QueryEngine.ts)<br>澶氳疆浼氳瘽娴佺紪鎺?br>[20_V6_5_RuntimeModes.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/20_V6_5_RuntimeModes.md)<br>杩愯鐜鎰熺煡涓庢ā寮忛€傞厤 | [query.ts](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/query.ts)<br>鍗曡疆 Agentic 鎵ц寰幆<br>[28_V6_5_TerminologyAndModuleBoundaries.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/28_V6_5_TerminologyAndModuleBoundaries.md)<br>鏍囧噯鏈涓庤鍒欐ā鍧楄竟鐣?| [38_V6_6_SpecDrivenDevelopment.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/38_V6_6_SpecDrivenDevelopment.md)<br>[spec-kit/](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/spec-kit/) 瑙勬牸椹卞姩寮€鍙?br>[21_V6_5_ToolUsageAndSelection.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/21_V6_5_ToolUsageAndSelection.md)<br>[24_V6_5_ToolUsageMatrix.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/24_V6_5_ToolUsageMatrix.md)<br>[25_V6_5_ToolCapabilityMapping.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/25_V6_5_ToolCapabilityMapping.md)<br>[26_V6_5_INDEX.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/26_V6_5_INDEX.md)<br>宸ュ叿棣栭€夌煩闃典笌鑳藉姏鏄犲皠绱㈠紩<br>[42_V6_7_PonytailLazySeniorDevLadder.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/42_V6_7_PonytailLazySeniorDevLadder.md)<br>鏈€鎳?Senior 寮€鍙戝紑鍙戦樁姊?| [12_AgentEnforcement.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/12_AgentEnforcement.md)<br>琛屼负寮哄埗瀹¤涓庡噯鍒欑害鏉?br>[43_V6_7_MattPocockSkillsIntegration.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/43_V6_7_MattPocockSkillsIntegration.md)<br>瀵归綈鎻愰棶銆佷笂涓嬫枃缂╄瘝涓庡喅绛栬褰?| [32_V6_5_ContextAssemblyAndInstructionStacking.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/32_V6_5_ContextAssemblyAndInstructionStacking.md)<br>涓婁笅鏂囩粍瑁呬笌鎸囦护鍫嗗彔 |
 | **L3: 鎵ц涓庢帶鍒跺眰 (Execution & Control)** | [22_V6_5_HookLifecycle.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/22_V6_5_HookLifecycle.md)<br>Hook 鐢熷懡鍛ㄦ湡绠＄悊 | [37_V6_6_CybersecuritySkillsRouter.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/37_V6_6_CybersecuritySkillsRouter.md)<br>閫嗗悜瀹夊叏涓?CTF 璺敱鍒嗗彂 | [Tool.ts](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/Tool.ts)<br>[tools.ts](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/src/tools.ts)<br>宸ュ叿涓粙鎺у埗涓庡姩鎬佺粍瑁?br>[39_V6_6_TasteFrontendDesign.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/39_V6_6_TasteFrontendDesign.md)<br>[skills/taste-skill/](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/skills/taste-skill/)<br>鍓嶇璁捐瀹＄編涓?UI Slop 娌荤悊 | [23_V6_5_PermissionAndOutputPipeline.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/23_V6_5_PermissionAndOutputPipeline.md)<br>鏉冮檺鎷︽埅涓庤緭鍑虹閬?br>[30_ToolQuestionBoundaryMatrix.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/30_ToolQuestionBoundaryMatrix.md)<br>鎻愰棶鍑瘉寮哄害杈圭晫鎺у埗<br>[31_ToolMisuseAndAntiPatternMatrix.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/31_ToolMisuseAndAntiPatternMatrix.md)<br>鍙嶆ā寮忔牎楠屽け璐ヤ笌绾犲亸鏈哄埗<br>[41_V6_7_AIShippingAndReviewabilityAudit.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/41_V6_7_AIShippingAndReviewabilityAudit.md)<br>SRA 浜や粯瀹¤涓庤嚜璇侀潪鏍￠獙 | [34_V6_5_ProjectFactMap_V2.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/34_V6_5_ProjectFactMap_V2.md)<br>[14_ProjectFactMapTemplate.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/14_ProjectFactMapTemplate.md)<br>4-Tier 浜嬪疄鍦板浘涓庢爣鍑嗘ā鏉?|
 | **L4: 鍩哄簳涓庡弬鑰冨眰 (Base & Reference)** | [33_V6_5_BackgroundConsolidationAndIdleLifecycle.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/33_V6_5_BackgroundConsolidationAndIdleLifecycle.md)<br>姊﹀鏈熸竻鐞嗕笌鍚庡彴宸╁浐 | [35_V6_5_SkillGovernanceAndMandatoryUse.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/35_V6_5_SkillGovernanceAndMandatoryUse.md)<br>[36_V6_5_SkillZoneSeparation.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/36_V6_5_SkillZoneSeparation.md)<br>鎶€鑳藉幓閲嶄笌鏈湴鎶€鑳介殧绂?| [skills/](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/skills/) 棰嗗煙鎵╁睍鎶€鑳藉寘<br>[raw_tools/](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/reference/raw_tools/) 鍘熷宸ュ叿灞?| [27_V6_5_ToolPermissionRiskMatrix.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/27_V6_5_ToolPermissionRiskMatrix.md)<br>[29_MandatoryVerificationMatrix.md](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/modules/29_MandatoryVerificationMatrix.md)<br>鏉冮檺椋庨櫓涓庡己鍒舵牎楠岀煩闃?br>[raw_permissions/](file:///C:/Users/XU RONG/Documents/workspace/AgentLogic/reference/raw_permissions/) 鍘熷瀹夊叏鏉冮檺鍖?| `src/state/`<br>杩愯鏃朵細璇濈姸鎬佺姸鎬佹満涓庢湰鍦拌惤鍦板眰 |
 
@@ -5680,4 +5687,72 @@ This ladder is integrated as a blocking gate during **SDD Phase 6 (Implement Pha
 - **Verification Matrix (Module 29)**: The evidence requirements for verification remain unchanged. A one-line implementation must still be validated with command execution or visual proof.
 
 ## END FILE: modules/42_V6_7_PonytailLazySeniorDevLadder.md
+
+---
+
+## BEGIN FILE: modules/43_V6_7_MattPocockSkillsIntegration.md
+
+# V6.7.0 Matt Pocock Skills Integration
+
+Status: **Stable V6.7.0 Line (Mandatory alignment & documentation protocol)**.
+
+This module integrates the core engineering principles from the `mattpocock/skills` framework. It addresses two major communication and token-efficiency gaps in AI agent coding: (1) requirement misalignment due to passive task hand-off, and (2) excessive verbosity due to the lack of a shared, domain-specific vocabulary. By enforcing the **Grilling Process**, **Ubiquitous Glossary (`CONTEXT.md`)**, and **Architecture Decision Records (ADRs)**, this module aligns developer intent with implementation and drastically optimizes the token economy.
+
+---
+
+## 1. The Grilling Process Protocol
+
+To eliminate misalignment between the user and the Agent, major feature plans **MUST** undergo a grilling session during **SDD Phase 2 (Specify Phase)**:
+
+1. **Relentless Probing**: The Agent must walk down the plan's design tree, branch by branch, stress-testing decisions and resolving dependencies before writing code.
+2. **Single-Question Flow**: The Agent **MUST** ask questions one at a time. Dumping a bulk list of questions is strictly prohibited.
+3. **Recommended Answers**: For every question asked, the Agent **MUST** provide a clear, reasoned "Recommended Answer" (e.g., *"How should we handle caching here? Recommended: Redis with a 5-minute TTL because..."*). This allows the user to simply approve the recommendation or quickly course-correct.
+4. **Codebase First**: The Agent must explore the codebase automatically to answer structural questions rather than asking the user for facts that can be statically verified.
+
+---
+
+## 2. Ubiquitous Vocabulary: `CONTEXT.md`
+
+To reduce conversation verbosity and ensure consistent code naming, the project **MUST** establish a shared glossary.
+
+### 2.1 Glossary Structure
+- **Single-Context Repository**: A single file named `CONTEXT.md` (or `GLOSSARY.md`) at the repository root.
+- **Multi-Context Repository**: A `CONTEXT-MAP.md` at the root mapping modules, with sub-contexts containing their own local `CONTEXT.md` (e.g., `src/<context>/CONTEXT.md`).
+
+### 2.2 Content Constraints
+- **Pure Jargon**: The glossary must contain ONLY domain terms, definitions, and acronym mappings.
+- **No Implementation or Specs**: It must not contain scratchpad notes, code snippets, ticket descriptions, or temporary tasks.
+- **Lazy Maintenance**: When a new terminology or decision crystallizes during a grilling session, the Agent must lazily update `CONTEXT.md` to define the term.
+
+### 2.3 Variable and Naming Alignment
+- Every class, variable, function, database table, and filename **MUST** use the exact terminology defined in `CONTEXT.md`.
+- Using multiple names for the same domain concept (e.g., using `User`, `Account`, and `Profile` interchangeably) is prohibited.
+
+---
+
+## 3. Architecture Decision Records (ADRs)
+
+For hard-to-reverse design decisions, surprising trade-offs, or choices involving complex tradeoffs (e.g., choosing a specific state library, introducing database migrations, or changing trust boundaries), the Agent must compile an ADR.
+
+### 3.1 Storage and Format
+- ADRs live in `docs/adr/` (or `src/<context>/docs/adr/` in multi-context layouts).
+- Files must be sequentially numbered (e.g., `docs/adr/0001-slug.md`, `docs/adr/0002-slug.md`).
+- Each ADR must contain:
+  - **Title**: Brief name of the decision.
+  - **Status**: Proposed, Accepted, Rejected, or Superseded.
+  - **Context**: The background, constraints, and problem driving the decision.
+  - **Decision**: The chosen solution.
+  - **Consequences**: The trade-offs, negative impacts, and subsequent requirements.
+
+### 3.2 Anti-Litigation Rule
+Once an ADR is set to `Accepted`, the Agent **MUST** treat it as an immutable architectural rule for the current branch. Re-litigating previously accepted decisions during subsequent tasks is prohibited unless the user explicitly requests an architectural review.
+
+---
+
+## 4. Integration with Spec-Driven Development (SDD)
+
+- **Specify Phase (Phase 2)**: The Agent must check if `CONTEXT.md` exists. If the task introduces new concepts, the Agent must initiate a single-question grilling session (搂1) and append new terms to `CONTEXT.md`.
+- **Plan Phase (Phase 3)**: If the plan introduces major trade-offs, the Agent must document them in a new ADR draft under `docs/adr/` before moving past the Plan phase.
+
+## END FILE: modules/43_V6_7_MattPocockSkillsIntegration.md
 

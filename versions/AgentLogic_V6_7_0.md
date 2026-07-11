@@ -71,6 +71,7 @@ The V6.7.0 line is supported by a modular suite of governance rules:
 - `modules/39_V6_6_TasteFrontendDesign.md`: Aesthetic standards, visual dials tuning, and anti-slop UI/UX audit rules.
 - `modules/41_V6_7_AIShippingAndReviewabilityAudit.md`: AI Shipping & Reviewability Audit (SRA) — Core+Conditional shipping artifacts, universal self-refute principle, trust boundary crossing enumeration, and Verification Matrix integration.
 - `modules/42_V6_7_PonytailLazySeniorDevLadder.md`: Ponytail Lazy Senior Developer's Ladder — 7-rung YAGNI implementation ladder, root-cause bug-fixing rules, and SDD integration.
+- `modules/43_V6_7_MattPocockSkillsIntegration.md`: Matt Pocock Skills Integration — Grilling plan interview flow, CONTEXT.md ubiquitous vocabulary glossary, and Architectural Decision Records (ADRs) specifications.
 
 ---
 
@@ -108,6 +109,9 @@ The V6.7.0 stable line integrates the following external source repositories:
 - **Ponytail**:
   - Source URL: `https://github.com/DietrichGebert/ponytail`
   - Integration path: `skills/ponytail/`
+- **Matt Pocock Skills**:
+  - Source URL: `https://github.com/mattpocock/skills`
+  - Integration path: `skills/productivity/grilling/`, `skills/productivity/grill-me/`, `skills/engineering/grill-with-docs/`
 
 ---
 
@@ -123,6 +127,7 @@ Key stable rules:
 - For Antigravity CLI (which relies on `~/.gemini/GEMINI.md` for rule loading and `~/.gemini/AgentLogic/GEMINI.md` for agent-level priority detection), the installer configures rule hooks at both paths simultaneously, while cleaning up any stale/duplicate legacy logic files during installation.
 - The `agent-browser` skill provides deterministic accessibility-tree browser automation, preferred dynamically when dynamic page rendering, multi-step actions, or session-isolated login tracking is required.
 - The `ponytail` skill channels a lazy senior developer, enforcing the 7-rung ladder (YAGNI, reuse, stdlib, native, dependency, one-line, min-code) to prevent vibe-coding slop and over-engineering.
+- The `mattpocock/skills` integration mandates interactive grilling (single-question stress-testing), root-level `CONTEXT.md` vocabulary maps, and docs/adr/ numbered Architectural Decision Records.
 
 
 

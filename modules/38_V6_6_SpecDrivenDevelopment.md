@@ -22,9 +22,11 @@ When starting a project or introducing a new feature, the Agent MUST execute the
    - *Requirement*: The Agent must check if `.specify/constitution.md` (or equivalent) exists. If not, it MUST create it first.
 2. **Specify Phase**: Define user scenarios, requirements, and user stories in clear, natural language.
    - *Requirement*: The specifications must be written to `.specify/spec.md` (or `.specify/specs/` directory).
+   - *Domain Vocabulary*: The Agent must check if `CONTEXT.md` exists, establish domain terminology, and run the single-question Grilling session (see `modules/43_V6_7_MattPocockSkillsIntegration.md`) to align on requirements before proceeding.
    - *UI/UX Prototyping Gate*: For frontend layout, visual styles, or app UI tasks, the Agent MUST generate a visual design mockup using the `generate_image` tool (via the `nano-banana-pro` skill) and present it as an artifact for user approval before moving to the Plan phase.
 3. **Plan Phase**: Draft a technical implementation plan specifying architecture, tech stack, data schemas, and integration logic.
    - *Requirement*: The plan must be saved in `.specify/plan.md`.
+   - *Architectural Decisions*: If the plan involves hard-to-reverse trade-offs, they must be documented in a numbered ADR under `docs/adr/` (see `modules/43_V6_7_MattPocockSkillsIntegration.md`).
 4. **Red-Team Gate** *(mandatory)*: Attack the plan's load-bearing assumptions before committing to tasks.
    - *Requirement*: The Agent MUST identify the load-bearing claims in `.specify/plan.md` — the assumptions that, if false, would cause the plan to fail.
    - *Method*: For each load-bearing claim: (a) Steelman — state the strongest version of why it might be true. (b) Attack — attack that steelmanned version, not a strawman. (c) Write each failure mode as "Fails if ___." — concrete and falsifiable.
