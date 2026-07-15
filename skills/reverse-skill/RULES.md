@@ -82,7 +82,8 @@ If already written (global config contains "reverse skill routing" content), che
 - internal network, 内网渗透, lateral movement, 横向移动, domain penetration, 域渗透, AD attack, BloodHound
 - privilege escalation, 权限提升, credential extraction, 凭证提取, Mimikatz, Kerberoasting, DCSync
 - C2, persistence, 持久化, Cobalt Strike, Sliver, Havoc
-- game reverse, 游戏逆向, anti-cheat, 反作弊, Unity, IL2CPP, Unreal Engine, Cheat Engine
+- game reverse, 游戏逆向, anti-cheat, 反作弊, Unity, IL2CPP, Cheat Engine
+- .NET reverse, C# 逆向, dnSpy, dnSpyEx, de4dot, ConfuserEx, SmartAssembly, .NET Reactor, dnlib, IL patch, SharpHound, Rubeus
 - symbol migration, 符号迁移, bindiff, cross-version, PDB missing
 - security diagram, 安全图表, attack path diagram, 攻击路径图, security architecture, 安全架构图 — trigger `diagram-generator/`
 
@@ -104,8 +105,11 @@ Read in order:
 
 ### Tool Usage
 - **NEVER guess tool paths** — read `tool-index.md` first, it contains the exact installed path for each tool
-- Missing tools → call `bootstrap-reverse.ps1` to auto-install, do NOT just report errors
-- **After ANY new tool installation, MUST run `refresh-tool-index.ps1`** to update paths in tool-index.md. This ensures other CLI clients can find the tools without reinstalling.
+- Missing tools → call the platform-appropriate bootstrap script to auto-install, do NOT just report errors:
+  - Windows: `bootstrap-reverse.ps1`
+  - Linux / macOS: `bash skills/scripts/bootstrap-reverse.sh`
+  - Kali Linux: `bash kali/scripts/bootstrap-reverse.sh`
+- **After ANY new tool installation, MUST run the platform-appropriate refresh script** to update paths in tool-index.md (Windows: `refresh-tool-index.ps1`; Linux / macOS / Kali: `bash skills/scripts/refresh-tool-index.sh` or `bash kali/scripts/refresh-tool-index.sh`). This ensures other CLI clients can find the tools without reinstalling.
 - When writing tool-index.md entries, paths MUST be **complete absolute paths** (e.g., `D:\wangluo\jadx\bin\jadx.bat`, NOT just `jadx`). Include: full path, version number, install method, and verification command.
 - Same tool fails auto-install 2 times → stop retrying, output full manual install steps
 - MCP service port mismatch → ask user for actual port, help update config
@@ -155,7 +159,7 @@ Read in order:
 4. Read routing.md → determine which sub-skill to enter
 5. Route not matched → web search methodology → propose new skill
 6. Read tool-index.md → confirm local tool status. If missing (first run) → read tool-index.md.template → run refresh-tool-index to generate it
-7. Missing tools → call bootstrap-reverse.ps1 to auto-install → THEN run refresh-tool-index.ps1 to persist new paths (so other CLIs don't reinstall)
+7. Missing tools → call the platform-appropriate bootstrap script to auto-install → THEN run the platform-appropriate refresh script to persist new paths (so other CLIs don't reinstall). On Windows use `bootstrap-reverse.ps1` + `refresh-tool-index.ps1`; on Linux / macOS use `bash skills/scripts/bootstrap-reverse.sh` + `bash skills/scripts/refresh-tool-index.sh`; on Kali use `bash kali/scripts/bootstrap-reverse.sh` + `bash kali/scripts/refresh-tool-index.sh`.
 8. Enter skill workflow → execute task (produce ACTUAL side effects)
    — Hesitating about operation → read precedent-reverse.md or precedent-pentest.md
    — Wanting to skip/be lazy → read agent-obedience-engineering.md excuse rebuttal table
@@ -312,14 +316,42 @@ When AI has web search capability, **MUST proactively search** in these scenario
 
 ## Bootstrap Command
 
+Windows (PowerShell):
+
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File "<SKILL_ROOT>/skills/scripts/bootstrap-reverse.ps1" -Capability @('tool_name') -StartServices
 ```
 
+Linux / macOS (Bash):
+
+```bash
+bash <SKILL_ROOT>/skills/scripts/bootstrap-reverse.sh tool_name --start-services
+```
+
+Kali Linux (Bash, Kali-native tooling):
+
+```bash
+bash <SKILL_ROOT>/kali/scripts/bootstrap-reverse.sh tool_name --start-services
+```
+
 ## Refresh Tool Index
+
+Windows (PowerShell):
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File "<SKILL_ROOT>/skills/scripts/refresh-tool-index.ps1"
+```
+
+Linux / macOS (Bash):
+
+```bash
+bash <SKILL_ROOT>/skills/scripts/refresh-tool-index.sh
+```
+
+Kali Linux (Bash):
+
+```bash
+bash <SKILL_ROOT>/kali/scripts/refresh-tool-index.sh
 ```
 
 ---

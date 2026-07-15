@@ -3,8 +3,8 @@
     "role":  "primary-local-logic",
     "description":  "Versioned primary logic package intended to be pulled into local AI coding hosts as the default operating logic.",
     "entry":  "MAIN.md",
-    "current_version":  "V6.7.0",
-    "main_logic_file":  "versions/AgentLogic_V6_7_0.md",
+    "current_version":  "V6.7.2",
+    "main_logic_file":  "versions/AgentLogic_V6_7_2.md",
     "default_profile":  "core-enhanced",
     "profiles":  {
                      "minimal":  {
@@ -15,7 +15,7 @@
                                                    "AGENT_INSTALL.md",
                                                    "README.md",
                                                    "AGENTS.md",
-                                                   "versions/AgentLogic_V6_7_0.md"
+                                                   "versions/AgentLogic_V6_7_2.md"
                                                ]
                                  },
                      "core-enhanced":  {
@@ -26,7 +26,7 @@
                                                          "AGENT_INSTALL.md",
                                                          "README.md",
                                                          "AGENTS.md",
-                                                         "versions/AgentLogic_V6_7_0.md",
+                                                         "versions/AgentLogic_V6_7_2.md",
                                                          "modules/01_MasterLogic.md",
                                                          "modules/03_AgenticLoop.md",
                                                          "modules/05_PermissionsAndSafety.md",
@@ -68,7 +68,7 @@
                                                              "AGENT_INSTALL.md",
                                                              "README.md",
                                                              "AGENTS.md",
-                                                             "versions/AgentLogic_V6_7_0.md",
+                                                             "versions/AgentLogic_V6_7_2.md",
                                                              "modules/01_MasterLogic.md",
                                                              "modules/03_AgenticLoop.md",
                                                              "modules/05_PermissionsAndSafety.md",

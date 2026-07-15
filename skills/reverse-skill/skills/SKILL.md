@@ -1,4 +1,4 @@
-﻿# Reverse Engineering Skills Master Control
+# Reverse Engineering Skills Master Control
 
 本目录收录了一系列逆向工程相关的技能模块，每个子目录是一个独立模块，内含 `SKILL.md` 描述其适用场景、工具链和工作流程。
 
@@ -26,6 +26,7 @@
 |------|------|---------|
 | **通用逆向** | `reverse-engineering/` | GDB / Frida / angr / Unicorn / Qiling / 反分析对抗 / 全语言平台逆向 / CTF 模式库 |
 | **APK 逆向** | `apk-reverse/` | Android APK 解包、jadx 反编译、smali 修改、Frida Hook、重打包签名安装 |
+| **.NET / C# 逆向** | `dotnet-reverse/` | 托管 PE 逆向、dnSpyEx + de4dot 脱混淆（ConfuserEx/SmartAssembly/Babel）、IL patch、Sharp* 红队工具分析、dnSpy MCP 联动 |
 | **IDA Pro 逆向** | `ida-reverse/` | IDA Pro MCP HTTP 服务器（72 个工具）：反编译、反汇编、数据流追踪、交叉引用 |
 | **前端 JS 逆向** | `js-reverse/` | 浏览器端签名定位、加密参数分析、运行时采样、Node 补环境复现；优先用现有 `js-reverse_*`，需要更强的浏览器/CDP/Hook 面时接入 jshookmcp，但前提是先把该 MCP server 下载/注册并启用 |
 | **radare2 分析** | `radare2/` | CLI 二进制侦察、反汇编、patch：r2 / rabin2 / rasm2 / radiff2 |
@@ -37,14 +38,14 @@
 | **RE→利用链** | `pwn-chain/` | 从逆向走到可用 exploit：栈/堆/内核 pwn、pwntools、libc-database、CTF 到真实远程的稳定化 |
 | **固件渗透链** | `firmware-pentest/` | OWASP FSTM 九阶段：提取→EMBA 自动化→Firmadyne/QEMU 仿真→AFL++ fuzz→实机利用 |
 | **EDR 绕过逆向** | `edr-bypass-re/` | 红队场景：逆向 EDR 的 hook 表/ETW/AMSI → 直接 syscall / Hell's Gate / 硬件断点 / call stack spoof |
-| **渗透测试工具链** | `pentest-tools/` | Nmap/Nuclei/SQLMap/FFUF/Hashcat 等 20+ 渗透工具，通过 MCP 暴露给 AI |
+| **渗透测试工具链** | `pentest-tools/` | Nmap/Nuclei/SQLMap/FFUF/Hashcat/Pentest Swarm 等 20+ 渗透工具，通过 MCP 暴露给 AI |
 | **图表生成** | `diagram-generator/` | 从自然语言生成 Mermaid/Graphviz/PlantUML 图表（攻击路径图、数据流图、架构图、状态机） |
 | **攻击链编排** | `attack-chain/` | 多阶段攻击路径规划与执行的总指挥；完整渗透、HW 演练、从外网打到域控等跨阶段任务从这里开始 |
 | **LLM/AI 安全测试** | `llm-security/` | OWASP LLM + ASI Top 10：Prompt 注入、工具滥用、记忆投毒、Agent 劫持、系统提示词提取、**Agent 服从性工程** |
 | **API 安全测试** | `api-security/` | REST/GraphQL/WebSocket 全协议：BOLA/IDOR、JWT/OAuth 攻击、10 阶段方法论 |
 | **供应链安全** | `supply-chain-security/` | SBOM/SCA/CI-CD 管道：依赖扫描、容器安全、构建完整性、漏洞可达性验证 |
 | **移动逆向工程** | `mobile-reverse/` | Android + iOS：Frida/Objection 动态插桩、SSL Pinning/Root/越狱检测绕过、OWASP MASTG |
-| **恶意软件分析** | `malware-analysis/` | YARA/Sigma 规则、CAPE/Azul 沙箱编排、IOC 提取、94 种反分析技术、多 Agent 自动化 |
+| **DSL 虚拟机逆向** | `dsl-vm-reverse/` | 分析 JavaScript 实现的自定义指令集虚拟机（IIFE + 单字母变量 + switch-case 解释器 + opcode 控制流），适用于风控引擎、自定义验证码 VM 等非标准 WASM 的 JS 虚拟机逆向 |
 
 ## 统一入口
 
@@ -62,6 +63,29 @@
 2. **快速捡漏** → strings / rabin2 -z / ltrace 看看有没有直接线索
 3. **深入分析** → 如果需要反编译→IDA；需要动态 Hook→Frida；需要符号执行→angr
 4. **一条路走不通就换一条** → 静态分析不行就动态，Java 层不行就看 so，页面观察不够就断点
+
+## 下一步菜单模式（Next-Step Menu Pattern）
+
+每个子 skill 在执行完一个阶段后，`MUST` 提供给用户 3-6 个编号的下步选项，让用户选择方向。不要在无用户选择的情况下跨阶段推进。
+
+格式要求：
+- 每个选项以数字编号（1-6 范围）
+- 每个选项描述一项具体可执行的动作（不是抽象方向）
+- 至少包含一个"导出报告/写 writeup"选项
+- 至少包含一个"继续深入分析"或"换一种方法"选项
+- 必要时包含一个"停止/暂停/询问其他问题"出口
+
+示例：
+```
+## 建议下一步（选一个编号）
+
+1. 对 sub_140001000 做深度反编译，还原算法
+2. 用 Frida 动态 Hook 验证参数猜想
+3. 导出当前已命名函数，生成符号迁移 YAML
+4. 生成当前阶段的分析报告
+5. 换 radare2 做轻量侦察对比
+6. 暂停，我先确认前面的证据
+```
 
 ## 目录是动态扩充的
 
@@ -86,7 +110,7 @@
 powershell -NoProfile -ExecutionPolicy Bypass -File "<skill-root>\scripts\bootstrap-reverse.ps1" -Capability @('工具名') -StartServices
 ```
 
-支持的能力：jadx、apktool、frida、idalib-mcp、jshookmcp、anything-analyzer、idapro、r2、rabin2、adb、agent-browser、ghidra-mcp、nmap、proxycat、burpsuite-mcp、binwalk、unblob、emba、firmadyne、qemu-static、pwntools、ropgadget、one_gadget、bindiff、ghidriff、syswhispers3、pe-sieve、garak、pyrit、osv-scanner、trivy、syft、gitleaks、objection、yara、floss
+支持的能力：jadx、apktool、frida、frida-ps、idalib-mcp、jshookmcp、anything-analyzer、idapro、r2、rabin2、adb、agent-browser、ghidra-mcp、nmap、seclists、proxycat、burpsuite-mcp、pentestswarm、binwalk、unblob、emba、firmadyne、qemu-static、pwntools、ropgadget、one_gadget、bindiff、ghidriff、syswhispers3、pe-sieve、garak、pyrit、osv-scanner、trivy、syft、gitleaks、objection、yara、floss
 
 自举完成后会自动刷新 `tool-index`。
 
@@ -109,3 +133,10 @@ powershell -NoProfile -ExecutionPolicy Bypass -File "<skill-root>\scripts\bootst
 - 索引：`field-journal/_index.md`
 - 先例：`field-journal/precedent-auth.md` → `precedent-reverse.md` → `precedent-pentest.md`
 - 新任务开始前先查索引和先例，复用已有经验
+
+## 任务完成自检（声称完成前 MUST 通过）
+
+- [ ] 我是否完成了路由三轴匹配（目标类型 + 用户意图 + 工具链）？
+- [ ] 我是否在路由成功后读取了目标 skill 的 SKILL.md？
+- [ ] 路由未命中时，我是否提议了新增 skill 而非强行匹配？
+- [ ] 我是否基于 `tool-index` 使用了真实工具路径？

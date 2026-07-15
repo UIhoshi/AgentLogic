@@ -573,6 +573,84 @@ class TestExtensionSkillRegistration:
         assert "speckit-test-ext-hello" in written
         assert "Run this updated hello." in skill_file.read_text(encoding="utf-8")
 
+    def test_codex_dev_skill_registration_replaces_existing_dev_symlink(
+        self, project_dir, extension_dir, temp_dir
+    ):
+        """Codex dev skill registration should migrate prior dev symlinks to files."""
+        if not _can_create_symlink(temp_dir):
+            pytest.skip("Current platform/user cannot create symlinks")
+
+        _create_init_options(project_dir, ai="codex", ai_skills=True)
+        skills_dir = _create_skills_dir(project_dir, ai="codex")
+        manager = ExtensionManager(project_dir)
+        manifest = ExtensionManifest(extension_dir / "extension.yml")
+
+        skill_file = skills_dir / "speckit-test-ext-hello" / "SKILL.md"
+        skill_file.parent.mkdir(parents=True, exist_ok=True)
+        cache_file = (
+            extension_dir
+            / ".specify-dev"
+            / "extension-skills"
+            / "speckit-test-ext-hello"
+            / "SKILL.md"
+        )
+        cache_file.parent.mkdir(parents=True)
+        cache_file.write_text("old linked content", encoding="utf-8")
+        os.symlink(os.path.relpath(cache_file, skill_file.parent), skill_file)
+
+        written = manager._register_extension_skills(
+            manifest,
+            extension_dir,
+            link_outputs=True,
+        )
+
+        assert "speckit-test-ext-hello" in written
+        assert skill_file.exists()
+        assert not skill_file.is_symlink()
+        assert "Run this to say hello." in skill_file.read_text(encoding="utf-8")
+        assert cache_file.read_text(encoding="utf-8") == "old linked content"
+
+    def test_codex_dev_skill_registration_preserves_unrelated_symlink(
+        self, project_dir, extension_dir, temp_dir
+    ):
+        """Codex dev registration should not overwrite user-owned symlinks."""
+        if not _can_create_symlink(temp_dir):
+            pytest.skip("Current platform/user cannot create symlinks")
+
+        _create_init_options(project_dir, ai="codex", ai_skills=True)
+        skills_dir = _create_skills_dir(project_dir, ai="codex")
+        manager = ExtensionManager(project_dir)
+        manifest = ExtensionManifest(extension_dir / "extension.yml")
+
+        skill_file = skills_dir / "speckit-test-ext-hello" / "SKILL.md"
+        skill_file.parent.mkdir(parents=True, exist_ok=True)
+        unrelated_cache_file = (
+            temp_dir
+            / "other-extension"
+            / ".specify-dev"
+            / "extension-skills"
+            / "speckit-test-ext-hello"
+            / "SKILL.md"
+        )
+        unrelated_cache_file.parent.mkdir(parents=True)
+        unrelated_cache_file.write_text("user-owned linked content", encoding="utf-8")
+        os.symlink(
+            os.path.relpath(unrelated_cache_file, skill_file.parent), skill_file
+        )
+
+        written = manager._register_extension_skills(
+            manifest,
+            extension_dir,
+            link_outputs=True,
+        )
+
+        assert "speckit-test-ext-hello" not in written
+        assert skill_file.is_symlink()
+        assert skill_file.resolve(strict=True) == unrelated_cache_file.resolve()
+        assert unrelated_cache_file.read_text(encoding="utf-8") == (
+            "user-owned linked content"
+        )
+
     def test_dev_skill_registration_falls_back_to_copy_when_symlink_fails(
         self, skills_project, extension_dir, monkeypatch
     ):
@@ -771,6 +849,126 @@ class TestExtensionSkillRegistration:
         assert '.specify/scripts/bash/setup-plan.sh --json "$ARGUMENTS"' in content
         assert ".specify/templates/checklist.md" in content
         assert ".specify/memory/constitution.md" in content
+
+    def test_skill_registration_uses_extension_local_script_paths(self, project_dir, temp_dir):
+        """Auto-registered skills should not rewrite extension scripts into core scripts."""
+        _create_init_options(project_dir, ai="claude", ai_skills=True)
+        skills_dir = _create_skills_dir(project_dir, ai="claude")
+
+        ext_dir = temp_dir / "scripted-ext"
+        ext_dir.mkdir()
+        manifest_data = {
+            "schema_version": "1.0",
+            "extension": {
+                "id": "scripted-ext",
+                "name": "Scripted Extension",
+                "version": "1.0.0",
+                "description": "Test",
+            },
+            "requires": {"speckit_version": ">=0.1.0"},
+            "provides": {
+                "commands": [
+                    {
+                        "name": "speckit.scripted-ext.check",
+                        "file": "commands/check.md",
+                        "description": "Scripted check command",
+                    }
+                ]
+            },
+        }
+        with open(ext_dir / "extension.yml", "w") as f:
+            yaml.safe_dump(manifest_data, f)
+
+        (ext_dir / "commands").mkdir()
+        (ext_dir / "scripts" / "bash").mkdir(parents=True)
+        (ext_dir / "scripts" / "bash" / "resolve-skill.sh").write_text(
+            "#!/usr/bin/env bash\n"
+        )
+        (ext_dir / "scripts" / "bash" / "ensure-skills.sh").write_text(
+            "#!/usr/bin/env bash\n"
+        )
+        (ext_dir / "commands" / "check.md").write_text(
+            "---\n"
+            "description: Scripted check command\n"
+            "scripts:\n"
+            '  sh: scripts/bash/resolve-skill.sh "{ARGS}"\n'
+            "---\n\n"
+            "Run {SCRIPT}\n"
+            "Then run scripts/bash/ensure-skills.sh.\n"
+        )
+
+        manager = ExtensionManager(project_dir)
+        manager.install_from_directory(ext_dir, "0.1.0", register_commands=False)
+
+        content = (skills_dir / "speckit-scripted-ext-check" / "SKILL.md").read_text()
+        assert "{SCRIPT}" not in content
+        assert "{ARGS}" not in content
+        assert (
+            '.specify/extensions/scripted-ext/scripts/bash/resolve-skill.sh "$ARGUMENTS"'
+            in content
+        )
+        assert ".specify/extensions/scripted-ext/scripts/bash/ensure-skills.sh" in content
+        assert ".specify/scripts/bash/resolve-skill.sh" not in content
+        assert ".specify/scripts/bash/ensure-skills.sh" not in content
+
+    def test_skill_registration_rewrites_extension_subdir_paths(self, project_dir, temp_dir):
+        """Auto-registered skills should resolve extension-relative subdir
+        references (agents/, knowledge-base/) to their installed location,
+        matching the rewrite already applied by register_commands() (#2101)."""
+        _create_init_options(project_dir, ai="claude", ai_skills=True)
+        skills_dir = _create_skills_dir(project_dir, ai="claude")
+
+        ext_dir = temp_dir / "path-ext"
+        ext_dir.mkdir()
+        manifest_data = {
+            "schema_version": "1.0",
+            "extension": {
+                "id": "path-ext",
+                "name": "Path Extension",
+                "version": "1.0.0",
+                "description": "Test",
+            },
+            "requires": {"speckit_version": ">=0.1.0"},
+            "provides": {
+                "commands": [
+                    {
+                        "name": "speckit.path-ext.run",
+                        "file": "commands/run.md",
+                        "description": "Run command",
+                    }
+                ]
+            },
+        }
+        with open(ext_dir / "extension.yml", "w") as f:
+            yaml.safe_dump(manifest_data, f)
+
+        (ext_dir / "commands").mkdir()
+        (ext_dir / "agents" / "control").mkdir(parents=True)
+        (ext_dir / "agents" / "control" / "commander.md").write_text("# Commander\n")
+        (ext_dir / "knowledge-base").mkdir()
+        (ext_dir / "knowledge-base" / "agent-scores.yaml").write_text("scores: {}\n")
+        (ext_dir / "templates").mkdir()
+        (ext_dir / "templates" / "kill-report.md").write_text("# Kill Report\n")
+
+        (ext_dir / "commands" / "run.md").write_text(
+            "---\n"
+            "description: Run command\n"
+            "---\n\n"
+            "Read agents/control/commander.md and knowledge-base/agent-scores.yaml.\n"
+            "Use templates/kill-report.md as the report template.\n"
+        )
+
+        manager = ExtensionManager(project_dir)
+        manager.install_from_directory(ext_dir, "0.1.0", register_commands=False)
+
+        content = (skills_dir / "speckit-path-ext-run" / "SKILL.md").read_text()
+        assert ".specify/extensions/path-ext/agents/control/commander.md" in content
+        assert ".specify/extensions/path-ext/knowledge-base/agent-scores.yaml" in content
+        # extension's own templates/ dir must resolve under the extension,
+        # not the project-level .specify/templates/
+        assert ".specify/extensions/path-ext/templates/kill-report.md" in content
+        assert "Read agents/control" not in content
+        assert "and knowledge-base/" not in content
 
     def test_missing_command_file_skipped(self, skills_project, temp_dir):
         """Commands with missing source files should be skipped gracefully."""

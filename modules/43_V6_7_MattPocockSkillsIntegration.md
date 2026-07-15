@@ -14,6 +14,7 @@ To eliminate misalignment between the user and the Agent, major feature plans **
 2. **Single-Question Flow**: The Agent **MUST** ask questions one at a time. Dumping a bulk list of questions is strictly prohibited.
 3. **Recommended Answers**: For every question asked, the Agent **MUST** provide a clear, reasoned "Recommended Answer" (e.g., *"How should we handle caching here? Recommended: Redis with a 5-minute TTL because..."*). This allows the user to simply approve the recommendation or quickly course-correct.
 4. **Codebase First**: The Agent must explore the codebase automatically to answer structural questions rather than asking the user for facts that can be statically verified.
+5. **Human-Readable Proposal Gate**: At the conclusion of the grilling session, the Agent **MUST** ask the user whether they require a human-readable Project Proposal / Scope Statement (in Word, PDF, or Markdown layout). If requested, the Agent must generate a non-technical summary focused on business scope, milestone timelines, and visual expectations, hiding API schemas and engineering configurations.
 
 ---
 

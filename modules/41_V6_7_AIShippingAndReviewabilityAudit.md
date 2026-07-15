@@ -131,6 +131,7 @@ Before declaring a task finished and ready for human merge review, the Agent **M
 - [ ] **Security Clear**: Run static security audit (§4.3) with self-refutation (§3) and verify zero hardcoded secrets.
 - [ ] **Performance Approved**: Run performance audit (§4.4) with self-refutation and confirm no glaring waterfalls or N+1 queries in hot paths.
 - [ ] **All Findings Self-Refuted**: Confirm that every reported finding has been through the self-refutation process (§3).
+- [ ] **Human Handover Prompted**: Ask the user if they require a human-readable Project Handover Package (such as a PDF user manual, a summary PowerPoint deck, or an interactive progress timeline) for business reporting, and compile it if requested.
 
 ---
 

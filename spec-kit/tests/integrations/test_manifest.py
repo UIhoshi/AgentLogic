@@ -116,6 +116,34 @@ class TestManifestPathTraversal:
         assert len(removed) == 1
         assert removed[0].name == "safe.txt"
 
+    def test_remove_drops_entry_and_is_noop_second_time(self, tmp_path):
+        (tmp_path / "f.txt").write_text("x", encoding="utf-8")
+        m = IntegrationManifest("test", tmp_path)
+        m.record_existing("f.txt")
+        assert "f.txt" in m.files
+        assert m.remove("f.txt") is True
+        assert "f.txt" not in m.files
+        assert m.remove("f.txt") is False  # already gone → no-op
+
+    def test_remove_rejects_absolute_path(self, tmp_path):
+        # Matches record_existing/is_recovered: an absolute key can never be a
+        # canonical manifest key, so remove() rejects it lexically and leaves
+        # the tracked entry untouched.
+        (tmp_path / "f.txt").write_text("x", encoding="utf-8")
+        m = IntegrationManifest("test", tmp_path)
+        m.record_existing("f.txt")
+        import sys
+        abs_input = "C:\\tmp\\f.txt" if sys.platform == "win32" else "/tmp/f.txt"
+        assert m.remove(abs_input) is False
+        assert "f.txt" in m.files
+
+    def test_remove_rejects_parent_traversal(self, tmp_path):
+        (tmp_path / "f.txt").write_text("x", encoding="utf-8")
+        m = IntegrationManifest("test", tmp_path)
+        m.record_existing("f.txt")
+        assert m.remove("../f.txt") is False
+        assert "f.txt" in m.files
+
 
 class TestManifestCheckModified:
     def test_unmodified_file(self, tmp_path):
@@ -453,3 +481,40 @@ class TestRecordExistingNewGuards:
         m = IntegrationManifest("test", tmp_path)
         with pytest.raises(ValueError, match=r"canonical|'\.\.' segments"):
             m.record_existing("dir/../file.txt")
+
+
+class TestManifestUnreadableFile:
+    """A managed file that is unreadable (e.g. PermissionError) must not crash
+    check_modified()/uninstall() — the CLI handlers surfaced a raw traceback."""
+
+    def _mk(self, tmp_path):
+        m = IntegrationManifest("test", tmp_path)
+        m.record_file("sub/f.md", "content")
+        return m
+
+    def test_check_modified_treats_unreadable_as_modified(self, tmp_path, monkeypatch):
+        m = self._mk(tmp_path)
+
+        def raise_perm(_path):
+            raise PermissionError("unreadable")
+
+        monkeypatch.setattr(
+            "specify_cli.integrations.manifest._sha256", raise_perm
+        )
+        # Before the fix this raised PermissionError.
+        assert m.check_modified() == ["sub/f.md"]
+
+    def test_uninstall_preserves_unreadable_file(self, tmp_path, monkeypatch):
+        m = self._mk(tmp_path)
+
+        def raise_perm(_path):
+            raise PermissionError("unreadable")
+
+        monkeypatch.setattr(
+            "specify_cli.integrations.manifest._sha256", raise_perm
+        )
+        removed, skipped = m.uninstall(force=False)
+        # Can't verify ownership => preserve, don't crash and don't delete.
+        assert removed == []
+        assert (tmp_path / "sub" / "f.md") in skipped
+        assert (tmp_path / "sub" / "f.md").exists()

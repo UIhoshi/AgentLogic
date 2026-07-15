@@ -51,10 +51,11 @@ If the current directory is not yet a Spec Kit project, `install` initializes on
 specify bundle update [<bundle_id>]
 ```
 
-| Option       | Description                          |
-| ------------ | ------------------------------------ |
-| `--all`      | Update every installed bundle        |
-| `--offline`  | Do not access the network            |
+| Option           | Description                                                                                                            |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `--all`          | Update every installed bundle                                                                                         |
+| `--integration`  | Override the integration used when refreshing components; applied only when the project's active integration can't be determined |
+| `--offline`      | Do not access the network                                                                                             |
 
 Re-resolves a bundle and **refreshes** its components through each primitive's update path, bringing already-installed components up to the bundle's newly pinned versions while preserving primitive-level overrides (such as preset priority). Provide a bundle id, or use `--all` to update everything installed.
 
@@ -118,6 +119,12 @@ specify bundle build
 | `--output`  | Output directory for the artifact                       |
 
 Produces a single versioned, distributable `.zip` artifact from a bundle directory. The artifact embeds the manifest and can be installed directly with `specify bundle install <artifact.zip>`.
+
+## Publish a Bundle
+
+Bundle authors validate and package bundles locally, then host the generated artifact and catalog metadata where users can access it. A bundle catalog entry points at the bundle artifact, but the components declared inside `bundle.yml` still resolve through bundled components, installed components, or active extension, preset, workflow, and step catalogs.
+
+If your bundle references components from non-default catalogs, document those catalog URLs and test the install path from a clean project with those catalogs added. Community bundle submissions should include that dependency-resolution evidence in the [Bundle Submission](https://github.com/github/spec-kit/issues/new?template=bundle_submission.yml) issue.
 
 ## Manage Catalog Sources
 

@@ -33,7 +33,7 @@ For local installation discovery:
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\doctor.ps1
 ```
 
-Do not bind hosts directly to `versions/AgentLogic_V6_7_0.md` or any future versioned file name.
+Do not bind hosts directly to `versions/AgentLogic_V6_7_2.md` or any future versioned file name.
 
 ## Purpose
 
@@ -77,7 +77,7 @@ When a host installs AgentLogic as its primary logic, it should:
 
 ## Current Stable Version File
 
-- `versions/AgentLogic_V6_7_0.md`
+- `versions/AgentLogic_V6_7_2.md`
 
 ## Host Adapters
 

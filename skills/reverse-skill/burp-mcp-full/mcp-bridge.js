@@ -49,7 +49,13 @@ async function callTool(toolName, params) {
         try { resolve(JSON.parse(data)); } catch (e) { resolve({ error: data }); }
       });
     });
-    req.on('error', reject);
+    req.on('error', (err) => {
+      reject(new Error(
+        `Cannot reach Burp MCP at ${BURP_HOST}:${BURP_PORT} (${err.code || err.message}). ` +
+        `Ensure Burp Suite is running with the "MCP Full Control" extension loaded. ` +
+        `If the port differs, set BURP_MCP_PORT and -Dburp.mcp.port=<same> on Burp.`
+      ));
+    });
     req.write(body);
     req.end();
   });
@@ -131,6 +137,26 @@ function getToolDescription(name) {
     remove_proxy_rule: 'Remove/clear proxy intercept rules',
     extensions_list: 'Get information about loaded extensions',
     log: 'Write a message to Burp extension output log',
+    audit_log: 'View audit log entries',
+    privacy_mode: 'Set privacy mode (strict/off)',
+    scope_gate: 'Enable/disable scope gate',
+    inline_fuzzer: 'FUZZ marker fuzzing',
+    race_condition: 'Race condition testing',
+    access_control_sweep: 'Test different auth levels',
+    injection_probe: 'SQLi/SSTI/LFI probe',
+    jwt_attack: 'JWT attacks (alg:none)',
+    jwt_decode: 'Decode JWT tokens',
+    session_remove_rule: 'Remove session rule',
+    session_list_rules: 'List session rules',
+    session_create_rule: 'Create session handling rule',
+    passive_intel: 'Extract secrets from proxy history',
+    websocket_list: 'List active WebSockets',
+    websocket_close: 'Close WebSocket',
+    websocket_send_binary: 'Send binary on WebSocket',
+    websocket_send_text: 'Send text on WebSocket',
+    websocket_create: 'Create WebSocket connection',
+    send_request_parallel: 'Send parallel HTTP requests',
+    cookie_jar_set: 'Set cookie in Burp cookie jar',
   };
   return descriptions[name] || `Burp Suite tool: ${name}`;
 }
@@ -187,6 +213,26 @@ function getToolParams(name) {
     register_http_handler: { header_name: {type:'string'}, header_value: {type:'string'}, match: {type:'string'}, replace: {type:'string'} },
     register_proxy_rule: { url_contains: {type:'string'} },
     log: { message: {type:'string'}, level: {type:'string'} },
+    audit_log: { limit: {type:'number'} },
+    privacy_mode: { mode: {type:'string'} },
+    scope_gate: { action: {type:'string'} },
+    inline_fuzzer: { template: {type:'string'}, host: {type:'string'}, wordlist: {type:'array'} },
+    race_condition: { request: {type:'string'}, host: {type:'string'}, count: {type:'number'} },
+    access_control_sweep: { request: {type:'string'}, host: {type:'string'}, auth_headers: {type:'string'} },
+    injection_probe: { url: {type:'string'}, param: {type:'string'}, type: {type:'string'} },
+    jwt_attack: { token: {type:'string'}, attack: {type:'string'} },
+    jwt_decode: { token: {type:'string'} },
+    session_remove_rule: {},
+    session_list_rules: {},
+    session_create_rule: { find: {type:'string'}, replace: {type:'string'} },
+    passive_intel: { limit: {type:'number'} },
+    websocket_list: {},
+    websocket_close: { id: {type:'string'} },
+    websocket_send_binary: { id: {type:'string'}, data: {type:'string'} },
+    websocket_send_text: { id: {type:'string'}, text: {type:'string'} },
+    websocket_create: { host: {type:'string'}, port: {type:'number'} },
+    send_request_parallel: { requests: {type:'array'} },
+    cookie_jar_set: { url: {type:'string'}, name: {type:'string'}, value: {type:'string'} },
   };
   return schemas[name] || {};
 }
@@ -207,10 +253,11 @@ function handleRequest(msg) {
       return null; // No response needed
 
     case 'tools/list':
-      if (!TOOLS) return { jsonrpc: '2.0', id, error: { code: -1, message: 'Tools not loaded. Is Burp running?' } };
+      if (!TOOLS) return { jsonrpc: '2.0', id, error: { code: -32000, message: `Burp MCP not connected at ${BURP_HOST}:${BURP_PORT}. Start Burp with the "MCP Full Control" extension loaded, then reconnect.` } };
       return { jsonrpc: '2.0', id, result: { tools: buildToolDefinitions(TOOLS) } };
 
     case 'tools/call': {
+      if (!TOOLS) return { jsonrpc: '2.0', id, error: { code: -32000, message: `Burp MCP not connected at ${BURP_HOST}:${BURP_PORT}. Start Burp with the "MCP Full Control" extension loaded, then reconnect.` } };
       const toolName = params.name.replace(/^burp_/, '');
       const toolArgs = params.arguments || {};
       return callTool(toolName, toolArgs).then(result => ({
@@ -239,27 +286,38 @@ async function main() {
   const rl = readline.createInterface({ input: process.stdin, terminal: false });
   let buffer = '';
 
+  let pending = 0;
+  let stdinClosed = false;
+
   rl.on('line', async (line) => {
     buffer += line;
+    let msg;
     try {
-      const msg = JSON.parse(buffer);
+      msg = JSON.parse(buffer);
       buffer = '';
-      
-      const response = await handleRequest(msg);
-      if (response) {
-        const out = JSON.stringify(response);
-        process.stdout.write(out + '\n');
-      }
     } catch (e) {
-      // Incomplete JSON, wait for more
-      if (e instanceof SyntaxError) return;
+      if (e instanceof SyntaxError) return; // incomplete JSON, wait for more
       buffer = '';
-      const errResp = { jsonrpc: '2.0', id: null, error: { code: -32700, message: 'Parse error' } };
-      process.stdout.write(JSON.stringify(errResp) + '\n');
+      process.stdout.write(JSON.stringify({ jsonrpc: '2.0', id: null, error: { code: -32700, message: 'Parse error' } }) + '\n');
+      return;
+    }
+
+    pending++;
+    try {
+      const response = await handleRequest(msg);
+      if (response) process.stdout.write(JSON.stringify(response) + '\n');
+    } catch (err) {
+      process.stdout.write(JSON.stringify({ jsonrpc: '2.0', id: msg.id ?? null, error: { code: -1, message: err.message || 'Handler error' } }) + '\n');
+    } finally {
+      pending--;
+      if (stdinClosed && pending === 0) process.exit(0);
     }
   });
 
-  rl.on('close', () => process.exit(0));
+  rl.on('close', () => {
+    stdinClosed = true;
+    if (pending === 0) process.exit(0);
+  });
 }
 
 main();

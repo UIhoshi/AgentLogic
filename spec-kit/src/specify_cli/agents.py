@@ -16,6 +16,9 @@ from typing import Any, Dict, List, Optional
 import yaml
 
 from ._init_options import is_ai_skills_enabled, load_init_options
+from ._toml_string import escape_toml_basic as _escape_toml_basic
+from ._toml_string import has_illegal_toml_control as _has_illegal_toml_control
+from ._utils import relative_extension_path_violation
 
 
 def _build_agent_configs() -> dict[str, Any]:
@@ -36,6 +39,8 @@ def _build_agent_configs() -> dict[str, Any]:
             # when register_commands() resolves __SPECKIT_COMMAND_*__ tokens.
             if "invoke_separator" not in config:
                 config["invoke_separator"] = integration.invoke_separator
+            if integration.dev_no_symlink:
+                config["dev_no_symlink"] = True
             configs[key] = config
     return configs
 
@@ -145,7 +150,9 @@ class CommandRegistrar:
         )
         return f"---\n{yaml_str}---\n"
 
-    def _adjust_script_paths(self, frontmatter: dict) -> dict:
+    def _adjust_script_paths(
+        self, frontmatter: dict, extension_id: Optional[str] = None
+    ) -> dict:
         """Normalize script paths in frontmatter to generated project locations.
 
         Rewrites known repo-relative and top-level script paths under the
@@ -155,6 +162,7 @@ class CommandRegistrar:
 
         Args:
             frontmatter: Frontmatter dictionary
+            extension_id: Extension id when rendering extension-owned commands.
 
         Returns:
             Modified frontmatter with normalized project paths
@@ -165,11 +173,15 @@ class CommandRegistrar:
         if isinstance(scripts, dict):
             for key, script_path in scripts.items():
                 if isinstance(script_path, str):
-                    scripts[key] = self.rewrite_project_relative_paths(script_path)
+                    scripts[key] = self.rewrite_project_relative_paths(
+                        script_path, extension_id=extension_id
+                    )
         return frontmatter
 
     @staticmethod
-    def rewrite_project_relative_paths(text: str) -> str:
+    def rewrite_project_relative_paths(
+        text: str, extension_id: Optional[str] = None
+    ) -> str:
         """Rewrite repo-relative paths to their generated project locations."""
         if not isinstance(text, str) or not text:
             return text
@@ -181,10 +193,18 @@ class CommandRegistrar:
         ):
             text = text.replace(old, new)
 
-        # Only rewrite top-level style references so extension-local paths like
-        # ".specify/extensions/<ext>/scripts/..." remain intact.
+        # Only rewrite top-level style references so existing generated paths
+        # like ".specify/extensions/<ext>/scripts/..." remain intact. When
+        # rendering extension commands, top-level "scripts/" is extension-local.
+        scripts_replacement = (
+            f".specify/extensions/{extension_id}/scripts/"
+            if extension_id
+            else ".specify/scripts/"
+        )
         text = re.sub(r'(^|[\s`"\'(])(?:\.?/)?memory/', r"\1.specify/memory/", text)
-        text = re.sub(r'(^|[\s`"\'(])(?:\.?/)?scripts/', r"\1.specify/scripts/", text)
+        text = re.sub(
+            r'(^|[\s`"\'(])(?:\.?/)?scripts/', rf"\1{scripts_replacement}", text
+        )
         text = re.sub(
             r'(^|[\s`"\'(])(?:\.?/)?templates/', r"\1.specify/templates/", text
         )
@@ -192,6 +212,52 @@ class CommandRegistrar:
         return text.replace(".specify/.specify/", ".specify/").replace(
             ".specify.specify/", ".specify/"
         )
+
+    @staticmethod
+    def rewrite_extension_paths(
+        text: str, extension_id: str, extension_dir: Path
+    ) -> str:
+        """Rewrite extension-relative paths to their installed locations.
+
+        Extension command bodies reference bundled files relative to the
+        extension root (e.g. ``agents/control/commander.md``). After install
+        those files live under ``.specify/extensions/<id>/``, so bare
+        references would resolve against the workspace root and never be
+        found (#2101).
+
+        Only directories that actually exist inside *extension_dir* are
+        rewritten, keeping the behaviour conservative and avoiding false
+        positives on prose. ``commands`` (slash-command sources), ``specs``
+        (user project artifacts) and dot-directories are never rewritten.
+        """
+        if not isinstance(text, str) or not text:
+            return text
+
+        skip = {"commands", ".git", "specs"}
+        try:
+            subdirs = [
+                entry.name
+                for entry in extension_dir.iterdir()
+                if entry.is_dir()
+                and entry.name not in skip
+                and not entry.name.startswith(".")
+            ]
+        except OSError:
+            return text
+
+        for subdir in subdirs:
+            # Only rewrite relative references (subdir/... or ./subdir/...);
+            # absolute paths like /subdir/... keep their meaning. Use a
+            # callable replacement: subdir/extension_id come from the
+            # filesystem and could contain backslashes or "\1"-like
+            # sequences, which would corrupt a string replacement template.
+            replacement = f".specify/extensions/{extension_id}/{subdir}/"
+            text = re.sub(
+                r'(^|[\s`"\'(])(?:\./)?' + re.escape(subdir) + "/",
+                lambda m: m.group(1) + replacement,
+                text,
+            )
+        return text
 
     def render_markdown_command(
         self, frontmatter: dict, body: str, source_id: str, context_note: str = None
@@ -233,9 +299,19 @@ class CommandRegistrar:
         toml_lines.append(f"# Source: {source_id}")
         toml_lines.append("")
 
-        # Keep TOML output valid even when body contains triple-quote delimiters.
-        # Prefer multiline forms, then fall back to escaped basic string.
-        if '"""' not in body:
+        # Keep TOML output valid even when body contains triple-quote delimiters
+        # or backslashes. Prefer multiline forms, then fall back to escaped basic
+        # string. A multiline *basic* string ("""...""") processes backslash escape
+        # sequences, so a body containing a backslash (e.g. a Windows path
+        # ``C:\\Users\\...`` whose ``\\U`` reads as an invalid unicode escape) would
+        # produce unparseable TOML — route those to the *literal* form ('''...'''),
+        # which does not process escapes, or to the escaped basic string.
+        # Control characters (U+0000–U+001F except tab/newline, U+007F) and a bare
+        # CR are illegal in every TOML string form, so a body containing them must
+        # go to the escaped basic string regardless of which delimiters it uses.
+        if self._has_illegal_toml_control(body):
+            toml_lines.append(f"prompt = {self._render_basic_toml_string(body)}")
+        elif '"""' not in body and "\\" not in body:
             toml_lines.append('prompt = """')
             toml_lines.append(body)
             toml_lines.append('"""')
@@ -248,17 +324,11 @@ class CommandRegistrar:
 
         return "\n".join(toml_lines)
 
-    @staticmethod
-    def _render_basic_toml_string(value: str) -> str:
-        """Render *value* as a TOML basic string literal."""
-        escaped = (
-            value.replace("\\", "\\\\")
-            .replace('"', '\\"')
-            .replace("\n", "\\n")
-            .replace("\r", "\\r")
-            .replace("\t", "\\t")
-        )
-        return f'"{escaped}"'
+    # Control-char detection and basic-string escaping are shared with the
+    # gemini/tabnine renderer in ``specify_cli.integrations.base`` via
+    # ``specify_cli._toml_string`` so the two never drift apart.
+    _has_illegal_toml_control = staticmethod(_has_illegal_toml_control)
+    _render_basic_toml_string = staticmethod(_escape_toml_basic)
 
     def render_yaml_command(
         self,
@@ -304,6 +374,7 @@ class CommandRegistrar:
         source_id: str,
         source_file: str,
         project_root: Path,
+        extension_id: Optional[str] = None,
     ) -> str:
         """Render a command override as a SKILL.md file.
 
@@ -323,7 +394,7 @@ class CommandRegistrar:
         agent_config = self.AGENT_CONFIGS.get(agent_name, {})
         if agent_config.get("extension") == "/SKILL.md":
             body = self.resolve_skill_placeholders(
-                agent_name, frontmatter, body, project_root
+                agent_name, frontmatter, body, project_root, extension_id=extension_id
             )
 
         description = frontmatter.get(
@@ -357,8 +428,39 @@ class CommandRegistrar:
         return skill_frontmatter
 
     @staticmethod
+    def apply_argument_hint(
+        source_frontmatter: Dict[str, Any],
+        skill_frontmatter: Dict[str, Any],
+        integration: Optional[object] = None,
+    ) -> None:
+        """Carry a command's ``argument-hint`` into its generated skill frontmatter.
+
+        Copies ``argument-hint`` from the parsed source command frontmatter into
+        *skill_frontmatter* (mutated in place) before serialization, so that a
+        folded multi-line ``description`` cannot be split into invalid YAML. Only
+        integrations that support the field — those exposing
+        ``inject_argument_hint`` (currently Claude) — receive the key, leaving
+        :meth:`build_skill_frontmatter`'s shared shape unchanged for every other
+        agent. Built-in templates carry no ``argument-hint``, so this is a no-op
+        for the core path.
+        """
+        if not isinstance(source_frontmatter, dict) or not isinstance(skill_frontmatter, dict):
+            return
+        argument_hint = source_frontmatter.get("argument-hint")
+        if (
+            argument_hint
+            and integration is not None
+            and hasattr(integration, "inject_argument_hint")
+        ):
+            skill_frontmatter["argument-hint"] = str(argument_hint)
+
+    @staticmethod
     def resolve_skill_placeholders(
-        agent_name: str, frontmatter: dict, body: str, project_root: Path
+        agent_name: str,
+        frontmatter: dict,
+        body: str,
+        project_root: Path,
+        extension_id: Optional[str] = None,
     ) -> str:
         """Resolve script placeholders for skills-backed agents."""
         if not isinstance(frontmatter, dict):
@@ -398,18 +500,9 @@ class CommandRegistrar:
 
         body = body.replace("{ARGS}", "$ARGUMENTS").replace("__AGENT__", agent_name)
 
-        # Resolve __CONTEXT_FILE__ from the agent-context extension config.
-        # Fall back to init-options.json for projects that haven't migrated.
-        # Local import: _load_agent_context_config lives in __init__.py which
-        # imports agents.py, so a top-level import would be circular.
-        from . import _load_agent_context_config
-        ac_cfg = _load_agent_context_config(project_root)
-        context_file = ac_cfg.get("context_file") or ""
-        if not context_file:
-            context_file = init_opts.get("context_file") or ""
-        body = body.replace("__CONTEXT_FILE__", context_file)
-
-        return CommandRegistrar.rewrite_project_relative_paths(body)
+        return CommandRegistrar.rewrite_project_relative_paths(
+            body, extension_id=extension_id
+        )
 
     def _convert_argument_placeholder(
         self, content: str, from_placeholder: str, to_placeholder: str
@@ -504,6 +597,7 @@ class CommandRegistrar:
         context_note: str = None,
         _resolved_dir: Path = None,
         link_outputs: bool = False,
+        extension_id: Optional[str] = None,
     ) -> List[str]:
         """Register commands for a specific agent.
 
@@ -521,6 +615,7 @@ class CommandRegistrar:
             link_outputs: If True, write rendered output to a source-local
                 dev cache and symlink the agent command file to it. Falls back
                 to a normal file write when symlinks are unavailable.
+            extension_id: Extension id when rendering extension-owned commands.
 
         Returns:
             List of registered command names
@@ -540,17 +635,42 @@ class CommandRegistrar:
 
         registered = []
         is_cline_ext = agent_name == "cline" and source_id != "core"
+        source_root = source_dir.resolve()
 
         for cmd_info in commands:
             cmd_name = cmd_info["name"]
             aliases = cmd_info.get("aliases", [])
             cmd_file = cmd_info["file"]
 
-            source_file = source_dir / cmd_file
-            if not source_file.exists():
+            # Guard against path traversal using the single shared policy in
+            # relative_extension_path_violation(), so the runtime guard stays
+            # aligned with ExtensionManifest._validate() and the skill/preset
+            # readers. Skip a malformed/unsafe ``file`` (non-string, empty,
+            # whitespace, absolute/anchored, or ``..`` traversal); the
+            # resolve()/relative_to() check below is the final containment
+            # backstop.
+            if relative_extension_path_violation(cmd_file):
+                continue
+            try:
+                source_file = (source_root / cmd_file).resolve()
+                source_file.relative_to(source_root)  # raises ValueError if outside
+            except (OSError, ValueError):
                 continue
 
-            content = source_file.read_text(encoding="utf-8")
+            if not source_file.is_file():
+                continue
+
+            try:
+                content = source_file.read_text(encoding="utf-8")
+            except (OSError, UnicodeDecodeError) as exc:
+                import warnings
+
+                warnings.warn(
+                    f"Skipping command '{cmd_name}': could not read source file "
+                    f"'{cmd_file}' ({exc.__class__.__name__}: {exc}).",
+                    stacklevel=2,
+                )
+                continue
             frontmatter, body = self.parse_frontmatter(content)
 
             if frontmatter.get("strategy") == "wrap":
@@ -565,7 +685,12 @@ class CommandRegistrar:
                         frontmatter[key] = core_frontmatter[key]
                 frontmatter.pop("strategy", None)
 
-            frontmatter = self._adjust_script_paths(frontmatter)
+            if extension_id:
+                body = self.rewrite_extension_paths(body, extension_id, source_root)
+
+            frontmatter = self._adjust_script_paths(
+                frontmatter, extension_id=extension_id
+            )
 
             for key in agent_config.get("strip_frontmatter_keys", []):
                 frontmatter.pop(key, None)
@@ -604,10 +729,11 @@ class CommandRegistrar:
                     source_id,
                     cmd_file,
                     project_root,
+                    extension_id=extension_id,
                 )
             elif agent_config["format"] == "markdown":
                 body = self.resolve_skill_placeholders(
-                    agent_name, frontmatter, body, project_root
+                    agent_name, frontmatter, body, project_root, extension_id=extension_id
                 )
                 body = self._convert_argument_placeholder(
                     body, "$ARGUMENTS", agent_config["args"]
@@ -617,18 +743,35 @@ class CommandRegistrar:
                 )
             elif agent_config["format"] == "toml":
                 body = self.resolve_skill_placeholders(
-                    agent_name, frontmatter, body, project_root
+                    agent_name, frontmatter, body, project_root, extension_id=extension_id
                 )
                 body = self._convert_argument_placeholder(
                     body, "$ARGUMENTS", agent_config["args"]
                 )
                 output = self.render_toml_command(frontmatter, body, source_id)
             elif agent_config["format"] == "yaml":
+                body = self.resolve_skill_placeholders(
+                    agent_name, frontmatter, body, project_root
+                )
+                body = self._convert_argument_placeholder(
+                    body, "$ARGUMENTS", agent_config["args"]
+                )
                 output = self.render_yaml_command(
                     frontmatter, body, source_id, cmd_name
                 )
             else:
                 raise ValueError(f"Unsupported format: {agent_config['format']}")
+
+            # -- Post-process for non-skills agents -----------------------
+            _integration = None
+            if agent_config["extension"] != "/SKILL.md":
+                from specify_cli.integrations import (  # noqa: PLC0415
+                    get_integration,
+                )
+
+                _integration = get_integration(agent_name)
+                if _integration is not None:
+                    output = _integration.post_process_command_content(output)
 
             dest_file = commands_dir / f"{output_name}{agent_config['extension']}"
             self._ensure_inside(dest_file, commands_dir)
@@ -641,6 +784,7 @@ class CommandRegistrar:
                 output_name,
                 agent_config["extension"],
                 link_outputs,
+                agent_config,
             )
 
             if agent_name == "copilot":
@@ -671,6 +815,7 @@ class CommandRegistrar:
                             source_id,
                             cmd_file,
                             project_root,
+                            extension_id=extension_id,
                         )
                     elif agent_config["format"] == "markdown":
                         alias_output = self.render_markdown_command(
@@ -688,6 +833,9 @@ class CommandRegistrar:
                         raise ValueError(
                             f"Unsupported format: {agent_config['format']}"
                         )
+
+                    if agent_config["extension"] != "/SKILL.md" and _integration is not None:
+                        alias_output = _integration.post_process_command_content(alias_output)
                 else:
                     # For other agents, reuse the primary output
                     alias_output = output
@@ -700,6 +848,7 @@ class CommandRegistrar:
                             source_id,
                             cmd_file,
                             project_root,
+                            extension_id=extension_id,
                         )
 
                 alias_file = (
@@ -715,6 +864,7 @@ class CommandRegistrar:
                     alias_output_name,
                     agent_config["extension"],
                     link_outputs,
+                    agent_config,
                 )
                 if agent_name == "copilot":
                     self.write_copilot_prompt(project_root, alias)
@@ -731,9 +881,12 @@ class CommandRegistrar:
         output_name: str,
         extension: str,
         link_outputs: bool,
+        agent_config: dict[str, Any] | None = None,
     ) -> None:
         """Write a rendered agent artifact, optionally as a dev-mode symlink."""
-        if not link_outputs:
+        if not link_outputs or (agent_config or {}).get("dev_no_symlink"):
+            if dest_file.is_symlink():
+                dest_file.unlink()
             dest_file.write_text(content, encoding="utf-8")
             return
 
@@ -827,6 +980,7 @@ class CommandRegistrar:
         context_note: str = None,
         link_outputs: bool = False,
         create_missing_active_skills_dir: bool = False,
+        extension_id: Optional[str] = None,
     ) -> Dict[str, List[str]]:
         """Register commands for all detected agents in the project.
 
@@ -843,6 +997,7 @@ class CommandRegistrar:
                 Recovery requires active skills mode (or Kimi's existing native
                 skills directory) and is skipped when safe resolution or
                 creation fails.
+            extension_id: Extension id when rendering extension-owned commands.
 
         Returns:
             Dictionary mapping agent names to list of registered commands
@@ -854,6 +1009,16 @@ class CommandRegistrar:
             self._active_skills_agent(project_root)
             if create_missing_active_skills_dir else None
         )
+        active_skills_dir: Optional[Path] = None
+        if active_skills_agent:
+            active_skills_config = self.AGENT_CONFIGS.get(active_skills_agent)
+            if (
+                active_skills_config
+                and active_skills_config.get("extension") == "/SKILL.md"
+            ):
+                active_skills_dir = self._resolve_agent_dir(
+                    active_skills_agent, active_skills_config, project_root,
+                )
         active_created_skills_dir: Optional[Path] = None
         for agent_name, agent_config in self.AGENT_CONFIGS.items():
             active_skills_output = (
@@ -885,6 +1050,14 @@ class CommandRegistrar:
             agent_dir = self._resolve_agent_dir(
                 agent_name, agent_config, project_root,
             )
+            shares_active_skills_dir = (
+                active_skills_dir is not None
+                and agent_name != active_skills_agent
+                and agent_config.get("extension") == "/SKILL.md"
+                and self._same_lexical_path(agent_dir, active_skills_dir)
+            )
+            if shares_active_skills_dir:
+                continue
 
             agent_dir_existed = agent_dir.is_dir()
             register_missing_active_skills_agent = (
@@ -927,6 +1100,7 @@ class CommandRegistrar:
                         context_note=context_note,
                         _resolved_dir=agent_dir,
                         link_outputs=link_outputs,
+                        extension_id=extension_id,
                     )
                     if registered:
                         results[agent_name] = registered
@@ -951,6 +1125,7 @@ class CommandRegistrar:
         project_root: Path,
         context_note: Optional[str] = None,
         link_outputs: bool = False,
+        extension_id: Optional[str] = None,
     ) -> Dict[str, List[str]]:
         """Register commands for all non-skill agents in the project.
 
@@ -966,6 +1141,7 @@ class CommandRegistrar:
             context_note: Custom context comment for markdown output
             link_outputs: If True, create dev-mode symlinks for rendered
                 command files when supported by the OS.
+            extension_id: Extension id when rendering extension-owned commands.
 
         Returns:
             Dictionary mapping agent names to list of registered commands
@@ -994,6 +1170,7 @@ class CommandRegistrar:
                         context_note=context_note,
                         _resolved_dir=agent_dir,
                         link_outputs=link_outputs,
+                        extension_id=extension_id,
                     )
                     if registered:
                         results[agent_name] = registered
