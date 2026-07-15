@@ -14,6 +14,18 @@ const REQUIRED_LOGIC_CHAIN_ANCHORS = [
 
 const ENTRY_FILES = ['00_START_HERE.md', 'AGENTS.md', 'README.md', 'MAIN.md'];
 
+const ACTIVE_VERSION_FILES = [
+  'AGENTS.md',
+  'README.md',
+  '00_README.md',
+  '00_START_HERE.md',
+  'AGENT_INSTALL.md',
+  'MAIN.md',
+  'modules/41_V6_7_AIShippingAndReviewabilityAudit.md',
+  'modules/42_V6_7_PonytailLazySeniorDevLadder.md',
+  'modules/43_V6_7_MattPocockSkillsIntegration.md',
+];
+
 const GATE_ANCHORS = [
   'MANDATORY LOGIC GATE',
   'AGENTS.md',
@@ -66,6 +78,51 @@ function checkLogicChainInRepoDocs() {
       fail(`Repository entry docs do not declare logic-chain anchor: ${anchor}`);
     } else {
       ok(`Repository entry docs declare logic-chain anchor: ${anchor}`);
+    }
+  }
+}
+
+function checkActiveVersionAndPathHygiene() {
+  const manifest = readFileSafe('manifest.json');
+  if (!manifest) {
+    fail('manifest.json is required for active-version checks.');
+    return;
+  }
+
+  let parsed;
+  try {
+    parsed = JSON.parse(manifest);
+  } catch (error) {
+    fail(`manifest.json is not valid JSON: ${error.message}`);
+    return;
+  }
+
+  const expectedVersion = parsed.current_version;
+  const staleVersionPattern = /AgentLogic_V6_7_0|V6\.7\.0|AgentLogic_V6_7_1|V6\.7\.1/;
+  const absoluteFileUriPattern = /file:\/\/(?:[A-Za-z]:|Users\/|home\/)/;
+
+  for (const relPath of ACTIVE_VERSION_FILES) {
+    const content = readFileSafe(relPath);
+    if (content == null) {
+      fail(`Active version file not found: ${relPath}`);
+      continue;
+    }
+    if (staleVersionPattern.test(content)) {
+      fail(`Stale stable-version reference found in active file: ${relPath}`);
+    }
+    if (absoluteFileUriPattern.test(content)) {
+      fail(`Machine-specific absolute file URI found in active file: ${relPath}`);
+    }
+  }
+
+  const startHere = readFileSafe('00_START_HERE.md');
+  if (startHere) {
+    const startupIndex = startHere.indexOf('## Startup Gate');
+    const fullReadIndex = startHere.indexOf('## Mandatory Full-Read Chain');
+    if (startupIndex === -1 || fullReadIndex === -1 || startupIndex > fullReadIndex) {
+      fail('00_START_HERE.md must define Startup Gate before Mandatory Full-Read Chain.');
+    } else {
+      ok('Startup Gate precedes the Mandatory Full-Read Chain.');
     }
   }
 }
@@ -127,6 +184,7 @@ function main() {
 
   checkRepoDocs();
   checkLogicChainInRepoDocs();
+  checkActiveVersionAndPathHygiene();
 
   for (const relPath of ENTRY_FILES) {
     checkEntryFileGate(relPath);

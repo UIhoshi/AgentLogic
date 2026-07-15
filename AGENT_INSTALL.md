@@ -17,11 +17,11 @@ Do not continue deeper reading, modify files, delete files, perform write action
 or begin implementation before the logic-entry loop above has been completed.
 -->
 
-# Agent Installation Guide (V6.7.0 Stable)
+# Agent Installation Guide (V6.7.2 Stable)
 
 This is the shortest installation path for AI agents. 
 
-Goal: Install **AgentLogic V6.7.0** into the current local host without guessing the entrypoint, target bundle, or validation command.
+Goal: Install **AgentLogic V6.7.2** into the current local host without guessing the entrypoint, target bundle, or validation command.
 
 ## Do Not Guess
 
@@ -29,7 +29,7 @@ Before installing, identify:
 
 1.  Whether the current directory is the AgentLogic repository root.
 2.  The target host: `codex`, `claude`, `antigravity`, or `generic`.
-3.  The selected profile: **`core-enhanced`** is mandatory for full V6.7.0 governance support.
+3.  The selected profile: **`core-enhanced`** is the default for full V6.7.2 governance support.
 4.  Whether the host should bind to `MAIN.md` directly or to a generated bundle.
 
 If uncertain, run the doctor first:
@@ -38,12 +38,12 @@ If uncertain, run the doctor first:
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\doctor.ps1
 ```
 
-## V6.7.0 Stable Facts
+## V6.7.2 Stable Facts
 
-- **Current Version**: V6.7.0 (SRA Shipping Audit, Red-Team Gate, Reversing Router, Spec Kit, Taste Design System, and visual system matrix integration).
+- **Current Version**: V6.7.2 (SRA Shipping Audit, Red-Team Gate, Reversing Router, Spec Kit, Taste Design System, and human-readable proposal/handover gates).
 - **Repository Role**: Primary local logic package (Method Layer).
 - **Stable Host Entry**: `MAIN.md`.
-- **Default Profile**: `core-enhanced` (Includes modules 20-40 for advanced governance and spec-driven workflows).
+- **Default Profile**: `core-enhanced` (Includes the current runtime, verification, SDD, SRA, skill, and reviewability governance modules).
 - **Machine-readable Contract**: `manifest.json`.
 - **Root Installer**: `install.ps1`.
 - **Validation Command**: `scripts/validate-package.ps1`.
@@ -76,31 +76,33 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost ge
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\validate-package.ps1
 ```
 
-## Agent Decision Rule (V6.7.0)
+## Agent Decision Rule (V6.7.2)
 
 If the user asks to "load", "install", "mount", "bind", or "use this logic locally", the agent **MUST** follow this protocol:
 
 1.  **Doctor Check**: Run `scripts/doctor.ps1` to verify environment and path integrity.
 2.  **Target Selection**: Choose the target host (`codex`, `claude`, `antigravity`, or `generic`) based on the current environment.
-3.  **Install & Legacy Cleanup**: Check for and remove any legacy logic files (such as root-level `.gemini/GEMINI.md` or `.claude/CLAUDE.md` in the user profile directory) to prevent them from overriding the new profile path. Then run the matching `install.ps1 -TargetHost ...` command using the `core-enhanced` profile.
+3.  **Install & Legacy Backup**: Run the matching `install.ps1 -TargetHost ...` command using the `core-enhanced` profile. The installer verifies the new target first, then moves other legacy logic files into a timestamped `.agentlogic-backup` directory instead of deleting them.
 4.  **Validation**: Run `scripts/validate-package.ps1`.
-5.  **Skill Governance Audit**: Run install-time skill deduplication and organization for the target host. This is mandatory, not optional. The default install path now executes:
-    - `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\skills-governance.ps1 -TargetHost <host> -Apply`
+5.  **Skill Governance Audit**: Run a dry-run host-local skill inventory for the target host. Applying archive moves is a separate, explicit operation after review. The default install path executes:
+    - `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\skills-governance.ps1 -TargetHost <host>`
     The purpose is:
-    - archive budget-heavy domain skill packs by default
+    - identify budget-heavy domain skill packs
     - preserve engineering-critical skills in the visible set
-    - prevent host-local skill sprawl from degrading model-visible skill quality
+    - report host-local skill sprawl without silently mutating it
 6.  **Adoption**: Immediately after installation, the agent must:
     -   Read `versions/AgentLogic_V6_7_2.md` to understand the new line.
     -   Adopt the **Mandatory Verification Matrix** (Module 29) for all subsequent claims.
     -   Adopt the **4-Tier Memory Taxonomy** (User, Feedback, Project, Reference) for project notes.
     -   Adopt the **Spec-Driven Development (SDD) Lifecycle** (Module 38) for technical tasks.
     -   Adopt the **Taste Frontend Design Standards** (Module 39) for interface and visual changes.
-7.  **Report**: State the installed host, version (V6.7.0), profile, and confirmation that the new governance rules are active.
+7.  **Report**: State the installed host, version (V6.7.2), profile, and confirmation that the new governance rules are active.
 
-## Install-Time And Update-Time Skill Rule (V6.7.0)
+## Install-Time And Update-Time Skill Rule (V6.7.2)
 
-Every local installation **and every local logic update** of AgentLogic must perform a host-local skill audit and organization pass.
+Every local installation **and every local logic update** of AgentLogic should perform a host-local
+skill inventory pass. Moving or archiving host-local skills requires a separate explicit `-Apply`
+operation after the inventory has been reviewed.
 
 This is required because:
 
@@ -110,7 +112,7 @@ This is required because:
 - duplicate-or-overlapping skill families must be classified instead of guessed
 - host-local skills must stay separate from any logic-carried skill layer so one machine's local packs do not become another machine's default logic state
 
-The V6.7.0 install/update rule is:
+The V6.7.2 install/update rule is:
 
 1. identify the host-local skill zone for the target host
 2. keep that host-local zone separate from the logic-carried layer

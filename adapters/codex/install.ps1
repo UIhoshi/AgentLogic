@@ -15,6 +15,7 @@ $configPath = Join-Path $UserHome ".codex\config.toml"
 New-Item -ItemType Directory -Force -Path $targetDir | Out-Null
 
 powershell -NoProfile -ExecutionPolicy Bypass -File $buildScript -ProfileName $ProfileName -TargetHost codex -OutputPath $targetPath
+if ($LASTEXITCODE -ne 0) { throw "build-profile.ps1 failed with exit code $LASTEXITCODE." }
 
 if (-not (Test-Path $configPath)) {
     New-Item -ItemType Directory -Force -Path (Split-Path -Parent $configPath) | Out-Null
@@ -44,9 +45,10 @@ else {
 
 [System.IO.File]::WriteAllText($configPath, $updated, [System.Text.UTF8Encoding]::new($false))
 
-powershell -NoProfile -ExecutionPolicy Bypass -File $skillsGovernanceScript -TargetHost codex -UserHome $UserHome -Apply
+powershell -NoProfile -ExecutionPolicy Bypass -File $skillsGovernanceScript -TargetHost codex -UserHome $UserHome
+if ($LASTEXITCODE -ne 0) { throw "skills-governance.ps1 failed with exit code $LASTEXITCODE." }
 
 Write-Host "Installed AgentLogic into Codex."
 Write-Host "Instructions path: $targetPath"
 Write-Host "Updated config: $configPath"
-Write-Host "Skill governance audit: applied"
+Write-Host "Skill governance inventory: complete (no archive moves applied)"

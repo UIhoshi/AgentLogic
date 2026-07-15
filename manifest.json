@@ -8,14 +8,19 @@
     "default_profile":  "core-enhanced",
     "profiles":  {
                      "minimal":  {
-                                     "description":  "Smallest safe entry set for hosts with tight context budgets.",
+                                     "description":  "Bootstrap entry set for hosts with tight context budgets; load core-enhanced before feature work, refactors, releases, or packaging.",
                                      "files":  [
                                                    "00_START_HERE.md",
                                                    "INSTALL.md",
                                                    "AGENT_INSTALL.md",
                                                    "README.md",
                                                    "AGENTS.md",
-                                                   "versions/AgentLogic_V6_7_2.md"
+                                                   "versions/AgentLogic_V6_7_2.md",
+                                                   "modules/12_AgentEnforcement.md",
+                                                   "modules/15_LogicEntryChecklist.md",
+                                                   "modules/29_MandatoryVerificationMatrix.md",
+                                                   "modules/30_ToolQuestionBoundaryMatrix.md",
+                                                   "modules/31_ToolMisuseAndAntiPatternMatrix.md"
                                                ]
                                  },
                      "core-enhanced":  {

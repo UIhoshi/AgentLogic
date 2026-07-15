@@ -90,7 +90,7 @@
       "required": [
         "codex",
         "claude",
-        "gemini",
+        "antigravity",
         "generic"
       ],
       "properties": {
@@ -102,7 +102,7 @@
           "type": "string",
           "minLength": 1
         },
-        "gemini": {
+        "antigravity": {
           "type": "string",
           "minLength": 1
         },
@@ -118,7 +118,7 @@
       "required": [
         "codex",
         "claude",
-        "gemini",
+        "antigravity",
         "generic"
       ],
       "properties": {
@@ -130,7 +130,7 @@
           "type": "string",
           "pattern": "^adapters/.+/install\\.ps1$"
         },
-        "gemini": {
+        "antigravity": {
           "type": "string",
           "pattern": "^adapters/.+/install\\.ps1$"
         },
@@ -193,7 +193,7 @@
           "required": [
             "codex",
             "claude",
-            "gemini",
+        "antigravity",
             "generic"
           ],
           "properties": {
@@ -203,7 +203,7 @@
             "claude": {
               "$ref": "#/$defs/installHost"
             },
-            "gemini": {
+        "antigravity": {
               "$ref": "#/$defs/installHost"
             },
             "generic": {

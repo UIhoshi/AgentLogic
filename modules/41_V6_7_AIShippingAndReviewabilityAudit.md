@@ -1,6 +1,6 @@
-# V6.7.0 AI Shipping & Reviewability Audit Integration
+# V6.7.2 AI Shipping & Reviewability Audit Integration
 
-Status: **Stable V6.7.0 Line (Mandatory shipping & verification protocol)**.
+Status: **Stable V6.7.2 Line (Mandatory shipping & verification protocol)**.
 
 This module defines the **AI Shipping & Reviewability Audit (SRA)** workflow, integrating concepts from the `pm-ai-shipping` framework. It addresses the critical gap in AI-assisted coding: while AI agents write code at extremely high speeds (the vibe-coding phase), they often leave no trace of design intent, security assumptions, variable maps, or test coverage. This protocol restores human reviewability and ensures safety before code is shipped.
 
@@ -8,7 +8,10 @@ This module defines the **AI Shipping & Reviewability Audit (SRA)** workflow, in
 
 ## 1. The SRA Core Mandate
 
-Every completed implementation, major refactor, or version release **MUST** pass through the **Ship & Audit Phase** before being merged or packaged.
+Every completed application implementation, major refactor, externally consumed logic change, or
+version/release package **MUST** pass through the applicable **Ship & Audit Phase** before being
+merged or packaged. Read-only audits and documentation-only changes use targeted review unless
+they alter a shipped rule contract, install path, trust boundary, or packaging surface.
 
 The goal is to translate "vibe-coded" codebases into documented, verified, and audited systems where developers and PMs can confidently verify:
 1. What the code is *intended* to do (documented intent).
@@ -23,7 +26,9 @@ To compile a reviewer-ready **Shipping Packet** under `documentation/` (or `.spe
 
 ### 2.1 Core Documents
 
-Every reviewable project **MUST** produce these five documents:
+Every reviewable application or release surface **MUST** produce these five documents. A pure
+logic-document change may use a concise audit record unless it changes architecture, permissions,
+trust boundaries, installation behavior, or externally consumed runtime behavior.
 
 | Artifact File | Purpose | Required Contents |
 | :--- | :--- | :--- |
@@ -50,12 +55,15 @@ Include a conditional document **only if** the application actually has that cap
 
 ## 3. Universal Audit Principle: Self-Refute First
 
-**This principle applies to ALL audit workflows in this module, not just security.**
+**This principle applies to all selected audit workflows in this module, not just security.**
 
 For every finding reported by any audit workflow (§4.1–§4.4), the Agent **MUST**:
 1. **State the finding** with specific code location and evidence.
 2. **Try to disprove it** using local code evidence (a counter-argument grounded in actual implementation).
-3. **Report only findings that survive self-refutation** — i.e., risks backed by undeniable code proof that could not be disproven.
+3. **Report only findings that survive self-refutation**. Each surviving finding must include its
+   evidence, counter-argument, residual uncertainty, and a status such as verified, partially
+   verified, or needs runtime confirmation. The standard is strong local evidence, not an
+   impossible claim of absolute certainty.
 
 Findings that can be disproven should be logged as "Investigated and cleared" with the disproving evidence, not silently dropped.
 
@@ -122,16 +130,16 @@ Each crossing point is a potential security gap and must be explicitly annotated
 
 ## 6. Gated Shipping Checklist (`/ship-check` execution)
 
-Before declaring a task finished and ready for human merge review, the Agent **MUST** run the `/ship-check` cycle:
+Before declaring an applicable task finished and ready for human merge review, the Agent **MUST** run the `/ship-check` cycle:
 
 - [ ] **Specs Sync**: Check if `.specify/spec.md` is aligned with the final code.
 - [ ] **Core Docs Compiled**: Verify that `documentation/` (or `.specify/ship/`) contains updated `architecture.md`, `flows.md`, `permissions.md`, `variables.md`.
 - [ ] **Tests Derived**: Verify that `tests.md` has been derived from the other core documents via §4.2, not merely copied from existing test files.
 - [ ] **Conditional Docs Honest**: Verify that conditional documents (§2.2) exist only for capabilities that are present, and absent capabilities are declared in `architecture.md`.
-- [ ] **Security Clear**: Run static security audit (§4.3) with self-refutation (§3) and verify zero hardcoded secrets.
-- [ ] **Performance Approved**: Run performance audit (§4.4) with self-refutation and confirm no glaring waterfalls or N+1 queries in hot paths.
+- [ ] **Security Clear**: When the change has secrets, permissions, trust boundaries, or external inputs, run the static security audit (§4.3) with self-refutation (§3) and verify the applicable secret-handling claims.
+- [ ] **Performance Approved**: When the change has a runtime hot path, database access, network flow, or caching behavior, run the performance audit (§4.4) with self-refutation.
 - [ ] **All Findings Self-Refuted**: Confirm that every reported finding has been through the self-refutation process (§3).
-- [ ] **Human Handover Prompted**: Ask the user if they require a human-readable Project Handover Package (such as a PDF user manual, a summary PowerPoint deck, or an interactive progress timeline) for business reporting, and compile it if requested.
+- [ ] **Human Handover**: Ask about a human-readable handover package only when the user or project stakeholders need business-facing reporting; compile it only if requested.
 
 ---
 

@@ -20,9 +20,11 @@ if ($targetDir) {
 }
 
 powershell -NoProfile -ExecutionPolicy Bypass -File $buildScript -ProfileName $ProfileName -TargetHost claude -OutputPath $TargetPath
-powershell -NoProfile -ExecutionPolicy Bypass -File $skillsGovernanceScript -TargetHost claude -UserHome $UserHome -Apply
+if ($LASTEXITCODE -ne 0) { throw "build-profile.ps1 failed with exit code $LASTEXITCODE." }
+powershell -NoProfile -ExecutionPolicy Bypass -File $skillsGovernanceScript -TargetHost claude -UserHome $UserHome
+if ($LASTEXITCODE -ne 0) { throw "skills-governance.ps1 failed with exit code $LASTEXITCODE." }
 
 Write-Host "Built Claude-ready AgentLogic bundle."
 Write-Host "Bundle path: $TargetPath"
-Write-Host "Skill governance audit: applied"
+Write-Host "Skill governance inventory: complete (no archive moves applied)"
 Write-Host "If your Claude host uses a different global entrypoint, point it at this file or rerun with -TargetPath."

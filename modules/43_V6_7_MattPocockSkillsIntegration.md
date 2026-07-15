@@ -1,6 +1,6 @@
-# V6.7.0 Matt Pocock Skills Integration
+# V6.7.2 Matt Pocock Skills Integration
 
-Status: **Stable V6.7.0 Line (Mandatory alignment & documentation protocol)**.
+Status: **Stable V6.7.2 Line (Mandatory alignment & documentation protocol)**.
 
 This module integrates the core engineering principles from the `mattpocock/skills` framework. It addresses two major communication and token-efficiency gaps in AI agent coding: (1) requirement misalignment due to passive task hand-off, and (2) excessive verbosity due to the lack of a shared, domain-specific vocabulary. By enforcing the **Grilling Process**, **Ubiquitous Glossary (`CONTEXT.md`)**, and **Architecture Decision Records (ADRs)**, this module aligns developer intent with implementation and drastically optimizes the token economy.
 
@@ -14,13 +14,18 @@ To eliminate misalignment between the user and the Agent, major feature plans **
 2. **Single-Question Flow**: The Agent **MUST** ask questions one at a time. Dumping a bulk list of questions is strictly prohibited.
 3. **Recommended Answers**: For every question asked, the Agent **MUST** provide a clear, reasoned "Recommended Answer" (e.g., *"How should we handle caching here? Recommended: Redis with a 5-minute TTL because..."*). This allows the user to simply approve the recommendation or quickly course-correct.
 4. **Codebase First**: The Agent must explore the codebase automatically to answer structural questions rather than asking the user for facts that can be statically verified.
-5. **Human-Readable Proposal Gate**: At the conclusion of the grilling session, the Agent **MUST** ask the user whether they require a human-readable Project Proposal / Scope Statement (in Word, PDF, or Markdown layout). If requested, the Agent must generate a non-technical summary focused on business scope, milestone timelines, and visual expectations, hiding API schemas and engineering configurations.
+5. **Human-Readable Proposal Gate**: At the conclusion of the grilling session, ask about a
+   human-readable Project Proposal / Scope Statement only when the user or stakeholders need a
+   business-facing artifact. Generate it only if requested; keep API schemas and engineering
+   configuration out of that artifact.
 
 ---
 
 ## 2. Ubiquitous Vocabulary: `CONTEXT.md`
 
-To reduce conversation verbosity and ensure consistent code naming, the project **MUST** establish a shared glossary.
+To reduce conversation verbosity and ensure consistent code naming, a project **SHOULD** establish
+a shared glossary when it introduces domain-specific terminology, multiple bounded contexts, or
+repeated naming ambiguity. Small documentation changes and isolated fixes do not require a new glossary.
 
 ### 2.1 Glossary Structure
 - **Single-Context Repository**: A single file named `CONTEXT.md` (or `GLOSSARY.md`) at the repository root.
@@ -32,7 +37,8 @@ To reduce conversation verbosity and ensure consistent code naming, the project 
 - **Lazy Maintenance**: When a new terminology or decision crystallizes during a grilling session, the Agent must lazily update `CONTEXT.md` to define the term.
 
 ### 2.3 Variable and Naming Alignment
-- Every class, variable, function, database table, and filename **MUST** use the exact terminology defined in `CONTEXT.md`.
+- New domain-facing names SHOULD use the terminology defined in `CONTEXT.md`; generated names,
+  framework conventions, and existing public APIs do not need to be renamed solely to satisfy a glossary.
 - Using multiple names for the same domain concept (e.g., using `User`, `Account`, and `Profile` interchangeably) is prohibited.
 
 ---

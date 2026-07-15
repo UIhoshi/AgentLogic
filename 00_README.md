@@ -1,4 +1,6 @@
 <!--
+
+
 MANDATORY LOGIC GATE
 
 Before making changes here, read `AGENTS.md` and `README.md` first.
@@ -17,11 +19,14 @@ Do not continue deeper reading, modify files, delete files, perform write action
 or begin implementation before the logic-entry loop above has been completed.
 -->
 
-# 🌌 AgentLogic: 智能体级本地自进化规则引擎 (V6.7.0)
+> `README.md` is the canonical English repository README and entry documentation. This file is retained as a legacy/reference document and is not part of the formal logic-entry chain.
+
+
+# 🌌 AgentLogic: 智能体级本地自进化规则引擎 (V6.7.2)
 
 [![Agentic Code](https://img.shields.io/badge/Agent-Autonomous-blueviolet?style=flat-square)](https://github.com/UIhoshi/AgentLogic)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/Version-V6.7.0_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_7_2.md)
+[![Version](https://img.shields.io/badge/Version-V6.7.2_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_7_2.md)
 
 AgentLogic 是一套专为本地 AI 编码宿主（如 Codex, Claude Code, Gemini Pro）设计的**分层规则引擎**。它将多轮会话规范、工具首选策略、安全沙箱拦截及专业领域扩展集成打包，作为 AI 智能体的“主运行心智”。
 

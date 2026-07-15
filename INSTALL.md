@@ -39,9 +39,11 @@ The default profile is:
 
 - `core-enhanced`
 
-## Legacy Logic Detection & Cleanup (Mandatory Step)
+## Legacy Logic Detection & Backup (Mandatory Step)
 
-To prevent conflicts where the AI client loads stale or outdated rules (e.g. from an old version location), the `install.ps1` script automatically performs a legacy file check. If old logic files are detected at root levels (such as `.gemini/GEMINI.md` or `.claude/CLAUDE.md`), they will be automatically removed/cleaned up during the install process.
+To prevent conflicts where the AI client loads stale or outdated rules, the `install.ps1` script
+checks legacy files after the new target has been verified. Other legacy files are moved into a
+timestamped `.agentlogic-backup` directory; the selected new target is never removed.
 
 
 ## First Diagnostic Command

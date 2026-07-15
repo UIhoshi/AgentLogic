@@ -82,7 +82,7 @@ These skills overlap with V6.5 logic but still provide unique operational value:
   - still provides high-performance, deterministic ref-based headless browser automation optimized for AI agents
 - `nano-banana-pro`
   - overlaps with general UI/UX drafting
-  - still provides Gemini 3 Pro Image (Nano Banana Pro) visual mockup generation for design-first E2E workflows
+  - still provides Gemini 3 Pro Image (Nano Banana Pro) visual mockup generation for net-new or major design work
 - `self-improvement`
   - overlaps with context assembly and error correction
   - still provides structured .learnings/ logging and promotion gates to harden recurring developer patterns
@@ -219,7 +219,7 @@ Use `agent-browser` when:
 
 Use `nano-banana-pro` when:
 
-- the task is designing or modifying a web page frontend, application UI, or dashboard component. In this case, the Agent must first formulate a design prompt, run `generate_image.py` (via Gemini 3 Pro Image), save the output mockup image, and present it for user review before writing any frontend code.
+- the task is designing a net-new web page frontend, application UI, or dashboard component, or requests a new custom visual asset. Content changes, accessibility fixes, responsive bug fixes, and small visual corrections use normal visual verification without requiring a new mockup approval.
 - custom assets, brand kits, or visual layouts are requested.
 
 ### 5.10 Self-improvement skill
@@ -272,15 +272,17 @@ The preferred V6.5 posture is:
 
 ## 9. Dynamic Context-Based Skill Selection (Context-Driven Routing)
 
-To eliminate manual activation and ensure skills are integrated seamlessly based on conversation flow, the agent must dynamically evaluate skill applicability:
+To avoid both missed specialized workflows and unnecessary skill loading, the agent should evaluate skill applicability for each task:
 
 ### 9.1 Dialog Intent Mapping
-Every turn, the agent MUST inspect the user's request and the conversation context to determine if they intersect with any active or archived skill domains:
-1. **Direct Action Mapping**: If the user asks for actions like web interaction, dynamic page testing, visual inspection, or exploit pattern tracking, the agent must automatically invoke the relevant skill (`agent-browser`, `playwright`, `screenshot`, or `reverse-skill`).
+For each task, the agent should inspect the user's request and conversation context to determine if they intersect with an active or archived skill domain:
+1. **Direct Action Mapping**: If the task requires web interaction, dynamic page testing, visual inspection, or exploit pattern tracking, the agent must use the relevant skill when available (`agent-browser`, `playwright`, `screenshot`, or `reverse-skill`).
 2. **Implicit Need Detection**: If a task requires dynamic rendering or session persistence (e.g. logging into a site), the agent must dynamically activate the matching skill rather than asking the user to manually trigger it.
 
 ### 9.2 Auto-Restoration protocol
-If the conversation context demands an archived skill, the agent should dynamically restore/activate it (by parsing its `SKILL.md` or loading its template) for the current task scope without user intervention.
+If the task demands an archived skill, the agent may load the smallest relevant skill instructions
+for the current task scope. Moving files or changing host-local skill state requires explicit user
+intent and the `-Apply` operation.
 
 ### 9.3 Codebase Tool Dominance
 When a skill introduces a specialized command-line utility (e.g. `agent-browser` CLI), the agent must automatically prefer utilizing it over writing custom scripts or ad-hoc wrappers, ensuring unified tool usage.

@@ -43,8 +43,9 @@
 
 ## 5. 上下文延申与重置判断
 
-- [ ] 已判断当前新任务是否属于上一轮 coding 的延申
-- [ ] 若不属于上一轮延申，且会话 Token 占用超过 15%，已询问是否需要 `forget/compress context`（若 Token 占用极低 <15% 且包含明确的上下文边界，可静默忽略该提问）
+- [ ] Current task is explicitly classified as an extension of the previous implementation round or as a new coding round.
+- [ ] If it is not an extension, the user was explicitly asked whether to `forget/compress context` before continuing.
+- [ ] If the user explicitly authorizes continuous execution, that authorization is recorded for the current task scope.
 - [ ] 若需要收缩上下文，已先回写结构化状态，再减少工作上下文
 
 ## 6. 开始项目前的最终结论

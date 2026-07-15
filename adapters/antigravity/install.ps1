@@ -22,7 +22,9 @@ if ($bundleDir) {
 
 # 1. Build the profile bundle to the dedicated bundle path
 powershell -NoProfile -ExecutionPolicy Bypass -File $buildScript -ProfileName $ProfileName -TargetHost antigravity -OutputPath $bundlePath
-powershell -NoProfile -ExecutionPolicy Bypass -File $skillsGovernanceScript -TargetHost antigravity -UserHome $UserHome -Apply
+if ($LASTEXITCODE -ne 0) { throw "build-profile.ps1 failed with exit code $LASTEXITCODE." }
+powershell -NoProfile -ExecutionPolicy Bypass -File $skillsGovernanceScript -TargetHost antigravity -UserHome $UserHome
+if ($LASTEXITCODE -ne 0) { throw "skills-governance.ps1 failed with exit code $LASTEXITCODE." }
 
 # 2. Add / Update the delegation hook in target AGENTS.md without overwriting other content
 $hookContent = @"
@@ -63,4 +65,4 @@ foreach ($target in $targets) {
 Write-Host "Built Antigravity-ready AgentLogic bundle."
 Write-Host "Bundle path: $bundlePath"
 Write-Host "Workspace rule hook configured at: $TargetPath"
-Write-Host "Skill governance audit: applied"
+Write-Host "Skill governance inventory: complete (no archive moves applied)"

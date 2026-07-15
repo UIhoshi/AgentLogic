@@ -57,13 +57,10 @@ function Build-Bundle {
     }
 
     $builder = New-Object System.Text.StringBuilder
-    $timestamp = (Get-Date).ToString("yyyy-MM-ddTHH:mm:ssK")
-
     [void]$builder.AppendLine("# AgentLogic Bundle")
     [void]$builder.AppendLine()
     [void]$builder.AppendLine("- Host target: $TargetHost")
     [void]$builder.AppendLine("- Profile: $ProfileName")
-    [void]$builder.AppendLine("- Generated at: $timestamp")
     [void]$builder.AppendLine("- Stable entry: $($Manifest.entry)")
     [void]$builder.AppendLine("- Version: $($Manifest.current_version)")
     [void]$builder.AppendLine()
@@ -77,7 +74,6 @@ function Build-Bundle {
         }
 
         $content = Get-Content -Raw -Path $fullPath
-        $content = $content -replace 'file:///REPO_ROOT_PLACEHOLDER/', "file:///$($RepoRoot.Replace('\', '/'))/"
         [void]$builder.AppendLine("---")
         [void]$builder.AppendLine()
         [void]$builder.AppendLine("## BEGIN FILE: $relativePath")

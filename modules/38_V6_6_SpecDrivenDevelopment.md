@@ -2,7 +2,7 @@
 
 Status: **Stable V6.6 Line (Mandatory operational protocol)**.
 
-This module defines the Spec-Driven Development (SDD) workflow powered by the integrated `spec-kit` layer. Under V6.6, SDD is promoted from an optional command-line toolkit to a **mandatory baseline development protocol** that must govern all codebase tasks.
+This module defines the Spec-Driven Development (SDD) workflow powered by the integrated `spec-kit` layer. SDD is the mandatory baseline for non-trivial implementation work, while read-only audits, documentation-only changes, metadata-only changes, and trivial isolated fixes use the lighter path defined by the repository Task Applicability Gate.
 
 ---
 
@@ -10,20 +10,20 @@ This module defines the Spec-Driven Development (SDD) workflow powered by the in
 
 To eliminate "vibe coding" (writing arbitrary code without specifications or plans), AgentLogic V6.6 enforces Spec-Driven Development as a default operational normal. 
 
-All development tasks, new projects, and feature requests **MUST** go through the structured SDD pipeline automatically. Specifications are treated as executable definitions of behavior and must be written down before code is touched.
+Feature work, refactors, multi-file behavior changes, new projects, and release-affecting changes **MUST** go through the structured SDD pipeline automatically. Specifications are treated as executable definitions of behavior and must be written down before production code is touched. The lighter task classes must still record intent and validation, but must not manufacture irrelevant architecture documents.
 
 ---
 
 ## 2. Mandatory SDD Lifecycle Phases
 
-When starting a project or introducing a new feature, the Agent MUST execute the following phases sequentially:
+When starting a project or introducing a feature, refactor, multi-file behavior change, or release-affecting change, the Agent MUST execute the following phases sequentially:
 
 1. **Constitution Phase**: Establish the project's governing principles, style rules, quality criteria, and performance guidelines.
    - *Requirement*: The Agent must check if `.specify/constitution.md` (or equivalent) exists. If not, it MUST create it first.
 2. **Specify Phase**: Define user scenarios, requirements, and user stories in clear, natural language.
    - *Requirement*: The specifications must be written to `.specify/spec.md` (or `.specify/specs/` directory).
-   - *Domain Vocabulary*: The Agent must check if `CONTEXT.md` exists, establish domain terminology, and run the single-question Grilling session (see `modules/43_V6_7_MattPocockSkillsIntegration.md`) to align on requirements before proceeding.
-   - *UI/UX Prototyping Gate*: For frontend layout, visual styles, or app UI tasks, the Agent MUST generate a visual design mockup using the `generate_image` tool (via the `nano-banana-pro` skill) and present it as an artifact for user approval before moving to the Plan phase.
+- *Domain Vocabulary*: If the task introduces domain terminology or crosses bounded contexts, check or establish `CONTEXT.md` and run the single-question Grilling session (see `modules/43_V6_7_MattPocockSkillsIntegration.md`) before proceeding.
+- *UI/UX Prototyping Gate*: For net-new or major frontend visual design, generate a visual mockup using the `generate_image` tool (via the `nano-banana-pro` skill) and present it for approval before moving to Plan. Content changes, accessibility fixes, responsive bug fixes, and small visual corrections require visual verification but not a new design approval gate.
 3. **Plan Phase**: Draft a technical implementation plan specifying architecture, tech stack, data schemas, and integration logic.
    - *Requirement*: The plan must be saved in `.specify/plan.md`.
    - *Architectural Decisions*: If the plan involves hard-to-reverse trade-offs, they must be documented in a numbered ADR under `docs/adr/` (see `modules/43_V6_7_MattPocockSkillsIntegration.md`).
@@ -35,7 +35,7 @@ When starting a project or introducing a new feature, the Agent MUST execute the
    - *Skip Condition*: The Red-Team Gate may be skipped ONLY for trivial bug fixes or documentation-only changes where no architectural assumptions exist.
 5. **Tasks Phase**: Translate the plan into a checklist of granular, actionable tasks.
    - *Requirement*: The task list must be saved in `.specify/tasks.md`.
-6. **Implement Phase**: Systematically execute the tasks in order, running build and test validation after each task. The Agent MUST apply the 7-Rung Lazy Developer's Ladder (see `modules/42_V6_7_PonytailLazySeniorDevLadder.md`) before writing or changing any line of code.
+6. **Implement Phase**: Systematically execute the tasks in order, applying the relevant build, test, runtime, or visual validation after each behavior-affecting task. The Agent MUST apply the 7-Rung Lazy Developer's Ladder (see `modules/42_V6_7_PonytailLazySeniorDevLadder.md`) before writing or changing production code.
 7. **Converge Phase**: Match the codebase state against the specs, plan, and tasks. Any discrepancy or remaining gap must be appended as new tasks to `.specify/tasks.md` until fully resolved.
 8. **Ship Phase**: Perform the AI Shipping & Reviewability Audit (SRA) to document architecture, flows, permissions, variables, and tests, running static audits before merging. See `modules/41_V6_7_AIShippingAndReviewabilityAudit.md`.
 
@@ -43,7 +43,7 @@ When starting a project or introducing a new feature, the Agent MUST execute the
 
 ## 3. Enforcement & Verification Rules
 
-- **Pre-Implementation Gate**: Writing production code before the **Specify** and **Plan** documents are created under `.specify/` is strictly prohibited.
+- **Pre-Implementation Gate**: Writing production code for a full-SDD task before the **Specify** and **Plan** documents are created under `.specify/` is strictly prohibited. Lighter task classes must still record scope and validation, but do not require irrelevant SDD artifacts.
 - **Red-Team Gate**: Entering the Tasks phase without completing the Red-Team Gate (Phase 4) on the plan is prohibited, except when the skip condition applies (trivial bug fixes or documentation-only changes).
 - **Zero Vibe-Coding**: Every single code change must trace back to a defined task in `.specify/tasks.md`.
 - **Shipping Gate**: No feature may be merged without completing the **Ship Phase** SRA checklist and compiling a reviewer-ready shipping packet under `documentation/` (or `.specify/ship/`).

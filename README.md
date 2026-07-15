@@ -17,11 +17,11 @@ Do not continue deeper reading, modify files, delete files, perform write action
 or begin implementation before the logic-entry loop above has been completed.
 -->
 
-# 🌌 AgentLogic: Autonomous Evolving Rule Engine (V6.7.0)
+# 🌌 AgentLogic: Autonomous Evolving Rule Engine (V6.7.2)
 
 [![Agentic Code](https://img.shields.io/badge/Agent-Autonomous-blueviolet?style=flat-square)](https://github.com/UIhoshi/AgentLogic)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/Version-V6.7.0_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_7_2.md)
+[![Version](https://img.shields.io/badge/Version-V6.7.2_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_7_2.md)
 
 AgentLogic is a versioned primary-logic package designed to be pulled into local AI coding hosts (such as Codex, Claude Code, Gemini Pro) and used as their default operating mind. It consolidates multi-turn session workflows, tool selection matrix, security sandbox auditing, and dynamic domain extensions.
 
@@ -38,7 +38,7 @@ For local diagnostic runs and host deployment, execute the following commands in
 | Step | PowerShell Command | Primary Purpose |
 | :--- | :--- | :--- |
 | **1. Diagnosis** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\doctor.ps1` | Analyzes repository layout, checks manifests, and recommends installers |
-| **2. Install** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost gemini` | Safely removes legacy override files and deploys the fresh host-ready ruleset |
+| **2. Install** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost antigravity` | Validates, builds, verifies, and deploys the fresh host-ready ruleset |
 | **3. Validation** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\maintainer-check.ps1` | Verifies structural link integrity and validates the compiled adapter bundles |
 
 ---
@@ -93,7 +93,7 @@ This rule package supports **automated self-evolution** and developer logging:
 ```
 
 > [!TIP]
-> **Design-First Prototyping Gate**: When building frontend interfaces or layouts, the agent is forced to use the `generate_image` tool via Gemini 3 Pro Image to generate a mockup first. Code implementation only starts after you approve the design's aesthetics.
+> **Design-First Prototyping Gate**: For net-new or major frontend visual design, the agent may use `generate_image` to produce a mockup before implementation. Content changes, accessibility fixes, responsive bug fixes, and small visual corrections use targeted visual verification without requiring a new design approval.
 
 ---
 

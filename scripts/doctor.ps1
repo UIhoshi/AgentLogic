@@ -80,7 +80,9 @@ if ($env:CODEX_HOME -or (Test-Path (Join-Path $HOME ".codex"))) {
 if ($env:CLAUDE_CONFIG_DIR -or (Test-Path (Join-Path $HOME ".claude"))) {
     $detected += "claude"
 }
-if (Test-Path (Join-Path $HOME ".gemini\antigravity-cli")) {
+if ((Test-Path (Join-Path $HOME ".gemini\antigravity-cli")) -or
+    (Test-Path (Join-Path $HOME ".gemini\GEMINI.md")) -or
+    (Test-Path (Join-Path $HOME ".gemini\AgentLogic\GEMINI.md"))) {
     $detected += "antigravity"
 }
 
@@ -105,6 +107,6 @@ Write-Host "powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\valida
 Write-Host ""
 Write-Host "Skill governance command"
 Write-Host "------------------------"
-Write-Host ("powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\skills-governance.ps1 -TargetHost {0} -Apply" -f $recommendedHost)
-Write-Host "Run this on both fresh installs and host-local logic updates."
+Write-Host ("powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\skills-governance.ps1 -TargetHost {0}" -f $recommendedHost)
+Write-Host "Run this inventory on fresh installs and host-local logic updates; use -Apply only after reviewing archive moves."
 Write-Host "This pass governs the host-local skill zone only; it does not define portable repository truth."

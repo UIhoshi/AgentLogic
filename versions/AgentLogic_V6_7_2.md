@@ -118,7 +118,7 @@ The V6.7.2 stable line integrates the following external source repositories:
 
 ## 5. Skill-System Integration Rule
 
-V6.7.2 treats general programming skills, cybersecurity domain skills, and visual design skills as portable, logic-carried assets under the `skills/` directory. 
+V6.7.2 treats general programming skills, cybersecurity domain skills, and visual design skills as portable, logic-carried assets under the `skills/` directory.
 
 Key stable rules:
 - Logic package rules outrank individual skills.

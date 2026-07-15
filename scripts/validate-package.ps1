@@ -36,6 +36,20 @@ Assert-Exists -Root $RepoRoot -RelativePath "AGENT_INSTALL.md" -Label "Agent ins
 Assert-Exists -Root $RepoRoot -RelativePath "scripts/doctor.ps1" -Label "Install doctor"
 
 $manifest = Get-Content -Raw -Path $manifestPath | ConvertFrom-Json
+$schema = Get-Content -Raw -Path $schemaPath | ConvertFrom-Json
+
+$schemaHostNames = @($schema.properties.host_outputs.required)
+foreach ($hostName in $manifest.host_outputs.PSObject.Properties.Name) {
+    if ($schemaHostNames -notcontains $hostName) {
+        Fail "Manifest host output '$hostName' is not declared by manifest.schema.json."
+    }
+}
+$schemaAdapterHostNames = @($schema.properties.adapters.required)
+foreach ($hostName in $manifest.adapters.PSObject.Properties.Name) {
+    if ($schemaAdapterHostNames -notcontains $hostName) {
+        Fail "Manifest adapter '$hostName' is not declared by manifest.schema.json."
+    }
+}
 
 $requiredTopLevelKeys = @(
     "name",
@@ -120,6 +134,19 @@ foreach ($outputProperty in $manifest.host_outputs.PSObject.Properties) {
     $parent = Split-Path -Parent (Join-Path $RepoRoot $outputProperty.Value)
     if (-not $parent) {
         Fail "Host output '$($outputProperty.Name)' has no parent directory."
+    }
+
+    $outputPath = Join-Path $RepoRoot $outputProperty.Value
+    Assert-Exists -Root $RepoRoot -RelativePath $outputProperty.Value -Label "Host output '$($outputProperty.Name)'"
+    $outputContent = Get-Content -Raw -Path $outputPath
+    if ($outputContent -notmatch [regex]::Escape("- Version: $($manifest.current_version)")) {
+        Fail "Host output '$($outputProperty.Name)' does not declare current version '$($manifest.current_version)'."
+    }
+    if ($outputContent -match 'file:///([A-Za-z]:|Users/|home/)') {
+        Fail "Host output '$($outputProperty.Name)' contains a machine-specific absolute file URI."
+    }
+    if ($outputContent -match 'AgentLogic_V6_7_0|V6\.7\.0|AgentLogic_V6_7_1') {
+        Fail "Host output '$($outputProperty.Name)' contains stale stable-version references."
     }
 }
 
