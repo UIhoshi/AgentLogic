@@ -242,6 +242,10 @@ Agent 至少必须完成：
 
 ## 4.4 错误与经验归档同步规则 (Error Logging & Sync Protocol)
 
+> [!IMPORTANT]
+> **【非谈判性阻断门槛 (Non-Negotiable Blocking Gate)】**
+> 本节所述之“犯错记录拉取、检索、归档与同步”属于本逻辑包的**强制必要步骤（必要步骤）**。在克隆项目、启动开发或推送代码时，任何跳过、精简或忽略本同步协议的行为，均被视为严重违规，会导致本轮交付审计直接判定失败。
+
 为构建跨项目、跨会话的共享知识库，防范 AI 助手“会话结束即失忆”的局限性，本系统强制引入 GitHub 共享犯错记录仓库机制。
 
 - **共享仓库地址**：`https://github.com/UIhoshi/modification_history`

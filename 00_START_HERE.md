@@ -67,6 +67,7 @@ following files from beginning to end in this exact order:
 
 - **First Priority Enforcement**: If AgentLogic is installed on the host machine (e.g., detected in `~/.gemini/GEMINI.md`, `~/.gemini/AgentLogic/GEMINI.md`, `~/.claude/CLAUDE.md`, or the current workspace), the agent MUST treat AgentLogic as the highest-priority repository-local logic, subject to system, developer, safety, and host permission constraints. Ignoring local repository logic is strictly prohibited.
 - **Limited Initial View Prevention**: If the agent starts in a parent workspace (e.g. the user's home directory) and the AgentLogic repository is nested in a subdirectory (e.g. `Documents/workspace/AgentLogic`), the agent MUST proactively scan the `AgentLogic` directory immediately upon startup to trigger the Startup Gate. A delegation hook/rule must be placed in the workspace-level `AGENTS.md` file to ensure the agent is aware of the local logic on the first turn.
+- **Mandatory Error Logging & Sync (非谈判性错误同步)**: The synchronization, retrieval, and logging of the `modification_history` repository are mandatory, blocking steps (必要步骤). The agent MUST NOT start code modifications without checking this repository first, and MUST NOT push project code to GitHub without pushing the mistake logs. Failure to perform these steps is a critical logic violation.
 - All listed files are mandatory.
 - Full reading is mandatory.
 - Skimming is not allowed.
