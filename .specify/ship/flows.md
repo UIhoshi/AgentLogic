@@ -2,14 +2,21 @@
 
 ## Maintainer validation flow
 
-1. `check-logic-entry.js` checks entry headers, active-version references, path hygiene, startup
-   order, and map anchors.
+1. `check-logic-entry.js` checks repository and operational entry headers, active-version
+   references, path hygiene, startup order, and map anchors.
 2. `maintainer-check.ps1` builds all four host bundles from `manifest.json`.
 3. `validate-package.ps1` checks manifest structure, current version headers, stale references,
    and machine-specific absolute URIs in every tracked output.
 
 Trust boundary: repository -> generated artifact. The generated artifact must be deterministic and
 must not encode the build machine path.
+
+## UI implementation flow
+
+1. Classify the task as formal UI implementation.
+2. Generate a text-to-image preview and show it to the user.
+3. Wait for user approval or an explicit user opt-out.
+4. Only then implement UI code and run screenshot/layout-boundary verification.
 
 ## Host installation flow
 

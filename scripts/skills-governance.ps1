@@ -1,3 +1,11 @@
+# MANDATORY LOGIC GATE
+#
+# Read `AGENTS.md` and `README.md` before making changes here.
+# Then follow the repository-declared logic entry chain.
+# Before every new coding round, determine whether this task extends the previous round.
+# If not, explicitly ask whether to forget/compress context first.
+# This is a blocking gate; do not begin implementation before it is complete.
+
 param(
     [ValidateSet("codex", "claude", "antigravity", "generic")]
     [string]$TargetHost = "generic",

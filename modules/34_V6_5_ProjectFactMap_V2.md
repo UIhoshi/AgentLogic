@@ -7,7 +7,7 @@ This template incorporates the 4-tier memory taxonomy and mandatory verification
 
 ## 1. Project Identity & Logic Entry
 - **Project Name**:
-- **Logic Entry Point**: (e.g., D:\workspace\AgentLogic\MAIN.md)
+- **Logic Entry Point**: (e.g., `MAIN.md` at the repository root)
 - **Logic Version**: V6.5 (Stable Line)
 - **Directory Audit Status**: [Verified/Unverified]
 

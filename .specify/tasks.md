@@ -1,13 +1,14 @@
-# AgentLogic V6.7.2 Logic Audit Remediation Tasks
+# AgentLogic V6.8.0 Logic Audit Remediation Tasks
 
-- [x] Record the audit findings and acceptance criteria in `.specify/spec.md`.
-- [x] Record the implementation order and Red-Team results in `.specify/plan.md`.
-- [x] Align the startup gate order across `AGENTS.md`, `00_START_HERE.md`, and `modules/15_LogicEntryChecklist.md`.
-- [x] Add the task-applicability model and condition unnecessary gates.
-- [x] Synchronize active V6.7.2 labels and clarify `00_README.md` as a legacy/reference document.
-- [x] Make profile generation deterministic and portable.
-- [x] Strengthen logic-entry, package, and maintainer validation.
-- [x] Harden installation failure handling, target verification, and legacy-file backup.
-- [x] Rebuild all tracked host bundles from `core-enhanced`.
-- [x] Produce/update the conditional SRA shipping packet.
-- [x] Run all required validation commands and inspect the final diff.
+- [x] Record the V6.8.0 remediation specification and execution plan.
+- [x] Complete the Red-Team review for scope, context, entry validation, and UI preview gates.
+- [x] Rewrite the master logic and system maps around actual AgentLogic repository facts.
+- [x] Remove the token-based context-reset exception from all active logic.
+- [x] Expand mechanical entry validation to operational entry scripts.
+- [x] Align Gemini/Antigravity documentation and installer help text.
+- [x] Replace the hard-coded modification-history path with portable guidance.
+- [x] Replace active `REPO_ROOT_PLACEHOLDER` links with repository-relative links.
+- [x] Make text-to-image preview and user review mandatory before formal UI implementation,
+      with explicit user opt-out as the only bypass.
+- [x] Rebuild bundles and run doctor, package, logic-entry, maintainer, and link checks.
+- [x] Record the correction in the local modification-history repository.

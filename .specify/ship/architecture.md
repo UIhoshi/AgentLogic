@@ -2,7 +2,7 @@
 
 ## Scope
 
-This change hardens the AgentLogic logic package rather than an application runtime. The package
+This V6.8.0 change hardens the AgentLogic logic package rather than an application runtime. The package
 has four operational surfaces:
 
 1. repository-local entry and governance documents;
@@ -15,7 +15,10 @@ has four operational surfaces:
 - Repository files are the source of truth; `dist/` is generated output.
 - `install.ps1` crosses from repository state into host configuration and host-local skill state.
 - Legacy host files are now moved to `.agentlogic-backup` only after the new target is verified.
-- Generated bundles preserve `REPO_ROOT_PLACEHOLDER` and contain no build-machine absolute file URIs.
+- Active source documentation uses repository-relative links; generated bundles contain no
+  build-machine absolute file URIs.
+- Formal UI implementation is gated by a text-to-image preview and user review, unless the user
+  explicitly opts out.
 
 ## Known risks / assumptions
 

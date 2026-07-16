@@ -83,7 +83,7 @@ Before selecting a development lifecycle, classify the task:
 | Documentation-only or metadata-only change | Entry Gate, targeted review, and package/link validation |
 | Trivial isolated fix | Lightweight specification and targeted validation; skip architectural Red-Team when no architectural assumption exists |
 | Feature, refactor, or multi-file behavior change | Full SDD lifecycle, including Red-Team before Tasks and Converge after implementation |
-| Frontend visual change | Matching SDD path plus visual approval only for net-new/major design and screenshot/layout-boundary verification for visible behavior |
+| Frontend visual change | Matching SDD path plus mandatory text-to-image preview and user review before formal UI implementation, unless the user explicitly opts out; screenshot/layout-boundary verification remains required for visible behavior |
 | Install, packaging, or release change | Target confirmation, build/package verification, post-result inspection, and applicable SRA artifacts |
 
 The matching gate is mandatory; unrelated gates are not. This prevents both skipped safety checks
@@ -94,6 +94,8 @@ and unnecessary process overhead.
 1. **Spec-Driven Development (SDD) Gate** (`modules/38_V6_6_SpecDrivenDevelopment.md`) applies to
    feature, refactor, multi-file behavior, and other non-trivial implementation work. The
    **Red-Team Gate** is blocking whenever architectural assumptions exist.
+   Formal UI implementation must first pass the text-to-image preview and user-review gate
+   defined by `modules/39_V6_6_TasteFrontendDesign.md`, unless the user explicitly opts out.
 2. **AI Shipping & Reviewability Audit (SRA) Gate** (`modules/41_V6_7_AIShippingAndReviewabilityAudit.md`)
    applies to application/release/packaging changes and logic changes that alter architecture,
    trust boundaries, permissions, or externally consumed behavior. Its five core artifacts are

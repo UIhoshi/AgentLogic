@@ -22,9 +22,9 @@ Current adapters:
 - `claude/`
   - writes a host-ready `CLAUDE.md` bundle
   - supports explicit `-TargetPath` for the user's preferred Claude entrypoint
-- `gemini/`
-  - writes a host-ready `GEMINI.md` bundle
-  - supports explicit `-TargetPath` for the user's preferred Gemini entrypoint
+- `antigravity/`
+  - writes a host-ready `AGENTS.md` bundle and configures the Gemini/Antigravity delegation hooks
+  - supports explicit `-TargetPath` for the user's preferred Antigravity entrypoint
 - `generic/`
   - writes a host-neutral bundle for any other local AI shell
 

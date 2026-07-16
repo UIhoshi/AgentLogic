@@ -83,5 +83,5 @@ When a host installs AgentLogic as its primary logic, it should:
 
 - Codex: `adapters/codex/install.ps1`
 - Claude: `adapters/claude/install.ps1`
-- Gemini: `adapters/gemini/install.ps1`
+- Antigravity: `adapters/antigravity/install.ps1`
 - Generic host output: `adapters/generic/install.ps1`

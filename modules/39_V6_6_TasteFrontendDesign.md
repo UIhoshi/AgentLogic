@@ -42,13 +42,13 @@ For redesigns or visual upgrades of existing projects, follow this checklist:
 
 ## 3.1 Visual Prototyping Gate (Design First Protocol)
 
-When designing a new frontend layout, app UI, or complex web interface component, the Agent MUST NOT write production HTML/CSS/JS code directly. Instead, follow this mandatory visual prototyping gate:
+Before any formal UI implementation—new or existing layout, app screen, web page, component, or visual design change—the Agent MUST NOT write production HTML/CSS/JS/UI code directly. Instead, follow this mandatory visual prototyping gate. The only bypass is an explicit user instruction not to use the preview step:
 
 1. **Prompt Formulation**: Formulate a highly detailed visual layout and style prompt based on the user's requirements (specifying typography, layout variance dials, HSL color palette, and visual density).
-2. **Prototyping**: Invoke the `generate_image` tool (powered by `skills/nano-banana-pro/`) to generate a visual mockup / design image of the proposed UI.
+2. **Prototyping**: Invoke the text-to-image generation tool to generate a visual mockup / design image of the proposed UI.
 3. **Artifact Review**: Save the generated image as a persistent artifact under the conversation directory and present it clearly to the user.
-4. **Interactive Consent**: Wait for the user to inspect the visual design mockup and provide explicit approval.
-5. **Implementation**: Only after the user confirms that the mockup's aesthetics are premium and match expectations, should the Agent proceed to code implementation. If the user requests changes, refine the prompt, re-run image generation, and present the updated design.
+4. **Interactive Consent**: Wait for the user to inspect the visual design mockup and either explicitly approve it or explicitly opt out of the preview gate.
+5. **Implementation**: Only after approval or explicit opt-out may the Agent proceed to code implementation. If the user requests changes, refine the prompt, re-run image generation, and present the updated design.
 
 ---
 

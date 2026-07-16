@@ -1,4 +1,13 @@
 #!/usr/bin/env bash
+
+# MANDATORY LOGIC GATE
+#
+# Read `AGENTS.md` and `README.md` before making changes here.
+# Then follow the repository-declared logic entry chain.
+# Before every new coding round, determine whether this task extends the previous round.
+# If not, explicitly ask whether to forget/compress context first.
+# This is a blocking gate; do not begin implementation before it is complete.
+
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -28,7 +37,7 @@ while [[ $# -gt 0 ]]; do
       ;;
     -h|--help)
       cat <<'EOF'
-Usage: ./install.sh [--host codex|claude|gemini|generic] [--profile NAME] [--target-path PATH] [--user-home PATH]
+Usage: ./install.sh [--host codex|claude|antigravity|generic] [--profile NAME] [--target-path PATH] [--user-home PATH]
 EOF
       exit 0
       ;;

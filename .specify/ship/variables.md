@@ -2,13 +2,15 @@
 
 ## Repository variables
 
-- `manifest.json.current_version`: stable package version (`V6.7.2`).
+- `manifest.json.current_version`: stable package version (`V6.8.0`).
 - `manifest.json.default_profile`: default profile (`core-enhanced`).
 - `manifest.json.host_outputs`: tracked generated bundle locations.
 - `ProfileName`: selected manifest profile, default `core-enhanced`.
 - `TargetHost`: one of `codex`, `claude`, `antigravity`, or `generic`.
 - `TargetPath`: optional explicit installation target.
 - `UserHome`: host user root used by adapters.
+- `ModificationHistoryPath`: optional explicit local path for the sibling `modification_history`
+  repository; default is the current project's parent directory plus `modification_history`.
 
 ## Secrets
 

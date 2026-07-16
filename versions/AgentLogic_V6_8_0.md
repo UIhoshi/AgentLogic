@@ -15,7 +15,8 @@ Key Enhancements:
 - **First Priority Enforcement**: Absolute prioritization of AgentLogic rules and workflows above generic cloud/system prompts if AgentLogic is detected as installed on the local system.
 - **Limited Initial View Prevention**: Support for scanning nested directories and placing a delegation hook in the workspace-level `AGENTS.md` to prevent agents starting in a parent workspace from ignoring local logic.
 - **Human-Readable Business Gates**: Interactive prompt checkpoints at the end of Grilling/Specification (Proposal Gate) and at the end of Ship/Completion (Handover Gate) to compile clean, non-technical project deliverables (PDF/Word/PPT slides).
-- **4-Layer System Mapping & Code Matrix**: Inspired by the Linux Kernel Map to organize rules, tools, and execution flows into a clean 4-tier grid, integrating [11_CrossDirectoryMap.md](file:///REPO_ROOT_PLACEHOLDER/modules/11_CrossDirectoryMap.md) and [40_AgentLogicSystemMap.md](file:///REPO_ROOT_PLACEHOLDER/modules/40_AgentLogicSystemMap.md).
+- **Mandatory UI Preview Gate**: Before formal UI implementation, generate a text-to-image preview, show it to the user, and wait for review; bypass is allowed only when the user explicitly opts out.
+- **4-Layer System Mapping & Code Matrix**: Inspired by the Linux Kernel Map to organize rules, tools, and execution flows into a clean 4-tier grid, integrating [11_CrossDirectoryMap.md](../modules/11_CrossDirectoryMap.md) and [40_AgentLogicSystemMap.md](../modules/40_AgentLogicSystemMap.md).
 - **Cybersecurity Skills Routing**: Direct integration of `reverse-skill` domain-specific skill sets (APK reversing, malware analysis, frontend JS decryption, firmware analysis, and CTF solvers) and tool orchestration rules.
 - **Spec-Driven Development (SDD)**: Direct integration of `spec-kit` to enforce specifications as executable definitions of behavior, preventing "vibe coding."
 - **Taste Frontend Design**: Direct integration of `taste-skill` to enforce anti-slop premium interface design system layouts, micro-interactions, spring animations (GSAP), and visual quality standards.
@@ -73,7 +74,8 @@ The V6.8.0 line is supported by a modular suite of governance rules:
 - `modules/39_V6_6_TasteFrontendDesign.md`: Aesthetic standards, visual dials tuning, and anti-slop UI/UX audit rules.
 - `modules/41_V6_7_AIShippingAndReviewabilityAudit.md`: AI Shipping & Reviewability Audit (SRA) 闁?Core+Conditional shipping artifacts, universal self-refute principle, trust boundary crossing enumeration, and Verification Matrix integration.
 - `modules/42_V6_7_PonytailLazySeniorDevLadder.md`: Ponytail Lazy Senior Developer's Ladder 闁?7-rung YAGNI implementation ladder, root-cause bug-fixing rules, and SDD integration.
-- `modules/43_V6_7_MattPocockSkillsIntegration.md`: Matt Pocock Skills Integration 闁?Grilling plan interview flow, CONTEXT.md ubiquitous vocabulary glossary, and Architectural Decision Records (ADRs) specifications.
+- `modules/43_V6_7_MattPocockSkillsIntegration.md`: Matt Pocock Skills Integration 闁?Grilling plan interview flow, CONTEXT.md ubiquitous vocabulary glossary, and Architectural Decision Records (ADRs) specifications.
+
 - `modules/44_V6_8_GrokBuildOperationalIntegration.md`: Provider-neutral operational contracts translated from the audited Grok Build runtime and user guides.
 
 ---

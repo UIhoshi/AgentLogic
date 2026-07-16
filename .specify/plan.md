@@ -1,70 +1,61 @@
-# AgentLogic V6.7.2 Logic Audit Remediation Plan
+# AgentLogic V6.8.0 Logic Audit Remediation Plan
 
 ## Execution Order
 
-1. Create the SDD records and define the applicability model.
-2. Repair the entry-gate order and remove contradictory mandatory wording.
-3. Update active V6.7.2 metadata and clarify the duplicate `00_README.md` boundary.
-4. Make SDD/SRA and related gates conditional by task class and capability.
-5. Make bundle generation deterministic and portable.
-6. Strengthen mechanical validation and maintainer-check ordering.
-7. Harden installation error handling, post-install verification, and legacy-file backup.
-8. Rebuild all tracked host bundles.
-9. Run source, package, generated-output, and installation-script validations.
+1. Record this specification, plan, Red-Team results, and task list.
+2. Replace the unrelated project-specific master map with an AgentLogic repository map.
+3. Remove the context-reset token exception and align the startup wording.
+4. Expand entry-gate validation to the declared operational entry scripts.
+5. Align host names and replace the hard-coded history path.
+6. Resolve active placeholder links and update the legacy boundary note.
+7. Strengthen the text-to-image UI preview and explicit-opt-out gate.
+8. Rebuild generated bundles and run all repository validation checks.
 
-## Task Applicability Model
+## Applicability
 
-| Task class | Required path |
-| --- | --- |
-| Read-only question or audit | Entry gate, fact map, matching evidence; no SDD artifacts or ship packet |
-| Documentation-only or metadata-only change | Entry gate, targeted review, link/package validation; skip architecture Red-Team unless a rule contract changes |
-| Trivial isolated fix | Lightweight spec/task note, targeted validation; Red-Team may be skipped when no architectural assumption exists |
-| Feature, refactor, or multi-file behavior change | Full SDD phases, including Red-Team before tasks and Converge after implementation |
-| Frontend visual change | Above path plus visual mockup approval only for net-new/major visual design; screenshot and layout-boundary verification for visible behavior |
-| Install, packaging, or release change | Target confirmation, build/package verification, post-result inspection, and conditional SRA artifacts |
+This is a logic-contract and packaging-surface change. It uses the full SDD path, including
+Red-Team before implementation, but it does not require a UI mockup because no UI is being
+implemented.
 
 ## Red-Team Results
 
-### Claim 1: Keeping repository-relative placeholders is safer than resolving paths during build
+### Claim 1: The current `src/` map can remain as a useful conceptual model
 
-- Steelman: generated bundles are easier to navigate when links resolve to local source files.
-- Attack: the bundle is installed on another machine, so an absolute build-machine path is stale
-  or leaks the build environment.
-- Fails if: a generated bundle contains `file:///C:/`, `file:///D:/`, or equivalent host paths.
-- Mitigation: preserve `REPO_ROOT_PLACEHOLDER` in generated content and mechanically reject machine
-  absolute paths in active and generated logic.
+- Steelman: it documents the architecture of a related Agentic CLI and may help future users.
+- Attack: the file is named and loaded as the current master logic, so agents can treat those
+  paths as facts about this repository.
+- Fails if: an agent searches for or edits nonexistent `src/` files instead of the actual
+  scripts, modules, and adapters.
+- Mitigation: map actual AgentLogic paths and move external architecture to reference-only
+  wording.
 
-### Claim 2: Validating generated outputs after building all hosts provides a reliable release gate
+### Claim 2: A token threshold is a harmless optimization for reset questions
 
-- Steelman: every host output is produced from the manifest and can be checked against the source.
-- Attack: a maintainer may validate only generic output or validate before generation.
-- Fails if: any manifest host output has an old version header or differs from a deterministic
-  fresh build.
-- Mitigation: validate all manifest outputs, compare deterministic hashes through a temporary build,
-  and make maintainer-check build all four hosts before final validation.
+- Steelman: asking about reset when context is tiny can add friction.
+- Attack: the repository's entry header and checklist define the reset decision as mandatory,
+  and token usage is not a stable cross-host measurement.
+- Fails if: different hosts silently carry context under the same new-task condition.
+- Mitigation: require an explicit reset decision for every non-extension coding round.
 
-### Claim 3: Moving legacy files after successful installation prevents destructive loss
+### Claim 3: Checking only Markdown entry documents is enough
 
-- Steelman: the new target must win precedence over stale host files.
-- Attack: cleanup before a successful install can leave the host without working logic; cleanup after
-  install can delete the newly selected default target.
-- Fails if: an install failure removes the only existing logic file, or post-install cleanup removes
-  the new target.
-- Mitigation: verify the new target first, protect the selected target, and move other legacy files
-  into a timestamped backup directory.
+- Steelman: agents usually begin from `AGENTS.md`, `README.md`, or `MAIN.md`.
+- Attack: `install.ps1`, `install.sh`, doctor, validation, and adapter scripts are executable
+  entrypoints and can be invoked directly.
+- Fails if: direct script entry bypasses the declared gate without mechanical detection.
+- Mitigation: maintain an explicit operational-entry inventory and validate its headers.
 
-### Claim 4: Conditional gates preserve safety without weakening high-risk work
+### Claim 4: The existing UI mockup gate already satisfies the new requirement
 
-- Steelman: every task receiving the same gates is simple to reason about.
-- Attack: universal SDD, visual, glossary, performance, security, and business-handover steps create
-  noise and encourage bypassing the whole system.
-- Fails if: a task with a trust-boundary, release, frontend-visible, or architectural change can
-  bypass its matching verification path.
-- Mitigation: classify tasks first, keep matching gates mandatory, and explicitly exempt only low-risk
-  classes that do not exercise the capability.
+- Steelman: it already covers new layouts and complex components.
+- Attack: the user requirement applies to formal UI work generally and requires showing the
+  image to the user, unless the user explicitly opts out.
+- Fails if: ordinary UI implementation starts without a preview and user checkpoint.
+- Mitigation: make the preview gate universal for formal UI implementation, with only explicit
+  user opt-out as a bypass.
 
 ## Architectural Decision
 
-The repository will use a single task-applicability model and deterministic, portable generated
-bundles. Historical version files remain immutable; active documentation and generated outputs are
-the synchronized surface.
+AgentLogic remains a portable method layer. Repository maps describe this repository's actual
+logic assets; external project architecture is reference material only. Generated bundles are
+rebuilt from source, and the UI preview rule is a blocking pre-implementation contract.

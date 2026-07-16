@@ -48,6 +48,7 @@ These modules explain the system context that governance depends on.
 The V6.5 line used the following primary external comparison source during promotion:
 
 - `https://github.com/claude-code-best/claude-code`
-- Local comparison path: `D:\workspace\claude-code`
+- Local comparison path: a sibling checkout selected by the maintainer; do not encode a
+  machine-specific absolute path in the logic package.
 
 Future V6.x iterations should preserve this practice and explicitly register their comparative source baselines.

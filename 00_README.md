@@ -43,7 +43,7 @@ AgentLogic 是一套专为本地 AI 编码宿主（如 Codex, Claude Code, Gemin
 | 操作步骤 | 运行指令 (PowerShell) | 核心作用 |
 | :--- | :--- | :--- |
 | **1. 环境诊断** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\doctor.ps1` | 检测仓库健康度，读取元数据，生成推荐安装指令 |
-| **2. 一键安装** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost gemini` | 清理老旧残留逻辑，构建并部署当前宿主对应的规则包 |
+| **2. 一键安装** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost antigravity` | 清理老旧残留逻辑，构建并部署当前宿主对应的规则包 |
 | **3. 本地验证** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\maintainer-check.ps1` | 运行安全与链接完备性校验，确保四层架构无坏链 |
 
 ---
@@ -75,10 +75,10 @@ graph TD
 
 | 抽象层级 | 核心职责 | 包含的规则文件 / 目录 |
 | :--- | :--- | :--- |
-| **L1: Strategy & Entry**<br>(战略与入口层) | 确立 AI 的起手式，进行会话挂起/激活以及环境自检。 | - [00_START_HERE.md](file:///REPO_ROOT_PLACEHOLDER/00_START_HERE.md) (起手式)<br>- [MAIN.md](file:///REPO_ROOT_PLACEHOLDER/MAIN.md) (宿主绑定入口)<br>- [AGENTS.md](file:///REPO_ROOT_PLACEHOLDER/AGENTS.md) (智能体规范)<br>- [15_LogicEntryChecklist.md](file:///REPO_ROOT_PLACEHOLDER/modules/15_LogicEntryChecklist.md) (自检清单)<br>- [13_MandatoryLogicGateTemplate.md](file:///REPO_ROOT_PLACEHOLDER/modules/13_MandatoryLogicGateTemplate.md) (强制拦截门) |
-| **L2: Session & Loop**<br>(会话与循环层) | 规范多轮对话中的思维演进，避免 Vibe Coding (盲目写代码)。 | - [03_AgenticLoop.md](file:///REPO_ROOT_PLACEHOLDER/modules/03_AgenticLoop.md) (执行循环)<br>- [38_SpecDrivenDevelopment.md](file:///REPO_ROOT_PLACEHOLDER/modules/38_V6_6_SpecDrivenDevelopment.md) (SDD 规格驱动六阶段)<br>- [20_V6_5_RuntimeModes.md](file:///REPO_ROOT_PLACEHOLDER/modules/20_V6_5_RuntimeModes.md) (运行模式)<br>- [28_V6_5_TerminologyAndModuleBoundaries.md](file:///REPO_ROOT_PLACEHOLDER/modules/28_V6_5_TerminologyAndModuleBoundaries.md) (规则边界) |
-| **L3: Control & Auditing**<br>(执行与控制层) | 拦截高风险操作，建立严格的结论验证矩阵与代码质量自审机制。 | - [29_MandatoryVerificationMatrix.md](file:///REPO_ROOT_PLACEHOLDER/modules/29_MandatoryVerificationMatrix.md) (强验证矩阵)<br>- [39_TasteFrontendDesign.md](file:///REPO_ROOT_PLACEHOLDER/modules/39_V6_6_TasteFrontendDesign.md) (视觉品味与 UI 审计)<br>- [30_ToolQuestionBoundaryMatrix.md](file:///REPO_ROOT_PLACEHOLDER/modules/30_ToolQuestionBoundaryMatrix.md) (提问凭证边界)<br>- [31_ToolMisuseAndAntiPatternMatrix.md](file:///REPO_ROOT_PLACEHOLDER/modules/31_ToolMisuseAndAntiPatternMatrix.md) (反模式纠偏) |
-| **L4: Drivers & Skills**<br>(基底与驱动层) | 底层原子执行驱动与可移植技能插件。支持上下文联动与自纠错。 | - `skills/` (可移植领域技能包)<br>  * [agent-browser](file:///REPO_ROOT_PLACEHOLDER/skills/agent-browser/) (网页动态自动化控制)<br>  * [nano-banana-pro](file:///REPO_ROOT_PLACEHOLDER/skills/nano-banana-pro/) (Gemini 多模态视觉原型)<br>  * [self-improvement](file:///REPO_ROOT_PLACEHOLDER/skills/self-improvement/) (自学习与错误记录)<br>- [35_V6_5_SkillGovernanceAndMandatoryUse.md](file:///REPO_ROOT_PLACEHOLDER/modules/35_V6_5_SkillGovernanceAndMandatoryUse.md) (技能治理规则) |
+| **L1: Strategy & Entry**<br>(战略与入口层) | 确立 AI 的起手式，进行会话挂起/激活以及环境自检。 | - [00_START_HERE.md](./00_START_HERE.md) (起手式)<br>- [MAIN.md](./MAIN.md) (宿主绑定入口)<br>- [AGENTS.md](./AGENTS.md) (智能体规范)<br>- [15_LogicEntryChecklist.md](./modules/15_LogicEntryChecklist.md) (自检清单)<br>- [13_MandatoryLogicGateTemplate.md](./modules/13_MandatoryLogicGateTemplate.md) (强制拦截门) |
+| **L2: Session & Loop**<br>(会话与循环层) | 规范多轮对话中的思维演进，避免 Vibe Coding (盲目写代码)。 | - [03_AgenticLoop.md](./modules/03_AgenticLoop.md) (执行循环)<br>- [38_SpecDrivenDevelopment.md](./modules/38_V6_6_SpecDrivenDevelopment.md) (SDD 规格驱动六阶段)<br>- [20_V6_5_RuntimeModes.md](./modules/20_V6_5_RuntimeModes.md) (运行模式)<br>- [28_V6_5_TerminologyAndModuleBoundaries.md](./modules/28_V6_5_TerminologyAndModuleBoundaries.md) (规则边界) |
+| **L3: Control & Auditing**<br>(执行与控制层) | 拦截高风险操作，建立严格的结论验证矩阵与代码质量自审机制。 | - [29_MandatoryVerificationMatrix.md](./modules/29_MandatoryVerificationMatrix.md) (强验证矩阵)<br>- [39_TasteFrontendDesign.md](./modules/39_V6_6_TasteFrontendDesign.md) (视觉品味与 UI 审计)<br>- [30_ToolQuestionBoundaryMatrix.md](./modules/30_ToolQuestionBoundaryMatrix.md) (提问凭证边界)<br>- [31_ToolMisuseAndAntiPatternMatrix.md](./modules/31_ToolMisuseAndAntiPatternMatrix.md) (反模式纠偏) |
+| **L4: Drivers & Skills**<br>(基底与驱动层) | 底层原子执行驱动与可移植技能插件。支持上下文联动与自纠错。 | - `skills/` (可移植领域技能包)<br>  * [agent-browser](./skills/agent-browser/) (网页动态自动化控制)<br>  * [nano-banana-pro](./skills/nano-banana-pro/) (Gemini 多模态视觉原型)<br>  * [self-improvement](./skills/self-improvement/) (自学习与错误记录)<br>- [35_V6_5_SkillGovernanceAndMandatoryUse.md](./modules/35_V6_5_SkillGovernanceAndMandatoryUse.md) (技能治理规则) |
 
 ---
 

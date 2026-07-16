@@ -73,3 +73,9 @@
 - [ ] If the user explicitly gave a continuous-execution instruction such as "unless I say stop, keep going", that instruction has been recorded as an active authorization for the current task scope
 - [ ] Subsequent planned implementation steps are being treated as part of the same continuous execution round rather than as repeated re-confirmation points
 - [ ] The current work is still being treated as implementation / build-out phase by default, not as formal product-test stage, unless the user explicitly said testing has begun
+
+## 9. UI Preview Gate
+
+- [ ] If the task includes formal UI implementation, a text-to-image preview has been generated and shown to the user before UI code is written
+- [ ] The user has either reviewed/approved the preview or explicitly opted out of the preview step
+- [ ] No UI implementation began before one of those two conditions was satisfied

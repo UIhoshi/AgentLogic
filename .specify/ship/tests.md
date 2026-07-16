@@ -7,7 +7,10 @@
 | All four host bundles build from the current profile | `scripts/maintainer-check.ps1` | Passed |
 | PowerShell scripts parse | PowerShell parser over repository scripts | Passed |
 | Generated bundles contain no absolute machine URIs | `Select-String` plus package validation | Passed |
-| Generated bundles contain V6.7.2 headers | package validation and header inspection | Passed |
+| Generated bundles contain V6.8.0 headers | package validation and header inspection | Passed |
+| Active docs contain no repository placeholder links | active-profile link scan | Passed |
+| Operational entry scripts carry the mandatory gate | `node scripts/check-logic-entry.js` | Passed |
+| UI work is blocked until preview review or explicit opt-out | static rule inspection | Passed |
 | Host mutation flow preserves legacy files on adapter failure | static inspection; requires a disposable host fixture for runtime proof | Partially verified |
 | Host-local skill archive moves are not implicit | adapter and installer static inspection | Partially verified |
 

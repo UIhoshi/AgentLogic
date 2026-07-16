@@ -275,7 +275,7 @@ or begin implementation before the logic-entry loop above has been completed.
 
 # Agent Installation Guide (V6.8.0 Stable)
 
-This is the shortest installation path for AI agents. 
+This is the shortest installation path for AI agents.
 
 Goal: Install **AgentLogic V6.8.0** into the current local host without guessing the entrypoint, target bundle, or validation command.
 
@@ -474,10 +474,10 @@ graph TD
 
 | Abstraction Layer | Primary Core Responsibility | Included Files / Directories |
 | :--- | :--- | :--- |
-| **L1: Strategy & Entry** | Defines entrypoints, environment injection, REPL startup gates, and context forget/reset rules. | - [00_START_HERE.md](file:///REPO_ROOT_PLACEHOLDER/00_START_HERE.md) (璧锋墜寮?<br>- [MAIN.md](file:///REPO_ROOT_PLACEHOLDER/MAIN.md) (Stable Host Binding)<br>- [AGENTS.md](file:///REPO_ROOT_PLACEHOLDER/AGENTS.md) (Agent Entry)<br>- [15_LogicEntryChecklist.md](file:///REPO_ROOT_PLACEHOLDER/modules/15_LogicEntryChecklist.md) (Gate Checklist)<br>- [13_MandatoryLogicGateTemplate.md](file:///REPO_ROOT_PLACEHOLDER/modules/13_MandatoryLogicGateTemplate.md) (Header Gating) |
-| **L2: Session & Loop** | Manages the single-turn execution cycle, prevents vibe-coding, and structures the SDD lifecycle. | - [03_AgenticLoop.md](file:///REPO_ROOT_PLACEHOLDER/modules/03_AgenticLoop.md) (Agentic Cycle)<br>- [38_SpecDrivenDevelopment.md](file:///REPO_ROOT_PLACEHOLDER/modules/38_V6_6_SpecDrivenDevelopment.md) (SDD Lifecycle)<br>- [20_V6_5_RuntimeModes.md](file:///REPO_ROOT_PLACEHOLDER/modules/20_V6_5_RuntimeModes.md) (Context Adaptation)<br>- [28_V6_5_TerminologyAndModuleBoundaries.md](file:///REPO_ROOT_PLACEHOLDER/modules/28_V6_5_TerminologyAndModuleBoundaries.md) (Boundary Rules) |
-| **L3: Control & Auditing** | Establishes high-friction verification rules, security-risk matrix, and visual frontend taste checks. | - [29_MandatoryVerificationMatrix.md](file:///REPO_ROOT_PLACEHOLDER/modules/29_MandatoryVerificationMatrix.md) (Verification Matrix)<br>- [39_TasteFrontendDesign.md](file:///REPO_ROOT_PLACEHOLDER/modules/39_V6_6_TasteFrontendDesign.md) (Aesthetic & Spacing Audit)<br>- [30_ToolQuestionBoundaryMatrix.md](file:///REPO_ROOT_PLACEHOLDER/modules/30_ToolQuestionBoundaryMatrix.md) (Credential Boundary)<br>- [31_ToolMisuseAndAntiPatternMatrix.md](file:///REPO_ROOT_PLACEHOLDER/modules/31_ToolMisuseAndAntiPatternMatrix.md) (Anti-Pattern Gating) |
-| **L4: Base & Drivers** | Low-level command execution, raw tool controllers, and active portable skill files. | - `skills/` (Logic-Carried Domain Skills)<br>  * [agent-browser](file:///REPO_ROOT_PLACEHOLDER/skills/agent-browser/) (Accessibility Browser CLI)<br>  * [nano-banana-pro](file:///REPO_ROOT_PLACEHOLDER/skills/nano-banana-pro/) (Gemini Mockup Engine)<br>  * [self-improvement](file:///REPO_ROOT_PLACEHOLDER/skills/self-improvement/) (Error Log & Self-Correction)<br>- [35_V6_5_SkillGovernanceAndMandatoryUse.md](file:///REPO_ROOT_PLACEHOLDER/modules/35_V6_5_SkillGovernanceAndMandatoryUse.md) (Governance Rules) |
+| **L1: Strategy & Entry** | Defines entrypoints, environment injection, REPL startup gates, and context forget/reset rules. | - [00_START_HERE.md](./00_START_HERE.md) (璧锋墜寮?<br>- [MAIN.md](./MAIN.md) (Stable Host Binding)<br>- [AGENTS.md](./AGENTS.md) (Agent Entry)<br>- [15_LogicEntryChecklist.md](./modules/15_LogicEntryChecklist.md) (Gate Checklist)<br>- [13_MandatoryLogicGateTemplate.md](./modules/13_MandatoryLogicGateTemplate.md) (Header Gating) |
+| **L2: Session & Loop** | Manages the single-turn execution cycle, prevents vibe-coding, and structures the SDD lifecycle. | - [03_AgenticLoop.md](./modules/03_AgenticLoop.md) (Agentic Cycle)<br>- [38_SpecDrivenDevelopment.md](./modules/38_V6_6_SpecDrivenDevelopment.md) (SDD Lifecycle)<br>- [20_V6_5_RuntimeModes.md](./modules/20_V6_5_RuntimeModes.md) (Context Adaptation)<br>- [28_V6_5_TerminologyAndModuleBoundaries.md](./modules/28_V6_5_TerminologyAndModuleBoundaries.md) (Boundary Rules) |
+| **L3: Control & Auditing** | Establishes high-friction verification rules, security-risk matrix, and visual frontend taste checks. | - [29_MandatoryVerificationMatrix.md](./modules/29_MandatoryVerificationMatrix.md) (Verification Matrix)<br>- [39_TasteFrontendDesign.md](./modules/39_V6_6_TasteFrontendDesign.md) (Aesthetic & Spacing Audit)<br>- [30_ToolQuestionBoundaryMatrix.md](./modules/30_ToolQuestionBoundaryMatrix.md) (Credential Boundary)<br>- [31_ToolMisuseAndAntiPatternMatrix.md](./modules/31_ToolMisuseAndAntiPatternMatrix.md) (Anti-Pattern Gating) |
+| **L4: Base & Drivers** | Low-level command execution, raw tool controllers, and active portable skill files. | - `skills/` (Logic-Carried Domain Skills)<br>  * [agent-browser](./skills/agent-browser/) (Accessibility Browser CLI)<br>  * [nano-banana-pro](./skills/nano-banana-pro/) (Gemini Mockup Engine)<br>  * [self-improvement](./skills/self-improvement/) (Error Log & Self-Correction)<br>- [35_V6_5_SkillGovernanceAndMandatoryUse.md](./modules/35_V6_5_SkillGovernanceAndMandatoryUse.md) (Governance Rules) |
 
 ---
 
@@ -487,17 +487,15 @@ This rule package supports **automated self-evolution** and developer logging:
 
 ```
 [Unexpected Error / User Correction / Best Practice Found]
-                      鈹?
-                      鈻?(1) Automatically log to:
+                      鈹?                      鈻?(1) Automatically log to:
        .learnings/ (LEARNINGS.md / ERRORS.md)
-                      鈹?
-                      鈻?(2) Exceeds threshold (Recurrence >= 3)
+                      鈹?                      鈻?(2) Exceeds threshold (Recurrence >= 3)
       Systemic rules extracted and merged into:
             CLAUDE.md / AGENTS.md
 ```
 
 > [!TIP]
-> **Design-First Prototyping Gate**: For net-new or major frontend visual design, the agent may use `generate_image` to produce a mockup before implementation. Content changes, accessibility fixes, responsive bug fixes, and small visual corrections use targeted visual verification without requiring a new design approval.
+> **Design-First Prototyping Gate**: Before any formal UI implementation, the agent must use text-to-image generation to produce a mockup, show it to the user, and wait for review. The only bypass is an explicit user instruction not to use this step.
 
 ---
 
@@ -626,7 +624,7 @@ Before selecting a development lifecycle, classify the task:
 | Documentation-only or metadata-only change | Entry Gate, targeted review, and package/link validation |
 | Trivial isolated fix | Lightweight specification and targeted validation; skip architectural Red-Team when no architectural assumption exists |
 | Feature, refactor, or multi-file behavior change | Full SDD lifecycle, including Red-Team before Tasks and Converge after implementation |
-| Frontend visual change | Matching SDD path plus visual approval only for net-new/major design and screenshot/layout-boundary verification for visible behavior |
+| Frontend visual change | Matching SDD path plus mandatory text-to-image preview and user review before formal UI implementation, unless the user explicitly opts out; screenshot/layout-boundary verification remains required for visible behavior |
 | Install, packaging, or release change | Target confirmation, build/package verification, post-result inspection, and applicable SRA artifacts |
 
 The matching gate is mandatory; unrelated gates are not. This prevents both skipped safety checks
@@ -637,6 +635,8 @@ and unnecessary process overhead.
 1. **Spec-Driven Development (SDD) Gate** (`modules/38_V6_6_SpecDrivenDevelopment.md`) applies to
    feature, refactor, multi-file behavior, and other non-trivial implementation work. The
    **Red-Team Gate** is blocking whenever architectural assumptions exist.
+   Formal UI implementation must first pass the text-to-image preview and user-review gate
+   defined by `modules/39_V6_6_TasteFrontendDesign.md`, unless the user explicitly opts out.
 2. **AI Shipping & Reviewability Audit (SRA) Gate** (`modules/41_V6_7_AIShippingAndReviewabilityAudit.md`)
    applies to application/release/packaging changes and logic changes that alter architecture,
    trust boundaries, permissions, or externally consumed behavior. Its five core artifacts are
@@ -681,7 +681,8 @@ Key Enhancements:
 - **First Priority Enforcement**: Absolute prioritization of AgentLogic rules and workflows above generic cloud/system prompts if AgentLogic is detected as installed on the local system.
 - **Limited Initial View Prevention**: Support for scanning nested directories and placing a delegation hook in the workspace-level `AGENTS.md` to prevent agents starting in a parent workspace from ignoring local logic.
 - **Human-Readable Business Gates**: Interactive prompt checkpoints at the end of Grilling/Specification (Proposal Gate) and at the end of Ship/Completion (Handover Gate) to compile clean, non-technical project deliverables (PDF/Word/PPT slides).
-- **4-Layer System Mapping & Code Matrix**: Inspired by the Linux Kernel Map to organize rules, tools, and execution flows into a clean 4-tier grid, integrating [11_CrossDirectoryMap.md](file:///REPO_ROOT_PLACEHOLDER/modules/11_CrossDirectoryMap.md) and [40_AgentLogicSystemMap.md](file:///REPO_ROOT_PLACEHOLDER/modules/40_AgentLogicSystemMap.md).
+- **Mandatory UI Preview Gate**: Before formal UI implementation, generate a text-to-image preview, show it to the user, and wait for review; bypass is allowed only when the user explicitly opts out.
+- **4-Layer System Mapping & Code Matrix**: Inspired by the Linux Kernel Map to organize rules, tools, and execution flows into a clean 4-tier grid, integrating [11_CrossDirectoryMap.md](../modules/11_CrossDirectoryMap.md) and [40_AgentLogicSystemMap.md](../modules/40_AgentLogicSystemMap.md).
 - **Cybersecurity Skills Routing**: Direct integration of `reverse-skill` domain-specific skill sets (APK reversing, malware analysis, frontend JS decryption, firmware analysis, and CTF solvers) and tool orchestration rules.
 - **Spec-Driven Development (SDD)**: Direct integration of `spec-kit` to enforce specifications as executable definitions of behavior, preventing "vibe coding."
 - **Taste Frontend Design**: Direct integration of `taste-skill` to enforce anti-slop premium interface design system layouts, micro-interactions, spring animations (GSAP), and visual quality standards.
@@ -739,7 +740,8 @@ The V6.8.0 line is supported by a modular suite of governance rules:
 - `modules/39_V6_6_TasteFrontendDesign.md`: Aesthetic standards, visual dials tuning, and anti-slop UI/UX audit rules.
 - `modules/41_V6_7_AIShippingAndReviewabilityAudit.md`: AI Shipping & Reviewability Audit (SRA) 闂?Core+Conditional shipping artifacts, universal self-refute principle, trust boundary crossing enumeration, and Verification Matrix integration.
 - `modules/42_V6_7_PonytailLazySeniorDevLadder.md`: Ponytail Lazy Senior Developer's Ladder 闂?7-rung YAGNI implementation ladder, root-cause bug-fixing rules, and SDD integration.
-- `modules/43_V6_7_MattPocockSkillsIntegration.md`: Matt Pocock Skills Integration 闂?Grilling plan interview flow, CONTEXT.md ubiquitous vocabulary glossary, and Architectural Decision Records (ADRs) specifications.
+- `modules/43_V6_7_MattPocockSkillsIntegration.md`: Matt Pocock Skills Integration 闂?Grilling plan interview flow, CONTEXT.md ubiquitous vocabulary glossary, and Architectural Decision Records (ADRs) specifications.
+
 - `modules/44_V6_8_GrokBuildOperationalIntegration.md`: Provider-neutral operational contracts translated from the audited Grok Build runtime and user guides.
 
 ---
@@ -820,324 +822,82 @@ For future logic iterations, a version line must explicitly record its external 
 
 ## BEGIN FILE: modules/01_MasterLogic.md
 
-# AgentLogic_V6_8_0 Master Logic
+# AgentLogic V6.8.0 Master Logic
 
-鏈枃浠朵笉鏄浛浠?`AgentLogic_V6_8_0.md`锛岃€屾槸灏嗗綋鍓嶄富閫昏緫鏄犲皠鍒板綋鍓嶄粨搴擄紝褰㈡垚涓€浠介潰鍚?Claude Code 绫?Agentic CLI 绯荤粺鐨勯」鐩骇涓婚€昏緫鎽樿銆?
+鏈枃浠舵槸 AgentLogic 浠撳簱鐨勯」鐩骇涓婚€昏緫鎽樿銆傚畠鎻忚堪鏈粨搴撲腑鐨勮鍒欍€侀獙璇併€佸畨瑁呭拰
+鎵撳寘璧勪骇锛屼笉鎻忚堪浠讳綍澶栭儴涓氬姟椤圭洰鎴栨煇涓叿浣?Agentic CLI 浜у搧鐨勬簮鐮佷簨瀹炪€?
+## 1. 褰撳墠浠撳簱瀹氫綅
 
-## 1. 褰撳墠椤圭洰瀹氫綅
+- 鏈粨搴撴槸鍙畨瑁呭埌鏈湴 AI coding host 鐨勪富閫昏緫鍩虹璁炬柦锛坢ethod layer锛夈€?- 浜嬪疄鏉ユ簮鏄粨搴撳唴鐨勫叆鍙ｆ枃妗ｃ€佺増鏈簮鏂囦欢銆佹ā鍧椼€佽剼鏈€乵anifest 鍜岀敓鎴愯緭鍑恒€?- 澶栭儴椤圭洰銆佹瘮杈冧粨搴撳拰 `reference/` 鍘熷灞傚彧鑳戒綔涓哄弬鑰冭瘉鎹紝涓嶈兘鑷姩鍗囩骇涓哄綋鍓嶄粨搴撲簨瀹炪€?- 褰撳墠绋冲畾缁戝畾鍏ュ彛鏄?`MAIN.md`锛涘綋鍓嶇増鏈簮鏂囦欢鐢?`manifest.json` 鐨?`main_logic_file` 鎸囧畾銆?
+## 2. 褰撳墠浠撳簱鐨勫洓灞傛槧灏?
+### L1锛氬叆鍙ｄ笌瀹夸富琛ㄩ潰 (Entry & Host Surface)
 
-- 璇ラ」鐩槸涓€涓粓绔師鐢熺殑 Agentic Coding System銆?
-- 绯荤粺鏍稿績涓嶆槸鈥滆亰澶┾€濓紝鑰屾槸鈥滃杞ā鍨嬫帹鐞?+ 宸ュ叿璋冪敤 + 鏉冮檺鍒ゅ畾 + 涓婁笅鏂囧帇缂?+ 鐘舵€佸洖鍐欌€濄€?
-- 鍥犳锛岄€昏緫鏁寸悊蹇呴』鍥寸粫浠ヤ笅浜斾釜瀵硅薄灞曞紑锛?
-  - 鍏ュ彛涓庡惎鍔?
-  - 浼氳瘽缂栨帓
-  - 鍗曡疆鎵ц寰幆
-  - 宸ュ叿绯荤粺
-  - 鏉冮檺涓庢墿灞曚綋绯?
+- 浜虹被鍏ュ彛锛歚00_START_HERE.md`
+- Agent 鍏ュ彛锛歚AGENTS.md`
+- 绋冲畾瀹夸富鍏ュ彛锛歚MAIN.md`
+- 浠撳簱璇存槑锛歚README.md`
+- 瀹夎璇存槑锛歚AGENT_INSTALL.md`銆乣INSTALL.md`
+- 瀹夸富閫傞厤鍣細`adapters/`
 
-## 2. 褰撳墠椤圭洰鑱斿姩鐨勫洓灞傛簮鐮佹槧灏?
+### L2锛氫細璇濊鍒欎笌寮€鍙戠敓鍛藉懆鏈?(Session & Development Lifecycle)
 
-### L1锛欳LI 涓庝氦浜掑澹冲眰 (Shell & CLI Surface)
-- 涓诲叆鍙ｆ枃妗ｏ細
-  - `README.md`
-  - `AGENTS.md`
-  - `00_START_HERE.md`
-  - `docs/introduction/architecture-overview.mdx`
-- 涓诲叆鍙ｄ笌 REPL 鍚姩锛?
-  - `src/entrypoints/cli.tsx`
-  - `src/main.tsx`
-  - `src/entrypoints/init.ts`
-- 缁堢涓?UI 娓叉煋缁勪欢锛?
-  - `src/screens/`
-  - `src/components/`
-  - `src/ink/`
+- 绋冲畾鐗堟湰婧愶細`versions/AgentLogic_V6_8_0.md`
+- 涓婚€昏緫鎽樿锛歚modules/01_MasterLogic.md`
+- Agent 寮哄埗瑙勫垯锛歚modules/12_AgentEnforcement.md`
+- 鍏ュ彛娓呭崟锛歚modules/15_LogicEntryChecklist.md`
+- Agentic loop 鍚堝悓锛歚modules/03_AgenticLoop.md`
+- SDD 鐢熷懡鍛ㄦ湡锛歚modules/38_V6_6_SpecDrivenDevelopment.md`
+- 浠诲姟瑙勬牸涓庣姸鎬侊細`.specify/`
 
-### L2锛氫細璇濅笌鎵ц寰幆缂栨帓灞?(Session & Loop Orchestration)
-- 澶氳疆浼氳瘽缂栨帓锛?
-  - `src/QueryEngine.ts`
-- 鍗曡疆 Agentic 寰幆寮曟搸锛?
-  - `src/query.ts`
-- 涓婁笅鏂囦笌浼氳瘽鐘舵€侊細
-  - `src/context.ts`
-  - `src/state/`
+### L3锛氬畨鍏ㄣ€佹潈闄愪笌楠岃瘉鎺у埗 (Safety & Verification Control)
 
-### L3锛氭湇鍔＄粍浠朵笌涓粙鎺у埗灞?(Service & Mediation Control)
-- 宸ュ叿娉ㄥ唽涓庡姩鎬佺粍瑁咃細
-  - `src/Tool.ts`
-  - `src/tools.ts`
-  - `src/services/tools/`
-- 鏉冮檺鍒ゅ畾涓庡畨鍏ㄧ綉鍏筹細
-  - `src/utils/permissions/`
-  - 鏍稿績鐗规潈宸ュ叿鎷︽埅锛堝 `BashTool`銆乣PowerShellTool` 鍐呴儴瀹夊叏鎺у埗锛?
-- 鎵╁睍涓粙涓庡崗璁┍鍔細
-  - `src/services/mcp/`
+- 浠诲姟閫傜敤鎬у叆鍙ｏ細`AGENTS.md`
+- 鏉冮檺涓庡畨鍏細`modules/05_PermissionsAndSafety.md`銆乣modules/23_V6_5_PermissionAndOutputPipeline.md`
+- 楠岃瘉鐭╅樀锛歚modules/29_MandatoryVerificationMatrix.md`
+- 宸ュ叿杈圭晫锛歚modules/30_ToolQuestionBoundaryMatrix.md`
+- 鍙嶆ā寮忕籂鍋忥細`modules/31_ToolMisuseAndAntiPatternMatrix.md`
+- 瑙勫垯鍏ュ彛鏍￠獙锛歚scripts/check-logic-entry.js`
+- 鍖呮牎楠岋細`scripts/validate-package.ps1`
+- 缁存姢鑰呮牎楠岋細`scripts/maintainer-check.ps1`
+- 鐜璇婃柇锛歚scripts/doctor.ps1`
 
-### L4锛氬師瀛愭墽琛屼笌搴曞眰椹卞姩灞?(Atomic Execution & Drivers)
-- 鍏蜂綋搴曞眰鍛戒护瀹炰綋锛?
-  - `src/commands/`
-- 鍏蜂綋鍘熷瓙宸ュ叿瀹炰綋锛?
-  - `src/tools/*` (濡?`view_file`銆乣run_command` 绛夊簳灞傚疄鐜?
-- 棰嗗煙鎵╁睍鎶€鑳藉簱锛?
-  - `skills/` (濡傞€嗗悜瀹夊叏璺敱銆丼pec 椹卞姩寮€鍙戝伐鍏峰寘銆乀aste 鍓嶇璁捐瑙勮寖绛?
+### L4锛氳鍒欒祫浜с€佹妧鑳戒笌鐢熸垚杈撳嚭 (Assets & Generated Outputs)
 
-## 3. 褰撳墠椤圭洰鐨勬牳蹇冨伐浣滃璞?
+- 鍙Щ妞嶆妧鑳斤細`skills/`
+- SDD 宸ュ叿灞傦細`spec-kit/`
+- 鍘熷鍙傝€冨眰锛歚reference/`
+- 瀹夸富 bundle锛歚dist/`
+- bundle 鐢熸垚鍣細`scripts/build-profile.ps1`
+- 鐗堟湰涓?profile 娓呭崟锛歚manifest.json`銆乣manifest.schema.json`
 
-- 妯″瀷璇锋眰瀵硅薄
-  鐢?`src/query.ts` 鍜?`src/services/api/claude.ts` 鍏卞悓鏋勫缓銆?
-- 宸ュ叿闆嗗悎瀵硅薄
-  鐢?`src/tools.ts` 鍔ㄦ€佺粍瑁咃紝涓嶆槸闈欐€佸父閲忋€?
-- 鏉冮檺涓婁笅鏂囧璞?
-  鐢?`ToolPermissionContext` 涓?`src/utils/permissions/` 鍏卞悓缁存姢銆?
-- 浼氳瘽鐘舵€佸璞?
-  鐢?`src/QueryEngine.ts`銆乣src/state/`銆乣src/bootstrap/state.ts` 鍏卞悓缁存姢銆?
+## 3. 缁熶竴鍏ュ彛椤哄簭
 
-## 4. 褰撳墠椤圭洰鐨勯珮浠峰€肩淮鎶ゅ師鍒?
+姝ｅ紡缂栫爜杞蹇呴』鎸変互涓嬮『搴忔墽琛岋細
 
-- 浠讳綍鈥滆兘鍔涘瓨鍦ㄢ€濈殑缁撹锛岄兘蹇呴』鍖哄垎锛?
-  - 宸插疄鐜?
-  - 鏉′欢鍚敤
-  - feature flag 鍏抽棴
-  - stub
-- 浠讳綍鈥滃伐鍏峰彲鐢ㄢ€濈殑缁撹锛岄兘蹇呴』鍖哄垎锛?
-  - 娉ㄥ唽灞傞潰瀛樺湪
-  - 杩愯鏃跺彲鍚敤
-  - 鏉冮檺灞傞潰鍙斁琛?
-  - 褰撳墠澶栭儴鏋勫缓榛樿鍙揪
-- 浠讳綍鈥滈€昏緫鍖呭畬鍠勨€濆姩浣滐紝閮藉繀椤绘妸宸ュ叿銆佹潈闄愩€佹墿灞曚綔涓轰竴涓暣浣撶郴缁熸潵鍐欙紝鑰屼笉鏄垎鏁ｈ蹇嗐€?
+1. 璇诲彇 `AGENTS.md` 鍜?`README.md`銆?2. 璇诲彇 `00_START_HERE.md`锛岀‘璁ゅ綋鍓嶇ǔ瀹氬叆鍙ｅ拰閫傜敤杈圭晫銆?3. 鍒ゆ柇浠诲姟鏄彧璇诲璁°€佹枃妗ｅ彉鏇淬€佸绔嬩慨澶嶃€佸姛鑳?閲嶆瀯銆乁I銆佸畨瑁?鍙戝竷涓殑鍝竴绫汇€?4. 鍒ゆ柇鏄惁寤剁画涓婁竴杞?coding锛涜嫢涓嶆槸锛屽繀椤昏闂槸鍚?`forget/compress context`锛屼笉寰椾娇鐢?   Token 闃堝€奸潤榛樿烦杩囥€?5. 鎸?`00_START_HERE.md` 澹版槑鐨?full-read chain 瀹屾暣璇诲彇鐗堟湰婧愩€佷富閫昏緫鍜屽叆鍙ｆ竻鍗曘€?6. 寤虹珛鏈€灏忎簨瀹炲湴鍥撅紝鍐嶆墽琛屽尮閰嶇殑 SDD銆佹潈闄愩€侀獙璇佹垨鍙戝竷闂ㄦ銆?
+鍙闂涓嶉渶瑕佷吉閫犲疄鐜拌鍒掞紱浣嗕换浣曞啓鍏ャ€佸畨瑁呫€佹墦鍖呮垨瑙勫垯鍚屾閮藉繀椤诲厛瀹屾垚閫傜敤鐨勯棬妲涖€?
+## 4. 鑳藉姏鐘舵€佸繀椤诲垎灞傝〃杈?
+浠讳綍鑳藉姏缁撹閮藉繀椤诲尯鍒嗭細
 
-## 4.1 鍏ㄩ儴 Agent 鐨勭粺涓€鎺ュ叆瑕佹眰
+- 瑙勫垯鏄惁澹版槑
+- 鏂囦欢鎴?profile 鏄惁娉ㄥ唽
+- 杩愯鏃舵槸鍚﹀彲鐢?- 鏉冮檺鏄惁鍏佽鎵ц
+- 鏄惁缁忚繃鍖归厤鐨勯獙璇佸伐鍏风‘璁?
+鎼滅储缁撴灉銆侀潤鎬佽鍙栥€佹瀯寤烘垚鍔熸垨鍘嗗彶璁板繂閮戒笉鑳藉崟鐙瘉鏄庤繍琛屾椂銆佽瑙夋垨杩滅▼浜嬪疄銆?
+## 5. UI 瀹炴柦鍓嶇疆闂ㄦ
 
-- 褰撳墠椤圭洰鍚庣画鏃犺鐢卞摢涓?Agent 杩涘叆锛岄兘蹇呴』鍏堣蛋涓婚€昏緫鎺ュ叆娴佺▼銆?
-- 杩欐潯瑙勫垯閫傜敤浜庯細
-  - 涓荤嚎绋?Agent
-  - 瀛?Agent
-  - review Agent
-  - verification Agent
-  - planning Agent
-  - 妯″潡涓撶敤 Agent
-- 鍙鍑虹幇浠ヤ笅浠讳竴鎯呭喌锛屽氨蹇呴』閲嶆柊鎵ц涓婚€昏緫鎺ュ叆锛?
-  - 杩涘叆涓€涓柊椤圭洰
-  - 鏂板涓€涓柊妯″潡
-  - 鎺ユ墜涓€涓箣鍓嶆湭璇婚€忕殑瀛愮郴缁?
-  - 浠庡垎鏋愰樁娈靛垏鎹㈠埌瀹炴柦闃舵
-- 鐩殑涓嶆槸澧炲姞褰㈠紡鍖栨祦绋嬶紝鑰屾槸鍑忓皯涓嶅悓 Agent 鍥犱负鍏ュ彛涓嶄竴鑷磋€屽甫鏉ョ殑閿欒鐜囥€佽竟鐣屾紓绉诲拰缁撴瀯璇垽銆?
+浠讳綍姝ｅ紡 UI 瀹炴柦锛堥〉闈€佸睆骞曘€佺粍浠躲€佸竷灞€銆佽瑙夎璁℃垨 UI 鏍峰紡鍙樻洿锛変箣鍓嶏紝蹇呴』锛?
+1. 浣跨敤鏂囩敓鍥惧伐鍏风敓鎴愬嵆灏嗗疄鏂界殑 UI 棰勮鍥俱€?2. 灏嗛瑙堝浘灞曠ず缁欑敤鎴锋煡鐪嬨€?3. 绛夊緟鐢ㄦ埛纭锛涚敤鎴峰彲浠ユ壒鍑嗛瑙堬紝涔熷彲浠ユ槑纭涓嶉渶瑕佽姝ラ銆?4. 鍙湁鎵瑰噯鎴栨槑纭?opt-out 鍚庯紝鎵嶅厑璁稿紑濮?UI 浠ｇ爜瀹炴柦銆?
+鐢ㄦ埛娌℃湁鏄庣‘ opt-out 鏃讹紝涓嶅緱鎶娾€滃唴瀹规敼鍔ㄣ€佸搷搴斿紡淇銆佹棤闅滅淇鎴栧皬鏀瑰姩鈥濆綋浣滈粯璁よ眮鍏嶃€?UI 瀹炴柦瀹屾垚鍚庝粛蹇呴』鎵ц鎴浘銆佺埗瀛愬竷灞€杈圭晫銆佹孩鍑恒€佹崲琛屽拰瀹為檯瀹瑰櫒瀹藉害楠岃瘉銆?
+## 6. 閿欒鍘嗗彶涓庤鍒欏悓姝?
+- `modification_history` 鏄叡浜敊璇笌淇璁板綍锛屼笉鏄綋鍓嶄粨搴撶殑涓婚€昏緫鏉ユ簮銆?- 榛樿鏈湴浣嶇疆鏄綋鍓嶉」鐩埗鐩綍涓嬬殑 `modification_history`锛涘叾浠栧竷灞€蹇呴』鏄惧紡閰嶇疆銆?- 鍦ㄨ鍒欓€昏緫鏇存柊銆佸彂甯冩垨鎺ㄩ€侀」鐩唬鐮佸墠锛屽厛妫€鏌ュ苟鍚屾瀵瑰簲鐨勫巻鍙茶褰曘€?- 涓嶅緱鎶婄壒瀹氭満鍣ㄧ殑鐢ㄦ埛鐩綍鍐欏叆瑙勫垯鏂囦欢鎴?bundle銆?
+## 7. 鐩綍杈圭晫涓庢墦鍖呰鍒?
+- `AgentLogic` 鐩綍鍙兘淇濆瓨閫昏緫銆佹ā鍧椼€佹妧鑳姐€佽剼鏈€佽鏍煎拰鐢熸垚 bundle銆?- 涓嶅緱鍦ㄦ湰浠撳簱鍒涘缓鏃犲叧涓氬姟婧愮爜銆佷緷璧栧畨瑁呯粨鏋溿€佷复鏃舵祴璇曟垨涓氬姟鏃ュ織銆?- `dist/` 鍙兘鐢?`scripts/build-profile.ps1` 鐢熸垚锛岀姝㈡墜宸ョ紪杈戙€?- `manifest.json` 鏄?profile銆佸涓昏緭鍑哄拰閫傞厤鍣ㄧ殑鏈哄櫒鍙浜嬪疄婧愩€?- `reference/` 鍜屽巻鍙茬増鏈枃浠朵笉搴旈粯璁ゆ敞鍏ヤ负褰撳墠杩愯瑙勫垯锛岄櫎闈?profile 鏄庣‘鍒楀嚭銆?
+## 8. 鍙樻洿鍚庣殑鏈€灏忛獙璇?
+- 鏂囨。鎴栬鍒欏彉鏇达細杩愯 `node scripts/check-logic-entry.js` 鍜岄摼鎺ユ鏌ャ€?- manifest銆乸rofile銆乥undle 鎴栧畨瑁呭彉鏇达細杩愯 `scripts/validate-package.ps1`銆?- 鐗堟湰銆佸涓绘垨鍙戝竷鍙樻洿锛氳繍琛?`scripts/maintainer-check.ps1`锛屽苟妫€鏌ョ敓鎴愯緭鍑哄拰 git diff銆?- 鐜涓庡涓诲垽鏂細杩愯 `scripts/doctor.ps1`銆?- 浠讳綍楂橀闄╂垨澶栭儴鐘舵€佸彉鏇撮兘蹇呴』鍋氱洰鏍囩‘璁ゅ拰缁撴灉纭銆?
+## 9. 鎸佺画鎵ц杈圭晫
 
-## 4.2 鏂版ā鍧楀繀椤诲厛瑙勫垝
-
-- 濡傛灉宸ヤ綔瀵硅薄鏄竴涓柊妯″潡锛岃€屼笉鏄凡鏈夋ā鍧楃殑灞€閮ㄤ慨澶嶏紝鍒?Agent 鍦ㄨ繘鍏ュ疄鐜板墠蹇呴』鍏堢粰鍑烘ā鍧楃骇瑙勫垝銆?
-- 璇ヨ鍒掕嚦灏戝簲鍖呭惈锛?
-  - 妯″潡鐩爣
-  - 妯″潡杈圭晫
-  - 鍏ュ彛涓庤惤鐐?
-  - 涓庣幇鏈夌郴缁熺殑鍏崇郴
-  - 楠岃瘉鏂瑰紡
-- 杩欐槸涓婚€昏緫鍦ㄦ柊澧炴ā鍧楀満鏅笅鐨勫己鍒舵淳鐢熻姹傘€?
-
-## 4.3 V6 鏄柟娉曡剳锛岄」鐩枃妗ｄ笌婧愮爜鏄簨瀹炲眰
-
-- 褰撳墠鐗堟湰蹇呴』鏄庣‘鍖哄垎锛?
-  - `AgentLogic_V6` 璐熻矗鏂规硶銆佽涓恒€佽鍒掋€侀獙璇併€佸洖鍐欒鍒?
-  - 椤圭洰鑷韩 md 涓庢簮鐮佽礋璐ｄ笟鍔′簨瀹炪€佸疄鐜颁簨瀹炪€佺粨鏋勪簨瀹炰笌褰撳墠鐘舵€?
-- 杩欐剰鍛崇潃锛?
-  - V6 涓嶈礋璐ｆ弿杩版煇涓叿浣撻」鐩埌搴曞仛浠€涔?
-  - V6 涓嶈礋璐ｆ浛浠ｉ」鐩?README銆佹ā鍧楁枃妗ｅ拰婧愮爜闃呰
-  - 椤圭洰鑷繁鐨勬枃妗ｄ笌婧愮爜锛屾墠鏄€滄枃浠跺湪鍝噷銆佸嚱鏁板湪鍝噷銆佸叆鍙ｅ湪鍝噷銆佸綋鍓嶅疄鐜板浣曗€濈殑浜嬪疄鏉ユ簮
-- 鑻?Agent 鎶?V6 鍜岄」鐩簨瀹炴贩涓轰竴浣擄紝灏变細鎶婃柟娉曞眰閿欒鍦板綋浣滈」鐩鏄庡眰锛岃繖鏄繀椤婚伩鍏嶇殑銆?
-
-## 4.3.1 椤圭洰涓?md 杩樺繀椤绘壙鎷呴€昏緫鍏ュ彛纭鑱岃矗
-
-- 褰撳墠鐗堟湰杩樺簲鏄庣‘锛氶」鐩富 md 涓嶅彧鏄憡璇?Agent鈥滈」鐩槸浠€涔堚€濓紝杩樺簲甯姪 Agent 纭鈥滃綋鍓嶉」鐩簲鎺ュ叆鍝唤 Agent 閫昏緫鏂囦欢鈥濄€?
-- 褰?Agent 閲嶆柊杩涘叆涓€涓」鐩椂锛岄粯璁ゅ簲鍏堜粠椤圭洰涓?md 寮€濮嬶紝浣嗕笉鑳芥姝ヤ簬椤圭洰浠嬬粛鏈韩銆?
-- 鍦ㄦ寮忓紑宸ュ墠锛岃繕蹇呴』纭锛?
-  - 褰撳墠椤圭洰鐩綍涓嬫槸鍚﹀凡鏈夐€昏緫鏂囦欢
-  - 鑻ユ病鏈夛紝閫昏緫鏂囦欢瀹為檯瀛樻斁鍦ㄥ摢閲?
-  - 褰撳墠椤圭洰鏄惁渚濊禆鐙珛缁存姢鐨勫閮ㄩ€昏緫鍖?
-- 杩欓噷涓嶅簲鎶婇€昏緫鐗堟湰鍐欐锛屽洜涓烘湭鏉ュ彲鑳戒粠 `V6` 鍗囩骇涓哄叾浠栫増鏈€?
-- 鍥犳锛岃鍒欏簲闈㈠悜鈥滈€昏緫鍏ュ彛鏄惁宸茬‘璁も€濓紝鑰屼笉鏄潰鍚戞煇涓浐瀹氱増鏈彿銆?
-
-## 4.3.2 椤圭洰涓?README 鐨勬渶灏忓繀澶囬」搴斿寘鍚€昏緫鍏ュ彛璇存槑
-
-- 褰撳墠鐗堟湰寤鸿鎶婅繖鏉¤繘涓€姝ュ墠缃埌椤圭洰涓?README / 涓?md 鐨勬渶灏忓繀澶囬」涓€?
-- 涔熷氨鏄锛岄」鐩富鏂囨。闄や簡璇存槑椤圭洰鐩爣銆佺洰褰曠粨鏋勩€佷娇鐢ㄦ柟寮忎箣澶栵紝杩樺簲榛樿鍖呭惈锛?
-  - 褰撳墠椤圭洰閫昏緫鍏ュ彛鏄惁鍦ㄤ粨搴撳唴
-  - 鑻ュ湪浠撳簱鍐咃紝閫昏緫鏂囦欢璺緞
-  - 鑻ヤ笉鍦ㄤ粨搴撳唴锛岄€昏緫鏂囦欢搴斾粠鍝噷鎺ュ叆
-  - 姝ｅ紡寮€濮嬮」鐩墠鏄惁闇€瑕佸厛鎸傛帴澶栭儴閫昏緫鍖?
-- 杩欐牱椤圭洰鏂囨。浼氬弽杩囨潵甯姪 Agent 鏇村揩瀹屾垚涓婚€昏緫鎺ュ叆锛屽舰鎴愭鍚戝惊鐜€?
-
-## 4.4 椤圭洰鎺ュ叆鏃跺繀椤诲缓绔嬮」鐩簨瀹炲湴鍥?
-
-- 褰撳墠椤圭洰杩涗竴姝ヨ瘉鏄庯細鍙涓婚€昏緫杩樹笉澶燂紝Agent 杩樺繀椤诲缓绔嬮」鐩簨瀹炲湴鍥俱€?
-- 椤圭洰浜嬪疄鍦板浘鑷冲皯闇€瑕佽鐩栵細
-  - 椤圭洰涓荤洰鏍?
-  - 涓绘枃妗ｅ叆鍙?
-  - 褰撳墠椤圭洰閫昏緫鍏ュ彛鏄惁宸茬‘璁?
-  - 褰撳墠浠诲姟鎵€灞炴ā鍧?
-  - 鍏抽敭鍏ュ彛鏂囦欢
-  - 鍏抽敭鍑芥暟 / 绫?
-  - 鏈‘璁や簨瀹炵偣
-- 杩欎唤鍦板浘涓嶆槸涓轰簡杈撳嚭婕備寒鎽樿锛岃€屾槸涓轰簡淇濊瘉鍚庣画瀹炵幇銆佷慨鏀广€侀獙璇佹椂涓嶄細鍋忕鐪熷疄椤圭洰缁撴瀯銆?
-- 鑻ュ悗缁闀挎湡澶嶇敤锛屽簲灏介噺鎶婇」鐩簨瀹炲湴鍥惧浐瀹氭垚妯℃澘杈撳嚭锛岃€屼笉鏄瘡娆￠噸鏂扮粍缁囧瓧娈甸『搴忋€?
-- 鑻ラ€昏緫鍖呭唴宸叉湁鏍囧噯妯℃澘鏂囦欢锛屽垯鍚庣画 Agent 搴斾紭鍏堢洿鎺ヤ娇鐢ㄨ妯℃澘銆?
-
-## 4.4.1 閫昏緫鍏ュ彛妫€鏌ユ竻鍗曞簲鍥哄畾
-
-- 褰撳墠鐗堟湰寤鸿鎶娾€滈€昏緫鍏ュ彛妫€鏌モ€濅篃鍥哄畾鎴愪竴浠界煭娓呭崟銆?
-- 姣忔閲嶆柊寮€濮嬮」鐩椂锛岃嚦灏戝簲妫€鏌ワ細
-  - 椤圭洰涓绘枃妗ｅ叆鍙ｆ槸鍚﹀凡瀹氫綅
-  - 椤圭洰閫昏緫鍏ュ彛鏄惁宸插畾浣?
-  - 鑻ラ」鐩洰褰曞唴鏈湅鍒伴€昏緫鏂囦欢锛屾槸鍚﹀凡璇㈤棶鍏朵綅缃?
-  - 褰撳墠閫昏緫鍏ュ彛鏄惁涓虹増鏈棤鍏崇‘璁わ紝鑰屼笉鏄嚟鏃х増鏈悕鐚滄祴
-  - 鐩綍瀹¤鏄惁宸插畬鎴?
-- 杩欐牱鍙互鎶娾€滃紑濮嬮」鐩墠鐨勫姩浣溾€濆浐鍖栨垚绋冲畾鍏ュ彛锛岃€屼笉鏄緷璧栧崟娆′細璇濊蹇嗐€?
-- 鑻ラ€昏緫鍖呭唴宸叉湁鏍囧噯娓呭崟鏂囦欢锛屽垯鍚庣画 Agent 搴斾紭鍏堢洿鎺ユ寜娓呭崟鎵ц銆?
-
-## 4.5 涓婚€昏緫涓嶈兘鍙鍓嶅崐娈?
-
-- 褰撳墠鐗堟湰鏄庣‘瑕佹眰锛欰gent 蹇呴』瀹屾暣闃呰涓婚€昏緫锛屼笉鑳藉彧璇诲彇鍓嶉潰鐨勮嫢骞叉潯娆惧悗灏辫繘鍏ユ墽琛屻€?
-- 鍚庨儴绔犺妭閫氬父鍖呭惈绂佹浜嬮」銆佹墦鍖呰竟鐣屻€侀闄╄鍒欍€佸悓姝ヨ鍒欏拰鐗堟湰缁存姢瑙勫垯銆?
-- 鍥犳锛屸€滃畬鏁撮槄璇讳富閫昏緫鈥濇湰韬氨鏄帴鍏ュ姩浣滅殑涓€閮ㄥ垎锛岃€屼笉鏄彲閫変範鎯€?
-
-## 4.6 榛樿宸ュ叿浣庢晥鏃跺繀椤讳富鍔ㄨ瘎浼?
-
-- 褰撳墠鐗堟湰杩涗竴姝ヨ姹傦細濡傛灉榛樿宸ュ叿銆侀粯璁ゆ祻瑙堝櫒璺緞銆侀粯璁ら槄璇昏矾寰勬垨榛樿鎼滅储璺緞鏄庢樉浣庢晥锛孉gent 涓嶅簲琚姩鍧氭寔鏃ц矾寰勩€?
-- Agent 搴斾富鍔ㄨ瘎浼帮細
-  - 鏄惁瀛樺湪鏇撮€傚悎褰撳墠浠诲姟鐨勫伐鍏锋垨 skills
-  - 鏄惁瀛樺湪鏇存垚鐔熺殑澶栭儴鍊欓€夋柟妗?
-  - 鍊欓€夋柟妗堝睘浜庢帹鑽愰」銆佸€欓€夊寮洪」杩樻槸姝ｅ紡闆嗘垚椤?
-
-## 4.6.1 Mandatory Tool Verification Summary
-
-- The main logic now treats some verification tool paths as mandatory rather than optional.
-- Local repository facts must be verified by local search/listing plus targeted reads.
-- Latest/current/remote facts must be verified by authoritative external read-only checks.
-- UI / visible behavior must be verified by screenshot or equivalent visual evidence.
-- All frontend layout changes that add or change text, fields, columns, badges, buttons, cards, grid/flex children, min-width, white-space, overflow, font size, or spacing must include a parent-child layout-boundary check so no child exceeds, pushes past, or visually breaks its parent container.
-- Frontend work is not complete until the visible result has been checked for overflow, truncation, wrapping, misalignment, and one-row-vs-two-row fit under the actual container width.
-- Runtime / build / packaging claims must be verified by command, build, or runtime checks.
-- Path-sensitive writes, side-effecting commands, and external state changes must include pre-target confirmation and post-result confirmation.
-- Permission-sensitive execution must include permission-mode and allowance confirmation before execution.
-- If the matching verification tool was not used, the conclusion should not be treated as fully verified.
-- `29_MandatoryVerificationMatrix.md` should be treated as the hard mapping layer for conclusion type -> tool family -> minimum pass condition.
-- `30_ToolQuestionBoundaryMatrix.md` should be treated as the hard boundary layer for tool family -> allowed question types -> support-only question types -> forbidden-alone question types.
-- `31_ToolMisuseAndAntiPatternMatrix.md` should be treated as the anti-pattern layer for common invalid closure paths, their correction recipes, and the safe interim labels that should replace overconfident conclusions.
-
-## 4.7 V6 鍙綔涓哄鎸傞€昏緫鍖咃紝涓嶄綔涓洪」鐩洰褰?
-
-- 褰撳墠椤圭洰宸茬粡璇佹槑锛氫富閫昏緫鍖呬笌涓氬姟椤圭洰鐩綍蹇呴』涓ユ牸鍒嗙銆?
-- `AgentLogic_V6` 鐨勮鑹叉槸澶栨寕閫昏緫鑴戯紝涓嶆槸涓氬姟浠撳簱鏈綋锛屼篃涓嶆槸鏂伴」鐩€佹柊妯″潡鐨勮惤鐩樼洰褰曘€?
-- 鍚庣画浠讳綍 Agent 杩涘叆鏂伴」鐩椂锛屽厑璁告妸 V6 褰撲綔锛?
-  - 涓婚€昏緫鍏ュ彛
-  - 瑙勫垯鍙傝€冨寘
-  - 鑳藉姏鏄犲皠鍖?
-  - 瀹¤涓庤ˉ寮哄熀绾?
-- 浣嗕笉鍏佽鎶?V6 褰撲綔锛?
-  - 椤圭洰婧愮爜鐩綍
-  - 妯″潡鍒涘缓鐩綍
-  - 渚濊禆瀹夎鐩綍
-  - 鏋勫缓杈撳嚭鐩綍
-  - 涓存椂娴嬭瘯涓庢棩蹇楃洰褰?
-- 鑻ュ惎鍔ㄦ柊椤圭洰锛屽繀椤诲厛寤虹珛鐙珛椤圭洰鐩綍锛屽啀灏?V6 浣滀负澶栨寕瑙勫垯鎺ュ叆銆?
-
-## 4.8 鍚姩鍓嶇洰褰曞璁″繀椤诲墠缃?
-
-- 褰撳墠鐗堟湰杩樺簲鎶娾€滅洰褰曞璁♀€濇彁鍗囦负鍚姩鍓嶅己鍒跺姩浣溿€?
-- Agent 鍦ㄥ紑濮嬩换浣曚細鍒涘缓涓氬姟鏂囦欢鐨勪换鍔″墠锛岄兘蹇呴』鍏堝垽鏂綋鍓嶇洰褰曟槸鍚﹀睘浜?V6 閫昏緫鍖呰寖鍥淬€?
-- 濡傛灉褰撳墠鐩綍灞炰簬锛?
-  - `AgentLogic_V6`
-  - 閫昏緫鍖呯淮鎶ょ洰褰?
-  - 閫昏緫鍖呴暅鍍忕洰褰?
-  - 閫昏緫鍖呰В鍘嬬洰褰?
-  鍒欎笉寰楃洿鎺ョ户缁」鐩垵濮嬪寲鎴栨ā鍧楀垱寤恒€?
-- 姝ｇ‘鍔ㄤ綔鏄厛鍒囨崲鍒扮嫭绔嬮」鐩洰褰曪紝鍐嶆妸 V6 浣滀负澶栨寕瑙勫垯鎺ュ叆銆?
-- 杩欐潯瑙勫垯鐨勭洰鏍囷紝鏄槻姝?AI 鍙湪宸叉湁宸ュ叿閲屾墦杞紝蹇界暐鏇村ソ鐢ㄧ殑澶栭儴宸ュ叿锛屼粠鑰岄檷浣庢晥鐜囧拰鍒ゆ柇璐ㄩ噺銆?
-- 缁熶竴琛ㄨ揪涓猴細榛樿宸ュ叿浣庢晥鏃讹紝Agent 搴斾富鍔ㄥ鎵炬洿閫傚悎褰撳墠浠诲姟鐨勫伐鍏锋垨鏂规锛屼絾蹇呴』鍖哄垎姝ｅ紡鑳藉姏涓庡€欓€夊寮恒€?
-
-## 5. 褰撳墠椤圭洰鐨勬墦鍖呮寚瀹?
-
-瀵逛簬褰撳墠椤圭洰锛屼富閫昏緫搴旀槑纭己鍒舵寚瀹氫互涓嬭竟鐣岋細
-
-- `src/tools/` 蹇呴』浣滀负宸ュ叿鍘熷婧愮爜灞傛暣鍖呬繚鐣欍€?
-- `src/Tool.ts`銆乣src/tools.ts`銆乣src/services/tools/` 蹇呴』浣滀负宸ュ叿鍩虹璁炬柦灞備繚鐣欍€?
-- `src/utils/permissions/` 涓嶈姹傛暣鐩綍澶嶅埗锛屼絾鑷冲皯瑕佸湪閫昏緫灞備腑鏄庣‘绱㈠紩涓庡叧閿矾寰勩€?
-- `docs/` 涓嶈姹傚叏閲忓鍒讹紝浣嗘牳蹇冪珷鑺傚繀椤诲湪绱㈠紩灞備腑鐐瑰悕銆?
-- 澶у瀷 UI 鐩綍涓嶈姹傛暣鍖呰繘鍏ラ€昏緫鍖咃紝榛樿浠ュ叆鍙ｇ储寮曞拰涓婚摼璺鏄庝负涓汇€?
-
-## 6. 涓轰粈涔堝厑璁稿伐鍏风洿鎺ユ墦鍖?
-
-褰撳墠椤圭洰鐨勫伐鍏风郴缁熻妯¤緝澶э紝涓斿緢澶氫环鍊兼潵鑷湡瀹炲疄鐜拌€屼笉鏄憳瑕佹枃瀛椼€?
-
-鍥犳閲囩敤浠ヤ笅绛栫暐鏇寸ǔ瀹氾細
-
-- 宸ュ叿婧愮爜鍘熸牱淇濈暀
-- 宸ュ叿鎬昏鍗曠嫭瑙ｉ噴
-- 宸ュ叿娉ㄥ唽涓庢墽琛屽熀纭€璁炬柦鍗曠嫭瑙ｉ噴
-- 瀵?stub銆乫eature flag銆佹潯浠跺惎鐢ㄥ伐鍏峰湪閫昏緫灞傛槑纭爣璁?
-
-## 7. 褰撳墠椤圭洰鐨勬渶缁堝垎灞傝竟鐣?
-
-瀵瑰綋鍓嶉」鐩紝寤鸿褰㈡垚濡備笅鏈€缁堣竟鐣岋細
-
-- P0 鏁村寘淇濈暀
-  - `src/tools/`
-  - `src/Tool.ts`
-  - `src/tools.ts`
-  - `src/services/tools/`
-- P1 淇濈暀鍏抽敭瀹炵幇灞?
-  - `src/utils/permissions/`
-  - `src/services/mcp/`
-  - `src/skills/`
-  - `src/tools/AgentTool/`
-- P2 淇濈暀绱㈠紩涓庢槧灏?
-  - `src/commands/`
-  - `src/context.ts`
-  - `src/state/`
-- P3 鍏ュ彛鍖栧鐞?
-  - 澶у瀷 UI 鐩綍
-  - 灞曠ず鎬х粍浠?
-
-褰撳墠鐗堟湰杩涗竴姝ュ姞寮轰负锛?
-
-- `src/commands/` 浣滀负鍛戒护闈㈠師濮嬪眰淇濈暀
-- `context.ts` 涓?`state/` 缁х画淇濇寔绱㈠紩浼樺厛
-
-## 8. 瀵逛富閫昏緫鐨勬柊澧炶ˉ寮?
-
-鐩歌緝浜庢洿鏃╃増鏈殑涓婚€昏緫锛屽綋鍓嶉」鐩澶栬瘉鏄庝簡浠ヤ笅鍐呭搴旈暱鏈熻繘鍏ヤ富閫昏緫锛?
-
-- 閫昏緫鍖呭簲鏄€滄簮鐮侀┍鍔ㄧ殑鐭ヨ瘑鍖呪€濓紝涓嶆槸鈥滄簮鐮佸鍒跺寘鈥濄€?
-- 宸ュ叿绯荤粺蹇呴』鏁村悎鎴愬畬鏁磋鍥撅紝鑷冲皯娑电洊娉ㄥ唽銆佽繃婊ゃ€佹巿鏉冦€佹墽琛屻€佸洖娴併€?
-- 椤圭洰绾ч€昏緫鍖呴渶瑕佷繚鐣欌€滆兘鍔涚姸鎬佲€濈淮搴︼紝閬垮厤鎶?stub 鎴栨浠ｇ爜璇啓鎴愮湡瀹炶兘鍔涖€?
-- 鍙戠幇鏇村噯纭殑鏋舵瀯銆佸伐鍏枫€佹潈闄愩€佹墿灞曡竟鐣屾椂锛屽簲鍚屾鍙嶅摵涓婚€昏緫鏂囦欢銆?
-- 褰撻」鐩瓨鍦ㄧ湡瀹炲叆鍙?/ 璧锋墜婧愮爜鏂囦欢鏃讹紝杩欎簺鏂囦欢椤堕儴榛樿閮藉簲鏀剧疆鐭皬鐨勯€昏緫鍏ュ彛鎻愰啋銆?
-- 杩欐潯瑙勫垯鐨勯粯璁よ寖鍥翠笉鏄€滃彧闄愬叧閿叆鍙ｂ€濓紝鑰屾槸瑕嗙洊椤圭洰鍐呮墍鏈夌湡瀹炲叆鍙?/ 璧锋墜婧愮爜鏂囦欢锛涗絾涓嶅簲鏈烘閾烘弧宸ュ叿鍑芥暟銆佸彾瀛愮粍浠跺拰闈炲叆鍙ｅ疄鐜版枃浠躲€?
-- 鎻愰啋搴旀寚鍚戜粨搴撳唴鐨?`AGENTS.md`銆乣README.md` 绛夌浉瀵瑰叆鍙ｆ枃浠讹紝鑰屼笉鏄啓鍏ユ満鍣ㄧ浉鍏崇殑缁濆璺緞銆?
-- 杩欐牱鍙互鎶娾€滀富閫昏緫鍥炶鈥濅粠椤跺眰鏂囨。寤朵几鍒扮湡瀹炲紑宸ョ偣锛岄檷浣庡杞璇濆悗鐨勪富閫昏緫婕傜Щ椋庨櫓銆?
-- 濡傛灉椤圭洰瑕佹妸杩欐潯瑙勫垯浠庘€滄枃妗ｈ鑼冣€濆崌绾т负鈥滃伐绋嬬害鏉熲€濓紝鍒欒繕搴旀彁渚涗粨搴撶骇鏍￠獙鑴氭湰锛岀敤浜庢満姊版鏌ユ墍鏈夌湡瀹炲叆鍙?/ 璧锋墜婧愮爜鏂囦欢涓庝富鏂囨。鏄惁浠嶄繚鐣欓€昏緫鍏ュ彛鎻愰啋銆?
-- 璇ョ被鑴氭湰搴斾紭鍏堟鏌ワ細
-  - 浠撳簱绾у叆鍙ｆ枃妗ｆ槸鍚︿粛鎸囧悜涓婚€昏緫鍏ュ彛
-  - 鎵€鏈夌湡瀹炲叆鍙?/ 璧锋墜婧愮爜鏂囦欢椤堕儴鏄惁浠嶄繚鐣欑煭鎻愰啋
-  - 鎻愰啋鍐呭鏄惁鎸囧洖浠撳簱鐩稿璺緞锛岃€屼笉鏄満鍣ㄧ粷瀵硅矾寰?
-
-
-## 9. Continuous Execution Interpretation For This Project
-
-- In this project-level logic summary, repeated confirmation is not the goal of the startup chain.
-- The goal is to preserve logical continuity and prevent context drift.
-- If the user explicitly says any equivalent of:
-  - "unless I say stop, keep going"
-  - "do not keep asking me for confirmation"
-  - "follow the plan and keep writing"
-  then that statement must be treated as active continuous-execution authorization within the current task scope.
-- Under that authorization:
-  - subsequent implementation steps should default to being treated as the same ongoing execution round
-  - the agent should continue reading, editing, validating, and fixing in sequence without repeated confirmation at ordinary step boundaries
-  - the agent should stop only when:
-    - the user explicitly says to stop
-    - the current plan is complete and a new strategic direction is required
-    - a true blocker cannot be resolved from local context
-    - a high-risk irreversible action is about to be taken
-- This authorization also implies that the work is still in implementation / build-out mode by default, not yet in formal product-test stage, unless the user explicitly says testing has begun.
+鐢ㄦ埛鏄庣‘瑕佹眰鎸佺画鎵ц鏃讹紝褰撳墠璁″垝鍐呯殑闃呰銆佷慨鏀广€侀獙璇佸拰淇瑙嗕负鍚屼竴鎵ц杞銆?鍙湁鐢ㄦ埛瑕佹眰鍋滄銆佽鍒掑畬鎴愰渶瑕佹柊鐨勬垬鐣ユ柟鍚戙€佸嚭鐜版棤娉曚粠鏈湴浜嬪疄瑙ｅ喅鐨勯樆濉烇紝鎴栧嵆灏嗚繘琛?楂橀闄╀笉鍙€嗘搷浣滄椂锛屾墠鏆傚仠璇锋眰杈撳叆銆?
 
 ## END FILE: modules/01_MasterLogic.md
 
@@ -1310,74 +1070,39 @@ Then follow the repository-declared logic entry chain, including `00_START_HERE.
 `modules/01_MasterLogic.md`, and `modules/15_LogicEntryChecklist.md` when applicable.
 
 Before every new coding round, explicitly decide whether the current task extends
-the previous coding round.
-If it does not, explicitly ask whether to forget/compress context before continuing.
+the previous coding round. If it does not, explicitly ask whether to forget/compress context.
 
-Treat this flow as a blocking gate, not as guidance, documentation, or a reminder.
-Do not infer continuation by yourself.
-Do not skip the context-reset question for efficiency.
-
-Do not continue deeper reading, modify files, delete files, perform write actions,
-or begin implementation before the logic-entry loop above has been completed.
+This is a blocking gate. Do not begin implementation before it is complete.
 -->
 
-# Cross Directory Code Map (浠ｇ爜璺ㄧ洰褰曞湴鍥?
+# Cross Directory Repository Map
 
-鏈枃浠舵槸閽堝鏈郴缁熸簮鐮佺洰褰曡璁＄殑 **4灞備唬鐮佹灦鏋勪笌璺ㄧ洰褰曡皟鐢ㄥ湴鍥?*銆傚畠灏嗕笁灞傛墎骞崇粨鏋勯噸鏋勪负鍙?Linux 鍐呮牳鍚彂鐨?**L1 鉃?L2 鉃?L3 鉃?L4** 鍥涘眰娓愯繘浣撶郴锛屾竻鏅扮晫瀹氫簡浠庣敤鎴风粓绔晫闈㈠埌搴曞眰鎵ц椹卞姩鐨勪唬鐮佸垎甯冧笌鏁版嵁娴佽浆鍏崇郴銆?
+This map describes the actual AgentLogic repository. It is not a map of an external
+Agentic CLI application's `src/` directory.
 
----
+| Layer | Responsibility | Actual paths |
+|---|---|---|
+| **L1: Entry & Host Surface** | Human/agent entry, stable binding, installation guidance, host integration | `00_START_HERE.md`, `AGENTS.md`, `README.md`, `MAIN.md`, `AGENT_INSTALL.md`, `INSTALL.md`, `adapters/` |
+| **L2: Lifecycle & Logic** | Version source, master logic, session rules, SDD, task state | `versions/`, `modules/01_MasterLogic.md`, `modules/03_AgenticLoop.md`, `modules/12_AgentEnforcement.md`, `modules/15_LogicEntryChecklist.md`, `modules/38_V6_6_SpecDrivenDevelopment.md`, `.specify/` |
+| **L3: Control & Verification** | Manifest contracts, permissions, evidence boundaries, package and entry validation | `manifest.json`, `manifest.schema.json`, `modules/05_PermissionsAndSafety.md`, `modules/29_MandatoryVerificationMatrix.md`, `modules/30_ToolQuestionBoundaryMatrix.md`, `modules/31_ToolMisuseAndAntiPatternMatrix.md`, `scripts/` |
+| **L4: Assets & Outputs** | Portable skills, reference layers, generated host bundles and profile build | `skills/`, `spec-kit/`, `reference/`, `dist/`, `scripts/build-profile.ps1` |
 
-## 1. 婧愮爜鍥涘眰鏄犲皠鐭╅樀 (4-Layer Code Architecture)
+## Operational flow
 
-| 浠ｇ爜灞傜骇 | 鏍稿績鑱岃矗 | 鍏宠仈鐨勫叧閿洰褰曚笌鏂囦欢 |
-| :--- | :--- | :--- |
-| **L1: Shell & CLI Surface**<br>(CLI 涓庝氦浜掑澹冲眰) | 璐熻矗 REPL 鍚姩銆佺敤鎴疯緭鍏ヨВ鏋愩€佸懡浠ゅ垎鍙戙€佺粓绔?UI 娓叉煋銆傜被浼间簬 Linux 鐨?TTY 缁堢涓庣郴缁熻皟鐢ㄦ帴鍙ｃ€?| - [cli.tsx](file:///REPO_ROOT_PLACEHOLDER/src/entrypoints/cli.tsx)<br>- [main.tsx](file:///REPO_ROOT_PLACEHOLDER/src/main.tsx)<br>- `src/screens/` 涓?`src/components/` (缁堢 React 缁勪欢)<br>- `src/ink/` (缁堢娓叉煋寮曟搸) |
-| **L2: Session & Loop Orchestration**<br>(浼氳瘽涓庡惊鐜紪鎺掑眰) | 璐熻矗鍗忚皟澶氳疆浼氳瘽鐘舵€併€佺鐞嗗綋鍓嶄細璇濅笂涓嬫枃浠ュ強鍗曡疆鎺ㄧ悊寰幆銆傜被浼间簬 Linux 鍐呮牳鐨勮繘绋嬭皟搴︿笌椤佃〃鏄犲皠銆?| - [QueryEngine.ts](file:///REPO_ROOT_PLACEHOLDER/src/QueryEngine.ts) (浼氳瘽缂栨帓)<br>- [query.ts](file:///REPO_ROOT_PLACEHOLDER/src/query.ts) (鍗曡疆鎬濊€?鎺ㄧ悊寮曟搸)<br>- [context.ts](file:///REPO_ROOT_PLACEHOLDER/src/context.ts) (涓婁笅鏂囧皝瑁?<br>- `src/state/` (浼氳瘽鐘舵€佺姸鎬佹満) |
-| **L3: Service & Mediation Control**<br>(鏈嶅姟缁勪欢涓庝腑浠嬫帶鍒跺眰) | 鎻愪緵缁熶竴鐨勬娊璞℃帴鍙ｏ紝璐熻矗宸ュ叿鐨勫姩鎬佺粍瑁呫€佹墽琛屾嫤鎴€佹潈闄愬垽瀹氬拰鎵╁睍鍗忚銆傜被浼间簬 Linux 鐨?VFS (铏氭嫙鏂囦欢绯荤粺) 鍜?Sockets 灞傘€?| - [Tool.ts](file:///REPO_ROOT_PLACEHOLDER/src/Tool.ts) & [tools.ts](file:///REPO_ROOT_PLACEHOLDER/src/tools.ts) (宸ュ叿涓粙涓庢敞鍐?<br>- `src/services/tools/` (宸ュ叿鎵ц涓?Hook 鐢熷懡鍛ㄦ湡缂栨帓)<br>- `src/utils/permissions/` (鏉冮檺鎷︽埅缃戝叧)<br>- `src/services/mcp/` (Model Context Protocol 瀹㈡埛绔?鏈嶅姟绔? |
-| **L4: Atomic Execution & Drivers**<br>(鍘熷瓙鎵ц涓庡簳灞傞┍鍔ㄥ眰) | 璐熻矗鍏蜂綋涓氬姟鍛戒护涓庡伐鍏风殑瀹為檯鎵ц锛屼笌鏈湴鐜銆佹枃浠剁郴缁熴€佺綉缁滀氦浜掋€傜被浼间簬 Linux 鐨勫叿浣撹澶囬┍鍔ㄤ笌鏂囦欢绯荤粺瀹炵幇銆?| - `src/commands/` (搴曞眰 CLI 鍛戒护瀹炵幇)<br>- `src/tools/` (鍘熷瓙宸ュ叿浠ｇ爜锛屽 `view_file`銆乣run_command` 绛夌殑瀹為檯 TypeScript 瀹炵幇)<br>- `skills/` (棰嗗煙鎶€鑳藉寘锛屼緥濡?`taste-skill` UI 瑙嗚鎺у埗銆乣reverse-skill` 閫嗗悜鍒嗘瀽銆乣agent-browser` 缃戦〉鑷姩鍖栨帶鍒躲€乣nano-banana-pro` 澶氭ā鎬佺敾鍥惧師鍨嬨€乣self-improvement` 缂洪櫡鑷籂鑷渷銆乣spec-kit` SDD 鎺у埗) |
-
----
-
-## 2. 鍏抽敭璺ㄧ洰褰曚氦浜掍笌鏁版嵁娴佸悜
-
-褰撶敤鎴疯緭鍏ユ寚浠ゆ垨澶фā鍨嬩骇鐢熷伐鍏疯皟鐢ㄦ椂锛屼唬鐮佸皢鎸変互涓嬭矾寰勮法鐩綍娴佽浆锛?
-
-```
-L1: Surface (cli.tsx / React UI)
-       鈹?(1) 鎻愪氦鐢ㄦ埛鎸囦护 / 杈撳叆
-       鈻?
-L2: Loop (QueryEngine.ts 鉃?query.ts) 鈼勨攢鈹€鈹€鈹?
-       鈹?(2) 鍙戣捣妯″瀷鎺ㄧ悊锛岀敓鎴愬伐鍏疯皟鐢ㄨ姹? 鈹?(7) 鍥炰紶鎵ц缁撴灉
-       鈻?                                 鈹?
-L3: Service (tools.ts 鉃?toolExecution.ts) 鈹?
-       鈹?(3) 瑙﹀彂 Pre-Hook 骞惰姹傛潈闄愭牎楠?
-       鈹溾攢鈹€鈹€鈹€鈹€鈹€鈹€鈹€鉃?src/utils/permissions/ (鏉冮檺鍒ゅ畾)
-       鈹?(4) 鏉冮檺鏀捐锛屽紑濮嬫淳鍙戝伐鍏?
-       鈻?
-L4: Drivers (src/tools/* or skills/*)
-       鈹?(5) 瀹為檯鎵ц绯荤粺/缃戠粶/鏂囦欢鎿嶄綔
-       鈻?
-L3: Service (toolResultStorage.ts 鉃?Hook Lifecycle)
-         (6) 瑙﹀彂 Post-Hook & 寮哄埗楠岃瘉鐭╅樀楠岃瘉 (modules/29)
+```text
+L1 entry docs
+  -> task applicability and context decision
+  -> L2 specifications and logic modules
+  -> L3 permission / evidence / package checks
+  -> L4 generated profile and host output
 ```
 
----
+## Maintenance rule
 
-## 3. 缁存姢涓庨槄璇婚『搴忓缓璁?
-
-瀵逛簬鎺ユ墜鎴栧弬涓庣郴缁熷紑鍙戠殑寮€鍙戣€咃紝鎺ㄨ崘鎸夌収濡備笅鐨勭郴缁熷寲璺緞杩涜浠ｇ爜闃呰锛?
-
-1. **鏍稿績閫昏緫鍏ュ彛**:
-   - `modules/01_MasterLogic.md` (涓绘灦鏋勭翰棰?
-   - `modules/40_AgentLogicSystemMap.md` (鏋舵瀯缃戞牸涓庢墽琛屾祦鍦板浘)
-2. **绗竴姝ワ細鐪嬪澹充氦浜?(L1)**:
-   - 浠?`src/main.tsx` 浜嗚В REPL 鍚姩锛岀劧鍚庣湅 `src/entrypoints/cli.tsx` 濡備綍澶勭悊棣栧抚娓叉煋涓庣粍浠舵寕杞姐€?
-3. **绗簩姝ワ細鐞嗕細璇濆惊鐜?(L2)**:
-   - 娣卞叆闃呰 `src/QueryEngine.ts` 鎺屾彙澶氳疆瀵硅瘽鐨勬寕璧蜂笌婵€娲伙紝鍐嶇湅 `src/query.ts` 鐞嗚В鍗曡疆 Agentic Loop 涓殑妯″瀷璋冪敤绛栫暐銆?
-4. **绗笁姝ワ細鐪嬪伐鍏锋湇鍔′笌瀹夊叏 (L3)**:
-   - 闃呰 `src/Tool.ts` 鎶借薄绫伙紝鎺ョ潃鐪?`src/services/tools/toolExecution.ts` 濡備綍绠＄悊鐢熷懡鍛ㄦ湡 Hook 浠ュ強濡備綍鎺ュ叆 `src/utils/permissions/` 杩涜瀹夊叏鎷︽埅銆?
-5. **绗洓姝ワ細鐪嬮┍鍔ㄤ笌钀藉湴 (L4)**:
-   - 鏌ョ湅 `src/tools/` 鐩綍涓嬬殑搴曞眰鎵ц閫昏緫锛岀劧鍚庣湅澶栭儴鎵╁睍鎶€鑳藉寘 `skills/` 濡備綍鍙嶅摵鏍稿績寮曟搸銆?
+When a new logic module, script, adapter, profile, or generated output is added, update the
+corresponding source-of-truth map and run `node scripts/check-logic-entry.js` plus
+`scripts/validate-package.ps1`. External project architecture belongs in `reference/` or an
+explicit comparison document and must not be presented as current repository fact.
 
 ## END FILE: modules/11_CrossDirectoryMap.md
 
@@ -1429,7 +1154,7 @@ Agent 鑷冲皯蹇呴』瀹屾垚锛?
 1. 璇嗗埆椤圭洰鏂囨。涓诲叆鍙?
 2. 纭椤圭洰鐩綍涓嬫槸鍚﹀瓨鍦ㄥ綋鍓嶉」鐩娇鐢ㄧ殑 Agent 閫昏緫鏂囦欢锛涜嫢涓嶅瓨鍦紝鍏堣闂€昏緫鍏ュ彛浣嶇疆
 3. 鍒ゆ柇褰撳墠浠诲姟鏄惁灞炰簬涓婁竴杞?coding 鐨勫欢鐢?
-4. 鑻ヤ笉灞炰簬涓婁竴杞欢鐢筹紝涓斾細璇?Token 鍗犵敤宸茶秴杩?15%锛屽厛璇㈤棶鐢ㄦ埛鏄惁闇€瑕?`forget/compress context`锛堣嫢 Token 鍗犵敤鏋佷綆 <15% 涓斿寘鍚槑纭殑涓婁笅鏂囪竟鐣岋紝鍙嚜鍔ㄩ潤榛樺拷鐣ヨ鎻愰棶锛?
+4. 鑻ヤ笉灞炰簬涓婁竴杞欢鐢筹紝蹇呴』鍏堣闂敤鎴锋槸鍚﹂渶瑕?`forget/compress context`锛涗笉寰楁牴鎹?Token 鍗犵敤銆佹ā鍨嬨€佸涓绘垨涓婁笅鏂囬暱搴﹂潤榛樿烦杩囪鍐冲畾
 5. 鑻ヨ鏀剁缉涓婁笅鏂囷紝鍏堟妸褰撳墠鏈夋晥鐘舵€佸洖鍐欏埌缁撴瀯鍖栬浇浣?
 6. 璇诲彇鐩稿叧 md 涓庡叧閿叆鍙ｆ簮鐮?
 7. 鍒ゆ柇褰撳墠浠诲姟浣嶄簬 L1 / L2 / L3 / L4 鍝竴灞?
@@ -1564,8 +1289,7 @@ Agent 鑷冲皯蹇呴』瀹屾垚锛?
 - 姝ｇ‘椤哄簭蹇呴』鍥哄畾涓猴細
   1. 鍏堢‘璁ら€昏緫鍏ュ彛
   2. 鍐嶅垽鏂槸鍚﹀睘浜庝笂涓€杞欢鐢?
-  3. 鑻ヤ笉鏄欢鐢筹紝涓斾細璇?Token 鍗犵敤瓒呰繃 15%锛屽繀椤诲厛璇㈤棶鏄惁闇€瑕?`forget/compress context`锛堣嫢 Token 鏋佸叾鍏呰冻 <15% 涓旇竟鐣屾竻鏅帮紝鍙潤榛樺拷鐣ユ彁闂苟鐩存帴缁х画锛?
-- 鑻ョ 3 姝ユ湭瀹屾垚涓旀湭婊¤冻蹇界暐鏉′欢锛屼笉寰楃洿鎺ヨ繘鍏ユ寮忓疄鐜般€?
+  3. 鑻ヤ笉鏄欢鐢筹紝蹇呴』鍏堣闂槸鍚﹂渶瑕?`forget/compress context`锛涗笉寰楄缃?Token 闃堝€间緥澶栨垨闈欓粯璺宠繃璇ュ喅瀹?- 鑻ョ 3 姝ユ湭瀹屾垚涓旀湭婊¤冻蹇界暐鏉′欢锛屼笉寰楃洿鎺ヨ繘鍏ユ寮忓疄鐜般€?
 - 鑻ョ敤鎴风‘璁ら渶瑕佹敹缂╀笂涓嬫枃锛孉gent 蹇呴』鍏堝洖鍐欑粨鏋勫寲鐘舵€侊紝鍐嶅噺灏戝伐浣滀笂涓嬫枃銆?
 
 ## 4.3 澶栭儴鏇翠紭宸ュ叿鐨勬彁鍑轰箟鍔?
@@ -1636,7 +1360,7 @@ Agent 鑷冲皯蹇呴』瀹屾垚锛?
 涓烘瀯寤鸿法椤圭洰銆佽法浼氳瘽鐨勫叡浜煡璇嗗簱锛岄槻鑼?AI 鍔╂墜鈥滀細璇濈粨鏉熷嵆澶卞繂鈥濈殑灞€闄愭€э紝鏈郴缁熷己鍒跺紩鍏?GitHub 鍏变韩鐘敊璁板綍浠撳簱鏈哄埗銆?
 
 - **鍏变韩浠撳簱鍦板潃**锛歚https://github.com/UIhoshi/modification_history`
-- **鏈湴鏄犲皠璺緞**锛歚C:/Users/XU RONG/Documents/workspace/modification_history`
+- **鏈湴鏄犲皠璺緞**锛氶粯璁や娇鐢ㄥ綋鍓嶉」鐩埗鐩綍涓嬬殑 `modification_history`锛涘鏈湴甯冨眬涓嶅悓锛屼娇鐢ㄦ樉寮忛厤缃殑缁濆璺緞鎴栫幆澧冨彉閲忥紝涓嶅緱鎶婃煇鍙版満鍣ㄧ殑鐢ㄦ埛鐩綍鍐欏叆瑙勫垯鏂囦欢
 - **褰掓。鏍煎紡**锛氬湪鍏变韩浠撳簱涓嬶紝浠ラ」鐩悕绉板缓绔嬪瓙鏂囦欢澶癸紙渚嬪 `/CanvasTab/`锛夛紝鍦ㄦ瀛愭枃浠跺す涓嬪啓鍏?Markdown 鏍煎紡鐨勪慨鏀逛笌淇鏃ュ織锛堝 `modification_history.md`锛夈€?
 
 ### 4.4.1 寮哄埗鍚屾鏃舵満涓庡弻閲嶆帹閫?
@@ -2155,6 +1879,12 @@ This stack should be treated as the default engineering baseline, not a special-
 - [ ] If the user explicitly gave a continuous-execution instruction such as "unless I say stop, keep going", that instruction has been recorded as an active authorization for the current task scope
 - [ ] Subsequent planned implementation steps are being treated as part of the same continuous execution round rather than as repeated re-confirmation points
 - [ ] The current work is still being treated as implementation / build-out phase by default, not as formal product-test stage, unless the user explicitly said testing has begun
+
+## 9. UI Preview Gate
+
+- [ ] If the task includes formal UI implementation, a text-to-image preview has been generated and shown to the user before UI code is written
+- [ ] The user has either reviewed/approved the preview or explicitly opted out of the preview step
+- [ ] No UI implementation began before one of those two conditions was satisfied
 
 ## END FILE: modules/15_LogicEntryChecklist.md
 
@@ -3530,7 +3260,8 @@ These modules explain the system context that governance depends on.
 The V6.5 line used the following primary external comparison source during promotion:
 
 - `https://github.com/claude-code-best/claude-code`
-- Local comparison path: `D:\workspace\claude-code`
+- Local comparison path: a sibling checkout selected by the maintainer; do not encode a
+  machine-specific absolute path in the logic package.
 
 Future V6.x iterations should preserve this practice and explicitly register their comparative source baselines.
 
@@ -4765,7 +4496,7 @@ This template incorporates the 4-tier memory taxonomy and mandatory verification
 
 ## 1. Project Identity & Logic Entry
 - **Project Name**:
-- **Logic Entry Point**: (e.g., D:\workspace\AgentLogic\MAIN.md)
+- **Logic Entry Point**: (e.g., `MAIN.md` at the repository root)
 - **Logic Version**: V6.5 (Stable Line)
 - **Directory Audit Status**: [Verified/Unverified]
 
@@ -5311,7 +5042,7 @@ This module defines the Spec-Driven Development (SDD) workflow powered by the in
 
 ## 1. Core SDD Mandate
 
-To eliminate "vibe coding" (writing arbitrary code without specifications or plans), AgentLogic V6.6 enforces Spec-Driven Development as a default operational normal. 
+To eliminate "vibe coding" (writing arbitrary code without specifications or plans), AgentLogic V6.6 enforces Spec-Driven Development as a default operational normal.
 
 Feature work, refactors, multi-file behavior changes, new projects, and release-affecting changes **MUST** go through the structured SDD pipeline automatically. Specifications are treated as executable definitions of behavior and must be written down before production code is touched. The lighter task classes must still record intent and validation, but must not manufacture irrelevant architecture documents.
 
@@ -5326,7 +5057,7 @@ When starting a project or introducing a feature, refactor, multi-file behavior 
 2. **Specify Phase**: Define user scenarios, requirements, and user stories in clear, natural language.
    - *Requirement*: The specifications must be written to `.specify/spec.md` (or `.specify/specs/` directory).
 - *Domain Vocabulary*: If the task introduces domain terminology or crosses bounded contexts, check or establish `CONTEXT.md` and run the single-question Grilling session (see `modules/43_V6_7_MattPocockSkillsIntegration.md`) before proceeding.
-- *UI/UX Prototyping Gate*: For net-new or major frontend visual design, generate a visual mockup using the `generate_image` tool (via the `nano-banana-pro` skill) and present it for approval before moving to Plan. Content changes, accessibility fixes, responsive bug fixes, and small visual corrections require visual verification but not a new design approval gate.
+- *UI/UX Prototyping Gate*: Before any formal UI implementation, generate a visual mockup using a text-to-image tool (via the image-generation skill), present it to the user, and wait for the user's review. This gate may be bypassed only when the user explicitly says not to use it. Do not treat content changes, accessibility fixes, responsive bug fixes, or small visual corrections as implicit exemptions unless the user explicitly opts out.
 3. **Plan Phase**: Draft a technical implementation plan specifying architecture, tech stack, data schemas, and integration logic.
    - *Requirement*: The plan must be saved in `.specify/plan.md`.
    - *Architectural Decisions*: If the plan involves hard-to-reverse trade-offs, they must be documented in a numbered ADR under `docs/adr/` (see `modules/43_V6_7_MattPocockSkillsIntegration.md`).
@@ -5411,13 +5142,13 @@ For redesigns or visual upgrades of existing projects, follow this checklist:
 
 ## 3.1 Visual Prototyping Gate (Design First Protocol)
 
-When designing a new frontend layout, app UI, or complex web interface component, the Agent MUST NOT write production HTML/CSS/JS code directly. Instead, follow this mandatory visual prototyping gate:
+Before any formal UI implementation鈥攏ew or existing layout, app screen, web page, component, or visual design change鈥攖he Agent MUST NOT write production HTML/CSS/JS/UI code directly. Instead, follow this mandatory visual prototyping gate. The only bypass is an explicit user instruction not to use the preview step:
 
 1. **Prompt Formulation**: Formulate a highly detailed visual layout and style prompt based on the user's requirements (specifying typography, layout variance dials, HSL color palette, and visual density).
-2. **Prototyping**: Invoke the `generate_image` tool (powered by `skills/nano-banana-pro/`) to generate a visual mockup / design image of the proposed UI.
+2. **Prototyping**: Invoke the text-to-image generation tool to generate a visual mockup / design image of the proposed UI.
 3. **Artifact Review**: Save the generated image as a persistent artifact under the conversation directory and present it clearly to the user.
-4. **Interactive Consent**: Wait for the user to inspect the visual design mockup and provide explicit approval.
-5. **Implementation**: Only after the user confirms that the mockup's aesthetics are premium and match expectations, should the Agent proceed to code implementation. If the user requests changes, refine the prompt, re-run image generation, and present the updated design.
+4. **Interactive Consent**: Wait for the user to inspect the visual design mockup and either explicitly approve it or explicitly opt out of the preview gate.
+5. **Implementation**: Only after approval or explicit opt-out may the Agent proceed to code implementation. If the user requests changes, refine the prompt, re-run image generation, and present the updated design.
 
 ---
 
@@ -5460,119 +5191,49 @@ Then follow the repository-declared logic entry chain, including `00_START_HERE.
 `modules/01_MasterLogic.md`, and `modules/15_LogicEntryChecklist.md` when applicable.
 
 Before every new coding round, explicitly decide whether the current task extends
-the previous coding round.
-If it does not, explicitly ask whether to forget/compress context before continuing.
+the previous coding round. If it does not, explicitly ask whether to forget/compress context.
 
-Treat this flow as a blocking gate, not as guidance, documentation, or a reminder.
-Do not infer continuation by yourself.
-Do not skip the context-reset question for efficiency.
-
-Do not continue deeper reading, modify files, delete files, perform write actions,
-or begin implementation before the logic-entry loop above has been completed.
+This is a blocking gate. Do not begin implementation before it is complete.
 -->
 
 # AgentLogic System Map
 
-鏈枃浠舵槸鍙?Linux 鍐呮牳鐩磋鏋舵瀯鍥撅紙[makelinux/linux_kernel_map](https://github.com/makelinux/linux_kernel_map)锛夊惎鍙戣€岃璁＄殑 **Agentic CLI 鏋舵瀯涓庤祫婧愬湴鍥?*銆?
-瀹冨皢鏁翠釜 AgentLogic 鐨勫杞細璇濄€佸伐鍏锋墽琛屻€佹潈闄愭帶鍒躲€佺姸鎬佹不鐞嗕互鍙婂閮ㄨ兘鍔涢泦鎴愶紝鏁寸悊鎴愪簡涓€涓寘鍚?*鍥涘眰鎶借薄锛圧ows锛?*涓?*浜斿ぇ瀛愮郴缁燂紙Columns锛?*鐨勭綉鏍煎湴鍥撅紝骞剁敤娴佺▼鍥炬弿缁樹簡鍗曡疆鎵ц娴佷腑鐨勪氦浜掕矾寰勩€?
+This four-layer map is a repository map for the portable AgentLogic method layer. The Linux
+kernel map is an analogy only; it does not imply that this repository contains a runtime CLI
+implementation or the source tree of another project.
 
----
+| Layer | Entry / lifecycle | Capability / tools | Governance / evidence | State / output |
+|---|---|---|---|---|
+| **L1 Strategy & Entry** | `00_START_HERE.md`, `AGENTS.md`, `MAIN.md` | `README.md`, `AGENT_INSTALL.md`, `INSTALL.md` | `modules/15_LogicEntryChecklist.md`, `modules/13_MandatoryLogicGateTemplate.md` | `manifest.json` |
+| **L2 Session & Lifecycle** | `modules/01_MasterLogic.md`, `modules/03_AgenticLoop.md`, `versions/AgentLogic_V6_8_0.md` | `modules/38_V6_6_SpecDrivenDevelopment.md`, `spec-kit/`, `.specify/` | `modules/12_AgentEnforcement.md`, `modules/44_V6_8_GrokBuildOperationalIntegration.md` | `.specify/spec.md`, `.specify/plan.md`, `.specify/tasks.md` |
+| **L3 Execution & Control** | `adapters/`, `install.ps1`, `install.sh` | `skills/`, `scripts/build-profile.ps1` | `modules/05_PermissionsAndSafety.md`, `modules/23_V6_5_PermissionAndOutputPipeline.md`, `modules/29_MandatoryVerificationMatrix.md`, `modules/30_ToolQuestionBoundaryMatrix.md`, `modules/31_ToolMisuseAndAntiPatternMatrix.md` | `scripts/check-logic-entry.js`, `scripts/validate-package.ps1` |
+| **L4 Base & Reference** | `reference/`, historical `versions/` files | `skills/`, `spec-kit/` | `modules/35_V6_5_SkillGovernanceAndMandatoryUse.md`, `modules/36_V6_5_SkillZoneSeparation.md`, `modules/41_V6_7_AIShippingAndReviewabilityAudit.md` | `dist/`, `modification_history/` sibling repository |
 
-## 1. 鏋舵瀯涓庤祫婧愮綉鏍煎湴鍥?(Architecture Grid Matrix)
-
-鏈煩闃靛皢澶嶆潅鐨勭郴缁熻兘鍔涙寜鈥滀笂涓嬪垎灞傦紙灞傜骇锛夆€濆拰鈥滃乏鍙冲垎娌伙紙瀛愮郴缁燂級鈥濈殑褰㈠紡杩涜鏄犲皠锛?
-
-| 鎶借薄灞傜骇 \ 瀛愮郴缁?| **浼氳瘽涓庣敓鍛藉懆鏈?(Session & Lifecycle)** | **鑳藉姏涓庤矾鐢?(Capabilities & Routing)** | **宸ュ叿涓庢墿灞?(Tools & Extensions)** | **瀹夊叏涓庢不鐞?(Security & Governance)** | **鐘舵€佷笌璁板繂 (State & Memory)** |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **L1: 鎴樼暐涓庡叆鍙ｅ眰 (Strategy & Entry)** | [cli.tsx](file:///REPO_ROOT_PLACEHOLDER/src/entrypoints/cli.tsx)<br>[main.tsx](file:///REPO_ROOT_PLACEHOLDER/src/main.tsx)<br>鍚姩涓庣幆澧冩敞鍏?| [00_START_HERE.md](file:///REPO_ROOT_PLACEHOLDER/00_START_HERE.md)<br>[AGENTS.md](file:///REPO_ROOT_PLACEHOLDER/AGENTS.md)<br>[MAIN.md](file:///REPO_ROOT_PLACEHOLDER/MAIN.md)<br>閫昏緫鎺ュ叆纭涓庡涓荤粦瀹氬叆鍙?| [README.md](file:///REPO_ROOT_PLACEHOLDER/README.md)<br>涓讳粨搴撴枃妗ｅ鑸鏄?br>[11_CrossDirectoryMap.md](file:///REPO_ROOT_PLACEHOLDER/modules/11_CrossDirectoryMap.md)<br>浠ｇ爜璺ㄧ洰褰曞湴鍥?| [15_LogicEntryChecklist.md](file:///REPO_ROOT_PLACEHOLDER/modules/15_LogicEntryChecklist.md)<br>閫昏緫鍏ュ彛妫€鏌ユ竻鍗?br>[13_MandatoryLogicGateTemplate.md](file:///REPO_ROOT_PLACEHOLDER/modules/13_MandatoryLogicGateTemplate.md)<br>鍏ㄥ眬閫昏緫鎷︽埅妫€鏌?| `manifest.json`<br>闈欐€佸厓鏁版嵁涓庢墦鍖呴厤缃枃浠堕厤缃?(杩愯鏃跺姩鎬佽蹇嗗眰 N/A) |
-| **L2: 棰嗗煙涓庡惊鐜眰 (Domain & Loop)** | [QueryEngine.ts](file:///REPO_ROOT_PLACEHOLDER/src/QueryEngine.ts)<br>澶氳疆浼氳瘽娴佺紪鎺?br>[20_V6_5_RuntimeModes.md](file:///REPO_ROOT_PLACEHOLDER/modules/20_V6_5_RuntimeModes.md)<br>杩愯鐜鎰熺煡涓庢ā寮忛€傞厤 | [query.ts](file:///REPO_ROOT_PLACEHOLDER/src/query.ts)<br>鍗曡疆 Agentic 鎵ц寰幆<br>[28_V6_5_TerminologyAndModuleBoundaries.md](file:///REPO_ROOT_PLACEHOLDER/modules/28_V6_5_TerminologyAndModuleBoundaries.md)<br>鏍囧噯鏈涓庤鍒欐ā鍧楄竟鐣?| [38_V6_6_SpecDrivenDevelopment.md](file:///REPO_ROOT_PLACEHOLDER/modules/38_V6_6_SpecDrivenDevelopment.md)<br>[spec-kit/](file:///REPO_ROOT_PLACEHOLDER/spec-kit/) 瑙勬牸椹卞姩寮€鍙?br>[21_V6_5_ToolUsageAndSelection.md](file:///REPO_ROOT_PLACEHOLDER/modules/21_V6_5_ToolUsageAndSelection.md)<br>[24_V6_5_ToolUsageMatrix.md](file:///REPO_ROOT_PLACEHOLDER/modules/24_V6_5_ToolUsageMatrix.md)<br>[25_V6_5_ToolCapabilityMapping.md](file:///REPO_ROOT_PLACEHOLDER/modules/25_V6_5_ToolCapabilityMapping.md)<br>[26_V6_5_INDEX.md](file:///REPO_ROOT_PLACEHOLDER/modules/26_V6_5_INDEX.md)<br>宸ュ叿棣栭€夌煩闃典笌鑳藉姏鏄犲皠绱㈠紩<br>[42_V6_7_PonytailLazySeniorDevLadder.md](file:///REPO_ROOT_PLACEHOLDER/modules/42_V6_7_PonytailLazySeniorDevLadder.md)<br>鏈€鎳?Senior 寮€鍙戝紑鍙戦樁姊?| [12_AgentEnforcement.md](file:///REPO_ROOT_PLACEHOLDER/modules/12_AgentEnforcement.md)<br>琛屼负寮哄埗瀹¤涓庡噯鍒欑害鏉?br>[43_V6_7_MattPocockSkillsIntegration.md](file:///REPO_ROOT_PLACEHOLDER/modules/43_V6_7_MattPocockSkillsIntegration.md)<br>瀵归綈鎻愰棶銆佷笂涓嬫枃缂╄瘝涓庡喅绛栬褰?| [32_V6_5_ContextAssemblyAndInstructionStacking.md](file:///REPO_ROOT_PLACEHOLDER/modules/32_V6_5_ContextAssemblyAndInstructionStacking.md)<br>涓婁笅鏂囩粍瑁呬笌鎸囦护鍫嗗彔 |
-| **L3: 鎵ц涓庢帶鍒跺眰 (Execution & Control)** | [22_V6_5_HookLifecycle.md](file:///REPO_ROOT_PLACEHOLDER/modules/22_V6_5_HookLifecycle.md)<br>Hook 鐢熷懡鍛ㄦ湡绠＄悊 | [37_V6_6_CybersecuritySkillsRouter.md](file:///REPO_ROOT_PLACEHOLDER/modules/37_V6_6_CybersecuritySkillsRouter.md)<br>閫嗗悜瀹夊叏涓?CTF 璺敱鍒嗗彂 | [Tool.ts](file:///REPO_ROOT_PLACEHOLDER/src/Tool.ts)<br>[tools.ts](file:///REPO_ROOT_PLACEHOLDER/src/tools.ts)<br>宸ュ叿涓粙鎺у埗涓庡姩鎬佺粍瑁?br>[39_V6_6_TasteFrontendDesign.md](file:///REPO_ROOT_PLACEHOLDER/modules/39_V6_6_TasteFrontendDesign.md)<br>[skills/taste-skill/](file:///REPO_ROOT_PLACEHOLDER/skills/taste-skill/)<br>鍓嶇璁捐瀹＄編涓?UI Slop 娌荤悊 | [23_V6_5_PermissionAndOutputPipeline.md](file:///REPO_ROOT_PLACEHOLDER/modules/23_V6_5_PermissionAndOutputPipeline.md)<br>鏉冮檺鎷︽埅涓庤緭鍑虹閬?br>[30_ToolQuestionBoundaryMatrix.md](file:///REPO_ROOT_PLACEHOLDER/modules/30_ToolQuestionBoundaryMatrix.md)<br>鎻愰棶鍑瘉寮哄害杈圭晫鎺у埗<br>[31_ToolMisuseAndAntiPatternMatrix.md](file:///REPO_ROOT_PLACEHOLDER/modules/31_ToolMisuseAndAntiPatternMatrix.md)<br>鍙嶆ā寮忔牎楠屽け璐ヤ笌绾犲亸鏈哄埗<br>[41_V6_7_AIShippingAndReviewabilityAudit.md](file:///REPO_ROOT_PLACEHOLDER/modules/41_V6_7_AIShippingAndReviewabilityAudit.md)<br>SRA 浜や粯瀹¤涓庤嚜璇侀潪鏍￠獙 | [34_V6_5_ProjectFactMap_V2.md](file:///REPO_ROOT_PLACEHOLDER/modules/34_V6_5_ProjectFactMap_V2.md)<br>[14_ProjectFactMapTemplate.md](file:///REPO_ROOT_PLACEHOLDER/modules/14_ProjectFactMapTemplate.md)<br>4-Tier 浜嬪疄鍦板浘涓庢爣鍑嗘ā鏉?|
-| **L4: 鍩哄簳涓庡弬鑰冨眰 (Base & Reference)** | [33_V6_5_BackgroundConsolidationAndIdleLifecycle.md](file:///REPO_ROOT_PLACEHOLDER/modules/33_V6_5_BackgroundConsolidationAndIdleLifecycle.md)<br>姊﹀鏈熸竻鐞嗕笌鍚庡彴宸╁浐 | [35_V6_5_SkillGovernanceAndMandatoryUse.md](file:///REPO_ROOT_PLACEHOLDER/modules/35_V6_5_SkillGovernanceAndMandatoryUse.md)<br>[36_V6_5_SkillZoneSeparation.md](file:///REPO_ROOT_PLACEHOLDER/modules/36_V6_5_SkillZoneSeparation.md)<br>鎶€鑳藉幓閲嶄笌鏈湴鎶€鑳介殧绂?| [skills/](file:///REPO_ROOT_PLACEHOLDER/skills/) 棰嗗煙鎵╁睍鎶€鑳藉寘<br>[raw_tools/](file:///REPO_ROOT_PLACEHOLDER/reference/raw_tools/) 鍘熷宸ュ叿灞?| [27_V6_5_ToolPermissionRiskMatrix.md](file:///REPO_ROOT_PLACEHOLDER/modules/27_V6_5_ToolPermissionRiskMatrix.md)<br>[29_MandatoryVerificationMatrix.md](file:///REPO_ROOT_PLACEHOLDER/modules/29_MandatoryVerificationMatrix.md)<br>鏉冮檺椋庨櫓涓庡己鍒舵牎楠岀煩闃?br>[raw_permissions/](file:///REPO_ROOT_PLACEHOLDER/reference/raw_permissions/) 鍘熷瀹夊叏鏉冮檺鍖?| `src/state/`<br>杩愯鏃朵細璇濈姸鎬佺姸鎬佹満涓庢湰鍦拌惤鍦板眰 |
-
----
-
-## 2. 鍗曡疆 Agentic 鎵ц娴佽拷韪湴鍥?(Single Turn Flow Map)
-
-褰撶敤鎴疯緭鍏ユ寚浠ゅ悗锛屾暣涓?Agentic Loop 浼氬湪绯荤粺鍚勭粍浠朵箣闂存祦鍔ㄣ€備互涓嬫槸鏁版嵁涓庢帶鍒舵祦鍦ㄤ笉鍚屾娊璞″眰绾у拰瀛愮郴缁熶箣闂寸殑娴佽浆鍥撅細
+## Control flow
 
 ```mermaid
 graph TD
-    %% Abstraction Layers Define
-    subgraph L1 [L1: Strategy & Entry Layer]
-        Input[User Input / Command] --> EntryCheck{Startup Gate Check<br>00_START_HERE.md}
-        EntryCheck -- First Turn --> ResetCheck{Context Reset Confirmation<br>15_LogicEntryChecklist.md}
-        EntryCheck -- Continued --o QueryEngine[QueryEngine.ts<br>Session Orchestrator]
-        ResetCheck -- Yes / No --> QueryEngine
-    end
-
-    subgraph L2 [L2: Domain & Loop Layer]
-        QueryEngine --> SingleLoop[query.ts<br>Agentic Loop Engine]
-        SingleLoop --> SDD_Gate{SDD Spec Validate<br>38_SpecDrivenDevelopment.md}
-        SDD_Gate --> Router[Skills Router<br>37_CybersecuritySkillsRouter.md]
-    end
-
-    subgraph L3 [L3: Execution & Control Layer]
-        Router -- Core Command --> ToolOrch[Tool Orchestration<br>Tool.ts / tools.ts]
-        Router -- Cyber Audit --> SecRouter[reverse-skill Domain Router]
-        
-        ToolOrch --> HookPre[Hook Lifecycle: Pre-execute<br>22_HookLifecycle.md]
-        HookPre --> PermGate{Permission & Risk Gating<br>23_PermissionAndOutputPipeline.md}
-        
-        PermGate -- Denied --> RespGen[Error Response Formulation]
-        PermGate -- Allowed --> Executor[Tool Executor<br>services/tools/toolExecution.ts]
-    end
-
-    subgraph L4 [L4: Base & Reference Layer]
-        Executor --> RawTools[Execute Raw Tool / MCP<br>raw_tools/ / skills/]
-        RawTools --> VerifyGate{Mandatory Verification Check<br>29_MandatoryVerificationMatrix.md}
-        
-        VerifyGate -- Evidence Fail --> Downgrade[Apply Corrective Downgrade<br>31_ToolMisuseAndAntiPatternMatrix.md]
-        VerifyGate -- Evidence Pass --> TasteGate{UI Design Taste Audit<br>39_TasteFrontendDesign.md}
-        
-        TasteGate -- Slop / Overflow / Wrapping Error --> Downgrade
-        TasteGate -- Clean UI / Compliant --> SRAGate{SRA Ship Audit<br>41_AIShippingAndReviewabilityAudit.md}
-        
-        SRAGate -- Ship Phase Active --> SRAExec[Self-Refute Audit Cycle<br>Core+Conditional Docs / Trust Boundary Check]
-        SRAExec --> HookPost
-        SRAGate -- No Ship Phase --> HookPost
-        
-        Downgrade --> HookPost
-        HookPost --> FactMapUpdate[Update Fact Map<br>34_ProjectFactMap_V2.md]
-        FactMapUpdate --> DreamPhase[Dream Phase / Idle Lifecycle<br>33_BackgroundConsolidation.md]
-    end
-
-    DreamPhase --> SingleLoop
-    SingleLoop -- Response Complete --> UserOut[Render UI / Output to User]
+    Entry[AGENTS / README / MAIN] --> Gate[Startup Gate]
+    Gate --> Classify[Task applicability]
+    Classify --> Spec[SDD and .specify state when applicable]
+    Spec --> Control[Permission and evidence boundaries]
+    Control --> Validate[Entry and package validation]
+    Validate --> Build[Profile build and host outputs]
+    Build --> Review[Post-result inspection and history sync]
 ```
 
----
+## UI branch
 
-## 3. 鏋舵瀯璁捐瀵圭収锛歀inux Kernel Map 瀵规瘮 AgentLogic
+Formal UI implementation branches through `modules/39_V6_6_TasteFrontendDesign.md`: generate
+a text-to-image preview, show it to the user, and wait for approval or explicit user opt-out
+before writing UI code. UI completion still requires screenshot and parent-child layout-boundary
+verification.
 
-閫氳繃灏嗙粡鍏哥殑 `linux_kernel_map` 涓?`AgentLogic` 杩涜鏋舵瀯瀵归綈锛屾垜浠彲浠ュ彂鐜颁袱鑰呭湪搴曞眰澶嶆潅绯荤粺鎶借薄涓婄殑楂樺害鐩镐技鎬э紝骞朵负 Agentic 绯荤粺鐨勬紨杩涙彁渚涙寚瀵硷細
+## Update rule
 
-| Linux 鍐呮牳鏋舵瀯缁勪欢 | Agentic 鏋舵瀯缁勪欢 (AgentLogic) | 鏄犲皠鍏崇郴涓庤璁″摬瀛?|
-| :--- | :--- | :--- |
-| **System Call Interface (SCI)** | **CLI Entry & Logic Gates** | 绯荤粺璋冪敤鐨勭粺涓€淇濇姢灞忛殰銆傚搴?`00_START_HERE.md` 涓庝富閫昏緫鎷︽埅锛岀‘淇濇墍鏈夎緭鍏ヤ笌澶栭儴閫昏緫鍦ㄨ皟鐢ㄦ牳蹇冨紩鎿庡墠缁忚繃瀹夊叏鍜岄€昏緫妫€鏌ャ€?|
-| **Process Scheduler (鍐呮牳璋冨害鍣?** | **QueryEngine & Agentic Loop** | 鍐冲畾鎵ц娴佸浣曟祦杞€佷綍鏃舵寕璧枫€佸杞惊鐜殑鍐崇瓥鐐广€傝礋璐ｅ崗璋冩€濊€冨懆鏈熴€佹ā鍨嬭皟鐢ㄤ笌宸ュ叿璋冪敤寰幆銆?|
-| **Virtual Memory System (铏氬瓨绯荤粺)** | **Context Assembly & fact map** | 鍐呭瓨铏氭嫙鍖栦笌鏄犲皠銆侫gent 骞朵笉鐩存帴鏆撮湶鍘熷鐨勯暱鍘嗗彶锛岃€屾槸閫氳繃涓婁笅鏂囩粍瑁呭拰 Project Fact Map锛?-Tier 浜嬪疄鍦板浘锛夊缓绔嬪褰撳墠椤圭洰鐨勫眬閮ㄢ€滀簨瀹炶鐣屸€濄€?|
-| **Virtual File System (VFS)** | **Tool Orchestration layer** | 瀵逛笉鍚屾枃浠剁郴缁熷簳搴х殑鎶借薄銆傚搴?`Tool.ts` / `tools.ts`锛屾棤璁烘槸鏈湴 Shell 宸ュ叿杩樻槸缃戠粶 MCP 鏈嶅姟锛屽湪鏍稿績寮曟搸鐪嬫潵閮芥槸缁熶竴鐨?Tool 鎶借薄鎺ュ彛銆?|
-| **Device Drivers (椹卞姩绋嬪簭)** | **Raw Tools & Skills** | 鐩存帴鎿嶄綔纭欢涓庡閮ㄧ幆澧冪殑搴曞眰鎺ュ彛銆傚搴?`raw_tools/` 鍜屾墿灞?`skills/`锛堝 APK 閫嗗悜銆?taste 璁捐锛夛紝璐熻矗灏嗙郴缁熺殑閫氱敤鍛戒护缈昏瘧涓哄叿浣撶殑鍘熷瓙鎵ц銆?|
-| **Security Auditing (LSM / SELinux)**| **Permission Gate & Verification Matrix** | 寮哄埗璁块棶鎺у埗涓庢牎楠屻€傚搴?`23_PermissionAndOutputPipeline.md` 鍜?`29_MandatoryVerificationMatrix.md`锛屽瓒婃潈鍛戒护杩涜鎷︽埅锛屽妯″瀷鎺ㄨ杩涜寮哄埗璇佹嵁瀹¤銆?|
-
----
-
-## 4. 鍚庣画杩藉姞涓庤凯浠ｅ噯鍒?(Maintenance Guidelines)
-
-1. **鍦板浘涓庝唬鐮佸己缁戝畾**锛?
-   - 浠讳綍鏂板 of `modules/*.md` 鎴?`src/` 涓嬬殑鏍稿績婧愮爜妯″潡锛屽繀椤诲悓姝ュ湪姝ゆ枃浠朵腑鐨?**鏋舵瀯涓庤祫婧愮綉鏍煎湴鍥?* 鐨勭浉搴旂綉鏍煎崟鍏冧腑杩涜娉ㄥ唽銆?
-   - 缃戞牸涓敞鍐岀殑鏂囦欢蹇呴』鍖呭惈绗﹀悎 Antigravity 瑙勮寖鐨勫畬鏁存湰鍦扮粷瀵硅矾寰勬垨鐩稿璺緞瓒呴摼鎺ワ紙濡?`file:///...`锛夛紝瀹炵幇 LXR 寮忕殑鈥滀竴閿洿杈炬簮鐮佲€濄€?
-
-2. **鎵ц娴佹紨杩?*锛?
-   - 濡傛灉绯荤粺鐨勫崟杞惊鐜鍔犱簡鏂扮殑鍓嶇疆/鍚庣疆瀹¤鎷︽埅鐐癸紙渚嬪锛氭柊澧炲ぇ妯″瀷瀹夊叏鎶ゆ爮杩囨护銆佸浠ｇ悊鍗忓悓缂栨帓绛夛級锛屽繀椤诲悓姝ユ洿鏂版湰鏂囦欢绗?2 鑺傜殑 **鍗曡疆 Agentic 鎵ц娴佽拷韪湴鍥?* (Mermaid)銆?
-
-3. **鍔ㄦ€佺敓鎴愭妧鏈€欓€?(Future Enhancement)**锛?
-   - 鍦ㄦ湭鏉ョ殑鐗堟湰锛堝 V7.0锛変腑锛屽缓璁紑鍙?`scripts/generate-system-map.js` 鑴氭湰锛岃嚜鍔ㄨ鍙?`manifest.json` 涓厤缃殑 profile 鍜屾ā鍧楀叧绯伙紝鍔ㄦ€佹覆鏌撳苟瀵煎嚭鏈枃浠剁殑 SVG 鎴?Markdown 缃戞牸鍥撅紝闄嶄綆浜哄伐缁存姢鐨勫亸宸€?
+This map must be updated when the manifest, entry chain, host adapters, validation scripts,
+profile outputs, or mandatory governance modules change. It must contain repository-relative
+paths only; external comparisons belong in the relevant reference or research record.
 
 ## END FILE: modules/40_AgentLogicSystemMap.md
 

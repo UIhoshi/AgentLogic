@@ -1,5 +1,13 @@
 #!/usr/bin/env node
 
+// MANDATORY LOGIC GATE
+//
+// Read `AGENTS.md` and `README.md` before making changes here.
+// Then follow the repository-declared logic entry chain.
+// Before every new coding round, determine whether this task extends the previous round.
+// If not, explicitly ask whether to forget/compress context first.
+// This is a blocking gate; do not begin implementation before it is complete.
+
 const fs = require('fs');
 const path = require('path');
 
@@ -14,6 +22,23 @@ const REQUIRED_LOGIC_CHAIN_ANCHORS = [
 
 const ENTRY_FILES = ['00_START_HERE.md', 'AGENTS.md', 'README.md', 'MAIN.md'];
 
+// These files are executable entrypoints, not leaf implementation files. They must carry
+// the same short gate so direct script invocation cannot bypass repository entry rules.
+const OPERATIONAL_ENTRY_FILES = [
+  'install.ps1',
+  'install.sh',
+  'scripts/check-logic-entry.js',
+  'scripts/doctor.ps1',
+  'scripts/validate-package.ps1',
+  'scripts/build-profile.ps1',
+  'scripts/maintainer-check.ps1',
+  'scripts/skills-governance.ps1',
+  'adapters/codex/install.ps1',
+  'adapters/claude/install.ps1',
+  'adapters/antigravity/install.ps1',
+  'adapters/generic/install.ps1',
+];
+
 const ACTIVE_VERSION_FILES = [
   'AGENTS.md',
   'README.md',
@@ -24,6 +49,16 @@ const ACTIVE_VERSION_FILES = [
   'modules/41_V6_7_AIShippingAndReviewabilityAudit.md',
   'modules/42_V6_7_PonytailLazySeniorDevLadder.md',
   'modules/43_V6_7_MattPocockSkillsIntegration.md',
+  'modules/01_MasterLogic.md',
+  'modules/11_CrossDirectoryMap.md',
+  'modules/12_AgentEnforcement.md',
+  'modules/15_LogicEntryChecklist.md',
+  'modules/26_V6_5_INDEX.md',
+  'modules/34_V6_5_ProjectFactMap_V2.md',
+  'modules/38_V6_6_SpecDrivenDevelopment.md',
+  'modules/39_V6_6_TasteFrontendDesign.md',
+  'modules/40_AgentLogicSystemMap.md',
+  'modules/44_V6_8_GrokBuildOperationalIntegration.md',
 ];
 
 const GATE_ANCHORS = [
@@ -34,7 +69,7 @@ const GATE_ANCHORS = [
   'blocking gate',
 ];
 
-const ABSOLUTE_PATH_PATTERNS = [/[A-Za-z]:\\/, /\/Users\//, /\/home\//];
+const ABSOLUTE_PATH_PATTERNS = [/(?<![A-Za-z0-9])[A-Za-z]:[\\/]/, /[\\/]Users[\\/]/, /[\\/]home[\\/]/];
 
 let hasError = false;
 
@@ -113,6 +148,9 @@ function checkActiveVersionAndPathHygiene() {
     if (absoluteFileUriPattern.test(content)) {
       fail(`Machine-specific absolute file URI found in active file: ${relPath}`);
     }
+    if (content.includes('REPO_ROOT_PLACEHOLDER')) {
+      fail(`Repository placeholder link found in active file: ${relPath}`);
+    }
   }
 
   const startHere = readFileSafe('00_START_HERE.md');
@@ -123,6 +161,18 @@ function checkActiveVersionAndPathHygiene() {
       fail('00_START_HERE.md must define Startup Gate before Mandatory Full-Read Chain.');
     } else {
       ok('Startup Gate precedes the Mandatory Full-Read Chain.');
+    }
+  }
+
+  const profileFiles = parsed.profiles?.[parsed.default_profile]?.files || [];
+  for (const relPath of profileFiles) {
+    const content = readFileSafe(relPath);
+    if (content == null) continue;
+    if (ABSOLUTE_PATH_PATTERNS.some((pattern) => pattern.test(content))) {
+      fail(`Machine-specific absolute path found in active profile file: ${relPath}`);
+    }
+    if (content.includes('REPO_ROOT_PLACEHOLDER')) {
+      fail(`Repository placeholder found in active profile file: ${relPath}`);
     }
   }
 }
@@ -179,6 +229,44 @@ function checkMapLinks() {
   }
 }
 
+function checkActiveRelativeLinks() {
+  const manifest = readFileSafe('manifest.json');
+  if (!manifest) return;
+
+  let parsed;
+  try {
+    parsed = JSON.parse(manifest);
+  } catch {
+    return;
+  }
+
+  const files = parsed.profiles?.[parsed.default_profile]?.files || [];
+  const markdownLink = /\[[^\]]*\]\(([^)]+)\)/g;
+  let checked = 0;
+
+  for (const relPath of files) {
+    if (!relPath.endsWith('.md')) continue;
+    const content = readFileSafe(relPath);
+    if (content == null) continue;
+    let match;
+    while ((match = markdownLink.exec(content)) !== null) {
+      let target = match[1].split('#', 1)[0].trim().replace(/^<|>$/g, '');
+      if (!target || /^(https?:|mailto:|app:)/i.test(target)) continue;
+      if (target.startsWith('file:///')) {
+        fail(`Absolute file link found in active Markdown: ${relPath} -> ${target}`);
+        continue;
+      }
+      const targetPath = path.resolve(path.dirname(path.join(ROOT, relPath)), target);
+      checked += 1;
+      if (!fs.existsSync(targetPath)) {
+        fail(`Broken relative Markdown link: ${relPath} -> ${target}`);
+      }
+    }
+  }
+
+  if (checked > 0) ok(`Verified ${checked} active relative Markdown links.`);
+}
+
 function main() {
   console.log('Checking repository logic-entry enforcement...\n');
 
@@ -190,7 +278,12 @@ function main() {
     checkEntryFileGate(relPath);
   }
 
+  for (const relPath of OPERATIONAL_ENTRY_FILES) {
+    checkEntryFileGate(relPath);
+  }
+
   checkMapLinks();
+  checkActiveRelativeLinks();
 
   if (hasError) {
     console.error('\nLogic-entry check FAILED.');

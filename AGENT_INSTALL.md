@@ -19,7 +19,7 @@ or begin implementation before the logic-entry loop above has been completed.
 
 # Agent Installation Guide (V6.8.0 Stable)
 
-This is the shortest installation path for AI agents. 
+This is the shortest installation path for AI agents.
 
 Goal: Install **AgentLogic V6.8.0** into the current local host without guessing the entrypoint, target bundle, or validation command.
 
