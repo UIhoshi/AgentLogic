@@ -116,6 +116,8 @@ AgentLogic 的演进离不开开源社区的启发。我们在设计中深度参
 | **PM Skills (AI Shipping)** | [phuryn/pm-skills](https://github.com/phuryn/pm-skills) | 引入 AI 交付与可评审性审计 (SRA) 机制，规范 vibe-coded 交付件 |
 | **Ponytail (Lazy Dev)** | [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) | 引入 7 步“最懒资深开发开发阶梯”（YAGNI、复用优先、原生优先）防代码膨胀 |
 | **Matt Pocock Skills** | [mattpocock/skills](https://github.com/mattpocock/skills) | 引入交互式单步 Grilling 拷问、`CONTEXT.md` 通用领域词汇表与 ADR 决策记录 |
+| **Cybersecurity Skills Router** | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | 引入恶意软件分析、APK 逆向、前端反混淆解密和固件审计技能调度 |
+| **Grok Build (对照参考)** | [xai-org/grok-build](https://github.com/xai-org/grok-build) | 对照分析服务商中立的运行时执行、状态保留压缩以及安全拒绝覆盖策略 |
 
 ---
 
