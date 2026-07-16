@@ -65,3 +65,6 @@ If the agent is waiting for user input for a long period, it may (if the host al
 
 A task is not truly `Finalized` until the **Consolidation Phase** is complete.
 The agent should be able to answer: "What did we learn in this session that should be saved forever?"
+## V6.8.0 Complementary State Freshness
+
+Background consolidation may extract durable patterns, but memory remains a retrieval aid rather than current-fact authority. Store provenance, scope, timestamp, confidence, and freshness state with durable items. Running background tasks and subagents must expose status, heartbeat, result/error, and cancellation handles; after compaction or resume, revalidate any state that may have changed. See `modules/44_V6_8_GrokBuildOperationalIntegration.md`.

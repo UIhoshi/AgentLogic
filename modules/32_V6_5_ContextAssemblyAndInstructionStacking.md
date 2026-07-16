@@ -68,3 +68,6 @@ When two rules conflict:
 ## 6. Implementation for V6.5
 
 Agents should explicitly state their "Active Instruction Profile" when switching between subdirectories with different `GEMINI.md` files.
+## V6.8.0 Complementary Instruction Map
+
+Context assembly should expose an instruction map containing source, scope, load order, provenance, freshness marker, and estimated token cost. Rebuild it after checkout, branch, worktree, or CWD changes. Narrower project rules may refine broader project rules, but no discovered file can override AgentLogic, system, developer, safety, or host permission constraints. See `modules/44_V6_8_GrokBuildOperationalIntegration.md`.

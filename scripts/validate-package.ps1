@@ -80,6 +80,35 @@ if (-not ($manifest.profiles.PSObject.Properties.Name -contains $manifest.defaul
     Fail "Default profile '$($manifest.default_profile)' is not defined in manifest.profiles."
 }
 
+if ($manifest.current_version -eq "V6.8.0") {
+    $operationalModule = "modules/44_V6_8_GrokBuildOperationalIntegration.md"
+    Assert-Exists -Root $RepoRoot -RelativePath $operationalModule -Label "V6.8 operational integration module"
+
+    $defaultFiles = @($manifest.profiles.$($manifest.default_profile).files)
+    if ($defaultFiles -notcontains $operationalModule) {
+        Fail "Default profile '$($manifest.default_profile)' does not include '$operationalModule'."
+    }
+
+    $operationalContent = Get-Content -Raw -Path (Join-Path $RepoRoot $operationalModule)
+    foreach ($requiredContract in @(
+        "Instruction and project-rule discovery contract",
+        "Active-state-preserving compaction",
+        "Policy compilation and command safety",
+        "Extensions, skills, plugins, hooks, and MCP trust",
+        "Subagent contract",
+        "Headless and automation result contract",
+        "Memory and revalidation"
+    )) {
+        if ($operationalContent -notmatch [regex]::Escape($requiredContract)) {
+            Fail "V6.8 operational module is missing required contract: $requiredContract"
+        }
+    }
+
+    if ($operationalContent -notmatch "https://github.com/xai-org/grok-build") {
+        Fail "V6.8 operational module is missing its comparative Grok Build source URL."
+    }
+}
+
 foreach ($profileProperty in $manifest.profiles.PSObject.Properties) {
     $profileName = $profileProperty.Name
     $profile = $profileProperty.Value

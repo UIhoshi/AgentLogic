@@ -17,11 +17,11 @@ Do not continue deeper reading, modify files, delete files, perform write action
 or begin implementation before the logic-entry loop above has been completed.
 -->
 
-# 🌌 AgentLogic: Autonomous Evolving Rule Engine (V6.7.2)
+# 🌌 AgentLogic: Autonomous Evolving Rule Engine (V6.8.0)
 
 [![Agentic Code](https://img.shields.io/badge/Agent-Autonomous-blueviolet?style=flat-square)](https://github.com/UIhoshi/AgentLogic)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/Version-V6.7.2_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_7_2.md)
+[![Version](https://img.shields.io/badge/Version-V6.8.0_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_8_0.md)
 
 AgentLogic is a versioned primary-logic package designed to be pulled into local AI coding hosts (such as Codex, Claude Code, Gemini Pro) and used as their default operating mind. It consolidates multi-turn session workflows, tool selection matrix, security sandbox auditing, and dynamic domain extensions.
 
@@ -119,4 +119,14 @@ During its evolutionary cycles, AgentLogic has integrated concepts and structure
 
 1. **Keep it Pure**: No business logic or project-specific implementations should be written into `AgentLogic` rule files.
 2. **Specify Before Writing**: Always compile technical blueprints to `.specify/spec.md` and `.specify/plan.md` before touching code.
-3. **Generate via Bundle**: Never edit `dist/` bundles manually. Always write updates to version files (e.g. `versions/AgentLogic_V6_7_2.md`), then run `build-profile.ps1` to rebuild the adapter targets.
+3. **Generate via Bundle**: Never edit `dist/` bundles manually. Always write updates to version files (e.g. `versions/AgentLogic_V6_8_0.md`), then run `build-profile.ps1` to rebuild the adapter targets.
+## V6.8 Operational Integration
+
+The default `core-enhanced` profile includes
+[`modules/44_V6_8_GrokBuildOperationalIntegration.md`](./modules/44_V6_8_GrokBuildOperationalIntegration.md).
+It translates useful provider-neutral patterns from
+[`xai-org/grok-build`](https://github.com/xai-org/grok-build) into contracts for
+rule discovery, session state, compaction, permissions, extension trust,
+subagents, headless execution, memory freshness, and bounded background work.
+These contracts complement—not replace—the existing SDD, Red-Team, SRA,
+verification, and history-synchronization gates.

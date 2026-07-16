@@ -17,11 +17,11 @@ Do not continue deeper reading, modify files, delete files, perform write action
 or begin implementation before the logic-entry loop above has been completed.
 -->
 
-# Agent Installation Guide (V6.7.2 Stable)
+# Agent Installation Guide (V6.8.0 Stable)
 
 This is the shortest installation path for AI agents. 
 
-Goal: Install **AgentLogic V6.7.2** into the current local host without guessing the entrypoint, target bundle, or validation command.
+Goal: Install **AgentLogic V6.8.0** into the current local host without guessing the entrypoint, target bundle, or validation command.
 
 ## Do Not Guess
 
@@ -29,7 +29,7 @@ Before installing, identify:
 
 1.  Whether the current directory is the AgentLogic repository root.
 2.  The target host: `codex`, `claude`, `antigravity`, or `generic`.
-3.  The selected profile: **`core-enhanced`** is the default for full V6.7.2 governance support.
+3.  The selected profile: **`core-enhanced`** is the default for full V6.8.0 governance support.
 4.  Whether the host should bind to `MAIN.md` directly or to a generated bundle.
 
 If uncertain, run the doctor first:
@@ -38,9 +38,9 @@ If uncertain, run the doctor first:
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\doctor.ps1
 ```
 
-## V6.7.2 Stable Facts
+## V6.8.0 Stable Facts
 
-- **Current Version**: V6.7.2 (SRA Shipping Audit, Red-Team Gate, Reversing Router, Spec Kit, Taste Design System, and human-readable proposal/handover gates).
+- **Current Version**: V6.8.0 (SRA Shipping Audit, Red-Team Gate, Reversing Router, Spec Kit, Taste Design System, and human-readable proposal/handover gates).
 - **Repository Role**: Primary local logic package (Method Layer).
 - **Stable Host Entry**: `MAIN.md`.
 - **Default Profile**: `core-enhanced` (Includes the current runtime, verification, SDD, SRA, skill, and reviewability governance modules).
@@ -76,7 +76,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost ge
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\validate-package.ps1
 ```
 
-## Agent Decision Rule (V6.7.2)
+## Agent Decision Rule (V6.8.0)
 
 If the user asks to "load", "install", "mount", "bind", or "use this logic locally", the agent **MUST** follow this protocol:
 
@@ -91,14 +91,14 @@ If the user asks to "load", "install", "mount", "bind", or "use this logic local
     - preserve engineering-critical skills in the visible set
     - report host-local skill sprawl without silently mutating it
 6.  **Adoption**: Immediately after installation, the agent must:
-    -   Read `versions/AgentLogic_V6_7_2.md` to understand the new line.
+    -   Read `versions/AgentLogic_V6_8_0.md` to understand the new line.
     -   Adopt the **Mandatory Verification Matrix** (Module 29) for all subsequent claims.
     -   Adopt the **4-Tier Memory Taxonomy** (User, Feedback, Project, Reference) for project notes.
     -   Adopt the **Spec-Driven Development (SDD) Lifecycle** (Module 38) for technical tasks.
     -   Adopt the **Taste Frontend Design Standards** (Module 39) for interface and visual changes.
-7.  **Report**: State the installed host, version (V6.7.2), profile, and confirmation that the new governance rules are active.
+7.  **Report**: State the installed host, version (V6.8.0), profile, and confirmation that the new governance rules are active.
 
-## Install-Time And Update-Time Skill Rule (V6.7.2)
+## Install-Time And Update-Time Skill Rule (V6.8.0)
 
 Every local installation **and every local logic update** of AgentLogic should perform a host-local
 skill inventory pass. Moving or archiving host-local skills requires a separate explicit `-Apply`
@@ -112,7 +112,7 @@ This is required because:
 - duplicate-or-overlapping skill families must be classified instead of guessed
 - host-local skills must stay separate from any logic-carried skill layer so one machine's local packs do not become another machine's default logic state
 
-The V6.7.2 install/update rule is:
+The V6.8.0 install/update rule is:
 
 1. identify the host-local skill zone for the target host
 2. keep that host-local zone separate from the logic-carried layer

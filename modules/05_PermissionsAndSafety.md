@@ -73,4 +73,6 @@
 - 沙箱与 bypass 是否符合配置
 - 同一工具被拒多次后的行为是否正确
 - 高风险写操作是否存在恢复路径
+## V6.8.0 Complementary Policy Contract
 
+Compile permissions per tool family and executable action. Merge applicable rules as `deny > ask > allow`; analyze each segment of compound shell commands and escalate undecidable intent instead of allowing it by default. A pre-tool hook may add a restriction but is not a sandbox boundary, so hook failure cannot weaken host permission checks. Record the effective decision and inspect path-sensitive side effects after execution. See `modules/44_V6_8_GrokBuildOperationalIntegration.md`.

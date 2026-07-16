@@ -54,3 +54,6 @@ When a project has hook-based extension or lifecycle interception, the logic pac
 - side effects allowed
 - output/result path
 - whether failure at this stage is recoverable
+## V6.8.0 Complementary Hook Contract
+
+Hooks participate in discovery, pre-tool policy, execution telemetry, post-tool result handling, and recovery, but each hook must declare its scope, side effects, timeout, and failure behavior. Hook presence or success is not proof of permission or correctness. Rule discovery and extension activation must remain inspectable, and post-hook validation must still use the matching evidence tool. See `modules/44_V6_8_GrokBuildOperationalIntegration.md`.

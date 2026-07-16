@@ -61,4 +61,6 @@
 - 不要只写“query 是核心”，要补齐它与 `QueryEngine`、工具编排、权限上下文之间的关系。
 - 不要把并行执行能力泛化为“所有工具都并行”。
 - 当前项目明确区分只读并发安全工具与有副作用工具，这一点必须长期保留在逻辑包中。
+## V6.8.0 Complementary Runtime Contract
 
+The agentic loop must carry a compact, inspectable runtime state rather than relying on transcript memory alone. Track session lineage, the active phase, actionable TODOs, pending side effects, background-task handles, child-agent handles, and verification gaps. When compacting, preserve that state and classify retry outcomes; do not retry deterministic failures or permission denials. Headless callers should receive a structured result envelope, while correctness still follows the applicable verification matrix. See `modules/44_V6_8_GrokBuildOperationalIntegration.md`.
