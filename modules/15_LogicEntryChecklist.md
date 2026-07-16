@@ -76,6 +76,6 @@
 
 ## 9. UI Preview Gate
 
-- [ ] If the task includes formal UI implementation, a text-to-image preview has been generated and shown to the user before UI code is written
-- [ ] The user has either reviewed/approved the preview or explicitly opted out of the preview step
-- [ ] No UI implementation began before one of those two conditions was satisfied
+- [ ] If the task includes formal UI implementation, a text-to-image preview has been generated and shown to the user (or saved locally under the project workspace for manual inspection) before UI code is written
+- [ ] The user has reviewed/approved the preview (via the chat UI or locally saved file) or explicitly opted out of the preview step
+- [ ] No UI implementation began before one of those conditions was satisfied

@@ -681,7 +681,7 @@ Key Enhancements:
 - **First Priority Enforcement**: Absolute prioritization of AgentLogic rules and workflows above generic cloud/system prompts if AgentLogic is detected as installed on the local system.
 - **Limited Initial View Prevention**: Support for scanning nested directories and placing a delegation hook in the workspace-level `AGENTS.md` to prevent agents starting in a parent workspace from ignoring local logic.
 - **Human-Readable Business Gates**: Interactive prompt checkpoints at the end of Grilling/Specification (Proposal Gate) and at the end of Ship/Completion (Handover Gate) to compile clean, non-technical project deliverables (PDF/Word/PPT slides).
-- **Mandatory UI Preview Gate**: Before formal UI implementation, generate a text-to-image preview, show it to the user, and wait for review; bypass is allowed only when the user explicitly opts out.
+- **Mandatory UI Preview Gate**: Before formal UI implementation, generate a text-to-image preview, show it to the user (with support for local file storage if the chat client does not support direct rendering), and wait for review; bypass is allowed only when the user explicitly opts out.
 - **4-Layer System Mapping & Code Matrix**: Inspired by the Linux Kernel Map to organize rules, tools, and execution flows into a clean 4-tier grid, integrating [11_CrossDirectoryMap.md](../modules/11_CrossDirectoryMap.md) and [40_AgentLogicSystemMap.md](../modules/40_AgentLogicSystemMap.md).
 - **Cybersecurity Skills Routing**: Direct integration of `reverse-skill` domain-specific skill sets (APK reversing, malware analysis, frontend JS decryption, firmware analysis, and CTF solvers) and tool orchestration rules.
 - **Spec-Driven Development (SDD)**: Direct integration of `spec-kit` to enforce specifications as executable definitions of behavior, preventing "vibe coding."
@@ -887,7 +887,7 @@ For future logic iterations, a version line must explicitly record its external 
 ## 5. UI 瀹炴柦鍓嶇疆闂ㄦ
 
 浠讳綍姝ｅ紡 UI 瀹炴柦锛堥〉闈€佸睆骞曘€佺粍浠躲€佸竷灞€銆佽瑙夎璁℃垨 UI 鏍峰紡鍙樻洿锛変箣鍓嶏紝蹇呴』锛?
-1. 浣跨敤鏂囩敓鍥惧伐鍏风敓鎴愬嵆灏嗗疄鏂界殑 UI 棰勮鍥俱€?2. 灏嗛瑙堝浘灞曠ず缁欑敤鎴锋煡鐪嬨€?3. 绛夊緟鐢ㄦ埛纭锛涚敤鎴峰彲浠ユ壒鍑嗛瑙堬紝涔熷彲浠ユ槑纭涓嶉渶瑕佽姝ラ銆?4. 鍙湁鎵瑰噯鎴栨槑纭?opt-out 鍚庯紝鎵嶅厑璁稿紑濮?UI 浠ｇ爜瀹炴柦銆?
+1. 浣跨敤鏂囩敓鍥惧伐鍏风敓鎴愬嵆灏嗗疄鏂界殑 UI 棰勮鍥俱€?2. 灏嗛瑙堝浘灞曠ず缁欑敤鎴锋煡鐪嬶紙鑻ヨ亰澶╃晫闈㈡垨瀹㈡埛绔幆澧冧笉鏀寔鐩存帴娓叉煋鏄剧ず锛屽簲灏嗗浘鐗囩敓鎴愬悗淇濆瓨鍒伴」鐩枃浠跺す濡?`.specify/mockups/` 涓嬶紝鏄庣‘鎻愮ず缁濆鏂囦欢璺緞浠ヤ緵鐢ㄦ埛鑷鏌ョ湅锛夈€?3. 绛夊緟鐢ㄦ埛纭锛涚敤鎴峰彲浠ユ壒鍑嗛瑙堬紝涔熷彲浠ユ槑纭涓嶉渶瑕佽姝ラ銆?4. 鍙湁鎵瑰噯鎴栨槑纭?opt-out 鍚庯紝鎵嶅厑璁稿紑濮?UI 浠ｇ爜瀹炴柦銆?
 鐢ㄦ埛娌℃湁鏄庣‘ opt-out 鏃讹紝涓嶅緱鎶娾€滃唴瀹规敼鍔ㄣ€佸搷搴斿紡淇銆佹棤闅滅淇鎴栧皬鏀瑰姩鈥濆綋浣滈粯璁よ眮鍏嶃€?UI 瀹炴柦瀹屾垚鍚庝粛蹇呴』鎵ц鎴浘銆佺埗瀛愬竷灞€杈圭晫銆佹孩鍑恒€佹崲琛屽拰瀹為檯瀹瑰櫒瀹藉害楠岃瘉銆?
 ## 6. 閿欒鍘嗗彶涓庤鍒欏悓姝?
 - `modification_history` 鏄叡浜敊璇笌淇璁板綍锛屼笉鏄綋鍓嶄粨搴撶殑涓婚€昏緫鏉ユ簮銆?- 榛樿鏈湴浣嶇疆鏄綋鍓嶉」鐩埗鐩綍涓嬬殑 `modification_history`锛涘叾浠栧竷灞€蹇呴』鏄惧紡閰嶇疆銆?- 鍦ㄨ鍒欓€昏緫鏇存柊銆佸彂甯冩垨鎺ㄩ€侀」鐩唬鐮佸墠锛屽厛妫€鏌ュ苟鍚屾瀵瑰簲鐨勫巻鍙茶褰曘€?- 涓嶅緱鎶婄壒瀹氭満鍣ㄧ殑鐢ㄦ埛鐩綍鍐欏叆瑙勫垯鏂囦欢鎴?bundle銆?
@@ -1882,9 +1882,9 @@ This stack should be treated as the default engineering baseline, not a special-
 
 ## 9. UI Preview Gate
 
-- [ ] If the task includes formal UI implementation, a text-to-image preview has been generated and shown to the user before UI code is written
-- [ ] The user has either reviewed/approved the preview or explicitly opted out of the preview step
-- [ ] No UI implementation began before one of those two conditions was satisfied
+- [ ] If the task includes formal UI implementation, a text-to-image preview has been generated and shown to the user (or saved locally under the project workspace for manual inspection) before UI code is written
+- [ ] The user has reviewed/approved the preview (via the chat UI or locally saved file) or explicitly opted out of the preview step
+- [ ] No UI implementation began before one of those conditions was satisfied
 
 ## END FILE: modules/15_LogicEntryChecklist.md
 
@@ -5057,7 +5057,7 @@ When starting a project or introducing a feature, refactor, multi-file behavior 
 2. **Specify Phase**: Define user scenarios, requirements, and user stories in clear, natural language.
    - *Requirement*: The specifications must be written to `.specify/spec.md` (or `.specify/specs/` directory).
 - *Domain Vocabulary*: If the task introduces domain terminology or crosses bounded contexts, check or establish `CONTEXT.md` and run the single-question Grilling session (see `modules/43_V6_7_MattPocockSkillsIntegration.md`) before proceeding.
-- *UI/UX Prototyping Gate*: Before any formal UI implementation, generate a visual mockup using a text-to-image tool (via the image-generation skill), present it to the user, and wait for the user's review. This gate may be bypassed only when the user explicitly says not to use it. Do not treat content changes, accessibility fixes, responsive bug fixes, or small visual corrections as implicit exemptions unless the user explicitly opts out.
+- *UI/UX Prototyping Gate*: Before any formal UI implementation, generate a visual mockup using a text-to-image tool (via the image-generation skill), present it to the user (either directly in the chat UI or by saving it to a folder in the project workspace, e.g. `.specify/mockups/`), and wait for the user's review. This gate may be bypassed only when the user explicitly says not to use it. Do not treat content changes, accessibility fixes, responsive bug fixes, or small visual corrections as implicit exemptions unless the user explicitly opts out.
 3. **Plan Phase**: Draft a technical implementation plan specifying architecture, tech stack, data schemas, and integration logic.
    - *Requirement*: The plan must be saved in `.specify/plan.md`.
    - *Architectural Decisions*: If the plan involves hard-to-reverse trade-offs, they must be documented in a numbered ADR under `docs/adr/` (see `modules/43_V6_7_MattPocockSkillsIntegration.md`).
@@ -5146,14 +5146,9 @@ Before any formal UI implementation鈥攏ew or existing layout, app screen, web 
 
 1. **Prompt Formulation**: Formulate a highly detailed visual layout and style prompt based on the user's requirements (specifying typography, layout variance dials, HSL color palette, and visual density).
 2. **Prototyping**: Invoke the text-to-image generation tool to generate a visual mockup / design image of the proposed UI.
-3. **Artifact Review**: Save the generated image as a persistent artifact under the conversation directory and present it clearly to the user.
-4. **Interactive Consent**: Wait for the user to inspect the visual design mockup and either explicitly approve it or explicitly opt out of the preview gate.
+3. **Artifact Review & Storage**: Save the generated image as a persistent artifact. If the host environment or chat client prevents direct visual rendering, save the mockup image directly to a visible folder within the project workspace (e.g., `.specify/mockups/` or the conversation artifacts folder), state the absolute file path clearly, and instruct the user to view the file locally.
+4. **Interactive Consent**: Wait for the user to inspect the visual design mockup (either directly in the chat UI or via the local saved file path) and either explicitly approve it or explicitly opt out of the preview gate.
 5. **Implementation**: Only after approval or explicit opt-out may the Agent proceed to code implementation. If the user requests changes, refine the prompt, re-run image generation, and present the updated design.
-
----
-
-## 4. Mandatory Design Verification Rules
-
 Verification of user interface changes is bound to the following rules:
 
 | Visual Aspect | Mandatory Verification Tool / Method | Minimum Proof Required |
@@ -5269,9 +5264,7 @@ To compile a reviewer-ready **Shipping Packet** under `documentation/` (or `.spe
 
 ### 2.1 Core Documents
 
-Every reviewable application or release surface **MUST** produce these five documents. A pure
-logic-document change may use a concise audit record unless it changes architecture, permissions,
-trust boundaries, installation behavior, or externally consumed runtime behavior.
+Every reviewable application or release surface **MUST** produce these five documents. However, non-application script changes, local build/validation script tooling (e.g., CLI helpers), or pure logic-document changes are exempt from generating `permissions.md` and `variables.md` (and other irrelevant application-centric SRA files) if they do not contain user authorization, database tables, or environment secrets. For such tooling or pure logic modifications, the shipping audit may be consolidated into a single `review_record.md` or documented within the version update history / PR description.
 
 | Artifact File | Purpose | Required Contents |
 | :--- | :--- | :--- |

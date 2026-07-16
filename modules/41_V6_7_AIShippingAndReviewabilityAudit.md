@@ -26,9 +26,7 @@ To compile a reviewer-ready **Shipping Packet** under `documentation/` (or `.spe
 
 ### 2.1 Core Documents
 
-Every reviewable application or release surface **MUST** produce these five documents. A pure
-logic-document change may use a concise audit record unless it changes architecture, permissions,
-trust boundaries, installation behavior, or externally consumed runtime behavior.
+Every reviewable application or release surface **MUST** produce these five documents. However, non-application script changes, local build/validation script tooling (e.g., CLI helpers), or pure logic-document changes are exempt from generating `permissions.md` and `variables.md` (and other irrelevant application-centric SRA files) if they do not contain user authorization, database tables, or environment secrets. For such tooling or pure logic modifications, the shipping audit may be consolidated into a single `review_record.md` or documented within the version update history / PR description.
 
 | Artifact File | Purpose | Required Contents |
 | :--- | :--- | :--- |

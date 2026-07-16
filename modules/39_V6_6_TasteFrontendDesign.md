@@ -46,14 +46,9 @@ Before any formal UI implementation—new or existing layout, app screen, web pa
 
 1. **Prompt Formulation**: Formulate a highly detailed visual layout and style prompt based on the user's requirements (specifying typography, layout variance dials, HSL color palette, and visual density).
 2. **Prototyping**: Invoke the text-to-image generation tool to generate a visual mockup / design image of the proposed UI.
-3. **Artifact Review**: Save the generated image as a persistent artifact under the conversation directory and present it clearly to the user.
-4. **Interactive Consent**: Wait for the user to inspect the visual design mockup and either explicitly approve it or explicitly opt out of the preview gate.
+3. **Artifact Review & Storage**: Save the generated image as a persistent artifact. If the host environment or chat client prevents direct visual rendering, save the mockup image directly to a visible folder within the project workspace (e.g., `.specify/mockups/` or the conversation artifacts folder), state the absolute file path clearly, and instruct the user to view the file locally.
+4. **Interactive Consent**: Wait for the user to inspect the visual design mockup (either directly in the chat UI or via the local saved file path) and either explicitly approve it or explicitly opt out of the preview gate.
 5. **Implementation**: Only after approval or explicit opt-out may the Agent proceed to code implementation. If the user requests changes, refine the prompt, re-run image generation, and present the updated design.
-
----
-
-## 4. Mandatory Design Verification Rules
-
 Verification of user interface changes is bound to the following rules:
 
 | Visual Aspect | Mandatory Verification Tool / Method | Minimum Proof Required |
