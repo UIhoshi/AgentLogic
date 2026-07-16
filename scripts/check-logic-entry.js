@@ -267,6 +267,77 @@ function checkActiveRelativeLinks() {
   if (checked > 0) ok(`Verified ${checked} active relative Markdown links.`);
 }
 
+function checkExternalReferences() {
+  const manifest = readFileSafe('manifest.json');
+  if (!manifest) return;
+
+  let parsed;
+  try {
+    parsed = JSON.parse(manifest);
+  } catch (error) {
+    return;
+  }
+
+  const activeVersionFile = parsed.main_logic_file;
+  const versionContent = readFileSafe(activeVersionFile);
+  if (!versionContent) {
+    fail(`Active version file not found: ${activeVersionFile}`);
+    return;
+  }
+
+  const refSectionIndex = versionContent.indexOf('## 4. Reference Source Registration');
+  if (refSectionIndex === -1) {
+    fail(`Active version file missing Section 4 Reference Source Registration: ${activeVersionFile}`);
+    return;
+  }
+
+  const nextSectionIndex = versionContent.indexOf('## 5.', refSectionIndex);
+  const refSectionText = nextSectionIndex === -1
+    ? versionContent.slice(refSectionIndex)
+    : versionContent.slice(refSectionIndex, nextSectionIndex);
+
+  const urlRegex = /Source URL:\s*`([^`]+)`/g;
+  let match;
+  const urls = [];
+  while ((match = urlRegex.exec(refSectionText)) !== null) {
+    urls.push(match[1].trim());
+  }
+
+  if (urls.length === 0) {
+    const simpleUrlRegex = /Source URL:\s*([^\s]+)/g;
+    while ((match = simpleUrlRegex.exec(refSectionText)) !== null) {
+      urls.push(match[1].trim().replace(/[.)]$/, ''));
+    }
+  }
+
+  if (urls.length === 0) {
+    ok(`No external references found to validate in ${activeVersionFile}.`);
+    return;
+  }
+
+  const readmeFiles = ['README.md', '00_README.md'];
+  for (const readme of readmeFiles) {
+    const readmeContent = readFileSafe(readme);
+    if (!readmeContent) {
+      fail(`Readme file not found for references check: ${readme}`);
+      continue;
+    }
+
+    let checked = 0;
+    for (const url of urls) {
+      const normUrl = url.replace(/\/$/, '');
+      if (!readmeContent.includes(normUrl)) {
+        fail(`External reference URL "${url}" declared in ${activeVersionFile} is missing in ${readme}.`);
+      } else {
+        checked++;
+      }
+    }
+    if (checked === urls.length) {
+      ok(`All ${checked} external references validated successfully in ${readme}.`);
+    }
+  }
+}
+
 function main() {
   console.log('Checking repository logic-entry enforcement...\n');
 
@@ -284,6 +355,7 @@ function main() {
 
   checkMapLinks();
   checkActiveRelativeLinks();
+  checkExternalReferences();
 
   if (hasError) {
     console.error('\nLogic-entry check FAILED.');
