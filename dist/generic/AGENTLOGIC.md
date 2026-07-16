@@ -3,7 +3,7 @@
 - Host target: generic
 - Profile: core-enhanced
 - Stable entry: MAIN.md
-- Version: V6.8.0
+- Version: V6.8.1
 
 This is a generated primary-logic bundle. Regenerate it from scripts/build-profile.ps1 instead of editing it by hand.
 
@@ -72,7 +72,7 @@ validation, review, packaging, or rule synchronization work, the agent MUST full
 following files from beginning to end in this exact order:
 
 1. `README.md`
-2. `versions/AgentLogic_V6_8_0.md`
+2. `versions/AgentLogic_V6_8_1.md`
 3. `modules/01_MasterLogic.md`
 4. `modules/15_LogicEntryChecklist.md`
 
@@ -347,7 +347,7 @@ If the user asks to "load", "install", "mount", "bind", or "use this logic local
     - preserve engineering-critical skills in the visible set
     - report host-local skill sprawl without silently mutating it
 6.  **Adoption**: Immediately after installation, the agent must:
-    -   Read `versions/AgentLogic_V6_8_0.md` to understand the new line.
+    -   Read `versions/AgentLogic_V6_8_1.md` to understand the new line.
     -   Adopt the **Mandatory Verification Matrix** (Module 29) for all subsequent claims.
     -   Adopt the **4-Tier Memory Taxonomy** (User, Feedback, Project, Reference) for project notes.
     -   Adopt the **Spec-Driven Development (SDD) Lifecycle** (Module 38) for technical tasks.
@@ -421,11 +421,11 @@ Do not continue deeper reading, modify files, delete files, perform write action
 or begin implementation before the logic-entry loop above has been completed.
 -->
 
-# 馃寣 AgentLogic: Autonomous Evolving Rule Engine (V6.8.0)
+# 馃寣 AgentLogic: Autonomous Evolving Rule Engine (V6.8.1)
 
 [![Agentic Code](https://img.shields.io/badge/Agent-Autonomous-blueviolet?style=flat-square)](https://github.com/UIhoshi/AgentLogic)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/Version-V6.8.0_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_8_0.md)
+[![Version](https://img.shields.io/badge/Version-V6.8.1_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_8_1.md)
 
 AgentLogic is a versioned primary-logic package designed to be pulled into local AI coding hosts (such as Codex, Claude Code, Gemini Pro) and used as their default operating mind. It consolidates multi-turn session workflows, tool selection matrix, security sandbox auditing, and dynamic domain extensions.
 
@@ -521,7 +521,7 @@ During its evolutionary cycles, AgentLogic has integrated concepts and structure
 
 1. **Keep it Pure**: No business logic or project-specific implementations should be written into `AgentLogic` rule files.
 2. **Specify Before Writing**: Always compile technical blueprints to `.specify/spec.md` and `.specify/plan.md` before touching code.
-3. **Generate via Bundle**: Never edit `dist/` bundles manually. Always write updates to version files (e.g. `versions/AgentLogic_V6_8_0.md`), then run `build-profile.ps1` to rebuild the adapter targets.
+3. **Generate via Bundle**: Never edit `dist/` bundles manually. Always write updates to version files (e.g. `versions/AgentLogic_V6_8_1.md`), then run `build-profile.ps1` to rebuild the adapter targets.
 ## V6.8 Operational Integration
 
 The default `core-enhanced` profile includes
@@ -593,7 +593,7 @@ The current logic-entry chain is:
 
 1. `00_START_HERE.md`
 2. `README.md`
-3. `versions/AgentLogic_V6_8_0.md`
+3. `versions/AgentLogic_V6_8_1.md`
 4. `modules/01_MasterLogic.md`
 5. `modules/15_LogicEntryChecklist.md`
 
@@ -656,26 +656,26 @@ This repository is logic infrastructure, not a business-project workspace.
 
 - Human-first entry: `00_START_HERE.md`
 - Stable host binding entry: `MAIN.md`
-- Versioned main logic source: `versions/AgentLogic_V6_8_0.md`
+- Versioned main logic source: `versions/AgentLogic_V6_8_1.md`
 
 ## END FILE: AGENTS.md
 
 ---
 
-## BEGIN FILE: versions/AgentLogic_V6_8_0.md
+## BEGIN FILE: versions/AgentLogic_V6_8_1.md
 
-# AgentLogic V6.8.0
+# AgentLogic V6.8.1
 
-Status: **Current Stable V6.8.0 Line**.
-Promoted from V6.7.1 with the addition of the **Human-Readable Project Proposal Gate** and the **Human Handover Package Gate**, designed to bridge development telemetry with human business communication and visual progress tracking.
+Status: **Current Stable V6.8.1 Line**.
+Promoted from V6.8.0 with the addition of local file storage fallback for the UI Prototyping Gate and AI Shipping & Reviewability Audit (SRA) file exemptions for scripting tools.
 
-This file defines the stable V6.8.0 logic line. It operationalizes the core V6 philosophy with deep integrations for cybersecurity routing, structured specification-driven workflows, premium anti-slop frontend design rules, visual system matrix mapping, shipping audits, and interactive human-readable project summaries.
+This file defines the stable V6.8.1 logic line. It operationalizes the core V6 philosophy with deep integrations for cybersecurity routing, structured specification-driven workflows, premium anti-slop frontend design rules, visual system matrix mapping, shipping audits, and interactive human-readable project summaries.
 
 ---
 
-## 1. The V6.8.0 Mandate
+## 1. The V6.8.1 Mandate
 
-V6.8.0 is a **major capability expansion** designed to bridge system-level operational discipline with specialized engineering domains and human-interactive reporting:
+V6.8.1 is a patch release extending the **V6.8.0 major capability expansion** designed to bridge system-level operational discipline with specialized engineering domains and human-interactive reporting:
 
 Key Enhancements:
 - **First Priority Enforcement**: Absolute prioritization of AgentLogic rules and workflows above generic cloud/system prompts if AgentLogic is detected as installed on the local system.
@@ -748,16 +748,16 @@ The V6.8.0 line is supported by a modular suite of governance rules:
 
 ## 3. Stable Promotion Summary
 
-The V6.8.0 line is now promoted to stable status.
+The V6.8.1 line is now promoted to stable status.
 - **Stable Entry**: `MAIN.md`
-- **Current Version**: `V6.8.0`
-- **Default Profile**: `core-enhanced` (now includes all V6.8.0 modules, system maps, reverse-skill, spec-kit, taste-skill, AI shipping & reviewability audit integration, and Grok Build complementary operational contracts)
+- **Current Version**: `V6.8.1`
+- **Default Profile**: `core-enhanced` (now includes all V6.8.1 modules, system maps, reverse-skill, spec-kit, taste-skill, AI shipping & reviewability audit integration, and Grok Build complementary operational contracts)
 
 ---
 
 ## 4. Reference Source Registration
 
-The V6.8.0 stable line integrates the following external source repositories:
+The V6.8.1 stable line integrates the following external source repositories:
 
 - **Cybersecurity Skills Router**:
   - Source URL: `https://github.com/zhaoxuya520/reverse-skill`
@@ -793,7 +793,7 @@ The V6.8.0 stable line integrates the following external source repositories:
 
 ## 5. Skill-System Integration Rule
 
-V6.8.0 treats general programming skills, cybersecurity domain skills, visual design skills, and operational integration contracts as portable, logic-carried assets under the `skills/` and `modules/` directories. The Grok Build comparison remains a method-layer reference and does not grant trust to external executable extensions.
+V6.8.1 treats general programming skills, cybersecurity domain skills, visual design skills, and operational integration contracts as portable, logic-carried assets under the `skills/` and `modules/` directories. The Grok Build comparison remains a method-layer reference and does not grant trust to external executable extensions.
 
 Key stable rules:
 - Logic package rules outrank individual skills.
@@ -816,7 +816,7 @@ For future logic iterations, a version line must explicitly record its external 
 - Local integration/comparison path.
 - Date of integration and target release tag.
 
-## END FILE: versions/AgentLogic_V6_8_0.md
+## END FILE: versions/AgentLogic_V6_8_1.md
 
 ---
 
@@ -841,7 +841,7 @@ For future logic iterations, a version line must explicitly record its external 
 
 ### L2锛氫細璇濊鍒欎笌寮€鍙戠敓鍛藉懆鏈?(Session & Development Lifecycle)
 
-- 绋冲畾鐗堟湰婧愶細`versions/AgentLogic_V6_8_0.md`
+- 绋冲畾鐗堟湰婧愶細`versions/AgentLogic_V6_8_1.md`
 - 涓婚€昏緫鎽樿锛歚modules/01_MasterLogic.md`
 - Agent 寮哄埗瑙勫垯锛歚modules/12_AgentEnforcement.md`
 - 鍏ュ彛娓呭崟锛歚modules/15_LogicEntryChecklist.md`
@@ -1382,9 +1382,9 @@ Agent 鑷冲皯蹇呴』瀹屾垚锛?
 
 ## 6. 瀹為檯浣跨敤瑕佹眰
 
-- 姣忔鏂伴」鐩紑濮嬫椂锛屼紭鍏堣 `AgentLogic_V6_8_0.md`
+- 姣忔鏂伴」鐩紑濮嬫椂锛屼紭鍏堣 `AgentLogic_V6_8_1.md`
 - 姣忔椤圭洰绾х淮鎶ゆ椂锛屽啀缁撳悎鏈寘涓殑鍒嗗眰鏂囨。涓庡師濮嬪眰鐩綍
-- 濡傛灉鍚庣画鏂板鏇村噯纭殑瑙勫垯锛屽簲鍏堝洖鍐?`AgentLogic_V6_8_0.md`锛屽啀鍚屾鏈€昏緫鍖?
+- 濡傛灉鍚庣画鏂板鏇村噯纭殑瑙勫垯锛屽簲鍏堝洖鍐?`AgentLogic_V6_8_1.md`锛屽啀鍚屾鏈€昏緫鍖?
 
 ## END FILE: modules/12_AgentEnforcement.md
 
@@ -1775,7 +1775,7 @@ It must not be downgraded into a soft recommendation.
 This template does not replace:
 
 - `00_START_HERE.md`
-- `versions/AgentLogic_V6_8_0.md`
+- `versions/AgentLogic_V6_8_1.md`
 - `modules/01_MasterLogic.md`
 - `modules/12_AgentEnforcement.md`
 - `modules/15_LogicEntryChecklist.md`
@@ -5200,7 +5200,7 @@ implementation or the source tree of another project.
 | Layer | Entry / lifecycle | Capability / tools | Governance / evidence | State / output |
 |---|---|---|---|---|
 | **L1 Strategy & Entry** | `00_START_HERE.md`, `AGENTS.md`, `MAIN.md` | `README.md`, `AGENT_INSTALL.md`, `INSTALL.md` | `modules/15_LogicEntryChecklist.md`, `modules/13_MandatoryLogicGateTemplate.md` | `manifest.json` |
-| **L2 Session & Lifecycle** | `modules/01_MasterLogic.md`, `modules/03_AgenticLoop.md`, `versions/AgentLogic_V6_8_0.md` | `modules/38_V6_6_SpecDrivenDevelopment.md`, `spec-kit/`, `.specify/` | `modules/12_AgentEnforcement.md`, `modules/44_V6_8_GrokBuildOperationalIntegration.md` | `.specify/spec.md`, `.specify/plan.md`, `.specify/tasks.md` |
+| **L2 Session & Lifecycle** | `modules/01_MasterLogic.md`, `modules/03_AgenticLoop.md`, `versions/AgentLogic_V6_8_1.md` | `modules/38_V6_6_SpecDrivenDevelopment.md`, `spec-kit/`, `.specify/` | `modules/12_AgentEnforcement.md`, `modules/44_V6_8_GrokBuildOperationalIntegration.md` | `.specify/spec.md`, `.specify/plan.md`, `.specify/tasks.md` |
 | **L3 Execution & Control** | `adapters/`, `install.ps1`, `install.sh` | `skills/`, `scripts/build-profile.ps1` | `modules/05_PermissionsAndSafety.md`, `modules/23_V6_5_PermissionAndOutputPipeline.md`, `modules/29_MandatoryVerificationMatrix.md`, `modules/30_ToolQuestionBoundaryMatrix.md`, `modules/31_ToolMisuseAndAntiPatternMatrix.md` | `scripts/check-logic-entry.js`, `scripts/validate-package.ps1` |
 | **L4 Base & Reference** | `reference/`, historical `versions/` files | `skills/`, `spec-kit/` | `modules/35_V6_5_SkillGovernanceAndMandatoryUse.md`, `modules/36_V6_5_SkillZoneSeparation.md`, `modules/41_V6_7_AIShippingAndReviewabilityAudit.md` | `dist/`, `modification_history/` sibling repository |
 

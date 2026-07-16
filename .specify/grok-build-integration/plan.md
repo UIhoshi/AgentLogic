@@ -5,7 +5,7 @@
 1. Add the research matrix and this specification without changing runtime logic.
 2. Run the Red-Team review below and resolve load-bearing risks.
 3. Create `modules/44_V6_8_GrokBuildOperationalIntegration.md` as the method-layer contract.
-4. Create `versions/AgentLogic_V6_8_0.md` from V6.7.2's stable line, add the new module,
+4. Create `versions/AgentLogic_V6_8_1.md` from V6.7.2's stable line, add the new module,
    and register Grok Build as a comparative source.
 5. Promote V6.8.0 through `manifest.json`, active entry docs, and install guidance using
    the repository release script rather than hand-editing version pointers.

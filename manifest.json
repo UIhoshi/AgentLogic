@@ -3,8 +3,8 @@
     "role":  "primary-local-logic",
     "description":  "Versioned primary logic package intended to be pulled into local AI coding hosts as the default operating logic.",
     "entry":  "MAIN.md",
-    "current_version":  "V6.8.0",
-    "main_logic_file":  "versions/AgentLogic_V6_8_0.md",
+    "current_version":  "V6.8.1",
+    "main_logic_file":  "versions/AgentLogic_V6_8_1.md",
     "default_profile":  "core-enhanced",
     "profiles":  {
                      "minimal":  {
@@ -15,7 +15,7 @@
                                                    "AGENT_INSTALL.md",
                                                    "README.md",
                                                    "AGENTS.md",
-                                                   "versions/AgentLogic_V6_8_0.md",
+                                                   "versions/AgentLogic_V6_8_1.md",
                                                    "modules/12_AgentEnforcement.md",
                                                    "modules/15_LogicEntryChecklist.md",
                                                    "modules/29_MandatoryVerificationMatrix.md",
@@ -31,7 +31,7 @@
                                                          "AGENT_INSTALL.md",
                                                          "README.md",
                                                          "AGENTS.md",
-                                                         "versions/AgentLogic_V6_8_0.md",
+                                                         "versions/AgentLogic_V6_8_1.md",
                                                          "modules/01_MasterLogic.md",
                                                          "modules/03_AgenticLoop.md",
                                                          "modules/05_PermissionsAndSafety.md",
@@ -63,7 +63,7 @@
                                                          "modules/41_V6_7_AIShippingAndReviewabilityAudit.md",
                                                          "modules/42_V6_7_PonytailLazySeniorDevLadder.md",
                                                          "modules/43_V6_7_MattPocockSkillsIntegration.md",
-                                                             "modules/44_V6_8_GrokBuildOperationalIntegration.md"
+                                                         "modules/44_V6_8_GrokBuildOperationalIntegration.md"
                                                      ]
                                        },
                      "github-publishing":  {
@@ -74,7 +74,7 @@
                                                              "AGENT_INSTALL.md",
                                                              "README.md",
                                                              "AGENTS.md",
-                                                             "versions/AgentLogic_V6_8_0.md",
+                                                             "versions/AgentLogic_V6_8_1.md",
                                                              "modules/01_MasterLogic.md",
                                                              "modules/03_AgenticLoop.md",
                                                              "modules/05_PermissionsAndSafety.md",

@@ -23,7 +23,7 @@
 
 ### L2：会话规则与开发生命周期 (Session & Development Lifecycle)
 
-- 稳定版本源：`versions/AgentLogic_V6_8_0.md`
+- 稳定版本源：`versions/AgentLogic_V6_8_1.md`
 - 主逻辑摘要：`modules/01_MasterLogic.md`
 - Agent 强制规则：`modules/12_AgentEnforcement.md`
 - 入口清单：`modules/15_LogicEntryChecklist.md`
