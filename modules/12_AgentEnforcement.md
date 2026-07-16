@@ -255,6 +255,10 @@ Agent 至少必须完成：
 ### 4.4.2 启动前检索义务
 - **先验检索**：在进入任何新项目或接手新任务进行 Startup Gate 校验时，除了阅读项目文档，**必须**先拉取 `modification_history` 仓库的最新 commit，检索当前项目或相似场景的历史报错，将其作为编码前的避坑先验知识。
 
+### 4.4.3 克隆与项目初始化同步 (Clone & Project Initialization Sync)
+- **拉取与映射**：当 Agent 首次从 GitHub 克隆一个新业务仓库（如 `git clone <URL>`）或者初始化一个新项目工作区时，**必须**同步将 [modification_history](https://github.com/UIhoshi/modification_history) 仓库克隆或拉取到本地工作区的同级目录下。
+- **本地历史拉取**：Agent 必须从 `modification_history` 仓库的对应项目子文件夹（如 `/CanvasTab/`）中复制或载入历史修改与犯错日志，将其缓存至当前项目的工作区下（如 `.specify/history/` 目录或项目根目录下），作为本次及后续生命周期开发的重要事实和避坑依据。
+
 ## 5. 为什么这是强制要求
 
 - 不同 Agent 进入项目时最容易出错的地方，不是能力不够，而是入口不一致。
