@@ -240,6 +240,21 @@ Agent 至少必须完成：
 - A skill use does not replace normal verification obligations. It only provides the strongest operational route when the task matches.
 - Use `modules/35_V6_5_SkillGovernanceAndMandatoryUse.md` for the current deduplication policy, archive posture, and mandatory-skill map.
 
+## 4.4 错误与经验归档同步规则 (Error Logging & Sync Protocol)
+
+为构建跨项目、跨会话的共享知识库，防范 AI 助手“会话结束即失忆”的局限性，本系统强制引入 GitHub 共享犯错记录仓库机制。
+
+- **共享仓库地址**：`https://github.com/UIhoshi/modification_history`
+- **本地映射路径**：`C:/Users/XU RONG/Documents/workspace/modification_history`
+- **归档格式**：在共享仓库下，以项目名称建立子文件夹（例如 `/CanvasTab/`），在此子文件夹下写入 Markdown 格式的修改与修复日志（如 `modification_history.md`）。
+
+### 4.4.1 强制同步时机与双重推送
+- **逻辑更新时**：每当对 `AgentLogic` 规则逻辑进行更新或规章升级时，必须同步在 `modification_history` 仓库中归档错误背景。
+- **项目代码推送时**：每次将任何业务项目代码（如 `CanvasTab`）推送到 GitHub 远程仓库之前，**必须**同步执行修改/犯错记录的编写，并率先将犯错记录推送到 `modification_history` 仓库。
+
+### 4.4.2 启动前检索义务
+- **先验检索**：在进入任何新项目或接手新任务进行 Startup Gate 校验时，除了阅读项目文档，**必须**先拉取 `modification_history` 仓库的最新 commit，检索当前项目或相似场景的历史报错，将其作为编码前的避坑先验知识。
+
 ## 5. 为什么这是强制要求
 
 - 不同 Agent 进入项目时最容易出错的地方，不是能力不够，而是入口不一致。

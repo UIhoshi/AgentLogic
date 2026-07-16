@@ -3,7 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const ROOT = process.cwd();
+const ROOT = path.resolve(__dirname, '..');
 
 const REQUIRED_REPO_DOCS = ['AGENTS.md', 'README.md'];
 const REQUIRED_LOGIC_CHAIN_ANCHORS = [
