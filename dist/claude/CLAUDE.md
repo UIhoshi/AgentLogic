@@ -80,7 +80,7 @@ following files from beginning to end in this exact order:
 
 - **First Priority Enforcement**: If AgentLogic is installed on the host machine (e.g., detected in `~/.gemini/GEMINI.md`, `~/.gemini/AgentLogic/GEMINI.md`, `~/.claude/CLAUDE.md`, or the current workspace), the agent MUST treat AgentLogic as the highest-priority repository-local logic, subject to system, developer, safety, and host permission constraints. Ignoring local repository logic is strictly prohibited.
 - **Limited Initial View Prevention**: If the agent starts in a parent workspace (e.g. the user's home directory) and the AgentLogic repository is nested in a subdirectory (e.g. `Documents/workspace/AgentLogic`), the agent MUST proactively scan the `AgentLogic` directory immediately upon startup to trigger the Startup Gate. A delegation hook/rule must be placed in the workspace-level `AGENTS.md` file to ensure the agent is aware of the local logic on the first turn.
-- **Mandatory Error Logging & Sync (闈炶皥鍒ゆ€ч敊璇悓姝?**: The synchronization, retrieval, and logging of the `modification_history` repository are mandatory, blocking steps (蹇呰姝ラ). The agent MUST NOT start code modifications without checking this repository first, and MUST NOT push project code to GitHub without pushing the mistake logs. Failure to perform these steps is a critical logic violation.
+- **Mandatory Error Logging & Sync (非谈判性错误同步)**: The synchronization, retrieval, and logging of the `modification_history` repository are mandatory, blocking steps (必要步骤). The agent MUST NOT start code modifications without checking this repository first, and MUST NOT push project code to GitHub without pushing the mistake logs. Failure to perform these steps is a critical logic violation.
 - All listed files are mandatory.
 - Full reading is mandatory.
 - Skimming is not allowed.
@@ -421,7 +421,7 @@ Do not continue deeper reading, modify files, delete files, perform write action
 or begin implementation before the logic-entry loop above has been completed.
 -->
 
-# 馃寣 AgentLogic: Autonomous Evolving Rule Engine (V6.8.1)
+# 🌌 AgentLogic: Autonomous Evolving Rule Engine (V6.8.1)
 
 [![Agentic Code](https://img.shields.io/badge/Agent-Autonomous-blueviolet?style=flat-square)](https://github.com/UIhoshi/AgentLogic)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
@@ -435,7 +435,7 @@ AgentLogic is a versioned primary-logic package designed to be pulled into local
 
 ---
 
-## 馃殌 Quick Start & Deployment
+## 🚀 Quick Start & Deployment
 
 For local diagnostic runs and host deployment, execute the following commands in sequence:
 
@@ -447,7 +447,7 @@ For local diagnostic runs and host deployment, execute the following commands in
 
 ---
 
-## 馃彈锔?4-Layer Architecture Matrix (Grid & Subsystems)
+## 🏗️ 4-Layer Architecture Matrix (Grid & Subsystems)
 
 We organize rules and code into a **4-layer progressive abstraction model** to prevent context budget bloat:
 
@@ -474,24 +474,24 @@ graph TD
 
 | Abstraction Layer | Primary Core Responsibility | Included Files / Directories |
 | :--- | :--- | :--- |
-| **L1: Strategy & Entry** | Defines entrypoints, environment injection, REPL startup gates, and context forget/reset rules. | - [00_START_HERE.md](./00_START_HERE.md) (璧锋墜寮?<br>- [MAIN.md](./MAIN.md) (Stable Host Binding)<br>- [AGENTS.md](./AGENTS.md) (Agent Entry)<br>- [15_LogicEntryChecklist.md](./modules/15_LogicEntryChecklist.md) (Gate Checklist)<br>- [13_MandatoryLogicGateTemplate.md](./modules/13_MandatoryLogicGateTemplate.md) (Header Gating) |
+| **L1: Strategy & Entry** | Defines entrypoints, environment injection, REPL startup gates, and context forget/reset rules. | - [00_START_HERE.md](./00_START_HERE.md) (起手式)<br>- [MAIN.md](./MAIN.md) (Stable Host Binding)<br>- [AGENTS.md](./AGENTS.md) (Agent Entry)<br>- [15_LogicEntryChecklist.md](./modules/15_LogicEntryChecklist.md) (Gate Checklist)<br>- [13_MandatoryLogicGateTemplate.md](./modules/13_MandatoryLogicGateTemplate.md) (Header Gating) |
 | **L2: Session & Loop** | Manages the single-turn execution cycle, prevents vibe-coding, and structures the SDD lifecycle. | - [03_AgenticLoop.md](./modules/03_AgenticLoop.md) (Agentic Cycle)<br>- [38_SpecDrivenDevelopment.md](./modules/38_V6_6_SpecDrivenDevelopment.md) (SDD Lifecycle)<br>- [20_V6_5_RuntimeModes.md](./modules/20_V6_5_RuntimeModes.md) (Context Adaptation)<br>- [28_V6_5_TerminologyAndModuleBoundaries.md](./modules/28_V6_5_TerminologyAndModuleBoundaries.md) (Boundary Rules) |
 | **L3: Control & Auditing** | Establishes high-friction verification rules, security-risk matrix, and visual frontend taste checks. | - [29_MandatoryVerificationMatrix.md](./modules/29_MandatoryVerificationMatrix.md) (Verification Matrix)<br>- [39_TasteFrontendDesign.md](./modules/39_V6_6_TasteFrontendDesign.md) (Aesthetic & Spacing Audit)<br>- [30_ToolQuestionBoundaryMatrix.md](./modules/30_ToolQuestionBoundaryMatrix.md) (Credential Boundary)<br>- [31_ToolMisuseAndAntiPatternMatrix.md](./modules/31_ToolMisuseAndAntiPatternMatrix.md) (Anti-Pattern Gating) |
 | **L4: Base & Drivers** | Low-level command execution, raw tool controllers, and active portable skill files. | - `skills/` (Logic-Carried Domain Skills)<br>  * [agent-browser](./skills/agent-browser/) (Accessibility Browser CLI)<br>  * [nano-banana-pro](./skills/nano-banana-pro/) (Gemini Mockup Engine)<br>  * [self-improvement](./skills/self-improvement/) (Error Log & Self-Correction)<br>- [35_V6_5_SkillGovernanceAndMandatoryUse.md](./modules/35_V6_5_SkillGovernanceAndMandatoryUse.md) (Governance Rules) |
 
 ---
 
-## 馃洜锔?Self-Improvement & Learning Feed
+## 🛠️ Self-Improvement & Learning Feed
 
 This rule package supports **automated self-evolution** and developer logging:
 
 ```
 [Unexpected Error / User Correction / Best Practice Found]
-                      鈹?
-                      鈻?(1) Automatically log to:
+                      │
+                      ▼ (1) Automatically log to:
        .learnings/ (LEARNINGS.md / ERRORS.md)
-                      鈹?
-                      鈻?(2) Exceeds threshold (Recurrence >= 3)
+                      │
+                      ▼ (2) Exceeds threshold (Recurrence >= 3)
       Systemic rules extracted and merged into:
             CLAUDE.md / AGENTS.md
 ```
@@ -501,7 +501,7 @@ This rule package supports **automated self-evolution** and developer logging:
 
 ---
 
-## 馃摎 External References & Integrated Sources
+## 📚 External References & Integrated Sources
 
 During its evolutionary cycles, AgentLogic has integrated concepts and structures from the following open-source GitHub projects:
 
@@ -521,7 +521,7 @@ During its evolutionary cycles, AgentLogic has integrated concepts and structure
 
 ---
 
-## 鈿栵笍 Maintenance Constraints
+## ⚖️ Maintenance Constraints
 
 1. **Keep it Pure**: No business logic or project-specific implementations should be written into `AgentLogic` rule files.
 2. **Specify Before Writing**: Always compile technical blueprints to `.specify/spec.md` and `.specify/plan.md` before touching code.
@@ -534,7 +534,7 @@ It translates useful provider-neutral patterns from
 [`xai-org/grok-build`](https://github.com/xai-org/grok-build) into contracts for
 rule discovery, session state, compaction, permissions, extension trust,
 subagents, headless execution, memory freshness, and bounded background work.
-These contracts complement鈥攏ot replace鈥攖he existing SDD, Red-Team, SRA,
+These contracts complement—not replace—the existing SDD, Red-Team, SRA,
 verification, and history-synchronization gates.
 
 ## END FILE: README.md
@@ -742,9 +742,9 @@ The V6.8.1 line is supported by a modular suite of governance rules:
 - `modules/37_V6_6_CybersecuritySkillsRouter.md`: Router configuration, security analysis toolchains, and field journal logging.
 - `modules/38_V6_6_SpecDrivenDevelopment.md`: Guidelines and 8-phase lifecycle for Spec-Driven Development, including mandatory Red-Team Gate.
 - `modules/39_V6_6_TasteFrontendDesign.md`: Aesthetic standards, visual dials tuning, and anti-slop UI/UX audit rules.
-- `modules/41_V6_7_AIShippingAndReviewabilityAudit.md`: AI Shipping & Reviewability Audit (SRA) 闂?Core+Conditional shipping artifacts, universal self-refute principle, trust boundary crossing enumeration, and Verification Matrix integration.
-- `modules/42_V6_7_PonytailLazySeniorDevLadder.md`: Ponytail Lazy Senior Developer's Ladder 闂?7-rung YAGNI implementation ladder, root-cause bug-fixing rules, and SDD integration.
-- `modules/43_V6_7_MattPocockSkillsIntegration.md`: Matt Pocock Skills Integration 闂?Grilling plan interview flow, CONTEXT.md ubiquitous vocabulary glossary, and Architectural Decision Records (ADRs) specifications.
+- `modules/41_V6_7_AIShippingAndReviewabilityAudit.md`: AI Shipping & Reviewability Audit (SRA) 闁?Core+Conditional shipping artifacts, universal self-refute principle, trust boundary crossing enumeration, and Verification Matrix integration.
+- `modules/42_V6_7_PonytailLazySeniorDevLadder.md`: Ponytail Lazy Senior Developer's Ladder 闁?7-rung YAGNI implementation ladder, root-cause bug-fixing rules, and SDD integration.
+- `modules/43_V6_7_MattPocockSkillsIntegration.md`: Matt Pocock Skills Integration 闁?Grilling plan interview flow, CONTEXT.md ubiquitous vocabulary glossary, and Architectural Decision Records (ADRs) specifications.
 
 - `modules/44_V6_8_GrokBuildOperationalIntegration.md`: Provider-neutral operational contracts translated from the audited Grok Build runtime and user guides.
 
@@ -828,124 +828,124 @@ For future logic iterations, a version line must explicitly record its external 
 
 # AgentLogic V6.8.1 Master Logic
 
-鏈枃浠舵槸 AgentLogic 浠撳簱鐨勯」鐩骇涓婚€昏緫鎽樿銆傚畠鎻忚堪鏈粨搴撲腑鐨勮鍒欍€侀獙璇併€佸畨瑁呭拰
-鎵撳寘璧勪骇锛屼笉鎻忚堪浠讳綍澶栭儴涓氬姟椤圭洰鎴栨煇涓叿浣?Agentic CLI 浜у搧鐨勬簮鐮佷簨瀹炪€?
+本文件是 AgentLogic 仓库的项目级主逻辑摘要。它描述本仓库中的规则、验证、安装和
+打包资产，不描述任何外部业务项目或某个具体 Agentic CLI 产品的源码事实。
 
-## 1. 褰撳墠浠撳簱瀹氫綅
+## 1. 当前仓库定位
 
-- 鏈粨搴撴槸鍙畨瑁呭埌鏈湴 AI coding host 鐨勪富閫昏緫鍩虹璁炬柦锛坢ethod layer锛夈€?
-- 浜嬪疄鏉ユ簮鏄粨搴撳唴鐨勫叆鍙ｆ枃妗ｃ€佺増鏈簮鏂囦欢銆佹ā鍧椼€佽剼鏈€乵anifest 鍜岀敓鎴愯緭鍑恒€?
-- 澶栭儴椤圭洰銆佹瘮杈冧粨搴撳拰 `reference/` 鍘熷灞傚彧鑳戒綔涓哄弬鑰冭瘉鎹紝涓嶈兘鑷姩鍗囩骇涓哄綋鍓嶄粨搴撲簨瀹炪€?
-- 褰撳墠绋冲畾缁戝畾鍏ュ彛鏄?`MAIN.md`锛涘綋鍓嶇増鏈簮鏂囦欢鐢?`manifest.json` 鐨?`main_logic_file` 鎸囧畾銆?
+- 本仓库是可安装到本地 AI coding host 的主逻辑基础设施（method layer）。
+- 事实来源是仓库内的入口文档、版本源文件、模块、脚本、manifest 和生成输出。
+- 外部项目、比较仓库和 `reference/` 原始层只能作为参考证据，不能自动升级为当前仓库事实。
+- 当前稳定绑定入口是 `MAIN.md`；当前版本源文件由 `manifest.json` 的 `main_logic_file` 指定。
 
-## 2. 褰撳墠浠撳簱鐨勫洓灞傛槧灏?
+## 2. 当前仓库的四层映射
 
-### L1锛氬叆鍙ｄ笌瀹夸富琛ㄩ潰 (Entry & Host Surface)
+### L1：入口与宿主表面 (Entry & Host Surface)
 
-- 浜虹被鍏ュ彛锛歚00_START_HERE.md`
-- Agent 鍏ュ彛锛歚AGENTS.md`
-- 绋冲畾瀹夸富鍏ュ彛锛歚MAIN.md`
-- 浠撳簱璇存槑锛歚README.md`
-- 瀹夎璇存槑锛歚AGENT_INSTALL.md`銆乣INSTALL.md`
-- 瀹夸富閫傞厤鍣細`adapters/`
+- 人类入口：`00_START_HERE.md`
+- Agent 入口：`AGENTS.md`
+- 稳定宿主入口：`MAIN.md`
+- 仓库说明：`README.md`
+- 安装说明：`AGENT_INSTALL.md`、`INSTALL.md`
+- 宿主适配器：`adapters/`
 
-### L2锛氫細璇濊鍒欎笌寮€鍙戠敓鍛藉懆鏈?(Session & Development Lifecycle)
+### L2：会话规则与开发生命周期 (Session & Development Lifecycle)
 
-- 绋冲畾鐗堟湰婧愶細`versions/AgentLogic_V6_8_1.md`
-- 涓婚€昏緫鎽樿锛歚modules/01_MasterLogic.md`
-- Agent 寮哄埗瑙勫垯锛歚modules/12_AgentEnforcement.md`
-- 鍏ュ彛娓呭崟锛歚modules/15_LogicEntryChecklist.md`
-- Agentic loop 鍚堝悓锛歚modules/03_AgenticLoop.md`
-- SDD 鐢熷懡鍛ㄦ湡锛歚modules/38_V6_6_SpecDrivenDevelopment.md`
-- 浠诲姟瑙勬牸涓庣姸鎬侊細`.specify/`
+- 稳定版本源：`versions/AgentLogic_V6_8_1.md`
+- 主逻辑摘要：`modules/01_MasterLogic.md`
+- Agent 强制规则：`modules/12_AgentEnforcement.md`
+- 入口清单：`modules/15_LogicEntryChecklist.md`
+- Agentic loop 合同：`modules/03_AgenticLoop.md`
+- SDD 生命周期：`modules/38_V6_6_SpecDrivenDevelopment.md`
+- 任务规格与状态：`.specify/`
 
-### L3锛氬畨鍏ㄣ€佹潈闄愪笌楠岃瘉鎺у埗 (Safety & Verification Control)
+### L3：安全、权限与验证控制 (Safety & Verification Control)
 
-- 浠诲姟閫傜敤鎬у叆鍙ｏ細`AGENTS.md`
-- 鏉冮檺涓庡畨鍏細`modules/05_PermissionsAndSafety.md`銆乣modules/23_V6_5_PermissionAndOutputPipeline.md`
-- 楠岃瘉鐭╅樀锛歚modules/29_MandatoryVerificationMatrix.md`
-- 宸ュ叿杈圭晫锛歚modules/30_ToolQuestionBoundaryMatrix.md`
-- 鍙嶆ā寮忕籂鍋忥細`modules/31_ToolMisuseAndAntiPatternMatrix.md`
-- 瑙勫垯鍏ュ彛鏍￠獙锛歚scripts/check-logic-entry.js`
-- 鍖呮牎楠岋細`scripts/validate-package.ps1`
-- 缁存姢鑰呮牎楠岋細`scripts/maintainer-check.ps1`
-- 鐜璇婃柇锛歚scripts/doctor.ps1`
+- 任务适用性入口：`AGENTS.md`
+- 权限与安全：`modules/05_PermissionsAndSafety.md`、`modules/23_V6_5_PermissionAndOutputPipeline.md`
+- 验证矩阵：`modules/29_MandatoryVerificationMatrix.md`
+- 工具边界：`modules/30_ToolQuestionBoundaryMatrix.md`
+- 反模式纠偏：`modules/31_ToolMisuseAndAntiPatternMatrix.md`
+- 规则入口校验：`scripts/check-logic-entry.js`
+- 包校验：`scripts/validate-package.ps1`
+- 维护者校验：`scripts/maintainer-check.ps1`
+- 环境诊断：`scripts/doctor.ps1`
 
-### L4锛氳鍒欒祫浜с€佹妧鑳戒笌鐢熸垚杈撳嚭 (Assets & Generated Outputs)
+### L4：规则资产、技能与生成输出 (Assets & Generated Outputs)
 
-- 鍙Щ妞嶆妧鑳斤細`skills/`
-- SDD 宸ュ叿灞傦細`spec-kit/`
-- 鍘熷鍙傝€冨眰锛歚reference/`
-- 瀹夸富 bundle锛歚dist/`
-- bundle 鐢熸垚鍣細`scripts/build-profile.ps1`
-- 鐗堟湰涓?profile 娓呭崟锛歚manifest.json`銆乣manifest.schema.json`
+- 可移植技能：`skills/`
+- SDD 工具层：`spec-kit/`
+- 原始参考层：`reference/`
+- 宿主 bundle：`dist/`
+- bundle 生成器：`scripts/build-profile.ps1`
+- 版本与 profile 清单：`manifest.json`、`manifest.schema.json`
 
-## 3. 缁熶竴鍏ュ彛椤哄簭
+## 3. 统一入口顺序
 
-姝ｅ紡缂栫爜杞蹇呴』鎸変互涓嬮『搴忔墽琛岋細
+正式编码轮次必须按以下顺序执行：
 
-1. 璇诲彇 `AGENTS.md` 鍜?`README.md`銆?
-2. 璇诲彇 `00_START_HERE.md`锛岀‘璁ゅ綋鍓嶇ǔ瀹氬叆鍙ｅ拰閫傜敤杈圭晫銆?
-3. 鍒ゆ柇浠诲姟鏄彧璇诲璁°€佹枃妗ｅ彉鏇淬€佸绔嬩慨澶嶃€佸姛鑳?閲嶆瀯銆乁I銆佸畨瑁?鍙戝竷涓殑鍝竴绫汇€?
-4. 鍒ゆ柇鏄惁寤剁画涓婁竴杞?coding锛涜嫢涓嶆槸锛屽繀椤昏闂槸鍚?`forget/compress context`锛屼笉寰椾娇鐢?
-   Token 闃堝€奸潤榛樿烦杩囥€?
-5. 鎸?`00_START_HERE.md` 澹版槑鐨?full-read chain 瀹屾暣璇诲彇鐗堟湰婧愩€佷富閫昏緫鍜屽叆鍙ｆ竻鍗曘€?
-6. 寤虹珛鏈€灏忎簨瀹炲湴鍥撅紝鍐嶆墽琛屽尮閰嶇殑 SDD銆佹潈闄愩€侀獙璇佹垨鍙戝竷闂ㄦ銆?
+1. 读取 `AGENTS.md` 和 `README.md`。
+2. 读取 `00_START_HERE.md`，确认当前稳定入口和适用边界。
+3. 判断任务是只读审计、文档变更、孤立修复、功能/重构、UI、安装/发布中的哪一类。
+4. 判断是否延续上一轮 coding；若不是，必须询问是否 `forget/compress context`，不得使用
+   Token 阈值静默跳过。
+5. 按 `00_START_HERE.md` 声明的 full-read chain 完整读取版本源、主逻辑和入口清单。
+6. 建立最小事实地图，再执行匹配的 SDD、权限、验证或发布门槛。
 
-鍙闂涓嶉渶瑕佷吉閫犲疄鐜拌鍒掞紱浣嗕换浣曞啓鍏ャ€佸畨瑁呫€佹墦鍖呮垨瑙勫垯鍚屾閮藉繀椤诲厛瀹屾垚閫傜敤鐨勯棬妲涖€?
+只读问题不需要伪造实现计划；但任何写入、安装、打包或规则同步都必须先完成适用的门槛。
 
-## 4. 鑳藉姏鐘舵€佸繀椤诲垎灞傝〃杈?
+## 4. 能力状态必须分层表达
 
-浠讳綍鑳藉姏缁撹閮藉繀椤诲尯鍒嗭細
+任何能力结论都必须区分：
 
-- 瑙勫垯鏄惁澹版槑
-- 鏂囦欢鎴?profile 鏄惁娉ㄥ唽
-- 杩愯鏃舵槸鍚﹀彲鐢?
-- 鏉冮檺鏄惁鍏佽鎵ц
-- 鏄惁缁忚繃鍖归厤鐨勯獙璇佸伐鍏风‘璁?
+- 规则是否声明
+- 文件或 profile 是否注册
+- 运行时是否可用
+- 权限是否允许执行
+- 是否经过匹配的验证工具确认
 
-鎼滅储缁撴灉銆侀潤鎬佽鍙栥€佹瀯寤烘垚鍔熸垨鍘嗗彶璁板繂閮戒笉鑳藉崟鐙瘉鏄庤繍琛屾椂銆佽瑙夋垨杩滅▼浜嬪疄銆?
+搜索结果、静态读取、构建成功或历史记忆都不能单独证明运行时、视觉或远程事实。
 
-## 5. UI 瀹炴柦鍓嶇疆闂ㄦ
+## 5. UI 实施前置门槛
 
-浠讳綍姝ｅ紡 UI 瀹炴柦锛堥〉闈€佸睆骞曘€佺粍浠躲€佸竷灞€銆佽瑙夎璁℃垨 UI 鏍峰紡鍙樻洿锛変箣鍓嶏紝蹇呴』锛?
+任何正式 UI 实施（页面、屏幕、组件、布局、视觉设计或 UI 样式变更）之前，必须：
 
-1. 浣跨敤鏂囩敓鍥惧伐鍏风敓鎴愬嵆灏嗗疄鏂界殑 UI 棰勮鍥俱€?
-2. 灏嗛瑙堝浘灞曠ず缁欑敤鎴锋煡鐪嬶紙鑻ヨ亰澶╃晫闈㈡垨瀹㈡埛绔幆澧冧笉鏀寔鐩存帴娓叉煋鏄剧ず锛屽簲灏嗗浘鐗囩敓鎴愬悗淇濆瓨鍒伴」鐩枃浠跺す濡?`.specify/mockups/` 涓嬶紝鏄庣‘鎻愮ず缁濆鏂囦欢璺緞浠ヤ緵鐢ㄦ埛鑷鏌ョ湅锛夈€?
-3. 绛夊緟鐢ㄦ埛纭锛涚敤鎴峰彲浠ユ壒鍑嗛瑙堬紝涔熷彲浠ユ槑纭涓嶉渶瑕佽姝ラ銆?
-4. 鍙湁鎵瑰噯鎴栨槑纭?opt-out 鍚庯紝鎵嶅厑璁稿紑濮?UI 浠ｇ爜瀹炴柦銆?
+1. 使用文生图工具生成即将实施的 UI 预览图。
+2. 将预览图展示给用户查看（若聊天界面或客户端环境不支持直接渲染显示，应将图片生成后保存到项目文件夹如 `.specify/mockups/` 下，明确提示绝对文件路径以供用户自行查看）。
+3. 等待用户确认；用户可以批准预览，也可以明确说不需要该步骤。
+4. 只有批准或明确 opt-out 后，才允许开始 UI 代码实施。
 
-鐢ㄦ埛娌℃湁鏄庣‘ opt-out 鏃讹紝涓嶅緱鎶娾€滃唴瀹规敼鍔ㄣ€佸搷搴斿紡淇銆佹棤闅滅淇鎴栧皬鏀瑰姩鈥濆綋浣滈粯璁よ眮鍏嶃€?
-UI 瀹炴柦瀹屾垚鍚庝粛蹇呴』鎵ц鎴浘銆佺埗瀛愬竷灞€杈圭晫銆佹孩鍑恒€佹崲琛屽拰瀹為檯瀹瑰櫒瀹藉害楠岃瘉銆?
+用户没有明确 opt-out 时，不得把“内容改动、响应式修复、无障碍修复或小改动”当作默认豁免。
+UI 实施完成后仍必须执行截图、父子布局边界、溢出、换行和实际容器宽度验证。
 
-## 6. 閿欒鍘嗗彶涓庤鍒欏悓姝?
+## 6. 错误历史与规则同步
 
-- `modification_history` 鏄叡浜敊璇笌淇璁板綍锛屼笉鏄綋鍓嶄粨搴撶殑涓婚€昏緫鏉ユ簮銆?
-- 榛樿鏈湴浣嶇疆鏄綋鍓嶉」鐩埗鐩綍涓嬬殑 `modification_history`锛涘叾浠栧竷灞€蹇呴』鏄惧紡閰嶇疆銆?
-- 鍦ㄨ鍒欓€昏緫鏇存柊銆佸彂甯冩垨鎺ㄩ€侀」鐩唬鐮佸墠锛屽厛妫€鏌ュ苟鍚屾瀵瑰簲鐨勫巻鍙茶褰曘€?
-- 涓嶅緱鎶婄壒瀹氭満鍣ㄧ殑鐢ㄦ埛鐩綍鍐欏叆瑙勫垯鏂囦欢鎴?bundle銆?
+- `modification_history` 是共享错误与修复记录，不是当前仓库的主逻辑来源。
+- 默认本地位置是当前项目父目录下的 `modification_history`；其他布局必须显式配置。
+- 在规则逻辑更新、发布或推送项目代码前，先检查并同步对应的历史记录。
+- 不得把特定机器的用户目录写入规则文件或 bundle。
 
-## 7. 鐩綍杈圭晫涓庢墦鍖呰鍒?
+## 7. 目录边界与打包规则
 
-- `AgentLogic` 鐩綍鍙兘淇濆瓨閫昏緫銆佹ā鍧椼€佹妧鑳姐€佽剼鏈€佽鏍煎拰鐢熸垚 bundle銆?
-- 涓嶅緱鍦ㄦ湰浠撳簱鍒涘缓鏃犲叧涓氬姟婧愮爜銆佷緷璧栧畨瑁呯粨鏋溿€佷复鏃舵祴璇曟垨涓氬姟鏃ュ織銆?
-- `dist/` 鍙兘鐢?`scripts/build-profile.ps1` 鐢熸垚锛岀姝㈡墜宸ョ紪杈戙€?
-- `manifest.json` 鏄?profile銆佸涓昏緭鍑哄拰閫傞厤鍣ㄧ殑鏈哄櫒鍙浜嬪疄婧愩€?
-- `reference/` 鍜屽巻鍙茬増鏈枃浠朵笉搴旈粯璁ゆ敞鍏ヤ负褰撳墠杩愯瑙勫垯锛岄櫎闈?profile 鏄庣‘鍒楀嚭銆?
+- `AgentLogic` 目录只能保存逻辑、模块、技能、脚本、规格和生成 bundle。
+- 不得在本仓库创建无关业务源码、依赖安装结果、临时测试或业务日志。
+- `dist/` 只能由 `scripts/build-profile.ps1` 生成，禁止手工编辑。
+- `manifest.json` 是 profile、宿主输出和适配器的机器可读事实源。
+- `reference/` 和历史版本文件不应默认注入为当前运行规则，除非 profile 明确列出。
 
-## 8. 鍙樻洿鍚庣殑鏈€灏忛獙璇?
+## 8. 变更后的最小验证
 
-- 鏂囨。鎴栬鍒欏彉鏇达細杩愯 `node scripts/check-logic-entry.js` 鍜岄摼鎺ユ鏌ャ€?
-- manifest銆乸rofile銆乥undle 鎴栧畨瑁呭彉鏇达細杩愯 `scripts/validate-package.ps1`銆?
-- 鐗堟湰銆佸涓绘垨鍙戝竷鍙樻洿锛氳繍琛?`scripts/maintainer-check.ps1`锛屽苟妫€鏌ョ敓鎴愯緭鍑哄拰 git diff銆?
-- 鐜涓庡涓诲垽鏂細杩愯 `scripts/doctor.ps1`銆?
-- 浠讳綍楂橀闄╂垨澶栭儴鐘舵€佸彉鏇撮兘蹇呴』鍋氱洰鏍囩‘璁ゅ拰缁撴灉纭銆?
+- 文档或规则变更：运行 `node scripts/check-logic-entry.js` 和链接检查。
+- manifest、profile、bundle 或安装变更：运行 `scripts/validate-package.ps1`。
+- 版本、宿主或发布变更：运行 `scripts/maintainer-check.ps1`，并检查生成输出和 git diff。
+- 环境与宿主判断：运行 `scripts/doctor.ps1`。
+- 任何高风险或外部状态变更都必须做目标确认和结果确认。
 
-## 9. 鎸佺画鎵ц杈圭晫
+## 9. 持续执行边界
 
-鐢ㄦ埛鏄庣‘瑕佹眰鎸佺画鎵ц鏃讹紝褰撳墠璁″垝鍐呯殑闃呰銆佷慨鏀广€侀獙璇佸拰淇瑙嗕负鍚屼竴鎵ц杞銆?
-鍙湁鐢ㄦ埛瑕佹眰鍋滄銆佽鍒掑畬鎴愰渶瑕佹柊鐨勬垬鐣ユ柟鍚戙€佸嚭鐜版棤娉曚粠鏈湴浜嬪疄瑙ｅ喅鐨勯樆濉烇紝鎴栧嵆灏嗚繘琛?
-楂橀闄╀笉鍙€嗘搷浣滄椂锛屾墠鏆傚仠璇锋眰杈撳叆銆?
+用户明确要求持续执行时，当前计划内的阅读、修改、验证和修复视为同一执行轮次。
+只有用户要求停止、计划完成需要新的战略方向、出现无法从本地事实解决的阻塞，或即将进行
+高风险不可逆操作时，才暂停请求输入。
 
 ## END FILE: modules/01_MasterLogic.md
 
@@ -955,67 +955,67 @@ UI 瀹炴柦瀹屾垚鍚庝粛蹇呴』鎵ц鎴浘銆佺埗瀛愬竷灞€
 
 # Agentic Loop
 
-## 1. 涓婚摼璺?
+## 1. 主链路
 
-褰撳墠椤圭洰鐨勪竴娆℃爣鍑嗘墽琛岄摼璺彲浠ュ啓鎴愶細
+当前项目的一次标准执行链路可以写成：
 
-1. 鐢ㄦ埛杈撳叆杩涘叆 REPL 鎴?pipe 妯″紡
-2. `QueryEngine` 鏀堕泦鐘舵€併€佷笂涓嬫枃銆佹秷鎭€佹潈闄愪笂涓嬫枃
-3. `query()` 鍙戣捣涓€娆℃ā鍨嬭姹?
-4. 妯″瀷杩斿洖鏂囨湰鍧楀拰 `tool_use`
-5. 绯荤粺鏍规嵁宸ュ叿绫诲瀷涓庡苟鍙戝畨鍏ㄦ€ф墽琛屽伐鍏?
-6. 宸ュ叿缁撴灉杞垚 `tool_result` 鍥炲啓浼氳瘽
-7. 濡傛灉闇€瑕佽拷闂紝鍒欒繘鍏ヤ笅涓€杞惊鐜?
-8. 濡傛灉浠诲姟缁撴潫锛屽垯杈撳嚭鏈€缁堢粨鏋滃苟璁板綍鐘舵€?
+1. 用户输入进入 REPL 或 pipe 模式
+2. `QueryEngine` 收集状态、上下文、消息、权限上下文
+3. `query()` 发起一次模型请求
+4. 模型返回文本块和 `tool_use`
+5. 系统根据工具类型与并发安全性执行工具
+6. 工具结果转成 `tool_result` 回写会话
+7. 如果需要追问，则进入下一轮循环
+8. 如果任务结束，则输出最终结果并记录状态
 
-## 2. 鍏抽敭鍑芥暟璐ｄ换
+## 2. 关键函数责任
 
 - `src/QueryEngine.ts`
-  璐熻矗浼氳瘽绾х紪鎺掋€佹垚鏈€佹憳瑕併€佹枃浠跺巻鍙层€乼urn bookkeeping銆?
+  负责会话级编排、成本、摘要、文件历史、turn bookkeeping。
 - `src/query.ts`
-  璐熻矗鍗曡疆鐨勭湡瀹炴墽琛屽惊鐜€?
+  负责单轮的真实执行循环。
 - `src/services/tools/toolOrchestration.ts`
-  璐熻矗浠诲姟鎵规鍒掑垎銆佷覆琛屾垨骞惰鎵ц銆?
+  负责任务批次划分、串行或并行执行。
 - `src/services/tools/toolExecution.ts`
-  璐熻矗鍗曚釜宸ュ叿鎵ц缁嗚妭涓庝笂涓嬫枃琛旀帴銆?
+  负责单个工具执行细节与上下文衔接。
 - `src/services/tools/toolHooks.ts`
-  璐熻矗 pre/post tool use hook 鐩稿叧閫昏緫銆?
+  负责 pre/post tool use hook 相关逻辑。
 
-## 3. 涓婁笅鏂囬澶勭悊
+## 3. 上下文预处理
 
-鍦ㄦā鍨嬭姹備箣鍓嶏紝褰撳墠椤圭洰鍖呭惈杈冮噸鐨勪笂涓嬫枃棰勭畻涓庡帇缂╅€昏緫锛屾牳蹇冪洰鏍囨槸锛?
+在模型请求之前，当前项目包含较重的上下文预算与压缩逻辑，核心目标是：
 
-- 闃叉鍘嗗彶娑堟伅鏃犻檺鑶ㄨ儉
-- 淇濇寔宸ュ叿缁撴灉鐨勫彲鍥炴函鎬?
-- 鍦?token 瓒呴檺鍓嶄富鍔ㄥ仛 compact
+- 防止历史消息无限膨胀
+- 保持工具结果的可回溯性
+- 在 token 超限前主动做 compact
 
-鐩稿叧鍏抽敭璇嶏細
+相关关键词：
 
 - auto compact
 - micro compact
 - tool result budget
 - prompt cache
 
-## 4. 宸ュ叿缁撴灉鍥炴祦
+## 4. 工具结果回流
 
-宸ュ叿鎵ц涓嶆槸缁堢偣锛岀湡姝ｉ噸瑕佺殑鏄粨鏋滃浣曞洖娴侊細
+工具执行不是终点，真正重要的是结果如何回流：
 
-- 缁撴灉浼氳鏄犲皠涓虹粨鏋勫寲 `tool_result`
-- 缁撴灉鍙兘琚鍓€佹憳瑕佹垨鎸佷箙鍖栧埌纾佺洏
-- 妯″瀷鍦ㄤ笅涓€杞湅鍒扮殑鏄€滃伐鍏风粨鏋滄秷鎭€濓紝鑰屼笉鏄洿鎺ユ搷浣滅郴缁熺姸鎬?
+- 结果会被映射为结构化 `tool_result`
+- 结果可能被裁剪、摘要或持久化到磁盘
+- 模型在下一轮看到的是“工具结果消息”，而不是直接操作系统状态
 
-鍥犳锛岄€昏緫鏁寸悊鏃跺繀椤诲悓鏃惰褰曪細
+因此，逻辑整理时必须同时记录：
 
-- 宸ュ叿鎵ц鏂瑰紡
-- 宸ュ叿缁撴灉鏍煎紡
-- 缁撴灉棰勭畻鎺у埗
-- 缁撴灉濡備綍褰卞搷涓嬩竴杞帹鐞?
+- 工具执行方式
+- 工具结果格式
+- 结果预算控制
+- 结果如何影响下一轮推理
 
-## 5. 缁存姢閫昏緫鍖呮椂鐨勬敞鎰忕偣
+## 5. 维护逻辑包时的注意点
 
-- 涓嶈鍙啓鈥渜uery 鏄牳蹇冣€濓紝瑕佽ˉ榻愬畠涓?`QueryEngine`銆佸伐鍏风紪鎺掋€佹潈闄愪笂涓嬫枃涔嬮棿鐨勫叧绯汇€?
-- 涓嶈鎶婂苟琛屾墽琛岃兘鍔涙硾鍖栦负鈥滄墍鏈夊伐鍏烽兘骞惰鈥濄€?
-- 褰撳墠椤圭洰鏄庣‘鍖哄垎鍙骞跺彂瀹夊叏宸ュ叿涓庢湁鍓綔鐢ㄥ伐鍏凤紝杩欎竴鐐瑰繀椤婚暱鏈熶繚鐣欏湪閫昏緫鍖呬腑銆?
+- 不要只写“query 是核心”，要补齐它与 `QueryEngine`、工具编排、权限上下文之间的关系。
+- 不要把并行执行能力泛化为“所有工具都并行”。
+- 当前项目明确区分只读并发安全工具与有副作用工具，这一点必须长期保留在逻辑包中。
 ## V6.8.0 Complementary Runtime Contract
 
 The agentic loop must carry a compact, inspectable runtime state rather than relying on transcript memory alone. Track session lineage, the active phase, actionable TODOs, pending side effects, background-task handles, child-agent handles, and verification gaps. When compacting, preserve that state and classify retry outcomes; do not retry deterministic failures or permission denials. Headless callers should receive a structured result envelope, while correctness still follows the applicable verification matrix. See `modules/44_V6_8_GrokBuildOperationalIntegration.md`.
@@ -1028,26 +1028,26 @@ The agentic loop must carry a compact, inspectable runtime state rather than rel
 
 # Permissions And Safety
 
-## 1. 鏉冮檺浣撶郴鐨勫湴浣?
+## 1. 权限体系的地位
 
-褰撳墠椤圭洰鐨勬潈闄愮郴缁熶笉鏄檮灞為€昏緫锛岃€屾槸宸ュ叿绯荤粺鐨勫疄闄呰竟鐣屽眰銆?
+当前项目的权限系统不是附属逻辑，而是工具系统的实际边界层。
 
-濡傛灉涓嶇悊瑙ｆ潈闄愭ā鍨嬶紝灏辨棤娉曞噯纭悊瑙ｏ細
+如果不理解权限模型，就无法准确理解：
 
-- 鍝簺宸ュ叿鍙槸鈥滄敞鍐屼簡鈥?
-- 鍝簺宸ュ叿鐪熺殑鑳芥墽琛?
-- 鍝簺鎵ц浼?ask
-- 鍝簺鎵ц浼?deny
+- 哪些工具只是“注册了”
+- 哪些工具真的能执行
+- 哪些执行会 ask
+- 哪些执行会 deny
 
-## 2. 涓夌鏉冮檺缁撴灉
+## 2. 三种权限结果
 
 - allow
 - ask
 - deny
 
-杩欎笁绉嶈涓哄叡鍚屽喅瀹氱敤鎴蜂綋楠屻€佸畨鍏ㄨ竟鐣屽拰 agentic loop 鐨勫彲鎸佺画鎬с€?
+这三种行为共同决定用户体验、安全边界和 agentic loop 的可持续性。
 
-## 3. 褰撳墠椤圭洰鐨勫叧閿潈闄愯矾寰?
+## 3. 当前项目的关键权限路径
 
 - `src/utils/permissions/permissions.ts`
 - `src/utils/permissions/PermissionRule.ts`
@@ -1055,52 +1055,52 @@ The agentic loop must carry a compact, inspectable runtime state rather than rel
 - `src/utils/permissions/permissionSetup.ts`
 - `src/utils/permissions/denialTracking.ts`
 
-## 4. 璁″垝妯″紡
+## 4. 计划模式
 
-璁″垝妯″紡鏄綋鍓嶉」鐩潪甯稿叧閿殑涓€灞傛墽琛屽垎娴侊細
+计划模式是当前项目非常关键的一层执行分流：
 
-- 鎺㈢储闃舵浼樺厛鍙
-- 閫€鍑鸿鍒掓ā寮忓悗鍐嶈繘鍏ユ墽琛?
-- 鍏佽鍦ㄢ€滃厛鐞嗚В鍐嶄慨鏀光€濈殑宸ョ▼绾緥涓婂舰鎴愮郴缁熷寲绾︽潫
+- 探索阶段优先只读
+- 退出计划模式后再进入执行
+- 允许在“先理解再修改”的工程纪律上形成系统化约束
 
-鐩稿叧宸ュ叿锛?
+相关工具：
 
 - `src/tools/EnterPlanModeTool/`
 - `src/tools/ExitPlanModeTool/`
 
-## 5. 娌欑涓庡懡浠ゅ畨鍏?
+## 5. 沙箱与命令安全
 
-鍛戒护鎵ц瀹夊叏閲嶇偣闆嗕腑鍦細
+命令执行安全重点集中在：
 
 - `src/tools/BashTool/`
 - `src/tools/PowerShellTool/`
 - `docs/safety/sandbox.mdx`
 
-闇€瑕侀暱鏈熺淮鎶ょ殑鍏抽敭鐐癸細
+需要长期维护的关键点：
 
-- 鏄惁璧版矙绠?
-- 鏄惁鍏佽 unsandboxed
-- 骞冲彴宸紓
-- 鍙鍛戒护涓庢湁鍓綔鐢ㄥ懡浠ょ殑鍖哄垎
-- 鍛戒护妯″紡鍖归厤鍜屽嵄闄╁懡浠よ瘑鍒?
+- 是否走沙箱
+- 是否允许 unsandboxed
+- 平台差异
+- 只读命令与有副作用命令的区分
+- 命令模式匹配和危险命令识别
 
 ## 6. Denial Tracking
 
-璇ユ満鍒剁殑宸ョ▼浠峰€煎緢楂橈紝搴旀寔缁啓鍏ヤ富閫昏緫锛?
+该机制的工程价值很高，应持续写入主逻辑：
 
-- 闃叉妯″瀷鍦ㄨ鎷掑悗鏃犻檺閲嶅鍚岀被璇锋眰
-- 灏嗘嫆缁濊褰曡浆鍖栦负鎵ц绛栫暐璋冩暣
-- 璁╂潈闄愮郴缁熶笉鍙槸鈥滄嫤鎴€濓紝鑰屾槸鈥滄帶鍒惰涓烘敹鏁涒€?
+- 防止模型在被拒后无限重复同类请求
+- 将拒绝记录转化为执行策略调整
+- 让权限系统不只是“拦截”，而是“控制行为收敛”
 
-## 7. 楠岃瘉鏍囧噯
+## 7. 验证标准
 
-涓庡綋鍓嶉」鐩浉鍏崇殑楠岃瘉锛屼笉搴斿彧鍋滅暀鍦ㄥ伐鍏疯兘璋冮€氾紝鑰屽簲鑷冲皯鑰冭檻锛?
+与当前项目相关的验证，不应只停留在工具能调通，而应至少考虑：
 
-- 瑙勫垯鍛戒腑鏄惁绗﹀悎棰勬湡
-- 璁″垝妯″紡鍒囨崲鍚庢潈闄愭槸鍚﹀洖婊?
-- 娌欑涓?bypass 鏄惁绗﹀悎閰嶇疆
-- 鍚屼竴宸ュ叿琚嫆澶氭鍚庣殑琛屼负鏄惁姝ｇ‘
-- 楂橀闄╁啓鎿嶄綔鏄惁瀛樺湪鎭㈠璺緞
+- 规则命中是否符合预期
+- 计划模式切换后权限是否回滚
+- 沙箱与 bypass 是否符合配置
+- 同一工具被拒多次后的行为是否正确
+- 高风险写操作是否存在恢复路径
 ## V6.8.0 Complementary Policy Contract
 
 Compile permissions per tool family and executable action. Merge applicable rules as `deny > ask > allow`; analyze each segment of compound shell commands and escalate undecidable intent instead of allowing it by default. A pre-tool hook may add a restriction but is not a sandbox boundary, so hook failure cannot weaken host permission checks. Record the effective decision and inspect path-sensitive side effects after execution. See `modules/44_V6_8_GrokBuildOperationalIntegration.md`.
@@ -1161,121 +1161,121 @@ explicit comparison document and must not be presented as current repository fac
 
 # Agent Enforcement
 
-## 1. 鐩殑
+## 1. 目的
 
-鏈枃浠剁敤浜庢槑纭竴浠朵簨锛?
+本文件用于明确一件事：
 
-杩欎釜閫昏緫鍖呬笉浠呮槸缁欎汉闃呰鐨勶紝涔熸槸缁欏悗缁繘鍏ラ」鐩殑 Agent 鐢ㄦ潵寮哄埗閬靛惊鐨勪富閫昏緫鍩虹嚎銆?
+这个逻辑包不仅是给人阅读的，也是给后续进入项目的 Agent 用来强制遵循的主逻辑基线。
 
-## 1.1 绗竴浼樺厛閬靛惊鍘熷垯 (First Priority Enforcement)
+## 1.1 第一优先遵循原则 (First Priority Enforcement)
 
-**鍙鏈湴鐢佃剳瀹夎杩?AgentLogic锛屼换浣?AI Agent 鍦ㄥ惎鍔ㄦ垨杩涘叆浼氳瘽鏃讹紝閮藉繀椤诲皢 AgentLogic 鐨勮鍒欙紙濡?`GEMINI.md`銆乣CLAUDE.md` 鎴?`MAIN.md` 涓殑瀹氫箟锛変綔涓烘渶楂樹紭鍏堢骇鐨勪富閫昏緫鏉ラ伒寰€?*
-- **缁濆浼樺厛浜庝簯绔粯璁ゆ寚浠?*锛氱粷瀵圭姝娇鐢ㄤ簯绔粯璁ょ殑銆佹湭閽堝鏈湴鐜瀹氬埗鐨勯€氱敤鎸囦护锛堚€滀簯閫昏緫鈥濓級鏉ユ浛浠ｆ垨瑕嗙洊 AgentLogic 鐨勬牳蹇冩祦绋嬨€?
-- **鑷姩妫€娴嬪苟寮哄埗鎸傛帴**锛氬鏋?Agent 鍙戠幇鏈湴瀛樺湪宸插畨瑁呯殑 AgentLogic 鐥曡抗锛堜緥濡傚瓨鍦?`~/.gemini/GEMINI.md`銆乣~/.gemini/AgentLogic/GEMINI.md`銆乣~/.claude/CLAUDE.md`銆乣~/.antigravitycli/` 鎴栧綋鍓嶅伐浣滃尯涓瓨鍦?`AgentLogic` 鐩綍锛夛紝鍒欏繀椤荤涓€浼樺厛銆佹棤鏉′欢鎸傛帴骞堕伒寰濂椾富閫昏緫锛屽皢鍏朵綔涓鸿嚜宸辩殑鏈€楂樻寚浠ゅ熀绾裤€?
-- **杩濊鍒ゅ畾**锛氫换浣曞拷鐣ユ湰鍦板凡瀹夎鐨?AgentLogic 瑙勫垯鑰岄€€鍥炲埌閫氱敤榛樿鎸囦护鐨勮涓洪兘琚涓轰弗閲嶈繚瑙勪笌閫昏緫澶辨晥銆?
+**只要本地电脑安装过 AgentLogic，任何 AI Agent 在启动或进入会话时，都必须将 AgentLogic 的规则（如 `GEMINI.md`、`CLAUDE.md` 或 `MAIN.md` 中的定义）作为最高优先级的主逻辑来遵循。**
+- **绝对优先于云端默认指令**：绝对禁止使用云端默认的、未针对本地环境定制的通用指令（“云逻辑”）来替代或覆盖 AgentLogic 的核心流程。
+- **自动检测并强制挂接**：如果 Agent 发现本地存在已安装的 AgentLogic 痕迹（例如存在 `~/.gemini/GEMINI.md`、`~/.gemini/AgentLogic/GEMINI.md`、`~/.claude/CLAUDE.md`、`~/.antigravitycli/` 或当前工作区中存在 `AgentLogic` 目录），则必须第一优先、无条件挂接并遵循此套主逻辑，将其作为自己的最高指令基线。
+- **违规判定**：任何忽略本地已安装的 AgentLogic 规则而退回到通用默认指令的行为都被视为严重违规与逻辑失效。
 
-## 2. 寮哄埗閫傜敤鑼冨洿
+## 2. 强制适用范围
 
-浠ヤ笅绫诲瀷鐨?Agent 閮藉繀椤婚伒寰細
+以下类型的 Agent 都必须遵循：
 
-- 涓荤嚎绋?Agent
-- 瀛?Agent
-- 骞惰 Agent
+- 主线程 Agent
+- 子 Agent
+- 并行 Agent
 - review Agent
 - verification Agent
 - planning Agent
-- 妯″潡涓撶敤 Agent
+- 模块专用 Agent
 
-## 3. 瑙﹀彂鏉′欢
+## 3. 触发条件
 
-鍑虹幇浠ヤ笅浠讳竴鏉′欢鏃讹紝蹇呴』閲嶆柊璧颁富閫昏緫鎺ュ叆锛?
+出现以下任一条件时，必须重新走主逻辑接入：
 
-- 寮€濮嬩竴涓柊椤圭洰
-- 鎺ユ墜涓€涓柊妯″潡
-- 鏂板涓€涓柊妯″潡
-- 杩涘叆涓€涓箣鍓嶆湭璇婚€忕殑瀛愮郴缁?
-- 浠庡垎鏋愰樁娈靛垏鎹㈠埌瀹炴柦闃舵
+- 开始一个新项目
+- 接手一个新模块
+- 新增一个新模块
+- 进入一个之前未读透的子系统
+- 从分析阶段切换到实施阶段
 
-## 4. 寮哄埗鎵ц鍐呭
+## 4. 强制执行内容
 
-Agent 鑷冲皯蹇呴』瀹屾垚锛?
+Agent 至少必须完成：
 
-1. 璇嗗埆椤圭洰鏂囨。涓诲叆鍙?
-2. 纭椤圭洰鐩綍涓嬫槸鍚﹀瓨鍦ㄥ綋鍓嶉」鐩娇鐢ㄧ殑 Agent 閫昏緫鏂囦欢锛涜嫢涓嶅瓨鍦紝鍏堣闂€昏緫鍏ュ彛浣嶇疆
-3. 鍒ゆ柇褰撳墠浠诲姟鏄惁灞炰簬涓婁竴杞?coding 鐨勫欢鐢?
-4. 鑻ヤ笉灞炰簬涓婁竴杞欢鐢筹紝蹇呴』鍏堣闂敤鎴锋槸鍚﹂渶瑕?`forget/compress context`锛涗笉寰楁牴鎹?Token 鍗犵敤銆佹ā鍨嬨€佸涓绘垨涓婁笅鏂囬暱搴﹂潤榛樿烦杩囪鍐冲畾
-5. 鑻ヨ鏀剁缉涓婁笅鏂囷紝鍏堟妸褰撳墠鏈夋晥鐘舵€佸洖鍐欏埌缁撴瀯鍖栬浇浣?
-6. 璇诲彇鐩稿叧 md 涓庡叧閿叆鍙ｆ簮鐮?
-7. 鍒ゆ柇褰撳墠浠诲姟浣嶄簬 L1 / L2 / L3 / L4 鍝竴灞?
-8. 缁欏嚭鎵ц椤哄簭銆佽竟鐣屽拰椋庨櫓鍒ゆ柇
-9. 濡傛灉鏄柊澧炴ā鍧楋紝鍒欒ˉ妯″潡绾ц鍒?
-10. 寤虹珛鏈€灏忛」鐩簨瀹炲湴鍥撅紝鏄庣‘椤圭洰鐩爣銆佹ā鍧楄惤鐐广€佸叆鍙ｆ枃浠朵笌鍏抽敭鍑芥暟 / 绫?
-11. 鎸夐€昏緫鍏ュ彛妫€鏌ユ竻鍗曞畬鎴愬惎鍔ㄥ墠鏍稿
+1. 识别项目文档主入口
+2. 确认项目目录下是否存在当前项目使用的 Agent 逻辑文件；若不存在，先询问逻辑入口位置
+3. 判断当前任务是否属于上一轮 coding 的延申
+4. 若不属于上一轮延申，必须先询问用户是否需要 `forget/compress context`；不得根据 Token 占用、模型、宿主或上下文长度静默跳过该决定
+5. 若要收缩上下文，先把当前有效状态回写到结构化载体
+6. 读取相关 md 与关键入口源码
+7. 判断当前任务位于 L1 / L2 / L3 / L4 哪一层
+8. 给出执行顺序、边界和风险判断
+9. 如果是新增模块，则补模块级规划
+10. 建立最小项目事实地图，明确项目目标、模块落点、入口文件与关键函数 / 类
+11. 按逻辑入口检查清单完成启动前核对
 
-- `AgentLogic_V6` 鍙兘浣滀负澶栨寕閫昏緫鑴戜笌瑙勫垯鍖呭瓨鍦紝涓嶅緱琚綋浣滀笟鍔￠」鐩伐浣滅洰褰曘€?
-- Agent 涓嶅緱鍦?V6 鐩綍涓嬪垱寤烘柊椤圭洰婧愮爜銆佹ā鍧楁枃浠躲€佷緷璧栧畨瑁呯粨鏋溿€佹瀯寤轰骇鐗┿€佹棩蹇楁垨娴嬭瘯鏉傞」銆?
-- 涓€鏃﹀彂鐜板綋鍓嶈矾寰勮惤鍦?V6 閫昏緫鍖呭唴锛岃€屼换鍔″張瑕佹眰鍒涘缓涓氬姟鏂囦欢锛屽繀椤诲厛鍒囨崲鍒扮嫭绔嬮」鐩洰褰曘€?
-- 杩涘叆鎵ц鍓嶅繀椤诲厛鍋氱洰褰曞璁★紝鐩綍瀹¤鏈€氳繃鏃讹紝涓嶅緱寮€濮嬪垵濮嬪寲銆佸啓鏂囦欢銆佽渚濊禆鎴栫敓鎴愭ā鍧椼€?
+- `AgentLogic_V6` 只能作为外挂逻辑脑与规则包存在，不得被当作业务项目工作目录。
+- Agent 不得在 V6 目录下创建新项目源码、模块文件、依赖安装结果、构建产物、日志或测试杂项。
+- 一旦发现当前路径落在 V6 逻辑包内，而任务又要求创建业务文件，必须先切换到独立项目目录。
+- 进入执行前必须先做目录审计，目录审计未通过时，不得开始初始化、写文件、装依赖或生成模块。
 
-## 4.1 涓婚€昏緫蹇呴』瀹屾暣闃呰
+## 4.1 主逻辑必须完整阅读
 
-- Agent 涓嶅緱鎶娾€滆杩囧墠鍑犳潯涓婚€昏緫鈥濊涓哄凡瀹屾垚鎺ュ叆銆?
-- 鍙湁鍦ㄥ畬鏁磋瀹屼富閫昏緫鍚庯紝鎵嶅彲瑙嗕负鐪熸瀹屾垚涓婚€昏緫鎺ュ叆銆?
-- 灏ゅ叾涓嶅緱鍑虹幇浠ヤ笅閿欒琛屼负锛?
-  - 鍙鍓嶉儴绔犺妭
-  - 鍙寜鍏抽敭璇嶅懡涓鍙?
-  - 鍥犱负鍓嶉潰宸叉湁鑻ュ共瑙勫垯锛屽氨蹇界暐鍚庨儴绔犺妭
-- 涓婚€昏緫鍚庨儴寰€寰€鍖呭惈锛?
-  - 绂佹浜嬮」
-  - 鎵撳寘瑙勫垯
-  - 椋庨櫓杈圭晫
-  - 鐗堟湰缁存姢瑙勫垯
-  - 鍥炲啓涓庡悓姝ヨ姹?
-- 杩欎簺鍐呭琚烦杩囧悗锛屽悗鏈熷啀鍥炴潵瀵归綈鐨勬垚鏈€氬父鏇撮珮銆?
+- Agent 不得把“读过前几条主逻辑”视为已完成接入。
+- 只有在完整读完主逻辑后，才可视为真正完成主逻辑接入。
+- 尤其不得出现以下错误行为：
+  - 只读前部章节
+  - 只按关键词命中读取
+  - 因为前面已有若干规则，就忽略后部章节
+- 主逻辑后部往往包含：
+  - 禁止事项
+  - 打包规则
+  - 风险边界
+  - 版本维护规则
+  - 回写与同步要求
+- 这些内容被跳过后，后期再回来对齐的成本通常更高。
 
-## 4.2 宸ュ叿涓?Skills 鐨勪富鍔ㄨ瘎浼拌姹?
+## 4.2 工具与 Skills 的主动评估要求
 
-- 褰?Agent 鏃犳硶纭畾褰撳墠浠诲姟鏈€閫傚悎浠€涔堝伐鍏锋垨 skills锛屾垨鑰呭彂鐜伴粯璁よ矾寰勬槑鏄句綆鏁堟椂锛屽繀椤讳富鍔ㄨ繘琛屽伐鍏疯瘎浼帮紝鑰屼笉鏄満姊版部鐢ㄦ棫璺緞銆?
-- 杩欑璇勪及鑷冲皯搴旇鐩栵細
-  - 鐜版湁宸ュ叿鏄惁鍙槸鈥滃媺寮鸿兘鐢ㄢ€?
-  - 鏄惁瀛樺湪鏇翠笓涓氥€佹洿楂樻晥銆佹洿绋冲畾鐨勫€欓€夊伐鍏?
-  - 鏇夸唬鏂规鏄惁鑳芥樉钁楁彁鍗囬槄璇汇€佹悳绱€佸垎绫绘垨鑷姩鍖栨晥鐜?
-- 鍏剁洰鐨勶紝鏄槻姝?Agent 鍥犱负鍙洴鐫€鎵嬪ご宸叉湁宸ュ叿鑰岄棴闂ㄩ€犺溅锛屽拷鐣ュ閮ㄥ凡缁忔洿鎴愮啛銆佹洿鍚堥€傜殑宸ュ叿銆?
+- 当 Agent 无法确定当前任务最适合什么工具或 skills，或者发现默认路径明显低效时，必须主动进行工具评估，而不是机械沿用旧路径。
+- 这种评估至少应覆盖：
+  - 现有工具是否只是“勉强能用”
+  - 是否存在更专业、更高效、更稳定的候选工具
+  - 替代方案是否能显著提升阅读、搜索、分类或自动化效率
+- 其目的，是防止 Agent 因为只盯着手头已有工具而闭门造车，忽略外部已经更成熟、更合适的工具。
 
-## 4.2.1 蹇呴』鍖哄垎鏂规硶灞備笌椤圭洰浜嬪疄灞?
+## 4.2.1 必须区分方法层与项目事实层
 
-- `AgentLogic_V6` 鏄柟娉曞眰銆佽鍒欏眰銆佽涓哄眰锛屼笉鏄叿浣撻」鐩殑涓氬姟璇存槑涔︺€?
-- 椤圭洰鑷韩 md 涓庢簮鐮侊紝鎵嶆槸涓氬姟浜嬪疄灞備笌瀹炵幇浜嬪疄灞傘€?
-- 鍥犳 Agent 蹇呴』锛?
-  - 鐢?V6 鍐冲畾濡備綍寮€濮嬮」鐩?
-  - 鐢ㄩ」鐩枃妗ｅ拰婧愮爜鍒ゆ柇椤圭洰鍒板簳鏄粈涔堛€佹ā鍧楀湪鍝噷銆佸嚱鏁板湪鍝噷
-- 涓嶅緱鎶?V6 鐨勬娊璞＄粡楠岀洿鎺ュ綋浣滃叿浣撻」鐩簨瀹炪€?
+- `AgentLogic_V6` 是方法层、规则层、行为层，不是具体项目的业务说明书。
+- 项目自身 md 与源码，才是业务事实层与实现事实层。
+- 因此 Agent 必须：
+  - 用 V6 决定如何开始项目
+  - 用项目文档和源码判断项目到底是什么、模块在哪里、函数在哪里
+- 不得把 V6 的抽象经验直接当作具体项目事实。
 
-## 4.2.2 椤圭洰寮€濮嬪墠蹇呴』纭閫昏緫鍏ュ彛
+## 4.2.2 项目开始前必须确认逻辑入口
 
-- Agent 閲嶆柊寮€濮嬮」鐩椂锛屼笉鑳藉彧璇婚」鐩富 md 鍚庡氨鐩存帴寮€宸ャ€?
-- 鍦ㄦ寮忓紑濮嬪墠锛屽繀椤荤‘璁ゅ綋鍓嶉」鐩娇鐢ㄧ殑 Agent 閫昏緫鏂囦欢鏄惁宸插畾浣嶃€?
-- 濡傛灉椤圭洰鐩綍鍐呮病鏈夌洿鎺ョ湅鍒伴€昏緫鏂囦欢锛屼笉寰楁搮鑷烦杩囷紝鑰屽簲鍏堣闂€昏緫鏂囦欢鍦ㄥ摢閲屻€?
-- 杩欓噷蹇呴』浣跨敤鐗堟湰鏃犲叧琛ㄨ揪锛屽洜涓洪€昏緫鍏ュ彛鍙兘涓嶆槸 `V6`锛屼篃鍙兘鏄悗缁柊鐗堟湰銆?
+- Agent 重新开始项目时，不能只读项目主 md 后就直接开工。
+- 在正式开始前，必须确认当前项目使用的 Agent 逻辑文件是否已定位。
+- 如果项目目录内没有直接看到逻辑文件，不得擅自跳过，而应先询问逻辑文件在哪里。
+- 这里必须使用版本无关表达，因为逻辑入口可能不是 `V6`，也可能是后续新版本。
 
-## 4.2.3 椤圭洰浜嬪疄鍦板浘涓庨€昏緫鍏ュ彛娓呭崟搴旀ā鏉垮寲
+## 4.2.3 项目事实地图与逻辑入口清单应模板化
 
-- 椤圭洰浜嬪疄鍦板浘涓嶅簲姣忔浠庨浂缁勭粐锛屽缓璁寜鍥哄畾妯℃澘杈撳嚭銆?
-- 閫昏緫鍏ュ彛妫€鏌ヤ篃涓嶅簲闈犺蹇嗘墽琛岋紝寤鸿鎸夊浐瀹氭竻鍗曟牳瀵广€?
-- 杩欐牱鍋氱殑鐩殑锛屾槸闄嶄綆涓嶅悓 Agent銆佷笉鍚岃疆娆°€佷笉鍚岄」鐩箣闂寸殑鎺ュ叆婕傜Щ銆?
-- 鑻ラ€昏緫鍖呬腑宸叉彁渚涙爣鍑嗘ā鏉夸笌鏍囧噯娓呭崟锛岄粯璁ゅ簲浼樺厛鐩存帴澶嶇敤銆?
+- 项目事实地图不应每次从零组织，建议按固定模板输出。
+- 逻辑入口检查也不应靠记忆执行，建议按固定清单核对。
+- 这样做的目的，是降低不同 Agent、不同轮次、不同项目之间的接入漂移。
+- 若逻辑包中已提供标准模板与标准清单，默认应优先直接复用。
 
-## 4.2.4 浠撳簱绾х‖绾︽潫鎺ㄨ崘钀界偣
+## 4.2.4 仓库级硬约束推荐落点
 
-- 濡傛灉椤圭洰甯屾湜鎶婇€昏緫鍏ュ彛浠庘€滄枃妗ｈ鑼冣€濆崌绾т负鈥滃伐绋嬬骇绾︽潫鈥濓紝鑷冲皯搴旇ˉ浠ヤ笅涓夊眰锛?
-  - 浠撳簱涓绘枃妗ｅ０鏄庨€昏緫鍏ュ彛涓庢鏌ュ懡浠?
-  - 鎵€鏈夌湡瀹炲叆鍙?/ 璧锋墜婧愮爜鏂囦欢椤堕儴淇濈暀浣庡櫔澹版彁閱?
-  - 浠撳簱鎻愪緵鍙墽琛岃剼鏈鏌ヨ繖浜涙彁閱掓槸鍚︿粛瀛樺湪
-- 杩欑妫€鏌ヨ剼鏈殑鐩爣涓嶆槸鏇夸唬涓婚€昏緫闃呰锛岃€屾槸闃叉椤圭洰鍦ㄥ杞敼鍔ㄥ悗鎶婇€昏緫鍏ュ彛鎻愰啋鎮勬倓鍒犳帀銆?
-- 杩欓噷鐨勨€滃叆鍙?/ 璧锋墜婧愮爜鏂囦欢鈥濋粯璁や笉鍐嶅彧鎸囧皯鏁板叧閿叆鍙ｏ紝鑰屾槸鎸?Agent 寰堝彲鑳戒粠閭ｉ噷寮€濮嬮槄璇汇€佷慨鏀规垨瀹炴柦鐨勭湡瀹炰唬鐮佸叆鍙ｏ紱宸ュ叿鍑芥暟銆佸彾瀛愮粍浠跺拰闈炲叆鍙ｅ疄鐜版枃浠朵笉搴旇鏈烘绾冲叆銆?
-- 鎺ㄨ崘鍛戒护褰㈡€佺ず渚嬶細
+- 如果项目希望把逻辑入口从“文档规范”升级为“工程级约束”，至少应补以下三层：
+  - 仓库主文档声明逻辑入口与检查命令
+  - 所有真实入口 / 起手源码文件顶部保留低噪声提醒
+  - 仓库提供可执行脚本检查这些提醒是否仍存在
+- 这种检查脚本的目标不是替代主逻辑阅读，而是防止项目在多轮改动后把逻辑入口提醒悄悄删掉。
+- 这里的“入口 / 起手源码文件”默认不再只指少数关键入口，而是指 Agent 很可能从那里开始阅读、修改或实施的真实代码入口；工具函数、叶子组件和非入口实现文件不应被机械纳入。
+- 推荐命令形态示例：
   - `node scripts/check-logic-entry.js`
-- 鍙湁鍏峰杩欎笁灞傚悗锛岄€昏緫鍏ュ彛绾︽潫鎵嶅紑濮嬩粠鈥滆鑼冪骇鈥濆悜鈥滃伐绋嬬骇鈥濊繃娓°€?
+- 只有具备这三层后，逻辑入口约束才开始从“规范级”向“工程级”过渡。
 
 ## 4.2.5 Real Entry / Starting Source Files Must Carry the Mandatory Logic Gate
 
@@ -1319,38 +1319,38 @@ Agent 鑷冲皯蹇呴』瀹屾垚锛?
 
 - Repositories should back this requirement with a mechanical validation script so that real entry / starting source files can be checked for gate presence and integrity.
 
-## 4.2.4.1 鏂囦欢澶村己鍒惰鍒欓粯璁や娇鐢ㄨ嫳鏂?
+## 4.2.4.1 文件头强制规则默认使用英文
 
-- 濡傛灉椤圭洰鎶婂己鍒惰鍒欏啓鍏ユ枃浠跺ご閮紝杩欎簺澶撮儴瑙勫垯榛樿蹇呴』浣跨敤鑻辨枃銆?
-- 璇ヨ姹傞€傜敤浜庯細
-  - 婧愮爜鏂囦欢澶撮儴
-  - 鏍峰紡鏂囦欢澶撮儴
-  - 鏍囪鏂囦欢澶撮儴
-  - 椤圭洰 markdown 鏂囦欢澶撮儴
-- 鐩殑涓嶆槸璇█鍋忓ソ锛岃€屾槸淇濊瘉璺?Agent銆佽法璇█鐜銆佽法妯″瀷鎻愪緵鏂规椂鐨勭ǔ瀹氫竴鑷存€с€?
-- 椤圭洰姝ｆ枃瑙ｉ噴鍙互缁х画浣跨敤鏈湴璇█锛屼絾鏂囦欢澶撮儴鐨勭煭寮哄埗瑙勫垯榛樿浣跨敤鑻辨枃銆?
-- 鑻ラ」鐩凡鎻愪緵浠撳簱绾ф鏌ヨ剼鏈紝鍒欒鑴氭湰涔熷簲鎸夎嫳鏂囨枃鏈繘琛屾牎楠屻€?
+- 如果项目把强制规则写入文件头部，这些头部规则默认必须使用英文。
+- 该要求适用于：
+  - 源码文件头部
+  - 样式文件头部
+  - 标记文件头部
+  - 项目 markdown 文件头部
+- 目的不是语言偏好，而是保证跨 Agent、跨语言环境、跨模型提供方时的稳定一致性。
+- 项目正文解释可以继续使用本地语言，但文件头部的短强制规则默认使用英文。
+- 若项目已提供仓库级检查脚本，则该脚本也应按英文文本进行校验。
 
-## 4.2.5 涓婁笅鏂囬噸缃彁闂睘浜庢渶楂樹紭鍏堝己鍒惰鍒?
+## 4.2.5 上下文重置提问属于最高优先强制规则
 
-- 鈥滃鏋滃綋鍓嶆柊浠诲姟涓嶆槸涓婁竴杞?coding 鐨勫欢鐢筹紝鍒欏繀椤诲厛璇㈤棶鏄惁闇€瑕?`forget/compress context`鈥?杩欐潯瑙勫垯锛屼紭鍏堢骇蹇呴』涓庘€滅‘璁ら€昏緫鍏ュ彛鈥濃€滃垽鏂槸鍚﹀睘浜庝笂涓€杞欢鐢斥€濈浉鍚屻€?
-- 瀹冧笉鏄缓璁」锛屼篃涓嶆槸涓婁笅鏂囪繃闀挎椂鎵嶄复鏃惰€冭檻鐨勮ˉ鍏呴」銆?
-- 姝ｇ‘椤哄簭蹇呴』鍥哄畾涓猴細
-  1. 鍏堢‘璁ら€昏緫鍏ュ彛
-  2. 鍐嶅垽鏂槸鍚﹀睘浜庝笂涓€杞欢鐢?
-  3. 鑻ヤ笉鏄欢鐢筹紝蹇呴』鍏堣闂槸鍚﹂渶瑕?`forget/compress context`锛涗笉寰楄缃?Token 闃堝€间緥澶栨垨闈欓粯璺宠繃璇ュ喅瀹?
-- 鑻ョ 3 姝ユ湭瀹屾垚涓旀湭婊¤冻蹇界暐鏉′欢锛屼笉寰楃洿鎺ヨ繘鍏ユ寮忓疄鐜般€?
-- 鑻ョ敤鎴风‘璁ら渶瑕佹敹缂╀笂涓嬫枃锛孉gent 蹇呴』鍏堝洖鍐欑粨鏋勫寲鐘舵€侊紝鍐嶅噺灏戝伐浣滀笂涓嬫枃銆?
+- “如果当前新任务不是上一轮 coding 的延申，则必须先询问是否需要 `forget/compress context`” 这条规则，优先级必须与“确认逻辑入口”“判断是否属于上一轮延申”相同。
+- 它不是建议项，也不是上下文过长时才临时考虑的补充项。
+- 正确顺序必须固定为：
+  1. 先确认逻辑入口
+  2. 再判断是否属于上一轮延申
+  3. 若不是延申，必须先询问是否需要 `forget/compress context`；不得设置 Token 阈值例外或静默跳过该决定
+- 若第 3 步未完成且未满足忽略条件，不得直接进入正式实现。
+- 若用户确认需要收缩上下文，Agent 必须先回写结构化状态，再减少工作上下文。
 
-## 4.3 澶栭儴鏇翠紭宸ュ叿鐨勬彁鍑轰箟鍔?
+## 4.3 外部更优工具的提出义务
 
-- 褰?Agent 鍦ㄩ」鐩紑濮嬮樁娈点€佹ā鍧楄鍒掗樁娈垫垨娴佺▼璁捐闃舵鍙戠幇澶栭儴宸叉湁鏇村悎閫傜殑宸ュ叿銆乻kills 鎴栬嚜鍔ㄥ寲缁勪欢鏃讹紝搴斾富鍔ㄦ彁鍑恒€?
-- 浣嗘彁鍑烘椂蹇呴』鏄庣‘鍖哄垎锛?
-  - 鎺ㄨ崘椤?
-  - 鍊欓€夊寮洪」
-  - 宸叉寮忛泦鎴愰」
-- 鏈粡纭锛屼笉寰楁妸鍊欓€夊伐鍏锋弿杩版垚褰撳墠椤圭洰鐨勬寮忚兘鍔涖€?
-- 榛樿宸ュ叿浣庢晥鏃讹紝Agent 搴斾富鍔ㄥ鎵炬洿閫傚悎褰撳墠浠诲姟鐨勫伐鍏锋垨鏂规锛屼絾蹇呴』鍖哄垎姝ｅ紡鑳藉姏涓庡€欓€夊寮恒€?
+- 当 Agent 在项目开始阶段、模块规划阶段或流程设计阶段发现外部已有更合适的工具、skills 或自动化组件时，应主动提出。
+- 但提出时必须明确区分：
+  - 推荐项
+  - 候选增强项
+  - 已正式集成项
+- 未经确认，不得把候选工具描述成当前项目的正式能力。
+- 默认工具低效时，Agent 应主动寻找更适合当前任务的工具或方案，但必须区分正式能力与候选增强。
 
 ## 4.3.1 Mandatory Tool Verification Must Not Be Skipped
 
@@ -1401,40 +1401,40 @@ Agent 鑷冲皯蹇呴』瀹屾垚锛?
 - A skill use does not replace normal verification obligations. It only provides the strongest operational route when the task matches.
 - Use `modules/35_V6_5_SkillGovernanceAndMandatoryUse.md` for the current deduplication policy, archive posture, and mandatory-skill map.
 
-## 4.4 閿欒涓庣粡楠屽綊妗ｅ悓姝ヨ鍒?(Error Logging & Sync Protocol)
+## 4.4 错误与经验归档同步规则 (Error Logging & Sync Protocol)
 
 > [!IMPORTANT]
-> **銆愰潪璋堝垽鎬ч樆鏂棬妲?(Non-Negotiable Blocking Gate)銆?*
-> 鏈妭鎵€杩颁箣鈥滅姱閿欒褰曟媺鍙栥€佹绱€佸綊妗ｄ笌鍚屾鈥濆睘浜庢湰閫昏緫鍖呯殑**寮哄埗蹇呰姝ラ锛堝繀瑕佹楠わ級**銆傚湪鍏嬮殕椤圭洰銆佸惎鍔ㄥ紑鍙戞垨鎺ㄩ€佷唬鐮佹椂锛屼换浣曡烦杩囥€佺簿绠€鎴栧拷鐣ユ湰鍚屾鍗忚鐨勮涓猴紝鍧囪瑙嗕负涓ラ噸杩濊锛屼細瀵艰嚧鏈疆浜や粯瀹¤鐩存帴鍒ゅ畾澶辫触銆?
+> **【非谈判性阻断门槛 (Non-Negotiable Blocking Gate)】**
+> 本节所述之“犯错记录拉取、检索、归档与同步”属于本逻辑包的**强制必要步骤（必要步骤）**。在克隆项目、启动开发或推送代码时，任何跳过、精简或忽略本同步协议的行为，均被视为严重违规，会导致本轮交付审计直接判定失败。
 
-涓烘瀯寤鸿法椤圭洰銆佽法浼氳瘽鐨勫叡浜煡璇嗗簱锛岄槻鑼?AI 鍔╂墜鈥滀細璇濈粨鏉熷嵆澶卞繂鈥濈殑灞€闄愭€э紝鏈郴缁熷己鍒跺紩鍏?GitHub 鍏变韩鐘敊璁板綍浠撳簱鏈哄埗銆?
+为构建跨项目、跨会话的共享知识库，防范 AI 助手“会话结束即失忆”的局限性，本系统强制引入 GitHub 共享犯错记录仓库机制。
 
-- **鍏变韩浠撳簱鍦板潃**锛歚https://github.com/UIhoshi/modification_history`
-- **鏈湴鏄犲皠璺緞**锛氶粯璁や娇鐢ㄥ綋鍓嶉」鐩埗鐩綍涓嬬殑 `modification_history`锛涘鏈湴甯冨眬涓嶅悓锛屼娇鐢ㄦ樉寮忛厤缃殑缁濆璺緞鎴栫幆澧冨彉閲忥紝涓嶅緱鎶婃煇鍙版満鍣ㄧ殑鐢ㄦ埛鐩綍鍐欏叆瑙勫垯鏂囦欢
-- **褰掓。鏍煎紡**锛氬湪鍏变韩浠撳簱涓嬶紝浠ラ」鐩悕绉板缓绔嬪瓙鏂囦欢澶癸紙渚嬪 `/CanvasTab/`锛夛紝鍦ㄦ瀛愭枃浠跺す涓嬪啓鍏?Markdown 鏍煎紡鐨勪慨鏀逛笌淇鏃ュ織锛堝 `modification_history.md`锛夈€?
+- **共享仓库地址**：`https://github.com/UIhoshi/modification_history`
+- **本地映射路径**：默认使用当前项目父目录下的 `modification_history`；如本地布局不同，使用显式配置的绝对路径或环境变量，不得把某台机器的用户目录写入规则文件
+- **归档格式**：在共享仓库下，以项目名称建立子文件夹（例如 `/CanvasTab/`），在此子文件夹下写入 Markdown 格式的修改与修复日志（如 `modification_history.md`）。
 
-### 4.4.1 寮哄埗鍚屾鏃舵満涓庡弻閲嶆帹閫?
-- **閫昏緫鏇存柊鏃?*锛氭瘡褰撳 `AgentLogic` 瑙勫垯閫昏緫杩涜鏇存柊鎴栬绔犲崌绾ф椂锛屽繀椤诲悓姝ュ湪 `modification_history` 浠撳簱涓綊妗ｉ敊璇儗鏅€?
-- **椤圭洰浠ｇ爜鎺ㄩ€佹椂**锛氭瘡娆″皢浠讳綍涓氬姟椤圭洰浠ｇ爜锛堝 `CanvasTab`锛夋帹閫佸埌 GitHub 杩滅▼浠撳簱涔嬪墠锛?*蹇呴』**鍚屾鎵ц淇敼/鐘敊璁板綍鐨勭紪鍐欙紝骞剁巼鍏堝皢鐘敊璁板綍鎺ㄩ€佸埌 `modification_history` 浠撳簱銆?
+### 4.4.1 强制同步时机与双重推送
+- **逻辑更新时**：每当对 `AgentLogic` 规则逻辑进行更新或规章升级时，必须同步在 `modification_history` 仓库中归档错误背景。
+- **项目代码推送时**：每次将任何业务项目代码（如 `CanvasTab`）推送到 GitHub 远程仓库之前，**必须**同步执行修改/犯错记录的编写，并率先将犯错记录推送到 `modification_history` 仓库。
 
-### 4.4.2 鍚姩鍓嶆绱箟鍔?
-- **鍏堥獙妫€绱?*锛氬湪杩涘叆浠讳綍鏂伴」鐩垨鎺ユ墜鏂颁换鍔¤繘琛?Startup Gate 鏍￠獙鏃讹紝闄や簡闃呰椤圭洰鏂囨。锛?*蹇呴』**鍏堟媺鍙?`modification_history` 浠撳簱鐨勬渶鏂?commit锛屾绱㈠綋鍓嶉」鐩垨鐩镐技鍦烘櫙鐨勫巻鍙叉姤閿欙紝灏嗗叾浣滀负缂栫爜鍓嶇殑閬垮潙鍏堥獙鐭ヨ瘑銆?
+### 4.4.2 启动前检索义务
+- **先验检索**：在进入任何新项目或接手新任务进行 Startup Gate 校验时，除了阅读项目文档，**必须**先拉取 `modification_history` 仓库的最新 commit，检索当前项目或相似场景的历史报错，将其作为编码前的避坑先验知识。
 
-### 4.4.3 鍏嬮殕涓庨」鐩垵濮嬪寲鍚屾 (Clone & Project Initialization Sync)
-- **鎷夊彇涓庢槧灏?*锛氬綋 Agent 棣栨浠?GitHub 鍏嬮殕涓€涓柊涓氬姟浠撳簱锛堝 `git clone <URL>`锛夋垨鑰呭垵濮嬪寲涓€涓柊椤圭洰宸ヤ綔鍖烘椂锛?*蹇呴』**鍚屾灏?[modification_history](https://github.com/UIhoshi/modification_history) 浠撳簱鍏嬮殕鎴栨媺鍙栧埌鏈湴宸ヤ綔鍖虹殑鍚岀骇鐩綍涓嬨€?
-- **鏈湴鍘嗗彶鎷夊彇**锛欰gent 蹇呴』浠?`modification_history` 浠撳簱鐨勫搴旈」鐩瓙鏂囦欢澶癸紙濡?`/CanvasTab/`锛変腑澶嶅埗鎴栬浇鍏ュ巻鍙蹭慨鏀逛笌鐘敊鏃ュ織锛屽皢鍏剁紦瀛樿嚦褰撳墠椤圭洰鐨勫伐浣滃尯涓嬶紙濡?`.specify/history/` 鐩綍鎴栭」鐩牴鐩綍涓嬶級锛屼綔涓烘湰娆″強鍚庣画鐢熷懡鍛ㄦ湡寮€鍙戠殑閲嶈浜嬪疄鍜岄伩鍧戜緷鎹€?
+### 4.4.3 克隆与项目初始化同步 (Clone & Project Initialization Sync)
+- **拉取与映射**：当 Agent 首次从 GitHub 克隆一个新业务仓库（如 `git clone <URL>`）或者初始化一个新项目工作区时，**必须**同步将 [modification_history](https://github.com/UIhoshi/modification_history) 仓库克隆或拉取到本地工作区的同级目录下。
+- **本地历史拉取**：Agent 必须从 `modification_history` 仓库的对应项目子文件夹（如 `/CanvasTab/`）中复制或载入历史修改与犯错日志，将其缓存至当前项目的工作区下（如 `.specify/history/` 目录或项目根目录下），作为本次及后续生命周期开发的重要事实和避坑依据。
 
-## 5. 涓轰粈涔堣繖鏄己鍒惰姹?
+## 5. 为什么这是强制要求
 
-- 涓嶅悓 Agent 杩涘叆椤圭洰鏃舵渶瀹规槗鍑洪敊鐨勫湴鏂癸紝涓嶆槸鑳藉姏涓嶅锛岃€屾槸鍏ュ彛涓嶄竴鑷淬€?
-- 涓婚€昏緫鐨勪綔鐢ㄥ氨鏄妸鍏ュ彛缁熶竴銆佸眰绾х粺涓€銆侀獙璇佹柟寮忕粺涓€銆佹枃妗ｅ洖鍐欑粺涓€銆?
-- 鍙杩欎釜鍏ュ彛涓€鑷达紝閿欒鐜囥€佽寖鍥存紓绉诲拰灞€閮ㄦ渶浼樹慨澶嶉兘浼氭槑鏄句笅闄嶃€?
+- 不同 Agent 进入项目时最容易出错的地方，不是能力不够，而是入口不一致。
+- 主逻辑的作用就是把入口统一、层级统一、验证方式统一、文档回写统一。
+- 只要这个入口一致，错误率、范围漂移和局部最优修复都会明显下降。
 
-## 6. 瀹為檯浣跨敤瑕佹眰
+## 6. 实际使用要求
 
-- 姣忔鏂伴」鐩紑濮嬫椂锛屼紭鍏堣 `AgentLogic_V6_8_1.md`
-- 姣忔椤圭洰绾х淮鎶ゆ椂锛屽啀缁撳悎鏈寘涓殑鍒嗗眰鏂囨。涓庡師濮嬪眰鐩綍
-- 濡傛灉鍚庣画鏂板鏇村噯纭殑瑙勫垯锛屽簲鍏堝洖鍐?`AgentLogic_V6_8_1.md`锛屽啀鍚屾鏈€昏緫鍖?
+- 每次新项目开始时，优先读 `AgentLogic_V6_8_1.md`
+- 每次项目级维护时，再结合本包中的分层文档与原始层目录
+- 如果后续新增更准确的规则，应先回写 `AgentLogic_V6_8_1.md`，再同步本逻辑包
 
 ## END FILE: modules/12_AgentEnforcement.md
 
@@ -1856,72 +1856,72 @@ This stack should be treated as the default engineering baseline, not a special-
 
 # Logic Entry Checklist
 
-鏈枃浠舵槸閫昏緫鍏ュ彛妫€鏌ユ竻鍗曟爣鍑嗘ā鏉裤€?
+本文件是逻辑入口检查清单标准模板。
 
-鐢ㄩ€旓細
+用途：
 
-- 鍦ㄦ寮忓紑濮嬮」鐩箣鍓嶏紝鐢ㄥ畠鏍稿鈥滈€昏緫鍏ュ彛鏄惁宸茬粡纭鈥濄€?
-- 瀹冪敤浜庨槻姝?Agent 鐩存帴寮€宸ヨ€屾病鏈夌‘璁ら€昏緫鏂囦欢銆侀€昏緫鍖呬綅缃垨鐩綍杈圭晫銆?
+- 在正式开始项目之前，用它核对“逻辑入口是否已经确认”。
+- 它用于防止 Agent 直接开工而没有确认逻辑文件、逻辑包位置或目录边界。
 
-浣跨敤瑙勫垯锛?
+使用规则：
 
-- 搴斿湪椤圭洰姝ｅ紡鎺ュ叆鍓嶅畬鎴愩€?
-- 鑻ヤ换涓€鍏抽敭椤规湭閫氳繃锛屼笉搴旇繘鍏ュ疄鐜扮姸鎬併€?
-- 杩欎唤娓呭崟浣跨敤鐗堟湰鏃犲叧琛ㄨ揪锛屼笉渚濊禆鍥哄畾鐗堟湰鍚嶃€?
+- 应在项目正式接入前完成。
+- 若任一关键项未通过，不应进入实现状态。
+- 这份清单使用版本无关表达，不依赖固定版本名。
 
 ---
 
-## 1. 涓绘枃妗ｅ畾浣?
+## 1. 主文档定位
 
-- [ ] 宸插畾浣嶉」鐩富 README / 涓?md
-- [ ] 宸茬‘璁ら」鐩枃妗ｄ富鍏ュ彛
-- [ ] 宸茬‘璁ゅ綋鍓嶆枃妗ｅ叆鍙ｄ笉鏄繃鏈熸垨鏃佹敮鏂囨。
+- [ ] 已定位项目主 README / 主 md
+- [ ] 已确认项目文档主入口
+- [ ] 已确认当前文档入口不是过期或旁支文档
 
-## 2. 閫昏緫鍏ュ彛瀹氫綅
+## 2. 逻辑入口定位
 
-- [ ] 宸叉鏌ュ綋鍓嶉」鐩洰褰曚笅鏄惁瀛樺湪 Agent 閫昏緫鏂囦欢
-- [ ] 鑻ラ」鐩洰褰曞唴涓嶅瓨鍦ㄩ€昏緫鏂囦欢锛屽凡璇㈤棶閫昏緫鏂囦欢鍦ㄥ摢閲?
-- [ ] 宸茬‘璁ゅ綋鍓嶉」鐩簲鎺ュ叆鍝竴浠介€昏緫鍏ュ彛
-- [ ] 娌℃湁鍥犱负鏃х増鏈悕涔犳儻鑰岀洿鎺ュ亣璁鹃€昏緫鏂囦欢鍚?
+- [ ] 已检查当前项目目录下是否存在 Agent 逻辑文件
+- [ ] 若项目目录内不存在逻辑文件，已询问逻辑文件在哪里
+- [ ] 已确认当前项目应接入哪一份逻辑入口
+- [ ] 没有因为旧版本名习惯而直接假设逻辑文件名
 
-## 3. 閫昏緫鍏ュ彛褰掑睘鍒ゆ柇
+## 3. 逻辑入口归属判断
 
-- [ ] 宸茬‘璁ら€昏緫鍏ュ彛灞炰簬浠撳簱鍐呮枃浠惰繕鏄閮ㄩ€昏緫鍖?
-- [ ] 鑻ュ睘浜庡閮ㄩ€昏緫鍖咃紝宸茬‘璁ゆ寕鎺ヤ綅缃?
-- [ ] 鑻ュ睘浜庝粨搴撳唴鏂囦欢锛屽凡纭鍏蜂綋璺緞
+- [ ] 已确认逻辑入口属于仓库内文件还是外部逻辑包
+- [ ] 若属于外部逻辑包，已确认挂接位置
+- [ ] 若属于仓库内文件，已确认具体路径
 
-## 4. 鐩綍涓庢墽琛岃竟鐣?
+## 4. 目录与执行边界
 
-- [ ] 宸插畬鎴愮洰褰曞璁?
-- [ ] 宸茬‘璁ゅ綋鍓嶇洰褰曚笉鏄€昏緫鍖呭伐浣滅洰褰?
-- [ ] 鑻ヤ换鍔￠渶瑕佸垱寤轰笟鍔℃枃浠讹紝宸插垏鎹㈠埌鐙珛椤圭洰鐩綍
-- [ ] 纭鎵ц鍛戒护鏃剁殑 Cwd 鏄惁姝ｇ‘澶勪簬宸ヤ綔鍖烘牴鐩綍锛屼互闃叉璇垹闄?璇鐩?
+- [ ] 已完成目录审计
+- [ ] 已确认当前目录不是逻辑包工作目录
+- [ ] 若任务需要创建业务文件，已切换到独立项目目录
+- [ ] 确认执行命令时的 Cwd 是否正确处于工作区根目录，以防止误删除/误覆盖
 
-## 5. 涓婁笅鏂囧欢鐢充笌閲嶇疆鍒ゆ柇
+## 5. 上下文延申与重置判断
 
 - [ ] Current task is explicitly classified as an extension of the previous implementation round or as a new coding round.
 - [ ] If it is not an extension, the user was explicitly asked whether to `forget/compress context` before continuing.
 - [ ] If the user explicitly authorizes continuous execution, that authorization is recorded for the current task scope.
-- [ ] 鑻ラ渶瑕佹敹缂╀笂涓嬫枃锛屽凡鍏堝洖鍐欑粨鏋勫寲鐘舵€侊紝鍐嶅噺灏戝伐浣滀笂涓嬫枃
+- [ ] 若需要收缩上下文，已先回写结构化状态，再减少工作上下文
 
-## 6. 寮€濮嬮」鐩墠鐨勬渶缁堢粨璁?
+## 6. 开始项目前的最终结论
 
-- [ ] 宸插畬鎴愪富閫昏緫鎺ュ叆
-- [ ] 宸插畬鎴愰€昏緫鍏ュ彛纭
-- [ ] 鑻ユ娴嬪埌鏈湴涓婚€昏緫鏂囦欢鏈夊彉鏇达紝宸茶繍琛?scripts/validate-package.ps1 杩涜涓€鑷存€ч獙璇?
-- [ ] 宸插畬鎴愪笂涓嬫枃寤剁敵鍒ゆ柇涓庡繀瑕佺殑涓婁笅鏂囬噸缃彁闂紙鎴栨弧瓒抽潤榛樺拷鐣ユ潯浠讹級
-- [ ] 宸插缓绔嬮」鐩簨瀹炲湴鍥?
-- [ ] 鑻ラ」鐩凡鎻愪緵浠撳簱绾ч€昏緫鍏ュ彛鏍￠獙鑴氭湰锛屽凡瀹為檯杩愯锛堜緥濡傦細`node scripts/check-logic-entry.js`锛?
-- [ ] 褰撳墠鍙互杩涘叆姝ｅ紡瑙勫垝 / 瀹炵幇 / 楠岃瘉闃舵
+- [ ] 已完成主逻辑接入
+- [ ] 已完成逻辑入口确认
+- [ ] 若检测到本地主逻辑文件有变更，已运行 scripts/validate-package.ps1 进行一致性验证
+- [ ] 已完成上下文延申判断与必要的上下文重置提问（或满足静默忽略条件）
+- [ ] 已建立项目事实地图
+- [ ] 若项目已提供仓库级逻辑入口校验脚本，已实际运行（例如：`node scripts/check-logic-entry.js`）
+- [ ] 当前可以进入正式规划 / 实现 / 验证阶段
 
-## 7. 鏈€氳繃鏃剁殑榛樿鍔ㄤ綔
+## 7. 未通过时的默认动作
 
-- 鑻ョ 1-5 鑺備换涓€椤规湭閫氳繃锛岄粯璁ゅ姩浣滃簲涓猴細
-  - 鍋滄杩涘叆瀹炵幇
-  - 鍏堣ˉ閫昏緫鍏ュ彛纭
-  - 鍏堣ˉ涓婁笅鏂囧欢鐢冲垽鏂垨涓婁笅鏂囬噸缃彁闂?
-  - 鍏堣ˉ鐩綍瀹¤
-  - 鍏堣ˉ椤圭洰浜嬪疄鍦板浘
+- 若第 1-5 节任一项未通过，默认动作应为：
+  - 停止进入实现
+  - 先补逻辑入口确认
+  - 先补上下文延申判断或上下文重置提问
+  - 先补目录审计
+  - 先补项目事实地图
 
 
 ## 8. Continuous Execution Authorization Checks
@@ -4463,7 +4463,7 @@ Context assembly should expose an instruction map containing source, scope, load
 # V6.5 Stable Module: Background Consolidation and Idle Lifecycle
 
 Status: stable V6.5 module.
-This module defines the "Dream Phase" 鈥?how an agent should act when a primary task is complete or during idle time.
+This module defines the "Dream Phase" – how an agent should act when a primary task is complete or during idle time.
 
 ---
 
@@ -5112,9 +5112,9 @@ When starting a project or introducing a feature, refactor, multi-file behavior 
    - *Requirement*: The plan must be saved in `.specify/plan.md`.
    - *Architectural Decisions*: If the plan involves hard-to-reverse trade-offs, they must be documented in a numbered ADR under `docs/adr/` (see `modules/43_V6_7_MattPocockSkillsIntegration.md`).
 4. **Red-Team Gate** *(mandatory)*: Attack the plan's load-bearing assumptions before committing to tasks.
-   - *Requirement*: The Agent MUST identify the load-bearing claims in `.specify/plan.md` 鈥?the assumptions that, if false, would cause the plan to fail.
-   - *Method*: For each load-bearing claim: (a) Steelman 鈥?state the strongest version of why it might be true. (b) Attack 鈥?attack that steelmanned version, not a strawman. (c) Write each failure mode as "Fails if ___." 鈥?concrete and falsifiable.
-   - *Ranking*: Rank failure modes by `(impact if wrong) 脳 (likelihood wrong) 脳 (cheapness to test)`. The top items are what to address *before* entering the Tasks phase.
+   - *Requirement*: The Agent MUST identify the load-bearing claims in `.specify/plan.md` — the assumptions that, if false, would cause the plan to fail.
+   - *Method*: For each load-bearing claim: (a) Steelman — state the strongest version of why it might be true. (b) Attack — attack that steelmanned version, not a strawman. (c) Write each failure mode as "Fails if ___." — concrete and falsifiable.
+   - *Ranking*: Rank failure modes by `(impact if wrong) × (likelihood wrong) × (cheapness to test)`. The top items are what to address *before* entering the Tasks phase.
    - *Output*: Append a "Red-Team Results" section to `.specify/plan.md` with the ranked attack results. If any top-ranked failure mode lacks a mitigation or test, the plan MUST be revised before proceeding.
    - *Skip Condition*: The Red-Team Gate may be skipped ONLY for trivial bug fixes or documentation-only changes where no architectural assumptions exist.
 5. **Tasks Phase**: Translate the plan into a checklist of granular, actionable tasks.
@@ -5192,7 +5192,7 @@ For redesigns or visual upgrades of existing projects, follow this checklist:
 
 ## 3.1 Visual Prototyping Gate (Design First Protocol)
 
-Before any formal UI implementation鈥攏ew or existing layout, app screen, web page, component, or visual design change鈥攖he Agent MUST NOT write production HTML/CSS/JS/UI code directly. Instead, follow this mandatory visual prototyping gate. The only bypass is an explicit user instruction not to use the preview step:
+Before any formal UI implementation—new or existing layout, app screen, web page, component, or visual design change—the Agent MUST NOT write production HTML/CSS/JS/UI code directly. Instead, follow this mandatory visual prototyping gate. The only bypass is an explicit user instruction not to use the preview step:
 
 1. **Prompt Formulation**: Formulate a highly detailed visual layout and style prompt based on the user's requirements (specifying typography, layout variance dials, HSL color palette, and visual density).
 2. **Prototyping**: Invoke the text-to-image generation tool to generate a visual mockup / design image of the proposed UI.
@@ -5319,7 +5319,7 @@ Every reviewable application or release surface **MUST** produce these five docu
 | Artifact File | Purpose | Required Contents |
 | :--- | :--- | :--- |
 | **`architecture.md`** | What the system is and how it connects | Product overview, tech stack, auth/session flow, trust boundaries, **Known risks / assumptions** list (each entry citing where it shows up in the code), and a "Related Documents" index linking to every other shipping doc. This is the root document. |
-| **`flows.md`** | Runtime view of who does what, when, and in what order | Each load-bearing flow as: actor 鈫?precondition 鈫?success outcome. Step-by-step sequence across UI 鈫?server 鈫?data 鈫?jobs 鈫?providers 鈫?agents. The **authz check at each protected step** (which claim/role/scope, on which resource, and the expected *deny* case). The **trust-boundary crossings** at each step (see 搂5). State changes and side effects each step causes. |
+| **`flows.md`** | Runtime view of who does what, when, and in what order | Each load-bearing flow as: actor → precondition → success outcome. Step-by-step sequence across UI → server → data → jobs → providers → agents. The **authz check at each protected step** (which claim/role/scope, on which resource, and the expected *deny* case). The **trust-boundary crossings** at each step (see §5). State changes and side effects each step causes. |
 | **`permissions.md`** | Static declaration of access rules | User role matrices, RBAC/policy declarations, endpoint access rules, resource-level permission grants. This is the *declared* view; `flows.md` is the *runtime* view. Reviewers compare the two. |
 | **`variables.md`** | Environment variable and secret registry | Environment variable registries, third-party API configurations, strict validation rules, zero-hardcoded-credentials verification. |
 | **`tests.md`** | Derived verification map | **NOT** an inventory of existing tests. This document is **derived from** `architecture.md`, `flows.md`, and `permissions.md` by the `/derive-tests` workflow. It lists the tests that *should* exist based on documented intent, cross-references which currently exist, and highlights unverified gaps. |
@@ -5328,7 +5328,7 @@ Every reviewable application or release surface **MUST** produce these five docu
 
 ### 2.2 Conditional Documents
 
-Include a conditional document **only if** the application actually has that capability. If the capability does not exist, write a single line in `architecture.md` (e.g., "No scheduled work 鈥?no `cron.md`.") rather than creating an empty document. Reviewability comes from an honest map, and "we don't do X" is part of the map.
+Include a conditional document **only if** the application actually has that capability. If the capability does not exist, write a single line in `architecture.md` (e.g., "No scheduled work — no `cron.md`.") rather than creating an empty document. Reviewability comes from an honest map, and "we don't do X" is part of the map.
 
 | Conditional File | Trigger Condition |
 | :--- | :--- |
@@ -5343,7 +5343,7 @@ Include a conditional document **only if** the application actually has that cap
 
 **This principle applies to all selected audit workflows in this module, not just security.**
 
-For every finding reported by any audit workflow (搂4.1鈥撀?.4), the Agent **MUST**:
+For every finding reported by any audit workflow (§4.1–§4.4), the Agent **MUST**:
 1. **State the finding** with specific code location and evidence.
 2. **Try to disprove it** using local code evidence (a counter-argument grounded in actual implementation).
 3. **Report only findings that survive self-refutation**. Each surviving finding must include its
@@ -5353,7 +5353,7 @@ For every finding reported by any audit workflow (搂4.1鈥撀?.4), the Agent **
 
 Findings that can be disproven should be logged as "Investigated and cleared" with the disproving evidence, not silently dropped.
 
-This principle integrates with `modules/29_MandatoryVerificationMatrix.md` 搂4 (Escalation Rule): the higher the consequence of a false finding, the stronger the self-refutation attempt must be.
+This principle integrates with `modules/29_MandatoryVerificationMatrix.md` §4 (Escalation Rule): the higher the consequence of a false finding, the stronger the self-refutation attempt must be.
 
 ---
 
@@ -5365,26 +5365,26 @@ When executing the shipping phase, the Agent performs the following audit workfl
 
 If documentation is missing or outdated, the Agent must read the source code and reconstruct the system intent:
 - Document the actual database state, API schemas, and component architecture into `architecture.md`.
-- Reconstruct the runtime flows into `flows.md`, explicitly marking each trust-boundary crossing (see 搂5).
+- Reconstruct the runtime flows into `flows.md`, explicitly marking each trust-boundary crossing (see §5).
 - Extract the static permission declarations into `permissions.md`.
-- Identify conditional capabilities (background cron jobs, embedded AI agents, SEO structures, email templates) and generate the corresponding conditional documents (搂2.2) only for capabilities that actually exist.
-- Apply the Self-Refute principle (搂3): any architectural assumption must be verified against code evidence.
+- Identify conditional capabilities (background cron jobs, embedded AI agents, SEO structures, email templates) and generate the corresponding conditional documents (§2.2) only for capabilities that actually exist.
+- Apply the Self-Refute principle (§3): any architectural assumption must be verified against code evidence.
 
 ### 4.2 Intended vs. Implemented Gap Analysis (`/derive-tests` workflow)
 
 The Agent must match the documented specifications (from `.specify/spec.md` or earlier project docs) against the actual codebase implementation:
 - **Compare**: Search for features mentioned in specs that are missing in the code, or undocumented logic implemented in the codebase.
 - **Deduce**: Create a gap analysis report citing the exact lines of code or specs where divergence occurs.
-- **Derive**: Generate `tests.md` as a **verification map** 鈥?listing the tests that *should* exist based on architecture, flows, and permissions documents, not merely inventorying existing tests.
+- **Derive**: Generate `tests.md` as a **verification map** — listing the tests that *should* exist based on architecture, flows, and permissions documents, not merely inventorying existing tests.
 - **Cover**: For untested business logic, generate precise test scenarios and recommend a green-before-merge CI gate.
-- **Self-Refute** (搂3): For each reported gap, attempt to find code evidence that the gap does not actually exist (e.g., the feature is implemented under a different name or path).
+- **Self-Refute** (§3): For each reported gap, attempt to find code evidence that the gap does not actually exist (e.g., the feature is implemented under a different name or path).
 
 ### 4.3 Static Security & Trust Boundary Audit (`/security-audit-static` workflow)
 
 A disciplined, self-refuting security scan:
-- **Map Trust Boundaries**: Document who may read or write to specific folders, tables, or endpoints, using the trust-boundary crossing enumeration (搂5).
+- **Map Trust Boundaries**: Document who may read or write to specific folders, tables, or endpoints, using the trust-boundary crossing enumeration (§5).
 - **Verify Secrets**: Scan for raw strings, hardcoded tokens, or unsafe exposure of `.env` configurations.
-- **Self-Refute Findings** (搂3): For every security finding, the Agent must try to disprove it using local code evidence. Report only risks that are backed by undeniable code proof.
+- **Self-Refute Findings** (§3): For every security finding, the Agent must try to disprove it using local code evidence. Report only risks that are backed by undeniable code proof.
 
 ### 4.4 Static Performance & Caching Audit (`/performance-audit-static` workflow)
 
@@ -5392,23 +5392,23 @@ A static analysis of application efficiency:
 - Detect N+1 query patterns, nested API requests (waterfalls), and database over-fetching.
 - Identify missing database indexes or redundant network roundtrips.
 - Recommend caching rules ranked by implementation effort and performance impact.
-- **Self-Refute** (搂3): For each performance finding, verify that the pattern actually executes in a hot path (not dead code or a rarely-hit branch).
+- **Self-Refute** (§3): For each performance finding, verify that the pattern actually executes in a hot path (not dead code or a rarely-hit branch).
 
 ---
 
 ## 5. Trust Boundary Crossing Enumeration
 
-When documenting flows (搂2.1 `flows.md`) and performing security audits (搂4.3), the Agent must explicitly label each trust-boundary crossing using this structured enumeration:
+When documenting flows (§2.1 `flows.md`) and performing security audits (§4.3), the Agent must explicitly label each trust-boundary crossing using this structured enumeration:
 
 | Boundary Type | Example | What to verify |
 | :--- | :--- | :--- |
-| **browser 鈫?server** | Form submission, API call | Input validation, CSRF protection, auth token |
-| **server 鈫?database** | SQL query, ORM call | Query parameterization, permission scoping |
-| **server 鈫?provider** | Third-party API call | API key handling, response validation, timeout |
-| **job 鈫?app** | Background worker callback | Authentication of job origin, idempotency |
-| **agent 鈫?tool** | LLM calling an external tool | Tool permission boundary, output sanitization |
-| **webhook 鈫?app** | External service callback | Signature verification, replay protection |
-| **server 鈫?server** | Microservice-to-microservice | mTLS, service identity, scope propagation |
+| **browser → server** | Form submission, API call | Input validation, CSRF protection, auth token |
+| **server → database** | SQL query, ORM call | Query parameterization, permission scoping |
+| **server → provider** | Third-party API call | API key handling, response validation, timeout |
+| **job → app** | Background worker callback | Authentication of job origin, idempotency |
+| **agent → tool** | LLM calling an external tool | Tool permission boundary, output sanitization |
+| **webhook → app** | External service callback | Signature verification, replay protection |
+| **server → server** | Microservice-to-microservice | mTLS, service identity, scope propagation |
 
 Each crossing point is a potential security gap and must be explicitly annotated in `flows.md`.
 
@@ -5420,11 +5420,11 @@ Before declaring an applicable task finished and ready for human merge review, t
 
 - [ ] **Specs Sync**: Check if `.specify/spec.md` is aligned with the final code.
 - [ ] **Core Docs Compiled**: Verify that `documentation/` (or `.specify/ship/`) contains updated `architecture.md`, `flows.md`, `permissions.md`, `variables.md`.
-- [ ] **Tests Derived**: Verify that `tests.md` has been derived from the other core documents via 搂4.2, not merely copied from existing test files.
-- [ ] **Conditional Docs Honest**: Verify that conditional documents (搂2.2) exist only for capabilities that are present, and absent capabilities are declared in `architecture.md`.
-- [ ] **Security Clear**: When the change has secrets, permissions, trust boundaries, or external inputs, run the static security audit (搂4.3) with self-refutation (搂3) and verify the applicable secret-handling claims.
-- [ ] **Performance Approved**: When the change has a runtime hot path, database access, network flow, or caching behavior, run the performance audit (搂4.4) with self-refutation.
-- [ ] **All Findings Self-Refuted**: Confirm that every reported finding has been through the self-refutation process (搂3).
+- [ ] **Tests Derived**: Verify that `tests.md` has been derived from the other core documents via §4.2, not merely copied from existing test files.
+- [ ] **Conditional Docs Honest**: Verify that conditional documents (§2.2) exist only for capabilities that are present, and absent capabilities are declared in `architecture.md`.
+- [ ] **Security Clear**: When the change has secrets, permissions, trust boundaries, or external inputs, run the static security audit (§4.3) with self-refutation (§3) and verify the applicable secret-handling claims.
+- [ ] **Performance Approved**: When the change has a runtime hot path, database access, network flow, or caching behavior, run the performance audit (§4.4) with self-refutation.
+- [ ] **All Findings Self-Refuted**: Confirm that every reported finding has been through the self-refutation process (§3).
 - [ ] **Human Handover**: Ask about a human-readable handover package only when the user or project stakeholders need business-facing reporting; compile it only if requested.
 
 ---
@@ -5433,10 +5433,10 @@ Before declaring an applicable task finished and ready for human merge review, t
 
 This module operates under the same evidence standards defined in `modules/29_MandatoryVerificationMatrix.md`:
 
-- **Security claims** are "Runtime / build / packaging claims" 鈫?require command/runtime verification, not just code reading.
-- **Performance claims** are "Behavior with ambiguous evidence" 鈫?require at least two independent evidence paths.
-- **Architecture claims** are "Local repository facts" 鈫?require targeted file reads confirming actual implementation.
-- The **Escalation Rule** (Module 29 搂4) applies: high-impact SRA findings demand precondition confirmation + execution evidence + post-result verification.
+- **Security claims** are "Runtime / build / packaging claims" → require command/runtime verification, not just code reading.
+- **Performance claims** are "Behavior with ambiguous evidence" → require at least two independent evidence paths.
+- **Architecture claims** are "Local repository facts" → require targeted file reads confirming actual implementation.
+- The **Escalation Rule** (Module 29 §4) applies: high-impact SRA findings demand precondition confirmation + execution evidence + post-result verification.
 
 The SRA module does not lower the evidence bar. It structures what must be documented; Module 29 governs how the documentation claims are verified.
 
@@ -5495,7 +5495,7 @@ When addressing a bug:
 
 The goal of the ladder is to eliminate code bloat, **not** to skip safety controls. The following surfaces are strictly excluded from YAGNI and are **never** on the chopping block:
 
-- **Security & Authorization**: Input sanitization, CSRF tokens, database query parameterization, and endpoint claim checks (Module 41 搂5) must be written thoroughly.
+- **Security & Authorization**: Input sanitization, CSRF tokens, database query parameterization, and endpoint claim checks (Module 41 §5) must be written thoroughly.
 - **Data Loss Prevention**: Idempotency checks, database transactions, confirmation dialogs for destructive actions, and backup validation.
 - **Accessibility (a11y)**: Proper ARIA labels, semantic HTML structure, keyboard navigation, and contrast compliance.
 - **Error Handling**: Graceful fallback states, detailed error logging, and user-facing notifications.
@@ -5595,7 +5595,7 @@ Once an ADR is set to `Accepted`, the Agent **MUST** treat it as an immutable ar
 
 ## 4. Integration with Spec-Driven Development (SDD)
 
-- **Specify Phase (Phase 2)**: The Agent must check if `CONTEXT.md` exists. If the task introduces new concepts, the Agent must initiate a single-question grilling session (搂1) and append new terms to `CONTEXT.md`.
+- **Specify Phase (Phase 2)**: The Agent must check if `CONTEXT.md` exists. If the task introduces new concepts, the Agent must initiate a single-question grilling session (§1) and append new terms to `CONTEXT.md`.
 - **Plan Phase (Phase 3)**: If the plan introduces major trade-offs, the Agent must document them in a new ADR draft under `docs/adr/` before moving past the Plan phase.
 
 ## END FILE: modules/43_V6_7_MattPocockSkillsIntegration.md
@@ -5604,7 +5604,7 @@ Once an ADR is set to `Accepted`, the Agent **MUST** treat it as an immutable ar
 
 ## BEGIN FILE: modules/44_V6_8_GrokBuildOperationalIntegration.md
 
-# AgentLogic V6.8.0 鈥?Grok Build Complementary Operational Integration
+# AgentLogic V6.8.0 — Grok Build Complementary Operational Integration
 
 Status: **Active in the V6.8.0 core-enhanced profile**.
 

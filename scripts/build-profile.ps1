@@ -24,7 +24,7 @@ function Get-Manifest {
     param([string]$RepoRoot)
 
     $manifestPath = Join-Path $RepoRoot "manifest.json"
-    return Get-Content -Raw -Path $manifestPath | ConvertFrom-Json
+    return Get-Content -Raw -Encoding UTF8 -Path $manifestPath | ConvertFrom-Json
 }
 
 function Resolve-OutputPath {
@@ -82,7 +82,7 @@ function Build-Bundle {
             throw "Profile file missing: $relativePath"
         }
 
-        $content = Get-Content -Raw -Path $fullPath
+        $content = Get-Content -Raw -Encoding UTF8 -Path $fullPath
         [void]$builder.AppendLine("---")
         [void]$builder.AppendLine()
         [void]$builder.AppendLine("## BEGIN FILE: $relativePath")

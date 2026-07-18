@@ -43,8 +43,9 @@ before writing host-local targets.
 
 GitHub Actions run `29645724052` rejected the committed bundle as stale even though local
 validation passed. The runner used Windows PowerShell; the remaining load-bearing cause is
-host-dependent line endings from `StringBuilder.AppendLine()`. The repair canonicalizes the
-complete generated bundle to LF before write and comparison.
+host-dependent line endings from `StringBuilder.AppendLine()` and code-page-dependent decoding
+of UTF-8 source files by Windows PowerShell. The repair canonicalizes the complete generated
+bundle to LF and explicitly decodes source inputs as UTF-8 before write and comparison.
 
 The regenerated `codex`, `claude`, `antigravity`, and `generic` bundles contain no carriage
 return bytes and all pass the non-mutating verifier, package validator, logic-entry check, and

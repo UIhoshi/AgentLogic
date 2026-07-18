@@ -11,8 +11,9 @@ the four tracked host bundles, and records a concise shipping review.
 1. Correct active V6.8.1 labels while preserving historical V6.8.0 artifacts.
 2. Add `-Verify` to `build-profile.ps1`; it builds the profile in memory and compares
    it with the configured output rather than writing it.
-3. Normalize generated bundle text to LF before writing or comparing it, so build output
-   is deterministic across Windows and CI checkout environments.
+3. Normalize generated bundle text to LF and read manifest/profile source files as UTF-8
+   before writing or comparing it, so build output is deterministic across Windows and CI
+   checkout environments.
 4. Make `validate-package.ps1` apply V6.8 contract checks to `V6.8.*` and invoke the
    non-mutating verification for every configured host output.
 5. Regenerate the tracked bundles once using the existing generator.
@@ -37,8 +38,8 @@ the four tracked host bundles, and records a concise shipping review.
 - Steelman: the generator deterministically assembles content from the manifest profile.
 - Attack: encoding or newline behavior could make a semantically valid output differ.
 - Fails if: the generator writes a different encoding from the verifier's expected text.
-- Mitigation: normalize the complete generated text to LF, write UTF-8 without a BOM, and
-  test the regenerated tracked outputs through package validation.
+- Mitigation: normalize the complete generated text to LF, decode all source inputs as UTF-8,
+  write UTF-8 without a BOM, and test the regenerated tracked outputs through package validation.
 
 ### Claim: Local validation proves CI will compare the same bytes
 
@@ -47,8 +48,8 @@ the four tracked host bundles, and records a concise shipping review.
   present committed files with a different newline convention.
 - Fails if: a Windows runner regenerates CRLF text against an LF checkout and reports a
   stale bundle even after a successful local validation.
-- Mitigation: canonicalize generated text to LF before both write and verification, then
-  regenerate the tracked outputs.
+- Mitigation: canonicalize generated text to LF, explicitly decode inputs as UTF-8 before
+  both write and verification, then regenerate the tracked outputs.
 
 ### Claim: Regenerating tracked bundles is safe
 
