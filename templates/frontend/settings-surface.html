@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Original AgentLogic settings surface template.">
+    <title>Settings Surface Template</title>
+    <link rel="stylesheet" href="foundation.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to settings</a>
+    <main class="shell settings-shell" id="main-content">
+      <nav class="settings-nav" aria-label="Settings navigation"><h1>Settings</h1><a aria-current="page" href="#general">General</a><a href="#members">Members</a><a href="#billing">Billing</a><a href="#security">Security</a><a href="#notifications">Notifications</a></nav>
+      <div class="settings-content">
+        <section id="general" class="card settings-section" aria-labelledby="general-title"><header><p class="eyebrow">Workspace</p><h2 id="general-title">General settings</h2><p class="muted">Use concise helper text to explain a setting before a person changes it.</p></header><form><div class="form-grid"><div class="field"><label for="workspace-name">Workspace name</label><input id="workspace-name" name="workspace-name" value="Northline workspace"></div><div class="field"><label for="workspace-url">Workspace URL</label><input id="workspace-url" name="workspace-url" value="northline"></div><div class="field"><label for="timezone">Time zone</label><select id="timezone" name="timezone"><option>GMT+09:00 Tokyo</option><option>GMT+00:00 UTC</option></select></div><div class="field"><label for="language">Language</label><select id="language" name="language"><option>English (US)</option><option>Japanese</option></select></div></div><div class="form-actions"><button class="button button-primary" type="submit">Save changes</button></div></form></section>
+        <section id="notifications" class="card settings-section" aria-labelledby="preferences-title"><header><p class="eyebrow">Preferences</p><h2 id="preferences-title">Display preferences</h2></header><form><div class="form-grid"><div class="field"><label for="currency">Default currency</label><select id="currency" name="currency"><option>USD — US Dollar</option><option>JPY — Japanese Yen</option></select></div><div class="field"><label for="format">Date format</label><select id="format" name="format"><option>MM/DD/YYYY</option><option>YYYY-MM-DD</option></select></div></div><div class="form-actions"><button class="button button-primary" type="submit">Save preferences</button></div></form></section>
+        <section class="card settings-section danger-zone" aria-labelledby="danger-title"><header><p class="eyebrow">Irreversible action</p><h2 id="danger-title">Danger zone</h2></header><div class="danger-zone-content"><div><strong>Delete this workspace</strong><p class="muted">Remove its data only after a project-specific confirmation flow is implemented.</p></div><button class="button button-danger" type="button">Delete workspace</button></div></section>
+      </div>
+    </main>
+  </body>
+</html>

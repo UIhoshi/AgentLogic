@@ -73,7 +73,7 @@ graph TD
 | **L1: Strategy & Entry** | Defines entrypoints, environment injection, REPL startup gates, and context forget/reset rules. | - [00_START_HERE.md](./00_START_HERE.md) (起手式)<br>- [MAIN.md](./MAIN.md) (Stable Host Binding)<br>- [AGENTS.md](./AGENTS.md) (Agent Entry)<br>- [15_LogicEntryChecklist.md](./modules/15_LogicEntryChecklist.md) (Gate Checklist)<br>- [13_MandatoryLogicGateTemplate.md](./modules/13_MandatoryLogicGateTemplate.md) (Header Gating) |
 | **L2: Session & Loop** | Manages the single-turn execution cycle, prevents vibe-coding, and structures the SDD lifecycle. | - [03_AgenticLoop.md](./modules/03_AgenticLoop.md) (Agentic Cycle)<br>- [38_SpecDrivenDevelopment.md](./modules/38_V6_6_SpecDrivenDevelopment.md) (SDD Lifecycle)<br>- [20_V6_5_RuntimeModes.md](./modules/20_V6_5_RuntimeModes.md) (Context Adaptation)<br>- [28_V6_5_TerminologyAndModuleBoundaries.md](./modules/28_V6_5_TerminologyAndModuleBoundaries.md) (Boundary Rules) |
 | **L3: Control & Auditing** | Establishes high-friction verification rules, security-risk matrix, and visual frontend taste checks. | - [29_MandatoryVerificationMatrix.md](./modules/29_MandatoryVerificationMatrix.md) (Verification Matrix)<br>- [39_TasteFrontendDesign.md](./modules/39_V6_6_TasteFrontendDesign.md) (Aesthetic & Spacing Audit)<br>- [30_ToolQuestionBoundaryMatrix.md](./modules/30_ToolQuestionBoundaryMatrix.md) (Credential Boundary)<br>- [31_ToolMisuseAndAntiPatternMatrix.md](./modules/31_ToolMisuseAndAntiPatternMatrix.md) (Anti-Pattern Gating) |
-| **L4: Base & Drivers** | Low-level command execution, raw tool controllers, and active portable skill files. | - `skills/` (Logic-Carried Domain Skills)<br>  * [agent-browser](./skills/agent-browser/) (Accessibility Browser CLI)<br>  * [nano-banana-pro](./skills/nano-banana-pro/) (Gemini Mockup Engine)<br>  * [self-improvement](./skills/self-improvement/) (Error Log & Self-Correction)<br>- [35_V6_5_SkillGovernanceAndMandatoryUse.md](./modules/35_V6_5_SkillGovernanceAndMandatoryUse.md) (Governance Rules) |
+| **L4: Base & Drivers** | Low-level command execution, raw tool controllers, portable skill files, and original frontend reference templates. | - `skills/` (Logic-Carried Domain Skills)<br>  * [agent-browser](./skills/agent-browser/) (Accessibility Browser CLI)<br>  * [nano-banana-pro](./skills/nano-banana-pro/) (Gemini Mockup Engine)<br>  * [self-improvement](./skills/self-improvement/) (Error Log & Self-Correction)<br>- [`templates/frontend/`](./templates/frontend/) (Original, unbranded UI starting points)<br>- [35_V6_5_SkillGovernanceAndMandatoryUse.md](./modules/35_V6_5_SkillGovernanceAndMandatoryUse.md) (Governance Rules) |
 
 ---
 
@@ -94,6 +94,14 @@ This rule package supports **automated self-evolution** and developer logging:
 
 > [!TIP]
 > **Design-First Prototyping Gate**: Before any formal UI implementation, the agent must use text-to-image generation to produce a mockup, show it to the user, and wait for review. The only bypass is an explicit user instruction not to use this step.
+
+## 🎨 Original Frontend Template Library
+
+[`templates/frontend/`](./templates/frontend/) contains a small, dependency-free set of original,
+unbranded HTML/CSS starting points: an editorial landing page, an analytics dashboard, and a
+settings surface. They complement the Taste skill rather than replacing it: Taste governs visual
+direction and verification, while the templates provide reusable structural baselines. They contain
+no third-party images, fonts, logos, remote assets, or copied Open Design code.
 
 ---
 

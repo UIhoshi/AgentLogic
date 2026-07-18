@@ -477,7 +477,7 @@ graph TD
 | **L1: Strategy & Entry** | Defines entrypoints, environment injection, REPL startup gates, and context forget/reset rules. | - [00_START_HERE.md](./00_START_HERE.md) (起手式)<br>- [MAIN.md](./MAIN.md) (Stable Host Binding)<br>- [AGENTS.md](./AGENTS.md) (Agent Entry)<br>- [15_LogicEntryChecklist.md](./modules/15_LogicEntryChecklist.md) (Gate Checklist)<br>- [13_MandatoryLogicGateTemplate.md](./modules/13_MandatoryLogicGateTemplate.md) (Header Gating) |
 | **L2: Session & Loop** | Manages the single-turn execution cycle, prevents vibe-coding, and structures the SDD lifecycle. | - [03_AgenticLoop.md](./modules/03_AgenticLoop.md) (Agentic Cycle)<br>- [38_SpecDrivenDevelopment.md](./modules/38_V6_6_SpecDrivenDevelopment.md) (SDD Lifecycle)<br>- [20_V6_5_RuntimeModes.md](./modules/20_V6_5_RuntimeModes.md) (Context Adaptation)<br>- [28_V6_5_TerminologyAndModuleBoundaries.md](./modules/28_V6_5_TerminologyAndModuleBoundaries.md) (Boundary Rules) |
 | **L3: Control & Auditing** | Establishes high-friction verification rules, security-risk matrix, and visual frontend taste checks. | - [29_MandatoryVerificationMatrix.md](./modules/29_MandatoryVerificationMatrix.md) (Verification Matrix)<br>- [39_TasteFrontendDesign.md](./modules/39_V6_6_TasteFrontendDesign.md) (Aesthetic & Spacing Audit)<br>- [30_ToolQuestionBoundaryMatrix.md](./modules/30_ToolQuestionBoundaryMatrix.md) (Credential Boundary)<br>- [31_ToolMisuseAndAntiPatternMatrix.md](./modules/31_ToolMisuseAndAntiPatternMatrix.md) (Anti-Pattern Gating) |
-| **L4: Base & Drivers** | Low-level command execution, raw tool controllers, and active portable skill files. | - `skills/` (Logic-Carried Domain Skills)<br>  * [agent-browser](./skills/agent-browser/) (Accessibility Browser CLI)<br>  * [nano-banana-pro](./skills/nano-banana-pro/) (Gemini Mockup Engine)<br>  * [self-improvement](./skills/self-improvement/) (Error Log & Self-Correction)<br>- [35_V6_5_SkillGovernanceAndMandatoryUse.md](./modules/35_V6_5_SkillGovernanceAndMandatoryUse.md) (Governance Rules) |
+| **L4: Base & Drivers** | Low-level command execution, raw tool controllers, portable skill files, and original frontend reference templates. | - `skills/` (Logic-Carried Domain Skills)<br>  * [agent-browser](./skills/agent-browser/) (Accessibility Browser CLI)<br>  * [nano-banana-pro](./skills/nano-banana-pro/) (Gemini Mockup Engine)<br>  * [self-improvement](./skills/self-improvement/) (Error Log & Self-Correction)<br>- [`templates/frontend/`](./templates/frontend/) (Original, unbranded UI starting points)<br>- [35_V6_5_SkillGovernanceAndMandatoryUse.md](./modules/35_V6_5_SkillGovernanceAndMandatoryUse.md) (Governance Rules) |
 
 ---
 
@@ -498,6 +498,14 @@ This rule package supports **automated self-evolution** and developer logging:
 
 > [!TIP]
 > **Design-First Prototyping Gate**: Before any formal UI implementation, the agent must use text-to-image generation to produce a mockup, show it to the user, and wait for review. The only bypass is an explicit user instruction not to use this step.
+
+## 🎨 Original Frontend Template Library
+
+[`templates/frontend/`](./templates/frontend/) contains a small, dependency-free set of original,
+unbranded HTML/CSS starting points: an editorial landing page, an analytics dashboard, and a
+settings surface. They complement the Taste skill rather than replacing it: Taste governs visual
+direction and verification, while the templates provide reusable structural baselines. They contain
+no third-party images, fonts, logos, remote assets, or copied Open Design code.
 
 ---
 
@@ -1198,7 +1206,7 @@ Agentic CLI application's `src/` directory.
 | **L1: Entry & Host Surface** | Human/agent entry, stable binding, installation guidance, host integration | `00_START_HERE.md`, `AGENTS.md`, `README.md`, `MAIN.md`, `AGENT_INSTALL.md`, `INSTALL.md`, `adapters/` |
 | **L2: Lifecycle & Logic** | Version source, master logic, session rules, SDD, task state | `versions/`, `modules/01_MasterLogic.md`, `modules/03_AgenticLoop.md`, `modules/12_AgentEnforcement.md`, `modules/15_LogicEntryChecklist.md`, `modules/38_V6_6_SpecDrivenDevelopment.md`, `.specify/` |
 | **L3: Control & Verification** | Manifest contracts, permissions, evidence boundaries, package and entry validation | `manifest.json`, `manifest.schema.json`, `modules/05_PermissionsAndSafety.md`, `modules/29_MandatoryVerificationMatrix.md`, `modules/30_ToolQuestionBoundaryMatrix.md`, `modules/31_ToolMisuseAndAntiPatternMatrix.md`, `scripts/` |
-| **L4: Assets & Outputs** | Portable skills, reference layers, generated host bundles and profile build | `skills/`, `spec-kit/`, `reference/`, `dist/`, `scripts/build-profile.ps1` |
+| **L4: Assets & Outputs** | Portable skills, original frontend reference templates, reference layers, generated host bundles and profile build | `skills/`, `templates/frontend/`, `spec-kit/`, `reference/`, `dist/`, `scripts/build-profile.ps1` |
 
 ## Operational flow
 
@@ -5322,7 +5330,7 @@ implementation or the source tree of another project.
 | **L1 Strategy & Entry** | `00_START_HERE.md`, `AGENTS.md`, `MAIN.md` | `README.md`, `AGENT_INSTALL.md`, `INSTALL.md` | `modules/15_LogicEntryChecklist.md`, `modules/13_MandatoryLogicGateTemplate.md` | `manifest.json` |
 | **L2 Session & Lifecycle** | `modules/01_MasterLogic.md`, `modules/03_AgenticLoop.md`, `versions/AgentLogic_V6_8_2.md` | `modules/38_V6_6_SpecDrivenDevelopment.md`, `spec-kit/`, `.specify/` | `modules/12_AgentEnforcement.md`, `modules/44_V6_8_GrokBuildOperationalIntegration.md`, `modules/46_V6_8_ProjectKnowledgeSync.md` | `PROJECT_MAP.md`, `CODE_MAP.md`, `.learnings/ERRORS.md`, conditional `.specify/` |
 | **L3 Execution & Control** | `adapters/`, `install.ps1`, `install.sh` | `skills/`, `scripts/build-profile.ps1` | `modules/05_PermissionsAndSafety.md`, `modules/23_V6_5_PermissionAndOutputPipeline.md`, `modules/29_MandatoryVerificationMatrix.md`, `modules/30_ToolQuestionBoundaryMatrix.md`, `modules/31_ToolMisuseAndAntiPatternMatrix.md` | `scripts/check-logic-entry.js`, `scripts/validate-package.ps1` |
-| **L4 Base & Reference** | `reference/`, historical `versions/` files | `skills/`, `spec-kit/` | `modules/35_V6_5_SkillGovernanceAndMandatoryUse.md`, `modules/36_V6_5_SkillZoneSeparation.md`, `modules/41_V6_7_AIShippingAndReviewabilityAudit.md` | `dist/`, optional `modification_history/` archive |
+| **L4 Base & Reference** | `reference/`, historical `versions/` files | `skills/`, `templates/frontend/`, `spec-kit/` | `modules/35_V6_5_SkillGovernanceAndMandatoryUse.md`, `modules/36_V6_5_SkillZoneSeparation.md`, `modules/41_V6_7_AIShippingAndReviewabilityAudit.md` | `dist/`, optional `modification_history/` archive |
 
 ## Control flow
 
