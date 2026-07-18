@@ -38,3 +38,14 @@ before writing host-local targets.
 - All four bundles were regenerated and each passed `build-profile.ps1 -Verify`.
 - `node scripts/check-logic-entry.js`, `scripts/validate-package.ps1`, and
   `scripts/maintainer-check.ps1` passed after the repair.
+
+## CI Follow-up
+
+GitHub Actions run `29645724052` rejected the committed bundle as stale even though local
+validation passed. The runner used Windows PowerShell; the remaining load-bearing cause is
+host-dependent line endings from `StringBuilder.AppendLine()`. The repair canonicalizes the
+complete generated bundle to LF before write and comparison.
+
+The regenerated `codex`, `claude`, `antigravity`, and `generic` bundles contain no carriage
+return bytes and all pass the non-mutating verifier, package validator, logic-entry check, and
+maintainer check locally.

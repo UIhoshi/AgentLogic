@@ -18,9 +18,10 @@ bundles match their source profile.
 2. V6.8 operational-contract checks must apply to every V6.8 patch release.
 3. `build-profile.ps1` must provide a non-mutating verification path for an existing
    generated output.
-4. `validate-package.ps1` must verify every configured host bundle against the default
+4. Generated bundles must use canonical LF line endings on every host.
+5. `validate-package.ps1` must verify every configured host bundle against the default
    profile without changing tracked files.
-5. Tracked `dist/` bundles must be regenerated from current sources and committed.
+6. Tracked `dist/` bundles must be regenerated from current sources and committed.
 
 ## Non-goals
 
@@ -35,5 +36,5 @@ bundles match their source profile.
 - The validator checks the V6.8 operational module for V6.8.1.
 - Mutating a generated bundle would make package validation fail; an untouched bundle
   passes verification.
+- The committed bundles pass the same verification on GitHub Actions Windows runners.
 - Rebuilt `dist/` files are clean immediately after package and maintainer checks.
-

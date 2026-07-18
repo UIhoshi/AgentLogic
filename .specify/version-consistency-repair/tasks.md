@@ -5,4 +5,5 @@
       rung 2, reuse the existing `Build-Bundle` function.)
 - [x] Regenerate configured host bundles using the existing generator. (Ladder: rung 2.)
 - [x] Update the concise shipping review record and validate the final repository.
-- [x] Commit the reviewed changes locally without pushing.
+- [x] Canonicalize generated bundle line endings and regenerate all tracked bundles.
+- [x] Re-run validation, commit the CI repair, and push the history record before AgentLogic.

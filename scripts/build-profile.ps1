@@ -93,7 +93,7 @@ function Build-Bundle {
         [void]$builder.AppendLine()
     }
 
-    return $builder.ToString()
+    return [System.Text.RegularExpressions.Regex]::Replace($builder.ToString(), "\r\n|\r|\n", "`n")
 }
 
 $repoRoot = Get-RepoRoot
