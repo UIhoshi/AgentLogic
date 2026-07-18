@@ -134,6 +134,7 @@
                              "project_knowledge_sync":  [
                                                        "modules/46_V6_8_ProjectKnowledgeSync.md",
                                                        "templates/PROJECT_MAP.md",
+                                                       "templates/CODE_MAP.md",
                                                        "templates/ERRORS.md"
                                                    ],
                              "reference_raw_layers":  [

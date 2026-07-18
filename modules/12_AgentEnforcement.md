@@ -249,6 +249,7 @@ Agent 至少必须完成：
 
 - 根目录 `AGENTS.md`：只保存项目局部规则、命令和验证要求；
 - 根目录 `PROJECT_MAP.md`：保存该项目实际 L1-L4、入口、边界和验证事实；
+- 根目录 `CODE_MAP.md`：保存入口、模块、关键函数/类、状态键和接口/事件的可交接文本导航；
 - `.learnings/ERRORS.md`：保存脱敏后的重要错误、根因、修正和防再发措施。
 
 ### 4.4.1 启动前同步义务
@@ -258,7 +259,7 @@ Agent 至少必须完成：
 1. 确认仓库根目录、分支和工作树；
 2. 在可联网且有远端时运行 `git fetch --prune`；
 3. 检查 `git status --short --branch`、本地差异及远端领先状态；
-4. 读取当前 `AGENTS.md`、`PROJECT_MAP.md` 和 `.learnings/ERRORS.md`；
+4. 读取当前 `AGENTS.md`、`PROJECT_MAP.md`、`CODE_MAP.md` 和 `.learnings/ERRORS.md`；
 5. 用当前源码和 `git diff` 复核会影响本轮任务的地图或记录。
 
 `fetch` 只用于检查新鲜度；`pull`、checkout、merge、rebase 等会改变工作树的动作必须单独确认目标，并优先使用干净工作树上的 `git pull --ff-only`。
@@ -266,6 +267,7 @@ Agent 至少必须完成：
 ### 4.4.2 同提交更新义务
 
 - 新增/移动入口、模块边界、关键流程、权限边界、依赖边界或验证命令时，必须在同一项目 commit 更新 `PROJECT_MAP.md`。
+- 关键函数/类归属、状态存储、接口/事件或验证导航发生变化时，必须在同一项目 commit 更新 `CODE_MAP.md`。
 - 发生重要意外错误、用户纠正或根因修复时，必须在理解修复后于同一项目 commit 更新 `.learnings/ERRORS.md`。
 - `.specify/` 仅用于匹配的非平凡 SDD 工作；`docs/adr/` 仅用于难以逆转的决定。
 - 默认不提交 `graphify-out/`；将经过验证的长期图谱结论写回 `PROJECT_MAP.md`。

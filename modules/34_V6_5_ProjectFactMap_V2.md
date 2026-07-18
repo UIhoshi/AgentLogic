@@ -5,6 +5,9 @@ This template supports the V6.8.2 project-native knowledge-sync contract. It bel
 target project as `PROJECT_MAP.md`, travels with project code, and contains no private agent
 memory or machine-specific data.
 
+`PROJECT_MAP.md` is the concise L1-L4 architecture map. Keep symbol-level ownership, state keys,
+and interface/event navigation in the mandatory companion `CODE_MAP.md`.
+
 ---
 
 ## 1. Project Identity & Freshness

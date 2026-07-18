@@ -107,10 +107,11 @@ and unnecessary process overhead.
 
 For business-project work, the project repository—not a separate history checkout—is the
 default synchronization surface for project facts. Before implementation, run the safe
-freshness check and read the tracked project `AGENTS.md`, `PROJECT_MAP.md`, and
+freshness check and read the tracked project `AGENTS.md`, `PROJECT_MAP.md`, `CODE_MAP.md`, and
 `.learnings/ERRORS.md` as defined by `modules/46_V6_8_ProjectKnowledgeSync.md`.
 
 - Update `PROJECT_MAP.md` in the same commit as a structural change.
+- Update `CODE_MAP.md` in the same commit as an affected key-flow, symbol, state, interface, or validation change.
 - Update `.learnings/ERRORS.md` in the same commit as a material error correction.
 - Keep `.specify/` and `docs/adr/` only when their matching gates apply.
 - Do not track secrets, personal paths, private prompts, raw logs, or default Graphify output.

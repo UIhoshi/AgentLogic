@@ -19,7 +19,7 @@ Feature work, refactors, multi-file behavior changes, new projects, and release-
 When starting a project or introducing a feature, refactor, multi-file behavior change, or release-affecting change, the Agent MUST execute the following phases sequentially:
 
 Before Phase 1, perform the project-native freshness check and read the current project
-`AGENTS.md`, `PROJECT_MAP.md`, and `.learnings/ERRORS.md` as defined by
+`AGENTS.md`, `PROJECT_MAP.md`, `CODE_MAP.md`, and `.learnings/ERRORS.md` as defined by
 `modules/46_V6_8_ProjectKnowledgeSync.md`.
 
 1. **Constitution Phase**: Establish the project's governing principles, style rules, quality criteria, and performance guidelines.
@@ -51,7 +51,7 @@ Before Phase 1, perform the project-native freshness check and read the current 
 - **Red-Team Gate**: Entering the Tasks phase without completing the Red-Team Gate (Phase 4) on the plan is prohibited, except when the skip condition applies (trivial bug fixes or documentation-only changes).
 - **Zero Vibe-Coding**: Every single code change must trace back to a defined task in `.specify/tasks.md`.
 - **Shipping Gate**: No feature may be merged without completing the **Ship Phase** SRA checklist and compiling a reviewer-ready shipping packet under `documentation/` (or `.specify/ship/`).
-- **Project Knowledge Gate**: A structural change must update `PROJECT_MAP.md` in the same commit; a material error correction must update `.learnings/ERRORS.md` in the same commit. Do not create `.specify/` for task classes that do not require SDD.
+- **Project Knowledge Gate**: A structural change must update `PROJECT_MAP.md` in the same commit; an affected key-flow, symbol, state, interface, or validation change must update `CODE_MAP.md`; a material error correction must update `.learnings/ERRORS.md`. Do not create `.specify/` for task classes that do not require SDD.
 - **Command Fallbacks**: The slash commands (like `/speckit.specify`, `/speckit.plan`, etc.) provided by `spec-kit` are shortcuts. In normal Agentic loops, the Agent MUST execute these steps natively and automatically create the documents, without requiring manual trigger commands.
 
 ---

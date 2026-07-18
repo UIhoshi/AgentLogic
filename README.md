@@ -141,8 +141,9 @@ whether to generate a Graphify code view. Graphify is not installed or run autom
 
 ## V6.8.2 Project-Native Knowledge Sync
 
-Business projects synchronize their own concise operational facts with code through tracked
-`AGENTS.md`, `PROJECT_MAP.md`, and `.learnings/ERRORS.md`. The global AgentLogic bundle is
+Business projects synchronize their own concise operational facts and symbol-level navigation with code through tracked
+`AGENTS.md`, `PROJECT_MAP.md`, `CODE_MAP.md`, and `.learnings/ERRORS.md`. `CODE_MAP.md` is the mandatory
+text-first handover map; visual Graphify maps remain user-approved and optional. The global AgentLogic bundle is
 not copied into projects. Before relying on those records, check remote freshness safely with
 `git fetch --prune` and inspect the current branch/worktree; a pull remains a separate,
 confirmed state change. `.specify/` and `docs/adr/` are conditional, while raw logs, secrets,

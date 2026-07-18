@@ -545,8 +545,9 @@ whether to generate a Graphify code view. Graphify is not installed or run autom
 
 ## V6.8.2 Project-Native Knowledge Sync
 
-Business projects synchronize their own concise operational facts with code through tracked
-`AGENTS.md`, `PROJECT_MAP.md`, and `.learnings/ERRORS.md`. The global AgentLogic bundle is
+Business projects synchronize their own concise operational facts and symbol-level navigation with code through tracked
+`AGENTS.md`, `PROJECT_MAP.md`, `CODE_MAP.md`, and `.learnings/ERRORS.md`. `CODE_MAP.md` is the mandatory
+text-first handover map; visual Graphify maps remain user-approved and optional. The global AgentLogic bundle is
 not copied into projects. Before relying on those records, check remote freshness safely with
 `git fetch --prune` and inspect the current branch/worktree; a pull remains a separate,
 confirmed state change. `.specify/` and `docs/adr/` are conditional, while raw logs, secrets,
@@ -668,10 +669,11 @@ and unnecessary process overhead.
 
 For business-project work, the project repository—not a separate history checkout—is the
 default synchronization surface for project facts. Before implementation, run the safe
-freshness check and read the tracked project `AGENTS.md`, `PROJECT_MAP.md`, and
+freshness check and read the tracked project `AGENTS.md`, `PROJECT_MAP.md`, `CODE_MAP.md`, and
 `.learnings/ERRORS.md` as defined by `modules/46_V6_8_ProjectKnowledgeSync.md`.
 
 - Update `PROJECT_MAP.md` in the same commit as a structural change.
+- Update `CODE_MAP.md` in the same commit as an affected key-flow, symbol, state, interface, or validation change.
 - Update `.learnings/ERRORS.md` in the same commit as a material error correction.
 - Keep `.specify/` and `docs/adr/` only when their matching gates apply.
 - Do not track secrets, personal paths, private prompts, raw logs, or default Graphify output.
@@ -726,7 +728,7 @@ Key Enhancements:
 - **Expanded Core Governance Modules**: Incorporates modules 37, 38, 39, and 40 for cybersecurity routing, SDD lifecycle tracking, premium design system controls, and visual architecture matrix mapping.
 - **Grok Build Complementary Operations**: Adds provider-neutral contracts for rule discovery, session lineage, active-state-preserving compaction, deny-overrides policy compilation, extension trust, subagent capabilities, headless result envelopes, memory freshness, and bounded retries/background work. See `modules/44_V6_8_GrokBuildOperationalIntegration.md`.
 - **Graphify Code Map Integration**: Adds an optional external code-map workflow and a consent-based Graph Preview Gate for substantial projects at Converge/Ship. See `modules/45_V6_8_GraphifyCodeMapIntegration.md`.
-- **Project-Native Knowledge Sync**: Requires tracked project `AGENTS.md`, `PROJECT_MAP.md`, and `.learnings/ERRORS.md`; replaces mandatory external-history checkout/push steps for ordinary project work. See `modules/46_V6_9_ProjectKnowledgeSync.md`.
+- **Project-Native Knowledge Sync**: Requires tracked project `AGENTS.md`, `PROJECT_MAP.md`, `CODE_MAP.md`, and `.learnings/ERRORS.md`. `CODE_MAP.md` is mandatory text-first function, state, and interface navigation; visual graph generation remains user-approved and optional. This replaces mandatory external-history checkout/push steps for ordinary project work. See `modules/46_V6_8_ProjectKnowledgeSync.md`.
 
 ---
 
@@ -783,7 +785,7 @@ The V6.8.1 line is supported by a modular suite of governance rules:
 
 - `modules/44_V6_8_GrokBuildOperationalIntegration.md`: Provider-neutral operational contracts translated from the audited Grok Build runtime and user guides.
 - `modules/45_V6_8_GraphifyCodeMapIntegration.md`: Optional external code-map policy, Graph Preview Gate, and external-extension trust boundary.
-- `modules/46_V6_8_ProjectKnowledgeSync.md`: Project-native Git synchronization for project maps and redacted error lessons.
+- `modules/46_V6_8_ProjectKnowledgeSync.md`: Project-native Git synchronization for project maps, mandatory textual code maps, and redacted error lessons.
 
 ---
 
@@ -850,7 +852,7 @@ Key stable rules:
 - The `ponytail` skill channels a lazy senior developer, enforcing the 7-rung ladder (YAGNI, reuse, stdlib, native, dependency, one-line, min-code) to prevent vibe-coding slop and over-engineering.
 - The `mattpocock/skills` integration mandates interactive grilling (single-question stress-testing), root-level `CONTEXT.md` vocabulary maps, and docs/adr/ numbered Architectural Decision Records.
 - Graphify is an optional external code-map capability. It may guide project discovery and offer a user-approved graph preview, but it must be security-audited before installation and never replaces the Verification Matrix.
-- Project-specific structure and lessons are synchronized with project code through `AGENTS.md`, `PROJECT_MAP.md`, and `.learnings/ERRORS.md`; the optional `modification_history` archive is reserved for cross-project lessons and historical records.
+- Project-specific structure, symbol navigation, and lessons are synchronized with project code through `AGENTS.md`, `PROJECT_MAP.md`, `CODE_MAP.md`, and `.learnings/ERRORS.md`; the optional `modification_history` archive is reserved for cross-project lessons and historical records.
 
 
 
@@ -964,11 +966,11 @@ UI 实施完成后仍必须执行截图、父子布局边界、溢出、换行�
 
 ## 6. 项目知识与规则同步
 
-- 业务项目的同步事实是项目自身 Git 跟踪的 `AGENTS.md`、`PROJECT_MAP.md` 和
+- 业务项目的同步事实是项目自身 Git 跟踪的 `AGENTS.md`、`PROJECT_MAP.md`、`CODE_MAP.md` 和
   `.learnings/ERRORS.md`，而不是外置日志仓库。
 - 接手项目时先 `git fetch --prune`（可用时）并检查分支、工作树和差异，再读取这三份文件；
   任何 pull/checkout/merge 仍需作为单独的状态变更确认。
-- 结构变化必须同提交更新 `PROJECT_MAP.md`；重要错误纠正必须同提交更新
+- 结构变化必须同提交更新 `PROJECT_MAP.md`；关键函数/状态/接口导航变化必须同提交更新 `CODE_MAP.md`；重要错误纠正必须同提交更新
   `.learnings/ERRORS.md`；`.specify/` 和 `docs/adr/` 仅在相应门槛触发时使用。
 - `modification_history` 可保留为跨项目经验和历史归档，但不阻断普通业务项目的编码或发布。
 - 不得把密钥、个人路径、私有提示词、原始日志或默认 Graphify 输出写入已跟踪知识文件或 bundle。
@@ -995,15 +997,17 @@ UI 实施完成后仍必须执行截图、父子布局边界、溢出、换行�
 只有用户要求停止、计划完成需要新的战略方向、出现无法从本地事实解决的阻塞，或即将进行
 高风险不可逆操作时，才暂停请求输入。
 
-## 10. 可选代码地图与图谱预览
+## 10. 强制文本代码地图与可选图谱预览
 
-- `modules/45_V6_8_GraphifyCodeMapIntegration.md` 提供按需项目代码地图策略，不是默认安装的外部依赖。
+- 每个完整工作流业务项目必须维护根目录 `CODE_MAP.md`，用于入口、模块、关键符号、状态和接口的文本导航；它不是运行时证明，必须以当前源码复核。
+- `modules/45_V6_8_GraphifyCodeMapIntegration.md` 提供按需可视化代码地图策略，不是默认安装的外部依赖。
 - 多模块功能、重大重构、架构或发布工作在 Converge/Ship 时应询问用户是否需要代码视图预览。
 - 用户明确同意后，才可在目标业务项目中生成 `graphify-out/`；不得默认在 AgentLogic 仓库内生成，也不得把外部图谱结果当作运行时事实证明。
 
 ## 11. 项目内 L1-L4 地图
 
 - 每个业务项目使用根目录 `PROJECT_MAP.md` 保存其真实 L1-L4 映射，不复制本逻辑包。
+- 每个业务项目使用根目录 `CODE_MAP.md` 保存可交接的符号级导航地图。
 - 此地图和 `.learnings/ERRORS.md` 必须与项目代码一起提交并跨设备同步。
 - 具体模板、脱敏边界和安全同步步骤由 `modules/46_V6_8_ProjectKnowledgeSync.md` 定义。
 
@@ -1470,6 +1474,7 @@ Agent 至少必须完成：
 
 - 根目录 `AGENTS.md`：只保存项目局部规则、命令和验证要求；
 - 根目录 `PROJECT_MAP.md`：保存该项目实际 L1-L4、入口、边界和验证事实；
+- 根目录 `CODE_MAP.md`：保存入口、模块、关键函数/类、状态键和接口/事件的可交接文本导航；
 - `.learnings/ERRORS.md`：保存脱敏后的重要错误、根因、修正和防再发措施。
 
 ### 4.4.1 启动前同步义务
@@ -1479,7 +1484,7 @@ Agent 至少必须完成：
 1. 确认仓库根目录、分支和工作树；
 2. 在可联网且有远端时运行 `git fetch --prune`；
 3. 检查 `git status --short --branch`、本地差异及远端领先状态；
-4. 读取当前 `AGENTS.md`、`PROJECT_MAP.md` 和 `.learnings/ERRORS.md`；
+4. 读取当前 `AGENTS.md`、`PROJECT_MAP.md`、`CODE_MAP.md` 和 `.learnings/ERRORS.md`；
 5. 用当前源码和 `git diff` 复核会影响本轮任务的地图或记录。
 
 `fetch` 只用于检查新鲜度；`pull`、checkout、merge、rebase 等会改变工作树的动作必须单独确认目标，并优先使用干净工作树上的 `git pull --ff-only`。
@@ -1487,6 +1492,7 @@ Agent 至少必须完成：
 ### 4.4.2 同提交更新义务
 
 - 新增/移动入口、模块边界、关键流程、权限边界、依赖边界或验证命令时，必须在同一项目 commit 更新 `PROJECT_MAP.md`。
+- 关键函数/类归属、状态存储、接口/事件或验证导航发生变化时，必须在同一项目 commit 更新 `CODE_MAP.md`。
 - 发生重要意外错误、用户纠正或根因修复时，必须在理解修复后于同一项目 commit 更新 `.learnings/ERRORS.md`。
 - `.specify/` 仅用于匹配的非平凡 SDD 工作；`docs/adr/` 仅用于难以逆转的决定。
 - 默认不提交 `graphify-out/`；将经过验证的长期图谱结论写回 `PROJECT_MAP.md`。
@@ -4617,6 +4623,9 @@ This template supports the V6.8.2 project-native knowledge-sync contract. It bel
 target project as `PROJECT_MAP.md`, travels with project code, and contains no private agent
 memory or machine-specific data.
 
+`PROJECT_MAP.md` is the concise L1-L4 architecture map. Keep symbol-level ownership, state keys,
+and interface/event navigation in the mandatory companion `CODE_MAP.md`.
+
 ---
 
 ## 1. Project Identity & Freshness
@@ -5159,7 +5168,7 @@ Feature work, refactors, multi-file behavior changes, new projects, and release-
 When starting a project or introducing a feature, refactor, multi-file behavior change, or release-affecting change, the Agent MUST execute the following phases sequentially:
 
 Before Phase 1, perform the project-native freshness check and read the current project
-`AGENTS.md`, `PROJECT_MAP.md`, and `.learnings/ERRORS.md` as defined by
+`AGENTS.md`, `PROJECT_MAP.md`, `CODE_MAP.md`, and `.learnings/ERRORS.md` as defined by
 `modules/46_V6_8_ProjectKnowledgeSync.md`.
 
 1. **Constitution Phase**: Establish the project's governing principles, style rules, quality criteria, and performance guidelines.
@@ -5191,7 +5200,7 @@ Before Phase 1, perform the project-native freshness check and read the current 
 - **Red-Team Gate**: Entering the Tasks phase without completing the Red-Team Gate (Phase 4) on the plan is prohibited, except when the skip condition applies (trivial bug fixes or documentation-only changes).
 - **Zero Vibe-Coding**: Every single code change must trace back to a defined task in `.specify/tasks.md`.
 - **Shipping Gate**: No feature may be merged without completing the **Ship Phase** SRA checklist and compiling a reviewer-ready shipping packet under `documentation/` (or `.specify/ship/`).
-- **Project Knowledge Gate**: A structural change must update `PROJECT_MAP.md` in the same commit; a material error correction must update `.learnings/ERRORS.md` in the same commit. Do not create `.specify/` for task classes that do not require SDD.
+- **Project Knowledge Gate**: A structural change must update `PROJECT_MAP.md` in the same commit; an affected key-flow, symbol, state, interface, or validation change must update `CODE_MAP.md`; a material error correction must update `.learnings/ERRORS.md`. Do not create `.specify/` for task classes that do not require SDD.
 - **Command Fallbacks**: The slash commands (like `/speckit.specify`, `/speckit.plan`, etc.) provided by `spec-kit` are shortcuts. In normal Agentic loops, the Agent MUST execute these steps natively and automatically create the documents, without requiring manual trigger commands.
 
 ---
@@ -5311,7 +5320,7 @@ implementation or the source tree of another project.
 | Layer | Entry / lifecycle | Capability / tools | Governance / evidence | State / output |
 |---|---|---|---|---|
 | **L1 Strategy & Entry** | `00_START_HERE.md`, `AGENTS.md`, `MAIN.md` | `README.md`, `AGENT_INSTALL.md`, `INSTALL.md` | `modules/15_LogicEntryChecklist.md`, `modules/13_MandatoryLogicGateTemplate.md` | `manifest.json` |
-| **L2 Session & Lifecycle** | `modules/01_MasterLogic.md`, `modules/03_AgenticLoop.md`, `versions/AgentLogic_V6_8_2.md` | `modules/38_V6_6_SpecDrivenDevelopment.md`, `spec-kit/`, `.specify/` | `modules/12_AgentEnforcement.md`, `modules/44_V6_8_GrokBuildOperationalIntegration.md`, `modules/46_V6_8_ProjectKnowledgeSync.md` | `PROJECT_MAP.md`, `.learnings/ERRORS.md`, conditional `.specify/` |
+| **L2 Session & Lifecycle** | `modules/01_MasterLogic.md`, `modules/03_AgenticLoop.md`, `versions/AgentLogic_V6_8_2.md` | `modules/38_V6_6_SpecDrivenDevelopment.md`, `spec-kit/`, `.specify/` | `modules/12_AgentEnforcement.md`, `modules/44_V6_8_GrokBuildOperationalIntegration.md`, `modules/46_V6_8_ProjectKnowledgeSync.md` | `PROJECT_MAP.md`, `CODE_MAP.md`, `.learnings/ERRORS.md`, conditional `.specify/` |
 | **L3 Execution & Control** | `adapters/`, `install.ps1`, `install.sh` | `skills/`, `scripts/build-profile.ps1` | `modules/05_PermissionsAndSafety.md`, `modules/23_V6_5_PermissionAndOutputPipeline.md`, `modules/29_MandatoryVerificationMatrix.md`, `modules/30_ToolQuestionBoundaryMatrix.md`, `modules/31_ToolMisuseAndAntiPatternMatrix.md` | `scripts/check-logic-entry.js`, `scripts/validate-package.ps1` |
 | **L4 Base & Reference** | `reference/`, historical `versions/` files | `skills/`, `spec-kit/` | `modules/35_V6_5_SkillGovernanceAndMandatoryUse.md`, `modules/36_V6_5_SkillZoneSeparation.md`, `modules/41_V6_7_AIShippingAndReviewabilityAudit.md` | `dist/`, optional `modification_history/` archive |
 
@@ -5928,7 +5937,7 @@ Graphify can build a queryable graph from a target project and export:
 
 Use it to accelerate discovery of entry points, cross-module paths, subsystem clusters,
 and high-connectivity concepts in substantial projects. It complements the Project Fact
-Map and repository system map; it does not replace them.
+mandatory textual `CODE_MAP.md`, the Project Fact Map, and repository system map; it does not replace them.
 
 Source: `https://github.com/Graphify-Labs/graphify` (v8 reference line).
 
@@ -6038,6 +6047,7 @@ Git repository:
 ```text
 AGENTS.md
 PROJECT_MAP.md
+CODE_MAP.md
 .learnings/ERRORS.md
 ```
 
@@ -6049,6 +6059,10 @@ PROJECT_MAP.md
   unconfirmed points.
 - `.learnings/ERRORS.md` contains concise records of material project errors: symptom, root
   cause, correction, prevention, and verification.
+- `CODE_MAP.md` is the mandatory text-first handover map for implementation projects. It records
+  entrypoints, module ownership, navigation-critical functions/classes, state or storage keys,
+  interface/event surfaces, validation commands, and a reviewed commit or freshness marker. It is
+  not a source dump, runtime proof, or replacement for targeted reads.
 
 These files travel with the code in the same normal project commits. They are project facts,
 not private agent memory.
@@ -6060,7 +6074,7 @@ Before relying on a tracked project map or error record, the agent must:
 1. identify the repository root and current branch/worktree;
 2. run `git fetch --prune` when a remote is configured and network access is available;
 3. inspect `git status --short --branch` and the relevant local/remote divergence;
-4. read the current `AGENTS.md`, `PROJECT_MAP.md`, and `.learnings/ERRORS.md`;
+4. read the current `AGENTS.md`, `PROJECT_MAP.md`, `CODE_MAP.md`, and `.learnings/ERRORS.md`;
 5. compare those records with current source and `git diff` before making strong claims.
 
 `git fetch --prune` is a read-oriented freshness check. `git pull`, checkout, merge, rebase,
@@ -6076,6 +6090,8 @@ working tree and tracked records.
 - A structural change (new/moved entrypoint, module boundary, flow, permission boundary,
   dependency boundary, or validation command) must update `PROJECT_MAP.md` in the same
   project commit.
+- An affected key-flow, symbol-ownership, state/storage, interface/event, or validation change
+  must update `CODE_MAP.md` in the same project commit.
 - A material unexpected failure, user correction, or root-cause repair must update
   `.learnings/ERRORS.md` in the same project commit after the correction is understood.
 - Do not write speculative, duplicate, or low-value chatter into either file.
@@ -6092,7 +6108,7 @@ Use only when the matching task requires them:
   of repeatable validation.
 
 Graphify output remains optional. Do not commit `graphify-out/` by default; record durable,
-verified graph conclusions in `PROJECT_MAP.md` instead.
+verified graph conclusions in `PROJECT_MAP.md` or `CODE_MAP.md` instead.
 
 ## 5. Privacy and repository boundary
 
@@ -6152,6 +6168,12 @@ when it is demonstrably reusable beyond one project.
 - Prevention:
 - Verification:
 ```
+
+### `CODE_MAP.md`
+
+Use `templates/CODE_MAP.md`. Every full-workflow business project tracks this concise
+symbol-level navigation map. A project with no implementation code may explicitly record that
+fact and defer symbol rows until implementation exists.
 
 ## 8. Verification boundary
 

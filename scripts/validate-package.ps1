@@ -197,7 +197,8 @@ if ($manifest.current_version -match '^V6\.8\.[2-9]') {
     }
 
     $knowledgeContent = Get-Content -Raw -Path (Join-Path $RepoRoot $knowledgeModule)
-    foreach ($requiredAnchor in @("AGENTS.md", "PROJECT_MAP.md", ".learnings/ERRORS.md", "git fetch --prune")) {
+    Assert-Exists -Root $RepoRoot -RelativePath "templates/CODE_MAP.md" -Label "project code-map template"
+    foreach ($requiredAnchor in @("AGENTS.md", "PROJECT_MAP.md", "CODE_MAP.md", ".learnings/ERRORS.md", "git fetch --prune")) {
         if ($knowledgeContent -notmatch [regex]::Escape($requiredAnchor)) {
             Fail "V6.8.2 project-knowledge module is missing required contract: $requiredAnchor"
         }

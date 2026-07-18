@@ -16,7 +16,7 @@ Graphify can build a queryable graph from a target project and export:
 
 Use it to accelerate discovery of entry points, cross-module paths, subsystem clusters,
 and high-connectivity concepts in substantial projects. It complements the Project Fact
-Map and repository system map; it does not replace them.
+mandatory textual `CODE_MAP.md`, the Project Fact Map, and repository system map; it does not replace them.
 
 Source: `https://github.com/Graphify-Labs/graphify` (v8 reference line).
 

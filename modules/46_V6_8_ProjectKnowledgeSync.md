@@ -14,6 +14,7 @@ Git repository:
 ```text
 AGENTS.md
 PROJECT_MAP.md
+CODE_MAP.md
 .learnings/ERRORS.md
 ```
 
@@ -25,6 +26,10 @@ PROJECT_MAP.md
   unconfirmed points.
 - `.learnings/ERRORS.md` contains concise records of material project errors: symptom, root
   cause, correction, prevention, and verification.
+- `CODE_MAP.md` is the mandatory text-first handover map for implementation projects. It records
+  entrypoints, module ownership, navigation-critical functions/classes, state or storage keys,
+  interface/event surfaces, validation commands, and a reviewed commit or freshness marker. It is
+  not a source dump, runtime proof, or replacement for targeted reads.
 
 These files travel with the code in the same normal project commits. They are project facts,
 not private agent memory.
@@ -36,7 +41,7 @@ Before relying on a tracked project map or error record, the agent must:
 1. identify the repository root and current branch/worktree;
 2. run `git fetch --prune` when a remote is configured and network access is available;
 3. inspect `git status --short --branch` and the relevant local/remote divergence;
-4. read the current `AGENTS.md`, `PROJECT_MAP.md`, and `.learnings/ERRORS.md`;
+4. read the current `AGENTS.md`, `PROJECT_MAP.md`, `CODE_MAP.md`, and `.learnings/ERRORS.md`;
 5. compare those records with current source and `git diff` before making strong claims.
 
 `git fetch --prune` is a read-oriented freshness check. `git pull`, checkout, merge, rebase,
@@ -52,6 +57,8 @@ working tree and tracked records.
 - A structural change (new/moved entrypoint, module boundary, flow, permission boundary,
   dependency boundary, or validation command) must update `PROJECT_MAP.md` in the same
   project commit.
+- An affected key-flow, symbol-ownership, state/storage, interface/event, or validation change
+  must update `CODE_MAP.md` in the same project commit.
 - A material unexpected failure, user correction, or root-cause repair must update
   `.learnings/ERRORS.md` in the same project commit after the correction is understood.
 - Do not write speculative, duplicate, or low-value chatter into either file.
@@ -68,7 +75,7 @@ Use only when the matching task requires them:
   of repeatable validation.
 
 Graphify output remains optional. Do not commit `graphify-out/` by default; record durable,
-verified graph conclusions in `PROJECT_MAP.md` instead.
+verified graph conclusions in `PROJECT_MAP.md` or `CODE_MAP.md` instead.
 
 ## 5. Privacy and repository boundary
 
@@ -128,6 +135,12 @@ when it is demonstrably reusable beyond one project.
 - Prevention:
 - Verification:
 ```
+
+### `CODE_MAP.md`
+
+Use `templates/CODE_MAP.md`. Every full-workflow business project tracks this concise
+symbol-level navigation map. A project with no implementation code may explicitly record that
+fact and defer symbol rows until implementation exists.
 
 ## 8. Verification boundary
 

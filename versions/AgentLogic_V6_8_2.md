@@ -26,7 +26,7 @@ Key Enhancements:
 - **Expanded Core Governance Modules**: Incorporates modules 37, 38, 39, and 40 for cybersecurity routing, SDD lifecycle tracking, premium design system controls, and visual architecture matrix mapping.
 - **Grok Build Complementary Operations**: Adds provider-neutral contracts for rule discovery, session lineage, active-state-preserving compaction, deny-overrides policy compilation, extension trust, subagent capabilities, headless result envelopes, memory freshness, and bounded retries/background work. See `modules/44_V6_8_GrokBuildOperationalIntegration.md`.
 - **Graphify Code Map Integration**: Adds an optional external code-map workflow and a consent-based Graph Preview Gate for substantial projects at Converge/Ship. See `modules/45_V6_8_GraphifyCodeMapIntegration.md`.
-- **Project-Native Knowledge Sync**: Requires tracked project `AGENTS.md`, `PROJECT_MAP.md`, and `.learnings/ERRORS.md`; replaces mandatory external-history checkout/push steps for ordinary project work. See `modules/46_V6_9_ProjectKnowledgeSync.md`.
+- **Project-Native Knowledge Sync**: Requires tracked project `AGENTS.md`, `PROJECT_MAP.md`, `CODE_MAP.md`, and `.learnings/ERRORS.md`. `CODE_MAP.md` is mandatory text-first function, state, and interface navigation; visual graph generation remains user-approved and optional. This replaces mandatory external-history checkout/push steps for ordinary project work. See `modules/46_V6_8_ProjectKnowledgeSync.md`.
 
 ---
 
@@ -83,7 +83,7 @@ The V6.8.1 line is supported by a modular suite of governance rules:
 
 - `modules/44_V6_8_GrokBuildOperationalIntegration.md`: Provider-neutral operational contracts translated from the audited Grok Build runtime and user guides.
 - `modules/45_V6_8_GraphifyCodeMapIntegration.md`: Optional external code-map policy, Graph Preview Gate, and external-extension trust boundary.
-- `modules/46_V6_8_ProjectKnowledgeSync.md`: Project-native Git synchronization for project maps and redacted error lessons.
+- `modules/46_V6_8_ProjectKnowledgeSync.md`: Project-native Git synchronization for project maps, mandatory textual code maps, and redacted error lessons.
 
 ---
 
@@ -150,7 +150,7 @@ Key stable rules:
 - The `ponytail` skill channels a lazy senior developer, enforcing the 7-rung ladder (YAGNI, reuse, stdlib, native, dependency, one-line, min-code) to prevent vibe-coding slop and over-engineering.
 - The `mattpocock/skills` integration mandates interactive grilling (single-question stress-testing), root-level `CONTEXT.md` vocabulary maps, and docs/adr/ numbered Architectural Decision Records.
 - Graphify is an optional external code-map capability. It may guide project discovery and offer a user-approved graph preview, but it must be security-audited before installation and never replaces the Verification Matrix.
-- Project-specific structure and lessons are synchronized with project code through `AGENTS.md`, `PROJECT_MAP.md`, and `.learnings/ERRORS.md`; the optional `modification_history` archive is reserved for cross-project lessons and historical records.
+- Project-specific structure, symbol navigation, and lessons are synchronized with project code through `AGENTS.md`, `PROJECT_MAP.md`, `CODE_MAP.md`, and `.learnings/ERRORS.md`; the optional `modification_history` archive is reserved for cross-project lessons and historical records.
 
 
 

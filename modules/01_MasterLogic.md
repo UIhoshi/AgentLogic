@@ -93,11 +93,11 @@ UI 实施完成后仍必须执行截图、父子布局边界、溢出、换行�
 
 ## 6. 项目知识与规则同步
 
-- 业务项目的同步事实是项目自身 Git 跟踪的 `AGENTS.md`、`PROJECT_MAP.md` 和
+- 业务项目的同步事实是项目自身 Git 跟踪的 `AGENTS.md`、`PROJECT_MAP.md`、`CODE_MAP.md` 和
   `.learnings/ERRORS.md`，而不是外置日志仓库。
 - 接手项目时先 `git fetch --prune`（可用时）并检查分支、工作树和差异，再读取这三份文件；
   任何 pull/checkout/merge 仍需作为单独的状态变更确认。
-- 结构变化必须同提交更新 `PROJECT_MAP.md`；重要错误纠正必须同提交更新
+- 结构变化必须同提交更新 `PROJECT_MAP.md`；关键函数/状态/接口导航变化必须同提交更新 `CODE_MAP.md`；重要错误纠正必须同提交更新
   `.learnings/ERRORS.md`；`.specify/` 和 `docs/adr/` 仅在相应门槛触发时使用。
 - `modification_history` 可保留为跨项目经验和历史归档，但不阻断普通业务项目的编码或发布。
 - 不得把密钥、个人路径、私有提示词、原始日志或默认 Graphify 输出写入已跟踪知识文件或 bundle。
@@ -124,14 +124,16 @@ UI 实施完成后仍必须执行截图、父子布局边界、溢出、换行�
 只有用户要求停止、计划完成需要新的战略方向、出现无法从本地事实解决的阻塞，或即将进行
 高风险不可逆操作时，才暂停请求输入。
 
-## 10. 可选代码地图与图谱预览
+## 10. 强制文本代码地图与可选图谱预览
 
-- `modules/45_V6_8_GraphifyCodeMapIntegration.md` 提供按需项目代码地图策略，不是默认安装的外部依赖。
+- 每个完整工作流业务项目必须维护根目录 `CODE_MAP.md`，用于入口、模块、关键符号、状态和接口的文本导航；它不是运行时证明，必须以当前源码复核。
+- `modules/45_V6_8_GraphifyCodeMapIntegration.md` 提供按需可视化代码地图策略，不是默认安装的外部依赖。
 - 多模块功能、重大重构、架构或发布工作在 Converge/Ship 时应询问用户是否需要代码视图预览。
 - 用户明确同意后，才可在目标业务项目中生成 `graphify-out/`；不得默认在 AgentLogic 仓库内生成，也不得把外部图谱结果当作运行时事实证明。
 
 ## 11. 项目内 L1-L4 地图
 
 - 每个业务项目使用根目录 `PROJECT_MAP.md` 保存其真实 L1-L4 映射，不复制本逻辑包。
+- 每个业务项目使用根目录 `CODE_MAP.md` 保存可交接的符号级导航地图。
 - 此地图和 `.learnings/ERRORS.md` 必须与项目代码一起提交并跨设备同步。
 - 具体模板、脱敏边界和安全同步步骤由 `modules/46_V6_8_ProjectKnowledgeSync.md` 定义。
