@@ -22,11 +22,11 @@ or begin implementation before the logic-entry loop above has been completed.
 > `README.md` is the canonical English repository README and entry documentation. This file is retained as a legacy/reference document and is not part of the formal logic-entry chain.
 
 
-# 🌌 AgentLogic: 智能体级本地自进化规则引擎 (V6.8.1)
+# 🌌 AgentLogic: 智能体级本地自进化规则引擎 (V6.8.2)
 
 [![Agentic Code](https://img.shields.io/badge/Agent-Autonomous-blueviolet?style=flat-square)](https://github.com/UIhoshi/AgentLogic)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/Version-V6.8.1_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_8_1.md)
+[![Version](https://img.shields.io/badge/Version-V6.8.2_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_8_2.md)
 
 AgentLogic 是一套专为本地 AI 编码宿主（如 Codex, Claude Code, Gemini Pro）设计的**分层规则引擎**。它将多轮会话规范、工具首选策略、安全沙箱拦截及专业领域扩展集成打包，作为 AI 智能体的“主运行心智”。
 
@@ -126,4 +126,4 @@ AgentLogic 的演进离不开开源社区的启发。我们在设计中深度参
 
 1. **逻辑包纯粹性**：本仓库是规则元数据，不能写入具体的业务项目代码。
 2. **防盲目执行**：AI 助理在进行复杂重构或方案设计前，必须在 `.specify/` 下完成 `spec.md` (规格) 和 `plan.md` (技术规划)。
-3. **版本隔离**：修改核心机制时，应优先回写 `versions/AgentLogic_V6_8_1.md`，然后重新运行 `build-profile.ps1` 进行编译部署。
+3. **版本隔离**：修改核心机制时，应优先回写 `versions/AgentLogic_V6_8_2.md`，然后重新运行 `build-profile.ps1` 进行编译部署。

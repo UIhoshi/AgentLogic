@@ -1,64 +1,47 @@
-# V6.5 Project Fact Map Template
+# Project Fact Map Template
 
-Status: stable V6.5 support template.
-This template incorporates the 4-tier memory taxonomy and mandatory verification tracking.
+Status: active project-fact template.
+This template supports the V6.8.2 project-native knowledge-sync contract. It belongs in the
+target project as `PROJECT_MAP.md`, travels with project code, and contains no private agent
+memory or machine-specific data.
 
 ---
 
-## 1. Project Identity & Logic Entry
+## 1. Project Identity & Freshness
 - **Project Name**:
-- **Logic Entry Point**: (e.g., `MAIN.md` at the repository root)
-- **Logic Version**: V6.5 (Stable Line)
-- **Directory Audit Status**: [Verified/Unverified]
+- **Repository / Branch**:
+- **Remote freshness check**: `git fetch --prune` [Verified/Offline/Not configured]
+- **Working-tree status**:
+- **Installed AgentLogic entry**:
 
-## 2. The 4-Tier Fact Map
+## 2. The Project L1-L4 Map
 
-### 2.1 Project Facts (Core Architecture & Logic)
-- **Primary Tech Stack**:
-- **Main Entrypoints**:
-- **Key Constraints**:
-- **Known Architectual Debt**: (e.g., Large files, God components)
+### L1 — Entry & Surface
+- **Entrypoints**:
+- **User/API/CLI surfaces**:
+- **Primary documentation**:
 
-### 2.2 User Facts (Preferences & Local Setup)
-- **Preferred Coding Style**:
-- **Local Tool Paths**: (e.g., Browser path, custom shell)
-- **Machine Quirks**:
+### L2 — Flow & Lifecycle
+- **Core flows**:
+- **State / task lifecycle**:
+- **Key module boundaries**:
 
-### 2.3 Feedback Facts (Lessons from Previous Rounds)
-- **Successful Patterns**:
-- **Failed Attempts/Anti-Patterns to Avoid**:
-- **Tool Usage Lessons**:
+### L3 — Control & Verification
+- **Services, permissions, and trust boundaries**:
+- **Validation commands**:
+- **Known constraints / architectural debt**:
 
-### 2.4 Reference Facts (External Systems)
-- **Upstream Documentation**:
-- **Dependency Versions**:
-- **Remote API Endpoints**:
+### L4 — Base & Dependencies
+- **Data stores / providers**:
+- **Foundational tools and dependencies**:
+- **External systems**:
 
-## 3. Current Task State
-
-### 3.1 Task Boundary
-- **Current Goal**:
-- **Affected Modules**:
-- **Risk Level**: [Low/Medium/High/Irreversible]
-
-### 3.2 Verification Tracker (Mandatory)
-| Feature/Claim | Evidence Tool Used | Result | Status |
-|---|---|---|---|
-| (e.g., Bug reproduction) | run_shell_command | Log attached | [Verified] |
-| (e.g., UI Fix) | screenshot | Image attached | [Pending] |
-
-## 4. Runtime Mode Context
-- **Active Mode**: [REPL / Headless / SDK / Server / Bridge / Packaging]
-- **Permission Posture**: [Allow / Ask / Deny]
-- **Output Target**:
-
-## 5. Unconfirmed Points (The "Audit List")
+## 3. Unconfirmed Points
 - [ ] Point 1
 - [ ] Point 2
 
----
-
-## 6. Cleanup & Consolidation Checklist
-- [ ] Temporary artifacts deleted?
-- [ ] New facts promoted to GEMINI.md or MEMORY.md?
-- [ ] Documentation synced?
+## 4. Update Rules
+- Update this file in the same commit as a structural or validation-boundary change.
+- Record material errors in `.learnings/ERRORS.md`, not in this map.
+- Do not include secrets, personal paths, private prompts, raw logs, or generated graph output.
+- Use current source and matching verification evidence to confirm facts; this map is not proof by itself.

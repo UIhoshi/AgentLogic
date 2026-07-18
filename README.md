@@ -17,11 +17,11 @@ Do not continue deeper reading, modify files, delete files, perform write action
 or begin implementation before the logic-entry loop above has been completed.
 -->
 
-# 🌌 AgentLogic: Autonomous Evolving Rule Engine (V6.8.1)
+# 🌌 AgentLogic: Autonomous Evolving Rule Engine (V6.8.2)
 
 [![Agentic Code](https://img.shields.io/badge/Agent-Autonomous-blueviolet?style=flat-square)](https://github.com/UIhoshi/AgentLogic)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/Version-V6.8.1_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_8_1.md)
+[![Version](https://img.shields.io/badge/Version-V6.8.2_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_8_2.md)
 
 AgentLogic is a versioned primary-logic package designed to be pulled into local AI coding hosts (such as Codex, Claude Code, Gemini Pro) and used as their default operating mind. It consolidates multi-turn session workflows, tool selection matrix, security sandbox auditing, and dynamic domain extensions.
 
@@ -122,7 +122,7 @@ During its evolutionary cycles, AgentLogic has integrated concepts and structure
 
 1. **Keep it Pure**: No business logic or project-specific implementations should be written into `AgentLogic` rule files.
 2. **Specify Before Writing**: Always compile technical blueprints to `.specify/spec.md` and `.specify/plan.md` before touching code.
-3. **Generate via Bundle**: Never edit `dist/` bundles manually. Always write updates to version files (e.g. `versions/AgentLogic_V6_8_1.md`), then run `build-profile.ps1` to rebuild the adapter targets.
+3. **Generate via Bundle**: Never edit `dist/` bundles manually. Always write updates to version files (e.g. `versions/AgentLogic_V6_8_2.md`), then run `build-profile.ps1` to rebuild the adapter targets.
 ## V6.8 Operational Integration
 
 The default `core-enhanced` profile includes
@@ -138,3 +138,13 @@ The same profile also includes
 [`modules/45_V6_8_GraphifyCodeMapIntegration.md`](./modules/45_V6_8_GraphifyCodeMapIntegration.md).
 It defines an optional Graph Preview Gate: substantial tasks ask the user at Converge/Ship
 whether to generate a Graphify code view. Graphify is not installed or run automatically.
+
+## V6.8.2 Project-Native Knowledge Sync
+
+Business projects synchronize their own concise operational facts with code through tracked
+`AGENTS.md`, `PROJECT_MAP.md`, and `.learnings/ERRORS.md`. The global AgentLogic bundle is
+not copied into projects. Before relying on those records, check remote freshness safely with
+`git fetch --prune` and inspect the current branch/worktree; a pull remains a separate,
+confirmed state change. `.specify/` and `docs/adr/` are conditional, while raw logs, secrets,
+machine paths, private prompts, and default `graphify-out/` artifacts stay out of tracked
+knowledge. See [Project-Native Knowledge Sync](./modules/46_V6_8_ProjectKnowledgeSync.md).

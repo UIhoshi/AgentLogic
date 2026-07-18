@@ -83,7 +83,8 @@ This module does not imply that Graphify is installed, approved, or available on
   processing and URL ingestion can use configured model/API or network paths. Confirm the
   selected mode and data boundary before generation.
 - Do not commit graph artifacts unless the user explicitly asks and the target project's
-  repository policy allows them.
+  repository policy allows them. By default, record durable, verified graph conclusions in
+  `PROJECT_MAP.md` and keep `graphify-out/` out of the tracked project-knowledge surface.
 
 ## 6. Recommended Workflow After Consent
 
@@ -102,4 +103,3 @@ This module does not imply that Graphify is installed, approved, or available on
   has converged or while shipping.
 - The Graph Preview Gate is opt-in and does not replace SDD, Red-Team, SRA, or the Mandatory
   Verification Matrix.
-

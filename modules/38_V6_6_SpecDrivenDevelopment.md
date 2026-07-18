@@ -18,6 +18,10 @@ Feature work, refactors, multi-file behavior changes, new projects, and release-
 
 When starting a project or introducing a feature, refactor, multi-file behavior change, or release-affecting change, the Agent MUST execute the following phases sequentially:
 
+Before Phase 1, perform the project-native freshness check and read the current project
+`AGENTS.md`, `PROJECT_MAP.md`, and `.learnings/ERRORS.md` as defined by
+`modules/46_V6_8_ProjectKnowledgeSync.md`.
+
 1. **Constitution Phase**: Establish the project's governing principles, style rules, quality criteria, and performance guidelines.
    - *Requirement*: The Agent must check if `.specify/constitution.md` (or equivalent) exists. If not, it MUST create it first.
 2. **Specify Phase**: Define user scenarios, requirements, and user stories in clear, natural language.
@@ -36,7 +40,7 @@ When starting a project or introducing a feature, refactor, multi-file behavior 
 5. **Tasks Phase**: Translate the plan into a checklist of granular, actionable tasks.
    - *Requirement*: The task list must be saved in `.specify/tasks.md`.
 6. **Implement Phase**: Systematically execute the tasks in order, applying the relevant build, test, runtime, or visual validation after each behavior-affecting task. The Agent MUST apply the 7-Rung Lazy Developer's Ladder (see `modules/42_V6_7_PonytailLazySeniorDevLadder.md`) before writing or changing production code.
-7. **Converge Phase**: Match the codebase state against the specs, plan, and tasks. Any discrepancy or remaining gap must be appended as new tasks to `.specify/tasks.md` until fully resolved.
+7. **Converge Phase**: Match the codebase state against the specs, plan, and tasks. Any discrepancy or remaining gap must be appended as new tasks to `.specify/tasks.md` until fully resolved. Update `PROJECT_MAP.md` when the implementation changed structure, flows, boundaries, or validation commands.
 8. **Ship Phase**: Perform the AI Shipping & Reviewability Audit (SRA) to document architecture, flows, permissions, variables, and tests, running static audits before merging. See `modules/41_V6_7_AIShippingAndReviewabilityAudit.md`.
 
 ---
@@ -47,6 +51,7 @@ When starting a project or introducing a feature, refactor, multi-file behavior 
 - **Red-Team Gate**: Entering the Tasks phase without completing the Red-Team Gate (Phase 4) on the plan is prohibited, except when the skip condition applies (trivial bug fixes or documentation-only changes).
 - **Zero Vibe-Coding**: Every single code change must trace back to a defined task in `.specify/tasks.md`.
 - **Shipping Gate**: No feature may be merged without completing the **Ship Phase** SRA checklist and compiling a reviewer-ready shipping packet under `documentation/` (or `.specify/ship/`).
+- **Project Knowledge Gate**: A structural change must update `PROJECT_MAP.md` in the same commit; a material error correction must update `.learnings/ERRORS.md` in the same commit. Do not create `.specify/` for task classes that do not require SDD.
 - **Command Fallbacks**: The slash commands (like `/speckit.specify`, `/speckit.plan`, etc.) provided by `spec-kit` are shortcuts. In normal Agentic loops, the Agent MUST execute these steps natively and automatically create the documents, without requiring manual trigger commands.
 
 ---

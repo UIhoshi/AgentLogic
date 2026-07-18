@@ -29,10 +29,10 @@ Once the user's primary directive is marked `Verified`, the agent should perform
 - Review the session history.
 - Identify new structural facts (e.g., "The auth service requires X header").
 - Identify new user preferences (e.g., "User prefers 4-space tabs").
-- Write these to the appropriate tier (Project Fact Map, MEMORY.md, or Global Memory).
+- Write project structure facts to tracked `PROJECT_MAP.md`, material project corrections to tracked `.learnings/ERRORS.md`, and private user/machine facts only to private memory.
 
 ### 2.3 Documentation Sync
-- Check if the code changes invalidate existing `GEMINI.md` or `README.md` descriptions.
+- Check if the code changes invalidate existing `AGENTS.md`, `PROJECT_MAP.md`, or `README.md` descriptions.
 - Propose or apply targeted updates to keep documentation in sync with reality.
 
 ### 2.4 Structural Consolidation

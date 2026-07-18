@@ -137,6 +137,7 @@ Before declaring an applicable task finished and ready for human merge review, t
 - [ ] **Security Clear**: When the change has secrets, permissions, trust boundaries, or external inputs, run the static security audit (§4.3) with self-refutation (§3) and verify the applicable secret-handling claims.
 - [ ] **Performance Approved**: When the change has a runtime hot path, database access, network flow, or caching behavior, run the performance audit (§4.4) with self-refutation.
 - [ ] **All Findings Self-Refuted**: Confirm that every reported finding has been through the self-refutation process (§3).
+- [ ] **Project Knowledge Sync**: Confirm `PROJECT_MAP.md` reflects any shipped structural or validation-boundary change and `.learnings/ERRORS.md` records material corrected failures without secrets or private data.
 - [ ] **Human Handover**: Ask about a human-readable handover package only when the user or project stakeholders need business-facing reporting; compile it only if requested.
 
 ---

@@ -59,6 +59,8 @@ const ACTIVE_VERSION_FILES = [
   'modules/39_V6_6_TasteFrontendDesign.md',
   'modules/40_AgentLogicSystemMap.md',
   'modules/44_V6_8_GrokBuildOperationalIntegration.md',
+  'modules/45_V6_8_GraphifyCodeMapIntegration.md',
+  'modules/46_V6_8_ProjectKnowledgeSync.md',
 ];
 
 const GATE_ANCHORS = [
@@ -338,6 +340,39 @@ function checkExternalReferences() {
   }
 }
 
+function checkProjectKnowledgeSyncContract() {
+  const manifest = readFileSafe('manifest.json');
+  if (!manifest) return;
+  let parsed;
+  try {
+    parsed = JSON.parse(manifest);
+  } catch {
+    return;
+  }
+
+  if (!/^V6\.8\.[2-9]/.test(parsed.current_version || '')) return;
+
+  const modulePath = 'modules/46_V6_8_ProjectKnowledgeSync.md';
+  const content = readFileSafe(modulePath);
+  if (!content) {
+    fail(`Missing project-knowledge module: ${modulePath}`);
+    return;
+  }
+
+  for (const anchor of ['AGENTS.md', 'PROJECT_MAP.md', '.learnings/ERRORS.md', 'git fetch --prune']) {
+    if (!content.includes(anchor)) {
+      fail(`Project-knowledge module is missing required anchor: ${anchor}`);
+    }
+  }
+
+  const files = parsed.profiles?.[parsed.default_profile]?.files || [];
+  if (!files.includes(modulePath)) {
+    fail(`Default profile '${parsed.default_profile}' does not include '${modulePath}'.`);
+  } else {
+    ok('Project-native knowledge-sync contract verified.');
+  }
+}
+
 function main() {
   console.log('Checking repository logic-entry enforcement...\n');
 
@@ -356,6 +391,7 @@ function main() {
   checkMapLinks();
   checkActiveRelativeLinks();
   checkExternalReferences();
+  checkProjectKnowledgeSyncContract();
 
   if (hasError) {
     console.error('\nLogic-entry check FAILED.');

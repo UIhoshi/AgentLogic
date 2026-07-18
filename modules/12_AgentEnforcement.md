@@ -240,28 +240,41 @@ Agent 至少必须完成：
 - A skill use does not replace normal verification obligations. It only provides the strongest operational route when the task matches.
 - Use `modules/35_V6_5_SkillGovernanceAndMandatoryUse.md` for the current deduplication policy, archive posture, and mandatory-skill map.
 
-## 4.4 错误与经验归档同步规则 (Error Logging & Sync Protocol)
+## 4.4 项目内知识同步规则 (Project-Native Knowledge Sync)
 
 > [!IMPORTANT]
-> **【非谈判性阻断门槛 (Non-Negotiable Blocking Gate)】**
-> 本节所述之“犯错记录拉取、检索、归档与同步”属于本逻辑包的**强制必要步骤（必要步骤）**。在克隆项目、启动开发或推送代码时，任何跳过、精简或忽略本同步协议的行为，均被视为严重违规，会导致本轮交付审计直接判定失败。
+> 项目地图和错误记录必须与项目代码处于同一 Git 历史，而不是依赖独立的日志仓库。同步不足时不得把旧地图或旧错误记录当作当前事实。
 
-为构建跨项目、跨会话的共享知识库，防范 AI 助手“会话结束即失忆”的局限性，本系统强制引入 GitHub 共享犯错记录仓库机制。
+每个使用完整 AgentLogic 工作流的业务项目必须跟踪：
 
-- **共享仓库地址**：`https://github.com/UIhoshi/modification_history`
-- **本地映射路径**：默认使用当前项目父目录下的 `modification_history`；如本地布局不同，使用显式配置的绝对路径或环境变量，不得把某台机器的用户目录写入规则文件
-- **归档格式**：在共享仓库下，以项目名称建立子文件夹（例如 `/CanvasTab/`），在此子文件夹下写入 Markdown 格式的修改与修复日志（如 `modification_history.md`）。
+- 根目录 `AGENTS.md`：只保存项目局部规则、命令和验证要求；
+- 根目录 `PROJECT_MAP.md`：保存该项目实际 L1-L4、入口、边界和验证事实；
+- `.learnings/ERRORS.md`：保存脱敏后的重要错误、根因、修正和防再发措施。
 
-### 4.4.1 强制同步时机与双重推送
-- **逻辑更新时**：每当对 `AgentLogic` 规则逻辑进行更新或规章升级时，必须同步在 `modification_history` 仓库中归档错误背景。
-- **项目代码推送时**：每次将任何业务项目代码（如 `CanvasTab`）推送到 GitHub 远程仓库之前，**必须**同步执行修改/犯错记录的编写，并率先将犯错记录推送到 `modification_history` 仓库。
+### 4.4.1 启动前同步义务
 
-### 4.4.2 启动前检索义务
-- **先验检索**：在进入任何新项目或接手新任务进行 Startup Gate 校验时，除了阅读项目文档，**必须**先拉取 `modification_history` 仓库的最新 commit，检索当前项目或相似场景的历史报错，将其作为编码前的避坑先验知识。
+进入项目或接手任务时，Agent 必须先：
 
-### 4.4.3 克隆与项目初始化同步 (Clone & Project Initialization Sync)
-- **拉取与映射**：当 Agent 首次从 GitHub 克隆一个新业务仓库（如 `git clone <URL>`）或者初始化一个新项目工作区时，**必须**同步将 [modification_history](https://github.com/UIhoshi/modification_history) 仓库克隆或拉取到本地工作区的同级目录下。
-- **本地历史拉取**：Agent 必须从 `modification_history` 仓库的对应项目子文件夹（如 `/CanvasTab/`）中复制或载入历史修改与犯错日志，将其缓存至当前项目的工作区下（如 `.specify/history/` 目录或项目根目录下），作为本次及后续生命周期开发的重要事实和避坑依据。
+1. 确认仓库根目录、分支和工作树；
+2. 在可联网且有远端时运行 `git fetch --prune`；
+3. 检查 `git status --short --branch`、本地差异及远端领先状态；
+4. 读取当前 `AGENTS.md`、`PROJECT_MAP.md` 和 `.learnings/ERRORS.md`；
+5. 用当前源码和 `git diff` 复核会影响本轮任务的地图或记录。
+
+`fetch` 只用于检查新鲜度；`pull`、checkout、merge、rebase 等会改变工作树的动作必须单独确认目标，并优先使用干净工作树上的 `git pull --ff-only`。
+
+### 4.4.2 同提交更新义务
+
+- 新增/移动入口、模块边界、关键流程、权限边界、依赖边界或验证命令时，必须在同一项目 commit 更新 `PROJECT_MAP.md`。
+- 发生重要意外错误、用户纠正或根因修复时，必须在理解修复后于同一项目 commit 更新 `.learnings/ERRORS.md`。
+- `.specify/` 仅用于匹配的非平凡 SDD 工作；`docs/adr/` 仅用于难以逆转的决定。
+- 默认不提交 `graphify-out/`；将经过验证的长期图谱结论写回 `PROJECT_MAP.md`。
+
+### 4.4.3 隐私与跨项目经验
+
+- 已跟踪项目知识不得包含密钥、Token、`.env` 内容、机器绝对路径、个人配置、私有提示词、原始终端日志、缓存、构建产物或完整 Graphify 输出。
+- `modification_history` 可以保留为可选的跨项目经验和历史归档，但不再是普通业务项目编码、克隆或推送的阻断依赖。
+- 一个教训在多个项目中重复出现时，才应被提升到 AgentLogic 或可选跨项目归档。
 
 ## 5. 为什么这是强制要求
 
@@ -271,6 +284,6 @@ Agent 至少必须完成：
 
 ## 6. 实际使用要求
 
-- 每次新项目开始时，优先读 `AgentLogic_V6_8_1.md`
+- 每次新项目开始时，优先读当前 `manifest.json` 指向的稳定版本源文件
 - 每次项目级维护时，再结合本包中的分层文档与原始层目录
-- 如果后续新增更准确的规则，应先回写 `AgentLogic_V6_8_1.md`，再同步本逻辑包
+- 如果后续新增更准确的规则，应先回写当前稳定版本源文件，再同步本逻辑包

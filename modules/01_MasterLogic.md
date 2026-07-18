@@ -1,4 +1,4 @@
-# AgentLogic V6.8.1 Master Logic
+# AgentLogic V6.8.2 Master Logic
 
 本文件是 AgentLogic 仓库的项目级主逻辑摘要。它描述本仓库中的规则、验证、安装和
 打包资产，不描述任何外部业务项目或某个具体 Agentic CLI 产品的源码事实。
@@ -23,7 +23,7 @@
 
 ### L2：会话规则与开发生命周期 (Session & Development Lifecycle)
 
-- 稳定版本源：`versions/AgentLogic_V6_8_1.md`
+- 稳定版本源：`versions/AgentLogic_V6_8_2.md`
 - 主逻辑摘要：`modules/01_MasterLogic.md`
 - Agent 强制规则：`modules/12_AgentEnforcement.md`
 - 入口清单：`modules/15_LogicEntryChecklist.md`
@@ -91,12 +91,16 @@
 用户没有明确 opt-out 时，不得把“内容改动、响应式修复、无障碍修复或小改动”当作默认豁免。
 UI 实施完成后仍必须执行截图、父子布局边界、溢出、换行和实际容器宽度验证。
 
-## 6. 错误历史与规则同步
+## 6. 项目知识与规则同步
 
-- `modification_history` 是共享错误与修复记录，不是当前仓库的主逻辑来源。
-- 默认本地位置是当前项目父目录下的 `modification_history`；其他布局必须显式配置。
-- 在规则逻辑更新、发布或推送项目代码前，先检查并同步对应的历史记录。
-- 不得把特定机器的用户目录写入规则文件或 bundle。
+- 业务项目的同步事实是项目自身 Git 跟踪的 `AGENTS.md`、`PROJECT_MAP.md` 和
+  `.learnings/ERRORS.md`，而不是外置日志仓库。
+- 接手项目时先 `git fetch --prune`（可用时）并检查分支、工作树和差异，再读取这三份文件；
+  任何 pull/checkout/merge 仍需作为单独的状态变更确认。
+- 结构变化必须同提交更新 `PROJECT_MAP.md`；重要错误纠正必须同提交更新
+  `.learnings/ERRORS.md`；`.specify/` 和 `docs/adr/` 仅在相应门槛触发时使用。
+- `modification_history` 可保留为跨项目经验和历史归档，但不阻断普通业务项目的编码或发布。
+- 不得把密钥、个人路径、私有提示词、原始日志或默认 Graphify 输出写入已跟踪知识文件或 bundle。
 
 ## 7. 目录边界与打包规则
 
@@ -125,3 +129,9 @@ UI 实施完成后仍必须执行截图、父子布局边界、溢出、换行�
 - `modules/45_V6_8_GraphifyCodeMapIntegration.md` 提供按需项目代码地图策略，不是默认安装的外部依赖。
 - 多模块功能、重大重构、架构或发布工作在 Converge/Ship 时应询问用户是否需要代码视图预览。
 - 用户明确同意后，才可在目标业务项目中生成 `graphify-out/`；不得默认在 AgentLogic 仓库内生成，也不得把外部图谱结果当作运行时事实证明。
+
+## 11. 项目内 L1-L4 地图
+
+- 每个业务项目使用根目录 `PROJECT_MAP.md` 保存其真实 L1-L4 映射，不复制本逻辑包。
+- 此地图和 `.learnings/ERRORS.md` 必须与项目代码一起提交并跨设备同步。
+- 具体模板、脱敏边界和安全同步步骤由 `modules/46_V6_8_ProjectKnowledgeSync.md` 定义。

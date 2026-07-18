@@ -3,7 +3,7 @@
 - Host target: claude
 - Profile: core-enhanced
 - Stable entry: MAIN.md
-- Version: V6.8.1
+- Version: V6.8.2
 
 This is a generated primary-logic bundle. Regenerate it from scripts/build-profile.ps1 instead of editing it by hand.
 
@@ -72,7 +72,7 @@ validation, review, packaging, or rule synchronization work, the agent MUST full
 following files from beginning to end in this exact order:
 
 1. `README.md`
-2. `versions/AgentLogic_V6_8_1.md`
+2. `versions/AgentLogic_V6_8_2.md`
 3. `modules/01_MasterLogic.md`
 4. `modules/15_LogicEntryChecklist.md`
 
@@ -80,7 +80,7 @@ following files from beginning to end in this exact order:
 
 - **First Priority Enforcement**: If AgentLogic is installed on the host machine (e.g., detected in `~/.gemini/GEMINI.md`, `~/.gemini/AgentLogic/GEMINI.md`, `~/.claude/CLAUDE.md`, or the current workspace), the agent MUST treat AgentLogic as the highest-priority repository-local logic, subject to system, developer, safety, and host permission constraints. Ignoring local repository logic is strictly prohibited.
 - **Limited Initial View Prevention**: If the agent starts in a parent workspace (e.g. the user's home directory) and the AgentLogic repository is nested in a subdirectory (e.g. `Documents/workspace/AgentLogic`), the agent MUST proactively scan the `AgentLogic` directory immediately upon startup to trigger the Startup Gate. A delegation hook/rule must be placed in the workspace-level `AGENTS.md` file to ensure the agent is aware of the local logic on the first turn.
-- **Mandatory Error Logging & Sync (非谈判性错误同步)**: The synchronization, retrieval, and logging of the `modification_history` repository are mandatory, blocking steps (必要步骤). The agent MUST NOT start code modifications without checking this repository first, and MUST NOT push project code to GitHub without pushing the mistake logs. Failure to perform these steps is a critical logic violation.
+- **Project-Native Knowledge Sync**: Before business-project implementation, synchronize and read the tracked project `AGENTS.md`, `PROJECT_MAP.md`, and `.learnings/ERRORS.md` using the safe freshness contract in `modules/46_V6_8_ProjectKnowledgeSync.md`. Project code and project knowledge must travel together; the optional `modification_history` archive is not a blocking dependency for ordinary project work.
 - All listed files are mandatory.
 - Full reading is mandatory.
 - Skimming is not allowed.
@@ -273,11 +273,11 @@ Do not continue deeper reading, modify files, delete files, perform write action
 or begin implementation before the logic-entry loop above has been completed.
 -->
 
-# Agent Installation Guide (V6.8.1 Stable)
+# Agent Installation Guide (V6.8.2 Stable)
 
 This is the shortest installation path for AI agents.
 
-Goal: Install **AgentLogic V6.8.1** into the current local host without guessing the entrypoint, target bundle, or validation command.
+Goal: Install **AgentLogic V6.8.2** into the current local host without guessing the entrypoint, target bundle, or validation command.
 
 ## Do Not Guess
 
@@ -285,7 +285,7 @@ Before installing, identify:
 
 1.  Whether the current directory is the AgentLogic repository root.
 2.  The target host: `codex`, `claude`, `antigravity`, or `generic`.
-3.  The selected profile: **`core-enhanced`** is the default for full V6.8.1 governance support.
+3.  The selected profile: **`core-enhanced`** is the default for full V6.8.2 governance support.
 4.  Whether the host should bind to `MAIN.md` directly or to a generated bundle.
 
 If uncertain, run the doctor first:
@@ -294,9 +294,9 @@ If uncertain, run the doctor first:
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\doctor.ps1
 ```
 
-## V6.8.1 Stable Facts
+## V6.8.2 Stable Facts
 
-- **Current Version**: V6.8.1 (SRA Shipping Audit, Red-Team Gate, Reversing Router, Spec Kit, Taste Design System, and human-readable proposal/handover gates).
+- **Current Version**: V6.8.2 (including project-native L1-L4 maps and project error synchronization).
 - **Repository Role**: Primary local logic package (Method Layer).
 - **Stable Host Entry**: `MAIN.md`.
 - **Default Profile**: `core-enhanced` (Includes the current runtime, verification, SDD, SRA, skill, and reviewability governance modules).
@@ -332,7 +332,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost ge
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\validate-package.ps1
 ```
 
-## Agent Decision Rule (V6.8.1)
+## Agent Decision Rule (V6.8.2)
 
 If the user asks to "load", "install", "mount", "bind", or "use this logic locally", the agent **MUST** follow this protocol:
 
@@ -347,14 +347,14 @@ If the user asks to "load", "install", "mount", "bind", or "use this logic local
     - preserve engineering-critical skills in the visible set
     - report host-local skill sprawl without silently mutating it
 6.  **Adoption**: Immediately after installation, the agent must:
-    -   Read `versions/AgentLogic_V6_8_1.md` to understand the new line.
+    -   Read `versions/AgentLogic_V6_8_2.md` to understand the new line.
     -   Adopt the **Mandatory Verification Matrix** (Module 29) for all subsequent claims.
     -   Adopt the **4-Tier Memory Taxonomy** (User, Feedback, Project, Reference) for project notes.
     -   Adopt the **Spec-Driven Development (SDD) Lifecycle** (Module 38) for technical tasks.
     -   Adopt the **Taste Frontend Design Standards** (Module 39) for interface and visual changes.
-7.  **Report**: State the installed host, version (V6.8.1), profile, and confirmation that the new governance rules are active.
+7.  **Report**: State the installed host, version (V6.8.2), profile, and confirmation that the new governance rules are active.
 
-## Install-Time And Update-Time Skill Rule (V6.8.1)
+## Install-Time And Update-Time Skill Rule (V6.8.2)
 
 Every local installation **and every local logic update** of AgentLogic should perform a host-local
 skill inventory pass. Moving or archiving host-local skills requires a separate explicit `-Apply`
@@ -368,7 +368,7 @@ This is required because:
 - duplicate-or-overlapping skill families must be classified instead of guessed
 - host-local skills must stay separate from any logic-carried skill layer so one machine's local packs do not become another machine's default logic state
 
-The V6.8.1 install/update rule is:
+The V6.8.2 install/update rule is:
 
 1. identify the host-local skill zone for the target host
 2. keep that host-local zone separate from the logic-carried layer
@@ -421,11 +421,11 @@ Do not continue deeper reading, modify files, delete files, perform write action
 or begin implementation before the logic-entry loop above has been completed.
 -->
 
-# 🌌 AgentLogic: Autonomous Evolving Rule Engine (V6.8.1)
+# 🌌 AgentLogic: Autonomous Evolving Rule Engine (V6.8.2)
 
 [![Agentic Code](https://img.shields.io/badge/Agent-Autonomous-blueviolet?style=flat-square)](https://github.com/UIhoshi/AgentLogic)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/Version-V6.8.1_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_8_1.md)
+[![Version](https://img.shields.io/badge/Version-V6.8.2_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_8_2.md)
 
 AgentLogic is a versioned primary-logic package designed to be pulled into local AI coding hosts (such as Codex, Claude Code, Gemini Pro) and used as their default operating mind. It consolidates multi-turn session workflows, tool selection matrix, security sandbox auditing, and dynamic domain extensions.
 
@@ -526,7 +526,7 @@ During its evolutionary cycles, AgentLogic has integrated concepts and structure
 
 1. **Keep it Pure**: No business logic or project-specific implementations should be written into `AgentLogic` rule files.
 2. **Specify Before Writing**: Always compile technical blueprints to `.specify/spec.md` and `.specify/plan.md` before touching code.
-3. **Generate via Bundle**: Never edit `dist/` bundles manually. Always write updates to version files (e.g. `versions/AgentLogic_V6_8_1.md`), then run `build-profile.ps1` to rebuild the adapter targets.
+3. **Generate via Bundle**: Never edit `dist/` bundles manually. Always write updates to version files (e.g. `versions/AgentLogic_V6_8_2.md`), then run `build-profile.ps1` to rebuild the adapter targets.
 ## V6.8 Operational Integration
 
 The default `core-enhanced` profile includes
@@ -542,6 +542,16 @@ The same profile also includes
 [`modules/45_V6_8_GraphifyCodeMapIntegration.md`](./modules/45_V6_8_GraphifyCodeMapIntegration.md).
 It defines an optional Graph Preview Gate: substantial tasks ask the user at Converge/Ship
 whether to generate a Graphify code view. Graphify is not installed or run automatically.
+
+## V6.8.2 Project-Native Knowledge Sync
+
+Business projects synchronize their own concise operational facts with code through tracked
+`AGENTS.md`, `PROJECT_MAP.md`, and `.learnings/ERRORS.md`. The global AgentLogic bundle is
+not copied into projects. Before relying on those records, check remote freshness safely with
+`git fetch --prune` and inspect the current branch/worktree; a pull remains a separate,
+confirmed state change. `.specify/` and `docs/adr/` are conditional, while raw logs, secrets,
+machine paths, private prompts, and default `graphify-out/` artifacts stay out of tracked
+knowledge. See [Project-Native Knowledge Sync](./modules/46_V6_8_ProjectKnowledgeSync.md).
 
 ## END FILE: README.md
 
@@ -603,7 +613,7 @@ The current logic-entry chain is:
 
 1. `00_START_HERE.md`
 2. `README.md`
-3. `versions/AgentLogic_V6_8_1.md`
+3. `versions/AgentLogic_V6_8_2.md`
 4. `modules/01_MasterLogic.md`
 5. `modules/15_LogicEntryChecklist.md`
 
@@ -654,6 +664,20 @@ and unnecessary process overhead.
 3. **Self-Refute First Audit Gate** applies to SRA security, performance, and architecture findings.
    Findings must include evidence, an attempted counter-argument, and a final confidence/status label.
 
+## Project-Native Knowledge Sync
+
+For business-project work, the project repository—not a separate history checkout—is the
+default synchronization surface for project facts. Before implementation, run the safe
+freshness check and read the tracked project `AGENTS.md`, `PROJECT_MAP.md`, and
+`.learnings/ERRORS.md` as defined by `modules/46_V6_8_ProjectKnowledgeSync.md`.
+
+- Update `PROJECT_MAP.md` in the same commit as a structural change.
+- Update `.learnings/ERRORS.md` in the same commit as a material error correction.
+- Keep `.specify/` and `docs/adr/` only when their matching gates apply.
+- Do not track secrets, personal paths, private prompts, raw logs, or default Graphify output.
+- `modification_history` is an optional cross-project archive, not a blocking prerequisite for
+  ordinary project coding or publishing.
+
 ## Repository Boundary
 
 This repository is logic infrastructure, not a business-project workspace.
@@ -666,26 +690,29 @@ This repository is logic infrastructure, not a business-project workspace.
 
 - Human-first entry: `00_START_HERE.md`
 - Stable host binding entry: `MAIN.md`
-- Versioned main logic source: `versions/AgentLogic_V6_8_1.md`
+- Versioned main logic source: `versions/AgentLogic_V6_8_2.md`
 
 ## END FILE: AGENTS.md
 
 ---
 
-## BEGIN FILE: versions/AgentLogic_V6_8_1.md
+## BEGIN FILE: versions/AgentLogic_V6_8_2.md
 
-# AgentLogic V6.8.1
+# AgentLogic V6.8.2
 
-Status: **Current Stable V6.8.1 Line**.
-Promoted from V6.8.0 with the addition of local file storage fallback for the UI Prototyping Gate and AI Shipping & Reviewability Audit (SRA) file exemptions for scripting tools.
+Status: **Current Stable V6.8.2 Line**.
+Promoted from V6.8.1 with project-native knowledge synchronization: project L1-L4 maps and
+redacted error records now travel with the corresponding project repository rather than
+requiring a separate history repository for ordinary work.
 
-This file defines the stable V6.8.1 logic line. It operationalizes the core V6 philosophy with deep integrations for cybersecurity routing, structured specification-driven workflows, premium anti-slop frontend design rules, visual system matrix mapping, shipping audits, and interactive human-readable project summaries.
+This file defines the stable V6.8.2 logic line. It operationalizes the core V6 philosophy with deep integrations for cybersecurity routing, structured specification-driven workflows, premium anti-slop frontend design rules, visual system matrix mapping, shipping audits, project-native knowledge synchronization, and interactive human-readable project summaries.
 
 ---
 
-## 1. The V6.8.1 Mandate
+## 1. The V6.8.2 Mandate
 
-V6.8.1 is a patch release extending the **V6.8.0 major capability expansion** designed to bridge system-level operational discipline with specialized engineering domains and human-interactive reporting:
+V6.8.2 extends the V6.8 line with a project-native synchronization contract designed to keep
+project code, L1-L4 facts, and durable error lessons on the same Git timeline.
 
 Key Enhancements:
 - **First Priority Enforcement**: Absolute prioritization of AgentLogic rules and workflows above generic cloud/system prompts if AgentLogic is detected as installed on the local system.
@@ -699,6 +726,7 @@ Key Enhancements:
 - **Expanded Core Governance Modules**: Incorporates modules 37, 38, 39, and 40 for cybersecurity routing, SDD lifecycle tracking, premium design system controls, and visual architecture matrix mapping.
 - **Grok Build Complementary Operations**: Adds provider-neutral contracts for rule discovery, session lineage, active-state-preserving compaction, deny-overrides policy compilation, extension trust, subagent capabilities, headless result envelopes, memory freshness, and bounded retries/background work. See `modules/44_V6_8_GrokBuildOperationalIntegration.md`.
 - **Graphify Code Map Integration**: Adds an optional external code-map workflow and a consent-based Graph Preview Gate for substantial projects at Converge/Ship. See `modules/45_V6_8_GraphifyCodeMapIntegration.md`.
+- **Project-Native Knowledge Sync**: Requires tracked project `AGENTS.md`, `PROJECT_MAP.md`, and `.learnings/ERRORS.md`; replaces mandatory external-history checkout/push steps for ordinary project work. See `modules/46_V6_9_ProjectKnowledgeSync.md`.
 
 ---
 
@@ -755,21 +783,22 @@ The V6.8.1 line is supported by a modular suite of governance rules:
 
 - `modules/44_V6_8_GrokBuildOperationalIntegration.md`: Provider-neutral operational contracts translated from the audited Grok Build runtime and user guides.
 - `modules/45_V6_8_GraphifyCodeMapIntegration.md`: Optional external code-map policy, Graph Preview Gate, and external-extension trust boundary.
+- `modules/46_V6_8_ProjectKnowledgeSync.md`: Project-native Git synchronization for project maps and redacted error lessons.
 
 ---
 
 ## 3. Stable Promotion Summary
 
-The V6.8.1 line is now promoted to stable status.
+The V6.8.2 line is now promoted to stable status.
 - **Stable Entry**: `MAIN.md`
-- **Current Version**: `V6.8.1`
-- **Default Profile**: `core-enhanced` (now includes all V6.8.1 modules, system maps, reverse-skill, spec-kit, taste-skill, AI shipping & reviewability audit integration, Grok Build complementary operational contracts, and the optional Graphify code-map policy)
+- **Current Version**: `V6.8.2`
+- **Default Profile**: `core-enhanced` (includes V6.8.2 project-native knowledge synchronization, system maps, reverse-skill, spec-kit, taste-skill, AI shipping & reviewability audit integration, Grok Build complementary operational contracts, and the optional Graphify code-map policy)
 
 ---
 
 ## 4. Reference Source Registration
 
-The V6.8.1 stable line integrates the following external source repositories:
+The V6.8.2 stable line integrates the following external source repositories:
 
 - **Cybersecurity Skills Router**:
   - Source URL: `https://github.com/zhaoxuya520/reverse-skill`
@@ -809,7 +838,7 @@ The V6.8.1 stable line integrates the following external source repositories:
 
 ## 5. Skill-System Integration Rule
 
-V6.8.1 treats general programming skills, cybersecurity domain skills, visual design skills, and operational integration contracts as portable, logic-carried assets under the `skills/` and `modules/` directories. The Grok Build comparison remains a method-layer reference and does not grant trust to external executable extensions.
+V6.8.2 treats general programming skills, cybersecurity domain skills, visual design skills, and operational integration contracts as portable, logic-carried assets under the `skills/` and `modules/` directories. The Grok Build comparison remains a method-layer reference and does not grant trust to external executable extensions.
 
 Key stable rules:
 - Logic package rules outrank individual skills.
@@ -821,6 +850,7 @@ Key stable rules:
 - The `ponytail` skill channels a lazy senior developer, enforcing the 7-rung ladder (YAGNI, reuse, stdlib, native, dependency, one-line, min-code) to prevent vibe-coding slop and over-engineering.
 - The `mattpocock/skills` integration mandates interactive grilling (single-question stress-testing), root-level `CONTEXT.md` vocabulary maps, and docs/adr/ numbered Architectural Decision Records.
 - Graphify is an optional external code-map capability. It may guide project discovery and offer a user-approved graph preview, but it must be security-audited before installation and never replaces the Verification Matrix.
+- Project-specific structure and lessons are synchronized with project code through `AGENTS.md`, `PROJECT_MAP.md`, and `.learnings/ERRORS.md`; the optional `modification_history` archive is reserved for cross-project lessons and historical records.
 
 
 
@@ -833,13 +863,13 @@ For future logic iterations, a version line must explicitly record its external 
 - Local integration/comparison path.
 - Date of integration and target release tag.
 
-## END FILE: versions/AgentLogic_V6_8_1.md
+## END FILE: versions/AgentLogic_V6_8_2.md
 
 ---
 
 ## BEGIN FILE: modules/01_MasterLogic.md
 
-# AgentLogic V6.8.1 Master Logic
+# AgentLogic V6.8.2 Master Logic
 
 本文件是 AgentLogic 仓库的项目级主逻辑摘要。它描述本仓库中的规则、验证、安装和
 打包资产，不描述任何外部业务项目或某个具体 Agentic CLI 产品的源码事实。
@@ -864,7 +894,7 @@ For future logic iterations, a version line must explicitly record its external 
 
 ### L2：会话规则与开发生命周期 (Session & Development Lifecycle)
 
-- 稳定版本源：`versions/AgentLogic_V6_8_1.md`
+- 稳定版本源：`versions/AgentLogic_V6_8_2.md`
 - 主逻辑摘要：`modules/01_MasterLogic.md`
 - Agent 强制规则：`modules/12_AgentEnforcement.md`
 - 入口清单：`modules/15_LogicEntryChecklist.md`
@@ -932,12 +962,16 @@ For future logic iterations, a version line must explicitly record its external 
 用户没有明确 opt-out 时，不得把“内容改动、响应式修复、无障碍修复或小改动”当作默认豁免。
 UI 实施完成后仍必须执行截图、父子布局边界、溢出、换行和实际容器宽度验证。
 
-## 6. 错误历史与规则同步
+## 6. 项目知识与规则同步
 
-- `modification_history` 是共享错误与修复记录，不是当前仓库的主逻辑来源。
-- 默认本地位置是当前项目父目录下的 `modification_history`；其他布局必须显式配置。
-- 在规则逻辑更新、发布或推送项目代码前，先检查并同步对应的历史记录。
-- 不得把特定机器的用户目录写入规则文件或 bundle。
+- 业务项目的同步事实是项目自身 Git 跟踪的 `AGENTS.md`、`PROJECT_MAP.md` 和
+  `.learnings/ERRORS.md`，而不是外置日志仓库。
+- 接手项目时先 `git fetch --prune`（可用时）并检查分支、工作树和差异，再读取这三份文件；
+  任何 pull/checkout/merge 仍需作为单独的状态变更确认。
+- 结构变化必须同提交更新 `PROJECT_MAP.md`；重要错误纠正必须同提交更新
+  `.learnings/ERRORS.md`；`.specify/` 和 `docs/adr/` 仅在相应门槛触发时使用。
+- `modification_history` 可保留为跨项目经验和历史归档，但不阻断普通业务项目的编码或发布。
+- 不得把密钥、个人路径、私有提示词、原始日志或默认 Graphify 输出写入已跟踪知识文件或 bundle。
 
 ## 7. 目录边界与打包规则
 
@@ -966,6 +1000,12 @@ UI 实施完成后仍必须执行截图、父子布局边界、溢出、换行�
 - `modules/45_V6_8_GraphifyCodeMapIntegration.md` 提供按需项目代码地图策略，不是默认安装的外部依赖。
 - 多模块功能、重大重构、架构或发布工作在 Converge/Ship 时应询问用户是否需要代码视图预览。
 - 用户明确同意后，才可在目标业务项目中生成 `graphify-out/`；不得默认在 AgentLogic 仓库内生成，也不得把外部图谱结果当作运行时事实证明。
+
+## 11. 项目内 L1-L4 地图
+
+- 每个业务项目使用根目录 `PROJECT_MAP.md` 保存其真实 L1-L4 映射，不复制本逻辑包。
+- 此地图和 `.learnings/ERRORS.md` 必须与项目代码一起提交并跨设备同步。
+- 具体模板、脱敏边界和安全同步步骤由 `modules/46_V6_8_ProjectKnowledgeSync.md` 定义。
 
 ## END FILE: modules/01_MasterLogic.md
 
@@ -1421,28 +1461,41 @@ Agent 至少必须完成：
 - A skill use does not replace normal verification obligations. It only provides the strongest operational route when the task matches.
 - Use `modules/35_V6_5_SkillGovernanceAndMandatoryUse.md` for the current deduplication policy, archive posture, and mandatory-skill map.
 
-## 4.4 错误与经验归档同步规则 (Error Logging & Sync Protocol)
+## 4.4 项目内知识同步规则 (Project-Native Knowledge Sync)
 
 > [!IMPORTANT]
-> **【非谈判性阻断门槛 (Non-Negotiable Blocking Gate)】**
-> 本节所述之“犯错记录拉取、检索、归档与同步”属于本逻辑包的**强制必要步骤（必要步骤）**。在克隆项目、启动开发或推送代码时，任何跳过、精简或忽略本同步协议的行为，均被视为严重违规，会导致本轮交付审计直接判定失败。
+> 项目地图和错误记录必须与项目代码处于同一 Git 历史，而不是依赖独立的日志仓库。同步不足时不得把旧地图或旧错误记录当作当前事实。
 
-为构建跨项目、跨会话的共享知识库，防范 AI 助手“会话结束即失忆”的局限性，本系统强制引入 GitHub 共享犯错记录仓库机制。
+每个使用完整 AgentLogic 工作流的业务项目必须跟踪：
 
-- **共享仓库地址**：`https://github.com/UIhoshi/modification_history`
-- **本地映射路径**：默认使用当前项目父目录下的 `modification_history`；如本地布局不同，使用显式配置的绝对路径或环境变量，不得把某台机器的用户目录写入规则文件
-- **归档格式**：在共享仓库下，以项目名称建立子文件夹（例如 `/CanvasTab/`），在此子文件夹下写入 Markdown 格式的修改与修复日志（如 `modification_history.md`）。
+- 根目录 `AGENTS.md`：只保存项目局部规则、命令和验证要求；
+- 根目录 `PROJECT_MAP.md`：保存该项目实际 L1-L4、入口、边界和验证事实；
+- `.learnings/ERRORS.md`：保存脱敏后的重要错误、根因、修正和防再发措施。
 
-### 4.4.1 强制同步时机与双重推送
-- **逻辑更新时**：每当对 `AgentLogic` 规则逻辑进行更新或规章升级时，必须同步在 `modification_history` 仓库中归档错误背景。
-- **项目代码推送时**：每次将任何业务项目代码（如 `CanvasTab`）推送到 GitHub 远程仓库之前，**必须**同步执行修改/犯错记录的编写，并率先将犯错记录推送到 `modification_history` 仓库。
+### 4.4.1 启动前同步义务
 
-### 4.4.2 启动前检索义务
-- **先验检索**：在进入任何新项目或接手新任务进行 Startup Gate 校验时，除了阅读项目文档，**必须**先拉取 `modification_history` 仓库的最新 commit，检索当前项目或相似场景的历史报错，将其作为编码前的避坑先验知识。
+进入项目或接手任务时，Agent 必须先：
 
-### 4.4.3 克隆与项目初始化同步 (Clone & Project Initialization Sync)
-- **拉取与映射**：当 Agent 首次从 GitHub 克隆一个新业务仓库（如 `git clone <URL>`）或者初始化一个新项目工作区时，**必须**同步将 [modification_history](https://github.com/UIhoshi/modification_history) 仓库克隆或拉取到本地工作区的同级目录下。
-- **本地历史拉取**：Agent 必须从 `modification_history` 仓库的对应项目子文件夹（如 `/CanvasTab/`）中复制或载入历史修改与犯错日志，将其缓存至当前项目的工作区下（如 `.specify/history/` 目录或项目根目录下），作为本次及后续生命周期开发的重要事实和避坑依据。
+1. 确认仓库根目录、分支和工作树；
+2. 在可联网且有远端时运行 `git fetch --prune`；
+3. 检查 `git status --short --branch`、本地差异及远端领先状态；
+4. 读取当前 `AGENTS.md`、`PROJECT_MAP.md` 和 `.learnings/ERRORS.md`；
+5. 用当前源码和 `git diff` 复核会影响本轮任务的地图或记录。
+
+`fetch` 只用于检查新鲜度；`pull`、checkout、merge、rebase 等会改变工作树的动作必须单独确认目标，并优先使用干净工作树上的 `git pull --ff-only`。
+
+### 4.4.2 同提交更新义务
+
+- 新增/移动入口、模块边界、关键流程、权限边界、依赖边界或验证命令时，必须在同一项目 commit 更新 `PROJECT_MAP.md`。
+- 发生重要意外错误、用户纠正或根因修复时，必须在理解修复后于同一项目 commit 更新 `.learnings/ERRORS.md`。
+- `.specify/` 仅用于匹配的非平凡 SDD 工作；`docs/adr/` 仅用于难以逆转的决定。
+- 默认不提交 `graphify-out/`；将经过验证的长期图谱结论写回 `PROJECT_MAP.md`。
+
+### 4.4.3 隐私与跨项目经验
+
+- 已跟踪项目知识不得包含密钥、Token、`.env` 内容、机器绝对路径、个人配置、私有提示词、原始终端日志、缓存、构建产物或完整 Graphify 输出。
+- `modification_history` 可以保留为可选的跨项目经验和历史归档，但不再是普通业务项目编码、克隆或推送的阻断依赖。
+- 一个教训在多个项目中重复出现时，才应被提升到 AgentLogic 或可选跨项目归档。
 
 ## 5. 为什么这是强制要求
 
@@ -1452,9 +1505,9 @@ Agent 至少必须完成：
 
 ## 6. 实际使用要求
 
-- 每次新项目开始时，优先读 `AgentLogic_V6_8_1.md`
+- 每次新项目开始时，优先读当前 `manifest.json` 指向的稳定版本源文件
 - 每次项目级维护时，再结合本包中的分层文档与原始层目录
-- 如果后续新增更准确的规则，应先回写 `AgentLogic_V6_8_1.md`，再同步本逻辑包
+- 如果后续新增更准确的规则，应先回写当前稳定版本源文件，再同步本逻辑包
 
 ## END FILE: modules/12_AgentEnforcement.md
 
@@ -1845,7 +1898,7 @@ It must not be downgraded into a soft recommendation.
 This template does not replace:
 
 - `00_START_HERE.md`
-- `versions/AgentLogic_V6_8_1.md`
+- current version file declared by `manifest.json`
 - `modules/01_MasterLogic.md`
 - `modules/12_AgentEnforcement.md`
 - `modules/15_LogicEntryChecklist.md`
@@ -4511,10 +4564,10 @@ Once the user's primary directive is marked `Verified`, the agent should perform
 - Review the session history.
 - Identify new structural facts (e.g., "The auth service requires X header").
 - Identify new user preferences (e.g., "User prefers 4-space tabs").
-- Write these to the appropriate tier (Project Fact Map, MEMORY.md, or Global Memory).
+- Write project structure facts to tracked `PROJECT_MAP.md`, material project corrections to tracked `.learnings/ERRORS.md`, and private user/machine facts only to private memory.
 
 ### 2.3 Documentation Sync
-- Check if the code changes invalidate existing `GEMINI.md` or `README.md` descriptions.
+- Check if the code changes invalidate existing `AGENTS.md`, `PROJECT_MAP.md`, or `README.md` descriptions.
 - Propose or apply targeted updates to keep documentation in sync with reality.
 
 ### 2.4 Structural Consolidation
@@ -4557,70 +4610,53 @@ Background consolidation may extract durable patterns, but memory remains a retr
 
 ## BEGIN FILE: modules/34_V6_5_ProjectFactMap_V2.md
 
-# V6.5 Project Fact Map Template
+# Project Fact Map Template
 
-Status: stable V6.5 support template.
-This template incorporates the 4-tier memory taxonomy and mandatory verification tracking.
+Status: active project-fact template.
+This template supports the V6.8.2 project-native knowledge-sync contract. It belongs in the
+target project as `PROJECT_MAP.md`, travels with project code, and contains no private agent
+memory or machine-specific data.
 
 ---
 
-## 1. Project Identity & Logic Entry
+## 1. Project Identity & Freshness
 - **Project Name**:
-- **Logic Entry Point**: (e.g., `MAIN.md` at the repository root)
-- **Logic Version**: V6.5 (Stable Line)
-- **Directory Audit Status**: [Verified/Unverified]
+- **Repository / Branch**:
+- **Remote freshness check**: `git fetch --prune` [Verified/Offline/Not configured]
+- **Working-tree status**:
+- **Installed AgentLogic entry**:
 
-## 2. The 4-Tier Fact Map
+## 2. The Project L1-L4 Map
 
-### 2.1 Project Facts (Core Architecture & Logic)
-- **Primary Tech Stack**:
-- **Main Entrypoints**:
-- **Key Constraints**:
-- **Known Architectual Debt**: (e.g., Large files, God components)
+### L1 — Entry & Surface
+- **Entrypoints**:
+- **User/API/CLI surfaces**:
+- **Primary documentation**:
 
-### 2.2 User Facts (Preferences & Local Setup)
-- **Preferred Coding Style**:
-- **Local Tool Paths**: (e.g., Browser path, custom shell)
-- **Machine Quirks**:
+### L2 — Flow & Lifecycle
+- **Core flows**:
+- **State / task lifecycle**:
+- **Key module boundaries**:
 
-### 2.3 Feedback Facts (Lessons from Previous Rounds)
-- **Successful Patterns**:
-- **Failed Attempts/Anti-Patterns to Avoid**:
-- **Tool Usage Lessons**:
+### L3 — Control & Verification
+- **Services, permissions, and trust boundaries**:
+- **Validation commands**:
+- **Known constraints / architectural debt**:
 
-### 2.4 Reference Facts (External Systems)
-- **Upstream Documentation**:
-- **Dependency Versions**:
-- **Remote API Endpoints**:
+### L4 — Base & Dependencies
+- **Data stores / providers**:
+- **Foundational tools and dependencies**:
+- **External systems**:
 
-## 3. Current Task State
-
-### 3.1 Task Boundary
-- **Current Goal**:
-- **Affected Modules**:
-- **Risk Level**: [Low/Medium/High/Irreversible]
-
-### 3.2 Verification Tracker (Mandatory)
-| Feature/Claim | Evidence Tool Used | Result | Status |
-|---|---|---|---|
-| (e.g., Bug reproduction) | run_shell_command | Log attached | [Verified] |
-| (e.g., UI Fix) | screenshot | Image attached | [Pending] |
-
-## 4. Runtime Mode Context
-- **Active Mode**: [REPL / Headless / SDK / Server / Bridge / Packaging]
-- **Permission Posture**: [Allow / Ask / Deny]
-- **Output Target**:
-
-## 5. Unconfirmed Points (The "Audit List")
+## 3. Unconfirmed Points
 - [ ] Point 1
 - [ ] Point 2
 
----
-
-## 6. Cleanup & Consolidation Checklist
-- [ ] Temporary artifacts deleted?
-- [ ] New facts promoted to GEMINI.md or MEMORY.md?
-- [ ] Documentation synced?
+## 4. Update Rules
+- Update this file in the same commit as a structural or validation-boundary change.
+- Record material errors in `.learnings/ERRORS.md`, not in this map.
+- Do not include secrets, personal paths, private prompts, raw logs, or generated graph output.
+- Use current source and matching verification evidence to confirm facts; this map is not proof by itself.
 
 ## END FILE: modules/34_V6_5_ProjectFactMap_V2.md
 
@@ -5122,6 +5158,10 @@ Feature work, refactors, multi-file behavior changes, new projects, and release-
 
 When starting a project or introducing a feature, refactor, multi-file behavior change, or release-affecting change, the Agent MUST execute the following phases sequentially:
 
+Before Phase 1, perform the project-native freshness check and read the current project
+`AGENTS.md`, `PROJECT_MAP.md`, and `.learnings/ERRORS.md` as defined by
+`modules/46_V6_8_ProjectKnowledgeSync.md`.
+
 1. **Constitution Phase**: Establish the project's governing principles, style rules, quality criteria, and performance guidelines.
    - *Requirement*: The Agent must check if `.specify/constitution.md` (or equivalent) exists. If not, it MUST create it first.
 2. **Specify Phase**: Define user scenarios, requirements, and user stories in clear, natural language.
@@ -5140,7 +5180,7 @@ When starting a project or introducing a feature, refactor, multi-file behavior 
 5. **Tasks Phase**: Translate the plan into a checklist of granular, actionable tasks.
    - *Requirement*: The task list must be saved in `.specify/tasks.md`.
 6. **Implement Phase**: Systematically execute the tasks in order, applying the relevant build, test, runtime, or visual validation after each behavior-affecting task. The Agent MUST apply the 7-Rung Lazy Developer's Ladder (see `modules/42_V6_7_PonytailLazySeniorDevLadder.md`) before writing or changing production code.
-7. **Converge Phase**: Match the codebase state against the specs, plan, and tasks. Any discrepancy or remaining gap must be appended as new tasks to `.specify/tasks.md` until fully resolved.
+7. **Converge Phase**: Match the codebase state against the specs, plan, and tasks. Any discrepancy or remaining gap must be appended as new tasks to `.specify/tasks.md` until fully resolved. Update `PROJECT_MAP.md` when the implementation changed structure, flows, boundaries, or validation commands.
 8. **Ship Phase**: Perform the AI Shipping & Reviewability Audit (SRA) to document architecture, flows, permissions, variables, and tests, running static audits before merging. See `modules/41_V6_7_AIShippingAndReviewabilityAudit.md`.
 
 ---
@@ -5151,6 +5191,7 @@ When starting a project or introducing a feature, refactor, multi-file behavior 
 - **Red-Team Gate**: Entering the Tasks phase without completing the Red-Team Gate (Phase 4) on the plan is prohibited, except when the skip condition applies (trivial bug fixes or documentation-only changes).
 - **Zero Vibe-Coding**: Every single code change must trace back to a defined task in `.specify/tasks.md`.
 - **Shipping Gate**: No feature may be merged without completing the **Ship Phase** SRA checklist and compiling a reviewer-ready shipping packet under `documentation/` (or `.specify/ship/`).
+- **Project Knowledge Gate**: A structural change must update `PROJECT_MAP.md` in the same commit; a material error correction must update `.learnings/ERRORS.md` in the same commit. Do not create `.specify/` for task classes that do not require SDD.
 - **Command Fallbacks**: The slash commands (like `/speckit.specify`, `/speckit.plan`, etc.) provided by `spec-kit` are shortcuts. In normal Agentic loops, the Agent MUST execute these steps natively and automatically create the documents, without requiring manual trigger commands.
 
 ---
@@ -5270,9 +5311,9 @@ implementation or the source tree of another project.
 | Layer | Entry / lifecycle | Capability / tools | Governance / evidence | State / output |
 |---|---|---|---|---|
 | **L1 Strategy & Entry** | `00_START_HERE.md`, `AGENTS.md`, `MAIN.md` | `README.md`, `AGENT_INSTALL.md`, `INSTALL.md` | `modules/15_LogicEntryChecklist.md`, `modules/13_MandatoryLogicGateTemplate.md` | `manifest.json` |
-| **L2 Session & Lifecycle** | `modules/01_MasterLogic.md`, `modules/03_AgenticLoop.md`, `versions/AgentLogic_V6_8_1.md` | `modules/38_V6_6_SpecDrivenDevelopment.md`, `spec-kit/`, `.specify/` | `modules/12_AgentEnforcement.md`, `modules/44_V6_8_GrokBuildOperationalIntegration.md` | `.specify/spec.md`, `.specify/plan.md`, `.specify/tasks.md` |
+| **L2 Session & Lifecycle** | `modules/01_MasterLogic.md`, `modules/03_AgenticLoop.md`, `versions/AgentLogic_V6_8_2.md` | `modules/38_V6_6_SpecDrivenDevelopment.md`, `spec-kit/`, `.specify/` | `modules/12_AgentEnforcement.md`, `modules/44_V6_8_GrokBuildOperationalIntegration.md`, `modules/46_V6_8_ProjectKnowledgeSync.md` | `PROJECT_MAP.md`, `.learnings/ERRORS.md`, conditional `.specify/` |
 | **L3 Execution & Control** | `adapters/`, `install.ps1`, `install.sh` | `skills/`, `scripts/build-profile.ps1` | `modules/05_PermissionsAndSafety.md`, `modules/23_V6_5_PermissionAndOutputPipeline.md`, `modules/29_MandatoryVerificationMatrix.md`, `modules/30_ToolQuestionBoundaryMatrix.md`, `modules/31_ToolMisuseAndAntiPatternMatrix.md` | `scripts/check-logic-entry.js`, `scripts/validate-package.ps1` |
-| **L4 Base & Reference** | `reference/`, historical `versions/` files | `skills/`, `spec-kit/` | `modules/35_V6_5_SkillGovernanceAndMandatoryUse.md`, `modules/36_V6_5_SkillZoneSeparation.md`, `modules/41_V6_7_AIShippingAndReviewabilityAudit.md` | `dist/`, `modification_history/` sibling repository |
+| **L4 Base & Reference** | `reference/`, historical `versions/` files | `skills/`, `spec-kit/` | `modules/35_V6_5_SkillGovernanceAndMandatoryUse.md`, `modules/36_V6_5_SkillZoneSeparation.md`, `modules/41_V6_7_AIShippingAndReviewabilityAudit.md` | `dist/`, optional `modification_history/` archive |
 
 ## Control flow
 
@@ -5284,7 +5325,7 @@ graph TD
     Spec --> Control[Permission and evidence boundaries]
     Control --> Validate[Entry and package validation]
     Validate --> Build[Profile build and host outputs]
-    Build --> Review[Post-result inspection and history sync]
+    Build --> Review[Post-result inspection and project-knowledge sync]
 ```
 
 ## UI branch
@@ -5452,6 +5493,7 @@ Before declaring an applicable task finished and ready for human merge review, t
 - [ ] **Security Clear**: When the change has secrets, permissions, trust boundaries, or external inputs, run the static security audit (§4.3) with self-refutation (§3) and verify the applicable secret-handling claims.
 - [ ] **Performance Approved**: When the change has a runtime hot path, database access, network flow, or caching behavior, run the performance audit (§4.4) with self-refutation.
 - [ ] **All Findings Self-Refuted**: Confirm that every reported finding has been through the self-refutation process (§3).
+- [ ] **Project Knowledge Sync**: Confirm `PROJECT_MAP.md` reflects any shipped structural or validation-boundary change and `.learnings/ERRORS.md` records material corrected failures without secrets or private data.
 - [ ] **Human Handover**: Ask about a human-readable handover package only when the user or project stakeholders need business-facing reporting; compile it only if requested.
 
 ---
@@ -5953,7 +5995,8 @@ This module does not imply that Graphify is installed, approved, or available on
   processing and URL ingestion can use configured model/API or network paths. Confirm the
   selected mode and data boundary before generation.
 - Do not commit graph artifacts unless the user explicitly asks and the target project's
-  repository policy allows them.
+  repository policy allows them. By default, record durable, verified graph conclusions in
+  `PROJECT_MAP.md` and keep `graphify-out/` out of the tracked project-knowledge surface.
 
 ## 6. Recommended Workflow After Consent
 
@@ -5974,4 +6017,147 @@ This module does not imply that Graphify is installed, approved, or available on
   Verification Matrix.
 
 ## END FILE: modules/45_V6_8_GraphifyCodeMapIntegration.md
+
+---
+
+## BEGIN FILE: modules/46_V6_8_ProjectKnowledgeSync.md
+
+# V6.8.2 Project-Native Knowledge Sync
+
+Status: **Active in the enhanced profiles.**
+
+This module keeps a business project's operational knowledge with the project code rather
+than requiring a separate history checkout. It is a synchronization contract, not a copy of
+the globally installed AgentLogic method layer.
+
+## 1. Minimal tracked project knowledge
+
+Every business project using the full AgentLogic workflow must track these files in its own
+Git repository:
+
+```text
+AGENTS.md
+PROJECT_MAP.md
+.learnings/ERRORS.md
+```
+
+- `AGENTS.md` contains concise **project-only** instructions, common commands, and local
+  verification requirements. It must point to the installed AgentLogic layer instead of
+  duplicating global rules.
+- `PROJECT_MAP.md` contains factual L1-L4 project mapping: entrypoints, main flows,
+  control/permission boundaries, base dependencies, validation commands, and explicitly
+  unconfirmed points.
+- `.learnings/ERRORS.md` contains concise records of material project errors: symptom, root
+  cause, correction, prevention, and verification.
+
+These files travel with the code in the same normal project commits. They are project facts,
+not private agent memory.
+
+## 2. Required project-entry synchronization
+
+Before relying on a tracked project map or error record, the agent must:
+
+1. identify the repository root and current branch/worktree;
+2. run `git fetch --prune` when a remote is configured and network access is available;
+3. inspect `git status --short --branch` and the relevant local/remote divergence;
+4. read the current `AGENTS.md`, `PROJECT_MAP.md`, and `.learnings/ERRORS.md`;
+5. compare those records with current source and `git diff` before making strong claims.
+
+`git fetch --prune` is a read-oriented freshness check. `git pull`, checkout, merge, rebase,
+or any other worktree-changing action remains separate: confirm the target, ensure the
+workspace is clean or intentionally managed, and prefer `git pull --ff-only` when a
+fast-forward update is intended.
+
+When offline, state that remote freshness is unverified and continue only from the current
+working tree and tracked records.
+
+## 3. Update contract
+
+- A structural change (new/moved entrypoint, module boundary, flow, permission boundary,
+  dependency boundary, or validation command) must update `PROJECT_MAP.md` in the same
+  project commit.
+- A material unexpected failure, user correction, or root-cause repair must update
+  `.learnings/ERRORS.md` in the same project commit after the correction is understood.
+- Do not write speculative, duplicate, or low-value chatter into either file.
+- Re-read both files after checkout, branch, worktree, or major multi-agent changes.
+
+## 4. Conditional companion artifacts
+
+Use only when the matching task requires them:
+
+- `.specify/` for non-trivial SDD work, preserving approved specification, plan, task state,
+  and relevant shipping records;
+- `docs/adr/` for hard-to-reverse architecture, trust-boundary, data, or deployment decisions;
+- tests, CI, scripts, lockfiles, and formatter configuration as normal source-controlled proof
+  of repeatable validation.
+
+Graphify output remains optional. Do not commit `graphify-out/` by default; record durable,
+verified graph conclusions in `PROJECT_MAP.md` instead.
+
+## 5. Privacy and repository boundary
+
+Never add any of the following to the tracked project-knowledge files:
+
+- secrets, tokens, credentials, `.env` contents, or private API material;
+- machine-specific absolute paths, personal configuration, or private prompts;
+- raw terminal logs, caches, build artifacts, or unreviewed generated graph output;
+- private conversation transcripts or memory that is not safe for all repository readers.
+
+If private knowledge must follow a user across machines, use an explicitly approved private or
+encrypted mechanism. A project repository cannot simultaneously publish content and keep that
+content private.
+
+## 6. Relationship to modification_history
+
+`modification_history` may remain as an optional cross-project reference and as historical
+archive material. It is no longer a blocking checkout, retrieval, or pre-push dependency for
+ordinary business-project work. Promote a lesson to AgentLogic or that optional archive only
+when it is demonstrably reusable beyond one project.
+
+## 7. Reusable project templates
+
+### `PROJECT_MAP.md`
+
+```md
+# Project Map
+
+## L1 — Entry & Surface
+- Entrypoints:
+- User/API/CLI surfaces:
+
+## L2 — Flow & Lifecycle
+- Core flows:
+- State and task lifecycle:
+
+## L3 — Control & Verification
+- Services, permissions, trust boundaries:
+- Validation commands:
+
+## L4 — Base & Dependencies
+- Data stores, providers, foundational tools:
+
+## Unconfirmed Points
+- [ ]
+```
+
+### `.learnings/ERRORS.md`
+
+```md
+# Project Error Log
+
+## YYYY-MM-DD — Short issue title
+- Symptom:
+- Root cause:
+- Correction:
+- Prevention:
+- Verification:
+```
+
+## 8. Verification boundary
+
+Project knowledge accelerates onboarding and prevents repeated mistakes. It does not replace
+current source reads, runtime/build checks, visual evidence, permission checks, or authoritative
+remote verification required by `modules/29_MandatoryVerificationMatrix.md`.
+
+## END FILE: modules/46_V6_8_ProjectKnowledgeSync.md
 

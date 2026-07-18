@@ -52,7 +52,7 @@ The current logic-entry chain is:
 
 1. `00_START_HERE.md`
 2. `README.md`
-3. `versions/AgentLogic_V6_8_1.md`
+3. `versions/AgentLogic_V6_8_2.md`
 4. `modules/01_MasterLogic.md`
 5. `modules/15_LogicEntryChecklist.md`
 
@@ -103,6 +103,20 @@ and unnecessary process overhead.
 3. **Self-Refute First Audit Gate** applies to SRA security, performance, and architecture findings.
    Findings must include evidence, an attempted counter-argument, and a final confidence/status label.
 
+## Project-Native Knowledge Sync
+
+For business-project work, the project repository—not a separate history checkout—is the
+default synchronization surface for project facts. Before implementation, run the safe
+freshness check and read the tracked project `AGENTS.md`, `PROJECT_MAP.md`, and
+`.learnings/ERRORS.md` as defined by `modules/46_V6_8_ProjectKnowledgeSync.md`.
+
+- Update `PROJECT_MAP.md` in the same commit as a structural change.
+- Update `.learnings/ERRORS.md` in the same commit as a material error correction.
+- Keep `.specify/` and `docs/adr/` only when their matching gates apply.
+- Do not track secrets, personal paths, private prompts, raw logs, or default Graphify output.
+- `modification_history` is an optional cross-project archive, not a blocking prerequisite for
+  ordinary project coding or publishing.
+
 ## Repository Boundary
 
 This repository is logic infrastructure, not a business-project workspace.
@@ -115,4 +129,4 @@ This repository is logic infrastructure, not a business-project workspace.
 
 - Human-first entry: `00_START_HERE.md`
 - Stable host binding entry: `MAIN.md`
-- Versioned main logic source: `versions/AgentLogic_V6_8_1.md`
+- Versioned main logic source: `versions/AgentLogic_V6_8_2.md`

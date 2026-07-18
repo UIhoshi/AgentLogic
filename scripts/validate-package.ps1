@@ -187,6 +187,23 @@ foreach ($outputProperty in $manifest.host_outputs.PSObject.Properties) {
     }
 }
 
+if ($manifest.current_version -match '^V6\.8\.[2-9]') {
+    $knowledgeModule = "modules/46_V6_8_ProjectKnowledgeSync.md"
+    Assert-Exists -Root $RepoRoot -RelativePath $knowledgeModule -Label "V6.8 project-native knowledge-sync module"
+
+    $defaultFiles = @($manifest.profiles.$($manifest.default_profile).files)
+    if ($defaultFiles -notcontains $knowledgeModule) {
+        Fail "Default profile '$($manifest.default_profile)' does not include '$knowledgeModule'."
+    }
+
+    $knowledgeContent = Get-Content -Raw -Path (Join-Path $RepoRoot $knowledgeModule)
+    foreach ($requiredAnchor in @("AGENTS.md", "PROJECT_MAP.md", ".learnings/ERRORS.md", "git fetch --prune")) {
+        if ($knowledgeContent -notmatch [regex]::Escape($requiredAnchor)) {
+            Fail "V6.8.2 project-knowledge module is missing required contract: $requiredAnchor"
+        }
+    }
+}
+
 $buildScript = Join-Path $RepoRoot "scripts\build-profile.ps1"
 foreach ($hostName in $manifest.host_outputs.PSObject.Properties.Name) {
     & powershell -NoProfile -ExecutionPolicy Bypass -File $buildScript -ProfileName $manifest.default_profile -TargetHost $hostName -Verify
