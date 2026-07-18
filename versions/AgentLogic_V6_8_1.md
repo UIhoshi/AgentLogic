@@ -27,7 +27,7 @@ Key Enhancements:
 
 ## 2. Core Governance Modules
 
-The V6.8.0 line is supported by a modular suite of governance rules:
+The V6.8.1 line is supported by a modular suite of governance rules:
 
 ### 2.1 Entry & Master Logic
 - `modules/01_MasterLogic.md`: Master logic outlining project-level CLI loops and mappings.

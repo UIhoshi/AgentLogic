@@ -273,11 +273,11 @@ Do not continue deeper reading, modify files, delete files, perform write action
 or begin implementation before the logic-entry loop above has been completed.
 -->
 
-# Agent Installation Guide (V6.8.0 Stable)
+# Agent Installation Guide (V6.8.1 Stable)
 
 This is the shortest installation path for AI agents.
 
-Goal: Install **AgentLogic V6.8.0** into the current local host without guessing the entrypoint, target bundle, or validation command.
+Goal: Install **AgentLogic V6.8.1** into the current local host without guessing the entrypoint, target bundle, or validation command.
 
 ## Do Not Guess
 
@@ -285,7 +285,7 @@ Before installing, identify:
 
 1.  Whether the current directory is the AgentLogic repository root.
 2.  The target host: `codex`, `claude`, `antigravity`, or `generic`.
-3.  The selected profile: **`core-enhanced`** is the default for full V6.8.0 governance support.
+3.  The selected profile: **`core-enhanced`** is the default for full V6.8.1 governance support.
 4.  Whether the host should bind to `MAIN.md` directly or to a generated bundle.
 
 If uncertain, run the doctor first:
@@ -294,9 +294,9 @@ If uncertain, run the doctor first:
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\doctor.ps1
 ```
 
-## V6.8.0 Stable Facts
+## V6.8.1 Stable Facts
 
-- **Current Version**: V6.8.0 (SRA Shipping Audit, Red-Team Gate, Reversing Router, Spec Kit, Taste Design System, and human-readable proposal/handover gates).
+- **Current Version**: V6.8.1 (SRA Shipping Audit, Red-Team Gate, Reversing Router, Spec Kit, Taste Design System, and human-readable proposal/handover gates).
 - **Repository Role**: Primary local logic package (Method Layer).
 - **Stable Host Entry**: `MAIN.md`.
 - **Default Profile**: `core-enhanced` (Includes the current runtime, verification, SDD, SRA, skill, and reviewability governance modules).
@@ -332,7 +332,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost ge
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\validate-package.ps1
 ```
 
-## Agent Decision Rule (V6.8.0)
+## Agent Decision Rule (V6.8.1)
 
 If the user asks to "load", "install", "mount", "bind", or "use this logic locally", the agent **MUST** follow this protocol:
 
@@ -352,9 +352,9 @@ If the user asks to "load", "install", "mount", "bind", or "use this logic local
     -   Adopt the **4-Tier Memory Taxonomy** (User, Feedback, Project, Reference) for project notes.
     -   Adopt the **Spec-Driven Development (SDD) Lifecycle** (Module 38) for technical tasks.
     -   Adopt the **Taste Frontend Design Standards** (Module 39) for interface and visual changes.
-7.  **Report**: State the installed host, version (V6.8.0), profile, and confirmation that the new governance rules are active.
+7.  **Report**: State the installed host, version (V6.8.1), profile, and confirmation that the new governance rules are active.
 
-## Install-Time And Update-Time Skill Rule (V6.8.0)
+## Install-Time And Update-Time Skill Rule (V6.8.1)
 
 Every local installation **and every local logic update** of AgentLogic should perform a host-local
 skill inventory pass. Moving or archiving host-local skills requires a separate explicit `-Apply`
@@ -368,7 +368,7 @@ This is required because:
 - duplicate-or-overlapping skill families must be classified instead of guessed
 - host-local skills must stay separate from any logic-carried skill layer so one machine's local packs do not become another machine's default logic state
 
-The V6.8.0 install/update rule is:
+The V6.8.1 install/update rule is:
 
 1. identify the host-local skill zone for the target host
 2. keep that host-local zone separate from the logic-carried layer
@@ -487,9 +487,11 @@ This rule package supports **automated self-evolution** and developer logging:
 
 ```
 [Unexpected Error / User Correction / Best Practice Found]
-                      鈹?                      鈻?(1) Automatically log to:
+                      鈹?
+                      鈻?(1) Automatically log to:
        .learnings/ (LEARNINGS.md / ERRORS.md)
-                      鈹?                      鈻?(2) Exceeds threshold (Recurrence >= 3)
+                      鈹?
+                      鈻?(2) Exceeds threshold (Recurrence >= 3)
       Systemic rules extracted and merged into:
             CLAUDE.md / AGENTS.md
 ```
@@ -695,7 +697,7 @@ Key Enhancements:
 
 ## 2. Core Governance Modules
 
-The V6.8.0 line is supported by a modular suite of governance rules:
+The V6.8.1 line is supported by a modular suite of governance rules:
 
 ### 2.1 Entry & Master Logic
 - `modules/01_MasterLogic.md`: Master logic outlining project-level CLI loops and mappings.
@@ -824,14 +826,20 @@ For future logic iterations, a version line must explicitly record its external 
 
 ## BEGIN FILE: modules/01_MasterLogic.md
 
-# AgentLogic V6.8.0 Master Logic
+# AgentLogic V6.8.1 Master Logic
 
 鏈枃浠舵槸 AgentLogic 浠撳簱鐨勯」鐩骇涓婚€昏緫鎽樿銆傚畠鎻忚堪鏈粨搴撲腑鐨勮鍒欍€侀獙璇併€佸畨瑁呭拰
 鎵撳寘璧勪骇锛屼笉鎻忚堪浠讳綍澶栭儴涓氬姟椤圭洰鎴栨煇涓叿浣?Agentic CLI 浜у搧鐨勬簮鐮佷簨瀹炪€?
+
 ## 1. 褰撳墠浠撳簱瀹氫綅
 
-- 鏈粨搴撴槸鍙畨瑁呭埌鏈湴 AI coding host 鐨勪富閫昏緫鍩虹璁炬柦锛坢ethod layer锛夈€?- 浜嬪疄鏉ユ簮鏄粨搴撳唴鐨勫叆鍙ｆ枃妗ｃ€佺増鏈簮鏂囦欢銆佹ā鍧椼€佽剼鏈€乵anifest 鍜岀敓鎴愯緭鍑恒€?- 澶栭儴椤圭洰銆佹瘮杈冧粨搴撳拰 `reference/` 鍘熷灞傚彧鑳戒綔涓哄弬鑰冭瘉鎹紝涓嶈兘鑷姩鍗囩骇涓哄綋鍓嶄粨搴撲簨瀹炪€?- 褰撳墠绋冲畾缁戝畾鍏ュ彛鏄?`MAIN.md`锛涘綋鍓嶇増鏈簮鏂囦欢鐢?`manifest.json` 鐨?`main_logic_file` 鎸囧畾銆?
+- 鏈粨搴撴槸鍙畨瑁呭埌鏈湴 AI coding host 鐨勪富閫昏緫鍩虹璁炬柦锛坢ethod layer锛夈€?
+- 浜嬪疄鏉ユ簮鏄粨搴撳唴鐨勫叆鍙ｆ枃妗ｃ€佺増鏈簮鏂囦欢銆佹ā鍧椼€佽剼鏈€乵anifest 鍜岀敓鎴愯緭鍑恒€?
+- 澶栭儴椤圭洰銆佹瘮杈冧粨搴撳拰 `reference/` 鍘熷灞傚彧鑳戒綔涓哄弬鑰冭瘉鎹紝涓嶈兘鑷姩鍗囩骇涓哄綋鍓嶄粨搴撲簨瀹炪€?
+- 褰撳墠绋冲畾缁戝畾鍏ュ彛鏄?`MAIN.md`锛涘綋鍓嶇増鏈簮鏂囦欢鐢?`manifest.json` 鐨?`main_logic_file` 鎸囧畾銆?
+
 ## 2. 褰撳墠浠撳簱鐨勫洓灞傛槧灏?
+
 ### L1锛氬叆鍙ｄ笌瀹夸富琛ㄩ潰 (Entry & Host Surface)
 
 - 浜虹被鍏ュ彛锛歚00_START_HERE.md`
@@ -876,30 +884,68 @@ For future logic iterations, a version line must explicitly record its external 
 
 姝ｅ紡缂栫爜杞蹇呴』鎸変互涓嬮『搴忔墽琛岋細
 
-1. 璇诲彇 `AGENTS.md` 鍜?`README.md`銆?2. 璇诲彇 `00_START_HERE.md`锛岀‘璁ゅ綋鍓嶇ǔ瀹氬叆鍙ｅ拰閫傜敤杈圭晫銆?3. 鍒ゆ柇浠诲姟鏄彧璇诲璁°€佹枃妗ｅ彉鏇淬€佸绔嬩慨澶嶃€佸姛鑳?閲嶆瀯銆乁I銆佸畨瑁?鍙戝竷涓殑鍝竴绫汇€?4. 鍒ゆ柇鏄惁寤剁画涓婁竴杞?coding锛涜嫢涓嶆槸锛屽繀椤昏闂槸鍚?`forget/compress context`锛屼笉寰椾娇鐢?   Token 闃堝€奸潤榛樿烦杩囥€?5. 鎸?`00_START_HERE.md` 澹版槑鐨?full-read chain 瀹屾暣璇诲彇鐗堟湰婧愩€佷富閫昏緫鍜屽叆鍙ｆ竻鍗曘€?6. 寤虹珛鏈€灏忎簨瀹炲湴鍥撅紝鍐嶆墽琛屽尮閰嶇殑 SDD銆佹潈闄愩€侀獙璇佹垨鍙戝竷闂ㄦ銆?
+1. 璇诲彇 `AGENTS.md` 鍜?`README.md`銆?
+2. 璇诲彇 `00_START_HERE.md`锛岀‘璁ゅ綋鍓嶇ǔ瀹氬叆鍙ｅ拰閫傜敤杈圭晫銆?
+3. 鍒ゆ柇浠诲姟鏄彧璇诲璁°€佹枃妗ｅ彉鏇淬€佸绔嬩慨澶嶃€佸姛鑳?閲嶆瀯銆乁I銆佸畨瑁?鍙戝竷涓殑鍝竴绫汇€?
+4. 鍒ゆ柇鏄惁寤剁画涓婁竴杞?coding锛涜嫢涓嶆槸锛屽繀椤昏闂槸鍚?`forget/compress context`锛屼笉寰椾娇鐢?
+   Token 闃堝€奸潤榛樿烦杩囥€?
+5. 鎸?`00_START_HERE.md` 澹版槑鐨?full-read chain 瀹屾暣璇诲彇鐗堟湰婧愩€佷富閫昏緫鍜屽叆鍙ｆ竻鍗曘€?
+6. 寤虹珛鏈€灏忎簨瀹炲湴鍥撅紝鍐嶆墽琛屽尮閰嶇殑 SDD銆佹潈闄愩€侀獙璇佹垨鍙戝竷闂ㄦ銆?
+
 鍙闂涓嶉渶瑕佷吉閫犲疄鐜拌鍒掞紱浣嗕换浣曞啓鍏ャ€佸畨瑁呫€佹墦鍖呮垨瑙勫垯鍚屾閮藉繀椤诲厛瀹屾垚閫傜敤鐨勯棬妲涖€?
+
 ## 4. 鑳藉姏鐘舵€佸繀椤诲垎灞傝〃杈?
+
 浠讳綍鑳藉姏缁撹閮藉繀椤诲尯鍒嗭細
 
 - 瑙勫垯鏄惁澹版槑
 - 鏂囦欢鎴?profile 鏄惁娉ㄥ唽
-- 杩愯鏃舵槸鍚﹀彲鐢?- 鏉冮檺鏄惁鍏佽鎵ц
+- 杩愯鏃舵槸鍚﹀彲鐢?
+- 鏉冮檺鏄惁鍏佽鎵ц
 - 鏄惁缁忚繃鍖归厤鐨勯獙璇佸伐鍏风‘璁?
+
 鎼滅储缁撴灉銆侀潤鎬佽鍙栥€佹瀯寤烘垚鍔熸垨鍘嗗彶璁板繂閮戒笉鑳藉崟鐙瘉鏄庤繍琛屾椂銆佽瑙夋垨杩滅▼浜嬪疄銆?
+
 ## 5. UI 瀹炴柦鍓嶇疆闂ㄦ
 
 浠讳綍姝ｅ紡 UI 瀹炴柦锛堥〉闈€佸睆骞曘€佺粍浠躲€佸竷灞€銆佽瑙夎璁℃垨 UI 鏍峰紡鍙樻洿锛変箣鍓嶏紝蹇呴』锛?
-1. 浣跨敤鏂囩敓鍥惧伐鍏风敓鎴愬嵆灏嗗疄鏂界殑 UI 棰勮鍥俱€?2. 灏嗛瑙堝浘灞曠ず缁欑敤鎴锋煡鐪嬶紙鑻ヨ亰澶╃晫闈㈡垨瀹㈡埛绔幆澧冧笉鏀寔鐩存帴娓叉煋鏄剧ず锛屽簲灏嗗浘鐗囩敓鎴愬悗淇濆瓨鍒伴」鐩枃浠跺す濡?`.specify/mockups/` 涓嬶紝鏄庣‘鎻愮ず缁濆鏂囦欢璺緞浠ヤ緵鐢ㄦ埛鑷鏌ョ湅锛夈€?3. 绛夊緟鐢ㄦ埛纭锛涚敤鎴峰彲浠ユ壒鍑嗛瑙堬紝涔熷彲浠ユ槑纭涓嶉渶瑕佽姝ラ銆?4. 鍙湁鎵瑰噯鎴栨槑纭?opt-out 鍚庯紝鎵嶅厑璁稿紑濮?UI 浠ｇ爜瀹炴柦銆?
-鐢ㄦ埛娌℃湁鏄庣‘ opt-out 鏃讹紝涓嶅緱鎶娾€滃唴瀹规敼鍔ㄣ€佸搷搴斿紡淇銆佹棤闅滅淇鎴栧皬鏀瑰姩鈥濆綋浣滈粯璁よ眮鍏嶃€?UI 瀹炴柦瀹屾垚鍚庝粛蹇呴』鎵ц鎴浘銆佺埗瀛愬竷灞€杈圭晫銆佹孩鍑恒€佹崲琛屽拰瀹為檯瀹瑰櫒瀹藉害楠岃瘉銆?
+
+1. 浣跨敤鏂囩敓鍥惧伐鍏风敓鎴愬嵆灏嗗疄鏂界殑 UI 棰勮鍥俱€?
+2. 灏嗛瑙堝浘灞曠ず缁欑敤鎴锋煡鐪嬶紙鑻ヨ亰澶╃晫闈㈡垨瀹㈡埛绔幆澧冧笉鏀寔鐩存帴娓叉煋鏄剧ず锛屽簲灏嗗浘鐗囩敓鎴愬悗淇濆瓨鍒伴」鐩枃浠跺す濡?`.specify/mockups/` 涓嬶紝鏄庣‘鎻愮ず缁濆鏂囦欢璺緞浠ヤ緵鐢ㄦ埛鑷鏌ョ湅锛夈€?
+3. 绛夊緟鐢ㄦ埛纭锛涚敤鎴峰彲浠ユ壒鍑嗛瑙堬紝涔熷彲浠ユ槑纭涓嶉渶瑕佽姝ラ銆?
+4. 鍙湁鎵瑰噯鎴栨槑纭?opt-out 鍚庯紝鎵嶅厑璁稿紑濮?UI 浠ｇ爜瀹炴柦銆?
+
+鐢ㄦ埛娌℃湁鏄庣‘ opt-out 鏃讹紝涓嶅緱鎶娾€滃唴瀹规敼鍔ㄣ€佸搷搴斿紡淇銆佹棤闅滅淇鎴栧皬鏀瑰姩鈥濆綋浣滈粯璁よ眮鍏嶃€?
+UI 瀹炴柦瀹屾垚鍚庝粛蹇呴』鎵ц鎴浘銆佺埗瀛愬竷灞€杈圭晫銆佹孩鍑恒€佹崲琛屽拰瀹為檯瀹瑰櫒瀹藉害楠岃瘉銆?
+
 ## 6. 閿欒鍘嗗彶涓庤鍒欏悓姝?
-- `modification_history` 鏄叡浜敊璇笌淇璁板綍锛屼笉鏄綋鍓嶄粨搴撶殑涓婚€昏緫鏉ユ簮銆?- 榛樿鏈湴浣嶇疆鏄綋鍓嶉」鐩埗鐩綍涓嬬殑 `modification_history`锛涘叾浠栧竷灞€蹇呴』鏄惧紡閰嶇疆銆?- 鍦ㄨ鍒欓€昏緫鏇存柊銆佸彂甯冩垨鎺ㄩ€侀」鐩唬鐮佸墠锛屽厛妫€鏌ュ苟鍚屾瀵瑰簲鐨勫巻鍙茶褰曘€?- 涓嶅緱鎶婄壒瀹氭満鍣ㄧ殑鐢ㄦ埛鐩綍鍐欏叆瑙勫垯鏂囦欢鎴?bundle銆?
+
+- `modification_history` 鏄叡浜敊璇笌淇璁板綍锛屼笉鏄綋鍓嶄粨搴撶殑涓婚€昏緫鏉ユ簮銆?
+- 榛樿鏈湴浣嶇疆鏄綋鍓嶉」鐩埗鐩綍涓嬬殑 `modification_history`锛涘叾浠栧竷灞€蹇呴』鏄惧紡閰嶇疆銆?
+- 鍦ㄨ鍒欓€昏緫鏇存柊銆佸彂甯冩垨鎺ㄩ€侀」鐩唬鐮佸墠锛屽厛妫€鏌ュ苟鍚屾瀵瑰簲鐨勫巻鍙茶褰曘€?
+- 涓嶅緱鎶婄壒瀹氭満鍣ㄧ殑鐢ㄦ埛鐩綍鍐欏叆瑙勫垯鏂囦欢鎴?bundle銆?
+
 ## 7. 鐩綍杈圭晫涓庢墦鍖呰鍒?
-- `AgentLogic` 鐩綍鍙兘淇濆瓨閫昏緫銆佹ā鍧椼€佹妧鑳姐€佽剼鏈€佽鏍煎拰鐢熸垚 bundle銆?- 涓嶅緱鍦ㄦ湰浠撳簱鍒涘缓鏃犲叧涓氬姟婧愮爜銆佷緷璧栧畨瑁呯粨鏋溿€佷复鏃舵祴璇曟垨涓氬姟鏃ュ織銆?- `dist/` 鍙兘鐢?`scripts/build-profile.ps1` 鐢熸垚锛岀姝㈡墜宸ョ紪杈戙€?- `manifest.json` 鏄?profile銆佸涓昏緭鍑哄拰閫傞厤鍣ㄧ殑鏈哄櫒鍙浜嬪疄婧愩€?- `reference/` 鍜屽巻鍙茬増鏈枃浠朵笉搴旈粯璁ゆ敞鍏ヤ负褰撳墠杩愯瑙勫垯锛岄櫎闈?profile 鏄庣‘鍒楀嚭銆?
+
+- `AgentLogic` 鐩綍鍙兘淇濆瓨閫昏緫銆佹ā鍧椼€佹妧鑳姐€佽剼鏈€佽鏍煎拰鐢熸垚 bundle銆?
+- 涓嶅緱鍦ㄦ湰浠撳簱鍒涘缓鏃犲叧涓氬姟婧愮爜銆佷緷璧栧畨瑁呯粨鏋溿€佷复鏃舵祴璇曟垨涓氬姟鏃ュ織銆?
+- `dist/` 鍙兘鐢?`scripts/build-profile.ps1` 鐢熸垚锛岀姝㈡墜宸ョ紪杈戙€?
+- `manifest.json` 鏄?profile銆佸涓昏緭鍑哄拰閫傞厤鍣ㄧ殑鏈哄櫒鍙浜嬪疄婧愩€?
+- `reference/` 鍜屽巻鍙茬増鏈枃浠朵笉搴旈粯璁ゆ敞鍏ヤ负褰撳墠杩愯瑙勫垯锛岄櫎闈?profile 鏄庣‘鍒楀嚭銆?
+
 ## 8. 鍙樻洿鍚庣殑鏈€灏忛獙璇?
-- 鏂囨。鎴栬鍒欏彉鏇达細杩愯 `node scripts/check-logic-entry.js` 鍜岄摼鎺ユ鏌ャ€?- manifest銆乸rofile銆乥undle 鎴栧畨瑁呭彉鏇达細杩愯 `scripts/validate-package.ps1`銆?- 鐗堟湰銆佸涓绘垨鍙戝竷鍙樻洿锛氳繍琛?`scripts/maintainer-check.ps1`锛屽苟妫€鏌ョ敓鎴愯緭鍑哄拰 git diff銆?- 鐜涓庡涓诲垽鏂細杩愯 `scripts/doctor.ps1`銆?- 浠讳綍楂橀闄╂垨澶栭儴鐘舵€佸彉鏇撮兘蹇呴』鍋氱洰鏍囩‘璁ゅ拰缁撴灉纭銆?
+
+- 鏂囨。鎴栬鍒欏彉鏇达細杩愯 `node scripts/check-logic-entry.js` 鍜岄摼鎺ユ鏌ャ€?
+- manifest銆乸rofile銆乥undle 鎴栧畨瑁呭彉鏇达細杩愯 `scripts/validate-package.ps1`銆?
+- 鐗堟湰銆佸涓绘垨鍙戝竷鍙樻洿锛氳繍琛?`scripts/maintainer-check.ps1`锛屽苟妫€鏌ョ敓鎴愯緭鍑哄拰 git diff銆?
+- 鐜涓庡涓诲垽鏂細杩愯 `scripts/doctor.ps1`銆?
+- 浠讳綍楂橀闄╂垨澶栭儴鐘舵€佸彉鏇撮兘蹇呴』鍋氱洰鏍囩‘璁ゅ拰缁撴灉纭銆?
+
 ## 9. 鎸佺画鎵ц杈圭晫
 
-鐢ㄦ埛鏄庣‘瑕佹眰鎸佺画鎵ц鏃讹紝褰撳墠璁″垝鍐呯殑闃呰銆佷慨鏀广€侀獙璇佸拰淇瑙嗕负鍚屼竴鎵ц杞銆?鍙湁鐢ㄦ埛瑕佹眰鍋滄銆佽鍒掑畬鎴愰渶瑕佹柊鐨勬垬鐣ユ柟鍚戙€佸嚭鐜版棤娉曚粠鏈湴浜嬪疄瑙ｅ喅鐨勯樆濉烇紝鎴栧嵆灏嗚繘琛?楂橀闄╀笉鍙€嗘搷浣滄椂锛屾墠鏆傚仠璇锋眰杈撳叆銆?
+鐢ㄦ埛鏄庣‘瑕佹眰鎸佺画鎵ц鏃讹紝褰撳墠璁″垝鍐呯殑闃呰銆佷慨鏀广€侀獙璇佸拰淇瑙嗕负鍚屼竴鎵ц杞銆?
+鍙湁鐢ㄦ埛瑕佹眰鍋滄銆佽鍒掑畬鎴愰渶瑕佹柊鐨勬垬鐣ユ柟鍚戙€佸嚭鐜版棤娉曚粠鏈湴浜嬪疄瑙ｅ喅鐨勯樆濉烇紝鎴栧嵆灏嗚繘琛?
+楂橀闄╀笉鍙€嗘搷浣滄椂锛屾墠鏆傚仠璇锋眰杈撳叆銆?
 
 ## END FILE: modules/01_MasterLogic.md
 
@@ -969,7 +1015,8 @@ For future logic iterations, a version line must explicitly record its external 
 
 - 涓嶈鍙啓鈥渜uery 鏄牳蹇冣€濓紝瑕佽ˉ榻愬畠涓?`QueryEngine`銆佸伐鍏风紪鎺掋€佹潈闄愪笂涓嬫枃涔嬮棿鐨勫叧绯汇€?
 - 涓嶈鎶婂苟琛屾墽琛岃兘鍔涙硾鍖栦负鈥滄墍鏈夊伐鍏烽兘骞惰鈥濄€?
-- 褰撳墠椤圭洰鏄庣‘鍖哄垎鍙骞跺彂瀹夊叏宸ュ叿涓庢湁鍓綔鐢ㄥ伐鍏凤紝杩欎竴鐐瑰繀椤婚暱鏈熶繚鐣欏湪閫昏緫鍖呬腑銆?## V6.8.0 Complementary Runtime Contract
+- 褰撳墠椤圭洰鏄庣‘鍖哄垎鍙骞跺彂瀹夊叏宸ュ叿涓庢湁鍓綔鐢ㄥ伐鍏凤紝杩欎竴鐐瑰繀椤婚暱鏈熶繚鐣欏湪閫昏緫鍖呬腑銆?
+## V6.8.0 Complementary Runtime Contract
 
 The agentic loop must carry a compact, inspectable runtime state rather than relying on transcript memory alone. Track session lineage, the active phase, actionable TODOs, pending side effects, background-task handles, child-agent handles, and verification gaps. When compacting, preserve that state and classify retry outcomes; do not retry deterministic failures or permission denials. Headless callers should receive a structured result envelope, while correctness still follows the applicable verification matrix. See `modules/44_V6_8_GrokBuildOperationalIntegration.md`.
 
@@ -1291,7 +1338,8 @@ Agent 鑷冲皯蹇呴』瀹屾垚锛?
 - 姝ｇ‘椤哄簭蹇呴』鍥哄畾涓猴細
   1. 鍏堢‘璁ら€昏緫鍏ュ彛
   2. 鍐嶅垽鏂槸鍚﹀睘浜庝笂涓€杞欢鐢?
-  3. 鑻ヤ笉鏄欢鐢筹紝蹇呴』鍏堣闂槸鍚﹂渶瑕?`forget/compress context`锛涗笉寰楄缃?Token 闃堝€间緥澶栨垨闈欓粯璺宠繃璇ュ喅瀹?- 鑻ョ 3 姝ユ湭瀹屾垚涓旀湭婊¤冻蹇界暐鏉′欢锛屼笉寰楃洿鎺ヨ繘鍏ユ寮忓疄鐜般€?
+  3. 鑻ヤ笉鏄欢鐢筹紝蹇呴』鍏堣闂槸鍚﹂渶瑕?`forget/compress context`锛涗笉寰楄缃?Token 闃堝€间緥澶栨垨闈欓粯璺宠繃璇ュ喅瀹?
+- 鑻ョ 3 姝ユ湭瀹屾垚涓旀湭婊¤冻蹇界暐鏉′欢锛屼笉寰楃洿鎺ヨ繘鍏ユ寮忓疄鐜般€?
 - 鑻ョ敤鎴风‘璁ら渶瑕佹敹缂╀笂涓嬫枃锛孉gent 蹇呴』鍏堝洖鍐欑粨鏋勫寲鐘舵€侊紝鍐嶅噺灏戝伐浣滀笂涓嬫枃銆?
 
 ## 4.3 澶栭儴鏇翠紭宸ュ叿鐨勬彁鍑轰箟鍔?

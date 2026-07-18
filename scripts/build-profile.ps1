@@ -10,7 +10,8 @@ param(
     [string]$ProfileName = "core-enhanced",
     [ValidateSet("codex", "claude", "antigravity", "generic")]
     [string]$TargetHost = "generic",
-    [string]$OutputPath
+    [string]$OutputPath,
+    [switch]$Verify
 )
 
 $ErrorActionPreference = "Stop"
@@ -99,6 +100,20 @@ $repoRoot = Get-RepoRoot
 $manifest = Get-Manifest -RepoRoot $repoRoot
 $resolvedOutputPath = Resolve-OutputPath -RepoRoot $repoRoot -Manifest $manifest -TargetHost $TargetHost -RequestedOutputPath $OutputPath
 $bundle = Build-Bundle -RepoRoot $repoRoot -Manifest $manifest -ProfileName $ProfileName -TargetHost $TargetHost
+
+if ($Verify) {
+    if (-not (Test-Path $resolvedOutputPath)) {
+        throw "Generated bundle is missing: $resolvedOutputPath"
+    }
+
+    $existingBundle = [System.IO.File]::ReadAllText($resolvedOutputPath)
+    if (-not [string]::Equals($existingBundle, $bundle, [System.StringComparison]::Ordinal)) {
+        throw "Generated bundle is stale: $resolvedOutputPath. Regenerate it with scripts/build-profile.ps1."
+    }
+
+    Write-Host "Verified profile '$ProfileName' for host '$TargetHost' -> $resolvedOutputPath"
+    return
+}
 
 $outputDir = Split-Path -Parent $resolvedOutputPath
 if ($outputDir) {

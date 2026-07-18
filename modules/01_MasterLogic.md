@@ -1,4 +1,4 @@
-# AgentLogic V6.8.0 Master Logic
+# AgentLogic V6.8.1 Master Logic
 
 本文件是 AgentLogic 仓库的项目级主逻辑摘要。它描述本仓库中的规则、验证、安装和
 打包资产，不描述任何外部业务项目或某个具体 Agentic CLI 产品的源码事实。

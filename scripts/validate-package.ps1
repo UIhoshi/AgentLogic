@@ -88,7 +88,7 @@ if (-not ($manifest.profiles.PSObject.Properties.Name -contains $manifest.defaul
     Fail "Default profile '$($manifest.default_profile)' is not defined in manifest.profiles."
 }
 
-if ($manifest.current_version -eq "V6.8.0") {
+if ($manifest.current_version -match '^V6\.8\.') {
     $operationalModule = "modules/44_V6_8_GrokBuildOperationalIntegration.md"
     Assert-Exists -Root $RepoRoot -RelativePath $operationalModule -Label "V6.8 operational integration module"
 
@@ -184,6 +184,14 @@ foreach ($outputProperty in $manifest.host_outputs.PSObject.Properties) {
     }
     if ($outputContent -match 'AgentLogic_V6_7_0|V6\.7\.0|AgentLogic_V6_7_1') {
         Fail "Host output '$($outputProperty.Name)' contains stale stable-version references."
+    }
+}
+
+$buildScript = Join-Path $RepoRoot "scripts\build-profile.ps1"
+foreach ($hostName in $manifest.host_outputs.PSObject.Properties.Name) {
+    & powershell -NoProfile -ExecutionPolicy Bypass -File $buildScript -ProfileName $manifest.default_profile -TargetHost $hostName -Verify
+    if ($LASTEXITCODE -ne 0) {
+        Fail "Host output '$hostName' does not match a generated '$($manifest.default_profile)' profile bundle."
     }
 }
 
