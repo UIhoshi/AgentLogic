@@ -50,3 +50,7 @@ bundle to LF and explicitly decodes source inputs as UTF-8 before write and comp
 The regenerated `codex`, `claude`, `antigravity`, and `generic` bundles contain no carriage
 return bytes and all pass the non-mutating verifier, package validator, logic-entry check, and
 maintainer check locally.
+
+A fresh Windows clone reproduced Git's CRLF checkout conversion at the first bundle newline.
+The verifier therefore normalizes the checked-out bundle before its otherwise exact comparison;
+real content drift remains a failure.

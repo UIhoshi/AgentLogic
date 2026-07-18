@@ -19,7 +19,8 @@ bundles match their source profile.
 3. `build-profile.ps1` must provide a non-mutating verification path for an existing
    generated output.
 4. Generated bundles must use canonical LF line endings and explicit UTF-8 source decoding
-   on every host.
+   on every host; verification must compare canonical newlines so Git's Windows checkout
+   conversion does not create a false drift failure.
 5. `validate-package.ps1` must verify every configured host bundle against the default
    profile without changing tracked files.
 6. Tracked `dist/` bundles must be regenerated from current sources and committed.

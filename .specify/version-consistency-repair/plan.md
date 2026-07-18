@@ -49,7 +49,8 @@ the four tracked host bundles, and records a concise shipping review.
 - Fails if: a Windows runner regenerates CRLF text against an LF checkout and reports a
   stale bundle even after a successful local validation.
 - Mitigation: canonicalize generated text to LF, explicitly decode inputs as UTF-8 before
-  both write and verification, then regenerate the tracked outputs.
+  output and verification, and normalize checked-out output before comparison, then
+  regenerate the tracked outputs.
 
 ### Claim: Regenerating tracked bundles is safe
 

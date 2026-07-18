@@ -107,7 +107,8 @@ if ($Verify) {
     }
 
     $existingBundle = [System.IO.File]::ReadAllText($resolvedOutputPath)
-    if (-not [string]::Equals($existingBundle, $bundle, [System.StringComparison]::Ordinal)) {
+    $normalizedExistingBundle = [System.Text.RegularExpressions.Regex]::Replace($existingBundle, "\r\n|\r|\n", "`n")
+    if (-not [string]::Equals($normalizedExistingBundle, $bundle, [System.StringComparison]::Ordinal)) {
         throw "Generated bundle is stale: $resolvedOutputPath. Regenerate it with scripts/build-profile.ps1."
     }
 
