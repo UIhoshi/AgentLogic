@@ -29,6 +29,7 @@
 - 入口清单：`modules/15_LogicEntryChecklist.md`
 - Agentic loop 合同：`modules/03_AgenticLoop.md`
 - SDD 生命周期：`modules/38_V6_6_SpecDrivenDevelopment.md`
+- Graphify 代码地图与预览门：`modules/45_V6_8_GraphifyCodeMapIntegration.md`
 - 任务规格与状态：`.specify/`
 
 ### L3：安全、权限与验证控制 (Safety & Verification Control)
@@ -118,3 +119,9 @@ UI 实施完成后仍必须执行截图、父子布局边界、溢出、换行�
 用户明确要求持续执行时，当前计划内的阅读、修改、验证和修复视为同一执行轮次。
 只有用户要求停止、计划完成需要新的战略方向、出现无法从本地事实解决的阻塞，或即将进行
 高风险不可逆操作时，才暂停请求输入。
+
+## 10. 可选代码地图与图谱预览
+
+- `modules/45_V6_8_GraphifyCodeMapIntegration.md` 提供按需项目代码地图策略，不是默认安装的外部依赖。
+- 多模块功能、重大重构、架构或发布工作在 Converge/Ship 时应询问用户是否需要代码视图预览。
+- 用户明确同意后，才可在目标业务项目中生成 `graphify-out/`；不得默认在 AgentLogic 仓库内生成，也不得把外部图谱结果当作运行时事实证明。

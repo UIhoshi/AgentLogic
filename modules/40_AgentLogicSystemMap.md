@@ -44,6 +44,13 @@ a text-to-image preview, show it to the user, and wait for approval or explicit 
 before writing UI code. UI completion still requires screenshot and parent-child layout-boundary
 verification.
 
+## Code-map branch
+
+For substantial target-project work, `modules/45_V6_8_GraphifyCodeMapIntegration.md` adds an
+opt-in Graph Preview Gate at Converge/Ship. With user approval and a reviewed external
+installation, Graphify may create a target-project `graphify-out/` map. Those artifacts are
+external project facts and discovery aids, not AgentLogic bundle content or standalone proof.
+
 ## Update rule
 
 This map must be updated when the manifest, entry chain, host adapters, validation scripts,

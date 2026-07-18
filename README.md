@@ -114,6 +114,7 @@ During its evolutionary cycles, AgentLogic has integrated concepts and structure
 | **Matt Pocock Skills** | [mattpocock/skills](https://github.com/mattpocock/skills) | Integrates interactive grilling, `CONTEXT.md` vocabulary maps, and Architecture Decision Records (ADRs) |
 | **Cybersecurity Skills Router** | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | Outlines malware analysis, APK reversing, frontend JS decryption, and firmware audit routing |
 | **Grok Build (comparative reference)** | [xai-org/grok-build](https://github.com/xai-org/grok-build) | Compares provider-neutral runtime execution, state-preserving compaction, and deny-overrides policies |
+| **Graphify (external code-map reference)** | [Graphify-Labs/graphify](https://github.com/Graphify-Labs/graphify) | Provides an optional queryable project graph and user-approved code-view preview workflow |
 
 ---
 
@@ -132,3 +133,8 @@ rule discovery, session state, compaction, permissions, extension trust,
 subagents, headless execution, memory freshness, and bounded background work.
 These contracts complement—not replace—the existing SDD, Red-Team, SRA,
 verification, and history-synchronization gates.
+
+The same profile also includes
+[`modules/45_V6_8_GraphifyCodeMapIntegration.md`](./modules/45_V6_8_GraphifyCodeMapIntegration.md).
+It defines an optional Graph Preview Gate: substantial tasks ask the user at Converge/Ship
+whether to generate a Graphify code view. Graphify is not installed or run automatically.

@@ -22,6 +22,7 @@ Key Enhancements:
 - **Taste Frontend Design**: Direct integration of `taste-skill` to enforce anti-slop premium interface design system layouts, micro-interactions, spring animations (GSAP), and visual quality standards.
 - **Expanded Core Governance Modules**: Incorporates modules 37, 38, 39, and 40 for cybersecurity routing, SDD lifecycle tracking, premium design system controls, and visual architecture matrix mapping.
 - **Grok Build Complementary Operations**: Adds provider-neutral contracts for rule discovery, session lineage, active-state-preserving compaction, deny-overrides policy compilation, extension trust, subagent capabilities, headless result envelopes, memory freshness, and bounded retries/background work. See `modules/44_V6_8_GrokBuildOperationalIntegration.md`.
+- **Graphify Code Map Integration**: Adds an optional external code-map workflow and a consent-based Graph Preview Gate for substantial projects at Converge/Ship. See `modules/45_V6_8_GraphifyCodeMapIntegration.md`.
 
 ---
 
@@ -77,6 +78,7 @@ The V6.8.1 line is supported by a modular suite of governance rules:
 - `modules/43_V6_7_MattPocockSkillsIntegration.md`: Matt Pocock Skills Integration 闁?Grilling plan interview flow, CONTEXT.md ubiquitous vocabulary glossary, and Architectural Decision Records (ADRs) specifications.
 
 - `modules/44_V6_8_GrokBuildOperationalIntegration.md`: Provider-neutral operational contracts translated from the audited Grok Build runtime and user guides.
+- `modules/45_V6_8_GraphifyCodeMapIntegration.md`: Optional external code-map policy, Graph Preview Gate, and external-extension trust boundary.
 
 ---
 
@@ -85,7 +87,7 @@ The V6.8.1 line is supported by a modular suite of governance rules:
 The V6.8.1 line is now promoted to stable status.
 - **Stable Entry**: `MAIN.md`
 - **Current Version**: `V6.8.1`
-- **Default Profile**: `core-enhanced` (now includes all V6.8.1 modules, system maps, reverse-skill, spec-kit, taste-skill, AI shipping & reviewability audit integration, and Grok Build complementary operational contracts)
+- **Default Profile**: `core-enhanced` (now includes all V6.8.1 modules, system maps, reverse-skill, spec-kit, taste-skill, AI shipping & reviewability audit integration, Grok Build complementary operational contracts, and the optional Graphify code-map policy)
 
 ---
 
@@ -122,6 +124,10 @@ The V6.8.1 stable line integrates the following external source repositories:
   - Local comparison path: `../grok-build`
   - Audited commit: `c68e39f60462f28d9be5e683d9cbe2c57b1a5027`
   - Integration date: `2026-07-16`; source line: `main` (no runtime dependency imported)
+- **Graphify (external code-map reference)**:
+  - Source URL: `https://github.com/Graphify-Labs/graphify`
+  - Integration path: `modules/45_V6_8_GraphifyCodeMapIntegration.md`
+  - Integration date: `2026-07-18`; reference line: `v8` (no runtime dependency or skill installed)
 
 ---
 
@@ -138,6 +144,7 @@ Key stable rules:
 - The `agent-browser` skill provides deterministic accessibility-tree browser automation, preferred dynamically when dynamic page rendering, multi-step actions, or session-isolated login tracking is required.
 - The `ponytail` skill channels a lazy senior developer, enforcing the 7-rung ladder (YAGNI, reuse, stdlib, native, dependency, one-line, min-code) to prevent vibe-coding slop and over-engineering.
 - The `mattpocock/skills` integration mandates interactive grilling (single-question stress-testing), root-level `CONTEXT.md` vocabulary maps, and docs/adr/ numbered Architectural Decision Records.
+- Graphify is an optional external code-map capability. It may guide project discovery and offer a user-approved graph preview, but it must be security-audited before installation and never replaces the Verification Matrix.
 
 
 

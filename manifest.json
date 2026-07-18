@@ -63,7 +63,8 @@
                                                          "modules/41_V6_7_AIShippingAndReviewabilityAudit.md",
                                                          "modules/42_V6_7_PonytailLazySeniorDevLadder.md",
                                                          "modules/43_V6_7_MattPocockSkillsIntegration.md",
-                                                         "modules/44_V6_8_GrokBuildOperationalIntegration.md"
+                                                         "modules/44_V6_8_GrokBuildOperationalIntegration.md",
+                                                         "modules/45_V6_8_GraphifyCodeMapIntegration.md"
                                                      ]
                                        },
                      "github-publishing":  {
@@ -110,7 +111,8 @@
                                                              "modules/41_V6_7_AIShippingAndReviewabilityAudit.md",
                                                              "modules/42_V6_7_PonytailLazySeniorDevLadder.md",
                                                              "modules/43_V6_7_MattPocockSkillsIntegration.md",
-                                                             "modules/44_V6_8_GrokBuildOperationalIntegration.md"
+                                                             "modules/44_V6_8_GrokBuildOperationalIntegration.md",
+                                                             "modules/45_V6_8_GraphifyCodeMapIntegration.md"
                                                          ]
                                            }
                  },
@@ -124,6 +126,9 @@
                                                    "modules/18_GitHubREADMEExamples_V1.md",
                                                    "modules/19_GitHubREADMEReviewChecklist_V1.md"
                                                ],
+                             "external_code_map":  [
+                                                       "modules/45_V6_8_GraphifyCodeMapIntegration.md"
+                                                   ],
                              "reference_raw_layers":  [
                                                           "reference/raw_tools/",
                                                           "reference/raw_tooling/",
