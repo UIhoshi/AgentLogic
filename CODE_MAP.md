@@ -17,3 +17,5 @@
 - `modules/48_V6_8_SkillAndToolRouting.md` defines the problem-to-evidence/skill routing aid.
 
 | Autonomous skill enforcement | contracts/skill-routing.json â†’ Module 49 â†’ scripts/validate-skill-routing.ps1 | registry validator + package validation |
+
+| Product/UI requirements | `product-requirements-grilling` skill ¡ú `.specify/<task>/requirements-brief.md` ¡ú `validate-requirements-brief.ps1` ¡ú image/UI route | brief approval/content validation; mockup decision required |

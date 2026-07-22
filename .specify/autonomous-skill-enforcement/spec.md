@@ -40,3 +40,15 @@ is unavailable. Preserve explicit user opt-outs only where an existing policy al
 - The candidate registry lists OpenTofu, kubectl, psql, FFmpeg, and Go with trigger, source class,
   and pre-install review requirements.
 - Package, entry, and generated-bundle verification pass.
+
+## Extension: Product requirements skill and UI-generation decision flow
+
+9. Ship a first-party `product-requirements-grilling` skill that wraps the audited generic grilling
+   behavior and produces a deterministic requirements brief.
+10. Install that skill into Codex during AgentLogic installation and make it the only primary alias
+    for the requirements-grilling route.
+11. Add a brief validator. It must block net-new/substantial UI generation and implementation until
+    required sections plus user approval are present.
+12. For new projects/UI ideas, require the agent to recommend and explicitly ask whether to create a
+    mockup. For dissatisfaction with an existing layout, require a current screenshot plus the
+    user's stated problems as image-generation/edit inputs before proposing a replacement mockup.

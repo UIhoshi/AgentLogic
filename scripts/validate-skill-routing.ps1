@@ -23,6 +23,8 @@ foreach ($route in @($registry.routes)) {
   if (@($route.triggers).Count -eq 0 -or @($route.host_skill_aliases).Count -eq 0 -or @($route.closure_evidence).Count -eq 0) { throw "Route '$($route.id)' needs triggers, host aliases, and closure evidence." }
 }
 foreach ($id in $required) { if (-not $seen[$id]) { throw "Missing required autonomous route '$id'." } }
+foreach ($requiredPath in @('skills\productivity\product-requirements-grilling\SKILL.md','skills\productivity\product-requirements-grilling\assets\requirements-brief.md','scripts\validate-requirements-brief.ps1')) { if (-not (Test-Path (Join-Path $RepoRoot $requiredPath))) { throw "Missing autonomous workflow asset: $requiredPath" } }
+
 $module = Get-Content -Raw -Encoding UTF8 $modulePath
 foreach ($anchor in @('Strict missing-capability policy','Software candidate reporting','invocation evidence')) { if ($module -notmatch [regex]::Escape($anchor)) { throw "Enforcement module missing anchor: $anchor" } }
 Write-Host "Autonomous skill routing validation passed ($($registry.routes.Count) routes)."

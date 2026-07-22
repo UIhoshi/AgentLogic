@@ -1,4 +1,4 @@
-# Ship Review — Autonomous Skill Enforcement
+﻿# Ship Review 鈥?Autonomous Skill Enforcement
 
 ## Scope
 
@@ -38,3 +38,7 @@ as present now.
 ## Post-push audit correction
 
 The first shipping review found that Module 49 referenced the canonical registry and software candidate directory, but neither asset was profile-bundled. Add both to enhanced profiles so installed hosts retain the routing data and candidate directory without relying on the source checkout.
+
+## Product requirements extension
+
+Adds the first-party `product-requirements-grilling` skill, structured requirements brief template, brief validator, and Codex deployment. The workflow requires a user-approved substantive brief before a UI mockup or UI implementation; existing-layout revisions record a current screenshot and the user's dissatisfaction before image editing.

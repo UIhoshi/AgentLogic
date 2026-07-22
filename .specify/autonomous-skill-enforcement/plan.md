@@ -28,3 +28,12 @@
 2. Update routing/UI/grilling/skill-governance integration points and active version references.
 3. Add deterministic registry validation and connect it to package validation.
 4. Rebuild bundles, run validation, and perform code review of changed scripts/docs.
+
+## Extension approach
+
+- Add a concise first-party skill under `skills/productivity/product-requirements-grilling` with a
+  brief template, rather than modifying the audited generic source skill.
+- Add `scripts/validate-requirements-brief.ps1` for deterministic section and approval checks.
+- Deploy the skill through the Codex adapter; do not copy third-party skill directories.
+- Update Module 49 and the routing registry to distinguish new/UI-idea mockup consent from
+  existing-layout dissatisfaction, which first requires screenshot evidence and a change brief.

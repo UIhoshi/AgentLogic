@@ -55,3 +55,7 @@ pinned and security-audited before installation.
 The registry and validator prove route declarations are complete; they cannot independently prove
 an LLM actually invoked a skill. Invocation records and matching evidence remain mandatory, and
 unrecorded use must be treated as unverified.
+
+## Product requirements and UI generation
+
+Use the first-party product-requirements-grilling skill for every requirements-grilling route. It must produce a user-approved brief that passes scripts/validate-requirements-brief.ps1 before mockup generation or UI implementation. For a new project or UI idea, recommend a mockup and explicitly ask whether the user wants it generated. For an existing layout the user dislikes, capture the current layout first; include that screenshot and the user's dissatisfaction/change brief in the image-generation or editing request. Approval or explicit mockup opt-out remains required before formal UI code.

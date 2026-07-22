@@ -34,6 +34,7 @@ const OPERATIONAL_ENTRY_FILES = [
   'scripts/maintainer-check.ps1',
   'scripts/skills-governance.ps1',
   'scripts/validate-skill-routing.ps1',
+  'scripts/validate-requirements-brief.ps1',
   'adapters/codex/install.ps1',
   'adapters/claude/install.ps1',
   'adapters/antigravity/install.ps1',

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Product Requirements Grilling"
+  short_description: "Clarify product and UI requirements one decision at a time"
+  default_prompt: "Clarify my product requirements before planning or designing the UI."
