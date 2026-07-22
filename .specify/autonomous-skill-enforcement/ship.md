@@ -34,3 +34,7 @@ candidates remain untrusted until a pinned-version security audit and explicit u
 This is enforceable at the rule, registry, and validation-contract layers, not a host-level event
 interceptor. A future host integration could collect invocation telemetry, but must not be claimed
 as present now.
+
+## Post-push audit correction
+
+The first shipping review found that Module 49 referenced the canonical registry and software candidate directory, but neither asset was profile-bundled. Add both to enhanced profiles so installed hosts retain the routing data and candidate directory without relying on the source checkout.
