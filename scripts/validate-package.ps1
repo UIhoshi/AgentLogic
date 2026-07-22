@@ -200,7 +200,35 @@ if ($manifest.current_version -match '^V6\.8\.[2-9]') {
     Assert-Exists -Root $RepoRoot -RelativePath "templates/CODE_MAP.md" -Label "project code-map template"
     foreach ($requiredAnchor in @("AGENTS.md", "PROJECT_MAP.md", "CODE_MAP.md", ".learnings/ERRORS.md", "git fetch --prune")) {
         if ($knowledgeContent -notmatch [regex]::Escape($requiredAnchor)) {
-            Fail "V6.8.2 project-knowledge module is missing required contract: $requiredAnchor"
+            Fail "V6.8 project-knowledge module is missing required contract: $requiredAnchor"
+        }
+    }
+}
+
+if ($manifest.current_version -match '^V6\.8\.[3-9]') {
+    $referenceWorkflowModule = "modules/47_V6_8_ReferenceToInterfaceWorkflow.md"
+    $routingModule = "modules/48_V6_8_SkillAndToolRouting.md"
+    Assert-Exists -Root $RepoRoot -RelativePath $referenceWorkflowModule -Label "V6.8 reference-to-interface workflow module"
+    Assert-Exists -Root $RepoRoot -RelativePath $routingModule -Label "V6.8 skill-and-tool routing module"
+
+    $defaultFiles = @($manifest.profiles.$($manifest.default_profile).files)
+    foreach ($module in @($referenceWorkflowModule, $routingModule)) {
+        if ($defaultFiles -notcontains $module) {
+            Fail "Default profile '$($manifest.default_profile)' does not include '$module'."
+        }
+    }
+
+    $referenceContent = Get-Content -Raw -Path (Join-Path $RepoRoot $referenceWorkflowModule)
+    foreach ($requiredAnchor in @("MengTo/Skills", "UI Preview Gate", "does not import")) {
+        if ($referenceContent -notmatch [regex]::Escape($requiredAnchor)) {
+            Fail "Reference-to-interface workflow is missing required contract: $requiredAnchor"
+        }
+    }
+
+    $routingContent = Get-Content -Raw -Path (Join-Path $RepoRoot $routingModule)
+    foreach ($requiredAnchor in @("Mandatory routing procedure", "Problem-to-path matrix", "Skill available")) {
+        if ($routingContent -notmatch [regex]::Escape($requiredAnchor)) {
+            Fail "Skill-and-tool routing module is missing required contract: $requiredAnchor"
         }
     }
 }

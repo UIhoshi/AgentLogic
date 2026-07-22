@@ -71,3 +71,10 @@ Verification of user interface changes is bound to the following rules:
 - **Image Generation Skills**: `skills/taste-skill/skills/imagegen-frontend-web/`, `skills/taste-skill/skills/imagegen-frontend-mobile/`, `skills/taste-skill/skills/brandkit/`
 - **Research Findings (Laziness/Slop Root Causes)**: `skills/taste-skill/research/`
 - **Original Rules Reference**: `skills/taste-skill/README.md`
+
+## 6. Reference-to-Interface Extension
+
+When design work begins from a permitted video, screenshot, live-page, or HTML reference, follow
+`modules/47_V6_8_ReferenceToInterfaceWorkflow.md`. It adds source classification, constrained
+reference briefs, approved capture paths, provenance boundaries, and conditional animation-
+performance review; this module remains the authority for visual direction and preview approval.

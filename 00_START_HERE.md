@@ -59,7 +59,7 @@ validation, review, packaging, or rule synchronization work, the agent MUST full
 following files from beginning to end in this exact order:
 
 1. `README.md`
-2. `versions/AgentLogic_V6_8_2.md`
+2. `versions/AgentLogic_V6_8_3.md`
 3. `modules/01_MasterLogic.md`
 4. `modules/15_LogicEntryChecklist.md`
 

@@ -76,6 +76,7 @@ if (-not $SkipVersionFileCopy) {
     $versionContent = Read-Utf8File -Path $oldMainLogicPath
     $versionContent = $versionContent.Replace($oldVersionToken, $newVersionToken)
     $versionContent = $versionContent.Replace($oldMainLogicFile, $newMainLogicFile)
+    $versionContent = $versionContent.Replace($oldVersion, $NewVersion)
 
     if ($PSCmdlet.ShouldProcess($newMainLogicPath, "Create new version file from $oldMainLogicFile")) {
         $newMainLogicDir = Split-Path -Parent $newMainLogicPath
@@ -115,6 +116,15 @@ $markdownFiles = Get-ChildItem -Path $RepoRoot -Recurse -File -Filter *.md |
 foreach ($file in $markdownFiles) {
     Replace-InFile -Path $file.FullName -OldValue $oldMainLogicFile -NewValue $newMainLogicFile
     Replace-InFile -Path $file.FullName -OldValue $oldVersionToken -NewValue $newVersionToken
+}
+
+# Version labels belong only to active entry/install surfaces. Historical specifications and
+# historical version files must keep their original version references.
+foreach ($relativePath in @("00_README.md", "README.md", "AGENT_INSTALL.md", "MAIN.md", "00_START_HERE.md", "AGENTS.md")) {
+    $path = Join-Path $RepoRoot $relativePath
+    if (Test-Path $path) {
+        Replace-InFile -Path $path -OldValue $oldVersion -NewValue $NewVersion
+    }
 }
 
 Write-Host "Prepared AgentLogic release update."

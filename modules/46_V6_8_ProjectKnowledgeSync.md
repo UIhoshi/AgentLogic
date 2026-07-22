@@ -1,4 +1,4 @@
-# V6.8.2 Project-Native Knowledge Sync
+# V6.8.3 Project-Native Knowledge Sync
 
 Status: **Active in the enhanced profiles.**
 

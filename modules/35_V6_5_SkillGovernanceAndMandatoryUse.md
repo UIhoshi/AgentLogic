@@ -286,6 +286,13 @@ intent and the `-Apply` operation.
 
 ### 9.3 Codebase Tool Dominance
 When a skill introduces a specialized command-line utility (e.g. `agent-browser` CLI), the agent must automatically prefer utilizing it over writing custom scripts or ad-hoc wrappers, ensuring unified tool usage.
+
+## 10. Operational Router
+
+For the required problem-to-evidence-to-skill sequence, use
+`modules/48_V6_8_SkillAndToolRouting.md`. It is a concise execution router; this module remains
+the authority for skill governance, availability, and trust boundaries.
+
 ## V6.8.0 Complementary Extension Trust
 
 Record external extensions as `discovered`, `enabled`, `trusted`, or `verified`; these are separate states. Discovery alone must not activate executable hooks, MCP/LSP servers, install scripts, or plugin commands. Capture source, scope, version/commit, capabilities, and the trust decision, and use the skill-security audit before trusting unfamiliar external material. See `modules/44_V6_8_GrokBuildOperationalIntegration.md`.

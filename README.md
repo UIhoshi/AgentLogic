@@ -17,11 +17,11 @@ Do not continue deeper reading, modify files, delete files, perform write action
 or begin implementation before the logic-entry loop above has been completed.
 -->
 
-# 🌌 AgentLogic: Autonomous Evolving Rule Engine (V6.8.2)
+# 🌌 AgentLogic: Autonomous Evolving Rule Engine (V6.8.3)
 
 [![Agentic Code](https://img.shields.io/badge/Agent-Autonomous-blueviolet?style=flat-square)](https://github.com/UIhoshi/AgentLogic)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/Version-V6.8.2_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_8_2.md)
+[![Version](https://img.shields.io/badge/Version-V6.8.3_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_8_3.md)
 
 AgentLogic is a versioned primary-logic package designed to be pulled into local AI coding hosts (such as Codex, Claude Code, Gemini Pro) and used as their default operating mind. It consolidates multi-turn session workflows, tool selection matrix, security sandbox auditing, and dynamic domain extensions.
 
@@ -123,6 +123,7 @@ During its evolutionary cycles, AgentLogic has integrated concepts and structure
 | **Cybersecurity Skills Router** | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | Outlines malware analysis, APK reversing, frontend JS decryption, and firmware audit routing |
 | **Grok Build (comparative reference)** | [xai-org/grok-build](https://github.com/xai-org/grok-build) | Compares provider-neutral runtime execution, state-preserving compaction, and deny-overrides policies |
 | **Graphify (external code-map reference)** | [Graphify-Labs/graphify](https://github.com/Graphify-Labs/graphify) | Provides an optional queryable project graph and user-approved code-view preview workflow |
+| **MengTo Skills (workflow comparison)** | [MengTo/Skills](https://github.com/MengTo/Skills) | Informs optional reference-to-interface capture, extraction, and verification workflows without importing external skills |
 
 ---
 
@@ -130,7 +131,7 @@ During its evolutionary cycles, AgentLogic has integrated concepts and structure
 
 1. **Keep it Pure**: No business logic or project-specific implementations should be written into `AgentLogic` rule files.
 2. **Specify Before Writing**: Always compile technical blueprints to `.specify/spec.md` and `.specify/plan.md` before touching code.
-3. **Generate via Bundle**: Never edit `dist/` bundles manually. Always write updates to version files (e.g. `versions/AgentLogic_V6_8_2.md`), then run `build-profile.ps1` to rebuild the adapter targets.
+3. **Generate via Bundle**: Never edit `dist/` bundles manually. Always write updates to version files (e.g. `versions/AgentLogic_V6_8_3.md`), then run `build-profile.ps1` to rebuild the adapter targets.
 ## V6.8 Operational Integration
 
 The default `core-enhanced` profile includes
@@ -147,7 +148,14 @@ The same profile also includes
 It defines an optional Graph Preview Gate: substantial tasks ask the user at Converge/Ship
 whether to generate a Graphify code view. Graphify is not installed or run automatically.
 
-## V6.8.2 Project-Native Knowledge Sync
+The enhanced profile also provides an optional
+[`Reference-to-Interface Workflow`](./modules/47_V6_8_ReferenceToInterfaceWorkflow.md) for
+permitted video, page, screenshot, and HTML references, plus a
+[`Skill and Tool Routing`](./modules/48_V6_8_SkillAndToolRouting.md) matrix for selecting the
+required evidence tool before the narrowest matching skill. Neither module installs or trusts
+external skills automatically.
+
+## V6.8.3 Project-Native Knowledge Sync
 
 Business projects synchronize their own concise operational facts and symbol-level navigation with code through tracked
 `AGENTS.md`, `PROJECT_MAP.md`, `CODE_MAP.md`, and `.learnings/ERRORS.md`. `CODE_MAP.md` is the mandatory

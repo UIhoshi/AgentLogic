@@ -1,7 +1,7 @@
 # Project Fact Map Template
 
 Status: active project-fact template.
-This template supports the V6.8.2 project-native knowledge-sync contract. It belongs in the
+This template supports the V6.8.3 project-native knowledge-sync contract. It belongs in the
 target project as `PROJECT_MAP.md`, travels with project code, and contains no private agent
 memory or machine-specific data.
 

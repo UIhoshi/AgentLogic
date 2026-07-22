@@ -3,8 +3,8 @@
     "role":  "primary-local-logic",
     "description":  "Versioned primary logic package intended to be pulled into local AI coding hosts as the default operating logic.",
     "entry":  "MAIN.md",
-    "current_version":  "V6.8.2",
-    "main_logic_file":  "versions/AgentLogic_V6_8_2.md",
+    "current_version":  "V6.8.3",
+    "main_logic_file":  "versions/AgentLogic_V6_8_3.md",
     "default_profile":  "core-enhanced",
     "profiles":  {
                      "minimal":  {
@@ -15,7 +15,7 @@
                                                    "AGENT_INSTALL.md",
                                                    "README.md",
                                                    "AGENTS.md",
-                                                   "versions/AgentLogic_V6_8_2.md",
+                                                   "versions/AgentLogic_V6_8_3.md",
                                                    "modules/12_AgentEnforcement.md",
                                                    "modules/15_LogicEntryChecklist.md",
                                                    "modules/29_MandatoryVerificationMatrix.md",
@@ -31,7 +31,7 @@
                                                          "AGENT_INSTALL.md",
                                                          "README.md",
                                                          "AGENTS.md",
-                                                         "versions/AgentLogic_V6_8_2.md",
+                                                         "versions/AgentLogic_V6_8_3.md",
                                                          "modules/01_MasterLogic.md",
                                                          "modules/03_AgenticLoop.md",
                                                          "modules/05_PermissionsAndSafety.md",
@@ -65,7 +65,9 @@
                                                          "modules/43_V6_7_MattPocockSkillsIntegration.md",
                                                          "modules/44_V6_8_GrokBuildOperationalIntegration.md",
                                                          "modules/45_V6_8_GraphifyCodeMapIntegration.md",
-                                                         "modules/46_V6_8_ProjectKnowledgeSync.md"
+                                                         "modules/46_V6_8_ProjectKnowledgeSync.md",
+                                                         "modules/47_V6_8_ReferenceToInterfaceWorkflow.md",
+                                                         "modules/48_V6_8_SkillAndToolRouting.md"
                                                      ]
                                        },
                      "github-publishing":  {
@@ -76,7 +78,7 @@
                                                              "AGENT_INSTALL.md",
                                                              "README.md",
                                                              "AGENTS.md",
-                                                             "versions/AgentLogic_V6_8_2.md",
+                                                             "versions/AgentLogic_V6_8_3.md",
                                                              "modules/01_MasterLogic.md",
                                                              "modules/03_AgenticLoop.md",
                                                              "modules/05_PermissionsAndSafety.md",
@@ -114,7 +116,9 @@
                                                              "modules/43_V6_7_MattPocockSkillsIntegration.md",
                                                              "modules/44_V6_8_GrokBuildOperationalIntegration.md",
                                                              "modules/45_V6_8_GraphifyCodeMapIntegration.md",
-                                                             "modules/46_V6_8_ProjectKnowledgeSync.md"
+                                                             "modules/46_V6_8_ProjectKnowledgeSync.md",
+                                                             "modules/47_V6_8_ReferenceToInterfaceWorkflow.md",
+                                                             "modules/48_V6_8_SkillAndToolRouting.md"
                                                          ]
                                            }
                  },
@@ -132,11 +136,17 @@
                                                        "modules/45_V6_8_GraphifyCodeMapIntegration.md"
                                                    ],
                              "project_knowledge_sync":  [
-                                                       "modules/46_V6_8_ProjectKnowledgeSync.md",
-                                                       "templates/PROJECT_MAP.md",
-                                                       "templates/CODE_MAP.md",
-                                                       "templates/ERRORS.md"
-                                                   ],
+                                                            "modules/46_V6_8_ProjectKnowledgeSync.md",
+                                                            "templates/PROJECT_MAP.md",
+                                                            "templates/CODE_MAP.md",
+                                                            "templates/ERRORS.md"
+                                                        ],
+                             "reference_to_interface":  [
+                                                            "modules/47_V6_8_ReferenceToInterfaceWorkflow.md"
+                                                        ],
+                             "skill_and_tool_routing":  [
+                                                            "modules/48_V6_8_SkillAndToolRouting.md"
+                                                        ],
                              "reference_raw_layers":  [
                                                           "reference/raw_tools/",
                                                           "reference/raw_tooling/",

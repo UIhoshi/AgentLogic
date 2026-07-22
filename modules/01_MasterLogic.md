@@ -1,4 +1,4 @@
-# AgentLogic V6.8.2 Master Logic
+# AgentLogic V6.8.3 Master Logic
 
 本文件是 AgentLogic 仓库的项目级主逻辑摘要。它描述本仓库中的规则、验证、安装和
 打包资产，不描述任何外部业务项目或某个具体 Agentic CLI 产品的源码事实。
@@ -23,13 +23,15 @@
 
 ### L2：会话规则与开发生命周期 (Session & Development Lifecycle)
 
-- 稳定版本源：`versions/AgentLogic_V6_8_2.md`
+- 稳定版本源：`versions/AgentLogic_V6_8_3.md`
 - 主逻辑摘要：`modules/01_MasterLogic.md`
 - Agent 强制规则：`modules/12_AgentEnforcement.md`
 - 入口清单：`modules/15_LogicEntryChecklist.md`
 - Agentic loop 合同：`modules/03_AgenticLoop.md`
 - SDD 生命周期：`modules/38_V6_6_SpecDrivenDevelopment.md`
 - Graphify 代码地图与预览门：`modules/45_V6_8_GraphifyCodeMapIntegration.md`
+- 参考到界面工作流：`modules/47_V6_8_ReferenceToInterfaceWorkflow.md`
+- 技能与工具路由：`modules/48_V6_8_SkillAndToolRouting.md`
 - 任务规格与状态：`.specify/`
 
 ### L3：安全、权限与验证控制 (Safety & Verification Control)
@@ -39,6 +41,7 @@
 - 验证矩阵：`modules/29_MandatoryVerificationMatrix.md`
 - 工具边界：`modules/30_ToolQuestionBoundaryMatrix.md`
 - 反模式纠偏：`modules/31_ToolMisuseAndAntiPatternMatrix.md`
+- 技能与工具路由：`modules/48_V6_8_SkillAndToolRouting.md`
 - 规则入口校验：`scripts/check-logic-entry.js`
 - 包校验：`scripts/validate-package.ps1`
 - 维护者校验：`scripts/maintainer-check.ps1`

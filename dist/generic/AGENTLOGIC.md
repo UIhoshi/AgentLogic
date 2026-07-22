@@ -3,7 +3,7 @@
 - Host target: generic
 - Profile: core-enhanced
 - Stable entry: MAIN.md
-- Version: V6.8.2
+- Version: V6.8.3
 
 This is a generated primary-logic bundle. Regenerate it from scripts/build-profile.ps1 instead of editing it by hand.
 
@@ -72,7 +72,7 @@ validation, review, packaging, or rule synchronization work, the agent MUST full
 following files from beginning to end in this exact order:
 
 1. `README.md`
-2. `versions/AgentLogic_V6_8_2.md`
+2. `versions/AgentLogic_V6_8_3.md`
 3. `modules/01_MasterLogic.md`
 4. `modules/15_LogicEntryChecklist.md`
 
@@ -273,11 +273,11 @@ Do not continue deeper reading, modify files, delete files, perform write action
 or begin implementation before the logic-entry loop above has been completed.
 -->
 
-# Agent Installation Guide (V6.8.2 Stable)
+# Agent Installation Guide (V6.8.3 Stable)
 
 This is the shortest installation path for AI agents.
 
-Goal: Install **AgentLogic V6.8.2** into the current local host without guessing the entrypoint, target bundle, or validation command.
+Goal: Install **AgentLogic V6.8.3** into the current local host without guessing the entrypoint, target bundle, or validation command.
 
 ## Do Not Guess
 
@@ -285,7 +285,7 @@ Before installing, identify:
 
 1.  Whether the current directory is the AgentLogic repository root.
 2.  The target host: `codex`, `claude`, `antigravity`, or `generic`.
-3.  The selected profile: **`core-enhanced`** is the default for full V6.8.2 governance support.
+3.  The selected profile: **`core-enhanced`** is the default for full V6.8.3 governance support.
 4.  Whether the host should bind to `MAIN.md` directly or to a generated bundle.
 
 If uncertain, run the doctor first:
@@ -294,9 +294,9 @@ If uncertain, run the doctor first:
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\doctor.ps1
 ```
 
-## V6.8.2 Stable Facts
+## V6.8.3 Stable Facts
 
-- **Current Version**: V6.8.2 (including project-native L1-L4 maps and project error synchronization).
+- **Current Version**: V6.8.3 (including project-native L1-L4 maps and project error synchronization).
 - **Repository Role**: Primary local logic package (Method Layer).
 - **Stable Host Entry**: `MAIN.md`.
 - **Default Profile**: `core-enhanced` (Includes the current runtime, verification, SDD, SRA, skill, and reviewability governance modules).
@@ -332,7 +332,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost ge
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\validate-package.ps1
 ```
 
-## Agent Decision Rule (V6.8.2)
+## Agent Decision Rule (V6.8.3)
 
 If the user asks to "load", "install", "mount", "bind", or "use this logic locally", the agent **MUST** follow this protocol:
 
@@ -347,14 +347,14 @@ If the user asks to "load", "install", "mount", "bind", or "use this logic local
     - preserve engineering-critical skills in the visible set
     - report host-local skill sprawl without silently mutating it
 6.  **Adoption**: Immediately after installation, the agent must:
-    -   Read `versions/AgentLogic_V6_8_2.md` to understand the new line.
+    -   Read `versions/AgentLogic_V6_8_3.md` to understand the new line.
     -   Adopt the **Mandatory Verification Matrix** (Module 29) for all subsequent claims.
     -   Adopt the **4-Tier Memory Taxonomy** (User, Feedback, Project, Reference) for project notes.
     -   Adopt the **Spec-Driven Development (SDD) Lifecycle** (Module 38) for technical tasks.
     -   Adopt the **Taste Frontend Design Standards** (Module 39) for interface and visual changes.
-7.  **Report**: State the installed host, version (V6.8.2), profile, and confirmation that the new governance rules are active.
+7.  **Report**: State the installed host, version (V6.8.3), profile, and confirmation that the new governance rules are active.
 
-## Install-Time And Update-Time Skill Rule (V6.8.2)
+## Install-Time And Update-Time Skill Rule (V6.8.3)
 
 Every local installation **and every local logic update** of AgentLogic should perform a host-local
 skill inventory pass. Moving or archiving host-local skills requires a separate explicit `-Apply`
@@ -368,7 +368,7 @@ This is required because:
 - duplicate-or-overlapping skill families must be classified instead of guessed
 - host-local skills must stay separate from any logic-carried skill layer so one machine's local packs do not become another machine's default logic state
 
-The V6.8.2 install/update rule is:
+The V6.8.3 install/update rule is:
 
 1. identify the host-local skill zone for the target host
 2. keep that host-local zone separate from the logic-carried layer
@@ -421,11 +421,11 @@ Do not continue deeper reading, modify files, delete files, perform write action
 or begin implementation before the logic-entry loop above has been completed.
 -->
 
-# 🌌 AgentLogic: Autonomous Evolving Rule Engine (V6.8.2)
+# 🌌 AgentLogic: Autonomous Evolving Rule Engine (V6.8.3)
 
 [![Agentic Code](https://img.shields.io/badge/Agent-Autonomous-blueviolet?style=flat-square)](https://github.com/UIhoshi/AgentLogic)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/Version-V6.8.2_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_8_2.md)
+[![Version](https://img.shields.io/badge/Version-V6.8.3_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_8_3.md)
 
 AgentLogic is a versioned primary-logic package designed to be pulled into local AI coding hosts (such as Codex, Claude Code, Gemini Pro) and used as their default operating mind. It consolidates multi-turn session workflows, tool selection matrix, security sandbox auditing, and dynamic domain extensions.
 
@@ -527,6 +527,7 @@ During its evolutionary cycles, AgentLogic has integrated concepts and structure
 | **Cybersecurity Skills Router** | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | Outlines malware analysis, APK reversing, frontend JS decryption, and firmware audit routing |
 | **Grok Build (comparative reference)** | [xai-org/grok-build](https://github.com/xai-org/grok-build) | Compares provider-neutral runtime execution, state-preserving compaction, and deny-overrides policies |
 | **Graphify (external code-map reference)** | [Graphify-Labs/graphify](https://github.com/Graphify-Labs/graphify) | Provides an optional queryable project graph and user-approved code-view preview workflow |
+| **MengTo Skills (workflow comparison)** | [MengTo/Skills](https://github.com/MengTo/Skills) | Informs optional reference-to-interface capture, extraction, and verification workflows without importing external skills |
 
 ---
 
@@ -534,7 +535,7 @@ During its evolutionary cycles, AgentLogic has integrated concepts and structure
 
 1. **Keep it Pure**: No business logic or project-specific implementations should be written into `AgentLogic` rule files.
 2. **Specify Before Writing**: Always compile technical blueprints to `.specify/spec.md` and `.specify/plan.md` before touching code.
-3. **Generate via Bundle**: Never edit `dist/` bundles manually. Always write updates to version files (e.g. `versions/AgentLogic_V6_8_2.md`), then run `build-profile.ps1` to rebuild the adapter targets.
+3. **Generate via Bundle**: Never edit `dist/` bundles manually. Always write updates to version files (e.g. `versions/AgentLogic_V6_8_3.md`), then run `build-profile.ps1` to rebuild the adapter targets.
 ## V6.8 Operational Integration
 
 The default `core-enhanced` profile includes
@@ -551,7 +552,14 @@ The same profile also includes
 It defines an optional Graph Preview Gate: substantial tasks ask the user at Converge/Ship
 whether to generate a Graphify code view. Graphify is not installed or run automatically.
 
-## V6.8.2 Project-Native Knowledge Sync
+The enhanced profile also provides an optional
+[`Reference-to-Interface Workflow`](./modules/47_V6_8_ReferenceToInterfaceWorkflow.md) for
+permitted video, page, screenshot, and HTML references, plus a
+[`Skill and Tool Routing`](./modules/48_V6_8_SkillAndToolRouting.md) matrix for selecting the
+required evidence tool before the narrowest matching skill. Neither module installs or trusts
+external skills automatically.
+
+## V6.8.3 Project-Native Knowledge Sync
 
 Business projects synchronize their own concise operational facts and symbol-level navigation with code through tracked
 `AGENTS.md`, `PROJECT_MAP.md`, `CODE_MAP.md`, and `.learnings/ERRORS.md`. `CODE_MAP.md` is the mandatory
@@ -622,7 +630,7 @@ The current logic-entry chain is:
 
 1. `00_START_HERE.md`
 2. `README.md`
-3. `versions/AgentLogic_V6_8_2.md`
+3. `versions/AgentLogic_V6_8_3.md`
 4. `modules/01_MasterLogic.md`
 5. `modules/15_LogicEntryChecklist.md`
 
@@ -700,28 +708,28 @@ This repository is logic infrastructure, not a business-project workspace.
 
 - Human-first entry: `00_START_HERE.md`
 - Stable host binding entry: `MAIN.md`
-- Versioned main logic source: `versions/AgentLogic_V6_8_2.md`
+- Versioned main logic source: `versions/AgentLogic_V6_8_3.md`
 
 ## END FILE: AGENTS.md
 
 ---
 
-## BEGIN FILE: versions/AgentLogic_V6_8_2.md
+## BEGIN FILE: versions/AgentLogic_V6_8_3.md
 
-# AgentLogic V6.8.2
+# AgentLogic V6.8.3
 
-Status: **Current Stable V6.8.2 Line**.
+Status: **Current Stable V6.8.3 Line**.
 Promoted from V6.8.1 with project-native knowledge synchronization: project L1-L4 maps and
 redacted error records now travel with the corresponding project repository rather than
 requiring a separate history repository for ordinary work.
 
-This file defines the stable V6.8.2 logic line. It operationalizes the core V6 philosophy with deep integrations for cybersecurity routing, structured specification-driven workflows, premium anti-slop frontend design rules, visual system matrix mapping, shipping audits, project-native knowledge synchronization, and interactive human-readable project summaries.
+This file defines the stable V6.8.3 logic line. It operationalizes the core V6 philosophy with deep integrations for cybersecurity routing, structured specification-driven workflows, premium anti-slop frontend design rules, visual system matrix mapping, shipping audits, project-native knowledge synchronization, and interactive human-readable project summaries.
 
 ---
 
-## 1. The V6.8.2 Mandate
+## 1. The V6.8.3 Mandate
 
-V6.8.2 extends the V6.8 line with a project-native synchronization contract designed to keep
+V6.8.3 extends the V6.8 line with a project-native synchronization contract designed to keep
 project code, L1-L4 facts, and durable error lessons on the same Git timeline.
 
 Key Enhancements:
@@ -737,6 +745,8 @@ Key Enhancements:
 - **Grok Build Complementary Operations**: Adds provider-neutral contracts for rule discovery, session lineage, active-state-preserving compaction, deny-overrides policy compilation, extension trust, subagent capabilities, headless result envelopes, memory freshness, and bounded retries/background work. See `modules/44_V6_8_GrokBuildOperationalIntegration.md`.
 - **Graphify Code Map Integration**: Adds an optional external code-map workflow and a consent-based Graph Preview Gate for substantial projects at Converge/Ship. See `modules/45_V6_8_GraphifyCodeMapIntegration.md`.
 - **Project-Native Knowledge Sync**: Requires tracked project `AGENTS.md`, `PROJECT_MAP.md`, `CODE_MAP.md`, and `.learnings/ERRORS.md`. `CODE_MAP.md` is mandatory text-first function, state, and interface navigation; visual graph generation remains user-approved and optional. This replaces mandatory external-history checkout/push steps for ordinary project work. See `modules/46_V6_8_ProjectKnowledgeSync.md`.
+- **Reference-to-Interface Workflow**: Adds an optional, consent- and provenance-bound workflow for turning permitted videos, pages, screenshots, and HTML into constrained interface briefs, approved mockups, and verified implementations. See `modules/47_V6_8_ReferenceToInterfaceWorkflow.md`.
+- **Skill and Tool Routing**: Adds a compact mandatory problem-to-evidence-to-skill routing procedure without weakening the existing verification matrix. See `modules/48_V6_8_SkillAndToolRouting.md`.
 
 ---
 
@@ -794,21 +804,23 @@ The V6.8.1 line is supported by a modular suite of governance rules:
 - `modules/44_V6_8_GrokBuildOperationalIntegration.md`: Provider-neutral operational contracts translated from the audited Grok Build runtime and user guides.
 - `modules/45_V6_8_GraphifyCodeMapIntegration.md`: Optional external code-map policy, Graph Preview Gate, and external-extension trust boundary.
 - `modules/46_V6_8_ProjectKnowledgeSync.md`: Project-native Git synchronization for project maps, mandatory textual code maps, and redacted error lessons.
+- `modules/47_V6_8_ReferenceToInterfaceWorkflow.md`: Optional reference capture, extraction, mockup, and verification workflow informed by MengTo/Skills.
+- `modules/48_V6_8_SkillAndToolRouting.md`: Operational problem-to-tool-and-skill routing matrix.
 
 ---
 
 ## 3. Stable Promotion Summary
 
-The V6.8.2 line is now promoted to stable status.
+The V6.8.3 line is now promoted to stable status.
 - **Stable Entry**: `MAIN.md`
-- **Current Version**: `V6.8.2`
-- **Default Profile**: `core-enhanced` (includes V6.8.2 project-native knowledge synchronization, system maps, reverse-skill, spec-kit, taste-skill, AI shipping & reviewability audit integration, Grok Build complementary operational contracts, and the optional Graphify code-map policy)
+- **Current Version**: `V6.8.3`
+- **Default Profile**: `core-enhanced` (includes V6.8.3 project-native knowledge synchronization, system maps, reverse-skill, spec-kit, taste-skill, AI shipping & reviewability audit integration, Grok Build complementary operational contracts, and the optional Graphify code-map policy)
 
 ---
 
 ## 4. Reference Source Registration
 
-The V6.8.2 stable line integrates the following external source repositories:
+The V6.8.3 stable line integrates the following external source repositories:
 
 - **Cybersecurity Skills Router**:
   - Source URL: `https://github.com/zhaoxuya520/reverse-skill`
@@ -843,12 +855,16 @@ The V6.8.2 stable line integrates the following external source repositories:
   - Source URL: `https://github.com/Graphify-Labs/graphify`
   - Integration path: `modules/45_V6_8_GraphifyCodeMapIntegration.md`
   - Integration date: `2026-07-18`; reference line: `v8` (no runtime dependency or skill installed)
+- **MengTo Skills (workflow comparison)**:
+  - Source URL: `https://github.com/MengTo/Skills`
+  - Integration paths: `modules/47_V6_8_ReferenceToInterfaceWorkflow.md`, `modules/48_V6_8_SkillAndToolRouting.md`
+  - Integration date: `2026-07-22`; no runtime dependency, executable skill, or source assets imported
 
 ---
 
 ## 5. Skill-System Integration Rule
 
-V6.8.2 treats general programming skills, cybersecurity domain skills, visual design skills, and operational integration contracts as portable, logic-carried assets under the `skills/` and `modules/` directories. The Grok Build comparison remains a method-layer reference and does not grant trust to external executable extensions.
+V6.8.3 treats general programming skills, cybersecurity domain skills, visual design skills, and operational integration contracts as portable, logic-carried assets under the `skills/` and `modules/` directories. The Grok Build comparison remains a method-layer reference and does not grant trust to external executable extensions.
 
 Key stable rules:
 - Logic package rules outrank individual skills.
@@ -861,6 +877,7 @@ Key stable rules:
 - The `mattpocock/skills` integration mandates interactive grilling (single-question stress-testing), root-level `CONTEXT.md` vocabulary maps, and docs/adr/ numbered Architectural Decision Records.
 - Graphify is an optional external code-map capability. It may guide project discovery and offer a user-approved graph preview, but it must be security-audited before installation and never replaces the Verification Matrix.
 - Project-specific structure, symbol navigation, and lessons are synchronized with project code through `AGENTS.md`, `PROJECT_MAP.md`, `CODE_MAP.md`, and `.learnings/ERRORS.md`; the optional `modification_history` archive is reserved for cross-project lessons and historical records.
+- Reference-to-interface work is optional and source-bound: it may use reviewed capture and analysis paths, but it never grants automatic trust, installation authority, asset-copy permission, or exemption from UI approval and visual verification.
 
 
 
@@ -873,13 +890,13 @@ For future logic iterations, a version line must explicitly record its external 
 - Local integration/comparison path.
 - Date of integration and target release tag.
 
-## END FILE: versions/AgentLogic_V6_8_2.md
+## END FILE: versions/AgentLogic_V6_8_3.md
 
 ---
 
 ## BEGIN FILE: modules/01_MasterLogic.md
 
-# AgentLogic V6.8.2 Master Logic
+# AgentLogic V6.8.3 Master Logic
 
 本文件是 AgentLogic 仓库的项目级主逻辑摘要。它描述本仓库中的规则、验证、安装和
 打包资产，不描述任何外部业务项目或某个具体 Agentic CLI 产品的源码事实。
@@ -904,13 +921,15 @@ For future logic iterations, a version line must explicitly record its external 
 
 ### L2：会话规则与开发生命周期 (Session & Development Lifecycle)
 
-- 稳定版本源：`versions/AgentLogic_V6_8_2.md`
+- 稳定版本源：`versions/AgentLogic_V6_8_3.md`
 - 主逻辑摘要：`modules/01_MasterLogic.md`
 - Agent 强制规则：`modules/12_AgentEnforcement.md`
 - 入口清单：`modules/15_LogicEntryChecklist.md`
 - Agentic loop 合同：`modules/03_AgenticLoop.md`
 - SDD 生命周期：`modules/38_V6_6_SpecDrivenDevelopment.md`
 - Graphify 代码地图与预览门：`modules/45_V6_8_GraphifyCodeMapIntegration.md`
+- 参考到界面工作流：`modules/47_V6_8_ReferenceToInterfaceWorkflow.md`
+- 技能与工具路由：`modules/48_V6_8_SkillAndToolRouting.md`
 - 任务规格与状态：`.specify/`
 
 ### L3：安全、权限与验证控制 (Safety & Verification Control)
@@ -920,6 +939,7 @@ For future logic iterations, a version line must explicitly record its external 
 - 验证矩阵：`modules/29_MandatoryVerificationMatrix.md`
 - 工具边界：`modules/30_ToolQuestionBoundaryMatrix.md`
 - 反模式纠偏：`modules/31_ToolMisuseAndAntiPatternMatrix.md`
+- 技能与工具路由：`modules/48_V6_8_SkillAndToolRouting.md`
 - 规则入口校验：`scripts/check-logic-entry.js`
 - 包校验：`scripts/validate-package.ps1`
 - 维护者校验：`scripts/maintainer-check.ps1`
@@ -4627,7 +4647,7 @@ Background consolidation may extract durable patterns, but memory remains a retr
 # Project Fact Map Template
 
 Status: active project-fact template.
-This template supports the V6.8.2 project-native knowledge-sync contract. It belongs in the
+This template supports the V6.8.3 project-native knowledge-sync contract. It belongs in the
 target project as `PROJECT_MAP.md`, travels with project code, and contains no private agent
 memory or machine-specific data.
 
@@ -4969,6 +4989,13 @@ intent and the `-Apply` operation.
 
 ### 9.3 Codebase Tool Dominance
 When a skill introduces a specialized command-line utility (e.g. `agent-browser` CLI), the agent must automatically prefer utilizing it over writing custom scripts or ad-hoc wrappers, ensuring unified tool usage.
+
+## 10. Operational Router
+
+For the required problem-to-evidence-to-skill sequence, use
+`modules/48_V6_8_SkillAndToolRouting.md`. It is a concise execution router; this module remains
+the authority for skill governance, availability, and trust boundaries.
+
 ## V6.8.0 Complementary Extension Trust
 
 Record external extensions as `discovered`, `enabled`, `trusted`, or `verified`; these are separate states. Discovery alone must not activate executable hooks, MCP/LSP servers, install scripts, or plugin commands. Capture source, scope, version/commit, capabilities, and the trust decision, and use the skill-security audit before trusting unfamiliar external material. See `modules/44_V6_8_GrokBuildOperationalIntegration.md`.
@@ -5300,6 +5327,13 @@ Verification of user interface changes is bound to the following rules:
 - **Research Findings (Laziness/Slop Root Causes)**: `skills/taste-skill/research/`
 - **Original Rules Reference**: `skills/taste-skill/README.md`
 
+## 6. Reference-to-Interface Extension
+
+When design work begins from a permitted video, screenshot, live-page, or HTML reference, follow
+`modules/47_V6_8_ReferenceToInterfaceWorkflow.md`. It adds source classification, constrained
+reference briefs, approved capture paths, provenance boundaries, and conditional animation-
+performance review; this module remains the authority for visual direction and preview approval.
+
 ## END FILE: modules/39_V6_6_TasteFrontendDesign.md
 
 ---
@@ -5328,8 +5362,8 @@ implementation or the source tree of another project.
 | Layer | Entry / lifecycle | Capability / tools | Governance / evidence | State / output |
 |---|---|---|---|---|
 | **L1 Strategy & Entry** | `00_START_HERE.md`, `AGENTS.md`, `MAIN.md` | `README.md`, `AGENT_INSTALL.md`, `INSTALL.md` | `modules/15_LogicEntryChecklist.md`, `modules/13_MandatoryLogicGateTemplate.md` | `manifest.json` |
-| **L2 Session & Lifecycle** | `modules/01_MasterLogic.md`, `modules/03_AgenticLoop.md`, `versions/AgentLogic_V6_8_2.md` | `modules/38_V6_6_SpecDrivenDevelopment.md`, `spec-kit/`, `.specify/` | `modules/12_AgentEnforcement.md`, `modules/44_V6_8_GrokBuildOperationalIntegration.md`, `modules/46_V6_8_ProjectKnowledgeSync.md` | `PROJECT_MAP.md`, `CODE_MAP.md`, `.learnings/ERRORS.md`, conditional `.specify/` |
-| **L3 Execution & Control** | `adapters/`, `install.ps1`, `install.sh` | `skills/`, `scripts/build-profile.ps1` | `modules/05_PermissionsAndSafety.md`, `modules/23_V6_5_PermissionAndOutputPipeline.md`, `modules/29_MandatoryVerificationMatrix.md`, `modules/30_ToolQuestionBoundaryMatrix.md`, `modules/31_ToolMisuseAndAntiPatternMatrix.md` | `scripts/check-logic-entry.js`, `scripts/validate-package.ps1` |
+| **L2 Session & Lifecycle** | `modules/01_MasterLogic.md`, `modules/03_AgenticLoop.md`, `versions/AgentLogic_V6_8_3.md` | `modules/38_V6_6_SpecDrivenDevelopment.md`, `modules/47_V6_8_ReferenceToInterfaceWorkflow.md`, `spec-kit/`, `.specify/` | `modules/12_AgentEnforcement.md`, `modules/44_V6_8_GrokBuildOperationalIntegration.md`, `modules/46_V6_8_ProjectKnowledgeSync.md` | `PROJECT_MAP.md`, `CODE_MAP.md`, `.learnings/ERRORS.md`, conditional `.specify/` |
+| **L3 Execution & Control** | `adapters/`, `install.ps1`, `install.sh` | `skills/`, `scripts/build-profile.ps1` | `modules/05_PermissionsAndSafety.md`, `modules/23_V6_5_PermissionAndOutputPipeline.md`, `modules/29_MandatoryVerificationMatrix.md`, `modules/30_ToolQuestionBoundaryMatrix.md`, `modules/31_ToolMisuseAndAntiPatternMatrix.md`, `modules/48_V6_8_SkillAndToolRouting.md` | `scripts/check-logic-entry.js`, `scripts/validate-package.ps1` |
 | **L4 Base & Reference** | `reference/`, historical `versions/` files | `skills/`, `templates/frontend/`, `spec-kit/` | `modules/35_V6_5_SkillGovernanceAndMandatoryUse.md`, `modules/36_V6_5_SkillZoneSeparation.md`, `modules/41_V6_7_AIShippingAndReviewabilityAudit.md` | `dist/`, optional `modification_history/` archive |
 
 ## Control flow
@@ -6039,7 +6073,7 @@ This module does not imply that Graphify is installed, approved, or available on
 
 ## BEGIN FILE: modules/46_V6_8_ProjectKnowledgeSync.md
 
-# V6.8.2 Project-Native Knowledge Sync
+# V6.8.3 Project-Native Knowledge Sync
 
 Status: **Active in the enhanced profiles.**
 
@@ -6190,4 +6224,153 @@ current source reads, runtime/build checks, visual evidence, permission checks, 
 remote verification required by `modules/29_MandatoryVerificationMatrix.md`.
 
 ## END FILE: modules/46_V6_8_ProjectKnowledgeSync.md
+
+---
+
+## BEGIN FILE: modules/47_V6_8_ReferenceToInterfaceWorkflow.md
+
+# V6.8 Reference-to-Interface Workflow
+
+Status: **Optional workflow module, active in enhanced profiles.**
+
+This module adapts the useful *workflow patterns* reviewed in
+[`MengTo/Skills`](https://github.com/MengTo/Skills) for AgentLogic. It does not import that
+repository's skills, scripts, assets, prompts, or executable dependencies.
+
+## 1. When to use
+
+Use this workflow only when a task needs to transform a supplied or approved reference into an
+interface direction or implementation plan, such as:
+
+- a screen recording, live page, screenshot, or HTML reference;
+- reconstruction of a page's layout, motion, or interaction patterns;
+- a design-inspiration study that needs reusable, constrained findings;
+- animation, Canvas, or WebGL work that needs an explicit performance pass.
+
+Do not use it for ordinary content edits, small responsive fixes, accessibility-only changes, or
+when a design source of truth already exists in Figma. Use the matching Figma skill in that case.
+
+## 2. Trust, consent, and ownership boundaries
+
+- External references are evidence and inspiration, not permission to copy protected assets,
+  brand identity, source code, or private flows.
+- Before installing or trusting any external capture, browser, video, or prompt skill, follow
+  the extension-trust and skill-security-audit requirements in Modules 35 and 44, and obtain
+  explicit user intent for the state-changing installation.
+- Load only the narrowest matching skill. A listed workflow never proves that its executable
+  dependencies are installed or permitted.
+- Preserve the existing UI Preview Gate: before formal UI code, generate a proposed mockup and
+  obtain user approval or explicit opt-out.
+
+## 3. Required workflow
+
+1. **Classify the source.** Record whether the source is a user-owned asset, a public reference,
+   existing project HTML, a live dynamic page, or a video. State the intended output: inspiration,
+   structural brief, interaction brief, or faithful internal recreation.
+2. **Choose the least invasive capture path.** Use supplied files first. For dynamic public pages,
+   use `agent-browser` or `playwright` when available and permitted; use static fetching only for
+   static content. Use an approved full-page screenshot path when full-page visual structure is
+   required.
+3. **Extract a constrained reference brief.** Record hierarchy, layout rhythm, typography roles,
+   palette family, spacing, responsive behavior, interaction states, motion cues, and explicit
+   non-goals. Distinguish observations from inferences.
+4. **Create a new design direction.** Apply Module 39's Design Read and dials. Produce an
+   original mockup that uses the brief rather than copying assets or implementation details.
+5. **Obtain UI approval.** Present the mockup to the user or receive an explicit opt-out before
+   UI implementation.
+6. **Implement minimally.** Apply the Lazy Developer's Ladder, reuse existing project primitives,
+   and implement only the approved behavior.
+7. **Verify.** Capture the resulting visible state and check containment, overflow, wrapping,
+   responsive widths, and interaction states. For animation, Canvas, or WebGL changes, inspect
+   runtime performance with the appropriate browser/profiling tool and report the measured scope.
+
+## 4. Output contract
+
+The workflow output should be a short, reviewable reference brief containing:
+
+- source provenance and consent status;
+- observed facts versus inferred decisions;
+- design direction and explicit non-goals;
+- mockup location and approval/opt-out status;
+- implementation and verification evidence;
+- known gaps, including unavailable capture or performance tools.
+
+## 5. Relationship to other modules
+
+- Module 39 governs visual design, mockup approval, and UI verification.
+- Modules 29–31 govern the strength of all conclusions.
+- Module 35 governs matching skills and external-skill audits.
+- Module 48 provides the quick problem-to-skill/tool routing table.
+
+## 6. Registered comparison source
+
+- Source: `https://github.com/MengTo/Skills`
+- Integrated patterns: reference capture, video/HTML-to-interaction analysis, full-page visual
+  capture, reusable design briefs, and conditional animation-performance review.
+- Non-import rule: no direct runtime dependency, skill-folder copy, automatic activation, or
+  installation is implied.
+
+## END FILE: modules/47_V6_8_ReferenceToInterfaceWorkflow.md
+
+---
+
+## BEGIN FILE: modules/48_V6_8_SkillAndToolRouting.md
+
+# V6.8 Skill and Tool Routing
+
+Status: **Operational router, active in enhanced profiles.**
+
+This module answers: *given the current problem, which evidence tool and skill path are required
+before an agent can close the claim?* It routes work; Modules 29–31 remain authoritative for
+verification strength and anti-pattern handling.
+
+## 1. Mandatory routing procedure
+
+Before acting, the agent must:
+
+1. classify the problem and the conclusion it intends to make;
+2. select the required evidence tool family first;
+3. select the narrowest matching available skill second;
+4. confirm availability, permission posture, and external-extension trust before execution;
+5. run the required post-result verification; and
+6. state a downgraded result when the required tool or evidence is unavailable.
+
+`Skill available` does not mean `tool permitted`; `tool succeeded` does not mean `claim verified`.
+
+## 2. Problem-to-path matrix
+
+| Problem / intended claim | Required evidence and tool path | Preferred skill when available | Closure requirement |
+| --- | --- | --- | --- |
+| Find where a feature, rule, or symbol lives | Local search/listing → targeted reads | `engineering/wayfinder`, `engineering/research` | Directly read the owning implementation and relevant caller/config. |
+| Diagnose a bug or unexpected command failure | Reproduce/log → search/read call chain → narrow fix → command validation | `engineering/diagnosing-bugs`, `self-improvement` | Verify root cause or label as unconfirmed; record material lessons without secrets. |
+| Implement/refactor behavior | Read boundary → reuse search → spec/task → bounded edit → tests/runtime | `engineering/implement`, `ponytail`, `engineering/tdd` | Match spec/task and execute relevant validation. |
+| Current library, product, release, or remote setting | Authoritative external lookup | Official-doc skill/path, `openai-docs` for OpenAI products | Cite or record the live authoritative source; memory is insufficient. |
+| Dynamic web flow, SPA, login, or browser interaction | Real browser interaction and capture | `agent-browser` or `playwright` | Observe the actual flow; static reading alone cannot close it. |
+| Desktop/window/OS visual state | OS-level capture | `screenshot` | Capture the actual target state. |
+| UI appearance, layout, responsive fit, or interaction state | Build/run → screenshot or browser replay → boundary check | `taste-skill`, `agent-browser`/`playwright` | Prove visible state, containment, overflow/wrap behavior, and relevant interaction state. |
+| Net-new UI, new visual asset, or approved reference-to-interface work | Reference brief → image mockup → user approval → implementation | `nano-banana-pro`, `taste-skill`, Module 47 | Do not write formal UI code before approval or explicit opt-out. |
+| Animation, Canvas, or WebGL performance | Runtime profiling plus visual inspection | Browser/profiling skill when available; Module 47 | Report measured runtime scope; static code review is insufficient. |
+| Security review, untrusted skill/plugin, or security-sensitive change | Targeted security audit + source/runtime evidence | `security-best-practices`, `engineering/skill-security-auditor`, `reverse-skill` when classified | Self-refute findings and retain only evidence-backed risks. |
+| GitHub Actions PR-check failure | Read workflow/logs → reproduce or inspect job output | `gh-fix-ci` | Verify the affected check or explicitly state external limitation. |
+| Package/install/release | Build/package → inspect artifact → confirm target → post-result check | Packaging scripts / SRA path | Validate local artifact before any remote mutation. |
+| External installation or plugin/MCP enablement | Security audit → explicit user consent → scoped install → inspect result | `engineering/skill-security-auditor` | Record source, scope, version, capabilities, and trust state. |
+
+## 3. Fallback and conflict rules
+
+- If the preferred skill is unavailable, use the strongest available tool family and say which
+  required evidence remains missing.
+- If multiple skills match, choose the smallest scope; do not load broad libraries for one task.
+- If a specialized skill conflicts with higher-priority safety, permission, SDD, or verification
+  rules, the higher-priority rule wins.
+- Do not create a custom replacement script when an approved, available specialized tool already
+  covers the task—unless that tool cannot meet the required permission, platform, or output
+  constraint.
+
+## 4. Fast labels
+
+Use only after the matching route: **verified**, **partially verified**, **inferred from static
+read**, **needs visual confirmation**, **needs runtime confirmation**, or **needs authoritative
+remote verification**.
+
+## END FILE: modules/48_V6_8_SkillAndToolRouting.md
 

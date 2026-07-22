@@ -22,11 +22,11 @@ or begin implementation before the logic-entry loop above has been completed.
 > `README.md` is the canonical English repository README and entry documentation. This file is retained as a legacy/reference document and is not part of the formal logic-entry chain.
 
 
-# 🌌 AgentLogic: 智能体级本地自进化规则引擎 (V6.8.2)
+# 🌌 AgentLogic: 智能体级本地自进化规则引擎 (V6.8.3)
 
 [![Agentic Code](https://img.shields.io/badge/Agent-Autonomous-blueviolet?style=flat-square)](https://github.com/UIhoshi/AgentLogic)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/Version-V6.8.2_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_8_2.md)
+[![Version](https://img.shields.io/badge/Version-V6.8.3_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_8_3.md)
 
 AgentLogic 是一套专为本地 AI 编码宿主（如 Codex, Claude Code, Gemini Pro）设计的**分层规则引擎**。它将多轮会话规范、工具首选策略、安全沙箱拦截及专业领域扩展集成打包，作为 AI 智能体的“主运行心智”。
 
@@ -119,6 +119,7 @@ AgentLogic 的演进离不开开源社区的启发。我们在设计中深度参
 | **Cybersecurity Skills Router** | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | 引入恶意软件分析、APK 逆向、前端反混淆解密和固件审计技能调度 |
 | **Grok Build (对照参考)** | [xai-org/grok-build](https://github.com/xai-org/grok-build) | 对照分析服务商中立的运行时执行、状态保留压缩以及安全拒绝覆盖策略 |
 | **Graphify（外部代码地图参考）** | [Graphify-Labs/graphify](https://github.com/Graphify-Labs/graphify) | 提供可选的可查询项目图谱与经用户同意的代码视图预览流程 |
+| **MengTo Skills（工作流对照）** | [MengTo/Skills](https://github.com/MengTo/Skills) | 为可选的参考素材到界面工作流提供采集、提取和验证方法；不直接导入外部技能 |
 
 ---
 
@@ -126,4 +127,4 @@ AgentLogic 的演进离不开开源社区的启发。我们在设计中深度参
 
 1. **逻辑包纯粹性**：本仓库是规则元数据，不能写入具体的业务项目代码。
 2. **防盲目执行**：AI 助理在进行复杂重构或方案设计前，必须在 `.specify/` 下完成 `spec.md` (规格) 和 `plan.md` (技术规划)。
-3. **版本隔离**：修改核心机制时，应优先回写 `versions/AgentLogic_V6_8_2.md`，然后重新运行 `build-profile.ps1` 进行编译部署。
+3. **版本隔离**：修改核心机制时，应优先回写 `versions/AgentLogic_V6_8_3.md`，然后重新运行 `build-profile.ps1` 进行编译部署。
