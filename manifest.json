@@ -68,7 +68,9 @@
                                                          "modules/46_V6_8_ProjectKnowledgeSync.md",
                                                          "modules/47_V6_8_ReferenceToInterfaceWorkflow.md",
                                                          "modules/48_V6_8_SkillAndToolRouting.md",
-                                                         "modules/49_V6_8_AutonomousSkillEnforcement.md"
+                                                         "modules/49_V6_8_AutonomousSkillEnforcement.md",
+                                                         "contracts/skill-routing.json",
+                                                         "docs/software-candidates.md"
                                                      ]
                                        },
                      "github-publishing":  {
@@ -120,7 +122,9 @@
                                                              "modules/46_V6_8_ProjectKnowledgeSync.md",
                                                              "modules/47_V6_8_ReferenceToInterfaceWorkflow.md",
                                                              "modules/48_V6_8_SkillAndToolRouting.md",
-                                                             "modules/49_V6_8_AutonomousSkillEnforcement.md"
+                                                             "modules/49_V6_8_AutonomousSkillEnforcement.md",
+                                                             "contracts/skill-routing.json",
+                                                             "docs/software-candidates.md"
                                                          ]
                                            }
                  },

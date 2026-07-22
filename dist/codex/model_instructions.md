@@ -6458,3 +6458,53 @@ unrecorded use must be treated as unverified.
 
 ## END FILE: modules/49_V6_8_AutonomousSkillEnforcement.md
 
+---
+
+## BEGIN FILE: contracts/skill-routing.json
+
+{
+  "schema_version": 1,
+  "purpose": "Canonical capability routes; aliases identify candidates, not installed or trusted tools.",
+  "completion_policy": "A mandatory route without an available mapped capability blocks implementation or verified completion. Report the gap and request a safe next step; never silently substitute a generic workflow.",
+  "routes": [
+    {"id":"requirements-grilling","triggers":["major_feature","net_new_ui","substantial_ui_refactor"],"capability":"requirements_grilling","host_skill_aliases":["grilling","grill-me","interview-system-designer"],"fallback":"block_before_specification","closure_evidence":["single_question_dialogue","approved_requirements_brief"]},
+    {"id":"ui-design","triggers":["net_new_ui","substantial_ui_refactor"],"capability":"ui_design_and_mockup","host_skill_aliases":["imagegen","nano-banana-pro","taste-skill","senior-frontend"],"fallback":"block_before_ui_code","closure_evidence":["approved_mockup_or_explicit_opt_out","visual_verification_plan"]},
+    {"id":"code-review","triggers":["code_audit","pull_request_review","release_review"],"capability":"code_review","host_skill_aliases":["code-reviewer","pr-review-expert","engineering/code-review"],"fallback":"block_verified_review","closure_evidence":["review_report","severity_and_evidence"]},
+    {"id":"security-review","triggers":["security_review","security_sensitive_change","untrusted_extension"],"capability":"security_review","host_skill_aliases":["security-best-practices","senior-security","skill-security-auditor"],"fallback":"block_verified_review_or_install","closure_evidence":["self_refuted_findings","trust_decision"]},
+    {"id":"browser-verification","triggers":["dynamic_web_flow","browser_ui_verification"],"capability":"browser_automation","host_skill_aliases":["playwright","agent-browser"],"fallback":"block_browser_verified_claim","closure_evidence":["fresh_browser_observation","captured_artifact"]},
+    {"id":"visual-verification","triggers":["desktop_visual_state","ui_visual_claim"],"capability":"visual_capture","host_skill_aliases":["screenshot","playwright","agent-browser"],"fallback":"block_visual_verified_claim","closure_evidence":["screenshot_or_equivalent","boundary_check"]},
+    {"id":"test-design","triggers":["test_design","coverage_gap","behavior_change"],"capability":"test_engineering","host_skill_aliases":["tdd-guide","senior-qa","api-test-suite-builder"],"fallback":"block_verified_behavior_change","closure_evidence":["relevant_test_or_explicit_gap","command_result"]},
+    {"id":"package-release","triggers":["install","package","release"],"capability":"package_validation","host_skill_aliases":["release-manager","ci-cd-pipeline-builder"],"fallback":"block_release_or_install_completion","closure_evidence":["artifact_validation","post_result_inspection"]}
+  ]
+}
+
+## END FILE: contracts/skill-routing.json
+
+---
+
+## BEGIN FILE: docs/software-candidates.md
+
+# Reviewed Software Candidates
+
+Status: **review-required; not approved for automatic installation.**
+
+Use this directory when a user asks what tooling is missing. Report only candidates relevant to the
+active project. Before installation, jointly choose an exact release/commit, verify publisher,
+license, checksum/signature, dependencies, permissions, and run the skill/security audit where a
+skill or GitHub repository is involved.
+
+| Need trigger | Candidate | Source class | Pre-install decision requirement |
+| --- | --- | --- | --- |
+| Infrastructure as code | OpenTofu | Official project / `opentofu/opentofu` | Pin release; confirm cloud/provider scope and MPL-2.0 compatibility. |
+| Kubernetes cluster operation | kubectl | Kubernetes official distribution | Match client within one minor version of the target cluster; do not install by default. |
+| PostgreSQL project or remote database debugging | PostgreSQL `psql` client | PostgreSQL download channel; Windows installer is EDB-hosted | Confirm client-only scope, supplier, version, and connection/credential handling. |
+| Video, audio, recording, or media conversion | FFmpeg | FFmpeg source; Windows binaries are third-party builds | Prefer source/officially linked build source; pin binary, verify checksum, review licensing/codecs. |
+| Go application or Go-based tooling | Go | Official Go distribution / `golang/go` | Pin toolchain version and confirm a Go build/test need. |
+| Browser UI automation | Playwright | Microsoft official project | Prefer the existing skill wrapper first; pin package/browser versions before persistent install. |
+| Agent-specific browser automation | agent-browser | `vercel-labs/agent-browser` candidate | Audit pinned checkout for network, background service, cloud-provider, and credential behavior before any install. |
+| Containers/local dependency services | Docker Desktop or an approved open-source alternative | Vendor/open-source candidate | Confirm licensing, WSL/virtualization impact, and organization policy before install. |
+
+Never interpret a listed candidate as trusted, installed, or permitted.
+
+## END FILE: docs/software-candidates.md
+
