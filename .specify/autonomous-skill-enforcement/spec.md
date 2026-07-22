@@ -52,3 +52,13 @@ is unavailable. Preserve explicit user opt-outs only where an existing policy al
 12. For new projects/UI ideas, require the agent to recommend and explicitly ask whether to create a
     mockup. For dissatisfaction with an existing layout, require a current screenshot plus the
     user's stated problems as image-generation/edit inputs before proposing a replacement mockup.
+
+## Extension: Route overlap audit and ordered selection
+
+13. Replace flat host-alias lists with ordered primary and conditionally applicable aliases.
+14. Split UI mockup generation from frontend UI implementation; image generation is mandatory for
+    the mockup route and a frontend skill is mandatory only after the mockup gate closes.
+15. Add the built-in `review-agent` as a primary code-review route and constrain PR/security/test
+    specialties to their explicit situations.
+16. Record non-default policy for Claude-oriented persistent-memory behavior and high-impact or
+    schema-specialized skills; do not delete them automatically.

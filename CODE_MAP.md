@@ -19,3 +19,5 @@
 | Autonomous skill enforcement | contracts/skill-routing.json â†’ Module 49 â†’ scripts/validate-skill-routing.ps1 | registry validator + package validation |
 
 | Product/UI requirements | `product-requirements-grilling` skill ¡ú `.specify/<task>/requirements-brief.md` ¡ú `validate-requirements-brief.ps1` ¡ú image/UI route | brief approval/content validation; mockup decision required |
+
+| Ordered routing policy | contracts/skill-routing.json (schema v2) ¡ú Module 49 ¡ú alidate-skill-routing.ps1 | primary/conditional alias and UI capability-separation assertions |

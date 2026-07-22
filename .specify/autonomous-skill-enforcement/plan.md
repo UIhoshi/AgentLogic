@@ -37,3 +37,12 @@
 - Deploy the skill through the Codex adapter; do not copy third-party skill directories.
 - Update Module 49 and the routing registry to distinguish new/UI-idea mockup consent from
   existing-layout dissatisfaction, which first requires screenshot evidence and a change brief.
+
+## Extension approach: overlap control
+
+- Schema v2 distinguishes `primary_host_skill_aliases` from `conditional_host_skill_aliases` and
+  requires a machine-readable selection rule.
+- Add the UI implementation route so a frontend implementation skill cannot masquerade as an image
+  generation or mockup capability.
+- Keep specialized skills installed but route them only for their narrow evidence/risk boundary;
+  persistent host-memory writes remain manual-only.

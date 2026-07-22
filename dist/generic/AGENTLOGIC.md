@@ -6460,6 +6460,35 @@ unrecorded use must be treated as unverified.
 
 Use the first-party product-requirements-grilling skill for every requirements-grilling route. It must produce a user-approved brief that passes scripts/validate-requirements-brief.ps1 before mockup generation or UI implementation. For a new project or UI idea, recommend a mockup and explicitly ask whether the user wants it generated. For an existing layout the user dislikes, capture the current layout first; include that screenshot and the user's dissatisfaction/change brief in the image-generation or editing request. Approval or explicit mockup opt-out remains required before formal UI code.
 
+## Ordered selection and overlap control
+
+A route is not a flat list of interchangeable skills. The canonical registry stores one or more
+ordered `primary_host_skill_aliases`, narrowly scoped `conditional_host_skill_aliases`, and a
+selection rule. A conditional skill is never proof that a missing primary capability was supplied.
+
+- UI work is deliberately split: `ui-design` requires image generation for the mockup/edit, while
+  `ui-implementation` routes later code work to a frontend implementation skill. A frontend skill
+  cannot close the mockup route.
+- Code review defaults to the built-in defect-first `review-agent` or `code-reviewer`; the
+  PR-focused skill is additional only for PR/merge workflow work.
+- Security, testing, browser, and release specialties are selected by their explicit scenario in
+  the registry rather than invoked together as generic substitutes.
+- Figma context retrieval and Figma implementation are complementary specialized paths, not a
+  generic UI-design substitute.
+
+## Non-default and persistent-memory skills
+
+Do not automatically invoke `self-improving-agent` to write host-specific memory or permanent
+rules. AgentLogic's project-native records remain the durable source of truth: `AGENTS.md`,
+`PROJECT_MAP.md`, `CODE_MAP.md`, and `.learnings/ERRORS.md`. Use its analysis functions only with
+an explicit user request and manually transfer any redacted, verified lesson through the normal
+project knowledge-sync contract.
+
+Skills marked `specialized_only` in the registry are not duplicate deletions; they are excluded
+from generic routing until the request matches their narrow domain and risk boundary.
+
+- Untrusted skills and plugins have their own extension-security route, whose primary skill is `skill-security-auditor`; a generic source-code security review cannot satisfy this trust boundary.
+
 ## END FILE: modules/49_V6_8_AutonomousSkillEnforcement.md
 
 ---
@@ -6467,8 +6496,8 @@ Use the first-party product-requirements-grilling skill for every requirements-g
 ## BEGIN FILE: contracts/skill-routing.json
 
 {
-  "schema_version": 1,
-  "purpose": "Canonical capability routes; aliases identify candidates, not installed or trusted tools.",
+  "schema_version": 2,
+  "purpose": "Canonical capability routes with an ordered primary skill and explicitly conditional supplements; aliases identify candidates, not installed or trusted tools.",
   "completion_policy": "A mandatory route without an available mapped capability blocks implementation or verified completion. Report the gap and request a safe next step; never silently substitute a generic workflow.",
   "routes": [
     {
@@ -6479,15 +6508,17 @@ Use the first-party product-requirements-grilling skill for every requirements-g
         "substantial_ui_refactor"
       ],
       "capability": "requirements_grilling",
-      "host_skill_aliases": [
-        "product-requirements-grilling"
-      ],
       "fallback": "block_before_specification",
       "closure_evidence": [
         "single_question_dialogue",
         "approved_requirements_brief",
         "brief_validator_result"
-      ]
+      ],
+      "primary_host_skill_aliases": [
+        "product-requirements-grilling"
+      ],
+      "conditional_host_skill_aliases": [],
+      "selection_rule": "Use the first-party product-requirements-grilling skill. No generic interview or hiring skill is an equivalent."
     },
     {
       "id": "ui-design",
@@ -6496,19 +6527,21 @@ Use the first-party product-requirements-grilling skill for every requirements-g
         "substantial_ui_refactor"
       ],
       "capability": "ui_design_and_mockup",
-      "host_skill_aliases": [
-        "imagegen",
-        "nano-banana-pro",
-        "taste-skill",
-        "senior-frontend"
-      ],
       "fallback": "block_before_ui_code",
       "closure_evidence": [
         "approved_requirements_brief",
         "mockup_requested_or_explicit_opt_out",
         "approved_mockup_or_explicit_opt_out",
         "visual_verification_plan"
-      ]
+      ],
+      "primary_host_skill_aliases": [
+        "imagegen"
+      ],
+      "conditional_host_skill_aliases": [
+        "nano-banana-pro",
+        "taste-skill"
+      ],
+      "selection_rule": "Use imagegen (or an explicitly approved equivalent image-generation capability) for the mockup/edit. nano-banana-pro is an approved equivalent only when installed; taste-skill may guide art direction but cannot replace image generation. Do not use a frontend implementation skill as mockup evidence."
     },
     {
       "id": "code-review",
@@ -6518,35 +6551,40 @@ Use the first-party product-requirements-grilling skill for every requirements-g
         "release_review"
       ],
       "capability": "code_review",
-      "host_skill_aliases": [
-        "code-reviewer",
-        "pr-review-expert",
-        "engineering/code-review"
-      ],
       "fallback": "block_verified_review",
       "closure_evidence": [
         "review_report",
         "severity_and_evidence"
-      ]
+      ],
+      "primary_host_skill_aliases": [
+        "review-agent",
+        "code-reviewer"
+      ],
+      "conditional_host_skill_aliases": [
+        "pr-review-expert"
+      ],
+      "selection_rule": "Use review-agent or code-reviewer for a defect-first code review. Use pr-review-expert only when the task specifically requires PR workflow, reviewability, or merge-readiness analysis; it supplements rather than replaces the review report."
     },
     {
       "id": "security-review",
       "triggers": [
         "security_review",
-        "security_sensitive_change",
-        "untrusted_extension"
+        "security_sensitive_change"
       ],
       "capability": "security_review",
-      "host_skill_aliases": [
-        "security-best-practices",
-        "senior-security",
-        "skill-security-auditor"
-      ],
       "fallback": "block_verified_review_or_install",
       "closure_evidence": [
         "self_refuted_findings",
         "trust_decision"
-      ]
+      ],
+      "primary_host_skill_aliases": [
+        "security-best-practices"
+      ],
+      "conditional_host_skill_aliases": [
+        "senior-security",
+        "senior-secops"
+      ],
+      "selection_rule": "Use security-best-practices for supported source-code reviews. Use senior-security for threat modeling or secure architecture and senior-secops for CVE/compliance/infrastructure operations. A conditional specialty does not waive the primary review when the primary applies."
     },
     {
       "id": "browser-verification",
@@ -6555,15 +6593,19 @@ Use the first-party product-requirements-grilling skill for every requirements-g
         "browser_ui_verification"
       ],
       "capability": "browser_automation",
-      "host_skill_aliases": [
-        "playwright",
-        "agent-browser"
-      ],
       "fallback": "block_browser_verified_claim",
       "closure_evidence": [
         "fresh_browser_observation",
         "captured_artifact"
-      ]
+      ],
+      "primary_host_skill_aliases": [
+        "playwright"
+      ],
+      "conditional_host_skill_aliases": [
+        "agent-browser",
+        "playwright-pro"
+      ],
+      "selection_rule": "Use playwright for ordinary real-browser interaction and proof. Use agent-browser only when installed and its accessibility-tree/session model is the better fit; use playwright-pro only for test-suite generation, migration, repair, cloud matrix, or test-management work."
     },
     {
       "id": "visual-verification",
@@ -6572,16 +6614,19 @@ Use the first-party product-requirements-grilling skill for every requirements-g
         "ui_visual_claim"
       ],
       "capability": "visual_capture",
-      "host_skill_aliases": [
-        "screenshot",
-        "playwright",
-        "agent-browser"
-      ],
       "fallback": "block_visual_verified_claim",
       "closure_evidence": [
         "screenshot_or_equivalent",
         "boundary_check"
-      ]
+      ],
+      "primary_host_skill_aliases": [
+        "screenshot"
+      ],
+      "conditional_host_skill_aliases": [
+        "playwright",
+        "agent-browser"
+      ],
+      "selection_rule": "Use screenshot for desktop/OS capture. Use Playwright or agent-browser capture only when the claim is inside a browser flow and the captured artifact covers the required viewport and layout boundaries."
     },
     {
       "id": "test-design",
@@ -6591,16 +6636,20 @@ Use the first-party product-requirements-grilling skill for every requirements-g
         "behavior_change"
       ],
       "capability": "test_engineering",
-      "host_skill_aliases": [
-        "tdd-guide",
-        "senior-qa",
-        "api-test-suite-builder"
-      ],
       "fallback": "block_verified_behavior_change",
       "closure_evidence": [
         "relevant_test_or_explicit_gap",
         "command_result"
-      ]
+      ],
+      "primary_host_skill_aliases": [
+        "tdd-guide"
+      ],
+      "conditional_host_skill_aliases": [
+        "senior-qa",
+        "api-test-suite-builder",
+        "playwright-pro"
+      ],
+      "selection_rule": "Use tdd-guide for unit/behavior tests. Use senior-qa for coverage and application test strategy, api-test-suite-builder for API suites, and playwright-pro for E2E suite operations."
     },
     {
       "id": "package-release",
@@ -6610,15 +6659,81 @@ Use the first-party product-requirements-grilling skill for every requirements-g
         "release"
       ],
       "capability": "package_validation",
-      "host_skill_aliases": [
-        "release-manager",
-        "ci-cd-pipeline-builder"
-      ],
       "fallback": "block_release_or_install_completion",
       "closure_evidence": [
         "artifact_validation",
         "post_result_inspection"
+      ],
+      "primary_host_skill_aliases": [
+        "release-manager"
+      ],
+      "conditional_host_skill_aliases": [
+        "ci-cd-pipeline-builder"
+      ],
+      "selection_rule": "Use release-manager for release readiness and artifact closure. Use ci-cd-pipeline-builder when pipeline design or repair is part of the release work."
+    },
+    {
+      "id": "ui-implementation",
+      "triggers": [
+        "net_new_ui",
+        "substantial_ui_refactor",
+        "approved_ui_mockup"
+      ],
+      "capability": "frontend_ui_implementation",
+      "primary_host_skill_aliases": [
+        "senior-frontend"
+      ],
+      "conditional_host_skill_aliases": [
+        "figma-implement-design"
+      ],
+      "selection_rule": "Use senior-frontend only after requirements and mockup gates close. Use figma-implement-design when an approved Figma node is the implementation source; it does not replace requirements grilling or mockup approval.",
+      "fallback": "block_before_ui_code",
+      "closure_evidence": [
+        "approved_requirements_brief",
+        "approved_mockup_or_explicit_opt_out",
+        "implementation_validation",
+        "visual_verification_plan"
       ]
+    },
+    {
+      "id": "extension-security-review",
+      "triggers": [
+        "untrusted_extension"
+      ],
+      "capability": "untrusted_extension_security_audit",
+      "primary_host_skill_aliases": [
+        "skill-security-auditor"
+      ],
+      "conditional_host_skill_aliases": [],
+      "selection_rule": "Use skill-security-auditor before installing or trusting an external skill or plugin. General source-code security review is not an equivalent extension-trust audit.",
+      "fallback": "block_verified_review_or_install",
+      "closure_evidence": [
+        "self_refuted_findings",
+        "trust_decision",
+        "dependency_or_behavior_audit"
+      ]
+    }
+  ],
+  "non_default_skill_policy": [
+    {
+      "skill": "self-improving-agent",
+      "status": "manual_only",
+      "reason": "Its Claude-oriented auto-memory and rule-promotion paths must not automatically write persistent rules or replace project-native AGENTS.md, PROJECT_MAP.md, CODE_MAP.md, or .learnings/ERRORS.md."
+    },
+    {
+      "skill": "database-schema-designer",
+      "status": "specialized_only",
+      "reason": "Use only for schema-focused work; database-designer remains the default for broader database design so both are not invoked for the same decision."
+    },
+    {
+      "skill": "ms365-tenant-manager",
+      "status": "specialized_only",
+      "reason": "High-impact tenant administration; never activate from generic engineering routing."
+    },
+    {
+      "skill": "aws-solution-architect",
+      "status": "specialized_only",
+      "reason": "Use only for explicit AWS architecture or migration requests."
     }
   ]
 }

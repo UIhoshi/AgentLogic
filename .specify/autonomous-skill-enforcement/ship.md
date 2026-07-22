@@ -42,3 +42,14 @@ The first shipping review found that Module 49 referenced the canonical registry
 ## Product requirements extension
 
 Adds the first-party `product-requirements-grilling` skill, structured requirements brief template, brief validator, and Codex deployment. The workflow requires a user-approved substantive brief before a UI mockup or UI implementation; existing-layout revisions record a current screenshot and the user's dissatisfaction before image editing.
+
+## Ordered-routing audit
+
+- Static review initially found a trust-boundary flaw: `untrusted_extension` shared the generic
+  source-security route, which could make `security-best-practices` appear to substitute for the
+  required external-skill audit. The final registry has a separate `extension-security-review`
+  route with `skill-security-auditor` as its primary capability.
+- UI mockup generation and UI implementation are separate routes. The validator rejects a registry
+  that lists `senior-frontend` as a UI mockup provider.
+- Remaining limitation: ordered aliases are an auditable selection contract, not host telemetry;
+  invocation evidence remains required.
