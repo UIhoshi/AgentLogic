@@ -53,3 +53,7 @@ Before acting, the agent must:
 Use only after the matching route: **verified**, **partially verified**, **inferred from static
 read**, **needs visual confirmation**, **needs runtime confirmation**, or **needs authoritative
 remote verification**.
+
+## 5. Autonomous enforcement
+
+For mandatory route declarations, host aliases, invocation records, strict missing-capability handling, and software-gap reporting, follow modules/49_V6_8_AutonomousSkillEnforcement.md and contracts/skill-routing.json. Code and PR audits must select the code-review route; generic static reading alone cannot close an audit claim.

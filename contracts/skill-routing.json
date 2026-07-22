@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "purpose": "Canonical capability routes; aliases identify candidates, not installed or trusted tools.",
+  "completion_policy": "A mandatory route without an available mapped capability blocks implementation or verified completion. Report the gap and request a safe next step; never silently substitute a generic workflow.",
+  "routes": [
+    {"id":"requirements-grilling","triggers":["major_feature","net_new_ui","substantial_ui_refactor"],"capability":"requirements_grilling","host_skill_aliases":["grilling","grill-me","interview-system-designer"],"fallback":"block_before_specification","closure_evidence":["single_question_dialogue","approved_requirements_brief"]},
+    {"id":"ui-design","triggers":["net_new_ui","substantial_ui_refactor"],"capability":"ui_design_and_mockup","host_skill_aliases":["imagegen","nano-banana-pro","taste-skill","senior-frontend"],"fallback":"block_before_ui_code","closure_evidence":["approved_mockup_or_explicit_opt_out","visual_verification_plan"]},
+    {"id":"code-review","triggers":["code_audit","pull_request_review","release_review"],"capability":"code_review","host_skill_aliases":["code-reviewer","pr-review-expert","engineering/code-review"],"fallback":"block_verified_review","closure_evidence":["review_report","severity_and_evidence"]},
+    {"id":"security-review","triggers":["security_review","security_sensitive_change","untrusted_extension"],"capability":"security_review","host_skill_aliases":["security-best-practices","senior-security","skill-security-auditor"],"fallback":"block_verified_review_or_install","closure_evidence":["self_refuted_findings","trust_decision"]},
+    {"id":"browser-verification","triggers":["dynamic_web_flow","browser_ui_verification"],"capability":"browser_automation","host_skill_aliases":["playwright","agent-browser"],"fallback":"block_browser_verified_claim","closure_evidence":["fresh_browser_observation","captured_artifact"]},
+    {"id":"visual-verification","triggers":["desktop_visual_state","ui_visual_claim"],"capability":"visual_capture","host_skill_aliases":["screenshot","playwright","agent-browser"],"fallback":"block_visual_verified_claim","closure_evidence":["screenshot_or_equivalent","boundary_check"]},
+    {"id":"test-design","triggers":["test_design","coverage_gap","behavior_change"],"capability":"test_engineering","host_skill_aliases":["tdd-guide","senior-qa","api-test-suite-builder"],"fallback":"block_verified_behavior_change","closure_evidence":["relevant_test_or_explicit_gap","command_result"]},
+    {"id":"package-release","triggers":["install","package","release"],"capability":"package_validation","host_skill_aliases":["release-manager","ci-cd-pipeline-builder"],"fallback":"block_release_or_install_completion","closure_evidence":["artifact_validation","post_result_inspection"]}
+  ]
+}

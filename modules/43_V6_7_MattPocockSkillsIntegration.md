@@ -66,3 +66,7 @@ Once an ADR is set to `Accepted`, the Agent **MUST** treat it as an immutable ar
 
 - **Specify Phase (Phase 2)**: The Agent must check if `CONTEXT.md` exists. If the task introduces new concepts, the Agent must initiate a single-question grilling session (§1) and append new terms to `CONTEXT.md`.
 - **Plan Phase (Phase 3)**: If the plan introduces major trade-offs, the Agent must document them in a new ADR draft under `docs/adr/` before moving past the Plan phase.
+
+## 5. UI trigger
+
+Net-new UI and substantial UI refactors are major feature plans for this module. They require the single-question grilling flow and approved requirements brief before image generation; see Module 49.

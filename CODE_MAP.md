@@ -15,3 +15,5 @@
 - `modules/47_V6_8_ReferenceToInterfaceWorkflow.md` defines the optional reference-workflow
   contract; it imports no external runtime dependency.
 - `modules/48_V6_8_SkillAndToolRouting.md` defines the problem-to-evidence/skill routing aid.
+
+| Autonomous skill enforcement | contracts/skill-routing.json → Module 49 → scripts/validate-skill-routing.ps1 | registry validator + package validation |

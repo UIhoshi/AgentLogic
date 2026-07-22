@@ -21,3 +21,5 @@
 ## Unconfirmed Points
 - [ ] No host-local availability of optional browser, screenshot, security, or profiling skills is
   implied by this repository map.
+
+- Autonomous routing: contracts/skill-routing.json and Module 49 define canonical capabilities, strict gaps, and software-candidate reporting.

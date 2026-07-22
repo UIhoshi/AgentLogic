@@ -1,0 +1,42 @@
+# Autonomous Skill Enforcement and Software Candidate Registry
+
+## Goal
+
+Turn the existing prose-only skill router into an auditable, host-aware operating contract:
+required task types select a canonical capability, map it to an available host skill, record the
+selection, and block implementation or completion when required evidence or a mandatory capability
+is unavailable. Preserve explicit user opt-outs only where an existing policy allows them.
+
+## Requirements
+
+1. Add a machine-readable canonical capability registry with task triggers, required workflow
+   stages, host skill aliases, fallback posture, and completion evidence.
+2. Add a profile-shipped enforcement module that requires task classification, capability
+   availability checks, invocation records, and an explicit blocked/partial result when a mandatory
+   capability is missing.
+3. Add mandatory routes for requirements grilling, net-new/substantial UI work, code/PR review,
+   security review, testing, browser verification, screenshots, package/release, and external
+   installation.
+4. Require net-new or substantial UI work to complete single-question requirements grilling and a
+   recorded UI brief before image generation; retain the explicit preview opt-out rule.
+5. Preserve a narrow exception for clearly classified small UI corrections, with visual verification
+   still mandatory.
+6. Maintain a reviewed-software candidate registry. When a user asks what is missing, report the
+   registry entries relevant to the task and state that GitHub projects require review before
+   installation.
+7. Validate the canonical registry and profile inclusion deterministically; do not auto-install,
+   trust, enable, or archive external skills or software.
+8. Regenerate every host bundle and update project maps and the active version documentation.
+
+## Acceptance Criteria
+
+- The default profile includes the enforcement module and bundles its rules for every host.
+- A validator fails if mandatory routes have no canonical capability, host alias list, fallback
+  posture, or closure evidence.
+- Code/PR review is explicitly routed to code-review capability; security reviews retain their
+  specialized route.
+- UI work cannot move from requirements to image generation until a UI brief and grilling outcome
+  exist, except for the documented small-correction path.
+- The candidate registry lists OpenTofu, kubectl, psql, FFmpeg, and Go with trigger, source class,
+  and pre-install review requirements.
+- Package, entry, and generated-bundle verification pass.

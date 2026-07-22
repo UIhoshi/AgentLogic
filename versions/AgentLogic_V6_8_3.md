@@ -171,3 +171,7 @@ For future logic iterations, a version line must explicitly record its external 
 - Source repository URL.
 - Local integration/comparison path.
 - Date of integration and target release tag.
+
+## 7. Autonomous Skill Enforcement Addendum
+
+The enhanced profile includes Module 49 and the canonical routing registry. Mandatory task routes must record a mapped available skill, invocation evidence, and closure evidence; missing mandatory capabilities block implementation or verified completion rather than silently degrading. docs/software-candidates.md is a review-required decision queue, never an auto-install list.

@@ -78,3 +78,7 @@ When design work begins from a permitted video, screenshot, live-page, or HTML r
 `modules/47_V6_8_ReferenceToInterfaceWorkflow.md`. It adds source classification, constrained
 reference briefs, approved capture paths, provenance boundaries, and conditional animation-
 performance review; this module remains the authority for visual direction and preview approval.
+
+## 7. Requirements-before-image integration
+
+For net-new UI or substantial UI refactors, complete the single-question requirements grilling and record an approved UI brief before Prompt Formulation in section 3.1. A user may opt out of mockup approval only after that discovery step. Clearly classified small visual corrections may skip a new mockup under Module 49, but still require visual verification.

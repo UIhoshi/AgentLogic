@@ -67,7 +67,8 @@
                                                          "modules/45_V6_8_GraphifyCodeMapIntegration.md",
                                                          "modules/46_V6_8_ProjectKnowledgeSync.md",
                                                          "modules/47_V6_8_ReferenceToInterfaceWorkflow.md",
-                                                         "modules/48_V6_8_SkillAndToolRouting.md"
+                                                         "modules/48_V6_8_SkillAndToolRouting.md",
+                                                         "modules/49_V6_8_AutonomousSkillEnforcement.md"
                                                      ]
                                        },
                      "github-publishing":  {
@@ -118,7 +119,8 @@
                                                              "modules/45_V6_8_GraphifyCodeMapIntegration.md",
                                                              "modules/46_V6_8_ProjectKnowledgeSync.md",
                                                              "modules/47_V6_8_ReferenceToInterfaceWorkflow.md",
-                                                             "modules/48_V6_8_SkillAndToolRouting.md"
+                                                             "modules/48_V6_8_SkillAndToolRouting.md",
+                                                             "modules/49_V6_8_AutonomousSkillEnforcement.md"
                                                          ]
                                            }
                  },
@@ -147,6 +149,11 @@
                              "skill_and_tool_routing":  [
                                                             "modules/48_V6_8_SkillAndToolRouting.md"
                                                         ],
+                             "autonomous_skill_enforcement":  [
+                                                                  "modules/49_V6_8_AutonomousSkillEnforcement.md",
+                                                                  "contracts/skill-routing.json",
+                                                                  "docs/software-candidates.md"
+                                                              ],
                              "reference_raw_layers":  [
                                                           "reference/raw_tools/",
                                                           "reference/raw_tooling/",

@@ -890,6 +890,10 @@ For future logic iterations, a version line must explicitly record its external 
 - Local integration/comparison path.
 - Date of integration and target release tag.
 
+## 7. Autonomous Skill Enforcement Addendum
+
+The enhanced profile includes Module 49 and the canonical routing registry. Mandatory task routes must record a mapped available skill, invocation evidence, and closure evidence; missing mandatory capabilities block implementation or verified completion rather than silently degrading. docs/software-candidates.md is a review-required decision queue, never an auto-install list.
+
 ## END FILE: versions/AgentLogic_V6_8_3.md
 
 ---
@@ -5000,6 +5004,10 @@ the authority for skill governance, availability, and trust boundaries.
 
 Record external extensions as `discovered`, `enabled`, `trusted`, or `verified`; these are separate states. Discovery alone must not activate executable hooks, MCP/LSP servers, install scripts, or plugin commands. Capture source, scope, version/commit, capabilities, and the trust decision, and use the skill-security audit before trusting unfamiliar external material. See `modules/44_V6_8_GrokBuildOperationalIntegration.md`.
 
+### 5.11 Code-review capability
+
+Use a code-review skill when the requested conclusion is a code audit, pull-request review, or release review. Prefer a mapped code-reviewer, pr-review-expert, or equivalent host capability. The capability is mandatory when available; if unavailable, follow Module 49's blocked/partial posture rather than calling generic static reading a completed audit.
+
 ## END FILE: modules/35_V6_5_SkillGovernanceAndMandatoryUse.md
 
 ---
@@ -5333,6 +5341,10 @@ When design work begins from a permitted video, screenshot, live-page, or HTML r
 `modules/47_V6_8_ReferenceToInterfaceWorkflow.md`. It adds source classification, constrained
 reference briefs, approved capture paths, provenance boundaries, and conditional animation-
 performance review; this module remains the authority for visual direction and preview approval.
+
+## 7. Requirements-before-image integration
+
+For net-new UI or substantial UI refactors, complete the single-question requirements grilling and record an approved UI brief before Prompt Formulation in section 3.1. A user may opt out of mockup approval only after that discovery step. Clearly classified small visual corrections may skip a new mockup under Module 49, but still require visual verification.
 
 ## END FILE: modules/39_V6_6_TasteFrontendDesign.md
 
@@ -5717,6 +5729,10 @@ Once an ADR is set to `Accepted`, the Agent **MUST** treat it as an immutable ar
 
 - **Specify Phase (Phase 2)**: The Agent must check if `CONTEXT.md` exists. If the task introduces new concepts, the Agent must initiate a single-question grilling session (§1) and append new terms to `CONTEXT.md`.
 - **Plan Phase (Phase 3)**: If the plan introduces major trade-offs, the Agent must document them in a new ADR draft under `docs/adr/` before moving past the Plan phase.
+
+## 5. UI trigger
+
+Net-new UI and substantial UI refactors are major feature plans for this module. They require the single-question grilling flow and approved requirements brief before image generation; see Module 49.
 
 ## END FILE: modules/43_V6_7_MattPocockSkillsIntegration.md
 
@@ -6372,5 +6388,73 @@ Use only after the matching route: **verified**, **partially verified**, **infer
 read**, **needs visual confirmation**, **needs runtime confirmation**, or **needs authoritative
 remote verification**.
 
+## 5. Autonomous enforcement
+
+For mandatory route declarations, host aliases, invocation records, strict missing-capability handling, and software-gap reporting, follow modules/49_V6_8_AutonomousSkillEnforcement.md and contracts/skill-routing.json. Code and PR audits must select the code-review route; generic static reading alone cannot close an audit claim.
+
 ## END FILE: modules/48_V6_8_SkillAndToolRouting.md
+
+---
+
+## BEGIN FILE: modules/49_V6_8_AutonomousSkillEnforcement.md
+
+# Autonomous Skill Enforcement
+
+## Purpose
+
+This module makes skill routing an operational completion contract. It complements Module 48:
+Module 48 selects evidence and a route; this module requires the selected route to be recorded and
+prevents silent degradation when a mandatory capability is absent.
+
+## Mandatory task state
+
+Before implementation, review, or a verified completion claim, record:
+
+1. task classification and intended conclusion;
+2. each matched route from `contracts/skill-routing.json`;
+3. the canonical capability, selected host skill alias, availability and permission posture;
+4. invocation evidence or the exact unavailability reason; and
+5. the required closure evidence and final status.
+
+An alias is only a candidate. The agent must confirm that the matching host skill is available and
+must read/invoke it before claiming that route was followed.
+
+## Strict missing-capability policy
+
+For a mandatory route, missing capability, denied permission, or failed required evidence blocks
+implementation when the route says `block_before_*`, and blocks a `verified` completion claim for
+all other routes. The agent may report a partial/static result only with the missing capability and
+next safe action stated explicitly. It must not silently replace a mandatory specialized skill with
+generic reasoning or a custom script.
+
+Explicit opt-outs remain limited to their existing contracts, such as the UI mockup opt-out. They do
+not waive requirements discovery, security evidence, or visual/runtime proof.
+
+## Core routes
+
+- Major features, net-new UI, and substantial UI refactors require single-question requirements
+  grilling and an approved requirements brief before planning or mockup generation.
+- Net-new/substantial UI then requires image generation, user approval or explicit opt-out, and
+  visual verification after implementation. Clearly classified small corrections may skip a new
+  mockup but never visual verification.
+- Code audits, PR reviews, and release reviews require a code-review capability and a severity-
+  backed review report. Security-scoped reviews additionally require security capability.
+- Dynamic browser claims require browser automation; desktop/visible claims require capture.
+- Behavior changes require test-engineering capability and relevant command evidence.
+- Package/install/release completion requires artifact validation and post-result inspection.
+
+## Software candidate reporting
+
+When the user asks what is missing, inspect the current host and report only the relevant entries
+from `docs/software-candidates.md`, including trigger, source class, and `review-required` status.
+The directory is a joint decision queue, not installation authority. Any GitHub project must be
+pinned and security-audited before installation.
+
+## Honest enforcement boundary
+
+The registry and validator prove route declarations are complete; they cannot independently prove
+an LLM actually invoked a skill. Invocation records and matching evidence remain mandatory, and
+unrecorded use must be treated as unverified.
+
+## END FILE: modules/49_V6_8_AutonomousSkillEnforcement.md
 

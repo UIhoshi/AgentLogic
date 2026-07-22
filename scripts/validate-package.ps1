@@ -205,6 +205,9 @@ if ($manifest.current_version -match '^V6\.8\.[2-9]') {
     }
 }
 
+& powershell -NoProfile -ExecutionPolicy Bypass -File (Join-Path $RepoRoot 'scripts\validate-skill-routing.ps1') -RepoRoot $RepoRoot
+if ($LASTEXITCODE -ne 0) { Fail 'Autonomous skill routing validation failed.' }
+
 if ($manifest.current_version -match '^V6\.8\.[3-9]') {
     $referenceWorkflowModule = "modules/47_V6_8_ReferenceToInterfaceWorkflow.md"
     $routingModule = "modules/48_V6_8_SkillAndToolRouting.md"

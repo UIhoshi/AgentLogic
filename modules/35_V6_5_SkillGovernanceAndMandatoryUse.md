@@ -296,3 +296,7 @@ the authority for skill governance, availability, and trust boundaries.
 ## V6.8.0 Complementary Extension Trust
 
 Record external extensions as `discovered`, `enabled`, `trusted`, or `verified`; these are separate states. Discovery alone must not activate executable hooks, MCP/LSP servers, install scripts, or plugin commands. Capture source, scope, version/commit, capabilities, and the trust decision, and use the skill-security audit before trusting unfamiliar external material. See `modules/44_V6_8_GrokBuildOperationalIntegration.md`.
+
+### 5.11 Code-review capability
+
+Use a code-review skill when the requested conclusion is a code audit, pull-request review, or release review. Prefer a mapped code-reviewer, pr-review-expert, or equivalent host capability. The capability is mandatory when available; if unavailable, follow Module 49's blocked/partial posture rather than calling generic static reading a completed audit.

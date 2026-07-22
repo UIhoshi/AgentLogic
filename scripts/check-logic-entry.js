@@ -33,6 +33,7 @@ const OPERATIONAL_ENTRY_FILES = [
   'scripts/build-profile.ps1',
   'scripts/maintainer-check.ps1',
   'scripts/skills-governance.ps1',
+  'scripts/validate-skill-routing.ps1',
   'adapters/codex/install.ps1',
   'adapters/claude/install.ps1',
   'adapters/antigravity/install.ps1',
@@ -61,6 +62,7 @@ const ACTIVE_VERSION_FILES = [
   'modules/44_V6_8_GrokBuildOperationalIntegration.md',
   'modules/45_V6_8_GraphifyCodeMapIntegration.md',
   'modules/46_V6_8_ProjectKnowledgeSync.md',
+  'modules/49_V6_8_AutonomousSkillEnforcement.md',
 ];
 
 const GATE_ANCHORS = [
