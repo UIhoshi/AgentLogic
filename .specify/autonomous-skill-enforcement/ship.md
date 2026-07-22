@@ -53,3 +53,11 @@ Adds the first-party `product-requirements-grilling` skill, structured requireme
   that lists `senior-frontend` as a UI mockup provider.
 - Remaining limitation: ordered aliases are an auditable selection contract, not host telemetry;
   invocation evidence remains required.
+
+## Cross-host routing repair
+
+The audit found that only Codex received the mandatory first-party requirements skill, and that legacy Modules 35/48 named conflicting mandatory skills. All adapters now deploy the skill, the installer verifies its exact path, a host deployment contract is profile-shipped, and legacy modules defer concrete mandatory choices to schema-v2 routing.
+
+## Installation smoke correction
+
+A cross-host smoke test also found and fixed Antigravity's compatibility-hook backup conflict. Its default compatibility hook is now a protected post-install target. First-party requirements skills are classified keep-active by skill governance rather than manual-review.

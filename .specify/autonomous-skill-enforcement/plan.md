@@ -46,3 +46,12 @@
   generation or mockup capability.
 - Keep specialized skills installed but route them only for their narrow evidence/risk boundary;
   persistent host-memory writes remain manual-only.
+
+## Extension approach: cross-host convergence
+
+- Use a shared, header-gated deployment script so each adapter copies exactly the same first-party
+  skill and verifies `SKILL.md` exists afterwards.
+- Keep host-specific deployment targets in a machine-readable contract, but do not claim that
+  host-local third-party/system skills are provisioned by AgentLogic.
+- Make Modules 35 and 48 defer mandatory concrete skill choices to schema-v2 routing instead of
+  retaining competing names or fallback permissions.

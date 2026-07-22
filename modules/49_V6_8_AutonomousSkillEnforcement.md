@@ -76,6 +76,19 @@ selection rule. A conditional skill is never proof that a missing primary capabi
 - Figma context retrieval and Figma implementation are complementary specialized paths, not a
   generic UI-design substitute.
 
+This registry is the sole source of concrete mandatory skill names. Modules 35 and 48 may govern
+availability or evidence families, but they must defer to this registry when naming a required
+skill or deciding whether a fallback is allowed.
+
+## Cross-host first-party skill availability
+
+The `product-requirements-grilling` skill is a first-party requirement, not merely a Codex-local
+convenience. Every supported adapter must deploy it and post-verify its `SKILL.md` path according
+to `contracts/host-skill-capabilities.json`. A generic installation places it beside the generated
+bundle under `skills/`; the generic host integrator must load that colocated skill before treating
+requirements-grilling as available. The deployment contract does not claim that third-party or
+system skills are installed.
+
 ## Non-default and persistent-memory skills
 
 Do not automatically invoke `self-improving-agent` to write host-specific memory or permanent

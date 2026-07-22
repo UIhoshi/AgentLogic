@@ -20,3 +20,15 @@
 - Root cause: Copying a wildcard into an already-created target directory nested the source directory.
 - Correction: Remove the target and copy the skill directory itself; create only its parent first.
 - Prevention: Verify the exact deployed `<skill>/SKILL.md` path after each adapter install.
+
+## 2026-07-23 – Reserved PowerShell `$Host` variable in host-contract validation
+- Symptom: skill-routing validation failed before inspecting the host deployment contract.
+- Root cause: a foreach loop used `$host`, colliding with PowerShell's read-only automatic `$Host` variable.
+- Correction: renamed the loop variable to `$targetHostName`.
+- Prevention: avoid PowerShell automatic-variable names in scripts and run the route validator immediately after edits.
+
+## 2026-07-23 – Antigravity installer backed up its own compatibility hook
+- Symptom: a smoke install created the legacy compatibility hook and then the top-level installer moved it to backup.
+- Root cause: Antigravity's adapter intentionally writes `.gemini/AgentLogic/GEMINI.md`, but `install.ps1` did not list that path as an installed/protected target.
+- Correction: include the compatibility hook in Antigravity post-install targets when using the default path.
+- Prevention: smoke-test every adapter through the top-level installer, including legacy-file protection behavior.

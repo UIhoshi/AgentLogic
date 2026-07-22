@@ -62,3 +62,14 @@ is unavailable. Preserve explicit user opt-outs only where an existing policy al
     specialties to their explicit situations.
 16. Record non-default policy for Claude-oriented persistent-memory behavior and high-impact or
     schema-specialized skills; do not delete them automatically.
+
+## Extension: Cross-host first-party skill deployment and canonical-rule convergence
+
+17. Deploy the first-party product-requirements skill through every supported host adapter and
+    verify the exact deployed `SKILL.md` path after installation.
+18. Add a host deployment contract and static validation so every manifest host has a first-party
+    skill target; generic output keeps the skill beside its generated bundle.
+19. Retire conflicting legacy mandatory aliases in Modules 35 and 48. Module 49 plus the canonical
+    registry are the only source of concrete mandatory skill selection.
+20. Narrow Module 48 fallback language so it cannot authorize a downgrade of a contract-mandated
+    capability.

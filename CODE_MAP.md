@@ -21,3 +21,5 @@
 | Product/UI requirements | `product-requirements-grilling` skill ¡ú `.specify/<task>/requirements-brief.md` ¡ú `validate-requirements-brief.ps1` ¡ú image/UI route | brief approval/content validation; mockup decision required |
 
 | Ordered routing policy | contracts/skill-routing.json (schema v2) ¡ú Module 49 ¡ú alidate-skill-routing.ps1 | primary/conditional alias and UI capability-separation assertions |
+
+| First-party skill deployment | host adapter ¡ú deploy-first-party-skill.ps1 ¡ú host-specific skill path from host-skill-capabilities.json | exact deployed SKILL.md path verified by install.ps1 |

@@ -17,6 +17,8 @@ $ErrorActionPreference = "Stop"
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot "..\..")).Path
 $buildScript = Join-Path $repoRoot "scripts\build-profile.ps1"
 $skillsGovernanceScript = Join-Path $repoRoot "scripts\skills-governance.ps1"
+$deploySkillScript = Join-Path $repoRoot "scripts\deploy-first-party-skill.ps1"
+$productSkillTarget = Join-Path $UserHome '.gemini\skills\product-requirements-grilling'
 
 if (-not $TargetPath) {
     $TargetPath = Join-Path $UserHome ".gemini\GEMINI.md"
@@ -31,6 +33,8 @@ if ($bundleDir) {
 # 1. Build the profile bundle to the dedicated bundle path
 powershell -NoProfile -ExecutionPolicy Bypass -File $buildScript -ProfileName $ProfileName -TargetHost antigravity -OutputPath $bundlePath
 if ($LASTEXITCODE -ne 0) { throw "build-profile.ps1 failed with exit code $LASTEXITCODE." }
+powershell -NoProfile -ExecutionPolicy Bypass -File $deploySkillScript -RepoRoot $repoRoot -TargetPath $productSkillTarget
+if ($LASTEXITCODE -ne 0) { throw "deploy-first-party-skill.ps1 failed with exit code $LASTEXITCODE." }
 powershell -NoProfile -ExecutionPolicy Bypass -File $skillsGovernanceScript -TargetHost antigravity -UserHome $UserHome
 if ($LASTEXITCODE -ne 0) { throw "skills-governance.ps1 failed with exit code $LASTEXITCODE." }
 

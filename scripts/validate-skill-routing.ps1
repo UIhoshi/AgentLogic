@@ -10,10 +10,15 @@ param([string]$RepoRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path)
 $ErrorActionPreference = "Stop"
 $registryPath = Join-Path $RepoRoot "contracts\skill-routing.json"
 $modulePath = Join-Path $RepoRoot "modules\49_V6_8_AutonomousSkillEnforcement.md"
+$hostCapabilitiesPath = Join-Path $RepoRoot "contracts\host-skill-capabilities.json"
 if (-not (Test-Path $registryPath)) { throw "Missing canonical skill routing registry: $registryPath" }
 if (-not (Test-Path $modulePath)) { throw "Missing autonomous skill enforcement module: $modulePath" }
+if (-not (Test-Path $hostCapabilitiesPath)) { throw "Missing host skill deployment contract: $hostCapabilitiesPath" }
 try { $registry = Get-Content -Raw -Encoding UTF8 $registryPath | ConvertFrom-Json } catch { throw "Invalid JSON in ${registryPath}: $($_.Exception.Message)" }
 if ($registry.schema_version -ne 2) { throw "Unsupported skill routing schema version." }
+try { $hostCapabilities = Get-Content -Raw -Encoding UTF8 $hostCapabilitiesPath | ConvertFrom-Json } catch { throw "Invalid JSON in ${hostCapabilitiesPath}: $($_.Exception.Message)" }
+if ($hostCapabilities.schema_version -ne 1 -or $hostCapabilities.first_party_skill -ne "product-requirements-grilling") { throw "Invalid host skill deployment contract." }
+foreach ($targetHostName in @('codex','claude','antigravity','generic')) { if (-not $hostCapabilities.hosts.$targetHostName.target_relative) { throw "Host deployment contract missing target for $targetHostName." } }
 if (-not $registry.completion_policy) { throw "Missing completion policy." }
 $required = @('requirements-grilling','ui-design','ui-implementation','code-review','security-review','extension-security-review','browser-verification','visual-verification','test-design','package-release')
 $seen = @{}
@@ -33,4 +38,11 @@ foreach ($requiredPath in @('skills\productivity\product-requirements-grilling\S
 
 $module = Get-Content -Raw -Encoding UTF8 $modulePath
 foreach ($anchor in @('Strict missing-capability policy','Software candidate reporting','invocation evidence')) { if ($module -notmatch [regex]::Escape($anchor)) { throw "Enforcement module missing anchor: $anchor" } }
+$governancePath = Join-Path $RepoRoot "modules\35_V6_5_SkillGovernanceAndMandatoryUse.md"
+$routingPath = Join-Path $RepoRoot "modules\48_V6_8_SkillAndToolRouting.md"
+foreach ($path in @($governancePath, $routingPath)) { if (-not (Test-Path $path)) { throw "Missing routing integration module: $path" } }
+$governance = Get-Content -Raw -Encoding UTF8 $governancePath
+if ($governance -notmatch [regex]::Escape('Concrete mandatory skill selection is defined only by `contracts/skill-routing.json` and Module 49.')) { throw 'Skill governance does not defer concrete mandatory selection to the canonical registry.' }
+$routing = Get-Content -Raw -Encoding UTF8 $routingPath
+foreach ($anchor in @('For a matched mandatory contract route, do not downgrade:', 'Module 49 and the schema-v2 contract override any older concrete skill names')) { if ($routing -notmatch [regex]::Escape($anchor)) { throw "Routing module missing canonical precedence anchor: $anchor" } }
 Write-Host "Autonomous skill routing validation passed ($($registry.routes.Count) routes)."

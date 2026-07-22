@@ -78,6 +78,7 @@ switch ($TargetHost) {
     "antigravity" {
         $installedTargets += if ($TargetPath) { $TargetPath } else { Join-Path $UserHome ".gemini\GEMINI.md" }
         $installedTargets += Join-Path $UserHome ".gemini\antigravity-cli\AgentLogic\AGENTS_BUNDLE.md"
+        if (-not $TargetPath) { $installedTargets += Join-Path $UserHome ".gemini\AgentLogic\GEMINI.md" }
     }
     "generic" { $installedTargets += if ($TargetPath) { $TargetPath } else { Join-Path $repoRoot "dist\generic\AGENTLOGIC.md" } }
 }
@@ -86,6 +87,19 @@ foreach ($installedTarget in $installedTargets) {
     if (-not (Test-Path $installedTarget)) {
         throw "Post-install verification failed; expected target was not created: $installedTarget"
     }
+}
+
+$installedSkillPath = switch ($TargetHost) {
+    "codex" { Join-Path $UserHome ".codex\skills\product-requirements-grilling\SKILL.md" }
+    "claude" { Join-Path $UserHome ".claude\skills\product-requirements-grilling\SKILL.md" }
+    "antigravity" { Join-Path $UserHome ".gemini\skills\product-requirements-grilling\SKILL.md" }
+    "generic" {
+        $genericBundle = if ($TargetPath) { $TargetPath } else { Join-Path $repoRoot "dist\generic\AGENTLOGIC.md" }
+        Join-Path (Split-Path -Parent $genericBundle) "skills\product-requirements-grilling\SKILL.md"
+    }
+}
+if (-not (Test-Path $installedSkillPath)) {
+    throw "Post-install verification failed; required first-party skill was not deployed: $installedSkillPath"
 }
 
 # Legacy files are moved only after the new target is verified. The selected target is protected.
@@ -119,6 +133,7 @@ foreach ($legacyFile in $legacyFiles) {
 
 Write-Host "Installed AgentLogic into $TargetHost."
 Write-Host ("Verified targets: {0}" -f ($installedTargets -join ", "))
+Write-Host "Verified first-party skill: $installedSkillPath"
 if ($backupRoot) {
     Write-Host "Legacy files were backed up to: $backupRoot"
 }

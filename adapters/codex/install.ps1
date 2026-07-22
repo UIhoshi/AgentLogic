@@ -19,7 +19,7 @@ $skillsGovernanceScript = Join-Path $repoRoot "scripts\skills-governance.ps1"
 $targetDir = Join-Path $UserHome ".codex\agentlogic"
 $targetPath = Join-Path $targetDir "model_instructions.md"
 $configPath = Join-Path $UserHome ".codex\config.toml"
-$productSkillSource = Join-Path $repoRoot 'skills\productivity\product-requirements-grilling'
+$deploySkillScript = Join-Path $repoRoot 'scripts\deploy-first-party-skill.ps1'
 $productSkillTarget = Join-Path $UserHome '.codex\skills\product-requirements-grilling'
 
 New-Item -ItemType Directory -Force -Path $targetDir | Out-Null
@@ -55,10 +55,8 @@ else {
 
 [System.IO.File]::WriteAllText($configPath, $updated, [System.Text.UTF8Encoding]::new($false))
 
-if (-not (Test-Path $productSkillSource)) { throw 'Missing first-party product requirements skill.' }
-New-Item -ItemType Directory -Force -Path (Split-Path -Parent $productSkillTarget) | Out-Null
-if (Test-Path $productSkillTarget) { Remove-Item -LiteralPath $productSkillTarget -Recurse -Force }
-Copy-Item -LiteralPath $productSkillSource -Destination $productSkillTarget -Recurse -Force
+powershell -NoProfile -ExecutionPolicy Bypass -File $deploySkillScript -RepoRoot $repoRoot -TargetPath $productSkillTarget
+if ($LASTEXITCODE -ne 0) { throw "deploy-first-party-skill.ps1 failed with exit code $LASTEXITCODE." }
 
 powershell -NoProfile -ExecutionPolicy Bypass -File $skillsGovernanceScript -TargetHost codex -UserHome $UserHome
 if ($LASTEXITCODE -ne 0) { throw "skills-governance.ps1 failed with exit code $LASTEXITCODE." }

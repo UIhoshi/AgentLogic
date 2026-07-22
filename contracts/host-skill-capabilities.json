@@ -1,0 +1,12 @@
+﻿{
+  "schema_version": 1,
+  "purpose": "Host deployment contract for AgentLogic first-party skills. It does not claim third-party or system skills are installed.",
+  "first_party_skill": "product-requirements-grilling",
+  "source": "skills/productivity/product-requirements-grilling",
+  "hosts": {
+    "codex": { "target_relative": ".codex/skills/product-requirements-grilling" },
+    "claude": { "target_relative": ".claude/skills/product-requirements-grilling" },
+    "antigravity": { "target_relative": ".gemini/skills/product-requirements-grilling" },
+    "generic": { "target_relative": "<bundle-directory>/skills/product-requirements-grilling" }
+  }
+}

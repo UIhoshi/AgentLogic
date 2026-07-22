@@ -24,13 +24,13 @@ Before acting, the agent must:
 | Problem / intended claim | Required evidence and tool path | Preferred skill when available | Closure requirement |
 | --- | --- | --- | --- |
 | Find where a feature, rule, or symbol lives | Local search/listing → targeted reads | `engineering/wayfinder`, `engineering/research` | Directly read the owning implementation and relevant caller/config. |
-| Diagnose a bug or unexpected command failure | Reproduce/log → search/read call chain → narrow fix → command validation | `engineering/diagnosing-bugs`, `self-improvement` | Verify root cause or label as unconfirmed; record material lessons without secrets. |
+| Diagnose a bug or unexpected command failure | Reproduce/log → search/read call chain → narrow fix → command validation | Narrowest installed debugging skill; project-native error record after a material correction | Verify root cause or label as unconfirmed; record material lessons without secrets. |
 | Implement/refactor behavior | Read boundary → reuse search → spec/task → bounded edit → tests/runtime | `engineering/implement`, `ponytail`, `engineering/tdd` | Match spec/task and execute relevant validation. |
 | Current library, product, release, or remote setting | Authoritative external lookup | Official-doc skill/path, `openai-docs` for OpenAI products | Cite or record the live authoritative source; memory is insufficient. |
-| Dynamic web flow, SPA, login, or browser interaction | Real browser interaction and capture | `agent-browser` or `playwright` | Observe the actual flow; static reading alone cannot close it. |
+| Dynamic web flow, SPA, login, or browser interaction | Real browser interaction and capture | `playwright`; `agent-browser` only under its conditional route rule | Observe the actual flow; static reading alone cannot close it. |
 | Desktop/window/OS visual state | OS-level capture | `screenshot` | Capture the actual target state. |
-| UI appearance, layout, responsive fit, or interaction state | Build/run → screenshot or browser replay → boundary check | `taste-skill`, `agent-browser`/`playwright` | Prove visible state, containment, overflow/wrap behavior, and relevant interaction state. |
-| Net-new UI, new visual asset, or approved reference-to-interface work | Reference brief → image mockup → user approval → implementation | `nano-banana-pro`, `taste-skill`, Module 47 | Do not write formal UI code before approval or explicit opt-out. |
+| UI appearance, layout, responsive fit, or interaction state | Build/run → screenshot or browser replay → boundary check | `screenshot` for desktop capture; `playwright` for browser flow | Prove visible state, containment, overflow/wrap behavior, and relevant interaction state. |
+| Net-new UI, new visual asset, or approved reference-to-interface work | Requirements brief → `imagegen` mockup/edit → user approval → frontend implementation | Module 49 ordered UI routes | Do not write formal UI code before approval or explicit opt-out. |
 | Animation, Canvas, or WebGL performance | Runtime profiling plus visual inspection | Browser/profiling skill when available; Module 47 | Report measured runtime scope; static code review is insufficient. |
 | Security review, untrusted skill/plugin, or security-sensitive change | Targeted security audit + source/runtime evidence | `security-best-practices`, `engineering/skill-security-auditor`, `reverse-skill` when classified | Self-refute findings and retain only evidence-backed risks. |
 | GitHub Actions PR-check failure | Read workflow/logs → reproduce or inspect job output | `gh-fix-ci` | Verify the affected check or explicitly state external limitation. |
@@ -39,8 +39,7 @@ Before acting, the agent must:
 
 ## 3. Fallback and conflict rules
 
-- If the preferred skill is unavailable, use the strongest available tool family and say which
-  required evidence remains missing.
+- For advisory paths outside the canonical contract, use the strongest available tool family and say which required evidence remains missing. For a matched mandatory contract route, do not downgrade: use only its primary/conditional selection rule or report the required block/partial result.
 - If multiple skills match, choose the smallest scope; do not load broad libraries for one task.
 - If a specialized skill conflicts with higher-priority safety, permission, SDD, or verification
   rules, the higher-priority rule wins.
@@ -56,4 +55,4 @@ remote verification**.
 
 ## 5. Autonomous enforcement
 
-For mandatory route declarations, host aliases, invocation records, strict missing-capability handling, and software-gap reporting, follow modules/49_V6_8_AutonomousSkillEnforcement.md and contracts/skill-routing.json. Code and PR audits must select the code-review route; generic static reading alone cannot close an audit claim.
+For mandatory route declarations, host aliases, invocation records, strict missing-capability handling, and software-gap reporting, follow modules/49_V6_8_AutonomousSkillEnforcement.md and contracts/skill-routing.json. Code and PR audits must select the code-review route; generic static reading alone cannot close an audit claim. Module 49 and the schema-v2 contract override any older concrete skill names in this module.

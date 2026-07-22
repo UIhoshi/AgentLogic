@@ -42,6 +42,8 @@ Assert-Exists -Root $RepoRoot -RelativePath "install.sh" -Label "Shell installer
 Assert-Exists -Root $RepoRoot -RelativePath "INSTALL.md" -Label "Human install guide"
 Assert-Exists -Root $RepoRoot -RelativePath "AGENT_INSTALL.md" -Label "Agent install guide"
 Assert-Exists -Root $RepoRoot -RelativePath "scripts/doctor.ps1" -Label "Install doctor"
+Assert-Exists -Root $RepoRoot -RelativePath "scripts/deploy-first-party-skill.ps1" -Label "First-party skill deployer"
+Assert-Exists -Root $RepoRoot -RelativePath "contracts/host-skill-capabilities.json" -Label "Host skill deployment contract"
 
 $manifest = Get-Content -Raw -Path $manifestPath | ConvertFrom-Json
 $schema = Get-Content -Raw -Path $schemaPath | ConvertFrom-Json
@@ -215,9 +217,16 @@ if ($manifest.current_version -match '^V6\.8\.[3-9]') {
     Assert-Exists -Root $RepoRoot -RelativePath $routingModule -Label "V6.8 skill-and-tool routing module"
 
     $defaultFiles = @($manifest.profiles.$($manifest.default_profile).files)
-    foreach ($module in @($referenceWorkflowModule, $routingModule)) {
+    foreach ($module in @($referenceWorkflowModule, $routingModule, "modules/49_V6_8_AutonomousSkillEnforcement.md", "contracts/skill-routing.json", "contracts/host-skill-capabilities.json")) {
         if ($defaultFiles -notcontains $module) {
             Fail "Default profile '$($manifest.default_profile)' does not include '$module'."
+        }
+    }
+
+    foreach ($adapter in @($manifest.adapters.PSObject.Properties.Value)) {
+        $adapterContent = Get-Content -Raw -Path (Join-Path $RepoRoot $adapter)
+        if ($adapterContent -notmatch [regex]::Escape("deploy-first-party-skill.ps1")) {
+            Fail "Adapter '$adapter' does not deploy the required first-party skill."
         }
     }
 

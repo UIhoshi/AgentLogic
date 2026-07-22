@@ -22,6 +22,7 @@ $recommendedActive = @(
     "playwright",
     "screenshot",
     "security-best-practices",
+    "product-requirements-grilling",
     "figma",
     "figma-implement-design",
     "gh-fix-ci",

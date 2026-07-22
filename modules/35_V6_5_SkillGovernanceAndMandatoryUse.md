@@ -77,13 +77,10 @@ These skills overlap with V6.5 logic but still provide unique operational value:
 - `figma` / `figma-implement-design`
   - overlaps with UI verification and design handoff
   - still provides design-specific execution guidance
-- `agent-browser`
   - overlaps with static page fetching (`read_url_content`) and playwright-based UI verification
   - still provides high-performance, deterministic ref-based headless browser automation optimized for AI agents
-- `nano-banana-pro`
   - overlaps with general UI/UX drafting
   - still provides Gemini 3 Pro Image (Nano Banana Pro) visual mockup generation for net-new or major design work
-- `self-improvement`
   - overlaps with context assembly and error correction
   - still provides structured .learnings/ logging and promotion gates to harden recurring developer patterns
 
@@ -121,9 +118,6 @@ Typical active-by-default families:
 - `figma`
 - `figma-implement-design`
 - `gh-fix-ci`
-- `agent-browser`
-- `nano-banana-pro`
-- `self-improvement`
 
 ### 4.2 Archived-by-default
 
@@ -208,95 +202,18 @@ Use `figma` or `figma-implement-design` when:
 
 Do not treat plain code reading as sufficient when the real source of truth is the design surface.
 
-### 5.8 Agent-browser skill
+### 5.8 Dynamic browser, UI mockup, and project learning capabilities
 
-Use `agent-browser` when:
+Concrete mandatory skill selection is defined only by `contracts/skill-routing.json` and Module 49.
+For ordinary browser proof, use the route's primary Playwright capability; use `agent-browser` only
+when it is installed and the registry's conditional selection rule applies. For a net-new or
+substantially redesigned UI, use the primary image-generation capability for the approved mockup;
+`nano-banana-pro` is an optional equivalent only when it is installed and explicitly approved.
 
-- the task requires dynamic web interaction, page navigation, clicking elements, filling forms, session-isolated browsing, or executing client-side JavaScript from the terminal.
-- standard static url fetching (`read_url_content`) is insufficient due to Single Page Application (SPA) rendering or multi-step user flow requirements.
-
-### 5.9 Nano-banana-pro skill
-
-Use `nano-banana-pro` when:
-
-- the task is designing a net-new web page frontend, application UI, or dashboard component, or requests a new custom visual asset. Content changes, accessibility fixes, responsive bug fixes, and small visual corrections use normal visual verification without requiring a new mockup approval.
-- custom assets, brand kits, or visual layouts are requested.
-
-### 5.10 Self-improvement skill
-
-Use `self-improvement` when:
-
-- a shell command or compilation step fails unexpectedly. In this case, log details to `.learnings/ERRORS.md`.
-- the user corrects the Agent's reasoning or code. Log the correction to `.learnings/LEARNINGS.md` with category `correction`.
-- the user requests a missing capability or makes a feature request. Log it to `.learnings/FEATURE_REQUESTS.md`.
-- systemic developer patterns need to be simplified or hardened based on recurrence (e.g. promoting rules to CLAUDE.md/AGENTS.md after 3+ occurrences).
-
-
----
-
-## 6. Skills Must Not Weaken Verification
-
-A skill invocation does not bypass V6.5 verification rules.
-
-Even when a skill is used correctly:
-
-- `29_MandatoryVerificationMatrix.md` still applies
-- `30_ToolQuestionBoundaryMatrix.md` still applies
-- `31_ToolMisuseAndAntiPatternMatrix.md` still applies
-
-A skill may accelerate the path, but it does not lower the evidence requirement.
-
----
-
-## 7. Restore Rule For Archived Skills
-
-If an archived skill family becomes relevant again:
-
-1. restore only the smallest relevant family or subfamily
-2. do not bulk-restore every archived pack
-3. verify that the restored set does not re-trigger skills context budget degradation
-4. if the restored family becomes a recurring requirement, document that promotion explicitly
-
----
-
-## 8. Practical Judgment
-
-The preferred V6.5 posture is:
-
-- **keep the logic package lean and authoritative**
-- **keep only high-value execution skills active by default**
-- **archive broad domain packs unless currently needed**
-- **treat skills as execution amplifiers, not as replacements for logic**
-
----
-
-## 9. Dynamic Context-Based Skill Selection (Context-Driven Routing)
-
-To avoid both missed specialized workflows and unnecessary skill loading, the agent should evaluate skill applicability for each task:
-
-### 9.1 Dialog Intent Mapping
-For each task, the agent should inspect the user's request and conversation context to determine if they intersect with an active or archived skill domain:
-1. **Direct Action Mapping**: If the task requires web interaction, dynamic page testing, visual inspection, or exploit pattern tracking, the agent must use the relevant skill when available (`agent-browser`, `playwright`, `screenshot`, or `reverse-skill`).
-2. **Implicit Need Detection**: If a task requires dynamic rendering or session persistence (e.g. logging into a site), the agent must dynamically activate the matching skill rather than asking the user to manually trigger it.
-
-### 9.2 Auto-Restoration protocol
-If the task demands an archived skill, the agent may load the smallest relevant skill instructions
-for the current task scope. Moving files or changing host-local skill state requires explicit user
-intent and the `-Apply` operation.
-
-### 9.3 Codebase Tool Dominance
-When a skill introduces a specialized command-line utility (e.g. `agent-browser` CLI), the agent must automatically prefer utilizing it over writing custom scripts or ad-hoc wrappers, ensuring unified tool usage.
-
-## 10. Operational Router
-
-For the required problem-to-evidence-to-skill sequence, use
-`modules/48_V6_8_SkillAndToolRouting.md`. It is a concise execution router; this module remains
-the authority for skill governance, availability, and trust boundaries.
-
-## V6.8.0 Complementary Extension Trust
-
-Record external extensions as `discovered`, `enabled`, `trusted`, or `verified`; these are separate states. Discovery alone must not activate executable hooks, MCP/LSP servers, install scripts, or plugin commands. Capture source, scope, version/commit, capabilities, and the trust decision, and use the skill-security audit before trusting unfamiliar external material. See `modules/44_V6_8_GrokBuildOperationalIntegration.md`.
+Do not use host-specific self-improvement memory or rule-promotion workflows automatically. Persist
+verified project lessons only through the project-native knowledge-sync records. A self-improvement
+analysis skill may be used only on explicit user request and cannot write durable rules itself.
 
 ### 5.11 Code-review capability
 
-Use a code-review skill when the requested conclusion is a code audit, pull-request review, or release review. Prefer a mapped code-reviewer, pr-review-expert, or equivalent host capability. The capability is mandatory when available; if unavailable, follow Module 49's blocked/partial posture rather than calling generic static reading a completed audit.
+Use a code-review skill when the requested conclusion is a code audit, pull-request review, or release review. Prefer the ordered code-review route: `review-agent` or `code-reviewer` first, with `pr-review-expert` only for PR/merge workflow work. The capability is mandatory when available; if unavailable, follow Module 49's blocked/partial posture rather than calling generic static reading a completed audit.

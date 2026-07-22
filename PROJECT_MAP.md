@@ -27,3 +27,5 @@
 - Product/UI discovery: `skills/productivity/product-requirements-grilling/` produces a user-approved requirements brief; `scripts/validate-requirements-brief.ps1` checks it before mockup/UI implementation. The Codex adapter deploys this first-party skill to `.codex/skills/`.
 
 - Ordered skill routing: schema-v2 contracts/skill-routing.json separates primary from conditional skills, splits UI mockup generation from UI implementation, and marks persistent-memory/high-impact skills non-default.
+
+- Cross-host requirements skill: contracts/host-skill-capabilities.json and scripts/deploy-first-party-skill.ps1 require every adapter to deploy and verify product-requirements-grilling; generic output colocates it with the bundle.
