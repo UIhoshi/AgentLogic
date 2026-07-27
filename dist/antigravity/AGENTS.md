@@ -11,8 +11,10 @@
 > You MUST ACTUALLY EXECUTE the Startup Gate protocol interactively on Turn 1:
 > 1. Classify the user task.
 > 2. Judge whether the task extends the previous coding round.
-> 3. If NOT an extension, explicitly ask the user whether to orget/compress context before proceeding:
->    '当前任务是否属于上一轮 coding 的延续？若不是，请确认是否需要 forget/compress context。'
+> 3. If NOT an extension, explicitly ask the user whether to orget/compress context before proceeding (matching the user's interaction language):
+>    - Chinese: '当前任务是否属于上一轮 coding 的延续？若不是，请确认是否需要 forget/compress context。'
+>    - English: 'Does the current task extend the previous coding round? If not, please confirm whether to forget/compress context.'
+>    - Other languages: Output the matching context-reset confirmation in the user's language.
 > 4. Execute the Mandatory Full-Read Chain before deeper project planning or code implementation.
 
 This is a generated primary-logic bundle. Regenerate it from scripts/build-profile.ps1 instead of editing it by hand.
