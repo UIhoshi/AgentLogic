@@ -92,6 +92,7 @@ following files from beginning to end in this exact order:
 
 - **First Priority Enforcement**: If AgentLogic is installed on the host machine (e.g., detected in `~/.gemini/GEMINI.md`, `~/.gemini/AgentLogic/GEMINI.md`, `~/.claude/CLAUDE.md`, or the current workspace), the agent MUST treat AgentLogic as the highest-priority repository-local logic, subject to system, developer, safety, and host permission constraints. Ignoring local repository logic is strictly prohibited.
 - **Limited Initial View Prevention**: If the agent starts in a parent workspace (e.g. the user's home directory) and the AgentLogic repository is nested in a subdirectory (e.g. `Documents/workspace/AgentLogic`), the agent MUST proactively scan the `AgentLogic` directory immediately upon startup to trigger the Startup Gate. A delegation hook/rule must be placed in the workspace-level `AGENTS.md` file to ensure the agent is aware of the local logic on the first turn.
+- **Universal Language Adaptation**: The agent MUST adapt all responses, Startup Gate prompts, and interactive dialogue to match the user's active interaction language (Chinese, English, Japanese, French, German, Spanish, Korean, etc.). Examples in rule files serve as semantic templates and must not restrict multi-lingual rendering.
 - **Project-Native Knowledge Sync**: Before business-project implementation, synchronize and read the tracked project `AGENTS.md`, `PROJECT_MAP.md`, and `.learnings/ERRORS.md` using the safe freshness contract in `modules/46_V6_8_ProjectKnowledgeSync.md`. Project code and project knowledge must travel together; the optional `modification_history` archive is not a blocking dependency for ordinary project work.
 - All listed files are mandatory.
 - Full reading is mandatory.
@@ -651,6 +652,7 @@ The current logic-entry chain is:
 Whenever AgentLogic is detected as installed on the local system (e.g., in `~/.gemini/GEMINI.md`, `~/.gemini/AgentLogic/GEMINI.md`, `~/.claude/CLAUDE.md`, or the current workspace), the agent MUST treat AgentLogic as the highest-priority repository-local logic, subject to system, developer, safety, and host permission constraints. Treating it as optional repository guidance is a critical failure.
 
 - **Limited Initial View Prevention**: If the agent is running in a parent workspace (e.g., the user profile directory) and AgentLogic is nested under a subdirectory (e.g., `Documents/workspace/AgentLogic`), the agent MUST proactively scan the `AgentLogic` directory immediately upon startup to trigger the Startup Gate. A delegation hook/rule should be written to the workspace-level `AGENTS.md` file to ensure detection.
+- **Universal Language Adaptation**: The agent MUST adapt all responses, Startup Gate prompts, and interactive dialogue to match the user's active interaction language (Chinese, English, Japanese, French, German, Spanish, Korean, etc.). Examples in rule files serve as semantic templates and must not restrict multi-lingual rendering.
 
 
 ## Startup Gate
@@ -1442,6 +1444,7 @@ Agent 至少必须完成：
 ## 4.2.5 上下文重置提问属于最高优先强制规则
 
 - “如果当前新任务不是上一轮 coding 的延申，则必须先询问是否需要 `forget/compress context`” 这条规则，优先级必须与“确认逻辑入口”“判断是否属于上一轮延申”相同。
+- **全语种交互自适应法则**：询问语言必须与用户当前交互的语言自适应匹配（例如：中文提问使用中文；英文提问使用英文；日文、德文、法文、西班牙文、韩文等其他语种依此类推）。规则文件中的中文/英文示例仅作为语义范本，不得限制 Agent 使用用户当前语言进行渲染与回复。
 - 它不是建议项，也不是上下文过长时才临时考虑的补充项。
 - 正确顺序必须固定为：
   1. 先确认逻辑入口

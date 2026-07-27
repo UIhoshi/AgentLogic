@@ -61,6 +61,7 @@ The current logic-entry chain is:
 Whenever AgentLogic is detected as installed on the local system (e.g., in `~/.gemini/GEMINI.md`, `~/.gemini/AgentLogic/GEMINI.md`, `~/.claude/CLAUDE.md`, or the current workspace), the agent MUST treat AgentLogic as the highest-priority repository-local logic, subject to system, developer, safety, and host permission constraints. Treating it as optional repository guidance is a critical failure.
 
 - **Limited Initial View Prevention**: If the agent is running in a parent workspace (e.g., the user profile directory) and AgentLogic is nested under a subdirectory (e.g., `Documents/workspace/AgentLogic`), the agent MUST proactively scan the `AgentLogic` directory immediately upon startup to trigger the Startup Gate. A delegation hook/rule should be written to the workspace-level `AGENTS.md` file to ensure detection.
+- **Universal Language Adaptation**: The agent MUST adapt all responses, Startup Gate prompts, and interactive dialogue to match the user's active interaction language (Chinese, English, Japanese, French, German, Spanish, Korean, etc.). Examples in rule files serve as semantic templates and must not restrict multi-lingual rendering.
 
 
 ## Startup Gate
