@@ -1,9 +1,19 @@
-# AgentLogic Bundle
+# MANDATORY AGENT EXECUTIVE PROTOCOL (AgentLogic V6.8.3)
 
 - Host target: generic
 - Profile: core-enhanced
 - Stable entry: MAIN.md
 - Version: V6.8.3
+
+> [!CRITICAL]
+> **EXECUTION vs SUMMARIZATION MANDATE**:
+> Do NOT merely read, recite, or summarize AgentLogic rules as passive background text when starting a session, receiving a prompt, or answering logic queries.
+> You MUST ACTUALLY EXECUTE the Startup Gate protocol interactively on Turn 1:
+> 1. Classify the user task.
+> 2. Judge whether the task extends the previous coding round.
+> 3. If NOT an extension, explicitly ask the user whether to orget/compress context before proceeding:
+>    '当前任务是否属于上一轮 coding 的延续？若不是，请确认是否需要 forget/compress context。'
+> 4. Execute the Mandatory Full-Read Chain before deeper project planning or code implementation.
 
 This is a generated primary-logic bundle. Regenerate it from scripts/build-profile.ps1 instead of editing it by hand.
 

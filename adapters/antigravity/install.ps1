@@ -44,8 +44,10 @@ $hookContent = @"
 # Local AgentLogic Precedence Rule
 
 - The agent MUST prioritize the local AgentLogic rule-set (located at [AgentLogic](file:///$($repoRoot.Replace('\', '/')))) as the highest-priority logic and execute its mandatory reading chain and Startup Gate first.
+- **EXECUTION vs SUMMARIZATION MANDATE**: You MUST NOT merely read, recite, or summarize AgentLogic rules as passive background text. On Turn 1 of any task/session, you MUST ACTUALLY EXECUTE the Startup Gate protocol and explicitly ask the user whether to `forget/compress context` unless the task is an explicit continuation:
+  "当前任务是否属于上一轮 coding 的延续？若不是，请确认是否需要 forget/compress context。"
 - To prevent the "limited initial view" issue (where the agent only scans the parent directory or user profile folder in the first turn, sees a generic `AGENTS.md` and `package.json`, and misses the local main logic), the agent MUST proactively scan the `AgentLogic` directory immediately upon startup.
-- The compiled master rules are stored in [AGENTS_BUNDLE.md](file:///$($bundlePath.Replace('\', '/'))). When AgentLogic is activated, the agent should read this bundle to align on all governance, validation, and design rules.
+- The compiled master rules are stored in [AGENTS_BUNDLE.md](file:///$($bundlePath.Replace('\', '/'))). When AgentLogic is activated, the agent MUST execute the blocking Startup Gate declared in this bundle.
 "@
 
 # 2. Add / Update the delegation hook in targets without overwriting other content
@@ -66,7 +68,9 @@ foreach ($target in $targets) {
             Write-Host "Appending AgentLogic delegation hook to '$target'..." -ForegroundColor Cyan
             Add-Content -Path $target -Value $hookContent -NoNewline
         } else {
-            Write-Host "Delegation hook already present in '$target'." -ForegroundColor Green
+            Write-Host "Updating delegation hook in '$target'..." -ForegroundColor Cyan
+            $updatedContent = [System.Text.RegularExpressions.Regex]::Replace($existingContent, "(?s)# Local AgentLogic Precedence Rule.*$", $hookContent.TrimStart())
+            Set-Content -Path $target -Value $updatedContent -NoNewline
         }
     } else {
         Write-Host "Creating new '$target' with AgentLogic delegation hook..." -ForegroundColor Cyan

@@ -1,4 +1,4 @@
-# MANDATORY LOGIC GATE
+﻿# MANDATORY LOGIC GATE
 #
 # Read `AGENTS.md` and `README.md` before making changes here.
 # Then follow the repository-declared logic entry chain.
@@ -15,6 +15,8 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+$OutputEncoding = [System.Text.Encoding]::UTF8
 
 function Get-RepoRoot {
     return (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
@@ -66,12 +68,22 @@ function Build-Bundle {
     }
 
     $builder = New-Object System.Text.StringBuilder
-    [void]$builder.AppendLine("# AgentLogic Bundle")
+    [void]$builder.AppendLine("# MANDATORY AGENT EXECUTIVE PROTOCOL (AgentLogic V6.8.3)")
     [void]$builder.AppendLine()
     [void]$builder.AppendLine("- Host target: $TargetHost")
     [void]$builder.AppendLine("- Profile: $ProfileName")
     [void]$builder.AppendLine("- Stable entry: $($Manifest.entry)")
     [void]$builder.AppendLine("- Version: $($Manifest.current_version)")
+    [void]$builder.AppendLine()
+    [void]$builder.AppendLine("> [!CRITICAL]")
+    [void]$builder.AppendLine("> **EXECUTION vs SUMMARIZATION MANDATE**:")
+    [void]$builder.AppendLine("> Do NOT merely read, recite, or summarize AgentLogic rules as passive background text when starting a session, receiving a prompt, or answering logic queries.")
+    [void]$builder.AppendLine("> You MUST ACTUALLY EXECUTE the Startup Gate protocol interactively on Turn 1:")
+    [void]$builder.AppendLine("> 1. Classify the user task.")
+    [void]$builder.AppendLine("> 2. Judge whether the task extends the previous coding round.")
+    [void]$builder.AppendLine("> 3. If NOT an extension, explicitly ask the user whether to `forget/compress context` before proceeding:")
+    [void]$builder.AppendLine(">    '当前任务是否属于上一轮 coding 的延续？若不是，请确认是否需要 forget/compress context。'")
+    [void]$builder.AppendLine("> 4. Execute the Mandatory Full-Read Chain before deeper project planning or code implementation.")
     [void]$builder.AppendLine()
     [void]$builder.AppendLine("This is a generated primary-logic bundle. Regenerate it from scripts/build-profile.ps1 instead of editing it by hand.")
     [void]$builder.AppendLine()
