@@ -68,7 +68,7 @@ function Build-Bundle {
     }
 
     $builder = New-Object System.Text.StringBuilder
-    [void]$builder.AppendLine("# MANDATORY AGENT EXECUTIVE PROTOCOL (AgentLogic V6.8.3)")
+    [void]$builder.AppendLine("# MANDATORY AGENT EXECUTIVE PROTOCOL (AgentLogic $($Manifest.current_version))")
     [void]$builder.AppendLine()
     [void]$builder.AppendLine("- Host target: $TargetHost")
     [void]$builder.AppendLine("- Profile: $ProfileName")

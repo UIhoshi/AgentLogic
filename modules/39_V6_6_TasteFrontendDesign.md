@@ -42,7 +42,7 @@ For redesigns or visual upgrades of existing projects, follow this checklist:
 
 ## 3.1 Visual Prototyping Gate (Design First Protocol)
 
-Before any formal UI implementation—new or existing layout, app screen, web page, component, or visual design change—the Agent MUST NOT write production HTML/CSS/JS/UI code directly. Instead, follow this mandatory visual prototyping gate. The only bypass is an explicit user instruction not to use the preview step:
+For net-new UI and substantial UI refactors, the Agent MUST NOT write production HTML/CSS/JS/UI code directly. Instead, follow this mandatory visual prototyping gate. A clearly classified small visual correction may skip a new mockup under Module 49, but must still pass visual verification; ambiguous changes follow this gate. An explicit user instruction not to use the preview step also bypasses mockup approval:
 
 1. **Prompt Formulation**: Formulate a highly detailed visual layout and style prompt based on the user's requirements (specifying typography, layout variance dials, HSL color palette, and visual density).
 2. **Prototyping**: Invoke the text-to-image generation tool to generate a visual mockup / design image of the proposed UI.

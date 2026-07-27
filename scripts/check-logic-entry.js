@@ -10,6 +10,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { TextDecoder } = require('util');
 
 const ROOT = path.resolve(__dirname, '..');
 
@@ -363,7 +364,7 @@ function checkProjectKnowledgeSyncContract() {
     return;
   }
 
-  for (const anchor of ['AGENTS.md', 'PROJECT_MAP.md', '.learnings/ERRORS.md', 'git fetch --prune']) {
+  for (const anchor of ['AGENTS.md', 'PROJECT_MAP.md', 'CODE_MAP.md', '.learnings/ERRORS.md', 'git fetch --prune']) {
     if (!content.includes(anchor)) {
       fail(`Project-knowledge module is missing required anchor: ${anchor}`);
     }
@@ -375,6 +376,35 @@ function checkProjectKnowledgeSyncContract() {
   } else {
     ok('Project-native knowledge-sync contract verified.');
   }
+}
+
+function checkCodeMapReadability() {
+  const relPath = 'CODE_MAP.md';
+  const fullPath = path.join(ROOT, relPath);
+  if (!fs.existsSync(fullPath)) {
+    fail(`Missing mandatory text-first code map: ${relPath}`);
+    return;
+  }
+
+  let content;
+  try {
+    content = new TextDecoder('utf-8', { fatal: true }).decode(fs.readFileSync(fullPath));
+  } catch {
+    fail(`${relPath} must be valid UTF-8.`);
+    return;
+  }
+
+  if (content.includes('\uFFFD')) {
+    fail(`${relPath} contains replacement characters and must be repaired from a readable source.`);
+    return;
+  }
+
+  if (/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/.test(content)) {
+    fail(`${relPath} contains disallowed control characters.`);
+    return;
+  }
+
+  ok(`${relPath} is valid UTF-8 and contains no disallowed control characters.`);
 }
 
 function main() {
@@ -396,6 +426,7 @@ function main() {
   checkActiveRelativeLinks();
   checkExternalReferences();
   checkProjectKnowledgeSyncContract();
+  checkCodeMapReadability();
 
   if (hasError) {
     console.error('\nLogic-entry check FAILED.');

@@ -1,4 +1,4 @@
-# AgentLogic V6.8.3 Master Logic
+# AgentLogic V6.8.4 Master Logic
 
 本文件是 AgentLogic 仓库的项目级主逻辑摘要。它描述本仓库中的规则、验证、安装和
 打包资产，不描述任何外部业务项目或某个具体 Agentic CLI 产品的源码事实。
@@ -23,7 +23,7 @@
 
 ### L2：会话规则与开发生命周期 (Session & Development Lifecycle)
 
-- 稳定版本源：`versions/AgentLogic_V6_8_3.md`
+- 稳定版本源：`versions/AgentLogic_V6_8_4.md`
 - 主逻辑摘要：`modules/01_MasterLogic.md`
 - Agent 强制规则：`modules/12_AgentEnforcement.md`
 - 入口清单：`modules/15_LogicEntryChecklist.md`
@@ -32,6 +32,8 @@
 - Graphify 代码地图与预览门：`modules/45_V6_8_GraphifyCodeMapIntegration.md`
 - 参考到界面工作流：`modules/47_V6_8_ReferenceToInterfaceWorkflow.md`
 - 技能与工具路由：`modules/48_V6_8_SkillAndToolRouting.md`
+- 外部研究与交付物整合：`modules/50_V6_8_ExternalResearchAndArtifactIntegration.md`
+- 工具可供性优先路由：`modules/51_V6_8_AffordanceFirstToolUse.md`
 - 任务规格与状态：`.specify/`
 
 ### L3：安全、权限与验证控制 (Safety & Verification Control)
@@ -131,6 +133,10 @@ UI 实施完成后仍必须执行截图、父子布局边界、溢出、换行�
 
 - 每个完整工作流业务项目必须维护根目录 `CODE_MAP.md`，用于入口、模块、关键符号、状态和接口的文本导航；它不是运行时证明，必须以当前源码复核。
 - `modules/45_V6_8_GraphifyCodeMapIntegration.md` 提供按需可视化代码地图策略，不是默认安装的外部依赖。
+- `modules/50_V6_8_ExternalResearchAndArtifactIntegration.md` 仅定义 Bento、PixelRAG 和
+  Firecrawl 的可选来源政策；不得从该政策推断任何组件已安装、可信或可调用。
+- `modules/51_V6_8_AffordanceFirstToolUse.md` 要求从任务意图和所需证据自然选择工具；
+  默认 profile 以执行为中心，完整治理内容在 `governance-reference` profile 中按需加载。
 - 多模块功能、重大重构、架构或发布工作在 Converge/Ship 时应询问用户是否需要代码视图预览。
 - 用户明确同意后，才可在目标业务项目中生成 `graphify-out/`；不得默认在 AgentLogic 仓库内生成，也不得把外部图谱结果当作运行时事实证明。
 

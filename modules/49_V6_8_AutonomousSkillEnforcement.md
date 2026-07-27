@@ -21,11 +21,13 @@ must read/invoke it before claiming that route was followed.
 
 ## Strict missing-capability policy
 
-For a mandatory route, missing capability, denied permission, or failed required evidence blocks
-implementation when the route says `block_before_*`, and blocks a `verified` completion claim for
-all other routes. The agent may report a partial/static result only with the missing capability and
-next safe action stated explicitly. It must not silently replace a mandatory specialized skill with
-generic reasoning or a custom script.
+For a mandatory route, missing required evidence capability, denied permission, or failed required
+evidence blocks implementation when the route says `block_before_*`, and blocks a `verified`
+completion claim for all other routes. A missing specialist does not by itself block an ordinary
+task when that route explicitly permits a native evidence fallback; record the missing specialist,
+use the permitted native tool, and never claim specialist invocation. The agent may report a
+partial/static result only with the missing capability and next safe action stated explicitly. It
+must not silently replace a strict specialized route with generic reasoning or a custom script.
 
 Explicit opt-outs remain limited to their existing contracts, such as the UI mockup opt-out. They do
 not waive requirements discovery, security evidence, or visual/runtime proof.
@@ -58,7 +60,7 @@ unrecorded use must be treated as unverified.
 
 ## Product requirements and UI generation
 
-Use the first-party product-requirements-grilling skill for every requirements-grilling route. It must produce a user-approved brief that passes scripts/validate-requirements-brief.ps1 before mockup generation or UI implementation. For a new project or UI idea, recommend a mockup and explicitly ask whether the user wants it generated. For an existing layout the user dislikes, capture the current layout first; include that screenshot and the user's dissatisfaction/change brief in the image-generation or editing request. Approval or explicit mockup opt-out remains required before formal UI code.
+Use the first-party product-requirements-grilling skill for every requirements-grilling route. It must produce a user-approved brief that passes scripts/validate-requirements-brief.ps1 before mockup generation or UI implementation. For a new project or UI idea, recommend a mockup and explicitly ask whether the user wants it generated. For an existing layout the user dislikes, capture the current layout first; include that screenshot and the user's dissatisfaction/change brief in the image-generation or editing request. This approval/opt-out gate applies to net-new UI and substantial UI refactors; clearly classified small visual corrections may skip a new mockup but never visual verification.
 
 ## Ordered selection and overlap control
 
@@ -79,6 +81,10 @@ selection rule. A conditional skill is never proof that a missing primary capabi
 This registry is the sole source of concrete mandatory skill names. Modules 35 and 48 may govern
 availability or evidence families, but they must defer to this registry when naming a required
 skill or deciding whether a fallback is allowed.
+
+Module 51 governs the natural first choice: intent → evidence → native tool → specialist when
+materially useful → closure. The registry refines that choice for routes that need a specific
+capability; it does not turn every routine task into a skill-selection ceremony.
 
 ## Cross-host first-party skill availability
 

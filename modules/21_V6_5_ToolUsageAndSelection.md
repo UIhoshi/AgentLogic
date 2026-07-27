@@ -132,15 +132,16 @@ Do **not** use them just because the repository contains them.
 Unless the task clearly demands otherwise, the preferred order is:
 
 1. locate documentation entrypoint
-2. inspect directory / entry files
-3. search for relevant symbols and paths
-4. read the smallest sufficient set of source files
-5. decide task layer and boundary
-6. choose the lowest-risk tool that can answer the next question
-7. edit only after the target and effect are understood
-8. validate with the narrowest meaningful verification first
-9. broaden validation if risk is high
-10. sync documentation
+2. read or refresh the project and code maps
+3. inspect only the mapped entry/module boundary
+4. search for symbols and paths only when a map entry is missing or stale
+5. read the smallest mapped source chain (owner, callers/callees, config, tests)
+6. decide task layer and boundary
+7. choose the lowest-risk tool that can answer the next question
+8. edit only after the target and effect are understood
+9. validate with the narrowest meaningful verification first
+10. broaden validation if risk is high
+11. sync the affected map and documentation
 
 This order exists to minimize irreversible mistakes.
 
@@ -345,12 +346,11 @@ Do not treat repository support for agents as automatic permission to delegate.
 
 ### 7.1 Repository onboarding pattern
 
-- directory listing
 - README / entry markdown read
-- entrypoint search
-- targeted file reads
-- task-layer judgment
-- project fact map output
+- project/code map read or refresh
+- mapped entrypoint and targeted file reads
+- search only for map gaps
+- task-layer judgment and impact map update
 
 ### 7.2 Bug-fix pattern
 

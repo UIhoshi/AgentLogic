@@ -18,15 +18,18 @@ Before acting, the agent must:
 6. state a downgraded result when the required tool or evidence is unavailable.
 
 `Skill available` does not mean `tool permitted`; `tool succeeded` does not mean `claim verified`.
+Apply Module 51 first: select the native tool for the intended work, then use this matrix only to
+refine a specialist route or closure requirement.
 
 ## 2. Problem-to-path matrix
 
 | Problem / intended claim | Required evidence and tool path | Preferred skill when available | Closure requirement |
 | --- | --- | --- | --- |
-| Find where a feature, rule, or symbol lives | Local search/listing → targeted reads | `engineering/wayfinder`, `engineering/research` | Directly read the owning implementation and relevant caller/config. |
+| Take over or navigate a project feature, rule, or symbol | Freshness check → `PROJECT_MAP.md` / `CODE_MAP.md` → targeted search only for map gaps → targeted reads | `engineering/wayfinder`, `engineering/research` | Validate the mapped owner and relevant caller/config; update an affected map entry with the change. |
 | Diagnose a bug or unexpected command failure | Reproduce/log → search/read call chain → narrow fix → command validation | Narrowest installed debugging skill; project-native error record after a material correction | Verify root cause or label as unconfirmed; record material lessons without secrets. |
 | Implement/refactor behavior | Read boundary → reuse search → spec/task → bounded edit → tests/runtime | `engineering/implement`, `ponytail`, `engineering/tdd` | Match spec/task and execute relevant validation. |
 | Current library, product, release, or remote setting | Authoritative external lookup | Official-doc skill/path, `openai-docs` for OpenAI products | Cite or record the live authoritative source; memory is insufficient. |
+| Broad public-site discovery, mapping, or structured collection | Scope/data-egress approval → read-oriented collection → provenance review | Firecrawl only when separately installed, trusted, and approved under Module 50 | Preserve source URLs and meet the evidence route for each resulting claim. |
 | Dynamic web flow, SPA, login, or browser interaction | Real browser interaction and capture | `playwright`; `agent-browser` only under its conditional route rule | Observe the actual flow; static reading alone cannot close it. |
 | Desktop/window/OS visual state | OS-level capture | `screenshot` | Capture the actual target state. |
 | UI appearance, layout, responsive fit, or interaction state | Build/run → screenshot or browser replay → boundary check | `screenshot` for desktop capture; `playwright` for browser flow | Prove visible state, containment, overflow/wrap behavior, and relevant interaction state. |
@@ -39,8 +42,10 @@ Before acting, the agent must:
 
 ## 3. Fallback and conflict rules
 
-- For advisory paths outside the canonical contract, use the strongest available tool family and say which required evidence remains missing. For a matched mandatory contract route, do not downgrade: use only its primary/conditional selection rule or report the required block/partial result.
+- For advisory paths outside the canonical contract, use the strongest available tool family and say which required evidence remains missing. For a matched route, honor its declared fallback: an unavailable specialist may use a permitted native evidence path only when the route allows it; an unavailable required evidence capability remains blocked or partial.
 - If multiple skills match, choose the smallest scope; do not load broad libraries for one task.
+- Bento, PixelRAG, and Firecrawl are source-specific optional paths governed by Module 50. Their
+  presence in policy does not establish installation, trust, permission, or a mandatory route.
 - If a specialized skill conflicts with higher-priority safety, permission, SDD, or verification
   rules, the higher-priority rule wins.
 - Do not create a custom replacement script when an approved, available specialized tool already

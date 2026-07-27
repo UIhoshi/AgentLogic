@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "purpose": "Canonical capability routes with an ordered primary skill and explicitly conditional supplements; aliases identify candidates, not installed or trusted tools.",
-  "completion_policy": "A mandatory route without an available mapped capability blocks implementation or verified completion. Report the gap and request a safe next step; never silently substitute a generic workflow.",
+  "completion_policy": "A missing required evidence capability blocks implementation or verified completion. A missing specialist blocks only routes whose fallback is strict; routes that explicitly allow native evidence fallback may proceed with disclosure and matching evidence. Never claim an unavailable skill was used.",
   "routes": [
     {
       "id": "requirements-grilling",
@@ -162,7 +162,7 @@
         "release"
       ],
       "capability": "package_validation",
-      "fallback": "block_release_or_install_completion",
+      "fallback": "allow_native_package_validation_with_disclosure",
       "closure_evidence": [
         "artifact_validation",
         "post_result_inspection"
@@ -173,7 +173,7 @@
       "conditional_host_skill_aliases": [
         "ci-cd-pipeline-builder"
       ],
-      "selection_rule": "Use release-manager for release readiness and artifact closure. Use ci-cd-pipeline-builder when pipeline design or repair is part of the release work."
+      "selection_rule": "Use release-manager for release readiness and artifact closure when available. When it is unavailable, native build/package validation plus post-result inspection may close a local install or package task with the gap disclosed. Use ci-cd-pipeline-builder when pipeline design or repair is part of the release work."
     },
     {
       "id": "ui-implementation",

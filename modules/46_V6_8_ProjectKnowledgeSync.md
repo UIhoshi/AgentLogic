@@ -31,6 +31,11 @@ CODE_MAP.md
   interface/event surfaces, validation commands, and a reviewed commit or freshness marker. It is
   not a source dump, runtime proof, or replacement for targeted reads.
 
+Treat the map as the default code-navigation index: for an inherited project, repair it before
+repeated broad discovery; for an owned project, establish it with the first implementation flow
+and update it with every affected key symbol or impact path. Before editing, use the map to find
+the owning flow and its likely callers/callees, then confirm that narrow source chain.
+
 These files travel with the code in the same normal project commits. They are project facts,
 not private agent memory.
 

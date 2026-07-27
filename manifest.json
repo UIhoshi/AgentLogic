@@ -1,225 +1,266 @@
 {
-  "name": "AgentLogic",
-  "role": "primary-local-logic",
-  "description": "Versioned primary logic package intended to be pulled into local AI coding hosts as the default operating logic.",
-  "entry": "MAIN.md",
-  "current_version": "V6.8.3",
-  "main_logic_file": "versions/AgentLogic_V6_8_3.md",
-  "default_profile": "core-enhanced",
-  "profiles": {
-    "minimal": {
-      "description": "Bootstrap entry set for hosts with tight context budgets; load core-enhanced before feature work, refactors, releases, or packaging.",
-      "files": [
-        "00_START_HERE.md",
-        "INSTALL.md",
-        "AGENT_INSTALL.md",
-        "README.md",
-        "AGENTS.md",
-        "versions/AgentLogic_V6_8_3.md",
-        "modules/12_AgentEnforcement.md",
-        "modules/15_LogicEntryChecklist.md",
-        "modules/29_MandatoryVerificationMatrix.md",
-        "modules/30_ToolQuestionBoundaryMatrix.md",
-        "modules/31_ToolMisuseAndAntiPatternMatrix.md"
-      ]
-    },
-    "core-enhanced": {
-      "description": "Recommended default bundle for general coding, refactors, project starts, updates, and version iteration.",
-      "files": [
-        "00_START_HERE.md",
-        "INSTALL.md",
-        "AGENT_INSTALL.md",
-        "README.md",
-        "AGENTS.md",
-        "versions/AgentLogic_V6_8_3.md",
-        "modules/01_MasterLogic.md",
-        "modules/03_AgenticLoop.md",
-        "modules/05_PermissionsAndSafety.md",
-        "modules/11_CrossDirectoryMap.md",
-        "modules/12_AgentEnforcement.md",
-        "modules/13_MandatoryLogicGateTemplate.md",
-        "modules/15_LogicEntryChecklist.md",
-        "modules/20_V6_5_RuntimeModes.md",
-        "modules/21_V6_5_ToolUsageAndSelection.md",
-        "modules/22_V6_5_HookLifecycle.md",
-        "modules/23_V6_5_PermissionAndOutputPipeline.md",
-        "modules/24_V6_5_ToolUsageMatrix.md",
-        "modules/25_V6_5_ToolCapabilityMapping.md",
-        "modules/26_V6_5_INDEX.md",
-        "modules/27_V6_5_ToolPermissionRiskMatrix.md",
-        "modules/28_V6_5_TerminologyAndModuleBoundaries.md",
-        "modules/29_MandatoryVerificationMatrix.md",
-        "modules/30_ToolQuestionBoundaryMatrix.md",
-        "modules/31_ToolMisuseAndAntiPatternMatrix.md",
-        "modules/32_V6_5_ContextAssemblyAndInstructionStacking.md",
-        "modules/33_V6_5_BackgroundConsolidationAndIdleLifecycle.md",
-        "modules/34_V6_5_ProjectFactMap_V2.md",
-        "modules/35_V6_5_SkillGovernanceAndMandatoryUse.md",
-        "modules/36_V6_5_SkillZoneSeparation.md",
-        "modules/37_V6_6_CybersecuritySkillsRouter.md",
-        "modules/38_V6_6_SpecDrivenDevelopment.md",
-        "modules/39_V6_6_TasteFrontendDesign.md",
-        "modules/40_AgentLogicSystemMap.md",
-        "modules/41_V6_7_AIShippingAndReviewabilityAudit.md",
-        "modules/42_V6_7_PonytailLazySeniorDevLadder.md",
-        "modules/43_V6_7_MattPocockSkillsIntegration.md",
-        "modules/44_V6_8_GrokBuildOperationalIntegration.md",
-        "modules/45_V6_8_GraphifyCodeMapIntegration.md",
-        "modules/46_V6_8_ProjectKnowledgeSync.md",
-        "modules/47_V6_8_ReferenceToInterfaceWorkflow.md",
-        "modules/48_V6_8_SkillAndToolRouting.md",
-        "modules/49_V6_8_AutonomousSkillEnforcement.md",
-        "contracts/skill-routing.json",
-        "contracts/host-skill-capabilities.json",
-        "docs/software-candidates.md"
-      ]
-    },
-    "github-publishing": {
-      "description": "Core enhanced bundle plus GitHub README publication system.",
-      "files": [
-        "00_START_HERE.md",
-        "INSTALL.md",
-        "AGENT_INSTALL.md",
-        "README.md",
-        "AGENTS.md",
-        "versions/AgentLogic_V6_8_3.md",
-        "modules/01_MasterLogic.md",
-        "modules/03_AgenticLoop.md",
-        "modules/05_PermissionsAndSafety.md",
-        "modules/11_CrossDirectoryMap.md",
-        "modules/12_AgentEnforcement.md",
-        "modules/13_MandatoryLogicGateTemplate.md",
-        "modules/15_LogicEntryChecklist.md",
-        "modules/16_GitHubREADMETemplate_V1.md",
-        "modules/17_GitHubREADMEStyleRules_V1.md",
-        "modules/18_GitHubREADMEExamples_V1.md",
-        "modules/19_GitHubREADMEReviewChecklist_V1.md",
-        "modules/20_V6_5_RuntimeModes.md",
-        "modules/21_V6_5_ToolUsageAndSelection.md",
-        "modules/22_V6_5_HookLifecycle.md",
-        "modules/23_V6_5_PermissionAndOutputPipeline.md",
-        "modules/24_V6_5_ToolUsageMatrix.md",
-        "modules/25_V6_5_ToolCapabilityMapping.md",
-        "modules/26_V6_5_INDEX.md",
-        "modules/27_V6_5_ToolPermissionRiskMatrix.md",
-        "modules/28_V6_5_TerminologyAndModuleBoundaries.md",
-        "modules/29_MandatoryVerificationMatrix.md",
-        "modules/30_ToolQuestionBoundaryMatrix.md",
-        "modules/31_ToolMisuseAndAntiPatternMatrix.md",
-        "modules/32_V6_5_ContextAssemblyAndInstructionStacking.md",
-        "modules/33_V6_5_BackgroundConsolidationAndIdleLifecycle.md",
-        "modules/34_V6_5_ProjectFactMap_V2.md",
-        "modules/35_V6_5_SkillGovernanceAndMandatoryUse.md",
-        "modules/36_V6_5_SkillZoneSeparation.md",
-        "modules/37_V6_6_CybersecuritySkillsRouter.md",
-        "modules/38_V6_6_SpecDrivenDevelopment.md",
-        "modules/39_V6_6_TasteFrontendDesign.md",
-        "modules/40_AgentLogicSystemMap.md",
-        "modules/41_V6_7_AIShippingAndReviewabilityAudit.md",
-        "modules/42_V6_7_PonytailLazySeniorDevLadder.md",
-        "modules/43_V6_7_MattPocockSkillsIntegration.md",
-        "modules/44_V6_8_GrokBuildOperationalIntegration.md",
-        "modules/45_V6_8_GraphifyCodeMapIntegration.md",
-        "modules/46_V6_8_ProjectKnowledgeSync.md",
-        "modules/47_V6_8_ReferenceToInterfaceWorkflow.md",
-        "modules/48_V6_8_SkillAndToolRouting.md",
-        "modules/49_V6_8_AutonomousSkillEnforcement.md",
-        "contracts/skill-routing.json",
-        "contracts/host-skill-capabilities.json",
-        "docs/software-candidates.md"
-      ]
-    }
-  },
-  "optional_modules": {
-    "mandatory_logic_gate": [
-      "modules/13_MandatoryLogicGateTemplate.md"
-    ],
-    "github_readme": [
-      "modules/16_GitHubREADMETemplate_V1.md",
-      "modules/17_GitHubREADMEStyleRules_V1.md",
-      "modules/18_GitHubREADMEExamples_V1.md",
-      "modules/19_GitHubREADMEReviewChecklist_V1.md"
-    ],
-    "external_code_map": [
-      "modules/45_V6_8_GraphifyCodeMapIntegration.md"
-    ],
-    "project_knowledge_sync": [
-      "modules/46_V6_8_ProjectKnowledgeSync.md",
-      "templates/PROJECT_MAP.md",
-      "templates/CODE_MAP.md",
-      "templates/ERRORS.md"
-    ],
-    "reference_to_interface": [
-      "modules/47_V6_8_ReferenceToInterfaceWorkflow.md"
-    ],
-    "skill_and_tool_routing": [
-      "modules/48_V6_8_SkillAndToolRouting.md"
-    ],
-    "autonomous_skill_enforcement": [
-      "modules/49_V6_8_AutonomousSkillEnforcement.md",
-      "contracts/skill-routing.json",
-      "docs/software-candidates.md"
-    ],
-    "reference_raw_layers": [
-      "reference/raw_tools/",
-      "reference/raw_tooling/",
-      "reference/raw_permissions/",
-      "reference/raw_extensions/",
-      "reference/raw_commands/"
-    ]
-  },
-  "host_outputs": {
-    "codex": "dist/codex/model_instructions.md",
-    "claude": "dist/claude/CLAUDE.md",
-    "antigravity": "dist/antigravity/AGENTS.md",
-    "generic": "dist/generic/AGENTLOGIC.md"
-  },
-  "adapters": {
-    "codex": "adapters/codex/install.ps1",
-    "claude": "adapters/claude/install.ps1",
-    "antigravity": "adapters/antigravity/install.ps1",
-    "generic": "adapters/generic/install.ps1"
-  },
-  "notes": [
-    "Hosts should bind to MAIN.md or a built bundle, never directly to a versioned file name.",
-    "Profile bundles should be generated by scripts/build-profile.ps1 instead of hand-curating prompt files.",
-    "The default operating profile is core-enhanced unless a host explicitly opts into another profile.",
-    "Project starts, project updates, refactors, reviews, version iteration, and context-forget rules are all part of the primary logic, not optional guidance."
-  ],
-  "install": {
-    "default_profile": "core-enhanced",
-    "stable_entry": "MAIN.md",
-    "agent_guide": "AGENT_INSTALL.md",
-    "human_guide": "INSTALL.md",
-    "doctor": {
-      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\doctor.ps1",
-      "script": "scripts/doctor.ps1"
-    },
-    "hosts": {
-      "codex": {
-        "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\install.ps1 -TargetHost codex",
-        "adapter": "adapters/codex/install.ps1",
-        "output": "dist/codex/model_instructions.md"
-      },
-      "claude": {
-        "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\install.ps1 -TargetHost claude",
-        "adapter": "adapters/claude/install.ps1",
-        "output": "dist/claude/CLAUDE.md"
-      },
-      "antigravity": {
-        "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\install.ps1 -TargetHost antigravity",
-        "adapter": "adapters/antigravity/install.ps1",
-        "output": "dist/antigravity/AGENTS.md"
-      },
-      "generic": {
-        "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\install.ps1 -TargetHost generic",
-        "adapter": "adapters/generic/install.ps1",
-        "output": "dist/generic/AGENTLOGIC.md"
-      }
-    },
-    "validation": {
-      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\validate-package.ps1",
-      "script": "scripts/validate-package.ps1"
-    }
-  }
+    "name":  "AgentLogic",
+    "role":  "primary-local-logic",
+    "description":  "Versioned primary logic package intended to be pulled into local AI coding hosts as the default operating logic.",
+    "entry":  "MAIN.md",
+    "current_version":  "V6.8.4",
+    "main_logic_file":  "versions/AgentLogic_V6_8_4.md",
+    "default_profile":  "core-enhanced",
+    "profiles":  {
+                     "minimal":  {
+                                     "description":  "Bootstrap entry set for hosts with tight context budgets; load core-enhanced before feature work, refactors, releases, or packaging.",
+                                     "files":  [
+                                                   "00_START_HERE.md",
+                                                   "INSTALL.md",
+                                                   "AGENT_INSTALL.md",
+                                                   "README.md",
+                                                   "AGENTS.md",
+                                                   "versions/AgentLogic_V6_8_4.md",
+                                                   "modules/12_AgentEnforcement.md",
+                                                   "modules/15_LogicEntryChecklist.md",
+                                                   "modules/29_MandatoryVerificationMatrix.md",
+                                                   "modules/30_ToolQuestionBoundaryMatrix.md",
+                                                   "modules/31_ToolMisuseAndAntiPatternMatrix.md"
+                                               ]
+                                 },
+                     "core-enhanced":  {
+                                           "description":  "Lean default execution bundle: entry, safety, verification, lifecycle, and affordance-first routing. Use governance-reference for deep policy/audit reference.",
+                                           "files":  [
+                                                         "00_START_HERE.md",
+                                                         "README.md",
+                                                         "AGENTS.md",
+                                                         "versions/AgentLogic_V6_8_4.md",
+                                                         "modules/01_MasterLogic.md",
+                                                         "modules/03_AgenticLoop.md",
+                                                         "modules/05_PermissionsAndSafety.md",
+                                                         "modules/12_AgentEnforcement.md",
+                                                         "modules/15_LogicEntryChecklist.md",
+                                                         "modules/27_V6_5_ToolPermissionRiskMatrix.md",
+                                                         "modules/29_MandatoryVerificationMatrix.md",
+                                                         "modules/30_ToolQuestionBoundaryMatrix.md",
+                                                         "modules/31_ToolMisuseAndAntiPatternMatrix.md",
+                                                         "modules/35_V6_5_SkillGovernanceAndMandatoryUse.md",
+                                                         "modules/38_V6_6_SpecDrivenDevelopment.md",
+                                                         "modules/39_V6_6_TasteFrontendDesign.md",
+                                                         "modules/41_V6_7_AIShippingAndReviewabilityAudit.md",
+                                                         "modules/44_V6_8_GrokBuildOperationalIntegration.md",
+                                                         "modules/46_V6_8_ProjectKnowledgeSync.md",
+                                                         "modules/47_V6_8_ReferenceToInterfaceWorkflow.md",
+                                                         "modules/48_V6_8_SkillAndToolRouting.md",
+                                                         "modules/49_V6_8_AutonomousSkillEnforcement.md",
+                                                         "modules/50_V6_8_ExternalResearchAndArtifactIntegration.md",
+                                                         "modules/51_V6_8_AffordanceFirstToolUse.md",
+                                                         "contracts/skill-routing.json",
+                                                         "contracts/host-skill-capabilities.json"
+                                                     ]
+                                       },
+                     "github-publishing":  {
+                                               "description":  "Core enhanced bundle plus GitHub README publication system.",
+                                               "files":  [
+                                                             "00_START_HERE.md",
+                                                             "INSTALL.md",
+                                                             "AGENT_INSTALL.md",
+                                                             "README.md",
+                                                             "AGENTS.md",
+                                                             "versions/AgentLogic_V6_8_4.md",
+                                                             "modules/01_MasterLogic.md",
+                                                             "modules/03_AgenticLoop.md",
+                                                             "modules/05_PermissionsAndSafety.md",
+                                                             "modules/11_CrossDirectoryMap.md",
+                                                             "modules/12_AgentEnforcement.md",
+                                                             "modules/13_MandatoryLogicGateTemplate.md",
+                                                             "modules/15_LogicEntryChecklist.md",
+                                                             "modules/16_GitHubREADMETemplate_V1.md",
+                                                             "modules/17_GitHubREADMEStyleRules_V1.md",
+                                                             "modules/18_GitHubREADMEExamples_V1.md",
+                                                             "modules/19_GitHubREADMEReviewChecklist_V1.md",
+                                                             "modules/20_V6_5_RuntimeModes.md",
+                                                             "modules/21_V6_5_ToolUsageAndSelection.md",
+                                                             "modules/22_V6_5_HookLifecycle.md",
+                                                             "modules/23_V6_5_PermissionAndOutputPipeline.md",
+                                                             "modules/24_V6_5_ToolUsageMatrix.md",
+                                                             "modules/25_V6_5_ToolCapabilityMapping.md",
+                                                             "modules/26_V6_5_INDEX.md",
+                                                             "modules/27_V6_5_ToolPermissionRiskMatrix.md",
+                                                             "modules/28_V6_5_TerminologyAndModuleBoundaries.md",
+                                                             "modules/29_MandatoryVerificationMatrix.md",
+                                                             "modules/30_ToolQuestionBoundaryMatrix.md",
+                                                             "modules/31_ToolMisuseAndAntiPatternMatrix.md",
+                                                             "modules/32_V6_5_ContextAssemblyAndInstructionStacking.md",
+                                                             "modules/33_V6_5_BackgroundConsolidationAndIdleLifecycle.md",
+                                                             "modules/34_V6_5_ProjectFactMap_V2.md",
+                                                             "modules/35_V6_5_SkillGovernanceAndMandatoryUse.md",
+                                                             "modules/36_V6_5_SkillZoneSeparation.md",
+                                                             "modules/37_V6_6_CybersecuritySkillsRouter.md",
+                                                             "modules/38_V6_6_SpecDrivenDevelopment.md",
+                                                             "modules/39_V6_6_TasteFrontendDesign.md",
+                                                             "modules/40_AgentLogicSystemMap.md",
+                                                             "modules/41_V6_7_AIShippingAndReviewabilityAudit.md",
+                                                             "modules/42_V6_7_PonytailLazySeniorDevLadder.md",
+                                                             "modules/43_V6_7_MattPocockSkillsIntegration.md",
+                                                             "modules/44_V6_8_GrokBuildOperationalIntegration.md",
+                                                             "modules/45_V6_8_GraphifyCodeMapIntegration.md",
+                                                             "modules/46_V6_8_ProjectKnowledgeSync.md",
+                                                             "modules/47_V6_8_ReferenceToInterfaceWorkflow.md",
+                                                             "modules/48_V6_8_SkillAndToolRouting.md",
+                                                             "modules/49_V6_8_AutonomousSkillEnforcement.md",
+                                                             "modules/50_V6_8_ExternalResearchAndArtifactIntegration.md",
+                                                             "contracts/skill-routing.json",
+                                                             "contracts/host-skill-capabilities.json",
+                                                             "docs/software-candidates.md",
+                                                             "modules/51_V6_8_AffordanceFirstToolUse.md"
+                                                         ]
+                                           },
+                     "governance-reference":  {
+                                                  "description":  "Full governance and narrative reference set for policy maintenance, deep audits, and exceptional workflow review; not the default host execution bundle.",
+                                                  "files":  [
+                                                                "00_START_HERE.md",
+                                                                "INSTALL.md",
+                                                                "AGENT_INSTALL.md",
+                                                                "README.md",
+                                                                "AGENTS.md",
+                                                                "versions/AgentLogic_V6_8_4.md",
+                                                                "modules/01_MasterLogic.md",
+                                                                "modules/03_AgenticLoop.md",
+                                                                "modules/05_PermissionsAndSafety.md",
+                                                                "modules/11_CrossDirectoryMap.md",
+                                                                "modules/12_AgentEnforcement.md",
+                                                                "modules/13_MandatoryLogicGateTemplate.md",
+                                                                "modules/15_LogicEntryChecklist.md",
+                                                                "modules/20_V6_5_RuntimeModes.md",
+                                                                "modules/21_V6_5_ToolUsageAndSelection.md",
+                                                                "modules/22_V6_5_HookLifecycle.md",
+                                                                "modules/23_V6_5_PermissionAndOutputPipeline.md",
+                                                                "modules/24_V6_5_ToolUsageMatrix.md",
+                                                                "modules/25_V6_5_ToolCapabilityMapping.md",
+                                                                "modules/26_V6_5_INDEX.md",
+                                                                "modules/27_V6_5_ToolPermissionRiskMatrix.md",
+                                                                "modules/28_V6_5_TerminologyAndModuleBoundaries.md",
+                                                                "modules/29_MandatoryVerificationMatrix.md",
+                                                                "modules/30_ToolQuestionBoundaryMatrix.md",
+                                                                "modules/31_ToolMisuseAndAntiPatternMatrix.md",
+                                                                "modules/32_V6_5_ContextAssemblyAndInstructionStacking.md",
+                                                                "modules/33_V6_5_BackgroundConsolidationAndIdleLifecycle.md",
+                                                                "modules/34_V6_5_ProjectFactMap_V2.md",
+                                                                "modules/35_V6_5_SkillGovernanceAndMandatoryUse.md",
+                                                                "modules/36_V6_5_SkillZoneSeparation.md",
+                                                                "modules/37_V6_6_CybersecuritySkillsRouter.md",
+                                                                "modules/38_V6_6_SpecDrivenDevelopment.md",
+                                                                "modules/39_V6_6_TasteFrontendDesign.md",
+                                                                "modules/40_AgentLogicSystemMap.md",
+                                                                "modules/41_V6_7_AIShippingAndReviewabilityAudit.md",
+                                                                "modules/42_V6_7_PonytailLazySeniorDevLadder.md",
+                                                                "modules/43_V6_7_MattPocockSkillsIntegration.md",
+                                                                "modules/44_V6_8_GrokBuildOperationalIntegration.md",
+                                                                "modules/45_V6_8_GraphifyCodeMapIntegration.md",
+                                                                "modules/46_V6_8_ProjectKnowledgeSync.md",
+                                                                "modules/47_V6_8_ReferenceToInterfaceWorkflow.md",
+                                                                "modules/48_V6_8_SkillAndToolRouting.md",
+                                                                "modules/49_V6_8_AutonomousSkillEnforcement.md",
+                                                                "modules/50_V6_8_ExternalResearchAndArtifactIntegration.md",
+                                                                "contracts/skill-routing.json",
+                                                                "contracts/host-skill-capabilities.json",
+                                                                "docs/software-candidates.md",
+                                                                "modules/51_V6_8_AffordanceFirstToolUse.md"
+                                                            ]
+                                              }
+                 },
+    "optional_modules":  {
+                             "mandatory_logic_gate":  [
+                                                          "modules/13_MandatoryLogicGateTemplate.md"
+                                                      ],
+                             "github_readme":  [
+                                                   "modules/16_GitHubREADMETemplate_V1.md",
+                                                   "modules/17_GitHubREADMEStyleRules_V1.md",
+                                                   "modules/18_GitHubREADMEExamples_V1.md",
+                                                   "modules/19_GitHubREADMEReviewChecklist_V1.md"
+                                               ],
+                             "external_code_map":  [
+                                                       "modules/45_V6_8_GraphifyCodeMapIntegration.md"
+                                                   ],
+                             "project_knowledge_sync":  [
+                                                            "modules/46_V6_8_ProjectKnowledgeSync.md",
+                                                            "templates/PROJECT_MAP.md",
+                                                            "templates/CODE_MAP.md",
+                                                            "templates/ERRORS.md"
+                                                        ],
+                             "reference_to_interface":  [
+                                                            "modules/47_V6_8_ReferenceToInterfaceWorkflow.md"
+                                                        ],
+                             "skill_and_tool_routing":  [
+                                                            "modules/48_V6_8_SkillAndToolRouting.md"
+                                                        ],
+                             "autonomous_skill_enforcement":  [
+                                                                  "modules/49_V6_8_AutonomousSkillEnforcement.md",
+                                                                  "contracts/skill-routing.json",
+                                                                  "docs/software-candidates.md"
+                                                              ],
+                             "external_research_and_artifacts":  [
+                                                                     "modules/50_V6_8_ExternalResearchAndArtifactIntegration.md"
+                                                                 ],
+                             "reference_raw_layers":  [
+                                                          "reference/raw_tools/",
+                                                          "reference/raw_tooling/",
+                                                          "reference/raw_permissions/",
+                                                          "reference/raw_extensions/",
+                                                          "reference/raw_commands/"
+                                                      ],
+                             "affordance_first_tool_use":  [
+                                                               "modules/51_V6_8_AffordanceFirstToolUse.md"
+                                                           ]
+                         },
+    "host_outputs":  {
+                         "codex":  "dist/codex/model_instructions.md",
+                         "claude":  "dist/claude/CLAUDE.md",
+                         "antigravity":  "dist/antigravity/AGENTS.md",
+                         "generic":  "dist/generic/AGENTLOGIC.md"
+                     },
+    "adapters":  {
+                     "codex":  "adapters/codex/install.ps1",
+                     "claude":  "adapters/claude/install.ps1",
+                     "antigravity":  "adapters/antigravity/install.ps1",
+                     "generic":  "adapters/generic/install.ps1"
+                 },
+    "notes":  [
+                  "Hosts should bind to MAIN.md or a built bundle, never directly to a versioned file name.",
+                  "Profile bundles should be generated by scripts/build-profile.ps1 instead of hand-curating prompt files.",
+                  "The default operating profile is core-enhanced unless a host explicitly opts into another profile.",
+                  "Project starts, project updates, refactors, reviews, version iteration, and context-forget rules are all part of the primary logic, not optional guidance."
+              ],
+    "install":  {
+                    "default_profile":  "core-enhanced",
+                    "stable_entry":  "MAIN.md",
+                    "agent_guide":  "AGENT_INSTALL.md",
+                    "human_guide":  "INSTALL.md",
+                    "doctor":  {
+                                   "command":  "powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\doctor.ps1",
+                                   "script":  "scripts/doctor.ps1"
+                               },
+                    "hosts":  {
+                                  "codex":  {
+                                                "command":  "powershell -NoProfile -ExecutionPolicy Bypass -File .\\install.ps1 -TargetHost codex",
+                                                "adapter":  "adapters/codex/install.ps1",
+                                                "output":  "dist/codex/model_instructions.md"
+                                            },
+                                  "claude":  {
+                                                 "command":  "powershell -NoProfile -ExecutionPolicy Bypass -File .\\install.ps1 -TargetHost claude",
+                                                 "adapter":  "adapters/claude/install.ps1",
+                                                 "output":  "dist/claude/CLAUDE.md"
+                                             },
+                                  "antigravity":  {
+                                                      "command":  "powershell -NoProfile -ExecutionPolicy Bypass -File .\\install.ps1 -TargetHost antigravity",
+                                                      "adapter":  "adapters/antigravity/install.ps1",
+                                                      "output":  "dist/antigravity/AGENTS.md"
+                                                  },
+                                  "generic":  {
+                                                  "command":  "powershell -NoProfile -ExecutionPolicy Bypass -File .\\install.ps1 -TargetHost generic",
+                                                  "adapter":  "adapters/generic/install.ps1",
+                                                  "output":  "dist/generic/AGENTLOGIC.md"
+                                              }
+                              },
+                    "validation":  {
+                                       "command":  "powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\validate-package.ps1",
+                                       "script":  "scripts/validate-package.ps1"
+                                   }
+                }
 }

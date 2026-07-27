@@ -1,9 +1,9 @@
-# MANDATORY AGENT EXECUTIVE PROTOCOL (AgentLogic V6.8.3)
+# MANDATORY AGENT EXECUTIVE PROTOCOL (AgentLogic V6.8.4)
 
 - Host target: claude
 - Profile: core-enhanced
 - Stable entry: MAIN.md
-- Version: V6.8.3
+- Version: V6.8.4
 
 > [!CRITICAL]
 > **EXECUTION vs SUMMARIZATION MANDATE**:
@@ -84,7 +84,7 @@ validation, review, packaging, or rule synchronization work, the agent MUST full
 following files from beginning to end in this exact order:
 
 1. `README.md`
-2. `versions/AgentLogic_V6_8_3.md`
+2. `versions/AgentLogic_V6_8_4.md`
 3. `modules/01_MasterLogic.md`
 4. `modules/15_LogicEntryChecklist.md`
 
@@ -146,273 +146,6 @@ This authorization should also be interpreted as meaning the work is still in an
 
 ---
 
-## BEGIN FILE: INSTALL.md
-
-<!--
-MANDATORY LOGIC GATE
-
-Before making changes here, read `AGENTS.md` and `README.md` first.
-Then follow the repository-declared logic entry chain, including `00_START_HERE.md`,
-`modules/01_MasterLogic.md`, and `modules/15_LogicEntryChecklist.md` when applicable.
-
-Before every new coding round, explicitly decide whether the current task extends
-the previous coding round.
-If it does not, explicitly ask whether to forget/compress context before continuing.
-
-Treat this flow as a blocking gate, not as guidance, documentation, or a reminder.
-Do not infer continuation by yourself.
-Do not skip the context-reset question for efficiency.
-
-Do not continue deeper reading, modify files, delete files, perform write actions,
-or begin implementation before the logic-entry loop above has been completed.
--->
-
-# Install AgentLogic Locally
-
-This page is the human-facing installation entry for AgentLogic.
-
-If you are an AI agent, start with [`AGENT_INSTALL.md`](./AGENT_INSTALL.md) instead.
-
-## What "Install" Means
-
-AgentLogic is not a normal app dependency. Installing it means:
-
-1. build the selected AgentLogic profile into a host-ready bundle;
-2. copy or bind that bundle to the target AI host;
-3. verify that the local host can use `MAIN.md` or the generated bundle as its primary logic.
-
-The stable host binding entry is:
-
-- `MAIN.md`
-
-The default profile is:
-
-- `core-enhanced`
-
-## Legacy Logic Detection & Backup (Mandatory Step)
-
-To prevent conflicts where the AI client loads stale or outdated rules, the `install.ps1` script
-checks legacy files after the new target has been verified. Other legacy files are moved into a
-timestamped `.agentlogic-backup` directory; the selected new target is never removed.
-
-
-## First Diagnostic Command
-
-Run this before guessing which command to use:
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\doctor.ps1
-```
-
-The doctor checks the repository shape, reads `manifest.json`, lists supported hosts, and prints the recommended install commands.
-
-## One-Command Install
-
-Choose the host that should receive the local logic.
-
-### Codex
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost codex
-```
-
-### Claude
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost claude
-```
-
-### Antigravity
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost antigravity
-```
-
-### Generic bundle
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost generic
-```
-
-On shell environments:
-
-```bash
-./install.sh --host codex
-```
-
-## Validate The Package
-
-After installation or repository changes:
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\validate-package.ps1
-```
-
-For maintainers:
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\maintainer-check.ps1
-```
-
-## Important Boundaries
-
-- Do not treat this repository as a business project workspace.
-- Do not create unrelated project files inside this repository.
-- Hosts should bind to `MAIN.md` or to a generated bundle, not directly to a versioned file.
-- Generated bundles are built from `manifest.json` and `scripts/build-profile.ps1`.
-
-## END FILE: INSTALL.md
-
----
-
-## BEGIN FILE: AGENT_INSTALL.md
-
-<!--
-MANDATORY LOGIC GATE
-
-Before making changes here, read `AGENTS.md` and `README.md` first.
-Then follow the repository-declared logic entry chain, including `00_START_HERE.md`,
-`modules/01_MasterLogic.md`, and `modules/15_LogicEntryChecklist.md` when applicable.
-
-Before every new coding round, explicitly decide whether the current task extends
-the previous coding round.
-If it does not, explicitly ask whether to forget/compress context before continuing.
-
-Treat this flow as a blocking gate, not as guidance, documentation, or a reminder.
-Do not infer continuation by yourself.
-Do not skip the context-reset question for efficiency.
-
-Do not continue deeper reading, modify files, delete files, perform write actions,
-or begin implementation before the logic-entry loop above has been completed.
--->
-
-# Agent Installation Guide (V6.8.3 Stable)
-
-This is the shortest installation path for AI agents.
-
-Goal: Install **AgentLogic V6.8.3** into the current local host without guessing the entrypoint, target bundle, or validation command.
-
-## Do Not Guess
-
-Before installing, identify:
-
-1.  Whether the current directory is the AgentLogic repository root.
-2.  The target host: `codex`, `claude`, `antigravity`, or `generic`.
-3.  The selected profile: **`core-enhanced`** is the default for full V6.8.3 governance support.
-4.  Whether the host should bind to `MAIN.md` directly or to a generated bundle.
-
-If uncertain, run the doctor first:
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\doctor.ps1
-```
-
-## V6.8.3 Stable Facts
-
-- **Current Version**: V6.8.3 (including project-native L1-L4 maps and project error synchronization).
-- **Repository Role**: Primary local logic package (Method Layer).
-- **Stable Host Entry**: `MAIN.md`.
-- **Default Profile**: `core-enhanced` (Includes the current runtime, verification, SDD, SRA, skill, and reviewability governance modules).
-- **Machine-readable Contract**: `manifest.json`.
-- **Root Installer**: `install.ps1`.
-- **Validation Command**: `scripts/validate-package.ps1`.
-
-## Install Commands
-
-### Codex
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost codex
-```
-
-### Claude
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost claude
-```
-
-### Antigravity
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost antigravity
-```
-
-### Generic
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost generic
-```
-
-## Validate
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\validate-package.ps1
-```
-
-## Agent Decision Rule (V6.8.3)
-
-If the user asks to "load", "install", "mount", "bind", or "use this logic locally", the agent **MUST** follow this protocol:
-
-1.  **Doctor Check**: Run `scripts/doctor.ps1` to verify environment and path integrity.
-2.  **Target Selection**: Choose the target host (`codex`, `claude`, `antigravity`, or `generic`) based on the current environment.
-3.  **Install & Legacy Backup**: Run the matching `install.ps1 -TargetHost ...` command using the `core-enhanced` profile. The installer verifies the new target first, then moves other legacy logic files into a timestamped `.agentlogic-backup` directory instead of deleting them.
-4.  **Validation**: Run `scripts/validate-package.ps1`.
-5.  **Skill Governance Audit**: Run a dry-run host-local skill inventory for the target host. Applying archive moves is a separate, explicit operation after review. The default install path executes:
-    - `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\skills-governance.ps1 -TargetHost <host>`
-    The purpose is:
-    - identify budget-heavy domain skill packs
-    - preserve engineering-critical skills in the visible set
-    - report host-local skill sprawl without silently mutating it
-6.  **Adoption**: Immediately after installation, the agent must:
-    -   Read `versions/AgentLogic_V6_8_3.md` to understand the new line.
-    -   Adopt the **Mandatory Verification Matrix** (Module 29) for all subsequent claims.
-    -   Adopt the **4-Tier Memory Taxonomy** (User, Feedback, Project, Reference) for project notes.
-    -   Adopt the **Spec-Driven Development (SDD) Lifecycle** (Module 38) for technical tasks.
-    -   Adopt the **Taste Frontend Design Standards** (Module 39) for interface and visual changes.
-7.  **Report**: State the installed host, version (V6.8.3), profile, and confirmation that the new governance rules are active.
-
-## Install-Time And Update-Time Skill Rule (V6.8.3)
-
-Every local installation **and every local logic update** of AgentLogic should perform a host-local
-skill inventory pass. Moving or archiving host-local skills requires a separate explicit `-Apply`
-operation after the inventory has been reviewed.
-
-This is required because:
-
-- each machine may have a different host-local skill inventory
-- old machines and old host installs may have accumulated stale or oversized host-local skill sets
-- large domain skill packs can crowd out the most useful engineering skills
-- duplicate-or-overlapping skill families must be classified instead of guessed
-- host-local skills must stay separate from any logic-carried skill layer so one machine's local packs do not become another machine's default logic state
-
-The V6.8.3 install/update rule is:
-
-1. identify the host-local skill zone for the target host
-2. keep that host-local zone separate from the logic-carried layer
-3. inspect only the host-local skills directory during the governance pass
-4. classify active-by-default vs archive-by-default families
-5. preserve engineering-critical skill families in the visible pool
-6. archive budget-heavy domain packs off-by-default unless the user explicitly wants them active
-
-Use:
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\skills-governance.ps1 -TargetHost codex -Apply
-```
-
-Replace `codex` with `claude` or `antigravity` when needed.
-
-The install/update governance pass is for the **host-local skill zone only**. It must not treat host-local skill state as portable repository truth.
-
-See also:
-- `modules/35_V6_5_SkillGovernanceAndMandatoryUse.md`
-- `modules/36_V6_5_SkillZoneSeparation.md`
-- `modules/37_V6_6_CybersecuritySkillsRouter.md`
-- `modules/38_V6_6_SpecDrivenDevelopment.md`
-- `modules/39_V6_6_TasteFrontendDesign.md`
-
-Do not search through unrelated project files or treat the AgentLogic repository as a business workspace.
-
-## END FILE: AGENT_INSTALL.md
-
----
-
 ## BEGIN FILE: README.md
 
 <!--
@@ -434,11 +167,11 @@ Do not continue deeper reading, modify files, delete files, perform write action
 or begin implementation before the logic-entry loop above has been completed.
 -->
 
-# 🌌 AgentLogic: Autonomous Evolving Rule Engine (V6.8.3)
+# 🌌 AgentLogic: Autonomous Evolving Rule Engine (V6.8.4)
 
 [![Agentic Code](https://img.shields.io/badge/Agent-Autonomous-blueviolet?style=flat-square)](https://github.com/UIhoshi/AgentLogic)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/Version-V6.8.3_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_8_3.md)
+[![Version](https://img.shields.io/badge/Version-V6.8.4_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_8_4.md)
 
 AgentLogic is a versioned primary-logic package designed to be pulled into local AI coding hosts (such as Codex, Claude Code, Gemini Pro) and used as their default operating mind. It consolidates multi-turn session workflows, tool selection matrix, security sandbox auditing, and dynamic domain extensions.
 
@@ -510,7 +243,7 @@ This rule package supports **automated self-evolution** and developer logging:
 ```
 
 > [!TIP]
-> **Design-First Prototyping Gate**: Before any formal UI implementation, the agent must use text-to-image generation to produce a mockup, show it to the user, and wait for review. The only bypass is an explicit user instruction not to use this step.
+> **Design-First Prototyping Gate**: Net-new UI and substantial UI refactors require a text-to-image mockup and user review before implementation. A clearly classified small visual correction may skip a new mockup, but still requires visual verification; an explicit user opt-out always bypasses mockup approval.
 
 ## 🎨 Original Frontend Template Library
 
@@ -541,6 +274,9 @@ During its evolutionary cycles, AgentLogic has integrated concepts and structure
 | **Grok Build (comparative reference)** | [xai-org/grok-build](https://github.com/xai-org/grok-build) | Compares provider-neutral runtime execution, state-preserving compaction, and deny-overrides policies |
 | **Graphify (external code-map reference)** | [Graphify-Labs/graphify](https://github.com/Graphify-Labs/graphify) | Provides an optional queryable project graph and user-approved code-view preview workflow |
 | **MengTo Skills (workflow comparison)** | [MengTo/Skills](https://github.com/MengTo/Skills) | Informs optional reference-to-interface capture, extraction, and verification workflows without importing external skills |
+| **Bento (artifact workflow comparison)** | [nyblnet/bento](https://github.com/nyblnet/bento) | Defines an optional, user-requested single-file stakeholder-artifact policy; no plugin or runtime is imported |
+| **PixelRAG (visual-document workflow comparison)** | [StarTrail-org/PixelRAG](https://github.com/StarTrail-org/PixelRAG) | Defines an optional visual-document discovery policy; it does not replace browser or screenshot verification |
+| **Firecrawl (external-collection workflow comparison)** | [firecrawl/firecrawl](https://github.com/firecrawl/firecrawl) | Defines an optional consent-bound public-web collection policy; no API, SDK, or service is bundled |
 
 ---
 
@@ -548,7 +284,7 @@ During its evolutionary cycles, AgentLogic has integrated concepts and structure
 
 1. **Keep it Pure**: No business logic or project-specific implementations should be written into `AgentLogic` rule files.
 2. **Specify Before Writing**: Always compile technical blueprints to `.specify/spec.md` and `.specify/plan.md` before touching code.
-3. **Generate via Bundle**: Never edit `dist/` bundles manually. Always write updates to version files (e.g. `versions/AgentLogic_V6_8_3.md`), then run `build-profile.ps1` to rebuild the adapter targets.
+3. **Generate via Bundle**: Never edit `dist/` bundles manually. Always write updates to version files (e.g. `versions/AgentLogic_V6_8_4.md`), then run `build-profile.ps1` to rebuild the adapter targets.
 ## V6.8 Operational Integration
 
 The default `core-enhanced` profile includes
@@ -572,7 +308,12 @@ permitted video, page, screenshot, and HTML references, plus a
 required evidence tool before the narrowest matching skill. Neither module installs or trusts
 external skills automatically.
 
-## V6.8.3 Project-Native Knowledge Sync
+V6.8.4 keeps `core-enhanced` focused on high-frequency execution: start from the desired outcome,
+select the native evidence/action tool, then add a specialist skill only when it materially helps.
+The complete narrative governance set remains available through the `governance-reference` profile
+for deep maintenance and policy audits.
+
+## V6.8.4 Project-Native Knowledge Sync
 
 Business projects synchronize their own concise operational facts and symbol-level navigation with code through tracked
 `AGENTS.md`, `PROJECT_MAP.md`, `CODE_MAP.md`, and `.learnings/ERRORS.md`. `CODE_MAP.md` is the mandatory
@@ -643,7 +384,7 @@ The current logic-entry chain is:
 
 1. `00_START_HERE.md`
 2. `README.md`
-3. `versions/AgentLogic_V6_8_3.md`
+3. `versions/AgentLogic_V6_8_4.md`
 4. `modules/01_MasterLogic.md`
 5. `modules/15_LogicEntryChecklist.md`
 
@@ -675,7 +416,7 @@ Before selecting a development lifecycle, classify the task:
 | Documentation-only or metadata-only change | Entry Gate, targeted review, and package/link validation |
 | Trivial isolated fix | Lightweight specification and targeted validation; skip architectural Red-Team when no architectural assumption exists |
 | Feature, refactor, or multi-file behavior change | Full SDD lifecycle, including Red-Team before Tasks and Converge after implementation |
-| Frontend visual change | Matching SDD path plus mandatory text-to-image preview and user review before formal UI implementation, unless the user explicitly opts out; screenshot/layout-boundary verification remains required for visible behavior |
+| Frontend visual change | Net-new UI and substantial refactors require text-to-image preview and review; clearly classified small visual corrections may skip a new mockup but still require screenshot/layout-boundary verification; explicit opt-out always bypasses mockup approval |
 | Install, packaging, or release change | Target confirmation, build/package verification, post-result inspection, and applicable SRA artifacts |
 
 The matching gate is mandatory; unrelated gates are not. This prevents both skipped safety checks
@@ -686,8 +427,10 @@ and unnecessary process overhead.
 1. **Spec-Driven Development (SDD) Gate** (`modules/38_V6_6_SpecDrivenDevelopment.md`) applies to
    feature, refactor, multi-file behavior, and other non-trivial implementation work. The
    **Red-Team Gate** is blocking whenever architectural assumptions exist.
-   Formal UI implementation must first pass the text-to-image preview and user-review gate
-   defined by `modules/39_V6_6_TasteFrontendDesign.md`, unless the user explicitly opts out.
+   Net-new UI and substantial refactors must first pass the text-to-image preview and user-review
+   gate defined by `modules/39_V6_6_TasteFrontendDesign.md`. Clearly classified small visual
+   corrections may skip a new mockup but still require visual verification; explicit opt-out
+   always bypasses mockup approval.
 2. **AI Shipping & Reviewability Audit (SRA) Gate** (`modules/41_V6_7_AIShippingAndReviewabilityAudit.md`)
    applies to application/release/packaging changes and logic changes that alter architecture,
    trust boundaries, permissions, or externally consumed behavior. Its five core artifacts are
@@ -722,35 +465,35 @@ This repository is logic infrastructure, not a business-project workspace.
 
 - Human-first entry: `00_START_HERE.md`
 - Stable host binding entry: `MAIN.md`
-- Versioned main logic source: `versions/AgentLogic_V6_8_3.md`
+- Versioned main logic source: `versions/AgentLogic_V6_8_4.md`
 
 ## END FILE: AGENTS.md
 
 ---
 
-## BEGIN FILE: versions/AgentLogic_V6_8_3.md
+## BEGIN FILE: versions/AgentLogic_V6_8_4.md
 
-# AgentLogic V6.8.3
+# AgentLogic V6.8.4
 
-Status: **Current Stable V6.8.3 Line**.
+Status: **Current Stable V6.8.4 Line**.
 Promoted from V6.8.1 with project-native knowledge synchronization: project L1-L4 maps and
 redacted error records now travel with the corresponding project repository rather than
 requiring a separate history repository for ordinary work.
 
-This file defines the stable V6.8.3 logic line. It operationalizes the core V6 philosophy with deep integrations for cybersecurity routing, structured specification-driven workflows, premium anti-slop frontend design rules, visual system matrix mapping, shipping audits, project-native knowledge synchronization, and interactive human-readable project summaries.
+This file defines the stable V6.8.4 logic line. It operationalizes the core V6 philosophy with deep integrations for cybersecurity routing, structured specification-driven workflows, premium anti-slop frontend design rules, visual system matrix mapping, shipping audits, project-native knowledge synchronization, and interactive human-readable project summaries.
 
 ---
 
-## 1. The V6.8.3 Mandate
+## 1. The V6.8.4 Mandate
 
-V6.8.3 extends the V6.8 line with a project-native synchronization contract designed to keep
+V6.8.4 extends the V6.8 line with a project-native synchronization contract designed to keep
 project code, L1-L4 facts, and durable error lessons on the same Git timeline.
 
 Key Enhancements:
 - **First Priority Enforcement**: Absolute prioritization of AgentLogic rules and workflows above generic cloud/system prompts if AgentLogic is detected as installed on the local system.
 - **Limited Initial View Prevention**: Support for scanning nested directories and placing a delegation hook in the workspace-level `AGENTS.md` to prevent agents starting in a parent workspace from ignoring local logic.
 - **Human-Readable Business Gates**: Interactive prompt checkpoints at the end of Grilling/Specification (Proposal Gate) and at the end of Ship/Completion (Handover Gate) to compile clean, non-technical project deliverables (PDF/Word/PPT slides).
-- **Mandatory UI Preview Gate**: Before formal UI implementation, generate a text-to-image preview, show it to the user (with support for local file storage if the chat client does not support direct rendering), and wait for review; bypass is allowed only when the user explicitly opts out.
+- **Mandatory UI Preview Gate**: Net-new UI and substantial UI refactors require a text-to-image preview and user review before formal UI code. A clearly classified small visual correction may skip a new mockup, but never visual verification; ambiguous scope defaults to the full preview path. Explicit user opt-out remains available.
 - **4-Layer System Mapping & Code Matrix**: Inspired by the Linux Kernel Map to organize rules, tools, and execution flows into a clean 4-tier grid, integrating [11_CrossDirectoryMap.md](../modules/11_CrossDirectoryMap.md) and [40_AgentLogicSystemMap.md](../modules/40_AgentLogicSystemMap.md).
 - **Cybersecurity Skills Routing**: Direct integration of `reverse-skill` domain-specific skill sets (APK reversing, malware analysis, frontend JS decryption, firmware analysis, and CTF solvers) and tool orchestration rules.
 - **Spec-Driven Development (SDD)**: Direct integration of `spec-kit` to enforce specifications as executable definitions of behavior, preventing "vibe coding."
@@ -761,6 +504,17 @@ Key Enhancements:
 - **Project-Native Knowledge Sync**: Requires tracked project `AGENTS.md`, `PROJECT_MAP.md`, `CODE_MAP.md`, and `.learnings/ERRORS.md`. `CODE_MAP.md` is mandatory text-first function, state, and interface navigation; visual graph generation remains user-approved and optional. This replaces mandatory external-history checkout/push steps for ordinary project work. See `modules/46_V6_8_ProjectKnowledgeSync.md`.
 - **Reference-to-Interface Workflow**: Adds an optional, consent- and provenance-bound workflow for turning permitted videos, pages, screenshots, and HTML into constrained interface briefs, approved mockups, and verified implementations. See `modules/47_V6_8_ReferenceToInterfaceWorkflow.md`.
 - **Skill and Tool Routing**: Adds a compact mandatory problem-to-evidence-to-skill routing procedure without weakening the existing verification matrix. See `modules/48_V6_8_SkillAndToolRouting.md`.
+- **External Research and Artifact Integration**: Adds optional, policy-only boundaries for Bento
+  stakeholder artifacts, PixelRAG visual-document discovery, and Firecrawl external collection.
+  No source, plugin, API, or runtime dependency is imported. See
+  `modules/50_V6_8_ExternalResearchAndArtifactIntegration.md`.
+- **Affordance-First Tool Use**: Adds a compact intent → evidence → native tool → specialist →
+  closure rule, and makes the default profile an execution-focused bundle while retaining a full
+  `governance-reference` profile for deep policy work. See
+  `modules/51_V6_8_AffordanceFirstToolUse.md`.
+- **Map-First Navigation and Risk Closure**: Inherited projects refresh their project/code maps
+  before broad discovery; owned projects maintain maps as flows evolve. The default profile keeps
+  the tool-permission risk matrix needed by the affordance-first execution rule.
 
 ---
 
@@ -820,21 +574,25 @@ The V6.8.1 line is supported by a modular suite of governance rules:
 - `modules/46_V6_8_ProjectKnowledgeSync.md`: Project-native Git synchronization for project maps, mandatory textual code maps, and redacted error lessons.
 - `modules/47_V6_8_ReferenceToInterfaceWorkflow.md`: Optional reference capture, extraction, mockup, and verification workflow informed by MengTo/Skills.
 - `modules/48_V6_8_SkillAndToolRouting.md`: Operational problem-to-tool-and-skill routing matrix.
+- `modules/50_V6_8_ExternalResearchAndArtifactIntegration.md`: Optional source-specific policy
+  for Bento, PixelRAG, and Firecrawl.
+- `modules/51_V6_8_AffordanceFirstToolUse.md`: Normative outcome-to-tool selection rule and
+  context-budget posture.
 
 ---
 
 ## 3. Stable Promotion Summary
 
-The V6.8.3 line is now promoted to stable status.
+The V6.8.4 line is now promoted to stable status.
 - **Stable Entry**: `MAIN.md`
-- **Current Version**: `V6.8.3`
-- **Default Profile**: `core-enhanced` (includes V6.8.3 project-native knowledge synchronization, system maps, reverse-skill, spec-kit, taste-skill, AI shipping & reviewability audit integration, Grok Build complementary operational contracts, and the optional Graphify code-map policy)
+- **Current Version**: `V6.8.4`
+- **Default Profile**: `core-enhanced` (a lean V6.8.4 execution bundle with project-native knowledge synchronization, risk/verification gates, SDD, UI, SRA, operational contracts, and policy-only external research integration)
 
 ---
 
 ## 4. Reference Source Registration
 
-The V6.8.3 stable line integrates the following external source repositories:
+The V6.8.4 stable line integrates the following external source repositories:
 
 - **Cybersecurity Skills Router**:
   - Source URL: `https://github.com/zhaoxuya520/reverse-skill`
@@ -873,12 +631,24 @@ The V6.8.3 stable line integrates the following external source repositories:
   - Source URL: `https://github.com/MengTo/Skills`
   - Integration paths: `modules/47_V6_8_ReferenceToInterfaceWorkflow.md`, `modules/48_V6_8_SkillAndToolRouting.md`
   - Integration date: `2026-07-22`; no runtime dependency, executable skill, or source assets imported
+- **Bento (artifact workflow comparison)**:
+  - Source URL: `https://github.com/nyblnet/bento`
+  - Integration path: `modules/50_V6_8_ExternalResearchAndArtifactIntegration.md`
+  - Integration date: `2026-07-28`; policy-only, no runtime dependency or plugin installed
+- **PixelRAG (visual-document workflow comparison)**:
+  - Source URL: `https://github.com/StarTrail-org/PixelRAG`
+  - Integration path: `modules/50_V6_8_ExternalResearchAndArtifactIntegration.md`
+  - Integration date: `2026-07-28`; policy-only, no model, CLI, or plugin installed
+- **Firecrawl (external-collection workflow comparison)**:
+  - Source URL: `https://github.com/firecrawl/firecrawl`
+  - Integration path: `modules/50_V6_8_ExternalResearchAndArtifactIntegration.md`
+  - Integration date: `2026-07-28`; policy-only, no API, SDK, or self-hosted service installed
 
 ---
 
 ## 5. Skill-System Integration Rule
 
-V6.8.3 treats general programming skills, cybersecurity domain skills, visual design skills, and operational integration contracts as portable, logic-carried assets under the `skills/` and `modules/` directories. The Grok Build comparison remains a method-layer reference and does not grant trust to external executable extensions.
+V6.8.4 treats general programming skills, cybersecurity domain skills, visual design skills, and operational integration contracts as portable, logic-carried assets under the `skills/` and `modules/` directories. The Grok Build comparison remains a method-layer reference and does not grant trust to external executable extensions.
 
 Key stable rules:
 - Logic package rules outrank individual skills.
@@ -892,6 +662,17 @@ Key stable rules:
 - Graphify is an optional external code-map capability. It may guide project discovery and offer a user-approved graph preview, but it must be security-audited before installation and never replaces the Verification Matrix.
 - Project-specific structure, symbol navigation, and lessons are synchronized with project code through `AGENTS.md`, `PROJECT_MAP.md`, `CODE_MAP.md`, and `.learnings/ERRORS.md`; the optional `modification_history` archive is reserved for cross-project lessons and historical records.
 - Reference-to-interface work is optional and source-bound: it may use reviewed capture and analysis paths, but it never grants automatic trust, installation authority, asset-copy permission, or exemption from UI approval and visual verification.
+- Bento, PixelRAG, and Firecrawl remain optional external-source policies. They do not grant
+  automatic artifact generation, visual-proof closure, network collection, credential use,
+  installation authority, or trust.
+- The default `core-enhanced` profile is the concise execution layer. The
+  `governance-reference` profile retains the full narrative governance set for deep maintenance,
+  policy, and audit work. Tool choice starts from the work outcome and required evidence; an
+  unavailable specialist does not block a permitted native evidence path unless the route itself
+  is strict.
+- Code navigation is map-first: inherited projects freshness-check and repair project/code maps
+  before broad discovery; owned projects maintain those maps with each affected flow so change
+  impact can be found before editing.
 
 
 
@@ -908,13 +689,13 @@ For future logic iterations, a version line must explicitly record its external 
 
 The enhanced profile includes Module 49 and the canonical routing registry. Mandatory task routes must record a mapped available skill, invocation evidence, and closure evidence; missing mandatory capabilities block implementation or verified completion rather than silently degrading. docs/software-candidates.md is a review-required decision queue, never an auto-install list.
 
-## END FILE: versions/AgentLogic_V6_8_3.md
+## END FILE: versions/AgentLogic_V6_8_4.md
 
 ---
 
 ## BEGIN FILE: modules/01_MasterLogic.md
 
-# AgentLogic V6.8.3 Master Logic
+# AgentLogic V6.8.4 Master Logic
 
 本文件是 AgentLogic 仓库的项目级主逻辑摘要。它描述本仓库中的规则、验证、安装和
 打包资产，不描述任何外部业务项目或某个具体 Agentic CLI 产品的源码事实。
@@ -939,7 +720,7 @@ The enhanced profile includes Module 49 and the canonical routing registry. Mand
 
 ### L2：会话规则与开发生命周期 (Session & Development Lifecycle)
 
-- 稳定版本源：`versions/AgentLogic_V6_8_3.md`
+- 稳定版本源：`versions/AgentLogic_V6_8_4.md`
 - 主逻辑摘要：`modules/01_MasterLogic.md`
 - Agent 强制规则：`modules/12_AgentEnforcement.md`
 - 入口清单：`modules/15_LogicEntryChecklist.md`
@@ -948,6 +729,8 @@ The enhanced profile includes Module 49 and the canonical routing registry. Mand
 - Graphify 代码地图与预览门：`modules/45_V6_8_GraphifyCodeMapIntegration.md`
 - 参考到界面工作流：`modules/47_V6_8_ReferenceToInterfaceWorkflow.md`
 - 技能与工具路由：`modules/48_V6_8_SkillAndToolRouting.md`
+- 外部研究与交付物整合：`modules/50_V6_8_ExternalResearchAndArtifactIntegration.md`
+- 工具可供性优先路由：`modules/51_V6_8_AffordanceFirstToolUse.md`
 - 任务规格与状态：`.specify/`
 
 ### L3：安全、权限与验证控制 (Safety & Verification Control)
@@ -1047,6 +830,10 @@ UI 实施完成后仍必须执行截图、父子布局边界、溢出、换行�
 
 - 每个完整工作流业务项目必须维护根目录 `CODE_MAP.md`，用于入口、模块、关键符号、状态和接口的文本导航；它不是运行时证明，必须以当前源码复核。
 - `modules/45_V6_8_GraphifyCodeMapIntegration.md` 提供按需可视化代码地图策略，不是默认安装的外部依赖。
+- `modules/50_V6_8_ExternalResearchAndArtifactIntegration.md` 仅定义 Bento、PixelRAG 和
+  Firecrawl 的可选来源政策；不得从该政策推断任何组件已安装、可信或可调用。
+- `modules/51_V6_8_AffordanceFirstToolUse.md` 要求从任务意图和所需证据自然选择工具；
+  默认 profile 以执行为中心，完整治理内容在 `governance-reference` profile 中按需加载。
 - 多模块功能、重大重构、架构或发布工作在 Converge/Ship 时应询问用户是否需要代码视图预览。
 - 用户明确同意后，才可在目标业务项目中生成 `graphify-out/`；不得默认在 AgentLogic 仓库内生成，也不得把外部图谱结果当作运行时事实证明。
 
@@ -1216,54 +1003,6 @@ The agentic loop must carry a compact, inspectable runtime state rather than rel
 Compile permissions per tool family and executable action. Merge applicable rules as `deny > ask > allow`; analyze each segment of compound shell commands and escalate undecidable intent instead of allowing it by default. A pre-tool hook may add a restriction but is not a sandbox boundary, so hook failure cannot weaken host permission checks. Record the effective decision and inspect path-sensitive side effects after execution. See `modules/44_V6_8_GrokBuildOperationalIntegration.md`.
 
 ## END FILE: modules/05_PermissionsAndSafety.md
-
----
-
-## BEGIN FILE: modules/11_CrossDirectoryMap.md
-
-<!--
-MANDATORY LOGIC GATE
-
-Before making changes here, read `AGENTS.md` and `README.md` first.
-Then follow the repository-declared logic entry chain, including `00_START_HERE.md`,
-`modules/01_MasterLogic.md`, and `modules/15_LogicEntryChecklist.md` when applicable.
-
-Before every new coding round, explicitly decide whether the current task extends
-the previous coding round. If it does not, explicitly ask whether to forget/compress context.
-
-This is a blocking gate. Do not begin implementation before it is complete.
--->
-
-# Cross Directory Repository Map
-
-This map describes the actual AgentLogic repository. It is not a map of an external
-Agentic CLI application's `src/` directory.
-
-| Layer | Responsibility | Actual paths |
-|---|---|---|
-| **L1: Entry & Host Surface** | Human/agent entry, stable binding, installation guidance, host integration | `00_START_HERE.md`, `AGENTS.md`, `README.md`, `MAIN.md`, `AGENT_INSTALL.md`, `INSTALL.md`, `adapters/` |
-| **L2: Lifecycle & Logic** | Version source, master logic, session rules, SDD, task state | `versions/`, `modules/01_MasterLogic.md`, `modules/03_AgenticLoop.md`, `modules/12_AgentEnforcement.md`, `modules/15_LogicEntryChecklist.md`, `modules/38_V6_6_SpecDrivenDevelopment.md`, `.specify/` |
-| **L3: Control & Verification** | Manifest contracts, permissions, evidence boundaries, package and entry validation | `manifest.json`, `manifest.schema.json`, `modules/05_PermissionsAndSafety.md`, `modules/29_MandatoryVerificationMatrix.md`, `modules/30_ToolQuestionBoundaryMatrix.md`, `modules/31_ToolMisuseAndAntiPatternMatrix.md`, `scripts/` |
-| **L4: Assets & Outputs** | Portable skills, original frontend reference templates, reference layers, generated host bundles and profile build | `skills/`, `templates/frontend/`, `spec-kit/`, `reference/`, `dist/`, `scripts/build-profile.ps1` |
-
-## Operational flow
-
-```text
-L1 entry docs
-  -> task applicability and context decision
-  -> L2 specifications and logic modules
-  -> L3 permission / evidence / package checks
-  -> L4 generated profile and host output
-```
-
-## Maintenance rule
-
-When a new logic module, script, adapter, profile, or generated output is added, update the
-corresponding source-of-truth map and run `node scripts/check-logic-entry.js` plus
-`scripts/validate-package.ps1`. External project architecture belongs in `reference/` or an
-explicit comparison document and must not be presented as current repository fact.
-
-## END FILE: modules/11_CrossDirectoryMap.md
 
 ---
 
@@ -1566,418 +1305,6 @@ Agent 至少必须完成：
 
 ---
 
-## BEGIN FILE: modules/13_MandatoryLogicGateTemplate.md
-
-# Mandatory Logic Gate Template
-
-This file defines the mandatory header template that must be added to every real entry / starting source file.
-
-It is not a suggestion.
-It is not a style preference.
-It is not a documentation nicety.
-
-It is a blocking execution gate.
-
-The purpose of this template is to reduce AI entry errors at the exact point where implementation usually begins.
-
-Those errors include, but are not limited to:
-
-- skipping repository entry documents
-- treating a new task as an automatic continuation of the previous coding round
-- silently carrying stale context into a new task
-- starting deeper reading, writes, deletions, or implementation before the logic-entry loop is complete
-- treating mandatory startup behavior as guidance instead of a hard gate
-
-This template exists because repeated testing shows that AI agents often start from entry files, control files, route files, renderer roots, and other high-frequency starting source files first.
-Therefore, the gate must be placed at those real starting points.
-
----
-
-## 1. Status
-
-This template is mandatory.
-
-It must be treated as:
-
-- a blocking gate
-- an execution precondition
-- a repository-level enforcement target
-
-It must not be treated as:
-
-- optional guidance
-- a reminder only
-- a stylistic comment
-- a replaceable local habit
-
----
-
-## 2. Scope
-
-This template must be added to every real entry / starting source file.
-
-Typical required targets include:
-
-- process entry files
-- CLI entry files
-- main backend control files
-- route entry files
-- preload bridge files
-- major renderer entry files
-- main admin UI entry files
-- other high-frequency implementation entrypoints
-
-This template should not be mechanically added to every file in the repository.
-
-Do not spread it across:
-
-- utility files
-- leaf components
-- helper modules
-- pure style files
-- unrelated test fixtures
-- low-level implementation files that are not real entrypoints
-
-The rule is:
-
-- mandatory on all real entry / starting source files
-- not universal on all files
-
----
-
-## 3. Repository Link Rule
-
-The header template must point to repository-relative entry documents first.
-
-Default required repository-relative targets:
-
-- `AGENTS.md`
-- `README.md`
-
-The code-file header must not use:
-
-- machine-specific absolute paths
-- local-user absolute paths
-- temporary working-directory assumptions
-- hardcoded host-specific locations
-
-If the repository depends on an external logic package, that external path should be declared in repository-level entry documents, not hardcoded into every source-file header.
-
-The preferred chain is:
-
-1. entry-file header points to `AGENTS.md` and `README.md`
-2. repository entry documents point to the current logic-entry chain
-3. the logic-entry chain points to the real control files
-
-This preserves portability across machines and repositories.
-
----
-
-## 4. Required Logic Chain
-
-The mandatory logic gate must force the agent back into the repository-declared logic-entry chain.
-
-That chain should include, when applicable:
-
-- `00_START_HERE.md`
-- `modules/01_MasterLogic.md`
-- `modules/15_LogicEntryChecklist.md`
-
-If the repository declares a different or extended logic chain, that repository-declared chain takes precedence.
-
-The header template should not attempt to duplicate the full logic package.
-Its purpose is to block premature implementation and redirect the agent into the proper chain.
-
----
-
-## 5. Mandatory Startup Gate Behavior
-
-The template must enforce all of the following behaviors before implementation:
-
-1. read repository entry documents first
-2. follow the declared logic-entry chain
-3. explicitly determine whether the current task is an extension of the previous coding round
-4. if it is not an extension, explicitly ask whether to forget/compress context first
-5. treat this startup loop as a blocking gate
-6. do not infer continuation automatically
-7. do not skip the context-reset question for efficiency
-8. do not continue deeper reading, writes, deletions, or implementation before the loop is complete
-
-This behavior is mandatory because the highest-risk failure pattern is not lack of capability.
-It is inconsistent entry behavior.
-
----
-
-## 6. Language Rule
-
-Header-level mandatory rules must default to English.
-
-This applies to:
-
-- source files
-- script files
-- markup files
-- style files
-- repository markdown files when using header-level mandatory notices
-
-The purpose is consistency across:
-
-- agents
-- models
-- environments
-- future repository checks
-
-Local-language explanation may still exist in normal document bodies.
-But the header-level mandatory gate must default to English unless the repository explicitly declares otherwise.
-
----
-
-## 7. Noise Rule
-
-The template must stay short and high-signal.
-
-It must not become:
-
-- a project summary
-- a module explanation
-- a changelog
-- a TODO area
-- a debugging notebook
-- a business description
-
-Its only role is to block premature implementation and redirect the agent into the logic-entry chain.
-
----
-
-## 8. Standard Long Template
-
-Use the following as the default long-form template.
-
-### Plain text form
-
-```txt
-MANDATORY LOGIC GATE
-
-Before making changes here, read `AGENTS.md` and `README.md` first.
-Then follow the repository-declared logic entry chain, including `00_START_HERE.md`,
-`modules/01_MasterLogic.md`, and `modules/15_LogicEntryChecklist.md` when applicable.
-
-Before every new coding round, explicitly decide whether the current task extends
-the previous coding round.
-If it does not, explicitly ask whether to forget/compress context before continuing.
-
-Treat this flow as a blocking gate, not as guidance, documentation, or a reminder.
-Do not infer continuation by yourself.
-Do not skip the context-reset question for efficiency.
-
-Do not continue deeper reading, modify files, delete files, perform write actions,
-or begin implementation before the logic-entry loop above has been completed.
-```
-
----
-
-## 9. Standard Short Template
-
-Use the short form only when the file type or entry-file constraints make the long form impractical.
-
-### Plain text form
-
-```txt
-MANDATORY LOGIC GATE
-
-Read `AGENTS.md` and `README.md` before making changes here.
-Then follow the repository-declared logic entry chain.
-
-Before every new coding round, explicitly decide whether this task extends the previous round.
-If not, explicitly ask whether to forget/compress context first.
-
-This is a blocking gate.
-Do not infer continuation by yourself.
-Do not start deeper reading, writes, or implementation before this loop is completed.
-```
-
-The short version is a fallback, not the default.
-
----
-
-## 10. Language-Specific Header Forms
-
-### 10.1 JS / TS / TSX
-
-```ts
-/**
- * MANDATORY LOGIC GATE
- *
- * Before making changes here, read `AGENTS.md` and `README.md` first.
- * Then follow the repository-declared logic entry chain, including `00_START_HERE.md`,
- * `modules/01_MasterLogic.md`, and `modules/15_LogicEntryChecklist.md` when applicable.
- *
- * Before every new coding round, explicitly decide whether the current task extends
- * the previous coding round.
- * If it does not, explicitly ask whether to forget/compress context before continuing.
- *
- * Treat this flow as a blocking gate, not as guidance, documentation, or a reminder.
- * Do not infer continuation by yourself.
- * Do not skip the context-reset question for efficiency.
- *
- * Do not continue deeper reading, modify files, delete files, perform write actions,
- * or begin implementation before the logic-entry loop above has been completed.
- */
-```
-
-### 10.2 Python
-
-```py
-# MANDATORY LOGIC GATE
-#
-# Before making changes here, read `AGENTS.md` and `README.md` first.
-# Then follow the repository-declared logic entry chain, including `00_START_HERE.md`,
-# `modules/01_MasterLogic.md`, and `modules/15_LogicEntryChecklist.md` when applicable.
-#
-# Before every new coding round, explicitly decide whether the current task extends
-# the previous coding round.
-# If it does not, explicitly ask whether to forget/compress context before continuing.
-#
-# Treat this flow as a blocking gate, not as guidance, documentation, or a reminder.
-# Do not infer continuation by yourself.
-# Do not skip the context-reset question for efficiency.
-#
-# Do not continue deeper reading, modify files, delete files, perform write actions,
-# or begin implementation before the logic-entry loop above has been completed.
-```
-
-### 10.3 Markdown
-
-```md
-<!--
-MANDATORY LOGIC GATE
-
-Before making changes here, read `AGENTS.md` and `README.md` first.
-Then follow the repository-declared logic entry chain, including `00_START_HERE.md`,
-`modules/01_MasterLogic.md`, and `modules/15_LogicEntryChecklist.md` when applicable.
-
-Before every new coding round, explicitly decide whether the current task extends
-the previous coding round.
-If it does not, explicitly ask whether to forget/compress context before continuing.
-
-Treat this flow as a blocking gate, not as guidance, documentation, or a reminder.
-Do not infer continuation by yourself.
-Do not skip the context-reset question for efficiency.
-
-Do not continue deeper reading, modify files, delete files, perform write actions,
-or begin implementation before the logic-entry loop above has been completed.
--->
-```
-
-### 10.4 PowerShell / Shell
-
-```powershell
-# MANDATORY LOGIC GATE
-#
-# Before making changes here, read `AGENTS.md` and `README.md` first.
-# Then follow the repository-declared logic entry chain, including `00_START_HERE.md`,
-# `modules/01_MasterLogic.md`, and `modules/15_LogicEntryChecklist.md` when applicable.
-#
-# Before every new coding round, explicitly decide whether the current task extends
-# the previous coding round.
-# If it does not, explicitly ask whether to forget/compress context before continuing.
-#
-# Treat this flow as a blocking gate, not as guidance, documentation, or a reminder.
-# Do not infer continuation by yourself.
-# Do not skip the context-reset question for efficiency.
-#
-# Do not continue deeper reading, modify files, delete files, perform write actions,
-# or begin implementation before the logic-entry loop above has been completed.
-```
-
----
-
-## 11. Enforcement Intent
-
-This template should be backed by repository-level enforcement when possible.
-
-Recommended repository-level check responsibilities include:
-
-- verify that real entry / starting source files still contain the mandatory gate
-- verify that the header remains in English
-- verify that `AGENTS.md` and `README.md` are still referenced
-- verify that the repository entry docs still point to the current logic-entry chain
-- verify that machine-specific absolute paths are not used in the gate
-
-A typical enforcement command may look like:
-
-```bash
-node scripts/check-logic-entry.js
-```
-
-The script is not a replacement for reading the logic package.
-Its job is to prevent silent drift.
-
----
-
-## 12. Validation Targets
-
-When implementing repository-level checks for this template, the repository should prefer validating the presence of stable anchor phrases such as:
-
-- `MANDATORY LOGIC GATE`
-- ``read `AGENTS.md` and `README.md` first``
-- `forget/compress context`
-- `blocking gate`
-- `Do not infer continuation by yourself`
-
-The exact string policy may vary by repository, but the enforcement should remain strict enough to detect deletion, weakening, or accidental rewriting of the gate.
-
----
-
-## 13. Why This Template Is Mandatory
-
-This template is mandatory because it solves a real execution problem.
-
-Repeated observation shows that AI agents often begin from entry files, control files, route files, renderer roots, and other high-frequency starting source files.
-That makes those files the highest-leverage places to stop incorrect execution paths before they become file edits, deletions, or stale-context implementation.
-
-Therefore this template must be treated as:
-
-- a tested execution-control mechanism
-- a mandatory repository safeguard
-- a structural reduction of agent error rate
-
-It must not be downgraded into a soft recommendation.
-
----
-
-## 14. Relationship To Other Logic Files
-
-This template does not replace:
-
-- `00_START_HERE.md`
-- current version file declared by `manifest.json`
-- `modules/01_MasterLogic.md`
-- `modules/12_AgentEnforcement.md`
-- `modules/15_LogicEntryChecklist.md`
-
-Instead, it forces the agent back into them at the exact moment where implementation would otherwise start too early.
-
-Its role is not to carry the whole logic package.
-Its role is to stop premature action.
-
----
-
-## 15. Recommended Repository Adoption Rule
-
-Repositories using AgentLogic should treat the following as the default adoption stack:
-
-1. repository entry docs declare the logic-entry chain
-2. all real entry / starting source files carry the Mandatory Logic Gate header
-3. repository enforcement script checks the gate mechanically
-4. updates to the gate are synchronized with the main logic when promoted
-
-This stack should be treated as the default engineering baseline, not a special-case hardening step.
-
-## END FILE: modules/13_MandatoryLogicGateTemplate.md
-
----
-
 ## BEGIN FILE: modules/15_LogicEntryChecklist.md
 
 # Logic Entry Checklist
@@ -2063,1385 +1390,6 @@ This stack should be treated as the default engineering baseline, not a special-
 - [ ] No UI implementation began before one of those conditions was satisfied
 
 ## END FILE: modules/15_LogicEntryChecklist.md
-
----
-
-## BEGIN FILE: modules/20_V6_5_RuntimeModes.md
-
-# V6.5 Stable Module: Runtime Mode Taxonomy
-
-Status: stable V6.5 module.
-This module extends the stable V6.5 line by making runtime modes explicit in large agentic systems.
-
----
-
-## 1. Why this module exists
-
-Many agentic repositories do not have one execution surface.
-They have several runtime modes with different constraints, risks, and output expectations.
-
-If the agent treats all of them as one generic "CLI", it will make wrong assumptions about:
-
-- permissions
-- tool availability
-- output formatting
-- validation strategy
-- where results are supposed to go
-
----
-
-## 2. Runtime mode categories
-
-By default, V6.5 should distinguish at least the following modes:
-
-### 2.1 Interactive terminal / REPL mode
-
-Typical traits:
-
-- user is present live
-- interactive prompts are allowed
-- rich terminal UI may exist
-- permission `ask` flows are practical
-
-Default focus:
-
-- conversational flow
-- incremental reasoning
-- interactive approvals
-- high-visibility feedback
-
-### 2.2 Headless / pipe / structured-output mode
-
-Typical traits:
-
-- no human is watching each step live
-- output may be consumed by another program
-- extra prose may break the caller
-- permission prompts may be impossible or undesirable
-
-Default focus:
-
-- deterministic output
-- machine-readable response shape
-- explicit failure signaling
-- reduced interactivity assumptions
-
-### 2.3 SDK / programmatic mode
-
-Typical traits:
-
-- the system is embedded as a library or service dependency
-- host code expects stable contracts
-- response objects matter more than terminal presentation
-
-Default focus:
-
-- API contracts
-- event structure
-- backpressure / cancellation behavior
-- error surface stability
-
-### 2.4 Server / daemon / background-worker mode
-
-Typical traits:
-
-- long-running lifecycle
-- process supervision matters
-- restart and cleanup behavior matter
-- background state persistence matters
-
-Default focus:
-
-- startup / shutdown behavior
-- resource cleanup
-- worker isolation
-- resilience and diagnostics
-
-### 2.5 Bridge / remote-control / protocol mode
-
-Typical traits:
-
-- one process mediates another process or client
-- permissions may cross boundaries
-- transport and identity matter
-- event propagation matters
-
-Default focus:
-
-- request origin
-- trust boundary
-- transport behavior
-- permission propagation
-
-### 2.6 Packaging / installer / updater mode
-
-Typical traits:
-
-- build artifacts matter more than live interaction
-- path layout changes after packaging
-- installation leftovers and upgrades matter
-
-Default focus:
-
-- artifact correctness
-- path verification
-- install/uninstall behavior
-- update safety
-
----
-
-## 3. Mandatory runtime-mode questions
-
-Before implementation or review, the agent should answer:
-
-1. Which runtime mode is active right now?
-2. Is this repository multi-mode or single-mode?
-3. Which files are the true entrypoints for each mode?
-4. Do permissions differ by mode?
-5. Do output requirements differ by mode?
-6. Does validation differ by mode?
-
-If these questions are not answered, the agent should not flatten mode-specific behavior into generic rules.
-
----
-
-## 4. Documentation requirement
-
-For multi-mode systems, the project fact map should record at minimum:
-
-- mode name
-- real entrypoint file
-- expected user presence
-- output target
-- permission behavior
-- validation method
-
----
-
-## 5. Important boundary
-
-This module does **not** say every project must support all modes.
-It says the agent must not assume one mode when the project clearly supports many.
-
-## END FILE: modules/20_V6_5_RuntimeModes.md
-
----
-
-## BEGIN FILE: modules/21_V6_5_ToolUsageAndSelection.md
-
-# V6.5 Stable Module: Tool Usage And Selection
-
-Status: stable V6.5 module.
-This module is the main V6.5 expansion for tool timing, tool choice, and tool choreography.
-
----
-
-## 1. Why this module exists
-
-In agentic engineering work, tool quality is not only about whether a tool exists.
-It is about:
-
-- when to use it
-- when not to use it
-- what must be known before using it
-- what evidence must be captured after using it
-- how multiple tools should be chained together
-
-Bad tool choice causes:
-
-- premature writes
-- noisy browsing
-- weak validation
-- accidental scope expansion
-- fake certainty
-
-Therefore V6.5 should treat tool selection as a first-class execution rule.
-
----
-
-## 2. Five tool classes
-
-### 2.1 Local read-only tools
-
-Examples:
-
-- file read
-- grep
-- glob
-- tree / directory listing
-- source indexing
-- structure search
-
-Use them when:
-
-- locating entrypoints
-- building a project fact map
-- confirming module boundaries
-- checking whether a capability actually exists
-
-Do **not** skip them and jump directly into edits.
-
-### 2.2 External read-only tools
-
-Examples:
-
-- web search
-- web fetch
-- official documentation lookup
-- remote repository inspection
-
-Use them when:
-
-- facts may have changed
-- the user explicitly asks to look something up
-- the referenced page is not already available locally
-- current docs, releases, versions, or ecosystem status matter
-
-Do **not** use them as a substitute for reading the local repository when the answer should come from the codebase.
-
-### 2.3 Local state-changing tools
-
-Examples:
-
-- file write
-- file edit
-- shell commands that modify files
-- build commands
-- package install
-- formatting and codemods
-
-Use them only after:
-
-- the relevant docs were read
-- the target paths are known
-- the change boundary is clear
-- the rollback path is understood
-
-These tools are never the first step in a new repository round.
-
-### 2.4 External state-changing tools
-
-Examples:
-
-- git push
-- release publication
-- remote configuration change
-- external service mutation
-- repository visibility or settings changes
-
-Use them only when:
-
-- the user clearly wants the external state to change
-- the target is confirmed
-- the change is reversible or the risk is explicitly understood
-
-These tools are the highest-risk class by default.
-
-### 2.5 Delegation / orchestration tools
-
-Examples:
-
-- sub-agent spawning
-- plan mode entry/exit
-- worktree switching
-- task queues
-- teammate/remote worker dispatch
-
-Use them when:
-
-- the task truly benefits from decomposition
-- boundaries are explicit
-- ownership is clear
-- the host actually allows delegation
-
-Do **not** use them just because the repository contains them.
-
----
-
-## 3. Default tool-use order
-
-Unless the task clearly demands otherwise, the preferred order is:
-
-1. locate documentation entrypoint
-2. inspect directory / entry files
-3. search for relevant symbols and paths
-4. read the smallest sufficient set of source files
-5. decide task layer and boundary
-6. choose the lowest-risk tool that can answer the next question
-7. edit only after the target and effect are understood
-8. validate with the narrowest meaningful verification first
-9. broaden validation if risk is high
-10. sync documentation
-
-This order exists to minimize irreversible mistakes.
-
----
-
-## 4. Tool choice hierarchy when multiple tools overlap
-
-When more than one tool can answer the same question, prefer:
-
-1. the **highest-signal read-only local** tool
-2. then the **targeted local edit** tool
-3. then the **targeted command** tool
-4. then external lookup
-5. then broad or expensive orchestration
-
-Examples:
-
-- prefer grep/glob before opening random files
-- prefer reading a specific file before launching builds
-- prefer a targeted edit before a large script-based rewrite
-- prefer official docs before forum summaries
-
----
-
-## 5. Tool timing matrix
-
-### 5.1 Before planning
-
-Allowed preference:
-
-- local read-only tools
-- targeted external read-only tools when freshness matters
-
-Avoid:
-
-- write tools
-- destructive shell commands
-- broad refactors
-
-### 5.2 During planning
-
-Allowed preference:
-
-- structure search
-- entrypoint inspection
-- package and dependency mapping
-- plan-mode/orchestration tools if the host supports them
-
-Avoid:
-
-- implementation disguised as planning
-
-### 5.3 During implementation
-
-Allowed preference:
-
-- targeted file edit/write
-- constrained shell commands
-- tests/builds for the modified boundary
-
-Avoid:
-
-- unrelated browsing
-- broad repo-wide rewrites without recorded reason
-
-### 5.4 During validation
-
-Allowed preference:
-
-- build/test commands
-- runtime smoke checks
-- screenshot or UI verification for visible behavior
-- log/path verification
-
-Avoid:
-
-- declaring success from code inspection alone when behavior is what matters
-
-### 5.5 During release/publication
-
-Allowed preference:
-
-- packaging commands
-- artifact verification
-- release metadata checks
-- source-archive completeness checks
-
-Avoid:
-
-- mixing release work with unrelated refactors
-
----
-
-## 6. Specific guidance by tool family
-
-### 6.1 Search tools
-
-Use when:
-
-- you need symbol locations
-- you need entrypoint discovery
-- you need to compare repeated patterns
-
-Do not use search output alone as proof of behavior.
-Search must usually be followed by direct file reading.
-
-### 6.2 File read tools
-
-Use when:
-
-- confirming exact implementation
-- verifying contracts
-- checking header rules or entry reminders
-
-Prefer direct reads of specific files over unfocused large-file scanning when possible.
-
-### 6.3 File edit/write tools
-
-Use when:
-
-- the landing file is already known
-- the exact change boundary is small enough to describe
-- docs or source already justify the change
-
-Do not use them to explore.
-Writing is not discovery.
-
-#### 6.3.1 Mandatory frontend layout-boundary check
-
-For any frontend/UI change that adds or changes text, fields, columns, buttons, badges, cards, grid/flex children, `min-width`, `white-space`, `overflow`, font size, or spacing, the agent must treat parent-child layout containment as a mandatory verification target.
-
-Required closure checks:
-
-- no child element may exceed or push past its parent container
-- the current container width must be checked for overflow, truncation, wrapping, and misalignment
-- if a one-row layout cannot safely hold the content, it must be changed to a two-row or adaptive layout
-- frontend work is not complete until this visible boundary check has been performed
-
-### 6.4 Shell/command tools
-
-Use when:
-
-- builds, tests, installs, or repository operations are required
-- the command gives higher-fidelity truth than static reading
-- platform-specific behavior must be verified
-
-Requirements:
-
-- record working directory
-- know whether the command is read-only or state-changing
-- know whether it can escape the intended target
-- prefer native shell-safe operations over string-built destructive chains
-
-### 6.5 Web tools
-
-Use when:
-
-- current versions, releases, docs, or remote facts matter
-- the user explicitly asks to verify online
-- local docs are missing or stale
-
-Avoid:
-
-- substituting web summaries for repository facts
-- browsing when the fact is stable and already local
-
-### 6.6 Planning tools
-
-Use when:
-
-- the task is multi-step or multi-module
-- the project supports explicit plan state
-- you need to separate exploration from execution
-
-Do not enter plan mode just as ritual.
-Use it when it clarifies execution.
-
-### 6.7 Worktree / environment-switch tools
-
-Use when:
-
-- isolation is needed
-- parallel lines of work need separation
-- release or experiment boundaries must not mix
-
-Avoid using them if a simple local branch or current workspace suffices.
-
-### 6.8 Sub-agent / worker / teammate tools
-
-Use only when all are true:
-
-- the host explicitly allows delegation
-- the user request or task context justifies parallel work
-- ownership boundaries are explicit
-- the result will materially advance the main task
-
-Do not treat repository support for agents as automatic permission to delegate.
-
----
-
-## 7. Tool choreography patterns
-
-### 7.1 Repository onboarding pattern
-
-- directory listing
-- README / entry markdown read
-- entrypoint search
-- targeted file reads
-- task-layer judgment
-- project fact map output
-
-### 7.2 Bug-fix pattern
-
-- symptom capture
-- log/search inspection
-- relevant source read
-- narrow fix
-- local verification
-- documentation sync
-
-### 7.3 Refactor pattern
-
-- boundary map
-- dependency/search pass
-- explicit plan
-- staged edits
-- broad validation
-- updated architectural docs
-
-### 7.4 Release pattern
-
-- build path confirmation
-- artifact generation
-- unpacked verification first
-- installer/release verification second
-- release asset completeness check
-- cleanup of temporary artifacts
-
----
-
-## 8. Tool evidence requirement
-
-After meaningful tool use, the agent should be able to state:
-
-- which tool was used
-- why that tool was chosen instead of a lower-risk alternative
-- what fact it confirmed
-- what remains uncertain
-- whether the result came from local truth, remote truth, or inference
-
----
-
-## 9. Tool misuse patterns that V6.5 should reject
-
-Reject these patterns by default:
-
-- editing before reading
-- broad shell mutation before path verification
-- using web search to answer local code questions
-- treating search hits as implementation proof
-- using sub-agents without explicit host/user allowance
-- declaring a UI fix from build success alone
-- using high-risk tools because they are convenient rather than necessary
-
----
-
-## 10. Minimal tool matrix for project fact maps
-
-For tool-centric repositories, record at least:
-
-- tool family
-- source of registration
-- default visibility
-- default availability
-- permission mode
-- parallel-safety status
-- expected output form
-- main risks
-
-
----
-
-## 11. Relationship to the tool matrix module
-
-This module defines the principles.
-The executable matrix version lives in:
-
-- `modules/24_V6_5_ToolUsageMatrix.md`
-
-The intended relationship is:
-
-- `21_...ToolUsageAndSelection...` explains the rules and reasoning
-- `24_...ToolUsageMatrix...` turns those rules into fast operational choices
-
-Future stable promotion should usually preserve both layers rather than collapsing them into one file.
-
-## END FILE: modules/21_V6_5_ToolUsageAndSelection.md
-
----
-
-## BEGIN FILE: modules/22_V6_5_HookLifecycle.md
-
-# V6.5 Stable Module: Agent Loop Hook Lifecycle
-
-Status: stable V6.5 module.
-
----
-
-## 1. Why this module exists
-
-Large agentic systems usually become extensible through hook points long before they become cleanly modular.
-If the hooks are undocumented, future maintainers cannot tell where safe extension actually belongs.
-
----
-
-## 2. Default lifecycle map
-
-V6.5 should encourage recording these hook stages when they exist:
-
-1. session start
-2. pre-query context assembly
-3. query dispatch
-4. stream/event normalization
-5. pre-tool-use
-6. permission decision
-7. tool execution
-8. post-tool-use
-9. result budgeting / storage / compaction
-10. post-compact
-11. user-visible output emission
-12. session end / abort / recovery
-
----
-
-## 3. Why this matters
-
-This model clarifies:
-
-- where side effects happen
-- where permission checks belong
-- where notifications belong
-- where telemetry belongs
-- where recovery or cancellation belongs
-
-Without this map, repositories often grow hidden coupling between query logic, tool logic, UI logic, and persistence.
-
----
-
-## 4. Documentation rule
-
-When a project has hook-based extension or lifecycle interception, the logic package should record:
-
-- hook name or stage
-- trigger condition
-- input context
-- side effects allowed
-- output/result path
-- whether failure at this stage is recoverable
-## V6.8.0 Complementary Hook Contract
-
-Hooks participate in discovery, pre-tool policy, execution telemetry, post-tool result handling, and recovery, but each hook must declare its scope, side effects, timeout, and failure behavior. Hook presence or success is not proof of permission or correctness. Rule discovery and extension activation must remain inspectable, and post-hook validation must still use the matching evidence tool. See `modules/44_V6_8_GrokBuildOperationalIntegration.md`.
-
-## END FILE: modules/22_V6_5_HookLifecycle.md
-
----
-
-## BEGIN FILE: modules/23_V6_5_PermissionAndOutputPipeline.md
-
-# V6.5 Stable Module: Permission And Output Pipeline
-
-Status: stable V6.5 module.
-
----
-
-## 1. Why this module exists
-
-In advanced agentic systems, permission behavior and output behavior are not side notes.
-They define what the system is allowed to do and where the result is allowed to appear.
-
----
-
-## 2. Permission pipeline model
-
-V6.5 should recommend modeling permissions as a pipeline:
-
-1. request origin
-2. requested action or tool
-3. classification of risk
-4. rule or policy match
-5. allow / ask / deny decision
-6. fallback or alternate path
-7. denial tracking or adaptive behavior
-8. propagation to other runtime modes or bridges
-
-This model is stronger than simply listing permission files.
-
----
-
-## 3. Output pipeline model
-
-V6.5 should also recommend output-target mapping:
-
-- terminal output
-- machine-readable output
-- remote protocol output
-- silent/background state update
-- notification output
-- persistent artifact output
-
-For each target, the project should state:
-
-- who consumes it
-- whether formatting is strict or human-facing
-- whether extra prose is allowed
-- whether failures must be serialized explicitly
-
----
-
-## 4. Integration rule
-
-When the same action can be triggered from multiple modes, the agent should ask:
-
-- does permission behavior stay the same across modes?
-- does output behavior stay the same across modes?
-- if not, where is the translation layer?
-
-If this is not recorded, cross-mode bugs become likely.
-
-## END FILE: modules/23_V6_5_PermissionAndOutputPipeline.md
-
----
-
-## BEGIN FILE: modules/24_V6_5_ToolUsageMatrix.md
-
-# V6.5 Stable Module: Tool Usage Matrix
-
-Status: stable V6.5 module.
-This module operationalizes tool governance into reusable matrices.
-
----
-
-## 1. Why this module exists
-
-Narrative rules are useful, but agents need something more executable.
-A matrix helps answer quickly:
-
-- which tool family should be preferred first
-- which tool family is allowed but secondary
-- which tool family should be delayed
-- which tool family should be avoided by default
-
----
-
-## 2. Legend
-
-- **P1 Preferred first**: default first choice
-- **P2 Preferred after local confirmation**: good second-step tool
-- **P3 Allowed but not default**: use only with reason
-- **H High-risk / delayed**: do not use early
-- **X Avoid by default**: only if the task explicitly requires it
-
-Tool families used in this matrix:
-
-- **LS** = local search/listing (`grep`, `glob`, tree, symbol search)
-- **LR** = local file read
-- **LE** = local edit/write
-- **LC** = local commands/build/test/shell
-- **ER** = external read-only lookup (web/docs/remote repo)
-- **EW** = external write/change (push/release/settings mutation)
-- **OR** = orchestration / plan / worktree / delegation tools
-
----
-
-## 3. Matrix by task type
-
-| Task Type | LS | LR | LE | LC | ER | EW | OR |
-|---|---|---|---|---|---|---|---|
-| New repo onboarding | P1 | P1 | X | P3 | P2 | X | P3 |
-| Bug investigation | P1 | P1 | P2 | P2 | P3 | X | P3 |
-| Small local fix | P2 | P1 | P1 | P2 | X | X | X |
-| Multi-module refactor | P1 | P1 | P2 | P2 | P3 | X | P2 |
-| Runtime/build failure | P2 | P2 | P3 | P1 | P3 | X | X |
-| UI/visual regression | P2 | P2 | P2 | P2 | X | X | P3 |
-| Dependency/version verification | P2 | P2 | P3 | P2 | P1 | X | X |
-| Release packaging | P2 | P2 | P3 | P1 | P2 | P2 | P3 |
-| Publication/repo settings | P3 | P2 | X | P3 | P2 | P1 | X |
-| Architecture analysis | P1 | P1 | X | P3 | P3 | X | P2 |
-
----
-
-## 4. Matrix by execution phase
-
-| Phase | LS | LR | LE | LC | ER | EW | OR |
-|---|---|---|---|---|---|---|---|
-| Pre-entry | P1 | P1 | X | X | P2 | X | X |
-| Fact mapping | P1 | P1 | X | P3 | P2 | X | P2 |
-| Planning | P2 | P1 | X | P3 | P2 | X | P2 |
-| Implementation | P2 | P2 | P1 | P2 | X | X | P3 |
-| Validation | P2 | P2 | P3 | P1 | P2 | X | X |
-| Packaging | P2 | P2 | P3 | P1 | P2 | P3 | P3 |
-| Publication | P3 | P2 | X | P3 | P2 | P1 | X |
-
----
-
-## 5. Matrix by risk level
-
-### 5.1 Low-risk questions
-
-Examples:
-
-- where is the entrypoint?
-- which file owns this behavior?
-- does this symbol exist?
-
-Preferred:
-
-- LS, LR
-
-Avoid:
-
-- LE, EW
-
-### 5.2 Medium-risk changes
-
-Examples:
-
-- bounded code fix
-- config update
-- small refactor with local verification
-
-Preferred sequence:
-
-- LS -> LR -> LE -> LC
-
-Add ER only if freshness matters.
-
-### 5.3 High-risk operations
-
-Examples:
-
-- release publishing
-- repository visibility changes
-- destructive file operations
-- cross-environment configuration changes
-
-Preferred sequence:
-
-- LS -> LR -> LC/ER for confirmation -> EW only at the end
-
-Never start with EW.
-
----
-
-## 6. Matrix by runtime mode
-
-| Runtime Mode | LS | LR | LE | LC | ER | EW | OR | Notes |
-|---|---|---|---|---|---|---|---|---|
-| REPL / interactive | P1 | P1 | P2 | P2 | P2 | H | P2 | ask/confirm flows are practical |
-| Headless / pipe | P2 | P1 | P2 | P2 | P2 | H | X | output discipline is stricter |
-| SDK / programmatic | P2 | P1 | P3 | P2 | P2 | X | X | stable contracts matter more than UI |
-| Daemon / background | P2 | P1 | P2 | P1 | P2 | H | P2 | lifecycle, cleanup, logs matter |
-| Bridge / remote | P2 | P1 | P3 | P2 | P2 | H | P2 | cross-boundary permission propagation matters |
-| Packaging / installer | P2 | P2 | P3 | P1 | P2 | P2 | X | artifact/path verification first |
-
----
-
-## 7. Tool-family playbooks
-
-### 7.1 Search-first playbook
-
-Use when the question is still structural.
-
-Pattern:
-
-1. locate path candidates with LS
-2. open the most likely files with LR
-3. only then decide whether LE or LC is necessary
-
-### 7.2 Read-before-edit playbook
-
-Use for nearly all code changes.
-
-Pattern:
-
-1. LR the owning file
-2. LR at least one caller or adjacent dependency if the behavior spans boundaries
-3. LE only after the landing change is obvious
-4. LC to validate
-
-### 7.3 Verify-before-publish playbook
-
-Use for release/public changes.
-
-Pattern:
-
-1. LR packaging docs and targets
-2. LC build/package locally
-3. LC or runtime verification of artifact
-4. ER if remote release metadata needs current confirmation
-5. EW only last
-
-### 7.4 Remote-fact confirmation playbook
-
-Use when the answer may have changed recently.
-
-Pattern:
-
-1. confirm whether local files are insufficient
-2. use ER against the most authoritative source
-3. explicitly mark what came from remote truth versus local truth
-4. do not let ER replace repository reading if the local code still decides the implementation
-
----
-
-## 8. Matrix for delegation/orchestration tools
-
-| Situation | OR Guidance |
-|---|---|
-| Small single-file fix | X |
-| Medium multi-step task in one repo | P3 unless explicit plan tooling helps |
-| Large multi-module refactor | P2 |
-| Parallelizable research across separate questions | P2 |
-| Critical-path blocking local task | X or delayed |
-| Host does not explicitly allow delegation | X |
-
-Key rule:
-
-Delegation is a force multiplier, not a permission substitute.
-
----
-
-## 9. Anti-pattern matrix
-
-| Anti-pattern | Why rejected |
-|---|---|
-| LE before LR | writing without evidence |
-| LC mutation before path confirmation | accidental scope damage |
-| ER before local code read for repository facts | source-of-truth inversion |
-| EW before local validation | externalizes mistakes |
-| OR before task boundary clarity | multiplies confusion |
-| build success used as proof of UI correctness | wrong validation mode |
-
----
-
-## 10. Fast default recipes
-
-### New repository
-
-`LS -> LR -> LR -> PFM/project fact map -> OR only if clearly useful`
-
-### Small bug fix
-
-`LS -> LR -> LR -> LE -> LC -> doc sync`
-
-### Current-version verification
-
-`LR -> ER -> LR -> conclusion`
-
-### Packaging/release
-
-`LR -> LC build -> LC verify -> ER remote metadata if needed -> EW`
-
-### Large architecture task
-
-`LS -> LR -> LR -> OR(plan) -> staged LE/LC -> doc sync`
-
----
-
-## 11. Promotion rule
-
-If this matrix proves stable across multiple repositories, it should be promoted into the future stable V6.x line as one of the practical "how the agent uses its hands" modules.
-
-## END FILE: modules/24_V6_5_ToolUsageMatrix.md
-
----
-
-## BEGIN FILE: modules/25_V6_5_ToolCapabilityMapping.md
-
-# V6.5 Stable Module: Tool Capability Mapping
-
-Status: stable V6.5 module.
-This module maps tool families to the kinds of questions they are appropriate to answer.
-
----
-
-## 1. Why this module exists
-
-A tool is not just "available" or "unavailable".
-A tool has an appropriate question shape.
-
-If the agent uses the wrong tool for the wrong question, failure usually looks like one of these:
-
-- weak evidence
-- fake certainty
-- wasted latency
-- unnecessary risk
-- correct tool, wrong time
-
-Therefore V6.5 should map each tool family to:
-
-- what question it is good at answering
-- what must be true before it is used
-- what it should not be used for
-- what evidence it produces
-
----
-
-## 2. Search and listing tools
-
-Examples:
-
-- grep
-- glob
-- tree / directory listing
-- symbol search
-- route search
-
-### Best at answering
-
-- Where is the likely entrypoint?
-- Which files mention this symbol or concept?
-- How many times does this pattern appear?
-- Which directories probably own this behavior?
-- Is this capability likely centralized or scattered?
-
-### Preconditions
-
-- the repository path is known
-- the search pattern is meaningful enough to narrow the field
-
-### Do not use for
-
-- proving exact runtime behavior by itself
-- proving call order by itself
-- proving a capability is actually enabled by itself
-
-### Evidence produced
-
-- candidate file set
-- pattern distribution
-- likely ownership surface
-
-### Follow-up tool normally required
-
-- local file read
-
----
-
-## 3. Local file read tools
-
-Examples:
-
-- direct file open/read
-- targeted source excerpt inspection
-- config / markdown inspection
-
-### Best at answering
-
-- What does this implementation actually do?
-- What arguments or contracts exist here?
-- What does the entry file say?
-- What does the README or module doc require?
-- What is the real boundary of this function/module?
-
-### Preconditions
-
-- the candidate file is already known or strongly suspected
-
-### Do not use for
-
-- repo-wide discovery when no target exists yet
-- validating runtime behavior that only execution can prove
-
-### Evidence produced
-
-- direct implementation truth
-- direct documentation truth
-- contract detail
-
-### Follow-up tools often required
-
-- additional file read
-- edit/write
-- command validation
-
----
-
-## 4. Local edit/write tools
-
-Examples:
-
-- file edit
-- file write
-- patch application
-- targeted codemod
-
-### Best at answering
-
-These tools do **not** answer questions well.
-They exist to implement already-justified changes.
-
-### Preconditions
-
-- the owning file is known
-- the required change is understood
-- the task boundary is explicit
-- the rollback path is understood
-
-### Do not use for
-
-- discovery
-- speculation
-- "trying random things"
-
-### Evidence produced
-
-- changed state only
-
-### Required follow-up
-
-- command/runtime/build/test validation
-- documentation sync when appropriate
-
----
-
-## 5. Local command tools
-
-Examples:
-
-- build
-- test
-- lint
-- runtime launch
-- package install
-- git status / diff / log
-- shell inspection commands
-
-### Best at answering
-
-- Does it build?
-- Does it run?
-- Which files actually changed?
-- Is the environment missing something?
-- Does the package manager or runtime agree with the code reading?
-- What happens on this platform in practice?
-
-### Preconditions
-
-- working directory is correct
-- command effect is understood
-- read-only vs state-changing behavior is known
-
-### Do not use for
-
-- replacing local source reading when implementation facts are needed
-- broad destructive mutation before path verification
-
-### Evidence produced
-
-- build truth
-- runtime truth
-- environment truth
-- concrete failure logs
-
-### Special note
-
-Commands are often the strongest validation tool, but not always the correct first discovery tool.
-
----
-
-## 6. External read-only tools
-
-Examples:
-
-- web search
-- official docs lookup
-- release notes lookup
-- remote repository inspection
-
-### Best at answering
-
-- What is the current upstream version?
-- What does the official documentation say now?
-- Has this release/API/library changed recently?
-- What is the current public state of the remote repository?
-
-### Preconditions
-
-- there is a real chance the answer changed recently
-- local files are insufficient for the question
-- the source authority matters
-
-### Do not use for
-
-- replacing codebase reading for local implementation truth
-- answering stable local questions that the repository already contains
-
-### Evidence produced
-
-- current remote truth
-- authoritative documentation truth
-
-### Required follow-up
-
-- explicitly separate remote fact from local fact
-
----
-
-## 7. External write/change tools
-
-Examples:
-
-- push
-- release publish
-- repository setting changes
-- visibility changes
-- remote configuration mutation
-
-### Best at answering
-
-These tools do not answer investigative questions.
-They apply confirmed decisions to external state.
-
-### Preconditions
-
-- the user wants the external state changed
-- the target is confirmed
-- local validation already happened
-- risk/rollback is understood
-
-### Do not use for
-
-- exploration
-- trial-and-error validation
-- "let's see if production accepts it"
-
-### Evidence produced
-
-- changed remote state
-
-### Required follow-up
-
-- post-change verification
-- path/URL/visibility confirmation
-
----
-
-## 8. Planning and orchestration tools
-
-Examples:
-
-- explicit plan mode
-- worktree switching
-- task queues
-- sub-agent delegation
-- teammate or swarm dispatch
-
-### Best at answering
-
-- How should this work be decomposed?
-- Which parts are independent?
-- What should happen in parallel versus serially?
-- Where should boundaries and ownership live?
-
-### Preconditions
-
-- the task is complex enough to justify orchestration
-- the host allows these tools
-- delegation boundaries are explicit
-
-### Do not use for
-
-- avoiding local responsibility for the critical-path task
-- replacing direct thinking with procedure theater
-
-### Evidence produced
-
-- structure of work
-- ownership map
-- sequencing plan
-
----
-
-## 9. Capability-to-question cheat sheet
-
-| Question Type | Best Tool Family |
-|---|---|
-| "Where is this implemented?" | Search/listing |
-| "What exactly does this file do?" | Local file read |
-| "Can I safely change this now?" | Local read first, then edit |
-| "Does it actually build/run?" | Local commands |
-| "What is the latest official version/rule/doc?" | External read-only |
-| "Can I publish or push now?" | External write only after local validation |
-| "How should I split this complex task?" | Planning/orchestration |
-
----
-
-## 10. Minimum question discipline
-
-Before choosing a tool, the agent should ask internally:
-
-1. Is this a location question, truth question, mutation question, runtime question, current-remote-fact question, or decomposition question?
-2. Which tool family is naturally aligned with that question?
-3. Is there a lower-risk tool that can answer it first?
-4. What evidence will this tool actually produce?
-
-That short internal check is usually enough to prevent most poor tool choices.
-
-## END FILE: modules/25_V6_5_ToolCapabilityMapping.md
-
----
-
-## BEGIN FILE: modules/26_V6_5_INDEX.md
-
-# V6.5 Module Index
-
-Status: **Stable V6.5 Line**.
-This file is the index for the V6.5 governance and structural modules.
-
----
-
-## 1. Overview
-The V6.5 line captures structural lessons from advanced agentic CLI systems. It focuses on tool governance, mandatory verification, and runtime awareness.
-
----
-
-## 2. Governance Modules (Execution Rules)
-These modules define how the agent should act.
-1.  **Tool Choice**: `modules/21_V6_5_ToolUsageAndSelection.md`
-2.  **Usage Matrix**: `modules/24_V6_5_ToolUsageMatrix.md`
-3.  **Capability Mapping**: `modules/25_V6_5_ToolCapabilityMapping.md`
-4.  **Risk Gating**: `modules/27_V6_5_ToolPermissionRiskMatrix.md`
-5.  **Evidence Matrix**: `modules/29_MandatoryVerificationMatrix.md`
-6.  **Question Boundaries**: `modules/30_ToolQuestionBoundaryMatrix.md`
-7.  **Anti-Pattern Rejection**: `modules/31_ToolMisuseAndAntiPatternMatrix.md`
-8.  **Instruction Stacking**: `modules/32_V6_5_ContextAssemblyAndInstructionStacking.md`
-9.  **Post-Task Consolidation**: `modules/33_V6_5_BackgroundConsolidationAndIdleLifecycle.md`
-10. **Fact Mapping**: `modules/34_V6_5_ProjectFactMap_V2.md`
-11. **Skill Governance**: `modules/35_V6_5_SkillGovernanceAndMandatoryUse.md`
-12. **Skill Zone Separation**: `modules/36_V6_5_SkillZoneSeparation.md`
-
----
-
-## 3. Structural Modules (Context & Architecture)
-These modules explain the system context that governance depends on.
-1.  **Runtime Modes**: `modules/20_V6_5_RuntimeModes.md`
-2.  **Hook Lifecycle**: `modules/22_V6_5_HookLifecycle.md`
-3.  **Permission/Output Pipeline**: `modules/23_V6_5_PermissionAndOutputPipeline.md`
-4.  **Terminology**: `modules/28_V6_5_TerminologyAndModuleBoundaries.md`
-
----
-
-## 4. Reading Priority
-- For **Behavior Improvements**: Read the **Governance Modules (1-12)** first.
-- For **System Modeling**: Read the **Structural Modules (1-4)** second.
-
-
----
-
-## 5. Reference source baseline
-
-The V6.5 line used the following primary external comparison source during promotion:
-
-- `https://github.com/claude-code-best/claude-code`
-- Local comparison path: a sibling checkout selected by the maintainer; do not encode a
-  machine-specific absolute path in the logic package.
-
-Future V6.x iterations should preserve this practice and explicitly register their comparative source baselines.
-
-## END FILE: modules/26_V6_5_INDEX.md
 
 ---
 
@@ -3842,383 +1790,6 @@ It is especially useful for making the agent's "hands and feet" more capable wit
 
 ---
 
-## BEGIN FILE: modules/28_V6_5_TerminologyAndModuleBoundaries.md
-
-# V6.5 Stable Module: Terminology And Module Boundaries
-
-Status: stable V6.5 support module.
-This module exists to reduce vocabulary drift and overlap inside the V6.5 stable line.
-
----
-
-## 1. Why this module exists
-
-A draft line becomes hard to promote when:
-
-- several files use near-synonyms inconsistently
-- one concept appears in too many modules
-- readers cannot tell which file is normative for which question
-
-This module defines the preferred vocabulary and the intended ownership boundary of each V6.5 stable module.
-
----
-
-## 2. Preferred terminology
-
-### 2.1 Runtime mode
-
-Use this term for the execution surface the system is currently operating in.
-
-Preferred examples:
-
-- REPL / interactive
-- headless / pipe
-- SDK / programmatic
-- daemon / background worker
-- bridge / remote
-- packaging / installer
-
-Do not casually replace this with:
-
-- channel
-- environment
-- interface
-- output mode
-
-unless the project truly means something narrower.
-
-### 2.2 Tool family
-
-Use this term for a class of tools that share similar behavior and risk.
-
-Preferred examples:
-
-- search/listing
-- local file read
-- local edit/write
-- local shell read-only
-- local shell mutating
-- external read-only lookup
-- external write/change
-- delegation/orchestration
-
-Do not mix this up with:
-
-- one concrete tool implementation
-- one provider-specific command
-- one repository-specific feature name
-
-### 2.3 Permission posture
-
-Use this term for the default approval stance a tool family should have.
-
-Preferred values:
-
-- allow by default
-- ask by default
-- deny by default unless explicitly required
-
-This is different from:
-
-- risk class
-- tool capability
-- trust boundary
-
-### 2.4 Risk class
-
-Use this term for the expected damage potential of a tool action.
-
-Preferred values:
-
-- low
-- medium
-- high
-- irreversible / high-impact
-
-Risk class answers:
-
-- how dangerous is this action if it goes wrong?
-
-It does **not** answer:
-
-- whether the tool is useful
-- whether the tool is available
-- whether the action is currently authorized
-
-### 2.5 Evidence requirement
-
-Use this term for what must be known before and after tool use.
-
-Typical examples:
-
-- pre-read required
-- path confirmation required
-- runtime verification required
-- post-change verification required
-
-This is one of the most important practical V6.5 terms.
-
-### 2.6 Output target
-
-Use this term for where a result is meant to go.
-
-Preferred examples:
-
-- terminal output
-- machine-readable output
-- remote protocol output
-- background state update
-- notification output
-- persistent artifact output
-
-### 2.7 Capability mapping
-
-Use this term for the relationship between a tool family and the question types it is best suited to answer.
-
-This is different from a usage matrix.
-
-### 2.8 Usage matrix
-
-Use this term for a decision table showing preferred tool families by:
-
-- task type
-- execution phase
-- runtime mode
-- risk level
-
-### 2.9 Governance module
-
-Use this term for a module that directly constrains how an agent should act.
-
-Current V6.5 governance modules are:
-
-- tool usage and selection
-- tool usage matrix
-- tool capability mapping
-- tool permission risk matrix
-
-### 2.10 Supporting structural module
-
-Use this term for a module that explains architectural context rather than directly giving first-step behavior rules.
-
-Current V6.5 supporting structural modules are:
-
-- runtime modes
-- hook lifecycle
-- permission/output pipeline
-
----
-
-
-### 2.6 Verification matrix
-
-Use this term for a hard mapping from conclusion type to:
-
-- required tool family
-- minimum pass condition
-- default failure state
-
-This term is narrower than general tool policy.
-It answers what verification is mandatory for a given claim category.
-
-### 2.7 Question-boundary matrix
-
-Use this term for a hard mapping from tool family to:
-
-- strongly answerable question types
-- support-only question types
-- forbidden-alone question types
-
-This term answers what a tool family is strong enough to conclude by itself.
-
-### 2.8 Anti-pattern matrix
-
-Use this term for a structured list of invalid closure paths, correction recipes, and downgrade labels.
-
-This term answers how to recognize false certainty and what to do after it appears.
-
-## 3. Module ownership boundaries
-
-### 3.1 `20_V6_5_RuntimeModes.md`
-
-Owns:
-
-- definition of runtime modes
-- multi-mode vs single-mode distinction
-- mode-specific validation/permission/output awareness
-
-Does **not** own:
-
-- detailed tool matrices
-- detailed permission posture by tool family
-
-### 3.2 `21_V6_5_ToolUsageAndSelection.md`
-
-Owns:
-
-- general principles for tool choice
-- sequencing logic
-- what kinds of tool misuse are prohibited
-- broad guidance on when to prefer low-risk tools
-
-Does **not** own:
-
-- the dense matrix tables
-- the per-question capability map
-- the full permission-risk gating table
-
-### 3.3 `24_V6_5_ToolUsageMatrix.md`
-
-Owns:
-
-- decision-table style guidance
-- tool preference by task type, phase, runtime mode, and risk level
-
-Does **not** own:
-
-- deep narrative rationale
-- full capability explanations
-- full permission posture detail
-
-### 3.4 `25_V6_5_ToolCapabilityMapping.md`
-
-Owns:
-
-- which question types each tool family answers well
-- what evidence each family tends to produce
-- what follow-up tool is usually needed
-
-Does **not** own:
-
-- phase matrix logic
-- runtime-mode matrix logic
-- permission posture table
-
-### 3.5 `27_V6_5_ToolPermissionRiskMatrix.md`
-
-Owns:
-
-- permission posture by tool family
-- risk class by tool family
-- high-risk execution gates
-- runtime-mode-sensitive risk tightening
-
-Does **not** own:
-
-- question-to-tool matching logic
-- general onboarding sequence rules
-- full output-target taxonomy outside its permission/output interaction scope
-
-### 3.6 `22_V6_5_HookLifecycle.md`
-
-Owns:
-
-- lifecycle stages
-- hook-point mapping
-- side-effect placement awareness
-
-Does **not** own:
-
-- tool family selection rules
-
-### 3.7 `23_V6_5_PermissionAndOutputPipeline.md`
-
-Owns:
-
-- permission pipeline shape
-- output target pipeline shape
-- cross-boundary propagation questions
-
-Does **not** own:
-
-- the detailed tool-family risk table
-
----
-
-## 4. Preferred reading model
-
-When the question is:
-
-- "What mode am I in?" -> read `20`
-- "How should I generally choose tools?" -> read `21`
-- "Which tool family is preferred here?" -> read `24`
-- "What question is this tool family good at answering?" -> read `25`
-- "How dangerous is this tool family and what gates apply?" -> read `27`
-- "Where are lifecycle interception points?" -> read `22`
-- "How do permissions and outputs cross boundaries?" -> read `23`
-
----
-
-## 5. Consolidation rule
-
-If future promotion happens, the stable V6.5 line should preserve these ownership boundaries as much as possible.
-The goal is not to maximize file count.
-The goal is to keep each governance question answerable from one primary place.
-
-
-### 3.8 `29_MandatoryVerificationMatrix.md`
-
-Owns:
-
-- conclusion type -> required tool family mapping
-- minimum pass conditions
-- default failure states when verification is incomplete
-
-Does not own:
-
-- question-strength boundaries for tool families
-- anti-pattern catalogs
-- broader runtime-mode modeling
-
-### 3.9 `30_ToolQuestionBoundaryMatrix.md`
-
-Owns:
-
-- tool family -> strongly answerable question types
-- tool family -> support-only question types
-- tool family -> forbidden-alone question types
-
-Does not own:
-
-- required verification pass criteria for each conclusion type
-- correction recipes after anti-patterns occur
-- permission posture tables
-
-### 3.10 `31_ToolMisuseAndAntiPatternMatrix.md`
-
-Owns:
-
-- common invalid closure paths
-- why those paths are invalid
-- correction recipes
-- safe downgrade labels
-
-Does not own:
-
-- the full decision matrix for normal tool selection
-- the full question-boundary model
----
-
-## 4. Provider Neutrality Rule
-
-V6.5 adopts the principle of **Provider Neutrality** in its architectural descriptions.
-
-### 4.1 Reasoning
-Large systems like claude-code are designed to be provider-agnostic (supporting Anthropic, OpenAI, Gemini, etc.). AgentLogic should follow this by describing features in terms of their **Agentic Role** rather than a specific LLM brand.
-
-### 4.2 Application
-- Do **not** write: "Claude will call the tool."
-- **Do** write: "The LLM Provider will receive the tool definition and return a call request."
-- Do **not** write: "Store this in Claude's memory."
-- **Do** write: "Store this in the Agentic Memory Layer."
-
-### 4.3 Contract-First Design
-When documenting new modules, define the **Data Contract** (JSON schema, message format) first. This ensures the logic remains valid even if the underlying model or provider is swapped.
-
-## END FILE: modules/28_V6_5_TerminologyAndModuleBoundaries.md
-
----
-
 ## BEGIN FILE: modules/29_MandatoryVerificationMatrix.md
 
 # Mandatory Verification Matrix
@@ -4504,220 +2075,6 @@ When an anti-pattern occurred and correction has not yet happened, the answer sh
 
 ---
 
-## BEGIN FILE: modules/32_V6_5_ContextAssemblyAndInstructionStacking.md
-
-# V6.5 Stable Module: Context Assembly and Instruction Stacking
-
-Status: stable V6.5 module.
-This module defines how to layer multiple instruction sources into a single coherent context without bloating or contradiction.
-
----
-
-## 1. Why this module exists
-
-Advanced agentic systems pull instructions from many sources:
-- global personal preferences
-- workspace-wide mandates
-- subdirectory-specific rules
-- project-managed instruction files (CLAUDE.md / GEMINI.md)
-- automated memory entries (MEMORY.md)
-
-If these are not stacked in a predictable order, the agent may:
-- follow a global rule when a project-specific override exists
-- ignore a subdirectory rule in favor of a root rule
-- get confused by conflicting instructions
-
----
-
-## 2. The Instruction Stack (Low to High Priority)
-
-Instructions should be layered such that **higher-numbered sources override lower-numbered ones**:
-
-1.  **Model/Provider Baseline**: The general knowledge and system prompt of the underlying LLM.
-2.  **Global Personal Memory**: Cross-project user preferences (e.g., "I always prefer TypeScript").
-3.  **Managed/Enterprise Policy**: Organizational rules enforced across all machines.
-4.  **Project Root Instructions**: Mandates for the entire repository (e.g., `GEMINI.md` at root).
-5.  **Subdirectory Instructions**: Overrides for specific modules (e.g., `src/api/GEMINI.md`).
-6.  **Private Project Memory**: Local, machine-specific notes (e.g., `MEMORY.md`).
-7.  **Dynamic Task Context**: Immediate instructions for the current coding round.
-
----
-
-## 3. Stacking Rules
-
-### 3.1 Specificity Wins
-A rule at the `src/` level always overrides a rule at the project root level for files within `src/`.
-
-### 3.2 Private Beats Public
-`MEMORY.md` (private notes) overrides `GEMINI.md` (public repo instructions) for the current user's execution, as it often contains local environment-specific fixes.
-
-### 3.3 Task Context is Supreme
-If the user says "ignore the lint rule for this one file" in the current session, that instruction wins over all permanent rules for that specific task.
-
----
-
-## 4. Anti-Pattern: The Bloated Prompt
-
-Do **not** include the full text of every instruction file if they overlap significantly.
-- Prefer **targeted inclusion**: only pull in the instructions relevant to the current directory and task.
-- Use **Instruction Pointers**: if a file is too large, the agent should read its summary/index first and only deep-read relevant sections.
-
----
-
-## 5. Instruction Collision Resolution
-
-When two rules conflict:
-1.  Identify the source tier for each rule.
-2.  Apply the higher-tier rule.
-3.  Log the collision in the current session context to explain why the lower-tier rule was ignored.
-
----
-
-## 6. Implementation for V6.5
-
-Agents should explicitly state their "Active Instruction Profile" when switching between subdirectories with different `GEMINI.md` files.
-## V6.8.0 Complementary Instruction Map
-
-Context assembly should expose an instruction map containing source, scope, load order, provenance, freshness marker, and estimated token cost. Rebuild it after checkout, branch, worktree, or CWD changes. Narrower project rules may refine broader project rules, but no discovered file can override AgentLogic, system, developer, safety, or host permission constraints. See `modules/44_V6_8_GrokBuildOperationalIntegration.md`.
-
-## END FILE: modules/32_V6_5_ContextAssemblyAndInstructionStacking.md
-
----
-
-## BEGIN FILE: modules/33_V6_5_BackgroundConsolidationAndIdleLifecycle.md
-
-# V6.5 Stable Module: Background Consolidation and Idle Lifecycle
-
-Status: stable V6.5 module.
-This module defines the "Dream Phase" – how an agent should act when a primary task is complete or during idle time.
-
----
-
-## 1. Why this module exists
-
-In most systems, the agent stops immediately after "Validate". This leaves:
-- messy temporary files
-- fragmented memory entries
-- un-synced documentation
-- un-shared structural lessons
-
-V6.5 introduces the **Idle Lifecycle** to convert session noise into durable project knowledge.
-
----
-
-## 2. The Post-Task "Dream" Lifecycle
-
-Once the user's primary directive is marked `Verified`, the agent should perform these steps (ideally in the background if supported, or as a final cleanup turn):
-
-### 2.1 Artifact Cleanup
-- Delete temporary log files, test snapshots, and build artifacts created during implementation.
-- Revert any non-essential environment changes (e.g., temporary `export` variables).
-
-### 2.2 Memory Extraction
-- Review the session history.
-- Identify new structural facts (e.g., "The auth service requires X header").
-- Identify new user preferences (e.g., "User prefers 4-space tabs").
-- Write project structure facts to tracked `PROJECT_MAP.md`, material project corrections to tracked `.learnings/ERRORS.md`, and private user/machine facts only to private memory.
-
-### 2.3 Documentation Sync
-- Check if the code changes invalidate existing `AGENTS.md`, `PROJECT_MAP.md`, or `README.md` descriptions.
-- Propose or apply targeted updates to keep documentation in sync with reality.
-
-### 2.4 Structural Consolidation
-- If multiple small edits were made, look for a larger pattern (e.g., "We are consistently adding X to every route").
-- Propose a refactor or a new logic rule to automate this pattern in the future.
-
----
-
-## 3. Memory Triage (The 4-Tier Model)
-
-When extracting memories, use the `claude-code` taxonomy:
-
-1.  **User**: Personal preferences, coding style, local machine quirks. (Save to Global or Private Local Memory).
-2.  **Feedback**: Methodological corrections or "lessons learned" from this specific session (e.g., "Don't use tool X for task Y").
-3.  **Project**: Hard facts about the codebase, architecture, and logic. (Save to `GEMINI.md` or Project Fact Map).
-4.  **Reference**: Pointers to external docs, APIs, or sibling services.
-
----
-
-## 4. The "Idle" Prompt
-
-If the agent is waiting for user input for a long period, it may (if the host allows) perform "Internal Checkup":
-- Verify directory integrity.
-- Re-index symbols if many files changed.
-- Audit `MEMORY.md` for stale entries (> 90 days).
-
----
-
-## 5. Enforcement
-
-A task is not truly `Finalized` until the **Consolidation Phase** is complete.
-The agent should be able to answer: "What did we learn in this session that should be saved forever?"
-## V6.8.0 Complementary State Freshness
-
-Background consolidation may extract durable patterns, but memory remains a retrieval aid rather than current-fact authority. Store provenance, scope, timestamp, confidence, and freshness state with durable items. Running background tasks and subagents must expose status, heartbeat, result/error, and cancellation handles; after compaction or resume, revalidate any state that may have changed. See `modules/44_V6_8_GrokBuildOperationalIntegration.md`.
-
-## END FILE: modules/33_V6_5_BackgroundConsolidationAndIdleLifecycle.md
-
----
-
-## BEGIN FILE: modules/34_V6_5_ProjectFactMap_V2.md
-
-# Project Fact Map Template
-
-Status: active project-fact template.
-This template supports the V6.8.3 project-native knowledge-sync contract. It belongs in the
-target project as `PROJECT_MAP.md`, travels with project code, and contains no private agent
-memory or machine-specific data.
-
-`PROJECT_MAP.md` is the concise L1-L4 architecture map. Keep symbol-level ownership, state keys,
-and interface/event navigation in the mandatory companion `CODE_MAP.md`.
-
----
-
-## 1. Project Identity & Freshness
-- **Project Name**:
-- **Repository / Branch**:
-- **Remote freshness check**: `git fetch --prune` [Verified/Offline/Not configured]
-- **Working-tree status**:
-- **Installed AgentLogic entry**:
-
-## 2. The Project L1-L4 Map
-
-### L1 — Entry & Surface
-- **Entrypoints**:
-- **User/API/CLI surfaces**:
-- **Primary documentation**:
-
-### L2 — Flow & Lifecycle
-- **Core flows**:
-- **State / task lifecycle**:
-- **Key module boundaries**:
-
-### L3 — Control & Verification
-- **Services, permissions, and trust boundaries**:
-- **Validation commands**:
-- **Known constraints / architectural debt**:
-
-### L4 — Base & Dependencies
-- **Data stores / providers**:
-- **Foundational tools and dependencies**:
-- **External systems**:
-
-## 3. Unconfirmed Points
-- [ ] Point 1
-- [ ] Point 2
-
-## 4. Update Rules
-- Update this file in the same commit as a structural or validation-boundary change.
-- Record material errors in `.learnings/ERRORS.md`, not in this map.
-- Do not include secrets, personal paths, private prompts, raw logs, or generated graph output.
-- Use current source and matching verification evidence to confirm facts; this map is not proof by itself.
-
-## END FILE: modules/34_V6_5_ProjectFactMap_V2.md
-
----
-
 ## BEGIN FILE: modules/35_V6_5_SkillGovernanceAndMandatoryUse.md
 
 # V6.5 Skill Governance And Mandatory Use
@@ -4944,182 +2301,6 @@ Use a code-review skill when the requested conclusion is a code audit, pull-requ
 
 ---
 
-## BEGIN FILE: modules/36_V6_5_SkillZoneSeparation.md
-
-# V6.5 Skill Zone Separation
-
-Status: **Stable V6.5 Line**.
-
-This module defines the required separation between host-local skills and logic-package-governed skills.
-
----
-
-## 1. Why The Separation Exists
-
-Different machines may have very different skill inventories.
-
-If AgentLogic does not distinguish:
-
-- skills that belong to the current machine and host
-- skills that belong to the logic package itself
-
-then a local machine's personal skill sprawl can be mistaken for portable logic state.
-
-That creates two failures:
-
-1. one machine pollutes another machine's installation expectations
-2. host-local skill cleanup accidentally mutates portable logic assets
-
----
-
-## 2. The Two Required Skill Zones
-
-### 2.1 Host-Local Skill Zone
-
-This zone belongs to the current machine and current host installation.
-
-Examples:
-
-- `~/.codex/skills`
-- `~/.claude/skills`
-- `~/.gemini/skills`
-
-Properties:
-
-- machine-specific
-- host-specific
-- may differ across devices
-- may include user-installed third-party skills
-- must be audited during install and update
-
-### 2.2 Logic-Carried Skill Zone
-
-This zone belongs to the AgentLogic package itself.
-
-Properties:
-
-- repository-governed
-- portable across machines
-- versioned with the logic package
-- should contain only skills that are intentionally shipped as part of AgentLogic
-
-Current V6.5 posture:
-
-- **AgentLogic does not currently ship a normal large logic-bundled skill pack**
-- the main portable layer is still the logic modules themselves
-- any future bundled skill layer must be explicitly declared as logic-carried rather than inferred from a host-local skill directory
-
----
-
-## 3. Governance Rule
-
-The install/update-time skill governance pass must operate only on the **host-local skill zone**.
-
-It must not:
-
-- treat host-local skill state as repository truth
-- copy one machine's host-local skill inventory into another machine by default
-- mutate a future logic-carried skill zone as if it were disposable user clutter
-
----
-
-## 4. Install And Update Rule
-
-During AgentLogic installation or update:
-
-1. identify the target host-local skill zone
-2. audit only that host-local zone
-3. classify active-by-default vs archive-by-default host-local families
-4. leave the logic-carried layer untouched unless the logic package itself is being upgraded
-
----
-
-## 5. Current V6.5 Practical Meaning
-
-For the current line:
-
-- host-local skills remain local
-- archived host-local skills remain local archives
-- AgentLogic logic modules remain the portable source of truth
-
-So a cleanup on one machine should not silently become the default skill set for another machine unless the user explicitly chooses to replicate it.
-
----
-
-## 6. Future Expansion Rule
-
-If AgentLogic later ships its own portable bundled skills, that layer must be explicitly documented with:
-
-- the bundle path
-- its role
-- whether it is always installed or optional
-- whether host-local governance may inspect it or must ignore it
-
-Until then, host-local skills and logic-package modules must stay clearly separated.
-
-## END FILE: modules/36_V6_5_SkillZoneSeparation.md
-
----
-
-## BEGIN FILE: modules/37_V6_6_CybersecuritySkillsRouter.md
-
-# V6.6 Cybersecurity Skills Router Integration
-
-Status: **Stable V6.6 Line**.
-
-This module defines the integration of the Cybersecurity Skills Router (from `reverse-skill`) as a core operating capability under AgentLogic V6.6.
-
----
-
-## 1. Core Integration Mandate
-
-Cybersecurity and reverse-engineering tasks require specialized toolchains, strict execution playbooks, and structured feedback loops to prevent model hallucination and command stalling.
-
-AgentLogic V6.6 embeds the **Cybersecurity Skills Router** to provide:
-- A systematic workflow for APK analysis, binary reverse engineering, frontend JS signing, firmware testing, and CTF challenges.
-- Explicit tool orchestration mapping for `jadx`, `apktool`, `Frida`, `radare2`, `IDA`, `BurpSuite`, and browser automation.
-- Auto-validation of security tool availability.
-- A **Field Journal** system to save and reuse exploit patterns, commands, and lessons learned.
-
----
-
-## 2. Classification & Routing Workflow
-
-For any cybersecurity or reverse-engineering task, the agent MUST execute the following sequence:
-
-1. **Classification**: Identify target type (APK, ELF/PE, JS, Web Traffic, CTF, Firmware) and user intent.
-2. **Routing**: Map to the appropriate skill directory under `skills/reverse-skill/skills/` (e.g., `apk-reverse`, `ida-reverse`, `malware-analysis`, etc.).
-3. **Pre-check**: Run tool detection scripts (e.g. `skills/reverse-skill/kali/` or `skills/reverse-skill/skills/scripts/bootstrap-reverse.sh`) to verify tool paths and versions.
-4. **Execution**: Perform static/dynamic analysis using precise, script-guided methods instead of "vibe guessing."
-5. **Post-result**: Save findings to the Field Journal (`skills/reverse-skill/skills/field-journal/`) and generate structured vulnerability/reversing reports.
-
----
-
-## 3. Mandatory Security Verification Rules
-
-When executing tasks under this module, verification claims are bound to the following tools:
-
-| Reversing Claim | Mandatory Verification Tool / Method | Minimum Proof Required |
-|---|---|---|
-| Binary / APK structure | `jadx` / `readelf` / `file` command output | Decompiled class lists or section headers |
-| Exploit success / PoC | Local script execution in sandbox | Command stdout showing control/access (e.g. CTF flag) |
-| Web API signature / Encryption | BurpSuite MCP or Browser replay trace | Intercepted payload or dynamic trace |
-| EDR Bypass / Native Hooking | Frida hook logs or debugger registers | Hook activation logs showing memory override |
-
----
-
-## 4. Location of Assets
-
-- **Cybersecurity Skills**: `skills/reverse-skill/skills/`
-- **MCP Server & Tooling**: `skills/reverse-skill/burp-mcp-full/`
-- **Sandbox Orchestrator**: `skills/reverse-skill/CTF-Sandbox-Orchestrator/`
-- **Kali Linux Helpers**: `skills/reverse-skill/kali/`
-- **Router Rules Reference**: `skills/reverse-skill/RULES.md`
-
-## END FILE: modules/37_V6_6_CybersecuritySkillsRouter.md
-
----
-
 ## BEGIN FILE: modules/38_V6_6_SpecDrivenDevelopment.md
 
 # V6.6 Spec-Driven Development (SDD) Integration
@@ -5151,7 +2332,7 @@ Before Phase 1, perform the project-native freshness check and read the current 
 2. **Specify Phase**: Define user scenarios, requirements, and user stories in clear, natural language.
    - *Requirement*: The specifications must be written to `.specify/spec.md` (or `.specify/specs/` directory).
 - *Domain Vocabulary*: If the task introduces domain terminology or crosses bounded contexts, check or establish `CONTEXT.md` and run the single-question Grilling session (see `modules/43_V6_7_MattPocockSkillsIntegration.md`) before proceeding.
-- *UI/UX Prototyping Gate*: Before any formal UI implementation, generate a visual mockup using a text-to-image tool (via the image-generation skill), present it to the user (either directly in the chat UI or by saving it to a folder in the project workspace, e.g. `.specify/mockups/`), and wait for the user's review. This gate may be bypassed only when the user explicitly says not to use it. Do not treat content changes, accessibility fixes, responsive bug fixes, or small visual corrections as implicit exemptions unless the user explicitly opts out.
+- *UI/UX Prototyping Gate*: Net-new UI and substantial UI refactors require a visual mockup using a text-to-image tool, user review, and approval or explicit opt-out before implementation. Clearly classified small visual corrections (including bounded content, accessibility, or responsive fixes) may skip a new mockup, but never the required visual verification. Ambiguous changes default to the mockup path.
 3. **Plan Phase**: Draft a technical implementation plan specifying architecture, tech stack, data schemas, and integration logic.
    - *Requirement*: The plan must be saved in `.specify/plan.md`.
    - *Architectural Decisions*: If the plan involves hard-to-reverse trade-offs, they must be documented in a numbered ADR under `docs/adr/` (see `modules/43_V6_7_MattPocockSkillsIntegration.md`).
@@ -5237,7 +2418,7 @@ For redesigns or visual upgrades of existing projects, follow this checklist:
 
 ## 3.1 Visual Prototyping Gate (Design First Protocol)
 
-Before any formal UI implementation—new or existing layout, app screen, web page, component, or visual design change—the Agent MUST NOT write production HTML/CSS/JS/UI code directly. Instead, follow this mandatory visual prototyping gate. The only bypass is an explicit user instruction not to use the preview step:
+For net-new UI and substantial UI refactors, the Agent MUST NOT write production HTML/CSS/JS/UI code directly. Instead, follow this mandatory visual prototyping gate. A clearly classified small visual correction may skip a new mockup under Module 49, but must still pass visual verification; ambiguous changes follow this gate. An explicit user instruction not to use the preview step also bypasses mockup approval:
 
 1. **Prompt Formulation**: Formulate a highly detailed visual layout and style prompt based on the user's requirements (specifying typography, layout variance dials, HSL color palette, and visual density).
 2. **Prototyping**: Invoke the text-to-image generation tool to generate a visual mockup / design image of the proposed UI.
@@ -5279,71 +2460,6 @@ performance review; this module remains the authority for visual direction and p
 For net-new UI or substantial UI refactors, complete the single-question requirements grilling and record an approved UI brief before Prompt Formulation in section 3.1. A user may opt out of mockup approval only after that discovery step. Clearly classified small visual corrections may skip a new mockup under Module 49, but still require visual verification.
 
 ## END FILE: modules/39_V6_6_TasteFrontendDesign.md
-
----
-
-## BEGIN FILE: modules/40_AgentLogicSystemMap.md
-
-<!--
-MANDATORY LOGIC GATE
-
-Before making changes here, read `AGENTS.md` and `README.md` first.
-Then follow the repository-declared logic entry chain, including `00_START_HERE.md`,
-`modules/01_MasterLogic.md`, and `modules/15_LogicEntryChecklist.md` when applicable.
-
-Before every new coding round, explicitly decide whether the current task extends
-the previous coding round. If it does not, explicitly ask whether to forget/compress context.
-
-This is a blocking gate. Do not begin implementation before it is complete.
--->
-
-# AgentLogic System Map
-
-This four-layer map is a repository map for the portable AgentLogic method layer. The Linux
-kernel map is an analogy only; it does not imply that this repository contains a runtime CLI
-implementation or the source tree of another project.
-
-| Layer | Entry / lifecycle | Capability / tools | Governance / evidence | State / output |
-|---|---|---|---|---|
-| **L1 Strategy & Entry** | `00_START_HERE.md`, `AGENTS.md`, `MAIN.md` | `README.md`, `AGENT_INSTALL.md`, `INSTALL.md` | `modules/15_LogicEntryChecklist.md`, `modules/13_MandatoryLogicGateTemplate.md` | `manifest.json` |
-| **L2 Session & Lifecycle** | `modules/01_MasterLogic.md`, `modules/03_AgenticLoop.md`, `versions/AgentLogic_V6_8_3.md` | `modules/38_V6_6_SpecDrivenDevelopment.md`, `modules/47_V6_8_ReferenceToInterfaceWorkflow.md`, `spec-kit/`, `.specify/` | `modules/12_AgentEnforcement.md`, `modules/44_V6_8_GrokBuildOperationalIntegration.md`, `modules/46_V6_8_ProjectKnowledgeSync.md` | `PROJECT_MAP.md`, `CODE_MAP.md`, `.learnings/ERRORS.md`, conditional `.specify/` |
-| **L3 Execution & Control** | `adapters/`, `install.ps1`, `install.sh` | `skills/`, `scripts/build-profile.ps1` | `modules/05_PermissionsAndSafety.md`, `modules/23_V6_5_PermissionAndOutputPipeline.md`, `modules/29_MandatoryVerificationMatrix.md`, `modules/30_ToolQuestionBoundaryMatrix.md`, `modules/31_ToolMisuseAndAntiPatternMatrix.md`, `modules/48_V6_8_SkillAndToolRouting.md` | `scripts/check-logic-entry.js`, `scripts/validate-package.ps1` |
-| **L4 Base & Reference** | `reference/`, historical `versions/` files | `skills/`, `templates/frontend/`, `spec-kit/` | `modules/35_V6_5_SkillGovernanceAndMandatoryUse.md`, `modules/36_V6_5_SkillZoneSeparation.md`, `modules/41_V6_7_AIShippingAndReviewabilityAudit.md` | `dist/`, optional `modification_history/` archive |
-
-## Control flow
-
-```mermaid
-graph TD
-    Entry[AGENTS / README / MAIN] --> Gate[Startup Gate]
-    Gate --> Classify[Task applicability]
-    Classify --> Spec[SDD and .specify state when applicable]
-    Spec --> Control[Permission and evidence boundaries]
-    Control --> Validate[Entry and package validation]
-    Validate --> Build[Profile build and host outputs]
-    Build --> Review[Post-result inspection and project-knowledge sync]
-```
-
-## UI branch
-
-Formal UI implementation branches through `modules/39_V6_6_TasteFrontendDesign.md`: generate
-a text-to-image preview, show it to the user, and wait for approval or explicit user opt-out
-before writing UI code. UI completion still requires screenshot and parent-child layout-boundary
-verification.
-
-## Code-map branch
-
-For substantial target-project work, `modules/45_V6_8_GraphifyCodeMapIntegration.md` adds an
-opt-in Graph Preview Gate at Converge/Ship. With user approval and a reviewed external
-installation, Graphify may create a target-project `graphify-out/` map. Those artifacts are
-external project facts and discovery aids, not AgentLogic bundle content or standalone proof.
-
-## Update rule
-
-This map must be updated when the manifest, entry chain, host adapters, validation scripts,
-profile outputs, or mandatory governance modules change. It must contain repository-relative
-paths only; external comparisons belong in the relevant reference or research record.
-
-## END FILE: modules/40_AgentLogicSystemMap.md
 
 ---
 
@@ -5505,168 +2621,6 @@ This module operates under the same evidence standards defined in `modules/29_Ma
 The SRA module does not lower the evidence bar. It structures what must be documented; Module 29 governs how the documentation claims are verified.
 
 ## END FILE: modules/41_V6_7_AIShippingAndReviewabilityAudit.md
-
----
-
-## BEGIN FILE: modules/42_V6_7_PonytailLazySeniorDevLadder.md
-
-# V6.7.2 Ponytail Lazy Senior Developer's Ladder
-
-Status: **Stable V6.7.2 Line (Mandatory implementation & refactoring protocol)**.
-
-This module integrates the core philosophy and the **7-Rung Ladder** from the `ponytail` framework. It targets a major efficiency gap in AI agent coding: the tendency of agents to over-build, introduce unnecessary helper abstractions, install redundant packages, or rewrite code that already exists elsewhere in the codebase. By enforcing a "lazy but safe" posture, this module cuts code bloat, reduces token costs, and increases execution speed while maintaining absolute system safety.
-
----
-
-## 1. The Core Philosophy: "Boring is Better than Clever"
-
-"Lazy" means efficient and disciplined, not careless or negligent.
-- The best code is the code that is never written.
-- Delete over add. Reuse over rewrite.
-- Boring, plain code that can be read easily at 3 AM is infinitely better than clever, customized abstractions.
-- Never introduce speculative scaffolding or code "for later". Later can build for itself.
-
----
-
-## 2. The 7-Rung Lazy Developer's Ladder
-
-Before writing, modifying, or refactoring any line of code, the Agent **MUST** evaluate this ladder. Stop at the first rung that holds:
-
-| Rung | Description | Operational Directive |
-| :--- | :--- | :--- |
-| **1. YAGNI (Need to Exist)** | Does this feature or abstraction need to exist at all? | If it is a speculative requirement or unrequested config, skip it. Explain in a single line to the user. |
-| **2. Codebase Reuse** | Does a helper, utility, component, or type already live here? | Look before you write. Search files nearby. Re-implementing a utility that is a few directories over is the most common slop. |
-| **3. Standard Library** | Does the language standard library cover this? | Reach for built-in library functions before writing custom parsing or logic wrappers. |
-| **4. Native Platform** | Does the native platform provide a feature for this? | Prefer native platform elements (e.g., `<input type="date">` over a calendar library, native CSS scroll-behavior over JS scroll scripts, DB constraints over app-level validation). |
-| **5. Existing Dependency** | Can an already-installed package solve it? | Reuse existing dependencies. Never add a new dependency for what a few lines of plain code or an existing library can do. |
-| **6. One-Liner** | Can this entire change be implemented in a single line? | If yes, write one line. |
-| **7. Minimum Viable Code** | If none of the above hold. | Write the absolute minimum amount of code that satisfies the specification. No unrequested abstractions, no interfaces with a single implementation, no factories for a single product. |
-
----
-
-## 3. Bug-Fixing Rule: Root Cause vs. Symptom
-
-AI agents often write quick symptom patches because they only read the path named in the bug ticket. This is prohibited.
-
-When addressing a bug:
-1. **Analyze caller hierarchy**: Before editing, grep every caller of the function you are about to touch.
-2. **Fix at the root**: A single guard inside the shared function is a smaller, safer diff than a guard in every caller. Patching only the path the ticket names leaves sibling callers still broken.
-3. **No shallow guards**: Do not patch around the bug at the outermost level. Fix it where all callers route through.
-
----
-
-## 4. Strict Safety Boundaries: Lazy but Safe
-
-The goal of the ladder is to eliminate code bloat, **not** to skip safety controls. The following surfaces are strictly excluded from YAGNI and are **never** on the chopping block:
-
-- **Security & Authorization**: Input sanitization, CSRF tokens, database query parameterization, and endpoint claim checks (Module 41 §5) must be written thoroughly.
-- **Data Loss Prevention**: Idempotency checks, database transactions, confirmation dialogs for destructive actions, and backup validation.
-- **Accessibility (a11y)**: Proper ARIA labels, semantic HTML structure, keyboard navigation, and contrast compliance.
-- **Error Handling**: Graceful fallback states, detailed error logging, and user-facing notifications.
-
-"Lazy, not negligent." If a safety guard is missing, adding it is mandatory, even if it adds lines of code.
-
----
-
-## 5. Integration with Spec-Driven Development (SDD)
-
-This ladder is integrated as a blocking gate during **SDD Phase 6 (Implement Phase)**:
-
-- **Pre-Task Check**: Before beginning any task from `.specify/tasks.md`, the Agent must state which rung of the Lazy Developer's Ladder is being used to address that task.
-- **Checklist**:
-  - [ ] Can we skip this task? (Rung 1)
-  - [ ] Can we reuse code? (Rung 2)
-  - [ ] Are we using stdlib/native? (Rungs 3 & 4)
-  - [ ] Are we using existing dependencies? (Rung 5)
-  - [ ] Is this the minimal working diff? (Rungs 6 & 7)
-
----
-
-## 6. Integration with Taste Design & Verification
-
-- **Aesthetics (Module 39)**: Simple code must not lead to visual slop. The use of native elements (Rung 4) must still be styled to look premium and aligned with the CSS design system.
-- **Verification Matrix (Module 29)**: The evidence requirements for verification remain unchanged. A one-line implementation must still be validated with command execution or visual proof.
-
-## END FILE: modules/42_V6_7_PonytailLazySeniorDevLadder.md
-
----
-
-## BEGIN FILE: modules/43_V6_7_MattPocockSkillsIntegration.md
-
-# V6.7.2 Matt Pocock Skills Integration
-
-Status: **Stable V6.7.2 Line (Mandatory alignment & documentation protocol)**.
-
-This module integrates the core engineering principles from the `mattpocock/skills` framework. It addresses two major communication and token-efficiency gaps in AI agent coding: (1) requirement misalignment due to passive task hand-off, and (2) excessive verbosity due to the lack of a shared, domain-specific vocabulary. By enforcing the **Grilling Process**, **Ubiquitous Glossary (`CONTEXT.md`)**, and **Architecture Decision Records (ADRs)**, this module aligns developer intent with implementation and drastically optimizes the token economy.
-
----
-
-## 1. The Grilling Process Protocol
-
-To eliminate misalignment between the user and the Agent, major feature plans **MUST** undergo a grilling session during **SDD Phase 2 (Specify Phase)**:
-
-1. **Relentless Probing**: The Agent must walk down the plan's design tree, branch by branch, stress-testing decisions and resolving dependencies before writing code.
-2. **Single-Question Flow**: The Agent **MUST** ask questions one at a time. Dumping a bulk list of questions is strictly prohibited.
-3. **Recommended Answers**: For every question asked, the Agent **MUST** provide a clear, reasoned "Recommended Answer" (e.g., *"How should we handle caching here? Recommended: Redis with a 5-minute TTL because..."*). This allows the user to simply approve the recommendation or quickly course-correct.
-4. **Codebase First**: The Agent must explore the codebase automatically to answer structural questions rather than asking the user for facts that can be statically verified.
-5. **Human-Readable Proposal Gate**: At the conclusion of the grilling session, ask about a
-   human-readable Project Proposal / Scope Statement only when the user or stakeholders need a
-   business-facing artifact. Generate it only if requested; keep API schemas and engineering
-   configuration out of that artifact.
-
----
-
-## 2. Ubiquitous Vocabulary: `CONTEXT.md`
-
-To reduce conversation verbosity and ensure consistent code naming, a project **SHOULD** establish
-a shared glossary when it introduces domain-specific terminology, multiple bounded contexts, or
-repeated naming ambiguity. Small documentation changes and isolated fixes do not require a new glossary.
-
-### 2.1 Glossary Structure
-- **Single-Context Repository**: A single file named `CONTEXT.md` (or `GLOSSARY.md`) at the repository root.
-- **Multi-Context Repository**: A `CONTEXT-MAP.md` at the root mapping modules, with sub-contexts containing their own local `CONTEXT.md` (e.g., `src/<context>/CONTEXT.md`).
-
-### 2.2 Content Constraints
-- **Pure Jargon**: The glossary must contain ONLY domain terms, definitions, and acronym mappings.
-- **No Implementation or Specs**: It must not contain scratchpad notes, code snippets, ticket descriptions, or temporary tasks.
-- **Lazy Maintenance**: When a new terminology or decision crystallizes during a grilling session, the Agent must lazily update `CONTEXT.md` to define the term.
-
-### 2.3 Variable and Naming Alignment
-- New domain-facing names SHOULD use the terminology defined in `CONTEXT.md`; generated names,
-  framework conventions, and existing public APIs do not need to be renamed solely to satisfy a glossary.
-- Using multiple names for the same domain concept (e.g., using `User`, `Account`, and `Profile` interchangeably) is prohibited.
-
----
-
-## 3. Architecture Decision Records (ADRs)
-
-For hard-to-reverse design decisions, surprising trade-offs, or choices involving complex tradeoffs (e.g., choosing a specific state library, introducing database migrations, or changing trust boundaries), the Agent must compile an ADR.
-
-### 3.1 Storage and Format
-- ADRs live in `docs/adr/` (or `src/<context>/docs/adr/` in multi-context layouts).
-- Files must be sequentially numbered (e.g., `docs/adr/0001-slug.md`, `docs/adr/0002-slug.md`).
-- Each ADR must contain:
-  - **Title**: Brief name of the decision.
-  - **Status**: Proposed, Accepted, Rejected, or Superseded.
-  - **Context**: The background, constraints, and problem driving the decision.
-  - **Decision**: The chosen solution.
-  - **Consequences**: The trade-offs, negative impacts, and subsequent requirements.
-
-### 3.2 Anti-Litigation Rule
-Once an ADR is set to `Accepted`, the Agent **MUST** treat it as an immutable architectural rule for the current branch. Re-litigating previously accepted decisions during subsequent tasks is prohibited unless the user explicitly requests an architectural review.
-
----
-
-## 4. Integration with Spec-Driven Development (SDD)
-
-- **Specify Phase (Phase 2)**: The Agent must check if `CONTEXT.md` exists. If the task introduces new concepts, the Agent must initiate a single-question grilling session (§1) and append new terms to `CONTEXT.md`.
-- **Plan Phase (Phase 3)**: If the plan introduces major trade-offs, the Agent must document them in a new ADR draft under `docs/adr/` before moving past the Plan phase.
-
-## 5. UI trigger
-
-Net-new UI and substantial UI refactors are major feature plans for this module. They require the single-question grilling flow and approved requirements brief before image generation; see Module 49.
-
-## END FILE: modules/43_V6_7_MattPocockSkillsIntegration.md
 
 ---
 
@@ -5907,118 +2861,6 @@ visual evidence; and any stale memory or external-fact conflicts.
 
 ---
 
-## BEGIN FILE: modules/45_V6_8_GraphifyCodeMapIntegration.md
-
-# V6.8 Graphify Code Map and Graph Preview Gate
-
-Status: **Optional external code-map integration, active in enhanced profiles**.
-
-This module integrates the Graphify method as an on-demand project fact-mapping and
-reviewability capability. It ships policy only: Graphify itself, its dependencies, and
-its generated artifacts remain external to AgentLogic.
-
-## 1. Purpose
-
-Graphify can build a queryable graph from a target project and export:
-
-- `graphify-out/graph.html`: an interactive, user-visible code-view preview;
-- `graphify-out/GRAPH_REPORT.md`: architecture highlights and suggested questions;
-- `graphify-out/graph.json`: reusable graph data for scoped queries.
-
-Use it to accelerate discovery of entry points, cross-module paths, subsystem clusters,
-and high-connectivity concepts in substantial projects. It complements the Project Fact
-mandatory textual `CODE_MAP.md`, the Project Fact Map, and repository system map; it does not replace them.
-
-Source: `https://github.com/Graphify-Labs/graphify` (v8 reference line).
-
-## 2. Evidence Boundary
-
-Graph output is **discovery evidence**, not final behavioral proof.
-
-- `EXTRACTED` edges can guide targeted source reads.
-- `INFERRED` and `AMBIGUOUS` edges require especially careful confirmation.
-- Runtime, permissions, visual behavior, current remote state, and packaging conclusions
-  remain governed by `modules/29_MandatoryVerificationMatrix.md`.
-- The graph must not be treated as proof that dynamic calls, feature flags, authorization,
-  generated code, or UI behavior actually execute.
-
-## 3. Graph Preview Gate
-
-At **Converge or Ship**, ask the user once whether they want a code-view preview when the
-current task is any of the following:
-
-- a multi-module feature or refactor;
-- architecture or dependency-boundary work;
-- release/packaging work with meaningful code or infrastructure surface;
-- an explicit request for code maps, graph exploration, or visual architecture review.
-
-Default question:
-
-> This task now has enough structure for a code-map preview. Would you like me to generate
-> an interactive Graphify view for the target project?
-
-Do **not** ask or generate by default for trivial isolated fixes, documentation-only work,
-metadata-only work, or a project that already has a current graph for the same reviewed
-commit. A user can request the graph at any time, which overrides the phase trigger.
-
-The gate is a consent checkpoint:
-
-- user approval permits a bounded graph-generation plan;
-- declining records no failure and continues normal handover;
-- approval does not authorize installation, host-hook changes, uploads, or generated-artifact
-  commits beyond the separately confirmed scope.
-
-## 4. Installation and Trust Boundary
-
-Before installing or trusting Graphify, use the host's external-skill security-audit path
-when available, as required by `modules/35_V6_5_SkillGovernanceAndMandatoryUse.md`.
-
-Graphify installation is state-changing because it can add assistant instructions and hooks.
-Therefore, before any command such as `uv tool install graphifyy` or
-`graphify install --platform codex`:
-
-1. confirm the exact target host/project and whether installation is global or project-scoped;
-2. inspect the external skill/package and its installation effects;
-3. obtain explicit user intent for the installation;
-4. inspect the resulting host/project changes afterward.
-
-This module does not imply that Graphify is installed, approved, or available on the host.
-
-## 5. Data and Output Boundary
-
-- Run Graphify only against the intended **business project**, never against AgentLogic by
-  default and never against unrelated workspace folders.
-- Keep `graphify-out/` in the target project. Do not add it to AgentLogic profiles or bundles.
-- Treat `graph.html` as an external visual artifact; show or link it only after it exists.
-- Code AST analysis is described by Graphify as local-first, but document/media semantic
-  processing and URL ingestion can use configured model/API or network paths. Confirm the
-  selected mode and data boundary before generation.
-- Do not commit graph artifacts unless the user explicitly asks and the target project's
-  repository policy allows them. By default, record durable, verified graph conclusions in
-  `PROJECT_MAP.md` and keep `graphify-out/` out of the tracked project-knowledge surface.
-
-## 6. Recommended Workflow After Consent
-
-1. Confirm target repository, current commit, graph scope, and privacy mode.
-2. Build or refresh the target project's graph using the reviewed installation.
-3. Inspect `GRAPH_REPORT.md` and use scoped graph queries to identify candidate paths.
-4. Verify important graph findings with targeted source reads and the matching runtime or
-   visual evidence tools.
-5. Present `graph.html` as the optional code-view preview and record whether it reflects the
-   reviewed commit.
-
-## 7. Relationship to Existing Gates
-
-- The UI Preview Gate creates a proposed UI design **before** formal UI code.
-- The Graph Preview Gate offers a codebase visualization **after** substantial implementation
-  has converged or while shipping.
-- The Graph Preview Gate is opt-in and does not replace SDD, Red-Team, SRA, or the Mandatory
-  Verification Matrix.
-
-## END FILE: modules/45_V6_8_GraphifyCodeMapIntegration.md
-
----
-
 ## BEGIN FILE: modules/46_V6_8_ProjectKnowledgeSync.md
 
 # V6.8.3 Project-Native Knowledge Sync
@@ -6053,6 +2895,11 @@ CODE_MAP.md
   entrypoints, module ownership, navigation-critical functions/classes, state or storage keys,
   interface/event surfaces, validation commands, and a reviewed commit or freshness marker. It is
   not a source dump, runtime proof, or replacement for targeted reads.
+
+Treat the map as the default code-navigation index: for an inherited project, repair it before
+repeated broad discovery; for an owned project, establish it with the first implementation flow
+and update it with every affected key symbol or impact path. Before editing, use the map to find
+the owning flow and its likely callers/callees, then confirm that narrow source chain.
 
 These files travel with the code in the same normal project commits. They are project facts,
 not private agent memory.
@@ -6218,7 +3065,9 @@ when a design source of truth already exists in Figma. Use the matching Figma sk
 2. **Choose the least invasive capture path.** Use supplied files first. For dynamic public pages,
    use `agent-browser` or `playwright` when available and permitted; use static fetching only for
    static content. Use an approved full-page screenshot path when full-page visual structure is
-   required.
+   required. For permitted layout-heavy documents where screenshot-tile retrieval is materially
+   useful, follow the optional PixelRAG policy in Module 50; it remains discovery support rather
+   than proof of browser behavior or final visible output.
 3. **Extract a constrained reference brief.** Record hierarchy, layout rhythm, typography roles,
    palette family, spacing, responsive behavior, interaction states, motion cues, and explicit
    non-goals. Distinguish observations from inferences.
@@ -6249,6 +3098,7 @@ The workflow output should be a short, reviewable reference brief containing:
 - Modules 29–31 govern the strength of all conclusions.
 - Module 35 governs matching skills and external-skill audits.
 - Module 48 provides the quick problem-to-skill/tool routing table.
+- Module 50 governs the optional Bento, PixelRAG, and Firecrawl source-specific boundaries.
 
 ## 6. Registered comparison source
 
@@ -6284,15 +3134,18 @@ Before acting, the agent must:
 6. state a downgraded result when the required tool or evidence is unavailable.
 
 `Skill available` does not mean `tool permitted`; `tool succeeded` does not mean `claim verified`.
+Apply Module 51 first: select the native tool for the intended work, then use this matrix only to
+refine a specialist route or closure requirement.
 
 ## 2. Problem-to-path matrix
 
 | Problem / intended claim | Required evidence and tool path | Preferred skill when available | Closure requirement |
 | --- | --- | --- | --- |
-| Find where a feature, rule, or symbol lives | Local search/listing → targeted reads | `engineering/wayfinder`, `engineering/research` | Directly read the owning implementation and relevant caller/config. |
+| Take over or navigate a project feature, rule, or symbol | Freshness check → `PROJECT_MAP.md` / `CODE_MAP.md` → targeted search only for map gaps → targeted reads | `engineering/wayfinder`, `engineering/research` | Validate the mapped owner and relevant caller/config; update an affected map entry with the change. |
 | Diagnose a bug or unexpected command failure | Reproduce/log → search/read call chain → narrow fix → command validation | Narrowest installed debugging skill; project-native error record after a material correction | Verify root cause or label as unconfirmed; record material lessons without secrets. |
 | Implement/refactor behavior | Read boundary → reuse search → spec/task → bounded edit → tests/runtime | `engineering/implement`, `ponytail`, `engineering/tdd` | Match spec/task and execute relevant validation. |
 | Current library, product, release, or remote setting | Authoritative external lookup | Official-doc skill/path, `openai-docs` for OpenAI products | Cite or record the live authoritative source; memory is insufficient. |
+| Broad public-site discovery, mapping, or structured collection | Scope/data-egress approval → read-oriented collection → provenance review | Firecrawl only when separately installed, trusted, and approved under Module 50 | Preserve source URLs and meet the evidence route for each resulting claim. |
 | Dynamic web flow, SPA, login, or browser interaction | Real browser interaction and capture | `playwright`; `agent-browser` only under its conditional route rule | Observe the actual flow; static reading alone cannot close it. |
 | Desktop/window/OS visual state | OS-level capture | `screenshot` | Capture the actual target state. |
 | UI appearance, layout, responsive fit, or interaction state | Build/run → screenshot or browser replay → boundary check | `screenshot` for desktop capture; `playwright` for browser flow | Prove visible state, containment, overflow/wrap behavior, and relevant interaction state. |
@@ -6305,8 +3158,10 @@ Before acting, the agent must:
 
 ## 3. Fallback and conflict rules
 
-- For advisory paths outside the canonical contract, use the strongest available tool family and say which required evidence remains missing. For a matched mandatory contract route, do not downgrade: use only its primary/conditional selection rule or report the required block/partial result.
+- For advisory paths outside the canonical contract, use the strongest available tool family and say which required evidence remains missing. For a matched route, honor its declared fallback: an unavailable specialist may use a permitted native evidence path only when the route allows it; an unavailable required evidence capability remains blocked or partial.
 - If multiple skills match, choose the smallest scope; do not load broad libraries for one task.
+- Bento, PixelRAG, and Firecrawl are source-specific optional paths governed by Module 50. Their
+  presence in policy does not establish installation, trust, permission, or a mandatory route.
 - If a specialized skill conflicts with higher-priority safety, permission, SDD, or verification
   rules, the higher-priority rule wins.
 - Do not create a custom replacement script when an approved, available specialized tool already
@@ -6352,11 +3207,13 @@ must read/invoke it before claiming that route was followed.
 
 ## Strict missing-capability policy
 
-For a mandatory route, missing capability, denied permission, or failed required evidence blocks
-implementation when the route says `block_before_*`, and blocks a `verified` completion claim for
-all other routes. The agent may report a partial/static result only with the missing capability and
-next safe action stated explicitly. It must not silently replace a mandatory specialized skill with
-generic reasoning or a custom script.
+For a mandatory route, missing required evidence capability, denied permission, or failed required
+evidence blocks implementation when the route says `block_before_*`, and blocks a `verified`
+completion claim for all other routes. A missing specialist does not by itself block an ordinary
+task when that route explicitly permits a native evidence fallback; record the missing specialist,
+use the permitted native tool, and never claim specialist invocation. The agent may report a
+partial/static result only with the missing capability and next safe action stated explicitly. It
+must not silently replace a strict specialized route with generic reasoning or a custom script.
 
 Explicit opt-outs remain limited to their existing contracts, such as the UI mockup opt-out. They do
 not waive requirements discovery, security evidence, or visual/runtime proof.
@@ -6389,7 +3246,7 @@ unrecorded use must be treated as unverified.
 
 ## Product requirements and UI generation
 
-Use the first-party product-requirements-grilling skill for every requirements-grilling route. It must produce a user-approved brief that passes scripts/validate-requirements-brief.ps1 before mockup generation or UI implementation. For a new project or UI idea, recommend a mockup and explicitly ask whether the user wants it generated. For an existing layout the user dislikes, capture the current layout first; include that screenshot and the user's dissatisfaction/change brief in the image-generation or editing request. Approval or explicit mockup opt-out remains required before formal UI code.
+Use the first-party product-requirements-grilling skill for every requirements-grilling route. It must produce a user-approved brief that passes scripts/validate-requirements-brief.ps1 before mockup generation or UI implementation. For a new project or UI idea, recommend a mockup and explicitly ask whether the user wants it generated. For an existing layout the user dislikes, capture the current layout first; include that screenshot and the user's dissatisfaction/change brief in the image-generation or editing request. This approval/opt-out gate applies to net-new UI and substantial UI refactors; clearly classified small visual corrections may skip a new mockup but never visual verification.
 
 ## Ordered selection and overlap control
 
@@ -6410,6 +3267,10 @@ selection rule. A conditional skill is never proof that a missing primary capabi
 This registry is the sole source of concrete mandatory skill names. Modules 35 and 48 may govern
 availability or evidence families, but they must defer to this registry when naming a required
 skill or deciding whether a fallback is allowed.
+
+Module 51 governs the natural first choice: intent → evidence → native tool → specialist when
+materially useful → closure. The registry refines that choice for routes that need a specific
+capability; it does not turn every routine task into a skill-selection ceremony.
 
 ## Cross-host first-party skill availability
 
@@ -6437,12 +3298,220 @@ from generic routing until the request matches their narrow domain and risk boun
 
 ---
 
+## BEGIN FILE: modules/50_V6_8_ExternalResearchAndArtifactIntegration.md
+
+# V6.8 External Research and Artifact Integration
+
+Status: **Optional external-source policy, active in enhanced profiles.**
+
+This module records policy patterns reviewed from Bento, PixelRAG, and Firecrawl. It imports no
+source code, plugin, skill, service, binary, model, API key, or automatic installation path.
+Discovery of any of those capabilities is not approval, trust, availability, or verification.
+
+## 1. Shared operating boundary
+
+Before using a source-specific capability, classify its intended role: a stakeholder artifact,
+visual-document discovery, or external web collection. Then confirm the smallest acceptable
+scope, the applicable permission posture, data destination, provenance, and matching evidence
+path. Modules 29–31 remain authoritative for verification strength; Modules 35 and 44 govern
+external-extension trust.
+
+- Pin a reviewed release or commit before an installation, integration, or template adoption.
+- Run the external skill/plugin security-audit route before trusting executable instructions.
+- Obtain explicit user intent before an installation, a hosted service request, a credential use,
+  or a side-effecting browser action.
+- Keep credentials in approved secret storage or environment variables only. Do not record them
+  in a bundle, map, specification, generated artifact, or repository file.
+- Never represent an optional source as present on a host merely because this policy names it.
+
+## 2. Bento — optional single-file stakeholder artifact
+
+Source: `https://github.com/nyblnet/bento` (MIT). Bento's self-contained `.bento.html` format
+can carry presentation content and its viewer/editor together. AgentLogic may use that idea only
+as an optional delivery format for a user-requested proposal, handover, or architecture briefing.
+
+### Allowed path
+
+1. Confirm that an interactive single-file presentation is wanted instead of Markdown, PDF, or
+   slides already supported by the project.
+2. Review and pin the source/version and any document-format instructions.
+3. Generate only approved, non-sensitive content into a target-project artifact.
+4. Open or render the artifact and inspect it before handover.
+
+### Non-goals and restrictions
+
+- Do not install Bento's host plugin, download an application, or add marketplace sources by
+  default; a plugin path that downloads software requires separate explicit consent and audit.
+- Do not add Bento runtime code or generated stakeholder artifacts to AgentLogic bundles.
+- Do not use it as a substitute for project documentation, SRA evidence, or source verification.
+
+## 3. PixelRAG — optional visual-document discovery accelerator
+
+Source: `https://github.com/StarTrail-org/PixelRAG` (Apache-2.0). PixelRAG's approach renders
+pages, PDFs, and images into screenshot tiles and retrieves visual structure. Use it only when
+permitted source material depends on tables, charts, diagrams, infographic layout, or PDF/page
+composition that text extraction would materially lose.
+
+### Allowed path
+
+1. Confirm ownership/permission for the source URL or file and whether rendering leaves the
+   device or calls a hosted index.
+2. Prefer a supplied local file or the narrowest approved public URL set.
+3. Use visual retrieval to locate candidate evidence or produce a constrained reference brief.
+4. Verify any consequential finding with targeted reads, browser/runtime evidence, or an actual
+   screenshot as required by Module 29.
+
+### Non-goals and restrictions
+
+- It does not replace Playwright/agent-browser for dynamic browser-flow observation.
+- It does not replace screenshot evidence for a UI-visible claim or user approval of a mockup.
+- Do not install its CLI, model, browser patches, or plugin without a reviewed, pinned source and
+  explicit user approval.
+
+## 4. Firecrawl — optional external web-collection path
+
+Source: `https://github.com/firecrawl/firecrawl` (AGPL-3.0). Firecrawl can search, scrape, map,
+crawl, batch-extract, and interact with public web pages. It is suitable only for a user-approved,
+bounded collection task where ordinary official-source lookup or a narrow browser path is
+insufficient.
+
+### Allowed path
+
+1. Record the purpose, allowed domains/URLs, page or depth limit, requested output fields, and
+   whether self-hosted or hosted processing is proposed.
+2. Obtain explicit consent for hosted processing and any data egress; do not send private,
+   authenticated, paywalled, or credential-bearing content by default.
+3. Use read-oriented search/scrape/map/crawl operations first and retain source URLs/provenance.
+4. Treat click, scroll, write, wait, press, login, submission, or prompt-driven interaction as a
+   permission-sensitive side effect. Confirm the exact target and post-result state before use.
+5. Store API credentials only in approved secrets/environment configuration and inspect results
+   for accidental sensitive-data capture.
+
+### Non-goals and restrictions
+
+- Do not copy AGPL-licensed source or SDK code into AgentLogic bundles.
+- Firecrawl is not the default browser verification tool and does not prove visible UI behavior.
+- Self-hosting, persistent installation, proxy configuration, and MCP/plugin enablement are
+  separate high-risk deployment tasks requiring their own specification and audit.
+
+## 5. Selection guide
+
+| Need | First choice | Optional source path | Required closure |
+| --- | --- | --- | --- |
+| Stakeholder-ready portable briefing | Existing project format | Bento artifact when explicitly requested | Open/render the final artifact; retain normal documentation and SRA evidence. |
+| Visual PDF/page/table/chart analysis | Supplied file plus approved visual capture | PixelRAG when visual retrieval is justified | Confirm conclusions with matching source, runtime, or screenshot evidence. |
+| Broad public website discovery or structured collection | Official sources and narrow lookup | Firecrawl after scope/data-egress approval | Preserve provenance and meet the evidence requirements for the claim. |
+| Dynamic browser flow or final visible UI proof | Playwright / screenshot route | None by default | Fresh browser observation or screenshot with layout-boundary check. |
+
+## 6. Registered comparison sources
+
+- Bento: `https://github.com/nyblnet/bento`; reviewed 2026-07-28; policy-only artifact pattern.
+- PixelRAG: `https://github.com/StarTrail-org/PixelRAG`; reviewed 2026-07-28; policy-only
+  visual-document discovery pattern.
+- Firecrawl: `https://github.com/firecrawl/firecrawl`; reviewed 2026-07-28; policy-only
+  consent-bound external collection pattern.
+
+## END FILE: modules/50_V6_8_ExternalResearchAndArtifactIntegration.md
+
+---
+
+## BEGIN FILE: modules/51_V6_8_AffordanceFirstToolUse.md
+
+# Affordance-First Tool Use
+
+Status: **Normative execution rule for enhanced profiles.**
+
+## 1. Natural operating model
+
+Choose tools the way a person chooses a pen, brush, ruler, or calculator: start with the work to
+be done, then pick the tool whose native function produces the needed result. Do not begin every
+task by asking abstractly which tool to use, and do not use a generic tool when a closer native
+tool is already available and permitted.
+
+The compact loop is:
+
+```text
+intent → evidence or artifact needed → native tool family → optional specialist → verify result
+```
+
+Safety and evidence gates remain part of the loop rather than a second, unrelated procedure.
+
+## 2. Outcome-to-tool reflexes
+
+| When the work is to… | Naturally use… | Close it with… |
+| --- | --- | --- |
+| take over an unfamiliar project | `PROJECT_MAP.md` and `CODE_MAP.md`, then freshness-checked source | a validated entry/module/symbol/impact map before implementation |
+| find where code, a rule, or a file lives | the current code map first; local search only to fill or refresh a missing map entry | a direct read of the mapped owner and relevant boundary |
+| understand or modify an existing behavior | the mapped flow, then only its callers, callees, state/config, and tests | an explicit impact path before editing |
+| write or change a known local artifact | bounded edit/write tool | the matching test, build, or runtime evidence |
+| prove behavior runs | test, build, command, or runtime tool | inspected command/result output |
+| see a UI, layout, screenshot, or visual document | screenshot or real browser capture | visual evidence plus containment/overflow checks |
+| learn a current external fact | authoritative live source | source-linked current evidence |
+| inspect a live browser flow | browser automation | fresh observation/captured artifact |
+| collect a bounded public-web corpus | scoped collection tool | preserved URLs, data-boundary review, and claim-specific evidence |
+| publish, install, delete, or change remote state | target confirmation before mutation | post-result inspection |
+
+The table describes the default reflex, not a permission bypass. A visible tool must still be
+available, allowed, and suitable for the current runtime.
+
+## 3. Map before search, and maintain the map
+
+For an inherited project, do not begin by repeatedly searching and reading random files. First run
+the project freshness check, read `PROJECT_MAP.md` and `CODE_MAP.md`, and compare the relevant
+entries with the current source and diff. If a map is missing or stale, create or repair the
+smallest useful map before implementation:
+
+```text
+entrypoint → module boundary → key function/class → state/interface → callers/callees → validation
+```
+
+For a project being built or owned, establish that map from the first implementation flow. Keep
+`PROJECT_MAP.md` current when structure, boundaries, dependencies, or validation change; keep
+`CODE_MAP.md` current when a key symbol, flow, state/store, interface/event, or validation path
+changes. Before a modification, consult the map to identify likely impact, then validate only the
+necessary source chain. After the modification, update the same map so the next change does not
+start from repository-wide discovery again.
+
+Maps accelerate navigation; they are not runtime proof. The final change still follows the
+matching evidence route.
+
+## 4. Skills are specialist tools, not ceremony
+
+Use a specialized skill when it is installed and materially improves the matched task: for example,
+a requirements-grilling skill for major discovery, browser automation for a live browser flow, or
+a review/security specialty for a requested review. Do not load broad skill libraries merely
+because a task mentions a related word.
+
+If a specialist is unavailable but the route's required evidence tool is available, proceed with
+the native tool path when the route allows it. Record the unavailable specialization and never
+claim the skill was used. If the required evidence itself is unavailable, the corresponding
+verified claim remains blocked. Explicitly strict routes—untrusted-extension security, required
+UI mockup generation, and requested specialized security/code review—remain strict.
+
+## 5. Friction proportionality
+
+- Map and refresh naturally before changing unknown code; search is for filling a known map gap,
+  not for rediscovering the whole project every round.
+- Verify naturally after an implementation or claim; do not create a separate ritual for obvious
+  tool selection.
+- Add confirmation only where risk rises: destructive/local side effects, credentials, data
+  egress, external state, installation, release, and trust changes.
+- Prefer the smallest tool that produces the correct evidence. Escalate only when the first tool
+  cannot close the question.
+
+Modules 29–31 define evidence strength, Module 27 defines risk gates, and Modules 48–49 define
+the registered specialist routes. This module governs the first practical choice among them.
+
+## END FILE: modules/51_V6_8_AffordanceFirstToolUse.md
+
+---
+
 ## BEGIN FILE: contracts/skill-routing.json
 
 {
   "schema_version": 2,
   "purpose": "Canonical capability routes with an ordered primary skill and explicitly conditional supplements; aliases identify candidates, not installed or trusted tools.",
-  "completion_policy": "A mandatory route without an available mapped capability blocks implementation or verified completion. Report the gap and request a safe next step; never silently substitute a generic workflow.",
+  "completion_policy": "A missing required evidence capability blocks implementation or verified completion. A missing specialist blocks only routes whose fallback is strict; routes that explicitly allow native evidence fallback may proceed with disclosure and matching evidence. Never claim an unavailable skill was used.",
   "routes": [
     {
       "id": "requirements-grilling",
@@ -6603,7 +3672,7 @@ from generic routing until the request matches their narrow domain and risk boun
         "release"
       ],
       "capability": "package_validation",
-      "fallback": "block_release_or_install_completion",
+      "fallback": "allow_native_package_validation_with_disclosure",
       "closure_evidence": [
         "artifact_validation",
         "post_result_inspection"
@@ -6614,7 +3683,7 @@ from generic routing until the request matches their narrow domain and risk boun
       "conditional_host_skill_aliases": [
         "ci-cd-pipeline-builder"
       ],
-      "selection_rule": "Use release-manager for release readiness and artifact closure. Use ci-cd-pipeline-builder when pipeline design or repair is part of the release work."
+      "selection_rule": "Use release-manager for release readiness and artifact closure when available. When it is unavailable, native build/package validation plus post-result inspection may close a local install or package task with the gap disclosed. Use ci-cd-pipeline-builder when pipeline design or repair is part of the release work."
     },
     {
       "id": "ui-implementation",
@@ -6702,32 +3771,4 @@ from generic routing until the request matches their narrow domain and risk boun
 }
 
 ## END FILE: contracts/host-skill-capabilities.json
-
----
-
-## BEGIN FILE: docs/software-candidates.md
-
-# Reviewed Software Candidates
-
-Status: **review-required; not approved for automatic installation.**
-
-Use this directory when a user asks what tooling is missing. Report only candidates relevant to the
-active project. Before installation, jointly choose an exact release/commit, verify publisher,
-license, checksum/signature, dependencies, permissions, and run the skill/security audit where a
-skill or GitHub repository is involved.
-
-| Need trigger | Candidate | Source class | Pre-install decision requirement |
-| --- | --- | --- | --- |
-| Infrastructure as code | OpenTofu | Official project / `opentofu/opentofu` | Pin release; confirm cloud/provider scope and MPL-2.0 compatibility. |
-| Kubernetes cluster operation | kubectl | Kubernetes official distribution | Match client within one minor version of the target cluster; do not install by default. |
-| PostgreSQL project or remote database debugging | PostgreSQL `psql` client | PostgreSQL download channel; Windows installer is EDB-hosted | Confirm client-only scope, supplier, version, and connection/credential handling. |
-| Video, audio, recording, or media conversion | FFmpeg | FFmpeg source; Windows binaries are third-party builds | Prefer source/officially linked build source; pin binary, verify checksum, review licensing/codecs. |
-| Go application or Go-based tooling | Go | Official Go distribution / `golang/go` | Pin toolchain version and confirm a Go build/test need. |
-| Browser UI automation | Playwright | Microsoft official project | Prefer the existing skill wrapper first; pin package/browser versions before persistent install. |
-| Agent-specific browser automation | agent-browser | `vercel-labs/agent-browser` candidate | Audit pinned checkout for network, background service, cloud-provider, and credential behavior before any install. |
-| Containers/local dependency services | Docker Desktop or an approved open-source alternative | Vendor/open-source candidate | Confirm licensing, WSL/virtualization impact, and organization policy before install. |
-
-Never interpret a listed candidate as trusted, installed, or permitted.
-
-## END FILE: docs/software-candidates.md
 

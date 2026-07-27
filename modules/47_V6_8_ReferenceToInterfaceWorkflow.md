@@ -39,7 +39,9 @@ when a design source of truth already exists in Figma. Use the matching Figma sk
 2. **Choose the least invasive capture path.** Use supplied files first. For dynamic public pages,
    use `agent-browser` or `playwright` when available and permitted; use static fetching only for
    static content. Use an approved full-page screenshot path when full-page visual structure is
-   required.
+   required. For permitted layout-heavy documents where screenshot-tile retrieval is materially
+   useful, follow the optional PixelRAG policy in Module 50; it remains discovery support rather
+   than proof of browser behavior or final visible output.
 3. **Extract a constrained reference brief.** Record hierarchy, layout rhythm, typography roles,
    palette family, spacing, responsive behavior, interaction states, motion cues, and explicit
    non-goals. Distinguish observations from inferences.
@@ -70,6 +72,7 @@ The workflow output should be a short, reviewable reference brief containing:
 - Modules 29–31 govern the strength of all conclusions.
 - Module 35 governs matching skills and external-skill audits.
 - Module 48 provides the quick problem-to-skill/tool routing table.
+- Module 50 governs the optional Bento, PixelRAG, and Firecrawl source-specific boundaries.
 
 ## 6. Registered comparison source
 

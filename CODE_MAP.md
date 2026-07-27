@@ -1,25 +1,32 @@
 # Code Map
 
+This text-first map is the default navigation index for this repository. Confirm active facts with
+current source and matching verification before making a strong claim.
+
 ## Key flows
 
-| Flow | Source of truth | Validation |
-| --- | --- | --- |
-| Profile compilation | `manifest.json` â†’ `scripts/build-profile.ps1` â†’ `dist/` | `scripts/validate-package.ps1` and bundle verification |
-| Entry enforcement | entry documents + `modules/15_LogicEntryChecklist.md` | `node scripts/check-logic-entry.js` |
-| Skill/tool selection | Modules 21, 24â€“25, 29â€“31, 35, and 48 | targeted evidence required by Module 29 |
-| Reference-to-interface work | Modules 39 and 47 | user-approved mockup plus visual/runtime evidence |
+| Flow | Owner / path | Change-impact route | Validation |
+| --- | --- | --- | --- |
+| Profile compilation | `manifest.json` -> `scripts/build-profile.ps1` -> `dist/` | profile file list, adapters, generated bundles | `scripts/validate-package.ps1` |
+| Entry enforcement | `00_START_HERE.md`, `AGENTS.md`, `README.md`, Module 15 | entry documents, logic-chain references, operational entry files | `node scripts/check-logic-entry.js` |
+| Map-first code navigation | Modules 46 and 51 -> `PROJECT_MAP.md` / `CODE_MAP.md` | map -> owner -> callers/callees/config -> targeted reads; search only for a map gap | source reads plus the matching evidence route |
+| Tool and skill routing | Modules 27, 29-31, 48-49; `contracts/skill-routing.json` | intent -> evidence -> native tool -> specialist -> closure | evidence matched by Module 29; routing validator |
+| UI work | Modules 38-39 and 49 | requirements -> mockup when required -> approved scope -> implementation | visual artifact and containment check |
+| External research and artifacts | Modules 47 and 50 | provenance -> consent/trust -> bounded capture or artifact -> targeted verification | matching source/runtime/visual evidence |
+| Host installation | `install.ps1`, adapters, deployment scripts | target host -> generated bundle -> first-party skill deployment -> post-check | package validation and installed-path inspection |
 
 ## Interfaces and state
 
-- `manifest.json` is the profile and host-output interface.
-- `modules/47_V6_8_ReferenceToInterfaceWorkflow.md` defines the optional reference-workflow
-  contract; it imports no external runtime dependency.
-- `modules/48_V6_8_SkillAndToolRouting.md` defines the problem-to-evidence/skill routing aid.
+- `manifest.json`: current version, profile membership, host output contract.
+- `versions/AgentLogic_V6_8_4.md`: stable version-source narrative.
+- `contracts/skill-routing.json`: canonical mandatory capability routes and closure evidence.
+- `contracts/host-skill-capabilities.json`: first-party skill deployment locations.
+- `.specify/`: scoped specification, plan, task, and ship records for non-trivial work.
+- `PROJECT_MAP.md`: repository L1-L4 map and validation boundary index.
+- `.learnings/ERRORS.md`: redacted material-error records only.
 
-| Autonomous skill enforcement | contracts/skill-routing.json â†’ Module 49 â†’ scripts/validate-skill-routing.ps1 | registry validator + package validation |
+## Map maintenance
 
-| Product/UI requirements | `product-requirements-grilling` skill ¡ú `.specify/<task>/requirements-brief.md` ¡ú `validate-requirements-brief.ps1` ¡ú image/UI route | brief approval/content validation; mockup decision required |
-
-| Ordered routing policy | contracts/skill-routing.json (schema v2) ¡ú Module 49 ¡ú alidate-skill-routing.ps1 | primary/conditional alias and UI capability-separation assertions |
-
-| First-party skill deployment | host adapter ¡ú deploy-first-party-skill.ps1 ¡ú host-specific skill path from host-skill-capabilities.json | exact deployed SKILL.md path verified by install.ps1 |
+- When inheriting a project, refresh the maps and reconcile them with the working tree before broad discovery.
+- When owning a project, add each new key flow at its first implementation and update affected owner, interface, state, and validation rows in the same change.
+- A map is a navigation aid, not runtime or remote-state proof.

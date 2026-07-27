@@ -17,11 +17,11 @@ Do not continue deeper reading, modify files, delete files, perform write action
 or begin implementation before the logic-entry loop above has been completed.
 -->
 
-# 🌌 AgentLogic: Autonomous Evolving Rule Engine (V6.8.3)
+# 🌌 AgentLogic: Autonomous Evolving Rule Engine (V6.8.4)
 
 [![Agentic Code](https://img.shields.io/badge/Agent-Autonomous-blueviolet?style=flat-square)](https://github.com/UIhoshi/AgentLogic)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/Version-V6.8.3_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_8_3.md)
+[![Version](https://img.shields.io/badge/Version-V6.8.4_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_8_4.md)
 
 AgentLogic is a versioned primary-logic package designed to be pulled into local AI coding hosts (such as Codex, Claude Code, Gemini Pro) and used as their default operating mind. It consolidates multi-turn session workflows, tool selection matrix, security sandbox auditing, and dynamic domain extensions.
 
@@ -93,7 +93,7 @@ This rule package supports **automated self-evolution** and developer logging:
 ```
 
 > [!TIP]
-> **Design-First Prototyping Gate**: Before any formal UI implementation, the agent must use text-to-image generation to produce a mockup, show it to the user, and wait for review. The only bypass is an explicit user instruction not to use this step.
+> **Design-First Prototyping Gate**: Net-new UI and substantial UI refactors require a text-to-image mockup and user review before implementation. A clearly classified small visual correction may skip a new mockup, but still requires visual verification; an explicit user opt-out always bypasses mockup approval.
 
 ## 🎨 Original Frontend Template Library
 
@@ -124,6 +124,9 @@ During its evolutionary cycles, AgentLogic has integrated concepts and structure
 | **Grok Build (comparative reference)** | [xai-org/grok-build](https://github.com/xai-org/grok-build) | Compares provider-neutral runtime execution, state-preserving compaction, and deny-overrides policies |
 | **Graphify (external code-map reference)** | [Graphify-Labs/graphify](https://github.com/Graphify-Labs/graphify) | Provides an optional queryable project graph and user-approved code-view preview workflow |
 | **MengTo Skills (workflow comparison)** | [MengTo/Skills](https://github.com/MengTo/Skills) | Informs optional reference-to-interface capture, extraction, and verification workflows without importing external skills |
+| **Bento (artifact workflow comparison)** | [nyblnet/bento](https://github.com/nyblnet/bento) | Defines an optional, user-requested single-file stakeholder-artifact policy; no plugin or runtime is imported |
+| **PixelRAG (visual-document workflow comparison)** | [StarTrail-org/PixelRAG](https://github.com/StarTrail-org/PixelRAG) | Defines an optional visual-document discovery policy; it does not replace browser or screenshot verification |
+| **Firecrawl (external-collection workflow comparison)** | [firecrawl/firecrawl](https://github.com/firecrawl/firecrawl) | Defines an optional consent-bound public-web collection policy; no API, SDK, or service is bundled |
 
 ---
 
@@ -131,7 +134,7 @@ During its evolutionary cycles, AgentLogic has integrated concepts and structure
 
 1. **Keep it Pure**: No business logic or project-specific implementations should be written into `AgentLogic` rule files.
 2. **Specify Before Writing**: Always compile technical blueprints to `.specify/spec.md` and `.specify/plan.md` before touching code.
-3. **Generate via Bundle**: Never edit `dist/` bundles manually. Always write updates to version files (e.g. `versions/AgentLogic_V6_8_3.md`), then run `build-profile.ps1` to rebuild the adapter targets.
+3. **Generate via Bundle**: Never edit `dist/` bundles manually. Always write updates to version files (e.g. `versions/AgentLogic_V6_8_4.md`), then run `build-profile.ps1` to rebuild the adapter targets.
 ## V6.8 Operational Integration
 
 The default `core-enhanced` profile includes
@@ -155,7 +158,12 @@ permitted video, page, screenshot, and HTML references, plus a
 required evidence tool before the narrowest matching skill. Neither module installs or trusts
 external skills automatically.
 
-## V6.8.3 Project-Native Knowledge Sync
+V6.8.4 keeps `core-enhanced` focused on high-frequency execution: start from the desired outcome,
+select the native evidence/action tool, then add a specialist skill only when it materially helps.
+The complete narrative governance set remains available through the `governance-reference` profile
+for deep maintenance and policy audits.
+
+## V6.8.4 Project-Native Knowledge Sync
 
 Business projects synchronize their own concise operational facts and symbol-level navigation with code through tracked
 `AGENTS.md`, `PROJECT_MAP.md`, `CODE_MAP.md`, and `.learnings/ERRORS.md`. `CODE_MAP.md` is the mandatory

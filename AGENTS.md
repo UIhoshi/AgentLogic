@@ -52,7 +52,7 @@ The current logic-entry chain is:
 
 1. `00_START_HERE.md`
 2. `README.md`
-3. `versions/AgentLogic_V6_8_3.md`
+3. `versions/AgentLogic_V6_8_4.md`
 4. `modules/01_MasterLogic.md`
 5. `modules/15_LogicEntryChecklist.md`
 
@@ -84,7 +84,7 @@ Before selecting a development lifecycle, classify the task:
 | Documentation-only or metadata-only change | Entry Gate, targeted review, and package/link validation |
 | Trivial isolated fix | Lightweight specification and targeted validation; skip architectural Red-Team when no architectural assumption exists |
 | Feature, refactor, or multi-file behavior change | Full SDD lifecycle, including Red-Team before Tasks and Converge after implementation |
-| Frontend visual change | Matching SDD path plus mandatory text-to-image preview and user review before formal UI implementation, unless the user explicitly opts out; screenshot/layout-boundary verification remains required for visible behavior |
+| Frontend visual change | Net-new UI and substantial refactors require text-to-image preview and review; clearly classified small visual corrections may skip a new mockup but still require screenshot/layout-boundary verification; explicit opt-out always bypasses mockup approval |
 | Install, packaging, or release change | Target confirmation, build/package verification, post-result inspection, and applicable SRA artifacts |
 
 The matching gate is mandatory; unrelated gates are not. This prevents both skipped safety checks
@@ -95,8 +95,10 @@ and unnecessary process overhead.
 1. **Spec-Driven Development (SDD) Gate** (`modules/38_V6_6_SpecDrivenDevelopment.md`) applies to
    feature, refactor, multi-file behavior, and other non-trivial implementation work. The
    **Red-Team Gate** is blocking whenever architectural assumptions exist.
-   Formal UI implementation must first pass the text-to-image preview and user-review gate
-   defined by `modules/39_V6_6_TasteFrontendDesign.md`, unless the user explicitly opts out.
+   Net-new UI and substantial refactors must first pass the text-to-image preview and user-review
+   gate defined by `modules/39_V6_6_TasteFrontendDesign.md`. Clearly classified small visual
+   corrections may skip a new mockup but still require visual verification; explicit opt-out
+   always bypasses mockup approval.
 2. **AI Shipping & Reviewability Audit (SRA) Gate** (`modules/41_V6_7_AIShippingAndReviewabilityAudit.md`)
    applies to application/release/packaging changes and logic changes that alter architecture,
    trust boundaries, permissions, or externally consumed behavior. Its five core artifacts are
@@ -131,4 +133,4 @@ This repository is logic infrastructure, not a business-project workspace.
 
 - Human-first entry: `00_START_HERE.md`
 - Stable host binding entry: `MAIN.md`
-- Versioned main logic source: `versions/AgentLogic_V6_8_3.md`
+- Versioned main logic source: `versions/AgentLogic_V6_8_4.md`

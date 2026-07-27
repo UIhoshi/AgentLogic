@@ -44,5 +44,9 @@ foreach ($path in @($governancePath, $routingPath)) { if (-not (Test-Path $path)
 $governance = Get-Content -Raw -Encoding UTF8 $governancePath
 if ($governance -notmatch [regex]::Escape('Concrete mandatory skill selection is defined only by `contracts/skill-routing.json` and Module 49.')) { throw 'Skill governance does not defer concrete mandatory selection to the canonical registry.' }
 $routing = Get-Content -Raw -Encoding UTF8 $routingPath
-foreach ($anchor in @('For a matched mandatory contract route, do not downgrade:', 'Module 49 and the schema-v2 contract override any older concrete skill names')) { if ($routing -notmatch [regex]::Escape($anchor)) { throw "Routing module missing canonical precedence anchor: $anchor" } }
+foreach ($anchor in @('For a matched route, honor its declared fallback:', 'Module 49 and the schema-v2 contract override any older concrete skill names')) { if ($routing -notmatch [regex]::Escape($anchor)) { throw "Routing module missing canonical precedence anchor: $anchor" } }
+$affordancePath = Join-Path $RepoRoot "modules\51_V6_8_AffordanceFirstToolUse.md"
+if (-not (Test-Path $affordancePath)) { throw "Missing affordance-first tool-use module: $affordancePath" }
+$affordance = Get-Content -Raw -Encoding UTF8 $affordancePath
+foreach ($anchor in @('Natural operating model', 'Outcome-to-tool reflexes')) { if ($affordance -notmatch [regex]::Escape($anchor)) { throw "Affordance module missing anchor: $anchor" } }
 Write-Host "Autonomous skill routing validation passed ($($registry.routes.Count) routes)."
