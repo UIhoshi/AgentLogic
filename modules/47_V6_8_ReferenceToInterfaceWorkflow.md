@@ -73,6 +73,8 @@ The workflow output should be a short, reviewable reference brief containing:
 - Module 35 governs matching skills and external-skill audits.
 - Module 48 provides the quick problem-to-skill/tool routing table.
 - Module 50 governs the optional Bento, PixelRAG, and Firecrawl source-specific boundaries.
+- Module 52 governs the optional img2threejs route when a permitted reference image must become
+  a concrete model for an interactive 3D webpage; it does not apply to static visual inspiration.
 
 ## 6. Registered comparison source
 

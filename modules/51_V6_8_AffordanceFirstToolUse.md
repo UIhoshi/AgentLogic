@@ -27,6 +27,7 @@ Safety and evidence gates remain part of the loop rather than a second, unrelate
 | write or change a known local artifact | bounded edit/write tool | the matching test, build, or runtime evidence |
 | prove behavior runs | test, build, command, or runtime tool | inspected command/result output |
 | see a UI, layout, screenshot, or visual document | screenshot or real browser capture | visual evidence plus containment/overflow checks |
+| build an interactive 3D webpage | native Three.js/frontend path; use img2threejs only for approved reference-image model reconstruction | browser/runtime, visual, containment, performance, and accessibility evidence |
 | learn a current external fact | authoritative live source | source-linked current evidence |
 | inspect a live browser flow | browser automation | fresh observation/captured artifact |
 | collect a bounded public-web corpus | scoped collection tool | preserved URLs, data-boundary review, and claim-specific evidence |

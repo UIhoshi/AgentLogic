@@ -1,9 +1,9 @@
-# MANDATORY AGENT EXECUTIVE PROTOCOL (AgentLogic V6.8.4)
+# MANDATORY AGENT EXECUTIVE PROTOCOL (AgentLogic V6.8.5)
 
 - Host target: antigravity
 - Profile: core-enhanced
 - Stable entry: MAIN.md
-- Version: V6.8.4
+- Version: V6.8.5
 
 > [!CRITICAL]
 > **EXECUTION vs SUMMARIZATION MANDATE**:
@@ -84,7 +84,7 @@ validation, review, packaging, or rule synchronization work, the agent MUST full
 following files from beginning to end in this exact order:
 
 1. `README.md`
-2. `versions/AgentLogic_V6_8_4.md`
+2. `versions/AgentLogic_V6_8_5.md`
 3. `modules/01_MasterLogic.md`
 4. `modules/15_LogicEntryChecklist.md`
 
@@ -167,11 +167,11 @@ Do not continue deeper reading, modify files, delete files, perform write action
 or begin implementation before the logic-entry loop above has been completed.
 -->
 
-# 🌌 AgentLogic: Autonomous Evolving Rule Engine (V6.8.4)
+# 🌌 AgentLogic: Autonomous Evolving Rule Engine (V6.8.5)
 
 [![Agentic Code](https://img.shields.io/badge/Agent-Autonomous-blueviolet?style=flat-square)](https://github.com/UIhoshi/AgentLogic)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/Version-V6.8.4_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_8_4.md)
+[![Version](https://img.shields.io/badge/Version-V6.8.5_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_8_5.md)
 
 AgentLogic is a versioned primary-logic package designed to be pulled into local AI coding hosts (such as Codex, Claude Code, Gemini Pro) and used as their default operating mind. It consolidates multi-turn session workflows, tool selection matrix, security sandbox auditing, and dynamic domain extensions.
 
@@ -277,6 +277,7 @@ During its evolutionary cycles, AgentLogic has integrated concepts and structure
 | **Bento (artifact workflow comparison)** | [nyblnet/bento](https://github.com/nyblnet/bento) | Defines an optional, user-requested single-file stakeholder-artifact policy; no plugin or runtime is imported |
 | **PixelRAG (visual-document workflow comparison)** | [StarTrail-org/PixelRAG](https://github.com/StarTrail-org/PixelRAG) | Defines an optional visual-document discovery policy; it does not replace browser or screenshot verification |
 | **Firecrawl (external-collection workflow comparison)** | [firecrawl/firecrawl](https://github.com/firecrawl/firecrawl) | Defines an optional consent-bound public-web collection policy; no API, SDK, or service is bundled |
+| **img2threejs (interactive 3D-web workflow comparison)** | [img2threejs/img2threejs](https://github.com/img2threejs/img2threejs) | Defines an optional reference-image-to-procedural-Three.js model route for approved interactive 3D web work; no skill or runtime is bundled |
 
 ---
 
@@ -284,7 +285,7 @@ During its evolutionary cycles, AgentLogic has integrated concepts and structure
 
 1. **Keep it Pure**: No business logic or project-specific implementations should be written into `AgentLogic` rule files.
 2. **Specify Before Writing**: Always compile technical blueprints to `.specify/spec.md` and `.specify/plan.md` before touching code.
-3. **Generate via Bundle**: Never edit `dist/` bundles manually. Always write updates to version files (e.g. `versions/AgentLogic_V6_8_4.md`), then run `build-profile.ps1` to rebuild the adapter targets.
+3. **Generate via Bundle**: Never edit `dist/` bundles manually. Always write updates to version files (e.g. `versions/AgentLogic_V6_8_5.md`), then run `build-profile.ps1` to rebuild the adapter targets.
 ## V6.8 Operational Integration
 
 The default `core-enhanced` profile includes
@@ -303,17 +304,19 @@ whether to generate a Graphify code view. Graphify is not installed or run autom
 
 The enhanced profile also provides an optional
 [`Reference-to-Interface Workflow`](./modules/47_V6_8_ReferenceToInterfaceWorkflow.md) for
-permitted video, page, screenshot, and HTML references, plus a
+permitted video, page, screenshot, and HTML references, plus an optional
+[`img2threejs Interactive 3D Web Integration`](./modules/52_V6_8_Img2ThreeJs3DWebIntegration.md)
+for approved reference-image model reconstruction, and a
 [`Skill and Tool Routing`](./modules/48_V6_8_SkillAndToolRouting.md) matrix for selecting the
 required evidence tool before the narrowest matching skill. Neither module installs or trusts
 external skills automatically.
 
-V6.8.4 keeps `core-enhanced` focused on high-frequency execution: start from the desired outcome,
+V6.8.5 keeps `core-enhanced` focused on high-frequency execution: start from the desired outcome,
 select the native evidence/action tool, then add a specialist skill only when it materially helps.
 The complete narrative governance set remains available through the `governance-reference` profile
 for deep maintenance and policy audits.
 
-## V6.8.4 Project-Native Knowledge Sync
+## V6.8.5 Project-Native Knowledge Sync
 
 Business projects synchronize their own concise operational facts and symbol-level navigation with code through tracked
 `AGENTS.md`, `PROJECT_MAP.md`, `CODE_MAP.md`, and `.learnings/ERRORS.md`. `CODE_MAP.md` is the mandatory
@@ -384,7 +387,7 @@ The current logic-entry chain is:
 
 1. `00_START_HERE.md`
 2. `README.md`
-3. `versions/AgentLogic_V6_8_4.md`
+3. `versions/AgentLogic_V6_8_5.md`
 4. `modules/01_MasterLogic.md`
 5. `modules/15_LogicEntryChecklist.md`
 
@@ -465,28 +468,28 @@ This repository is logic infrastructure, not a business-project workspace.
 
 - Human-first entry: `00_START_HERE.md`
 - Stable host binding entry: `MAIN.md`
-- Versioned main logic source: `versions/AgentLogic_V6_8_4.md`
+- Versioned main logic source: `versions/AgentLogic_V6_8_5.md`
 
 ## END FILE: AGENTS.md
 
 ---
 
-## BEGIN FILE: versions/AgentLogic_V6_8_4.md
+## BEGIN FILE: versions/AgentLogic_V6_8_5.md
 
-# AgentLogic V6.8.4
+# AgentLogic V6.8.5
 
-Status: **Current Stable V6.8.4 Line**.
+Status: **Current Stable V6.8.5 Line**.
 Promoted from V6.8.1 with project-native knowledge synchronization: project L1-L4 maps and
 redacted error records now travel with the corresponding project repository rather than
 requiring a separate history repository for ordinary work.
 
-This file defines the stable V6.8.4 logic line. It operationalizes the core V6 philosophy with deep integrations for cybersecurity routing, structured specification-driven workflows, premium anti-slop frontend design rules, visual system matrix mapping, shipping audits, project-native knowledge synchronization, and interactive human-readable project summaries.
+This file defines the stable V6.8.5 logic line. It operationalizes the core V6 philosophy with deep integrations for cybersecurity routing, structured specification-driven workflows, premium anti-slop frontend design rules, visual system matrix mapping, shipping audits, project-native knowledge synchronization, and interactive human-readable project summaries.
 
 ---
 
-## 1. The V6.8.4 Mandate
+## 1. The V6.8.5 Mandate
 
-V6.8.4 extends the V6.8 line with a project-native synchronization contract designed to keep
+V6.8.5 extends the V6.8 line with a project-native synchronization contract designed to keep
 project code, L1-L4 facts, and durable error lessons on the same Git timeline.
 
 Key Enhancements:
@@ -512,6 +515,10 @@ Key Enhancements:
   closure rule, and makes the default profile an execution-focused bundle while retaining a full
   `governance-reference` profile for deep policy work. See
   `modules/51_V6_8_AffordanceFirstToolUse.md`.
+- **Interactive 3D Web Integration**: Adds an optional, policy-only route for approved interactive
+  3D webpage models: static visuals stay on the UI route, generic interaction stays on the native
+  Three.js route, and reference-image model reconstruction may select `img2threejs` only after
+  explicit trust and installation gates. See `modules/52_V6_8_Img2ThreeJs3DWebIntegration.md`.
 - **Map-First Navigation and Risk Closure**: Inherited projects refresh their project/code maps
   before broad discovery; owned projects maintain maps as flows evolve. The default profile keeps
   the tool-permission risk matrix needed by the affordance-first execution rule.
@@ -578,21 +585,23 @@ The V6.8.1 line is supported by a modular suite of governance rules:
   for Bento, PixelRAG, and Firecrawl.
 - `modules/51_V6_8_AffordanceFirstToolUse.md`: Normative outcome-to-tool selection rule and
   context-budget posture.
+- `modules/52_V6_8_Img2ThreeJs3DWebIntegration.md`: Optional source-specific policy for
+  approved reference-image procedural-model reconstruction in interactive 3D web work.
 
 ---
 
 ## 3. Stable Promotion Summary
 
-The V6.8.4 line is now promoted to stable status.
+The V6.8.5 line is now promoted to stable status.
 - **Stable Entry**: `MAIN.md`
-- **Current Version**: `V6.8.4`
-- **Default Profile**: `core-enhanced` (a lean V6.8.4 execution bundle with project-native knowledge synchronization, risk/verification gates, SDD, UI, SRA, operational contracts, and policy-only external research integration)
+- **Current Version**: `V6.8.5`
+- **Default Profile**: `core-enhanced` (a lean V6.8.5 execution bundle with project-native knowledge synchronization, risk/verification gates, SDD, UI, SRA, operational contracts, and policy-only external research integration)
 
 ---
 
 ## 4. Reference Source Registration
 
-The V6.8.4 stable line integrates the following external source repositories:
+The V6.8.5 stable line integrates the following external source repositories:
 
 - **Cybersecurity Skills Router**:
   - Source URL: `https://github.com/zhaoxuya520/reverse-skill`
@@ -643,12 +652,16 @@ The V6.8.4 stable line integrates the following external source repositories:
   - Source URL: `https://github.com/firecrawl/firecrawl`
   - Integration path: `modules/50_V6_8_ExternalResearchAndArtifactIntegration.md`
   - Integration date: `2026-07-28`; policy-only, no API, SDK, or self-hosted service installed
+- **img2threejs (interactive 3D-web workflow comparison)**:
+  - Source URL: `https://github.com/img2threejs/img2threejs`
+  - Integration path: `modules/52_V6_8_Img2ThreeJs3DWebIntegration.md`
+  - Observed on `2026-08-08`; `main` pinned for review at `d6673386f89673a58736f8d398dd16ece67874f5`; policy-only, no source checkout, skill, or runtime installed
 
 ---
 
 ## 5. Skill-System Integration Rule
 
-V6.8.4 treats general programming skills, cybersecurity domain skills, visual design skills, and operational integration contracts as portable, logic-carried assets under the `skills/` and `modules/` directories. The Grok Build comparison remains a method-layer reference and does not grant trust to external executable extensions.
+V6.8.5 treats general programming skills, cybersecurity domain skills, visual design skills, and operational integration contracts as portable, logic-carried assets under the `skills/` and `modules/` directories. The Grok Build comparison remains a method-layer reference and does not grant trust to external executable extensions.
 
 Key stable rules:
 - Logic package rules outrank individual skills.
@@ -673,6 +686,9 @@ Key stable rules:
 - Code navigation is map-first: inherited projects freshness-check and repair project/code maps
   before broad discovery; owned projects maintain those maps with each affected flow so change
   impact can be found before editing.
+- `img2threejs` is an optional source-specific candidate for reference-image procedural models in
+  interactive 3D webpages. It does not activate for static 3D-feel UI visuals or generic Three.js
+  scenes, and it remains unavailable until separately reviewed, trusted, and installed.
 
 
 
@@ -689,13 +705,13 @@ For future logic iterations, a version line must explicitly record its external 
 
 The enhanced profile includes Module 49 and the canonical routing registry. Mandatory task routes must record a mapped available skill, invocation evidence, and closure evidence; missing mandatory capabilities block implementation or verified completion rather than silently degrading. docs/software-candidates.md is a review-required decision queue, never an auto-install list.
 
-## END FILE: versions/AgentLogic_V6_8_4.md
+## END FILE: versions/AgentLogic_V6_8_5.md
 
 ---
 
 ## BEGIN FILE: modules/01_MasterLogic.md
 
-# AgentLogic V6.8.4 Master Logic
+# AgentLogic V6.8.5 Master Logic
 
 本文件是 AgentLogic 仓库的项目级主逻辑摘要。它描述本仓库中的规则、验证、安装和
 打包资产，不描述任何外部业务项目或某个具体 Agentic CLI 产品的源码事实。
@@ -720,7 +736,7 @@ The enhanced profile includes Module 49 and the canonical routing registry. Mand
 
 ### L2：会话规则与开发生命周期 (Session & Development Lifecycle)
 
-- 稳定版本源：`versions/AgentLogic_V6_8_4.md`
+- 稳定版本源：`versions/AgentLogic_V6_8_5.md`
 - 主逻辑摘要：`modules/01_MasterLogic.md`
 - Agent 强制规则：`modules/12_AgentEnforcement.md`
 - 入口清单：`modules/15_LogicEntryChecklist.md`
@@ -731,6 +747,7 @@ The enhanced profile includes Module 49 and the canonical routing registry. Mand
 - 技能与工具路由：`modules/48_V6_8_SkillAndToolRouting.md`
 - 外部研究与交付物整合：`modules/50_V6_8_ExternalResearchAndArtifactIntegration.md`
 - 工具可供性优先路由：`modules/51_V6_8_AffordanceFirstToolUse.md`
+- 交互式 3D 网页模型策略：`modules/52_V6_8_Img2ThreeJs3DWebIntegration.md`
 - 任务规格与状态：`.specify/`
 
 ### L3：安全、权限与验证控制 (Safety & Verification Control)
@@ -834,6 +851,9 @@ UI 实施完成后仍必须执行截图、父子布局边界、溢出、换行�
   Firecrawl 的可选来源政策；不得从该政策推断任何组件已安装、可信或可调用。
 - `modules/51_V6_8_AffordanceFirstToolUse.md` 要求从任务意图和所需证据自然选择工具；
   默认 profile 以执行为中心，完整治理内容在 `governance-reference` profile 中按需加载。
+- `modules/52_V6_8_Img2ThreeJs3DWebIntegration.md` 定义可选的交互式 3D 网页模型路线：
+  静态 3D 感视觉走 UI 路径，通用 3D 交互走原生 Three.js 路径，只有经批准的参考图模型重建
+  才能候选 `img2threejs`，且不得推断已安装、可信或可执行。
 - 多模块功能、重大重构、架构或发布工作在 Converge/Ship 时应询问用户是否需要代码视图预览。
 - 用户明确同意后，才可在目标业务项目中生成 `graphify-out/`；不得默认在 AgentLogic 仓库内生成，也不得把外部图谱结果当作运行时事实证明。
 
@@ -3099,6 +3119,8 @@ The workflow output should be a short, reviewable reference brief containing:
 - Module 35 governs matching skills and external-skill audits.
 - Module 48 provides the quick problem-to-skill/tool routing table.
 - Module 50 governs the optional Bento, PixelRAG, and Firecrawl source-specific boundaries.
+- Module 52 governs the optional img2threejs route when a permitted reference image must become
+  a concrete model for an interactive 3D webpage; it does not apply to static visual inspiration.
 
 ## 6. Registered comparison source
 
@@ -3150,6 +3172,7 @@ refine a specialist route or closure requirement.
 | Desktop/window/OS visual state | OS-level capture | `screenshot` | Capture the actual target state. |
 | UI appearance, layout, responsive fit, or interaction state | Build/run → screenshot or browser replay → boundary check | `screenshot` for desktop capture; `playwright` for browser flow | Prove visible state, containment, overflow/wrap behavior, and relevant interaction state. |
 | Net-new UI, new visual asset, or approved reference-to-interface work | Requirements brief → `imagegen` mockup/edit → user approval → frontend implementation | Module 49 ordered UI routes | Do not write formal UI code before approval or explicit opt-out. |
+| Interactive 3D webpage with a reference-based concrete model | Clarify interaction + reference rights → external-skill audit/consent → staged model reconstruction → browser integration | `img2threejs` only when separately installed, trusted, and approved | Static 3D-feel visuals stay on the UI route; generic Three.js scenes do not require img2threejs; final page needs browser, visual, containment, performance, and accessibility evidence. |
 | Animation, Canvas, or WebGL performance | Runtime profiling plus visual inspection | Browser/profiling skill when available; Module 47 | Report measured runtime scope; static code review is insufficient. |
 | Security review, untrusted skill/plugin, or security-sensitive change | Targeted security audit + source/runtime evidence | `security-best-practices`, `engineering/skill-security-auditor`, `reverse-skill` when classified | Self-refute findings and retain only evidence-backed risks. |
 | GitHub Actions PR-check failure | Read workflow/logs → reproduce or inspect job output | `gh-fix-ci` | Verify the affected check or explicitly state external limitation. |
@@ -3446,6 +3469,7 @@ Safety and evidence gates remain part of the loop rather than a second, unrelate
 | write or change a known local artifact | bounded edit/write tool | the matching test, build, or runtime evidence |
 | prove behavior runs | test, build, command, or runtime tool | inspected command/result output |
 | see a UI, layout, screenshot, or visual document | screenshot or real browser capture | visual evidence plus containment/overflow checks |
+| build an interactive 3D webpage | native Three.js/frontend path; use img2threejs only for approved reference-image model reconstruction | browser/runtime, visual, containment, performance, and accessibility evidence |
 | learn a current external fact | authoritative live source | source-linked current evidence |
 | inspect a live browser flow | browser automation | fresh observation/captured artifact |
 | collect a bounded public-web corpus | scoped collection tool | preserved URLs, data-boundary review, and claim-specific evidence |
@@ -3503,6 +3527,97 @@ Modules 29–31 define evidence strength, Module 27 defines risk gates, and Modu
 the registered specialist routes. This module governs the first practical choice among them.
 
 ## END FILE: modules/51_V6_8_AffordanceFirstToolUse.md
+
+---
+
+## BEGIN FILE: modules/52_V6_8_Img2ThreeJs3DWebIntegration.md
+
+# V6.8 img2threejs Interactive 3D Web Integration
+
+Status: **Optional source-specific policy, active in enhanced profiles.**
+
+This module registers patterns reviewed from
+[`img2threejs/img2threejs`](https://github.com/img2threejs/img2threejs). It imports no source,
+Python script, model asset, dependency, browser extension, MCP server, or host skill. Discovery of
+the repository does not establish installation, permission, trust, or security-audit completion.
+
+## 1. Purpose and boundaries
+
+Use this policy for web work that includes an operable three-dimensional object or scene. Its
+purpose is to distinguish ordinary visual design from interactive 3D implementation, and to invoke
+img2threejs only when a reference image must become a concrete procedural Three.js model.
+
+The source may generate TypeScript/Three.js factories from a supplied image through a staged,
+quality-gated reconstruction workflow. It is not a general replacement for image generation, CSS
+perspective effects, normal frontend work, or a generic Three.js scene authoring workflow.
+
+## 2. Trigger decision
+
+Apply the following decision tree before selecting a tool:
+
+| User outcome | Route | img2threejs status |
+| --- | --- | --- |
+| A static webpage visual, including a "3D-feel" composition | UI mockup / `imagegen` route | Do not use. |
+| A webpage with an operable 3D object or scene—rotation, dragging, zooming, camera orbit, 3D presentation, or model animation—but no source-image reconstruction requirement | Standard Three.js / frontend route | Do not use by default. |
+| The same operable 3D experience **and** a request to generate or reconstruct a concrete model from a supplied or approved reference image | Interactive 3D web route plus img2threejs candidate | Consider only after the trust and consent gates below. |
+
+Do not treat the words "3D", "effect image", "depth", "parallax", or "three-dimensional
+style" by themselves as an img2threejs trigger. Clarify the intended interaction and whether a
+specific reference-based model is required when that distinction remains ambiguous.
+
+## 3. Required route
+
+For the reference-based interactive 3D route:
+
+1. Complete the applicable requirements, specification, and UI approval gates before formal UI
+   implementation. A page composition mockup remains a separate artifact from the 3D model.
+2. Confirm the reference provenance, the user's right to use it, the intended model purpose, and
+   the project Three.js/runtime constraints.
+3. Before installing, cloning, enabling, or executing img2threejs, pin an exact reviewed commit,
+   obtain explicit user consent, and complete the external-skill security-audit route. Until then,
+   report the capability as unavailable and use only a permitted native alternative.
+4. If it is approved and installed in a target project, follow its staged model-specification,
+   pass-gated generation, and reference-comparison workflow. Record uncertainty from hidden or
+   unobserved geometry instead of presenting inferred details as measured fact.
+5. Integrate the resulting model into the actual webpage with bounded loading and lifecycle cleanup.
+   Do not let a model-review render substitute for integration evidence.
+6. Verify the delivered page with the matching browser/runtime and visual paths: actual controls,
+   model readiness, viewport containment, responsive fit, lazy-load/fallback behavior, performance
+   scope, keyboard/accessibility support, and `prefers-reduced-motion` behavior where motion exists.
+
+## 4. Safety, trust, and performance
+
+- The image/model source, generated artifacts, and any hosted analysis path remain subject to the
+  user’s data-rights and data-egress constraints.
+- A third-party skill is `discovered` until it is separately enabled, trusted, and verified under
+  Module 44. It is not trusted merely because this policy names it.
+- Do not add a 3D runtime to a page solely for decoration. Prefer CSS or existing primitives for
+  non-interactive depth effects; lazy-load the 3D route when it is needed and provide graceful
+  non-WebGL, loading, and reduced-motion fallbacks.
+- img2threejs review screenshots show model fidelity only. Final visible claims still require the
+  project page’s actual browser capture and containment checks under Modules 29, 39, 47, and 51.
+
+## 5. Registered comparison source
+
+- Source: `https://github.com/img2threejs/img2threejs`
+- Observed branch and pin: `main` at `d6673386f89673a58736f8d398dd16ece67874f5` on 2026-08-08.
+- Declared upstream license: Apache-2.0; compatibility and repository contents still require the
+  applicable review before any import or installation.
+- Integrated patterns: reference-image model reconstruction, explicit staged quality gates,
+  uncertainty reporting, and reference-versus-render review.
+- Non-import rule: no source checkout, executable dependency, host installation, or automatic
+  activation is included in AgentLogic.
+
+## 6. Relationship to other modules
+
+- Module 39 remains the authority for UI direction, mockup approval, and visual verification.
+- Module 47 governs source provenance and permitted references before interface work.
+- Module 48 selects the evidence/tool path, and Module 49 retains strict external-extension audit
+  and availability requirements.
+- Module 51 governs the natural routing distinction: mockup first for static visuals, native
+  Three.js for generic interaction, and img2threejs only for approved reference-model reconstruction.
+
+## END FILE: modules/52_V6_8_Img2ThreeJs3DWebIntegration.md
 
 ---
 

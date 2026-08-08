@@ -3,8 +3,8 @@
     "role":  "primary-local-logic",
     "description":  "Versioned primary logic package intended to be pulled into local AI coding hosts as the default operating logic.",
     "entry":  "MAIN.md",
-    "current_version":  "V6.8.4",
-    "main_logic_file":  "versions/AgentLogic_V6_8_4.md",
+    "current_version":  "V6.8.5",
+    "main_logic_file":  "versions/AgentLogic_V6_8_5.md",
     "default_profile":  "core-enhanced",
     "profiles":  {
                      "minimal":  {
@@ -15,7 +15,7 @@
                                                    "AGENT_INSTALL.md",
                                                    "README.md",
                                                    "AGENTS.md",
-                                                   "versions/AgentLogic_V6_8_4.md",
+                                                   "versions/AgentLogic_V6_8_5.md",
                                                    "modules/12_AgentEnforcement.md",
                                                    "modules/15_LogicEntryChecklist.md",
                                                    "modules/29_MandatoryVerificationMatrix.md",
@@ -29,7 +29,7 @@
                                                          "00_START_HERE.md",
                                                          "README.md",
                                                          "AGENTS.md",
-                                                         "versions/AgentLogic_V6_8_4.md",
+                                                         "versions/AgentLogic_V6_8_5.md",
                                                          "modules/01_MasterLogic.md",
                                                          "modules/03_AgenticLoop.md",
                                                          "modules/05_PermissionsAndSafety.md",
@@ -50,6 +50,7 @@
                                                          "modules/49_V6_8_AutonomousSkillEnforcement.md",
                                                          "modules/50_V6_8_ExternalResearchAndArtifactIntegration.md",
                                                          "modules/51_V6_8_AffordanceFirstToolUse.md",
+                                                         "modules/52_V6_8_Img2ThreeJs3DWebIntegration.md",
                                                          "contracts/skill-routing.json",
                                                          "contracts/host-skill-capabilities.json"
                                                      ]
@@ -62,7 +63,7 @@
                                                              "AGENT_INSTALL.md",
                                                              "README.md",
                                                              "AGENTS.md",
-                                                             "versions/AgentLogic_V6_8_4.md",
+                                                             "versions/AgentLogic_V6_8_5.md",
                                                              "modules/01_MasterLogic.md",
                                                              "modules/03_AgenticLoop.md",
                                                              "modules/05_PermissionsAndSafety.md",
@@ -108,7 +109,8 @@
                                                              "contracts/skill-routing.json",
                                                              "contracts/host-skill-capabilities.json",
                                                              "docs/software-candidates.md",
-                                                             "modules/51_V6_8_AffordanceFirstToolUse.md"
+                                                             "modules/51_V6_8_AffordanceFirstToolUse.md",
+                                                             "modules/52_V6_8_Img2ThreeJs3DWebIntegration.md"
                                                          ]
                                            },
                      "governance-reference":  {
@@ -119,7 +121,7 @@
                                                                 "AGENT_INSTALL.md",
                                                                 "README.md",
                                                                 "AGENTS.md",
-                                                                "versions/AgentLogic_V6_8_4.md",
+                                                                "versions/AgentLogic_V6_8_5.md",
                                                                 "modules/01_MasterLogic.md",
                                                                 "modules/03_AgenticLoop.md",
                                                                 "modules/05_PermissionsAndSafety.md",
@@ -161,7 +163,8 @@
                                                                 "contracts/skill-routing.json",
                                                                 "contracts/host-skill-capabilities.json",
                                                                 "docs/software-candidates.md",
-                                                                "modules/51_V6_8_AffordanceFirstToolUse.md"
+                                                                "modules/51_V6_8_AffordanceFirstToolUse.md",
+                                                                "modules/52_V6_8_Img2ThreeJs3DWebIntegration.md"
                                                             ]
                                               }
                  },
@@ -207,6 +210,9 @@
                                                       ],
                              "affordance_first_tool_use":  [
                                                                "modules/51_V6_8_AffordanceFirstToolUse.md"
+                                                           ],
+                             "img2threejs_3d_web_integration":  [
+                                                                       "modules/52_V6_8_Img2ThreeJs3DWebIntegration.md"
                                                            ]
                          },
     "host_outputs":  {

@@ -22,11 +22,11 @@ or begin implementation before the logic-entry loop above has been completed.
 > `README.md` is the canonical English repository README and entry documentation. This file is retained as a legacy/reference document and is not part of the formal logic-entry chain.
 
 
-# 🌌 AgentLogic: 智能体级本地自进化规则引擎 (V6.8.4)
+# 🌌 AgentLogic: 智能体级本地自进化规则引擎 (V6.8.5)
 
 [![Agentic Code](https://img.shields.io/badge/Agent-Autonomous-blueviolet?style=flat-square)](https://github.com/UIhoshi/AgentLogic)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/Version-V6.8.4_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_8_4.md)
+[![Version](https://img.shields.io/badge/Version-V6.8.5_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_8_5.md)
 
 AgentLogic 是一套专为本地 AI 编码宿主（如 Codex, Claude Code, Gemini Pro）设计的**分层规则引擎**。它将多轮会话规范、工具首选策略、安全沙箱拦截及专业领域扩展集成打包，作为 AI 智能体的“主运行心智”。
 
@@ -123,6 +123,7 @@ AgentLogic 的演进离不开开源社区的启发。我们在设计中深度参
 | **Bento（交付物工作流对照）** | [nyblnet/bento](https://github.com/nyblnet/bento) | 定义按需生成单文件干系人交付物的政策；不导入插件或运行时 |
 | **PixelRAG（视觉文档工作流对照）** | [StarTrail-org/PixelRAG](https://github.com/StarTrail-org/PixelRAG) | 定义可选视觉文档发现政策；不取代浏览器或截图验证 |
 | **Firecrawl（外部采集工作流对照）** | [firecrawl/firecrawl](https://github.com/firecrawl/firecrawl) | 定义经同意的公开网页采集政策；不打包 API、SDK 或服务 |
+| **img2threejs（交互式 3D 网页工作流对照）** | [img2threejs/img2threejs](https://github.com/img2threejs/img2threejs) | 为经批准的参考图程序化 Three.js 模型重建提供可选路线；不打包 skill 或运行时 |
 
 ---
 
@@ -130,4 +131,4 @@ AgentLogic 的演进离不开开源社区的启发。我们在设计中深度参
 
 1. **逻辑包纯粹性**：本仓库是规则元数据，不能写入具体的业务项目代码。
 2. **防盲目执行**：AI 助理在进行复杂重构或方案设计前，必须在 `.specify/` 下完成 `spec.md` (规格) 和 `plan.md` (技术规划)。
-3. **版本隔离**：修改核心机制时，应优先回写 `versions/AgentLogic_V6_8_4.md`，然后重新运行 `build-profile.ps1` 进行编译部署。
+3. **版本隔离**：修改核心机制时，应优先回写 `versions/AgentLogic_V6_8_5.md`，然后重新运行 `build-profile.ps1` 进行编译部署。

@@ -7,7 +7,7 @@
 ## L2 — Flow & Lifecycle
 - Core flows: entry gate → task classification → project/code map consultation or refresh → applicable SDD/verification → profile build.
 - State and task lifecycle: `.specify/` contains scoped specification, plan, tasks, and ship records.
-- Key modules: `modules/01_MasterLogic.md`, Modules 29–31, 35, 38–39, 41, 44–51.
+- Key modules: `modules/01_MasterLogic.md`, Modules 29–31, 35, 38–39, 41, 44–52.
 
 ## L3 — Control & Verification
 - Controls: permissions, tool-permission risk gates, extension trust, skill routing, package validation, and entry-gate checks.
@@ -17,6 +17,8 @@
 ## L4 — Base & Dependencies
 - Base assets: `skills/`, `spec-kit/`, `manifest.json`, scripts, and generated `dist/` bundles.
 - External comparison sources are policy-only unless explicitly installed and trusted.
+- `img2threejs` is a review-required optional source candidate for approved reference-image
+  reconstruction in interactive 3D webpages; it is not an installed host skill.
 
 ## Unconfirmed Points
 - [ ] No host-local availability of optional browser, screenshot, security, or profiling skills is

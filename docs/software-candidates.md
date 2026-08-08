@@ -19,6 +19,7 @@ skill or GitHub repository is involved.
 | Interactive stakeholder handover artifact | Bento | `nyblnet/bento` candidate | Pin a release/commit; audit any plugin/download behavior; use only for an explicitly requested target-project artifact. |
 | Visual PDF/page/chart retrieval | PixelRAG | `StarTrail-org/PixelRAG` candidate | Pin source and audit CLI/model/plugin behavior, local-vs-hosted data flow, and browser patch effects before installation. |
 | Broad public-web collection | Firecrawl | `firecrawl/firecrawl` candidate | Confirm AGPL-3.0 implications, hosted/self-hosted data boundary, URL scope, credentials, and interaction side effects before install or API use. |
+| Reference-image procedural model for an interactive 3D webpage | img2threejs | `img2threejs/img2threejs` candidate | Pin a reviewed commit; audit executable scripts and reference/data rights; confirm target-project Three.js scope and explicit user intent before install or execution. |
 | Containers/local dependency services | Docker Desktop or an approved open-source alternative | Vendor/open-source candidate | Confirm licensing, WSL/virtualization impact, and organization policy before install. |
 
 Never interpret a listed candidate as trusted, installed, or permitted.

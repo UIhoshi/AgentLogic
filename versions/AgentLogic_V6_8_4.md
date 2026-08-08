@@ -37,6 +37,10 @@ Key Enhancements:
   closure rule, and makes the default profile an execution-focused bundle while retaining a full
   `governance-reference` profile for deep policy work. See
   `modules/51_V6_8_AffordanceFirstToolUse.md`.
+- **Interactive 3D Web Integration**: Adds an optional, policy-only route for approved interactive
+  3D webpage models: static visuals stay on the UI route, generic interaction stays on the native
+  Three.js route, and reference-image model reconstruction may select `img2threejs` only after
+  explicit trust and installation gates. See `modules/52_V6_8_Img2ThreeJs3DWebIntegration.md`.
 - **Map-First Navigation and Risk Closure**: Inherited projects refresh their project/code maps
   before broad discovery; owned projects maintain maps as flows evolve. The default profile keeps
   the tool-permission risk matrix needed by the affordance-first execution rule.
@@ -103,6 +107,8 @@ The V6.8.1 line is supported by a modular suite of governance rules:
   for Bento, PixelRAG, and Firecrawl.
 - `modules/51_V6_8_AffordanceFirstToolUse.md`: Normative outcome-to-tool selection rule and
   context-budget posture.
+- `modules/52_V6_8_Img2ThreeJs3DWebIntegration.md`: Optional source-specific policy for
+  approved reference-image procedural-model reconstruction in interactive 3D web work.
 
 ---
 
@@ -168,6 +174,10 @@ The V6.8.4 stable line integrates the following external source repositories:
   - Source URL: `https://github.com/firecrawl/firecrawl`
   - Integration path: `modules/50_V6_8_ExternalResearchAndArtifactIntegration.md`
   - Integration date: `2026-07-28`; policy-only, no API, SDK, or self-hosted service installed
+- **img2threejs (interactive 3D-web workflow comparison)**:
+  - Source URL: `https://github.com/img2threejs/img2threejs`
+  - Integration path: `modules/52_V6_8_Img2ThreeJs3DWebIntegration.md`
+  - Observed on `2026-08-08`; `main` pinned for review at `d6673386f89673a58736f8d398dd16ece67874f5`; policy-only, no source checkout, skill, or runtime installed
 
 ---
 
@@ -198,6 +208,9 @@ Key stable rules:
 - Code navigation is map-first: inherited projects freshness-check and repair project/code maps
   before broad discovery; owned projects maintain those maps with each affected flow so change
   impact can be found before editing.
+- `img2threejs` is an optional source-specific candidate for reference-image procedural models in
+  interactive 3D webpages. It does not activate for static 3D-feel UI visuals or generic Three.js
+  scenes, and it remains unavailable until separately reviewed, trusted, and installed.
 
 
 

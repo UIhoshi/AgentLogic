@@ -17,11 +17,11 @@ Do not continue deeper reading, modify files, delete files, perform write action
 or begin implementation before the logic-entry loop above has been completed.
 -->
 
-# 🌌 AgentLogic: Autonomous Evolving Rule Engine (V6.8.4)
+# 🌌 AgentLogic: Autonomous Evolving Rule Engine (V6.8.5)
 
 [![Agentic Code](https://img.shields.io/badge/Agent-Autonomous-blueviolet?style=flat-square)](https://github.com/UIhoshi/AgentLogic)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/Version-V6.8.4_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_8_4.md)
+[![Version](https://img.shields.io/badge/Version-V6.8.5_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_8_5.md)
 
 AgentLogic is a versioned primary-logic package designed to be pulled into local AI coding hosts (such as Codex, Claude Code, Gemini Pro) and used as their default operating mind. It consolidates multi-turn session workflows, tool selection matrix, security sandbox auditing, and dynamic domain extensions.
 
@@ -127,6 +127,7 @@ During its evolutionary cycles, AgentLogic has integrated concepts and structure
 | **Bento (artifact workflow comparison)** | [nyblnet/bento](https://github.com/nyblnet/bento) | Defines an optional, user-requested single-file stakeholder-artifact policy; no plugin or runtime is imported |
 | **PixelRAG (visual-document workflow comparison)** | [StarTrail-org/PixelRAG](https://github.com/StarTrail-org/PixelRAG) | Defines an optional visual-document discovery policy; it does not replace browser or screenshot verification |
 | **Firecrawl (external-collection workflow comparison)** | [firecrawl/firecrawl](https://github.com/firecrawl/firecrawl) | Defines an optional consent-bound public-web collection policy; no API, SDK, or service is bundled |
+| **img2threejs (interactive 3D-web workflow comparison)** | [img2threejs/img2threejs](https://github.com/img2threejs/img2threejs) | Defines an optional reference-image-to-procedural-Three.js model route for approved interactive 3D web work; no skill or runtime is bundled |
 
 ---
 
@@ -134,7 +135,7 @@ During its evolutionary cycles, AgentLogic has integrated concepts and structure
 
 1. **Keep it Pure**: No business logic or project-specific implementations should be written into `AgentLogic` rule files.
 2. **Specify Before Writing**: Always compile technical blueprints to `.specify/spec.md` and `.specify/plan.md` before touching code.
-3. **Generate via Bundle**: Never edit `dist/` bundles manually. Always write updates to version files (e.g. `versions/AgentLogic_V6_8_4.md`), then run `build-profile.ps1` to rebuild the adapter targets.
+3. **Generate via Bundle**: Never edit `dist/` bundles manually. Always write updates to version files (e.g. `versions/AgentLogic_V6_8_5.md`), then run `build-profile.ps1` to rebuild the adapter targets.
 ## V6.8 Operational Integration
 
 The default `core-enhanced` profile includes
@@ -153,17 +154,19 @@ whether to generate a Graphify code view. Graphify is not installed or run autom
 
 The enhanced profile also provides an optional
 [`Reference-to-Interface Workflow`](./modules/47_V6_8_ReferenceToInterfaceWorkflow.md) for
-permitted video, page, screenshot, and HTML references, plus a
+permitted video, page, screenshot, and HTML references, plus an optional
+[`img2threejs Interactive 3D Web Integration`](./modules/52_V6_8_Img2ThreeJs3DWebIntegration.md)
+for approved reference-image model reconstruction, and a
 [`Skill and Tool Routing`](./modules/48_V6_8_SkillAndToolRouting.md) matrix for selecting the
 required evidence tool before the narrowest matching skill. Neither module installs or trusts
 external skills automatically.
 
-V6.8.4 keeps `core-enhanced` focused on high-frequency execution: start from the desired outcome,
+V6.8.5 keeps `core-enhanced` focused on high-frequency execution: start from the desired outcome,
 select the native evidence/action tool, then add a specialist skill only when it materially helps.
 The complete narrative governance set remains available through the `governance-reference` profile
 for deep maintenance and policy audits.
 
-## V6.8.4 Project-Native Knowledge Sync
+## V6.8.5 Project-Native Knowledge Sync
 
 Business projects synchronize their own concise operational facts and symbol-level navigation with code through tracked
 `AGENTS.md`, `PROJECT_MAP.md`, `CODE_MAP.md`, and `.learnings/ERRORS.md`. `CODE_MAP.md` is the mandatory
