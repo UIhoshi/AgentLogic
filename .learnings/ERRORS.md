@@ -1,5 +1,12 @@
 ﻿# Project Error Log
 
+## 2026-08-11 - Direct HTTP anti-bot response was treated as page inaccessibility
+- Symptom: A public-page collection task initially stopped after a direct HTTP request returned a site verification page.
+- Root cause: The execution path treated a transport-level response as conclusive and did not immediately use the available real-browser rendering path.
+- Correction: Opened the page in a browser session and used an accessibility snapshot to verify the rendered article and extract the requested links.
+- Prevention: For public web-content tasks, when rendered-page evidence is required and a browser tool is available, attempt a normal browser snapshot before declaring the content inaccessible. Do not bypass CAPTCHA, authentication, or other access controls.
+- Verification: The browser snapshot exposed the article title, content sections, and external resource links while no resource downloads were performed.
+
 ## 2026-07-22 鈥?PowerShell reserved-variable collision during bundle rebuild
 - Symptom: The profile-build loop failed before invoking the build script.
 - Root cause: The loop variable was named `$host`, which collides with PowerShell's read-only
