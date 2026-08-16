@@ -34,6 +34,7 @@ refine a specialist route or closure requirement.
 | Desktop/window/OS visual state | OS-level capture | `screenshot` | Capture the actual target state. |
 | UI appearance, layout, responsive fit, or interaction state | Build/run → screenshot or browser replay → boundary check | `screenshot` for desktop capture; `playwright` for browser flow | Prove visible state, containment, overflow/wrap behavior, and relevant interaction state. |
 | Net-new UI, new visual asset, or approved reference-to-interface work | Requirements brief → `imagegen` mockup/edit → user approval → frontend implementation | Module 49 ordered UI routes | Do not write formal UI code before approval or explicit opt-out. |
+| Requested Word, Excel, or PowerPoint file processing | Trusted OfficeCLI → structure/JSON read → bounded edit → flush/close → rendered visual and compatible-open check | OfficeCLI only after Module 50's availability and trust gate | If OfficeCLI is absent or untrusted, do not mutate the Office file or claim a verified result. |
 | Interactive 3D webpage with a reference-based concrete model | Clarify interaction + reference rights → external-skill audit/consent → staged model reconstruction → browser integration | `img2threejs` only when separately installed, trusted, and approved | Static 3D-feel visuals stay on the UI route; generic Three.js scenes do not require img2threejs; final page needs browser, visual, containment, performance, and accessibility evidence. |
 | Animation, Canvas, or WebGL performance | Runtime profiling plus visual inspection | Browser/profiling skill when available; Module 47 | Report measured runtime scope; static code review is insufficient. |
 | Security review, untrusted skill/plugin, or security-sensitive change | Targeted security audit + source/runtime evidence | `security-best-practices`, `engineering/skill-security-auditor`, `reverse-skill` when classified | Self-refute findings and retain only evidence-backed risks. |
@@ -45,7 +46,7 @@ refine a specialist route or closure requirement.
 
 - For advisory paths outside the canonical contract, use the strongest available tool family and say which required evidence remains missing. For a matched route, honor its declared fallback: an unavailable specialist may use a permitted native evidence path only when the route allows it; an unavailable required evidence capability remains blocked or partial.
 - If multiple skills match, choose the smallest scope; do not load broad libraries for one task.
-- Bento, PixelRAG, and Firecrawl are source-specific optional paths governed by Module 50. Their
+- PixelRAG and Firecrawl are source-specific optional paths governed by Module 50. Their
   presence in policy does not establish installation, trust, permission, or a mandatory route.
 - If a specialized skill conflicts with higher-priority safety, permission, SDD, or verification
   rules, the higher-priority rule wins.

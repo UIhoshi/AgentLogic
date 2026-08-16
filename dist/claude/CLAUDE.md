@@ -274,7 +274,7 @@ During its evolutionary cycles, AgentLogic has integrated concepts and structure
 | **Grok Build (comparative reference)** | [xai-org/grok-build](https://github.com/xai-org/grok-build) | Compares provider-neutral runtime execution, state-preserving compaction, and deny-overrides policies |
 | **Graphify (external code-map reference)** | [Graphify-Labs/graphify](https://github.com/Graphify-Labs/graphify) | Provides an optional queryable project graph and user-approved code-view preview workflow |
 | **MengTo Skills (workflow comparison)** | [MengTo/Skills](https://github.com/MengTo/Skills) | Informs optional reference-to-interface capture, extraction, and verification workflows without importing external skills |
-| **Bento (artifact workflow comparison)** | [nyblnet/bento](https://github.com/nyblnet/bento) | Defines an optional, user-requested single-file stakeholder-artifact policy; no plugin or runtime is imported |
+| **OfficeCLI (Office-document workflow comparison)** | [iOfficeAI/OfficeCLI](https://github.com/iOfficeAI/OfficeCLI) | Defines a mandatory route for requested Word/Excel/PowerPoint processing once separately trusted and installed; no binary, skill, or runtime is imported |
 | **PixelRAG (visual-document workflow comparison)** | [StarTrail-org/PixelRAG](https://github.com/StarTrail-org/PixelRAG) | Defines an optional visual-document discovery policy; it does not replace browser or screenshot verification |
 | **Firecrawl (external-collection workflow comparison)** | [firecrawl/firecrawl](https://github.com/firecrawl/firecrawl) | Defines an optional consent-bound public-web collection policy; no API, SDK, or service is bundled |
 | **img2threejs (interactive 3D-web workflow comparison)** | [img2threejs/img2threejs](https://github.com/img2threejs/img2threejs) | Defines an optional reference-image-to-procedural-Three.js model route for approved interactive 3D web work; no skill or runtime is bundled |
@@ -507,10 +507,14 @@ Key Enhancements:
 - **Project-Native Knowledge Sync**: Requires tracked project `AGENTS.md`, `PROJECT_MAP.md`, `CODE_MAP.md`, and `.learnings/ERRORS.md`. `CODE_MAP.md` is mandatory text-first function, state, and interface navigation; visual graph generation remains user-approved and optional. This replaces mandatory external-history checkout/push steps for ordinary project work. See `modules/46_V6_8_ProjectKnowledgeSync.md`.
 - **Reference-to-Interface Workflow**: Adds an optional, consent- and provenance-bound workflow for turning permitted videos, pages, screenshots, and HTML into constrained interface briefs, approved mockups, and verified implementations. See `modules/47_V6_8_ReferenceToInterfaceWorkflow.md`.
 - **Skill and Tool Routing**: Adds a compact mandatory problem-to-evidence-to-skill routing procedure without weakening the existing verification matrix. See `modules/48_V6_8_SkillAndToolRouting.md`.
-- **External Research and Artifact Integration**: Adds optional, policy-only boundaries for Bento
-  stakeholder artifacts, PixelRAG visual-document discovery, and Firecrawl external collection.
+- **External Research and Artifact Integration**: Adds optional, policy-only boundaries for PixelRAG
+  visual-document discovery and Firecrawl external collection.
   No source, plugin, API, or runtime dependency is imported. See
   `modules/50_V6_8_ExternalResearchAndArtifactIntegration.md`.
+- **Office-Document Processing Route**: Adds a mandatory OfficeCLI route whenever the user requests
+  reading, creating, editing, repairing, or verifying `.docx`, `.xlsx`, or `.pptx` files. The route
+  is blocked until OfficeCLI is separately pinned, security-audited, trusted, installed, and
+  permitted; it requires structure inspection plus rendered and compatible-open verification.
 - **Affordance-First Tool Use**: Adds a compact intent → evidence → native tool → specialist →
   closure rule, and makes the default profile an execution-focused bundle while retaining a full
   `governance-reference` profile for deep policy work. See
@@ -581,8 +585,8 @@ The V6.8.1 line is supported by a modular suite of governance rules:
 - `modules/46_V6_8_ProjectKnowledgeSync.md`: Project-native Git synchronization for project maps, mandatory textual code maps, and redacted error lessons.
 - `modules/47_V6_8_ReferenceToInterfaceWorkflow.md`: Optional reference capture, extraction, mockup, and verification workflow informed by MengTo/Skills.
 - `modules/48_V6_8_SkillAndToolRouting.md`: Operational problem-to-tool-and-skill routing matrix.
-- `modules/50_V6_8_ExternalResearchAndArtifactIntegration.md`: Optional source-specific policy
-  for Bento, PixelRAG, and Firecrawl.
+- `modules/50_V6_8_ExternalResearchAndArtifactIntegration.md`: Source-specific policy
+  for OfficeCLI, PixelRAG, and Firecrawl.
 - `modules/51_V6_8_AffordanceFirstToolUse.md`: Normative outcome-to-tool selection rule and
   context-budget posture.
 - `modules/52_V6_8_Img2ThreeJs3DWebIntegration.md`: Optional source-specific policy for
@@ -640,10 +644,11 @@ The V6.8.5 stable line integrates the following external source repositories:
   - Source URL: `https://github.com/MengTo/Skills`
   - Integration paths: `modules/47_V6_8_ReferenceToInterfaceWorkflow.md`, `modules/48_V6_8_SkillAndToolRouting.md`
   - Integration date: `2026-07-22`; no runtime dependency, executable skill, or source assets imported
-- **Bento (artifact workflow comparison)**:
-  - Source URL: `https://github.com/nyblnet/bento`
-  - Integration path: `modules/50_V6_8_ExternalResearchAndArtifactIntegration.md`
-  - Integration date: `2026-07-28`; policy-only, no runtime dependency or plugin installed
+- **OfficeCLI (Office-document workflow comparison)**:
+  - Source URL: `https://github.com/iOfficeAI/OfficeCLI`
+  - Integration paths: `modules/50_V6_8_ExternalResearchAndArtifactIntegration.md`,
+    `modules/48_V6_8_SkillAndToolRouting.md`, and `modules/51_V6_8_AffordanceFirstToolUse.md`
+  - Reviewed release: `v1.0.144` on `2026-08-16`; policy-only, no binary, skill, plugin, or runtime installed
 - **PixelRAG (visual-document workflow comparison)**:
   - Source URL: `https://github.com/StarTrail-org/PixelRAG`
   - Integration path: `modules/50_V6_8_ExternalResearchAndArtifactIntegration.md`
@@ -675,9 +680,12 @@ Key stable rules:
 - Graphify is an optional external code-map capability. It may guide project discovery and offer a user-approved graph preview, but it must be security-audited before installation and never replaces the Verification Matrix.
 - Project-specific structure, symbol navigation, and lessons are synchronized with project code through `AGENTS.md`, `PROJECT_MAP.md`, `CODE_MAP.md`, and `.learnings/ERRORS.md`; the optional `modification_history` archive is reserved for cross-project lessons and historical records.
 - Reference-to-interface work is optional and source-bound: it may use reviewed capture and analysis paths, but it never grants automatic trust, installation authority, asset-copy permission, or exemption from UI approval and visual verification.
-- Bento, PixelRAG, and Firecrawl remain optional external-source policies. They do not grant
+- PixelRAG and Firecrawl remain optional external-source policies. They do not grant
   automatic artifact generation, visual-proof closure, network collection, credential use,
   installation authority, or trust.
+- OfficeCLI is mandatory only for user-requested Office-file processing after its separate
+  availability, trust, and install gates close; it does not grant an automatic binary installation,
+  host-skill deployment, update permission, or visual-proof closure.
 - The default `core-enhanced` profile is the concise execution layer. The
   `governance-reference` profile retains the full narrative governance set for deep maintenance,
   policy, and audit work. Tool choice starts from the work outcome and required evidence; an
@@ -847,8 +855,9 @@ UI 实施完成后仍必须执行截图、父子布局边界、溢出、换行�
 
 - 每个完整工作流业务项目必须维护根目录 `CODE_MAP.md`，用于入口、模块、关键符号、状态和接口的文本导航；它不是运行时证明，必须以当前源码复核。
 - `modules/45_V6_8_GraphifyCodeMapIntegration.md` 提供按需可视化代码地图策略，不是默认安装的外部依赖。
-- `modules/50_V6_8_ExternalResearchAndArtifactIntegration.md` 仅定义 Bento、PixelRAG 和
-  Firecrawl 的可选来源政策；不得从该政策推断任何组件已安装、可信或可调用。
+- `modules/50_V6_8_ExternalResearchAndArtifactIntegration.md` 定义 OfficeCLI、PixelRAG 和
+  Firecrawl 的来源政策；Office 文件处理必须走经信任的 OfficeCLI 路线，其他来源仍不得从该政策推断
+  已安装、可信或可调用。
 - `modules/51_V6_8_AffordanceFirstToolUse.md` 要求从任务意图和所需证据自然选择工具；
   默认 profile 以执行为中心，完整治理内容在 `governance-reference` profile 中按需加载。
 - `modules/52_V6_8_Img2ThreeJs3DWebIntegration.md` 定义可选的交互式 3D 网页模型路线：
@@ -3118,7 +3127,7 @@ The workflow output should be a short, reviewable reference brief containing:
 - Modules 29–31 govern the strength of all conclusions.
 - Module 35 governs matching skills and external-skill audits.
 - Module 48 provides the quick problem-to-skill/tool routing table.
-- Module 50 governs the optional Bento, PixelRAG, and Firecrawl source-specific boundaries.
+- Module 50 governs the OfficeCLI, PixelRAG, and Firecrawl source-specific boundaries.
 - Module 52 governs the optional img2threejs route when a permitted reference image must become
   a concrete model for an interactive 3D webpage; it does not apply to static visual inspiration.
 
@@ -3172,6 +3181,7 @@ refine a specialist route or closure requirement.
 | Desktop/window/OS visual state | OS-level capture | `screenshot` | Capture the actual target state. |
 | UI appearance, layout, responsive fit, or interaction state | Build/run → screenshot or browser replay → boundary check | `screenshot` for desktop capture; `playwright` for browser flow | Prove visible state, containment, overflow/wrap behavior, and relevant interaction state. |
 | Net-new UI, new visual asset, or approved reference-to-interface work | Requirements brief → `imagegen` mockup/edit → user approval → frontend implementation | Module 49 ordered UI routes | Do not write formal UI code before approval or explicit opt-out. |
+| Requested Word, Excel, or PowerPoint file processing | Trusted OfficeCLI → structure/JSON read → bounded edit → flush/close → rendered visual and compatible-open check | OfficeCLI only after Module 50's availability and trust gate | If OfficeCLI is absent or untrusted, do not mutate the Office file or claim a verified result. |
 | Interactive 3D webpage with a reference-based concrete model | Clarify interaction + reference rights → external-skill audit/consent → staged model reconstruction → browser integration | `img2threejs` only when separately installed, trusted, and approved | Static 3D-feel visuals stay on the UI route; generic Three.js scenes do not require img2threejs; final page needs browser, visual, containment, performance, and accessibility evidence. |
 | Animation, Canvas, or WebGL performance | Runtime profiling plus visual inspection | Browser/profiling skill when available; Module 47 | Report measured runtime scope; static code review is insufficient. |
 | Security review, untrusted skill/plugin, or security-sensitive change | Targeted security audit + source/runtime evidence | `security-best-practices`, `engineering/skill-security-auditor`, `reverse-skill` when classified | Self-refute findings and retain only evidence-backed risks. |
@@ -3183,7 +3193,7 @@ refine a specialist route or closure requirement.
 
 - For advisory paths outside the canonical contract, use the strongest available tool family and say which required evidence remains missing. For a matched route, honor its declared fallback: an unavailable specialist may use a permitted native evidence path only when the route allows it; an unavailable required evidence capability remains blocked or partial.
 - If multiple skills match, choose the smallest scope; do not load broad libraries for one task.
-- Bento, PixelRAG, and Firecrawl are source-specific optional paths governed by Module 50. Their
+- PixelRAG and Firecrawl are source-specific optional paths governed by Module 50. Their
   presence in policy does not establish installation, trust, permission, or a mandatory route.
 - If a specialized skill conflicts with higher-priority safety, permission, SDD, or verification
   rules, the higher-priority rule wins.
@@ -3327,7 +3337,7 @@ from generic routing until the request matches their narrow domain and risk boun
 
 Status: **Optional external-source policy, active in enhanced profiles.**
 
-This module records policy patterns reviewed from Bento, PixelRAG, and Firecrawl. It imports no
+This module records policy patterns reviewed from OfficeCLI, PixelRAG, and Firecrawl. It imports no
 source code, plugin, skill, service, binary, model, API key, or automatic installation path.
 Discovery of any of those capabilities is not approval, trust, availability, or verification.
 
@@ -3347,26 +3357,52 @@ external-extension trust.
   in a bundle, map, specification, generated artifact, or repository file.
 - Never represent an optional source as present on a host merely because this policy names it.
 
-## 2. Bento — optional single-file stakeholder artifact
+## 2. OfficeCLI — mandatory route for requested Office-file processing
 
-Source: `https://github.com/nyblnet/bento` (MIT). Bento's self-contained `.bento.html` format
-can carry presentation content and its viewer/editor together. AgentLogic may use that idea only
-as an optional delivery format for a user-requested proposal, handover, or architecture briefing.
+Source: `https://github.com/iOfficeAI/OfficeCLI` (Apache-2.0). OfficeCLI is an optional
+external executable, not an installed AgentLogic skill or runtime. When a user requests that the
+agent read, inspect, create, edit, repair, or verify a Microsoft Office file (`.docx`, `.xlsx`,
+or `.pptx`), the agent must use OfficeCLI as the document-processing route. Generic ZIP/XML
+editing, static text extraction, or a hand-written replacement script must not be presented as an
+equivalent route.
 
-### Allowed path
+### Availability, trust, and install boundary
 
-1. Confirm that an interactive single-file presentation is wanted instead of Markdown, PDF, or
-   slides already supported by the project.
-2. Review and pin the source/version and any document-format instructions.
-3. Generate only approved, non-sensitive content into a target-project artifact.
-4. Open or render the artifact and inspect it before handover.
+- If OfficeCLI is not installed, trusted, and permitted in the current target project or host, do
+  not mutate the Office file and do not claim a verified Office-file result. State the missing
+  capability and request the separate installation decision.
+- Installation requires explicit user consent, a pinned release or commit, publisher/license and
+  checksum or signature verification, and the external skill/plugin security-audit route. Do not
+  execute `curl | bash`, `irm | iex`, or any installer behavior that automatically deploys skills
+  into detected AI hosts.
+- Disable or explicitly approve automatic update checks before use. An Office document may contain
+  sensitive material; do not upload it, enable hosted processing, or record its contents in project
+  knowledge without separate authorization.
+
+### Required processing and verification path
+
+1. Confirm the exact input file, output path, requested operation, and whether the output must
+   remain editable in Microsoft Office.
+2. Preserve an untouched source copy or verified backup. Use OfficeCLI's outline/structured JSON
+   inspection to establish the relevant document, worksheet, slide, element, formula, or style
+   boundary before editing.
+3. Prefer bounded, atomic batches. `--best-effort` or partial-success behavior requires explicit
+   user approval because it can leave a document only partly changed.
+4. Flush and close the document before another program, delivery channel, or renderer consumes it.
+5. For visible Word, Excel, or PowerPoint claims, render the changed output to HTML or PNG and
+   inspect the actual pages/sheets/slides for containment, clipping, pagination, formula/chart
+   presentation, and layout regressions. When the target Office application is available, perform
+   the compatible-open check as a second evidence path.
+6. Record the exact OfficeCLI version, executed commands, changed paths, and remaining rendering or
+   compatibility gaps. A successful command or JSON response alone is not visual proof.
 
 ### Non-goals and restrictions
 
-- Do not install Bento's host plugin, download an application, or add marketplace sources by
-  default; a plugin path that downloads software requires separate explicit consent and audit.
-- Do not add Bento runtime code or generated stakeholder artifacts to AgentLogic bundles.
-- Do not use it as a substitute for project documentation, SRA evidence, or source verification.
+- This route does not make OfficeCLI a default tool for Markdown, PDF, or ordinary webpage work.
+- It does not guarantee lossless repair of macros, embedded objects, proprietary features, or
+  malformed Office files. Report unsupported features and preserve the source file.
+- OfficeCLI's browser HTML output is a render/preview path; it is not evidence that a generated
+  `.pptx` is a browser-native editable presentation.
 
 ## 3. PixelRAG — optional visual-document discovery accelerator
 
@@ -3421,14 +3457,16 @@ insufficient.
 
 | Need | First choice | Optional source path | Required closure |
 | --- | --- | --- | --- |
-| Stakeholder-ready portable briefing | Existing project format | Bento artifact when explicitly requested | Open/render the final artifact; retain normal documentation and SRA evidence. |
+| User-requested `.docx`, `.xlsx`, or `.pptx` processing | Trusted OfficeCLI route | OfficeCLI only after the availability/trust gate above | Structured inspection, bounded mutation, flushed output, and matching render/compatible-open evidence. |
 | Visual PDF/page/table/chart analysis | Supplied file plus approved visual capture | PixelRAG when visual retrieval is justified | Confirm conclusions with matching source, runtime, or screenshot evidence. |
 | Broad public website discovery or structured collection | Official sources and narrow lookup | Firecrawl after scope/data-egress approval | Preserve provenance and meet the evidence requirements for the claim. |
 | Dynamic browser flow or final visible UI proof | Playwright / screenshot route | None by default | Fresh browser observation or screenshot with layout-boundary check. |
 
 ## 6. Registered comparison sources
 
-- Bento: `https://github.com/nyblnet/bento`; reviewed 2026-07-28; policy-only artifact pattern.
+- OfficeCLI: `https://github.com/iOfficeAI/OfficeCLI`; reviewed 2026-08-16; release
+  `v1.0.144`; policy-only Office-document processing route, no binary, skill, plugin, or runtime
+  installed.
 - PixelRAG: `https://github.com/StarTrail-org/PixelRAG`; reviewed 2026-07-28; policy-only
   visual-document discovery pattern.
 - Firecrawl: `https://github.com/firecrawl/firecrawl`; reviewed 2026-07-28; policy-only
@@ -3469,6 +3507,7 @@ Safety and evidence gates remain part of the loop rather than a second, unrelate
 | write or change a known local artifact | bounded edit/write tool | the matching test, build, or runtime evidence |
 | prove behavior runs | test, build, command, or runtime tool | inspected command/result output |
 | see a UI, layout, screenshot, or visual document | screenshot or real browser capture | visual evidence plus containment/overflow checks |
+| read, edit, repair, or verify a requested Word, Excel, or PowerPoint file | trusted OfficeCLI document route | structured inspection, bounded mutation, flushed output, and rendered/compatible-open evidence |
 | build an interactive 3D webpage | native Three.js/frontend path; use img2threejs only for approved reference-image model reconstruction | browser/runtime, visual, containment, performance, and accessibility evidence |
 | learn a current external fact | authoritative live source | source-linked current evidence |
 | inspect a live browser flow | browser automation | fresh observation/captured artifact |

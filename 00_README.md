@@ -120,7 +120,7 @@ AgentLogic 的演进离不开开源社区的启发。我们在设计中深度参
 | **Grok Build (对照参考)** | [xai-org/grok-build](https://github.com/xai-org/grok-build) | 对照分析服务商中立的运行时执行、状态保留压缩以及安全拒绝覆盖策略 |
 | **Graphify（外部代码地图参考）** | [Graphify-Labs/graphify](https://github.com/Graphify-Labs/graphify) | 提供可选的可查询项目图谱与经用户同意的代码视图预览流程 |
 | **MengTo Skills（工作流对照）** | [MengTo/Skills](https://github.com/MengTo/Skills) | 为可选的参考素材到界面工作流提供采集、提取和验证方法；不直接导入外部技能 |
-| **Bento（交付物工作流对照）** | [nyblnet/bento](https://github.com/nyblnet/bento) | 定义按需生成单文件干系人交付物的政策；不导入插件或运行时 |
+| **OfficeCLI（Office 文档工作流对照）** | [iOfficeAI/OfficeCLI](https://github.com/iOfficeAI/OfficeCLI) | 对用户要求的 Word/Excel/PowerPoint 文件处理，定义经单独信任与安装后的强制工具路线；不导入二进制、skill 或运行时 |
 | **PixelRAG（视觉文档工作流对照）** | [StarTrail-org/PixelRAG](https://github.com/StarTrail-org/PixelRAG) | 定义可选视觉文档发现政策；不取代浏览器或截图验证 |
 | **Firecrawl（外部采集工作流对照）** | [firecrawl/firecrawl](https://github.com/firecrawl/firecrawl) | 定义经同意的公开网页采集政策；不打包 API、SDK 或服务 |
 | **img2threejs（交互式 3D 网页工作流对照）** | [img2threejs/img2threejs](https://github.com/img2threejs/img2threejs) | 为经批准的参考图程序化 Three.js 模型重建提供可选路线；不打包 skill 或运行时 |

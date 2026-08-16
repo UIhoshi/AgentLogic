@@ -2,7 +2,7 @@
 
 Status: **Optional external-source policy, active in enhanced profiles.**
 
-This module records policy patterns reviewed from Bento, PixelRAG, and Firecrawl. It imports no
+This module records policy patterns reviewed from OfficeCLI, PixelRAG, and Firecrawl. It imports no
 source code, plugin, skill, service, binary, model, API key, or automatic installation path.
 Discovery of any of those capabilities is not approval, trust, availability, or verification.
 
@@ -22,26 +22,52 @@ external-extension trust.
   in a bundle, map, specification, generated artifact, or repository file.
 - Never represent an optional source as present on a host merely because this policy names it.
 
-## 2. Bento — optional single-file stakeholder artifact
+## 2. OfficeCLI — mandatory route for requested Office-file processing
 
-Source: `https://github.com/nyblnet/bento` (MIT). Bento's self-contained `.bento.html` format
-can carry presentation content and its viewer/editor together. AgentLogic may use that idea only
-as an optional delivery format for a user-requested proposal, handover, or architecture briefing.
+Source: `https://github.com/iOfficeAI/OfficeCLI` (Apache-2.0). OfficeCLI is an optional
+external executable, not an installed AgentLogic skill or runtime. When a user requests that the
+agent read, inspect, create, edit, repair, or verify a Microsoft Office file (`.docx`, `.xlsx`,
+or `.pptx`), the agent must use OfficeCLI as the document-processing route. Generic ZIP/XML
+editing, static text extraction, or a hand-written replacement script must not be presented as an
+equivalent route.
 
-### Allowed path
+### Availability, trust, and install boundary
 
-1. Confirm that an interactive single-file presentation is wanted instead of Markdown, PDF, or
-   slides already supported by the project.
-2. Review and pin the source/version and any document-format instructions.
-3. Generate only approved, non-sensitive content into a target-project artifact.
-4. Open or render the artifact and inspect it before handover.
+- If OfficeCLI is not installed, trusted, and permitted in the current target project or host, do
+  not mutate the Office file and do not claim a verified Office-file result. State the missing
+  capability and request the separate installation decision.
+- Installation requires explicit user consent, a pinned release or commit, publisher/license and
+  checksum or signature verification, and the external skill/plugin security-audit route. Do not
+  execute `curl | bash`, `irm | iex`, or any installer behavior that automatically deploys skills
+  into detected AI hosts.
+- Disable or explicitly approve automatic update checks before use. An Office document may contain
+  sensitive material; do not upload it, enable hosted processing, or record its contents in project
+  knowledge without separate authorization.
+
+### Required processing and verification path
+
+1. Confirm the exact input file, output path, requested operation, and whether the output must
+   remain editable in Microsoft Office.
+2. Preserve an untouched source copy or verified backup. Use OfficeCLI's outline/structured JSON
+   inspection to establish the relevant document, worksheet, slide, element, formula, or style
+   boundary before editing.
+3. Prefer bounded, atomic batches. `--best-effort` or partial-success behavior requires explicit
+   user approval because it can leave a document only partly changed.
+4. Flush and close the document before another program, delivery channel, or renderer consumes it.
+5. For visible Word, Excel, or PowerPoint claims, render the changed output to HTML or PNG and
+   inspect the actual pages/sheets/slides for containment, clipping, pagination, formula/chart
+   presentation, and layout regressions. When the target Office application is available, perform
+   the compatible-open check as a second evidence path.
+6. Record the exact OfficeCLI version, executed commands, changed paths, and remaining rendering or
+   compatibility gaps. A successful command or JSON response alone is not visual proof.
 
 ### Non-goals and restrictions
 
-- Do not install Bento's host plugin, download an application, or add marketplace sources by
-  default; a plugin path that downloads software requires separate explicit consent and audit.
-- Do not add Bento runtime code or generated stakeholder artifacts to AgentLogic bundles.
-- Do not use it as a substitute for project documentation, SRA evidence, or source verification.
+- This route does not make OfficeCLI a default tool for Markdown, PDF, or ordinary webpage work.
+- It does not guarantee lossless repair of macros, embedded objects, proprietary features, or
+  malformed Office files. Report unsupported features and preserve the source file.
+- OfficeCLI's browser HTML output is a render/preview path; it is not evidence that a generated
+  `.pptx` is a browser-native editable presentation.
 
 ## 3. PixelRAG — optional visual-document discovery accelerator
 
@@ -96,14 +122,16 @@ insufficient.
 
 | Need | First choice | Optional source path | Required closure |
 | --- | --- | --- | --- |
-| Stakeholder-ready portable briefing | Existing project format | Bento artifact when explicitly requested | Open/render the final artifact; retain normal documentation and SRA evidence. |
+| User-requested `.docx`, `.xlsx`, or `.pptx` processing | Trusted OfficeCLI route | OfficeCLI only after the availability/trust gate above | Structured inspection, bounded mutation, flushed output, and matching render/compatible-open evidence. |
 | Visual PDF/page/table/chart analysis | Supplied file plus approved visual capture | PixelRAG when visual retrieval is justified | Confirm conclusions with matching source, runtime, or screenshot evidence. |
 | Broad public website discovery or structured collection | Official sources and narrow lookup | Firecrawl after scope/data-egress approval | Preserve provenance and meet the evidence requirements for the claim. |
 | Dynamic browser flow or final visible UI proof | Playwright / screenshot route | None by default | Fresh browser observation or screenshot with layout-boundary check. |
 
 ## 6. Registered comparison sources
 
-- Bento: `https://github.com/nyblnet/bento`; reviewed 2026-07-28; policy-only artifact pattern.
+- OfficeCLI: `https://github.com/iOfficeAI/OfficeCLI`; reviewed 2026-08-16; release
+  `v1.0.144`; policy-only Office-document processing route, no binary, skill, plugin, or runtime
+  installed.
 - PixelRAG: `https://github.com/StarTrail-org/PixelRAG`; reviewed 2026-07-28; policy-only
   visual-document discovery pattern.
 - Firecrawl: `https://github.com/firecrawl/firecrawl`; reviewed 2026-07-28; policy-only

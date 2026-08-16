@@ -134,8 +134,9 @@ UI 实施完成后仍必须执行截图、父子布局边界、溢出、换行�
 
 - 每个完整工作流业务项目必须维护根目录 `CODE_MAP.md`，用于入口、模块、关键符号、状态和接口的文本导航；它不是运行时证明，必须以当前源码复核。
 - `modules/45_V6_8_GraphifyCodeMapIntegration.md` 提供按需可视化代码地图策略，不是默认安装的外部依赖。
-- `modules/50_V6_8_ExternalResearchAndArtifactIntegration.md` 仅定义 Bento、PixelRAG 和
-  Firecrawl 的可选来源政策；不得从该政策推断任何组件已安装、可信或可调用。
+- `modules/50_V6_8_ExternalResearchAndArtifactIntegration.md` 定义 OfficeCLI、PixelRAG 和
+  Firecrawl 的来源政策；Office 文件处理必须走经信任的 OfficeCLI 路线，其他来源仍不得从该政策推断
+  已安装、可信或可调用。
 - `modules/51_V6_8_AffordanceFirstToolUse.md` 要求从任务意图和所需证据自然选择工具；
   默认 profile 以执行为中心，完整治理内容在 `governance-reference` profile 中按需加载。
 - `modules/52_V6_8_Img2ThreeJs3DWebIntegration.md` 定义可选的交互式 3D 网页模型路线：

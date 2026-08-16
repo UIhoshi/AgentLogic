@@ -16,7 +16,7 @@ skill or GitHub repository is involved.
 | Go application or Go-based tooling | Go | Official Go distribution / `golang/go` | Pin toolchain version and confirm a Go build/test need. |
 | Browser UI automation | Playwright | Microsoft official project | Prefer the existing skill wrapper first; pin package/browser versions before persistent install. |
 | Agent-specific browser automation | agent-browser | `vercel-labs/agent-browser` candidate | Audit pinned checkout for network, background service, cloud-provider, and credential behavior before any install. |
-| Interactive stakeholder handover artifact | Bento | `nyblnet/bento` candidate | Pin a release/commit; audit any plugin/download behavior; use only for an explicitly requested target-project artifact. |
+| Requested Word, Excel, or PowerPoint file processing | OfficeCLI | `iOfficeAI/OfficeCLI` candidate | Pin the release and SHA256 asset; audit installer/skill deployment and update behavior; require explicit consent before install and do not use remote pipe installers. |
 | Visual PDF/page/chart retrieval | PixelRAG | `StarTrail-org/PixelRAG` candidate | Pin source and audit CLI/model/plugin behavior, local-vs-hosted data flow, and browser patch effects before installation. |
 | Broad public-web collection | Firecrawl | `firecrawl/firecrawl` candidate | Confirm AGPL-3.0 implications, hosted/self-hosted data boundary, URL scope, credentials, and interaction side effects before install or API use. |
 | Reference-image procedural model for an interactive 3D webpage | img2threejs | `img2threejs/img2threejs` candidate | Pin a reviewed commit; audit executable scripts and reference/data rights; confirm target-project Three.js scope and explicit user intent before install or execution. |

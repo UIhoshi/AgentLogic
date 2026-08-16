@@ -12,7 +12,7 @@ current source and matching verification before making a strong claim.
 | Map-first code navigation | Modules 46 and 51 -> `PROJECT_MAP.md` / `CODE_MAP.md` | map -> owner -> callers/callees/config -> targeted reads; search only for a map gap | source reads plus the matching evidence route |
 | Tool and skill routing | Modules 27, 29-31, 48-49; `contracts/skill-routing.json` | intent -> evidence -> native tool -> specialist -> closure | evidence matched by Module 29; routing validator |
 | UI work | Modules 38-39 and 49 | requirements -> mockup when required -> approved scope -> implementation | visual artifact and containment check |
-| External research and artifacts | Modules 47 and 50 | provenance -> consent/trust -> bounded capture or artifact -> targeted verification | matching source/runtime/visual evidence |
+| External research, artifacts, and Office files | Modules 47 and 50 | provenance -> consent/trust -> bounded capture/artifact or OfficeCLI structure -> bounded mutation -> render | matching source/runtime/visual evidence; Office files require OfficeCLI availability and trust |
 | Reference-image interactive 3D web model | Module 52 / img2threejs candidate -> target-project Three.js integration | clarify static vs interactive vs reference-model outcome -> audit/consent -> staged model route -> in-page verification | browser/runtime, visual, containment, performance, and accessibility evidence |
 | Host installation | `install.ps1`, adapters, deployment scripts | target host -> generated bundle -> first-party skill deployment -> post-check | package validation and installed-path inspection |
 

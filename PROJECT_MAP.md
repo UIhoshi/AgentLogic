@@ -16,7 +16,9 @@
 
 ## L4 — Base & Dependencies
 - Base assets: `skills/`, `spec-kit/`, `manifest.json`, scripts, and generated `dist/` bundles.
-- External comparison sources are policy-only unless explicitly installed and trusted.
+- External comparison sources are policy-only unless explicitly installed and trusted. Requested
+  `.docx`, `.xlsx`, and `.pptx` processing routes through OfficeCLI after its separate availability,
+  trust, and install gates close.
 - `img2threejs` is a review-required optional source candidate for approved reference-image
   reconstruction in interactive 3D webpages; it is not an installed host skill.
 

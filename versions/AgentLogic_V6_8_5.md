@@ -29,10 +29,14 @@ Key Enhancements:
 - **Project-Native Knowledge Sync**: Requires tracked project `AGENTS.md`, `PROJECT_MAP.md`, `CODE_MAP.md`, and `.learnings/ERRORS.md`. `CODE_MAP.md` is mandatory text-first function, state, and interface navigation; visual graph generation remains user-approved and optional. This replaces mandatory external-history checkout/push steps for ordinary project work. See `modules/46_V6_8_ProjectKnowledgeSync.md`.
 - **Reference-to-Interface Workflow**: Adds an optional, consent- and provenance-bound workflow for turning permitted videos, pages, screenshots, and HTML into constrained interface briefs, approved mockups, and verified implementations. See `modules/47_V6_8_ReferenceToInterfaceWorkflow.md`.
 - **Skill and Tool Routing**: Adds a compact mandatory problem-to-evidence-to-skill routing procedure without weakening the existing verification matrix. See `modules/48_V6_8_SkillAndToolRouting.md`.
-- **External Research and Artifact Integration**: Adds optional, policy-only boundaries for Bento
-  stakeholder artifacts, PixelRAG visual-document discovery, and Firecrawl external collection.
+- **External Research and Artifact Integration**: Adds optional, policy-only boundaries for PixelRAG
+  visual-document discovery and Firecrawl external collection.
   No source, plugin, API, or runtime dependency is imported. See
   `modules/50_V6_8_ExternalResearchAndArtifactIntegration.md`.
+- **Office-Document Processing Route**: Adds a mandatory OfficeCLI route whenever the user requests
+  reading, creating, editing, repairing, or verifying `.docx`, `.xlsx`, or `.pptx` files. The route
+  is blocked until OfficeCLI is separately pinned, security-audited, trusted, installed, and
+  permitted; it requires structure inspection plus rendered and compatible-open verification.
 - **Affordance-First Tool Use**: Adds a compact intent → evidence → native tool → specialist →
   closure rule, and makes the default profile an execution-focused bundle while retaining a full
   `governance-reference` profile for deep policy work. See
@@ -103,8 +107,8 @@ The V6.8.1 line is supported by a modular suite of governance rules:
 - `modules/46_V6_8_ProjectKnowledgeSync.md`: Project-native Git synchronization for project maps, mandatory textual code maps, and redacted error lessons.
 - `modules/47_V6_8_ReferenceToInterfaceWorkflow.md`: Optional reference capture, extraction, mockup, and verification workflow informed by MengTo/Skills.
 - `modules/48_V6_8_SkillAndToolRouting.md`: Operational problem-to-tool-and-skill routing matrix.
-- `modules/50_V6_8_ExternalResearchAndArtifactIntegration.md`: Optional source-specific policy
-  for Bento, PixelRAG, and Firecrawl.
+- `modules/50_V6_8_ExternalResearchAndArtifactIntegration.md`: Source-specific policy
+  for OfficeCLI, PixelRAG, and Firecrawl.
 - `modules/51_V6_8_AffordanceFirstToolUse.md`: Normative outcome-to-tool selection rule and
   context-budget posture.
 - `modules/52_V6_8_Img2ThreeJs3DWebIntegration.md`: Optional source-specific policy for
@@ -162,10 +166,11 @@ The V6.8.5 stable line integrates the following external source repositories:
   - Source URL: `https://github.com/MengTo/Skills`
   - Integration paths: `modules/47_V6_8_ReferenceToInterfaceWorkflow.md`, `modules/48_V6_8_SkillAndToolRouting.md`
   - Integration date: `2026-07-22`; no runtime dependency, executable skill, or source assets imported
-- **Bento (artifact workflow comparison)**:
-  - Source URL: `https://github.com/nyblnet/bento`
-  - Integration path: `modules/50_V6_8_ExternalResearchAndArtifactIntegration.md`
-  - Integration date: `2026-07-28`; policy-only, no runtime dependency or plugin installed
+- **OfficeCLI (Office-document workflow comparison)**:
+  - Source URL: `https://github.com/iOfficeAI/OfficeCLI`
+  - Integration paths: `modules/50_V6_8_ExternalResearchAndArtifactIntegration.md`,
+    `modules/48_V6_8_SkillAndToolRouting.md`, and `modules/51_V6_8_AffordanceFirstToolUse.md`
+  - Reviewed release: `v1.0.144` on `2026-08-16`; policy-only, no binary, skill, plugin, or runtime installed
 - **PixelRAG (visual-document workflow comparison)**:
   - Source URL: `https://github.com/StarTrail-org/PixelRAG`
   - Integration path: `modules/50_V6_8_ExternalResearchAndArtifactIntegration.md`
@@ -197,9 +202,12 @@ Key stable rules:
 - Graphify is an optional external code-map capability. It may guide project discovery and offer a user-approved graph preview, but it must be security-audited before installation and never replaces the Verification Matrix.
 - Project-specific structure, symbol navigation, and lessons are synchronized with project code through `AGENTS.md`, `PROJECT_MAP.md`, `CODE_MAP.md`, and `.learnings/ERRORS.md`; the optional `modification_history` archive is reserved for cross-project lessons and historical records.
 - Reference-to-interface work is optional and source-bound: it may use reviewed capture and analysis paths, but it never grants automatic trust, installation authority, asset-copy permission, or exemption from UI approval and visual verification.
-- Bento, PixelRAG, and Firecrawl remain optional external-source policies. They do not grant
+- PixelRAG and Firecrawl remain optional external-source policies. They do not grant
   automatic artifact generation, visual-proof closure, network collection, credential use,
   installation authority, or trust.
+- OfficeCLI is mandatory only for user-requested Office-file processing after its separate
+  availability, trust, and install gates close; it does not grant an automatic binary installation,
+  host-skill deployment, update permission, or visual-proof closure.
 - The default `core-enhanced` profile is the concise execution layer. The
   `governance-reference` profile retains the full narrative governance set for deep maintenance,
   policy, and audit work. Tool choice starts from the work outcome and required evidence; an
