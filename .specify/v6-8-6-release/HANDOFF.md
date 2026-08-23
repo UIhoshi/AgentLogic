@@ -1,6 +1,6 @@
-﻿# V6.8.6 Release Handoff
+# V6.8.6 Release Handoff
 
-Status: **paused before commit/push/release** at the user's request.
+Status: **paused before push/release** at the user's request. Local WIP commit: `93b171a`.
 
 ## Completed
 - Implemented V6.8.6 portable-skill registry, lifecycle records, route state machine, deployment payloads, project Skill Usage tracking, and documentation/version promotion.
@@ -16,5 +16,5 @@ Status: **paused before commit/push/release** at the user's request.
 - `code-review` is selected; native package validation is the permitted fallback because `release-manager` is unavailable.
 
 ## Do not yet perform
-- No git commit, push, tag, or GitHub Release has been created.
+- Local WIP commit exists; no push, tag, or GitHub Release has been created.
 - Do not stage the locally deleted historical `skills/reverse-skill/.../系统命令.md`; Windows security tooling repeatedly quarantines it. It must not be included as a repository deletion.
