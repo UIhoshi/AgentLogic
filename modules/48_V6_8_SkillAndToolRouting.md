@@ -63,3 +63,12 @@ remote verification**.
 ## 5. Autonomous enforcement
 
 For mandatory route declarations, host aliases, invocation records, strict missing-capability handling, and software-gap reporting, follow modules/49_V6_8_AutonomousSkillEnforcement.md and contracts/skill-routing.json. Code and PR audits must select the code-review route; generic static reading alone cannot close an audit claim. Module 49 and the schema-v2 contract override any older concrete skill names in this module.
+
+## 6. Programming-Level Route Closure
+
+For enhanced profiles, a matched route is not merely a prose reminder. Follow Module 53's deployed
+workflow gate and record the deterministic classification, preflight availability result, skill
+invocation evidence, and closure evidence in `.specify/<task>/skill-execution.json`. Route ordering
+and dependencies in the canonical contract decide which route must close first. All portable skills
+must be registered before they can be promoted to a routed lifecycle state; unreviewed legacy skills
+remain `manual_only` rather than being inferred as automatic.

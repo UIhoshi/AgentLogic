@@ -10,21 +10,36 @@ current source and matching verification before making a strong claim.
 | Profile compilation | `manifest.json` -> `scripts/build-profile.ps1` -> `dist/` | profile file list, adapters, generated bundles | `scripts/validate-package.ps1` |
 | Entry enforcement | `00_START_HERE.md`, `AGENTS.md`, `README.md`, Module 15 | entry documents, logic-chain references, operational entry files | `node scripts/check-logic-entry.js` |
 | Map-first code navigation | Modules 46 and 51 -> `PROJECT_MAP.md` / `CODE_MAP.md` | map -> owner -> callers/callees/config -> targeted reads; search only for a map gap | source reads plus the matching evidence route |
-| Tool and skill routing | Modules 27, 29-31, 48-49; `contracts/skill-routing.json` | intent -> evidence -> native tool -> specialist -> closure | evidence matched by Module 29; routing validator |
+| Tool and skill routing | Modules 27, 29-31, 48-49, 53; `contracts/skill-*.json` | classify -> preflight -> recorded invocation -> closure -> project handover | registry, routing, and workflow-gate validation |
 | UI work | Modules 38-39 and 49 | requirements -> mockup when required -> approved scope -> implementation | visual artifact and containment check |
 | External research, artifacts, and Office files | Modules 47 and 50 | provenance -> consent/trust -> bounded capture/artifact or OfficeCLI structure -> bounded mutation -> render | matching source/runtime/visual evidence; Office files require OfficeCLI availability and trust |
 | Reference-image interactive 3D web model | Module 52 / img2threejs candidate -> target-project Three.js integration | clarify static vs interactive vs reference-model outcome -> audit/consent -> staged model route -> in-page verification | browser/runtime, visual, containment, performance, and accessibility evidence |
-| Host installation | `install.ps1`, adapters, deployment scripts | target host -> generated bundle -> first-party skill deployment -> post-check | package validation and installed-path inspection |
+| Host installation | `install.ps1`, adapters, deployment scripts | target host -> generated bundle -> first-party skill and enforcement payload deployment -> post-check | package validation and installed-path inspection |
 
 ## Interfaces and state
 
 - `manifest.json`: current version, profile membership, host output contract.
-- `versions/AgentLogic_V6_8_5.md`: stable version-source narrative.
-- `contracts/skill-routing.json`: canonical mandatory capability routes and closure evidence.
-- `contracts/host-skill-capabilities.json`: first-party skill deployment locations.
+- `versions/AgentLogic_V6_8_6.md`: stable version-source narrative.
+- `contracts/skill-registry.json`: explicit lifecycle record for every portable `SKILL.md`.
+- `contracts/skill-routing.json`: ordered capability routes, dependencies, and closure evidence.
+- `contracts/skill-enforcement.json`: classification and workflow-gate state contract.
+- `scripts/skill-enforcement.ps1`: preflight, invocation, closure, and project Skill Usage validator.
+- `contracts/host-skill-capabilities.json`: first-party skill and workflow-enforcement payload deployment locations.
 - `.specify/`: scoped specification, plan, task, and ship records for non-trivial work.
 - `PROJECT_MAP.md`: repository L1-L4 map and validation boundary index.
 - `.learnings/ERRORS.md`: redacted material-error records only.
+
+
+## Skill Usage
+
+| Durable flow | Capability / skill | Trigger | Source of truth | Reviewed commit |
+| --- | --- | --- | --- | --- |
+| Major feature specification | `product-requirements-grilling` | `major_feature` | `.agentlogic/skill-usage.json` | `34eab55 + V6.8.6 release worktree` |
+| Behavior-change validation | `tdd-guide` | `behavior_change` | `.agentlogic/skill-usage.json` | `34eab55 + V6.8.6 release worktree` |
+| V6.8.6 release review | code-review | elease_review | .agentlogic/skill-usage.json | 34eab55 + V6.8.6 release worktree |
+
+> This summary is intentionally concise. Per-task invocation evidence for the programming-level
+> enforcement upgrade is stored in `.specify/skill-enforcement-hardening/skill-execution.json`.
 
 ## Map maintenance
 

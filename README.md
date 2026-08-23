@@ -17,11 +17,11 @@ Do not continue deeper reading, modify files, delete files, perform write action
 or begin implementation before the logic-entry loop above has been completed.
 -->
 
-# 🌌 AgentLogic: Autonomous Evolving Rule Engine (V6.8.5)
+# 🌌 AgentLogic: Autonomous Evolving Rule Engine (V6.8.6)
 
 [![Agentic Code](https://img.shields.io/badge/Agent-Autonomous-blueviolet?style=flat-square)](https://github.com/UIhoshi/AgentLogic)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/Version-V6.8.5_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_8_5.md)
+[![Version](https://img.shields.io/badge/Version-V6.8.6_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_8_6.md)
 
 AgentLogic is a versioned primary-logic package designed to be pulled into local AI coding hosts (such as Codex, Claude Code, Gemini Pro) and used as their default operating mind. It consolidates multi-turn session workflows, tool selection matrix, security sandbox auditing, and dynamic domain extensions.
 
@@ -135,7 +135,7 @@ During its evolutionary cycles, AgentLogic has integrated concepts and structure
 
 1. **Keep it Pure**: No business logic or project-specific implementations should be written into `AgentLogic` rule files.
 2. **Specify Before Writing**: Always compile technical blueprints to `.specify/spec.md` and `.specify/plan.md` before touching code.
-3. **Generate via Bundle**: Never edit `dist/` bundles manually. Always write updates to version files (e.g. `versions/AgentLogic_V6_8_5.md`), then run `build-profile.ps1` to rebuild the adapter targets.
+3. **Generate via Bundle**: Never edit `dist/` bundles manually. Always write updates to version files (e.g. `versions/AgentLogic_V6_8_6.md`), then run `build-profile.ps1` to rebuild the adapter targets.
 ## V6.8 Operational Integration
 
 The default `core-enhanced` profile includes
@@ -161,12 +161,12 @@ for approved reference-image model reconstruction, and a
 required evidence tool before the narrowest matching skill. Neither module installs or trusts
 external skills automatically.
 
-V6.8.5 keeps `core-enhanced` focused on high-frequency execution: start from the desired outcome,
+V6.8.6 keeps `core-enhanced` focused on high-frequency execution: start from the desired outcome,
 select the native evidence/action tool, then add a specialist skill only when it materially helps.
 The complete narrative governance set remains available through the `governance-reference` profile
 for deep maintenance and policy audits.
 
-## V6.8.5 Project-Native Knowledge Sync
+## V6.8.6 Project-Native Knowledge Sync
 
 Business projects synchronize their own concise operational facts and symbol-level navigation with code through tracked
 `AGENTS.md`, `PROJECT_MAP.md`, `CODE_MAP.md`, and `.learnings/ERRORS.md`. `CODE_MAP.md` is the mandatory
@@ -176,3 +176,15 @@ not copied into projects. Before relying on those records, check remote freshnes
 confirmed state change. `.specify/` and `docs/adr/` are conditional, while raw logs, secrets,
 machine paths, private prompts, and default `graphify-out/` artifacts stay out of tracked
 knowledge. See [Project-Native Knowledge Sync](./modules/46_V6_8_ProjectKnowledgeSync.md).
+
+## Programming-Level Skill Enforcement
+
+The enhanced profiles register every portable skill, derive matched routes from structured task
+classification, and validate preflight, invocation, and closure evidence through a deployable
+workflow gate. Projects keep durable Skill Usage facts in `.agentlogic/skill-usage.json` and a
+concise `CODE_MAP.md` summary. The gate validates recorded workflow state; it does not claim
+host-native tool interception unless a host-specific hook is separately verified.
+
+## V6.8.6 — Programming-Level Skill Enforcement
+
+V6.8.6 adds a machine-checkable portable-skill registry, lifecycle states, deterministic route selection, invocation/closure evidence, cross-host deployment checks, and project-level Skill Usage records in `.agentlogic/skill-usage.json` and `CODE_MAP.md`. It prevents required skill routes from being silently skipped while clearly stating the boundary: enforcement verifies recorded workflow state and does not claim host-native interception unless a verified host hook exists. See [CHANGELOG.md](./CHANGELOG.md) and [Module 53](./modules/53_V6_8_ProgrammingLevelSkillEnforcement.md).

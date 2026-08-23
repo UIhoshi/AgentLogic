@@ -3,8 +3,8 @@
     "role":  "primary-local-logic",
     "description":  "Versioned primary logic package intended to be pulled into local AI coding hosts as the default operating logic.",
     "entry":  "MAIN.md",
-    "current_version":  "V6.8.5",
-    "main_logic_file":  "versions/AgentLogic_V6_8_5.md",
+    "current_version":  "V6.8.6",
+    "main_logic_file":  "versions/AgentLogic_V6_8_6.md",
     "default_profile":  "core-enhanced",
     "profiles":  {
                      "minimal":  {
@@ -15,12 +15,14 @@
                                                    "AGENT_INSTALL.md",
                                                    "README.md",
                                                    "AGENTS.md",
-                                                   "versions/AgentLogic_V6_8_5.md",
+                                                   "versions/AgentLogic_V6_8_6.md",
                                                    "modules/12_AgentEnforcement.md",
                                                    "modules/15_LogicEntryChecklist.md",
                                                    "modules/29_MandatoryVerificationMatrix.md",
                                                    "modules/30_ToolQuestionBoundaryMatrix.md",
-                                                   "modules/31_ToolMisuseAndAntiPatternMatrix.md"
+                                                   "modules/31_ToolMisuseAndAntiPatternMatrix.md",
+                                                   "modules/53_V6_8_ProgrammingLevelSkillEnforcement.md",
+                                                   "contracts/skill-enforcement.json"
                                                ]
                                  },
                      "core-enhanced":  {
@@ -29,7 +31,7 @@
                                                          "00_START_HERE.md",
                                                          "README.md",
                                                          "AGENTS.md",
-                                                         "versions/AgentLogic_V6_8_5.md",
+                                                         "versions/AgentLogic_V6_8_6.md",
                                                          "modules/01_MasterLogic.md",
                                                          "modules/03_AgenticLoop.md",
                                                          "modules/05_PermissionsAndSafety.md",
@@ -52,7 +54,9 @@
                                                          "modules/51_V6_8_AffordanceFirstToolUse.md",
                                                          "modules/52_V6_8_Img2ThreeJs3DWebIntegration.md",
                                                          "contracts/skill-routing.json",
-                                                         "contracts/host-skill-capabilities.json"
+                                                         "contracts/host-skill-capabilities.json",
+                                                         "modules/53_V6_8_ProgrammingLevelSkillEnforcement.md",
+                                                         "contracts/skill-enforcement.json"
                                                      ]
                                        },
                      "github-publishing":  {
@@ -63,7 +67,7 @@
                                                              "AGENT_INSTALL.md",
                                                              "README.md",
                                                              "AGENTS.md",
-                                                             "versions/AgentLogic_V6_8_5.md",
+                                                             "versions/AgentLogic_V6_8_6.md",
                                                              "modules/01_MasterLogic.md",
                                                              "modules/03_AgenticLoop.md",
                                                              "modules/05_PermissionsAndSafety.md",
@@ -110,7 +114,9 @@
                                                              "contracts/host-skill-capabilities.json",
                                                              "docs/software-candidates.md",
                                                              "modules/51_V6_8_AffordanceFirstToolUse.md",
-                                                             "modules/52_V6_8_Img2ThreeJs3DWebIntegration.md"
+                                                             "modules/52_V6_8_Img2ThreeJs3DWebIntegration.md",
+                                                             "modules/53_V6_8_ProgrammingLevelSkillEnforcement.md",
+                                                             "contracts/skill-enforcement.json"
                                                          ]
                                            },
                      "governance-reference":  {
@@ -121,7 +127,7 @@
                                                                 "AGENT_INSTALL.md",
                                                                 "README.md",
                                                                 "AGENTS.md",
-                                                                "versions/AgentLogic_V6_8_5.md",
+                                                                "versions/AgentLogic_V6_8_6.md",
                                                                 "modules/01_MasterLogic.md",
                                                                 "modules/03_AgenticLoop.md",
                                                                 "modules/05_PermissionsAndSafety.md",
@@ -164,7 +170,9 @@
                                                                 "contracts/host-skill-capabilities.json",
                                                                 "docs/software-candidates.md",
                                                                 "modules/51_V6_8_AffordanceFirstToolUse.md",
-                                                                "modules/52_V6_8_Img2ThreeJs3DWebIntegration.md"
+                                                                "modules/52_V6_8_Img2ThreeJs3DWebIntegration.md",
+                                                                "modules/53_V6_8_ProgrammingLevelSkillEnforcement.md",
+                                                                "contracts/skill-enforcement.json"
                                                             ]
                                               }
                  },
@@ -212,8 +220,15 @@
                                                                "modules/51_V6_8_AffordanceFirstToolUse.md"
                                                            ],
                              "img2threejs_3d_web_integration":  [
-                                                                       "modules/52_V6_8_Img2ThreeJs3DWebIntegration.md"
-                                                           ]
+                                                                    "modules/52_V6_8_Img2ThreeJs3DWebIntegration.md"
+                                                                ],
+                             "programming_level_skill_enforcement":  [
+                                                                         "modules/53_V6_8_ProgrammingLevelSkillEnforcement.md",
+                                                                         "contracts/skill-registry.json",
+                                                                         "contracts/skill-routing.json",
+                                                                         "contracts/skill-enforcement.json",
+                                                                         "contracts/host-skill-capabilities.json"
+                                                                     ]
                          },
     "host_outputs":  {
                          "codex":  "dist/codex/model_instructions.md",

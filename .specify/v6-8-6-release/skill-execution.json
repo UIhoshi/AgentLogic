@@ -1,0 +1,51 @@
+{
+    "schema_version":  1,
+    "task_id":  "v6-8-6-release",
+    "classification":  {
+                           "task_class":  "release",
+                           "change_scope":  "architectural",
+                           "ui_scope":  "none",
+                           "external_effect":  "remote_release",
+                           "claim_types":  [
+                                               "release_review"
+                                           ]
+                       },
+    "matched_route_ids":  [
+                              "code-review",
+                              "package-release"
+                          ],
+    "routes":  [
+                   {
+                       "route_id":  "code-review",
+                       "state":  "preflight_passed",
+                       "selected_skill":  "code-review",
+                       "available_skills":  [
+                                                "code-review"
+                                            ],
+                       "closure_evidence":  [
+
+                                            ],
+                       "blocked_reason":  null,
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check"
+                                               ]
+                   },
+                   {
+                       "route_id":  "package-release",
+                       "state":  "preflight_passed",
+                       "selected_skill":  "native-package-validation",
+                       "available_skills":  [
+                                                "code-review"
+                                            ],
+                       "closure_evidence":  [
+
+                                            ],
+                       "blocked_reason":  null,
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check"
+                                               ]
+                   }
+               ]
+}

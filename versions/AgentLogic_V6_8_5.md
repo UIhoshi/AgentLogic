@@ -113,6 +113,9 @@ The V6.8.1 line is supported by a modular suite of governance rules:
   context-budget posture.
 - `modules/52_V6_8_Img2ThreeJs3DWebIntegration.md`: Optional source-specific policy for
   approved reference-image procedural-model reconstruction in interactive 3D web work.
+- `modules/53_V6_8_ProgrammingLevelSkillEnforcement.md`: Machine-checkable portable-skill
+  coverage, route state transitions, cross-host workflow-gate deployment, and project Skill Usage
+  handover contract.
 
 ---
 

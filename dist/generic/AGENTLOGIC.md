@@ -1,9 +1,9 @@
-# MANDATORY AGENT EXECUTIVE PROTOCOL (AgentLogic V6.8.5)
+# MANDATORY AGENT EXECUTIVE PROTOCOL (AgentLogic V6.8.6)
 
 - Host target: generic
 - Profile: core-enhanced
 - Stable entry: MAIN.md
-- Version: V6.8.5
+- Version: V6.8.6
 
 > [!CRITICAL]
 > **EXECUTION vs SUMMARIZATION MANDATE**:
@@ -84,7 +84,7 @@ validation, review, packaging, or rule synchronization work, the agent MUST full
 following files from beginning to end in this exact order:
 
 1. `README.md`
-2. `versions/AgentLogic_V6_8_5.md`
+2. `versions/AgentLogic_V6_8_6.md`
 3. `modules/01_MasterLogic.md`
 4. `modules/15_LogicEntryChecklist.md`
 
@@ -167,11 +167,11 @@ Do not continue deeper reading, modify files, delete files, perform write action
 or begin implementation before the logic-entry loop above has been completed.
 -->
 
-# 🌌 AgentLogic: Autonomous Evolving Rule Engine (V6.8.5)
+# 🌌 AgentLogic: Autonomous Evolving Rule Engine (V6.8.6)
 
 [![Agentic Code](https://img.shields.io/badge/Agent-Autonomous-blueviolet?style=flat-square)](https://github.com/UIhoshi/AgentLogic)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/Version-V6.8.5_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_8_5.md)
+[![Version](https://img.shields.io/badge/Version-V6.8.6_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_8_6.md)
 
 AgentLogic is a versioned primary-logic package designed to be pulled into local AI coding hosts (such as Codex, Claude Code, Gemini Pro) and used as their default operating mind. It consolidates multi-turn session workflows, tool selection matrix, security sandbox auditing, and dynamic domain extensions.
 
@@ -285,7 +285,7 @@ During its evolutionary cycles, AgentLogic has integrated concepts and structure
 
 1. **Keep it Pure**: No business logic or project-specific implementations should be written into `AgentLogic` rule files.
 2. **Specify Before Writing**: Always compile technical blueprints to `.specify/spec.md` and `.specify/plan.md` before touching code.
-3. **Generate via Bundle**: Never edit `dist/` bundles manually. Always write updates to version files (e.g. `versions/AgentLogic_V6_8_5.md`), then run `build-profile.ps1` to rebuild the adapter targets.
+3. **Generate via Bundle**: Never edit `dist/` bundles manually. Always write updates to version files (e.g. `versions/AgentLogic_V6_8_6.md`), then run `build-profile.ps1` to rebuild the adapter targets.
 ## V6.8 Operational Integration
 
 The default `core-enhanced` profile includes
@@ -311,12 +311,12 @@ for approved reference-image model reconstruction, and a
 required evidence tool before the narrowest matching skill. Neither module installs or trusts
 external skills automatically.
 
-V6.8.5 keeps `core-enhanced` focused on high-frequency execution: start from the desired outcome,
+V6.8.6 keeps `core-enhanced` focused on high-frequency execution: start from the desired outcome,
 select the native evidence/action tool, then add a specialist skill only when it materially helps.
 The complete narrative governance set remains available through the `governance-reference` profile
 for deep maintenance and policy audits.
 
-## V6.8.5 Project-Native Knowledge Sync
+## V6.8.6 Project-Native Knowledge Sync
 
 Business projects synchronize their own concise operational facts and symbol-level navigation with code through tracked
 `AGENTS.md`, `PROJECT_MAP.md`, `CODE_MAP.md`, and `.learnings/ERRORS.md`. `CODE_MAP.md` is the mandatory
@@ -326,6 +326,18 @@ not copied into projects. Before relying on those records, check remote freshnes
 confirmed state change. `.specify/` and `docs/adr/` are conditional, while raw logs, secrets,
 machine paths, private prompts, and default `graphify-out/` artifacts stay out of tracked
 knowledge. See [Project-Native Knowledge Sync](./modules/46_V6_8_ProjectKnowledgeSync.md).
+
+## Programming-Level Skill Enforcement
+
+The enhanced profiles register every portable skill, derive matched routes from structured task
+classification, and validate preflight, invocation, and closure evidence through a deployable
+workflow gate. Projects keep durable Skill Usage facts in `.agentlogic/skill-usage.json` and a
+concise `CODE_MAP.md` summary. The gate validates recorded workflow state; it does not claim
+host-native tool interception unless a host-specific hook is separately verified.
+
+## V6.8.6 — Programming-Level Skill Enforcement
+
+V6.8.6 adds a machine-checkable portable-skill registry, lifecycle states, deterministic route selection, invocation/closure evidence, cross-host deployment checks, and project-level Skill Usage records in `.agentlogic/skill-usage.json` and `CODE_MAP.md`. It prevents required skill routes from being silently skipped while clearly stating the boundary: enforcement verifies recorded workflow state and does not claim host-native interception unless a verified host hook exists. See [CHANGELOG.md](./CHANGELOG.md) and [Module 53](./modules/53_V6_8_ProgrammingLevelSkillEnforcement.md).
 
 ## END FILE: README.md
 
@@ -387,7 +399,7 @@ The current logic-entry chain is:
 
 1. `00_START_HERE.md`
 2. `README.md`
-3. `versions/AgentLogic_V6_8_5.md`
+3. `versions/AgentLogic_V6_8_6.md`
 4. `modules/01_MasterLogic.md`
 5. `modules/15_LogicEntryChecklist.md`
 
@@ -468,28 +480,28 @@ This repository is logic infrastructure, not a business-project workspace.
 
 - Human-first entry: `00_START_HERE.md`
 - Stable host binding entry: `MAIN.md`
-- Versioned main logic source: `versions/AgentLogic_V6_8_5.md`
+- Versioned main logic source: `versions/AgentLogic_V6_8_6.md`
 
 ## END FILE: AGENTS.md
 
 ---
 
-## BEGIN FILE: versions/AgentLogic_V6_8_5.md
+## BEGIN FILE: versions/AgentLogic_V6_8_6.md
 
-# AgentLogic V6.8.5
+# AgentLogic V6.8.6
 
-Status: **Current Stable V6.8.5 Line**.
+Status: **Current Stable V6.8.6 Line**.
 Promoted from V6.8.1 with project-native knowledge synchronization: project L1-L4 maps and
 redacted error records now travel with the corresponding project repository rather than
 requiring a separate history repository for ordinary work.
 
-This file defines the stable V6.8.5 logic line. It operationalizes the core V6 philosophy with deep integrations for cybersecurity routing, structured specification-driven workflows, premium anti-slop frontend design rules, visual system matrix mapping, shipping audits, project-native knowledge synchronization, and interactive human-readable project summaries.
+This file defines the stable V6.8.6 logic line. It operationalizes the core V6 philosophy with deep integrations for cybersecurity routing, structured specification-driven workflows, premium anti-slop frontend design rules, visual system matrix mapping, shipping audits, project-native knowledge synchronization, and interactive human-readable project summaries.
 
 ---
 
-## 1. The V6.8.5 Mandate
+## 1. The V6.8.6 Mandate
 
-V6.8.5 extends the V6.8 line with a project-native synchronization contract designed to keep
+V6.8.6 extends the V6.8 line with a project-native synchronization contract designed to keep
 project code, L1-L4 facts, and durable error lessons on the same Git timeline.
 
 Key Enhancements:
@@ -591,21 +603,24 @@ The V6.8.1 line is supported by a modular suite of governance rules:
   context-budget posture.
 - `modules/52_V6_8_Img2ThreeJs3DWebIntegration.md`: Optional source-specific policy for
   approved reference-image procedural-model reconstruction in interactive 3D web work.
+- `modules/53_V6_8_ProgrammingLevelSkillEnforcement.md`: Machine-checkable portable-skill
+  coverage, route state transitions, cross-host workflow-gate deployment, and project Skill Usage
+  handover contract.
 
 ---
 
 ## 3. Stable Promotion Summary
 
-The V6.8.5 line is now promoted to stable status.
+The V6.8.6 line is now promoted to stable status.
 - **Stable Entry**: `MAIN.md`
-- **Current Version**: `V6.8.5`
-- **Default Profile**: `core-enhanced` (a lean V6.8.5 execution bundle with project-native knowledge synchronization, risk/verification gates, SDD, UI, SRA, operational contracts, and policy-only external research integration)
+- **Current Version**: `V6.8.6`
+- **Default Profile**: `core-enhanced` (a lean V6.8.6 execution bundle with project-native knowledge synchronization, risk/verification gates, SDD, UI, SRA, operational contracts, and policy-only external research integration)
 
 ---
 
 ## 4. Reference Source Registration
 
-The V6.8.5 stable line integrates the following external source repositories:
+The V6.8.6 stable line integrates the following external source repositories:
 
 - **Cybersecurity Skills Router**:
   - Source URL: `https://github.com/zhaoxuya520/reverse-skill`
@@ -666,7 +681,7 @@ The V6.8.5 stable line integrates the following external source repositories:
 
 ## 5. Skill-System Integration Rule
 
-V6.8.5 treats general programming skills, cybersecurity domain skills, visual design skills, and operational integration contracts as portable, logic-carried assets under the `skills/` and `modules/` directories. The Grok Build comparison remains a method-layer reference and does not grant trust to external executable extensions.
+V6.8.6 treats general programming skills, cybersecurity domain skills, visual design skills, and operational integration contracts as portable, logic-carried assets under the `skills/` and `modules/` directories. The Grok Build comparison remains a method-layer reference and does not grant trust to external executable extensions.
 
 Key stable rules:
 - Logic package rules outrank individual skills.
@@ -713,13 +728,23 @@ For future logic iterations, a version line must explicitly record its external 
 
 The enhanced profile includes Module 49 and the canonical routing registry. Mandatory task routes must record a mapped available skill, invocation evidence, and closure evidence; missing mandatory capabilities block implementation or verified completion rather than silently degrading. docs/software-candidates.md is a review-required decision queue, never an auto-install list.
 
-## END FILE: versions/AgentLogic_V6_8_5.md
+## 8. Programming-Level Skill Enforcement
+
+V6.8.6 now registers every portable `SKILL.md` through `contracts/skill-registry.json` and requires
+explicit lifecycle status before a skill can be automatically routed. The schema-v3 routing contract,
+task-enforcement state machine, cross-host workflow payload, and project Skill Usage records make
+required skill selection, invocation evidence, closure evidence, and future integrations
+machine-checkable. The workflow gate is explicit about its boundary: it validates recorded process
+state and never claims host-native tool interception without a verified host hook. See
+`modules/53_V6_8_ProgrammingLevelSkillEnforcement.md`.
+
+## END FILE: versions/AgentLogic_V6_8_6.md
 
 ---
 
 ## BEGIN FILE: modules/01_MasterLogic.md
 
-# AgentLogic V6.8.5 Master Logic
+# AgentLogic V6.8.6 Master Logic
 
 本文件是 AgentLogic 仓库的项目级主逻辑摘要。它描述本仓库中的规则、验证、安装和
 打包资产，不描述任何外部业务项目或某个具体 Agentic CLI 产品的源码事实。
@@ -744,7 +769,7 @@ The enhanced profile includes Module 49 and the canonical routing registry. Mand
 
 ### L2：会话规则与开发生命周期 (Session & Development Lifecycle)
 
-- 稳定版本源：`versions/AgentLogic_V6_8_5.md`
+- 稳定版本源：`versions/AgentLogic_V6_8_6.md`
 - 主逻辑摘要：`modules/01_MasterLogic.md`
 - Agent 强制规则：`modules/12_AgentEnforcement.md`
 - 入口清单：`modules/15_LogicEntryChecklist.md`
@@ -756,6 +781,7 @@ The enhanced profile includes Module 49 and the canonical routing registry. Mand
 - 外部研究与交付物整合：`modules/50_V6_8_ExternalResearchAndArtifactIntegration.md`
 - 工具可供性优先路由：`modules/51_V6_8_AffordanceFirstToolUse.md`
 - 交互式 3D 网页模型策略：`modules/52_V6_8_Img2ThreeJs3DWebIntegration.md`
+- 编程级技能强制：`modules/53_V6_8_ProgrammingLevelSkillEnforcement.md`、`contracts/skill-registry.json`、`contracts/skill-enforcement.json`
 - 任务规格与状态：`.specify/`
 
 ### L3：安全、权限与验证控制 (Safety & Verification Control)
@@ -865,6 +891,7 @@ UI 实施完成后仍必须执行截图、父子布局边界、溢出、换行�
   才能候选 `img2threejs`，且不得推断已安装、可信或可执行。
 - 多模块功能、重大重构、架构或发布工作在 Converge/Ship 时应询问用户是否需要代码视图预览。
 - 用户明确同意后，才可在目标业务项目中生成 `graphify-out/`；不得默认在 AgentLogic 仓库内生成，也不得把外部图谱结果当作运行时事实证明。
+- `modules/53_V6_8_ProgrammingLevelSkillEnforcement.md` 要求每个可携带 `SKILL.md` 在机器可读注册表中有生命周期状态；匹配路由必须经过可执行的 preflight、invocation 与 closure 记录。该工作流门不等同于未验证的宿主原生工具拦截。
 
 ## 11. 项目内 L1-L4 地图
 
@@ -2920,7 +2947,7 @@ CODE_MAP.md
   unconfirmed points.
 - `.learnings/ERRORS.md` contains concise records of material project errors: symptom, root
   cause, correction, prevention, and verification.
-- `CODE_MAP.md` is the mandatory text-first handover map for implementation projects. It records
+- `CODE_MAP.md` is the mandatory text-first handover map for implementation projects. Durable skill use is recorded in `.agentlogic/skill-usage.json` and summarized in its `## Skill Usage` section; task-level invocation records stay in `.specify/<task>/skill-execution.json`. It records
   entrypoints, module ownership, navigation-critical functions/classes, state or storage keys,
   interface/event surfaces, validation commands, and a reviewed commit or freshness marker. It is
   not a source dump, runtime proof, or replacement for targeted reads.
@@ -2956,7 +2983,7 @@ working tree and tracked records.
 - A structural change (new/moved entrypoint, module boundary, flow, permission boundary,
   dependency boundary, or validation command) must update `PROJECT_MAP.md` in the same
   project commit.
-- An affected key-flow, symbol-ownership, state/storage, interface/event, or validation change
+- An affected key-flow, symbol-ownership, state/storage, interface/event, validation change, or durable skill adoption/replacement/upgrade/retirement
   must update `CODE_MAP.md` in the same project commit.
 - A material unexpected failure, user correction, or root-cause repair must update
   `.learnings/ERRORS.md` in the same project commit after the correction is understood.
@@ -3211,6 +3238,15 @@ remote verification**.
 
 For mandatory route declarations, host aliases, invocation records, strict missing-capability handling, and software-gap reporting, follow modules/49_V6_8_AutonomousSkillEnforcement.md and contracts/skill-routing.json. Code and PR audits must select the code-review route; generic static reading alone cannot close an audit claim. Module 49 and the schema-v2 contract override any older concrete skill names in this module.
 
+## 6. Programming-Level Route Closure
+
+For enhanced profiles, a matched route is not merely a prose reminder. Follow Module 53's deployed
+workflow gate and record the deterministic classification, preflight availability result, skill
+invocation evidence, and closure evidence in `.specify/<task>/skill-execution.json`. Route ordering
+and dependencies in the canonical contract decide which route must close first. All portable skills
+must be registered before they can be promoted to a routed lifecycle state; unreviewed legacy skills
+remain `manual_only` rather than being inferred as automatic.
+
 ## END FILE: modules/48_V6_8_SkillAndToolRouting.md
 
 ---
@@ -3290,8 +3326,7 @@ selection rule. A conditional skill is never proof that a missing primary capabi
 - UI work is deliberately split: `ui-design` requires image generation for the mockup/edit, while
   `ui-implementation` routes later code work to a frontend implementation skill. A frontend skill
   cannot close the mockup route.
-- Code review defaults to the built-in defect-first `review-agent` or `code-reviewer`; the
-  PR-focused skill is additional only for PR/merge workflow work.
+- Code review defaults to the defect-first `review-agent` or `code-reviewer`; the portable `code-review` skill is an approved conditional route when installed and selected. The PR-focused skill is additional only for PR/merge workflow work.
 - Security, testing, browser, and release specialties are selected by their explicit scenario in
   the registry rather than invoked together as generic substitutes.
 - Figma context retrieval and Figma implementation are complementary specialized paths, not a
@@ -3326,6 +3361,17 @@ Skills marked `specialized_only` in the registry are not duplicate deletions; th
 from generic routing until the request matches their narrow domain and risk boundary.
 
 - Untrusted skills and plugins have their own extension-security route, whose primary skill is `skill-security-auditor`; a generic source-code security review cannot satisfy this trust boundary.
+
+## Programming-Level Enforcement Contract
+
+Module 53 and `contracts/skill-registry.json`, `contracts/skill-routing.json`,
+`contracts/skill-enforcement.json`, and `contracts/host-skill-capabilities.json` are the executable
+continuation of this module. Every portable `SKILL.md` must have an explicit lifecycle record.
+Matched routes must progress through the deployable preflight → invocation → closure state machine;
+a missing strict capability or evidence blocks the declared transition. The command validates
+recorded workflow state only and must not be represented as unsupported host-native tool
+interception. Project-level durable use belongs in `.agentlogic/skill-usage.json`, with a concise
+`CODE_MAP.md` Skill Usage summary.
 
 ## END FILE: modules/49_V6_8_AutonomousSkillEnforcement.md
 
@@ -3663,246 +3709,397 @@ For the reference-based interactive 3D route:
 ## BEGIN FILE: contracts/skill-routing.json
 
 {
-  "schema_version": 2,
-  "purpose": "Canonical capability routes with an ordered primary skill and explicitly conditional supplements; aliases identify candidates, not installed or trusted tools.",
-  "completion_policy": "A missing required evidence capability blocks implementation or verified completion. A missing specialist blocks only routes whose fallback is strict; routes that explicitly allow native evidence fallback may proceed with disclosure and matching evidence. Never claim an unavailable skill was used.",
-  "routes": [
-    {
-      "id": "requirements-grilling",
-      "triggers": [
-        "major_feature",
-        "net_new_ui",
-        "substantial_ui_refactor"
-      ],
-      "capability": "requirements_grilling",
-      "fallback": "block_before_specification",
-      "closure_evidence": [
-        "single_question_dialogue",
-        "approved_requirements_brief",
-        "brief_validator_result"
-      ],
-      "primary_host_skill_aliases": [
-        "product-requirements-grilling"
-      ],
-      "conditional_host_skill_aliases": [],
-      "selection_rule": "Use the first-party product-requirements-grilling skill. No generic interview or hiring skill is an equivalent."
-    },
-    {
-      "id": "ui-design",
-      "triggers": [
-        "net_new_ui",
-        "substantial_ui_refactor"
-      ],
-      "capability": "ui_design_and_mockup",
-      "fallback": "block_before_ui_code",
-      "closure_evidence": [
-        "approved_requirements_brief",
-        "mockup_requested_or_explicit_opt_out",
-        "approved_mockup_or_explicit_opt_out",
-        "visual_verification_plan"
-      ],
-      "primary_host_skill_aliases": [
-        "imagegen"
-      ],
-      "conditional_host_skill_aliases": [
-        "nano-banana-pro",
-        "taste-skill"
-      ],
-      "selection_rule": "Use imagegen (or an explicitly approved equivalent image-generation capability) for the mockup/edit. nano-banana-pro is an approved equivalent only when installed; taste-skill may guide art direction but cannot replace image generation. Do not use a frontend implementation skill as mockup evidence."
-    },
-    {
-      "id": "code-review",
-      "triggers": [
-        "code_audit",
-        "pull_request_review",
-        "release_review"
-      ],
-      "capability": "code_review",
-      "fallback": "block_verified_review",
-      "closure_evidence": [
-        "review_report",
-        "severity_and_evidence"
-      ],
-      "primary_host_skill_aliases": [
-        "review-agent",
-        "code-reviewer"
-      ],
-      "conditional_host_skill_aliases": [
-        "pr-review-expert"
-      ],
-      "selection_rule": "Use review-agent or code-reviewer for a defect-first code review. Use pr-review-expert only when the task specifically requires PR workflow, reviewability, or merge-readiness analysis; it supplements rather than replaces the review report."
-    },
-    {
-      "id": "security-review",
-      "triggers": [
-        "security_review",
-        "security_sensitive_change"
-      ],
-      "capability": "security_review",
-      "fallback": "block_verified_review_or_install",
-      "closure_evidence": [
-        "self_refuted_findings",
-        "trust_decision"
-      ],
-      "primary_host_skill_aliases": [
-        "security-best-practices"
-      ],
-      "conditional_host_skill_aliases": [
-        "senior-security",
-        "senior-secops"
-      ],
-      "selection_rule": "Use security-best-practices for supported source-code reviews. Use senior-security for threat modeling or secure architecture and senior-secops for CVE/compliance/infrastructure operations. A conditional specialty does not waive the primary review when the primary applies."
-    },
-    {
-      "id": "browser-verification",
-      "triggers": [
-        "dynamic_web_flow",
-        "browser_ui_verification"
-      ],
-      "capability": "browser_automation",
-      "fallback": "block_browser_verified_claim",
-      "closure_evidence": [
-        "fresh_browser_observation",
-        "captured_artifact"
-      ],
-      "primary_host_skill_aliases": [
-        "playwright"
-      ],
-      "conditional_host_skill_aliases": [
-        "agent-browser",
-        "playwright-pro"
-      ],
-      "selection_rule": "Use playwright for ordinary real-browser interaction and proof. Use agent-browser only when installed and its accessibility-tree/session model is the better fit; use playwright-pro only for test-suite generation, migration, repair, cloud matrix, or test-management work."
-    },
-    {
-      "id": "visual-verification",
-      "triggers": [
-        "desktop_visual_state",
-        "ui_visual_claim"
-      ],
-      "capability": "visual_capture",
-      "fallback": "block_visual_verified_claim",
-      "closure_evidence": [
-        "screenshot_or_equivalent",
-        "boundary_check"
-      ],
-      "primary_host_skill_aliases": [
-        "screenshot"
-      ],
-      "conditional_host_skill_aliases": [
-        "playwright",
-        "agent-browser"
-      ],
-      "selection_rule": "Use screenshot for desktop/OS capture. Use Playwright or agent-browser capture only when the claim is inside a browser flow and the captured artifact covers the required viewport and layout boundaries."
-    },
-    {
-      "id": "test-design",
-      "triggers": [
-        "test_design",
-        "coverage_gap",
-        "behavior_change"
-      ],
-      "capability": "test_engineering",
-      "fallback": "block_verified_behavior_change",
-      "closure_evidence": [
-        "relevant_test_or_explicit_gap",
-        "command_result"
-      ],
-      "primary_host_skill_aliases": [
-        "tdd-guide"
-      ],
-      "conditional_host_skill_aliases": [
-        "senior-qa",
-        "api-test-suite-builder",
-        "playwright-pro"
-      ],
-      "selection_rule": "Use tdd-guide for unit/behavior tests. Use senior-qa for coverage and application test strategy, api-test-suite-builder for API suites, and playwright-pro for E2E suite operations."
-    },
-    {
-      "id": "package-release",
-      "triggers": [
-        "install",
-        "package",
-        "release"
-      ],
-      "capability": "package_validation",
-      "fallback": "allow_native_package_validation_with_disclosure",
-      "closure_evidence": [
-        "artifact_validation",
-        "post_result_inspection"
-      ],
-      "primary_host_skill_aliases": [
-        "release-manager"
-      ],
-      "conditional_host_skill_aliases": [
-        "ci-cd-pipeline-builder"
-      ],
-      "selection_rule": "Use release-manager for release readiness and artifact closure when available. When it is unavailable, native build/package validation plus post-result inspection may close a local install or package task with the gap disclosed. Use ci-cd-pipeline-builder when pipeline design or repair is part of the release work."
-    },
-    {
-      "id": "ui-implementation",
-      "triggers": [
-        "net_new_ui",
-        "substantial_ui_refactor",
-        "approved_ui_mockup"
-      ],
-      "capability": "frontend_ui_implementation",
-      "primary_host_skill_aliases": [
-        "senior-frontend"
-      ],
-      "conditional_host_skill_aliases": [
-        "figma-implement-design"
-      ],
-      "selection_rule": "Use senior-frontend only after requirements and mockup gates close. Use figma-implement-design when an approved Figma node is the implementation source; it does not replace requirements grilling or mockup approval.",
-      "fallback": "block_before_ui_code",
-      "closure_evidence": [
-        "approved_requirements_brief",
-        "approved_mockup_or_explicit_opt_out",
-        "implementation_validation",
-        "visual_verification_plan"
-      ]
-    },
-    {
-      "id": "extension-security-review",
-      "triggers": [
-        "untrusted_extension"
-      ],
-      "capability": "untrusted_extension_security_audit",
-      "primary_host_skill_aliases": [
-        "skill-security-auditor"
-      ],
-      "conditional_host_skill_aliases": [],
-      "selection_rule": "Use skill-security-auditor before installing or trusting an external skill or plugin. General source-code security review is not an equivalent extension-trust audit.",
-      "fallback": "block_verified_review_or_install",
-      "closure_evidence": [
-        "self_refuted_findings",
-        "trust_decision",
-        "dependency_or_behavior_audit"
-      ]
-    }
-  ],
-  "non_default_skill_policy": [
-    {
-      "skill": "self-improving-agent",
-      "status": "manual_only",
-      "reason": "Its Claude-oriented auto-memory and rule-promotion paths must not automatically write persistent rules or replace project-native AGENTS.md, PROJECT_MAP.md, CODE_MAP.md, or .learnings/ERRORS.md."
-    },
-    {
-      "skill": "database-schema-designer",
-      "status": "specialized_only",
-      "reason": "Use only for schema-focused work; database-designer remains the default for broader database design so both are not invoked for the same decision."
-    },
-    {
-      "skill": "ms365-tenant-manager",
-      "status": "specialized_only",
-      "reason": "High-impact tenant administration; never activate from generic engineering routing."
-    },
-    {
-      "skill": "aws-solution-architect",
-      "status": "specialized_only",
-      "reason": "Use only for explicit AWS architecture or migration requests."
-    }
-  ]
+    "schema_version":  3,
+    "purpose":  "Canonical capability routes with an ordered primary skill and explicitly conditional supplements; aliases identify candidates, not installed or trusted tools.",
+    "completion_policy":  "A missing required evidence capability blocks implementation or verified completion. A missing specialist blocks only routes whose fallback is strict; routes that explicitly allow native evidence fallback may proceed with disclosure and matching evidence. Workflow enforcement validates recorded route progression; it never claims unsupported host-native interception. Never claim an unavailable skill was used.",
+    "routes":  [
+                   {
+                       "id":  "requirements-grilling",
+                       "triggers":  [
+                                        "major_feature",
+                                        "net_new_ui",
+                                        "substantial_ui_refactor"
+                                    ],
+                       "capability":  "requirements_grilling",
+                       "fallback":  "block_before_specification",
+                       "closure_evidence":  [
+                                                "single_question_dialogue",
+                                                "approved_requirements_brief",
+                                                "brief_validator_result"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "product-requirements-grilling"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+
+                                                          ],
+                       "selection_rule":  "Use the first-party product-requirements-grilling skill. No generic interview or hiring skill is an equivalent.",
+                       "order":  10,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "specification"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none"
+                   },
+                   {
+                       "id":  "ui-design",
+                       "triggers":  [
+                                        "net_new_ui",
+                                        "substantial_ui_refactor"
+                                    ],
+                       "capability":  "ui_design_and_mockup",
+                       "fallback":  "block_before_ui_code",
+                       "closure_evidence":  [
+                                                "approved_requirements_brief",
+                                                "mockup_requested_or_explicit_opt_out",
+                                                "approved_mockup_or_explicit_opt_out",
+                                                "visual_verification_plan"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "imagegen"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "nano-banana-pro",
+                                                              "taste-skill"
+                                                          ],
+                       "selection_rule":  "Use imagegen (or an explicitly approved equivalent image-generation capability) for the mockup/edit. nano-banana-pro is an approved equivalent only when installed; taste-skill may guide art direction but cannot replace image generation. Do not use a frontend implementation skill as mockup evidence.",
+                       "order":  20,
+                       "requires_routes":  [
+                                               "requirements-grilling"
+                                           ],
+                       "blocked_transitions":  [
+                                                   "ui_code"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "explicit_user_opt_out_of_mockup_only"
+                   },
+                   {
+                       "id":  "code-review",
+                       "triggers":  [
+                                        "code_audit",
+                                        "pull_request_review",
+                                        "release_review"
+                                    ],
+                       "capability":  "code_review",
+                       "fallback":  "block_verified_review",
+                       "closure_evidence":  [
+                                                "review_report",
+                                                "severity_and_evidence"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "review-agent",
+                                                          "code-reviewer",
+                                                          "code-review"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "pr-review-expert"
+                                                          ],
+                       "selection_rule":  "Use review-agent or code-reviewer for a defect-first code review. The portable code-review skill is an approved conditional route when installed and selected. Use pr-review-expert only when the task specifically requires PR workflow, reviewability, or merge-readiness analysis; it supplements rather than replaces the review report.",
+                       "order":  70,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "verified_review"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none"
+                   },
+                   {
+                       "id":  "security-review",
+                       "triggers":  [
+                                        "security_review",
+                                        "security_sensitive_change"
+                                    ],
+                       "capability":  "security_review",
+                       "fallback":  "block_verified_review_or_install",
+                       "closure_evidence":  [
+                                                "self_refuted_findings",
+                                                "trust_decision"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "security-best-practices"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "senior-security",
+                                                              "senior-secops"
+                                                          ],
+                       "selection_rule":  "Use security-best-practices for supported source-code reviews. Use senior-security for threat modeling or secure architecture and senior-secops for CVE/compliance/infrastructure operations. A conditional specialty does not waive the primary review when the primary applies.",
+                       "order":  71,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "verified_review",
+                                                   "install"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none"
+                   },
+                   {
+                       "id":  "browser-verification",
+                       "triggers":  [
+                                        "dynamic_web_flow",
+                                        "browser_ui_verification"
+                                    ],
+                       "capability":  "browser_automation",
+                       "fallback":  "block_browser_verified_claim",
+                       "closure_evidence":  [
+                                                "fresh_browser_observation",
+                                                "captured_artifact"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "playwright"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "agent-browser",
+                                                              "playwright-pro"
+                                                          ],
+                       "selection_rule":  "Use playwright for ordinary real-browser interaction and proof. Use agent-browser only when installed and its accessibility-tree/session model is the better fit; use playwright-pro only for test-suite generation, migration, repair, cloud matrix, or test-management work.",
+                       "order":  50,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "browser_verified_claim"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none"
+                   },
+                   {
+                       "id":  "visual-verification",
+                       "triggers":  [
+                                        "desktop_visual_state",
+                                        "ui_visual_claim",
+                                        "small_visual_correction"
+                                    ],
+                       "capability":  "visual_capture",
+                       "fallback":  "block_visual_verified_claim",
+                       "closure_evidence":  [
+                                                "screenshot_or_equivalent",
+                                                "boundary_check"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "screenshot"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "playwright",
+                                                              "agent-browser"
+                                                          ],
+                       "selection_rule":  "Use screenshot for desktop/OS capture. Use Playwright or agent-browser capture only when the claim is inside a browser flow and the captured artifact covers the required viewport and layout boundaries.",
+                       "order":  60,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "visual_verified_claim"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none"
+                   },
+                   {
+                       "id":  "test-design",
+                       "triggers":  [
+                                        "test_design",
+                                        "coverage_gap",
+                                        "behavior_change"
+                                    ],
+                       "capability":  "test_engineering",
+                       "fallback":  "block_verified_behavior_change",
+                       "closure_evidence":  [
+                                                "relevant_test_or_explicit_gap",
+                                                "command_result"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "tdd-guide"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "senior-qa",
+                                                              "api-test-suite-builder",
+                                                              "playwright-pro"
+                                                          ],
+                       "selection_rule":  "Use tdd-guide for unit/behavior tests. Use senior-qa for coverage and application test strategy, api-test-suite-builder for API suites, and playwright-pro for E2E suite operations.",
+                       "order":  40,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "verified_behavior_change"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none"
+                   },
+                   {
+                       "id":  "package-release",
+                       "triggers":  [
+                                        "install",
+                                        "package",
+                                        "release",
+                                        "remote_release"
+                                    ],
+                       "capability":  "package_validation",
+                       "fallback":  "allow_native_package_validation_with_disclosure",
+                       "closure_evidence":  [
+                                                "artifact_validation",
+                                                "post_result_inspection"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "release-manager"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "ci-cd-pipeline-builder"
+                                                          ],
+                       "selection_rule":  "Use release-manager for release readiness and artifact closure when available. When it is unavailable, native build/package validation plus post-result inspection may close a local install or package task with the gap disclosed. Use ci-cd-pipeline-builder when pipeline design or repair is part of the release work.",
+                       "order":  80,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "package_or_release_completion"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "native_local_package_validation_only",
+                       "conditional_closure_evidence":  [
+                                                            {
+                                                                "field":  "external_effect",
+                                                                "values":  [
+                                                                               "remote_release"
+                                                                           ],
+                                                                "evidence":  [
+                                                                                 "exact_remote_target_confirmation"
+                                                                             ]
+                                                            }
+                                                        ]
+                   },
+                   {
+                       "id":  "ui-implementation",
+                       "triggers":  [
+                                        "net_new_ui",
+                                        "substantial_ui_refactor"
+                                    ],
+                       "capability":  "frontend_ui_implementation",
+                       "primary_host_skill_aliases":  [
+                                                          "senior-frontend"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "figma-implement-design"
+                                                          ],
+                       "selection_rule":  "Use senior-frontend only after requirements and mockup gates close. Use figma-implement-design when an approved Figma node is the implementation source; it does not replace requirements grilling or mockup approval.",
+                       "fallback":  "block_before_ui_code",
+                       "closure_evidence":  [
+                                                "approved_requirements_brief",
+                                                "approved_mockup_or_explicit_opt_out",
+                                                "implementation_validation",
+                                                "visual_verification_plan"
+                                            ],
+                       "order":  30,
+                       "requires_routes":  [
+                                               "requirements-grilling",
+                                               "ui-design"
+                                           ],
+                       "blocked_transitions":  [
+                                                   "ui_code"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none"
+                   },
+                   {
+                       "id":  "extension-security-review",
+                       "triggers":  [
+                                        "untrusted_extension"
+                                    ],
+                       "capability":  "untrusted_extension_security_audit",
+                       "primary_host_skill_aliases":  [
+                                                          "skill-security-auditor"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+
+                                                          ],
+                       "selection_rule":  "Use skill-security-auditor before installing or trusting an external skill or plugin. General source-code security review is not an equivalent extension-trust audit.",
+                       "fallback":  "block_verified_review_or_install",
+                       "closure_evidence":  [
+                                                "self_refuted_findings",
+                                                "trust_decision",
+                                                "dependency_or_behavior_audit"
+                                            ],
+                       "order":  72,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "verified_review",
+                                                   "install"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none"
+                   }
+               ],
+    "non_default_skill_policy":  [
+                                     {
+                                         "skill":  "self-improving-agent",
+                                         "status":  "manual_only",
+                                         "reason":  "Its Claude-oriented auto-memory and rule-promotion paths must not automatically write persistent rules or replace project-native AGENTS.md, PROJECT_MAP.md, CODE_MAP.md, or .learnings/ERRORS.md."
+                                     },
+                                     {
+                                         "skill":  "database-schema-designer",
+                                         "status":  "specialized_only",
+                                         "reason":  "Use only for schema-focused work; database-designer remains the default for broader database design so both are not invoked for the same decision."
+                                     },
+                                     {
+                                         "skill":  "ms365-tenant-manager",
+                                         "status":  "specialized_only",
+                                         "reason":  "High-impact tenant administration; never activate from generic engineering routing."
+                                     },
+                                     {
+                                         "skill":  "aws-solution-architect",
+                                         "status":  "specialized_only",
+                                         "reason":  "Use only for explicit AWS architecture or migration requests."
+                                     }
+                                 ],
+    "enforcement_contract":  "contracts/skill-enforcement.json"
 }
 
 ## END FILE: contracts/skill-routing.json
@@ -3912,17 +4109,493 @@ For the reference-based interactive 3D route:
 ## BEGIN FILE: contracts/host-skill-capabilities.json
 
 {
-  "schema_version": 1,
-  "purpose": "Host deployment contract for AgentLogic first-party skills. It does not claim third-party or system skills are installed.",
-  "first_party_skill": "product-requirements-grilling",
-  "source": "skills/productivity/product-requirements-grilling",
-  "hosts": {
-    "codex": { "target_relative": ".codex/skills/product-requirements-grilling" },
-    "claude": { "target_relative": ".claude/skills/product-requirements-grilling" },
-    "antigravity": { "target_relative": ".gemini/skills/product-requirements-grilling" },
-    "generic": { "target_relative": "<bundle-directory>/skills/product-requirements-grilling" }
-  }
+    "schema_version":  2,
+    "purpose":  "Host deployment contract for AgentLogic first-party skills. It does not claim third-party or system skills are installed.",
+    "first_party_skill":  "product-requirements-grilling",
+    "source":  "skills/productivity/product-requirements-grilling",
+    "hosts":  {
+                  "codex":  {
+                                "target_relative":  ".codex/skills/product-requirements-grilling",
+                                "enforcement":  {
+                                                    "level":  "workflow_enforced",
+                                                    "native_tool_interception":  false,
+                                                    "target_relative":  ".codex/agentlogic/skill-enforcement",
+                                                    "command_relative":  "scripts/skill-enforcement.ps1",
+                                                    "required_files":  [
+                                                                           "scripts/skill-enforcement.ps1",
+                                                                           "contracts/skill-enforcement.json",
+                                                                           "contracts/skill-routing.json",
+                                                                           "contracts/skill-registry.json"
+                                                                       ]
+                                                }
+                            },
+                  "claude":  {
+                                 "target_relative":  ".claude/skills/product-requirements-grilling",
+                                 "enforcement":  {
+                                                     "level":  "workflow_enforced",
+                                                     "native_tool_interception":  false,
+                                                     "target_relative":  ".claude/AgentLogic/skill-enforcement",
+                                                     "command_relative":  "scripts/skill-enforcement.ps1",
+                                                     "required_files":  [
+                                                                            "scripts/skill-enforcement.ps1",
+                                                                            "contracts/skill-enforcement.json",
+                                                                            "contracts/skill-routing.json",
+                                                                            "contracts/skill-registry.json"
+                                                                        ]
+                                                 }
+                             },
+                  "antigravity":  {
+                                      "target_relative":  ".gemini/skills/product-requirements-grilling",
+                                      "enforcement":  {
+                                                          "level":  "workflow_enforced",
+                                                          "native_tool_interception":  false,
+                                                          "target_relative":  ".gemini/antigravity-cli/AgentLogic/skill-enforcement",
+                                                          "command_relative":  "scripts/skill-enforcement.ps1",
+                                                          "required_files":  [
+                                                                                 "scripts/skill-enforcement.ps1",
+                                                                                 "contracts/skill-enforcement.json",
+                                                                                 "contracts/skill-routing.json",
+                                                                                 "contracts/skill-registry.json"
+                                                                             ]
+                                                      }
+                                  },
+                  "generic":  {
+                                  "target_relative":  "\u003cbundle-directory\u003e/skills/product-requirements-grilling",
+                                  "enforcement":  {
+                                                      "level":  "workflow_enforced",
+                                                      "native_tool_interception":  false,
+                                                      "target_relative":  "\u003cbundle-directory\u003e/skill-enforcement",
+                                                      "command_relative":  "scripts/skill-enforcement.ps1",
+                                                      "required_files":  [
+                                                                             "scripts/skill-enforcement.ps1",
+                                                                             "contracts/skill-enforcement.json",
+                                                                             "contracts/skill-routing.json",
+                                                                             "contracts/skill-registry.json"
+                                                                         ]
+                                                  }
+                              }
+              },
+    "enforcement_payload":  {
+                                "level":  "workflow_enforced",
+                                "native_tool_interception":  false,
+                                "description":  "A deployable preflight, invocation-record, and closure-validation command. It enforces recorded workflow state and must not be described as host-native tool interception.",
+                                "files":  [
+                                              "scripts/skill-enforcement.ps1",
+                                              "contracts/skill-enforcement.json",
+                                              "contracts/skill-routing.json",
+                                              "contracts/skill-registry.json"
+                                          ]
+                            }
 }
 
 ## END FILE: contracts/host-skill-capabilities.json
+
+---
+
+## BEGIN FILE: modules/53_V6_8_ProgrammingLevelSkillEnforcement.md
+
+# V6.8 Programming-Level Skill Enforcement
+
+Status: **Active in the enhanced profiles.**
+
+This module turns skill selection into a machine-checkable workflow gate. It complements Modules
+29–31: those modules decide the evidence strength; this module prevents a matched required skill
+route from being silently omitted during planning, implementation, review, verification, packaging,
+or project handover.
+
+## 1. Enforcement boundary
+
+The enforcement level is deliberately explicit:
+
+- **workflow_enforced** means the installed command validates task classification, matched routes,
+  selected capabilities, invocation records, closure evidence, and permitted state transitions.
+  Missing strict evidence blocks the declared workflow transition.
+- **native_tool_interception** means a host-native mechanism can observe or prevent an individual
+  tool call. Do not claim this level unless the host contract and post-install verification prove it.
+
+A workflow ledger is evidence of a contract-valid recorded process, not proof of invisible host
+behavior. An unrecorded skill invocation remains unverified; a host without native interception
+must state that limitation rather than presenting workflow enforcement as a sandbox.
+
+## 2. Canonical contracts
+
+The following files are one system and must be updated together:
+
+- `contracts/skill-registry.json`: exactly one lifecycle record for every `skills/**/SKILL.md`.
+  Valid lifecycle states are `mandatory`, `conditional`, `manual_only`, `archived`, and
+  `deprecated`. Existing skills with insufficient reviewed trigger metadata default to
+  `manual_only`.
+- `contracts/skill-routing.json`: ordered task routes, triggers, dependencies, required invocation
+  evidence, closure evidence, fallback/exemption policy, and blocked transitions.
+- `contracts/skill-enforcement.json`: valid task classification dimensions, signal derivation,
+  task-record state machine, and project skill-usage schema.
+- `contracts/host-skill-capabilities.json`: each host's installed workflow-gate payload and its
+  honestly declared native-interception status.
+
+Adding a new portable skill without a registry record is a package-validation failure. Promoting a
+skill from `manual_only` requires a reviewed trigger, route/fallback decision, invocation evidence,
+closure evidence, host availability posture, and test coverage.
+
+## 3. Required task state machine
+
+For a non-trivial task, use `.specify/<task>/skill-execution.json` and the deployed
+`skill-enforcement.ps1` command:
+
+1. `initialize`: supply structured classification, which deterministically derives all matched
+   routes in order.
+2. `preflight`: confirm selected capabilities are available and block strict routes that are not.
+3. `record-invocation`: write the required skill invocation evidence.
+4. `closure`: require all route-specific evidence and closed route dependencies before a route is
+   closed.
+
+The command rejects changed route sets, invalid state transitions, missing strict skills, missing
+invocation records, missing closure evidence, and remote releases without exact target
+confirmation. A task may report a partial or blocked outcome when a required capability is absent;
+it may not call that outcome verified.
+
+## 4. Multi-route ordering and exemptions
+
+Routes are merged from the classification signals, then sorted by their declared order. Dependencies
+are blocking: requirements grilling closes before UI design; UI design closes before UI
+implementation. A small visual correction may skip a new mockup only under the existing explicit
+rule, but it always matches visual verification. An explicit mockup opt-out is not a waiver for
+requirements discovery, browser/visual evidence, security evidence, or test evidence.
+
+Remote release closure always includes local artifact validation, exact remote target confirmation,
+and post-result inspection. Native package fallback applies only where the route explicitly permits
+it; it never authorizes an external release mutation without the remote checks.
+
+## 5. Cross-host deployment
+
+Every supported adapter deploys the same self-contained enforcement payload and verifies it after
+copying. The payload includes the command and the registry, routing, and enforcement contracts.
+A host may only be labelled `workflow_enforced` after this verification. Adapters and documentation
+must not call the deployment `native_tool_interception` unless an actual verified host hook is added
+in a later, host-specific change.
+
+## 6. Project Skill Usage handover
+
+A business project records durable skill use in `.agentlogic/skill-usage.json` and maintains a
+concise `## Skill Usage` section in `CODE_MAP.md`. The JSON record includes the skill/capability,
+flows, trigger, source/version or provider, status, and reviewed commit. The map points to the JSON
+source; it is not a raw invocation log. Per-task events remain under `.specify/<task>/`.
+
+When a project adopts, replaces, upgrades, or retires a durable skill, update the JSON source and
+its CODE_MAP summary in the same commit. Never store credentials, private prompts, raw logs, or
+machine paths in either record.
+
+## 7. Validation and future integration
+
+Run:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\validate-skill-registry.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\validate-skill-routing.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\test-skill-enforcement.ps1
+```
+
+`validate-package.ps1` invokes the registry and routing checks. Future integrations must add the
+skill registry record and any reviewed route changes before the package can validate; no installer,
+profile bundle, or prose-only mention is an alternative path.
+
+## END FILE: modules/53_V6_8_ProgrammingLevelSkillEnforcement.md
+
+---
+
+## BEGIN FILE: contracts/skill-enforcement.json
+
+{
+    "schema_version":  1,
+    "purpose":  "Machine-readable workflow-gate contract for task classification, route selection, recorded invocation, closure evidence, and project skill handover.",
+    "enforcement_levels":  {
+                               "workflow_enforced":  "The installed command validates and records route progression. It blocks contract states but does not claim invisible host tool interception.",
+                               "native_tool_interception":  "A host-native hook observes or prevents an individual tool action. Do not claim this level unless the host contract and post-install verification prove it."
+                           },
+    "task_classification":  {
+                                "required_fields":  [
+                                                        "task_class",
+                                                        "change_scope",
+                                                        "ui_scope",
+                                                        "external_effect",
+                                                        "claim_types"
+                                                    ],
+                                "task_class":  [
+                                                   "read_only",
+                                                   "documentation",
+                                                   "trivial_fix",
+                                                   "feature",
+                                                   "major_feature",
+                                                   "refactor",
+                                                   "code_audit",
+                                                   "security_review",
+                                                   "install",
+                                                   "package",
+                                                   "release"
+                                               ],
+                                "change_scope":  [
+                                                     "isolated",
+                                                     "multi_file",
+                                                     "architectural"
+                                                 ],
+                                "ui_scope":  [
+                                                 "none",
+                                                 "small_correction",
+                                                 "net_new",
+                                                 "substantial_refactor"
+                                             ],
+                                "external_effect":  [
+                                                        "none",
+                                                        "local_package",
+                                                        "remote_release"
+                                                    ],
+                                "claim_types":  [
+                                                    "none",
+                                                    "behavior_change",
+                                                    "browser_ui",
+                                                    "dynamic_web_flow",
+                                                    "desktop_visual_state",
+                                                    "ui_visual",
+                                                    "security_sensitive",
+                                                    "untrusted_extension",
+                                                    "test_design",
+                                                    "coverage_gap",
+                                                    "pull_request_review"
+                                                ],
+                                "signal_rules":  [
+                                                     {
+                                                         "field":  "task_class",
+                                                         "values":  [
+                                                                        "major_feature"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "major_feature",
+                                                                         "behavior_change"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "task_class",
+                                                         "values":  [
+                                                                        "feature",
+                                                                        "refactor"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "behavior_change"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "task_class",
+                                                         "values":  [
+                                                                        "code_audit"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "code_audit"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "task_class",
+                                                         "values":  [
+                                                                        "security_review"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "security_review"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "task_class",
+                                                         "values":  [
+                                                                        "install"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "install"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "task_class",
+                                                         "values":  [
+                                                                        "package"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "package"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "task_class",
+                                                         "values":  [
+                                                                        "release"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "release",
+                                                                         "release_review"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "ui_scope",
+                                                         "values":  [
+                                                                        "small_correction"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "small_visual_correction",
+                                                                         "ui_visual_claim"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "ui_scope",
+                                                         "values":  [
+                                                                        "net_new"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "net_new_ui",
+                                                                         "ui_visual_claim"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "ui_scope",
+                                                         "values":  [
+                                                                        "substantial_refactor"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "substantial_ui_refactor",
+                                                                         "ui_visual_claim"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "external_effect",
+                                                         "values":  [
+                                                                        "local_package"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "package"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "external_effect",
+                                                         "values":  [
+                                                                        "remote_release"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "release",
+                                                                         "remote_release"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "browser_ui"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "browser_ui_verification"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "ui_visual"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "ui_visual_claim"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "security_sensitive"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "security_sensitive_change"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "untrusted_extension"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "untrusted_extension"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "dynamic_web_flow"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "dynamic_web_flow"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "desktop_visual_state"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "desktop_visual_state"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "test_design"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "test_design"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "coverage_gap"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "coverage_gap"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "pull_request_review"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "pull_request_review"
+                                                                     ]
+                                                     }
+                                                 ]
+                            },
+    "task_execution_record":  {
+                                  "required_fields":  [
+                                                          "schema_version",
+                                                          "task_id",
+                                                          "classification",
+                                                          "matched_route_ids",
+                                                          "routes"
+                                                      ],
+                                  "states":  [
+                                                 "pending",
+                                                 "preflight_passed",
+                                                 "invoked",
+                                                 "closed",
+                                                 "blocked"
+                                             ],
+                                  "location":  ".specify/\u003ctask\u003e/skill-execution.json"
+                              },
+    "project_skill_usage":  {
+                                "location":  ".agentlogic/skill-usage.json",
+                                "required_fields":  [
+                                                        "schema_version",
+                                                        "reviewed_commit",
+                                                        "skills"
+                                                    ],
+                                "required_skill_fields":  [
+                                                              "skill_id",
+                                                              "capability",
+                                                              "flows",
+                                                              "trigger",
+                                                              "source",
+                                                              "status"
+                                                          ],
+                                "code_map_heading":  "Skill Usage",
+                                "transient_task_records":  ".specify/\u003ctask\u003e/skill-execution.json"
+                            }
+}
+
+## END FILE: contracts/skill-enforcement.json
 

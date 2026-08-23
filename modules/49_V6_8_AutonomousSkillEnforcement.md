@@ -71,8 +71,7 @@ selection rule. A conditional skill is never proof that a missing primary capabi
 - UI work is deliberately split: `ui-design` requires image generation for the mockup/edit, while
   `ui-implementation` routes later code work to a frontend implementation skill. A frontend skill
   cannot close the mockup route.
-- Code review defaults to the built-in defect-first `review-agent` or `code-reviewer`; the
-  PR-focused skill is additional only for PR/merge workflow work.
+- Code review defaults to the defect-first `review-agent` or `code-reviewer`; the portable `code-review` skill is an approved conditional route when installed and selected. The PR-focused skill is additional only for PR/merge workflow work.
 - Security, testing, browser, and release specialties are selected by their explicit scenario in
   the registry rather than invoked together as generic substitutes.
 - Figma context retrieval and Figma implementation are complementary specialized paths, not a
@@ -107,3 +106,14 @@ Skills marked `specialized_only` in the registry are not duplicate deletions; th
 from generic routing until the request matches their narrow domain and risk boundary.
 
 - Untrusted skills and plugins have their own extension-security route, whose primary skill is `skill-security-auditor`; a generic source-code security review cannot satisfy this trust boundary.
+
+## Programming-Level Enforcement Contract
+
+Module 53 and `contracts/skill-registry.json`, `contracts/skill-routing.json`,
+`contracts/skill-enforcement.json`, and `contracts/host-skill-capabilities.json` are the executable
+continuation of this module. Every portable `SKILL.md` must have an explicit lifecycle record.
+Matched routes must progress through the deployable preflight → invocation → closure state machine;
+a missing strict capability or evidence blocks the declared transition. The command validates
+recorded workflow state only and must not be represented as unsupported host-native tool
+interception. Project-level durable use belongs in `.agentlogic/skill-usage.json`, with a concise
+`CODE_MAP.md` Skill Usage summary.

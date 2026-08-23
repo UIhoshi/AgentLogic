@@ -39,3 +39,10 @@
 - Root cause: Antigravity's adapter intentionally writes `.gemini/AgentLogic/GEMINI.md`, but `install.ps1` did not list that path as an installed/protected target.
 - Correction: include the compatibility hook in Antigravity post-install targets when using the default path.
 - Prevention: smoke-test every adapter through the top-level installer, including legacy-file protection behavior.
+
+## 2026-08-23 – UTF-8 BOM invalidated a JSON contract
+- Symptom: `node scripts/check-logic-entry.js` could not parse `manifest.json` after a PowerShell edit.
+- Root cause: Windows PowerShell `Set-Content -Encoding utf8` added a BOM that Node's JSON parser did not accept.
+- Correction: Rewrote generated/edited JSON contracts with an explicit BOM-free UTF-8 encoding.
+- Prevention: For JSON consumed by Node, use `[System.IO.File]::WriteAllText(..., [System.Text.UTF8Encoding]::new($false))` and run the entry checker immediately.
+- Verification: `node scripts/check-logic-entry.js` passed after the rewrite.

@@ -1,12 +1,79 @@
-﻿{
-  "schema_version": 1,
-  "purpose": "Host deployment contract for AgentLogic first-party skills. It does not claim third-party or system skills are installed.",
-  "first_party_skill": "product-requirements-grilling",
-  "source": "skills/productivity/product-requirements-grilling",
-  "hosts": {
-    "codex": { "target_relative": ".codex/skills/product-requirements-grilling" },
-    "claude": { "target_relative": ".claude/skills/product-requirements-grilling" },
-    "antigravity": { "target_relative": ".gemini/skills/product-requirements-grilling" },
-    "generic": { "target_relative": "<bundle-directory>/skills/product-requirements-grilling" }
-  }
+{
+    "schema_version":  2,
+    "purpose":  "Host deployment contract for AgentLogic first-party skills. It does not claim third-party or system skills are installed.",
+    "first_party_skill":  "product-requirements-grilling",
+    "source":  "skills/productivity/product-requirements-grilling",
+    "hosts":  {
+                  "codex":  {
+                                "target_relative":  ".codex/skills/product-requirements-grilling",
+                                "enforcement":  {
+                                                    "level":  "workflow_enforced",
+                                                    "native_tool_interception":  false,
+                                                    "target_relative":  ".codex/agentlogic/skill-enforcement",
+                                                    "command_relative":  "scripts/skill-enforcement.ps1",
+                                                    "required_files":  [
+                                                                           "scripts/skill-enforcement.ps1",
+                                                                           "contracts/skill-enforcement.json",
+                                                                           "contracts/skill-routing.json",
+                                                                           "contracts/skill-registry.json"
+                                                                       ]
+                                                }
+                            },
+                  "claude":  {
+                                 "target_relative":  ".claude/skills/product-requirements-grilling",
+                                 "enforcement":  {
+                                                     "level":  "workflow_enforced",
+                                                     "native_tool_interception":  false,
+                                                     "target_relative":  ".claude/AgentLogic/skill-enforcement",
+                                                     "command_relative":  "scripts/skill-enforcement.ps1",
+                                                     "required_files":  [
+                                                                            "scripts/skill-enforcement.ps1",
+                                                                            "contracts/skill-enforcement.json",
+                                                                            "contracts/skill-routing.json",
+                                                                            "contracts/skill-registry.json"
+                                                                        ]
+                                                 }
+                             },
+                  "antigravity":  {
+                                      "target_relative":  ".gemini/skills/product-requirements-grilling",
+                                      "enforcement":  {
+                                                          "level":  "workflow_enforced",
+                                                          "native_tool_interception":  false,
+                                                          "target_relative":  ".gemini/antigravity-cli/AgentLogic/skill-enforcement",
+                                                          "command_relative":  "scripts/skill-enforcement.ps1",
+                                                          "required_files":  [
+                                                                                 "scripts/skill-enforcement.ps1",
+                                                                                 "contracts/skill-enforcement.json",
+                                                                                 "contracts/skill-routing.json",
+                                                                                 "contracts/skill-registry.json"
+                                                                             ]
+                                                      }
+                                  },
+                  "generic":  {
+                                  "target_relative":  "\u003cbundle-directory\u003e/skills/product-requirements-grilling",
+                                  "enforcement":  {
+                                                      "level":  "workflow_enforced",
+                                                      "native_tool_interception":  false,
+                                                      "target_relative":  "\u003cbundle-directory\u003e/skill-enforcement",
+                                                      "command_relative":  "scripts/skill-enforcement.ps1",
+                                                      "required_files":  [
+                                                                             "scripts/skill-enforcement.ps1",
+                                                                             "contracts/skill-enforcement.json",
+                                                                             "contracts/skill-routing.json",
+                                                                             "contracts/skill-registry.json"
+                                                                         ]
+                                                  }
+                              }
+              },
+    "enforcement_payload":  {
+                                "level":  "workflow_enforced",
+                                "native_tool_interception":  false,
+                                "description":  "A deployable preflight, invocation-record, and closure-validation command. It enforces recorded workflow state and must not be described as host-native tool interception.",
+                                "files":  [
+                                              "scripts/skill-enforcement.ps1",
+                                              "contracts/skill-enforcement.json",
+                                              "contracts/skill-routing.json",
+                                              "contracts/skill-registry.json"
+                                          ]
+                            }
 }

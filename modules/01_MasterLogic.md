@@ -1,4 +1,4 @@
-# AgentLogic V6.8.5 Master Logic
+# AgentLogic V6.8.6 Master Logic
 
 本文件是 AgentLogic 仓库的项目级主逻辑摘要。它描述本仓库中的规则、验证、安装和
 打包资产，不描述任何外部业务项目或某个具体 Agentic CLI 产品的源码事实。
@@ -23,7 +23,7 @@
 
 ### L2：会话规则与开发生命周期 (Session & Development Lifecycle)
 
-- 稳定版本源：`versions/AgentLogic_V6_8_5.md`
+- 稳定版本源：`versions/AgentLogic_V6_8_6.md`
 - 主逻辑摘要：`modules/01_MasterLogic.md`
 - Agent 强制规则：`modules/12_AgentEnforcement.md`
 - 入口清单：`modules/15_LogicEntryChecklist.md`
@@ -35,6 +35,7 @@
 - 外部研究与交付物整合：`modules/50_V6_8_ExternalResearchAndArtifactIntegration.md`
 - 工具可供性优先路由：`modules/51_V6_8_AffordanceFirstToolUse.md`
 - 交互式 3D 网页模型策略：`modules/52_V6_8_Img2ThreeJs3DWebIntegration.md`
+- 编程级技能强制：`modules/53_V6_8_ProgrammingLevelSkillEnforcement.md`、`contracts/skill-registry.json`、`contracts/skill-enforcement.json`
 - 任务规格与状态：`.specify/`
 
 ### L3：安全、权限与验证控制 (Safety & Verification Control)
@@ -144,6 +145,7 @@ UI 实施完成后仍必须执行截图、父子布局边界、溢出、换行�
   才能候选 `img2threejs`，且不得推断已安装、可信或可执行。
 - 多模块功能、重大重构、架构或发布工作在 Converge/Ship 时应询问用户是否需要代码视图预览。
 - 用户明确同意后，才可在目标业务项目中生成 `graphify-out/`；不得默认在 AgentLogic 仓库内生成，也不得把外部图谱结果当作运行时事实证明。
+- `modules/53_V6_8_ProgrammingLevelSkillEnforcement.md` 要求每个可携带 `SKILL.md` 在机器可读注册表中有生命周期状态；匹配路由必须经过可执行的 preflight、invocation 与 closure 记录。该工作流门不等同于未验证的宿主原生工具拦截。
 
 ## 11. 项目内 L1-L4 地图
 

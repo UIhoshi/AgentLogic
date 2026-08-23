@@ -1,242 +1,393 @@
 {
-  "schema_version": 2,
-  "purpose": "Canonical capability routes with an ordered primary skill and explicitly conditional supplements; aliases identify candidates, not installed or trusted tools.",
-  "completion_policy": "A missing required evidence capability blocks implementation or verified completion. A missing specialist blocks only routes whose fallback is strict; routes that explicitly allow native evidence fallback may proceed with disclosure and matching evidence. Never claim an unavailable skill was used.",
-  "routes": [
-    {
-      "id": "requirements-grilling",
-      "triggers": [
-        "major_feature",
-        "net_new_ui",
-        "substantial_ui_refactor"
-      ],
-      "capability": "requirements_grilling",
-      "fallback": "block_before_specification",
-      "closure_evidence": [
-        "single_question_dialogue",
-        "approved_requirements_brief",
-        "brief_validator_result"
-      ],
-      "primary_host_skill_aliases": [
-        "product-requirements-grilling"
-      ],
-      "conditional_host_skill_aliases": [],
-      "selection_rule": "Use the first-party product-requirements-grilling skill. No generic interview or hiring skill is an equivalent."
-    },
-    {
-      "id": "ui-design",
-      "triggers": [
-        "net_new_ui",
-        "substantial_ui_refactor"
-      ],
-      "capability": "ui_design_and_mockup",
-      "fallback": "block_before_ui_code",
-      "closure_evidence": [
-        "approved_requirements_brief",
-        "mockup_requested_or_explicit_opt_out",
-        "approved_mockup_or_explicit_opt_out",
-        "visual_verification_plan"
-      ],
-      "primary_host_skill_aliases": [
-        "imagegen"
-      ],
-      "conditional_host_skill_aliases": [
-        "nano-banana-pro",
-        "taste-skill"
-      ],
-      "selection_rule": "Use imagegen (or an explicitly approved equivalent image-generation capability) for the mockup/edit. nano-banana-pro is an approved equivalent only when installed; taste-skill may guide art direction but cannot replace image generation. Do not use a frontend implementation skill as mockup evidence."
-    },
-    {
-      "id": "code-review",
-      "triggers": [
-        "code_audit",
-        "pull_request_review",
-        "release_review"
-      ],
-      "capability": "code_review",
-      "fallback": "block_verified_review",
-      "closure_evidence": [
-        "review_report",
-        "severity_and_evidence"
-      ],
-      "primary_host_skill_aliases": [
-        "review-agent",
-        "code-reviewer"
-      ],
-      "conditional_host_skill_aliases": [
-        "pr-review-expert"
-      ],
-      "selection_rule": "Use review-agent or code-reviewer for a defect-first code review. Use pr-review-expert only when the task specifically requires PR workflow, reviewability, or merge-readiness analysis; it supplements rather than replaces the review report."
-    },
-    {
-      "id": "security-review",
-      "triggers": [
-        "security_review",
-        "security_sensitive_change"
-      ],
-      "capability": "security_review",
-      "fallback": "block_verified_review_or_install",
-      "closure_evidence": [
-        "self_refuted_findings",
-        "trust_decision"
-      ],
-      "primary_host_skill_aliases": [
-        "security-best-practices"
-      ],
-      "conditional_host_skill_aliases": [
-        "senior-security",
-        "senior-secops"
-      ],
-      "selection_rule": "Use security-best-practices for supported source-code reviews. Use senior-security for threat modeling or secure architecture and senior-secops for CVE/compliance/infrastructure operations. A conditional specialty does not waive the primary review when the primary applies."
-    },
-    {
-      "id": "browser-verification",
-      "triggers": [
-        "dynamic_web_flow",
-        "browser_ui_verification"
-      ],
-      "capability": "browser_automation",
-      "fallback": "block_browser_verified_claim",
-      "closure_evidence": [
-        "fresh_browser_observation",
-        "captured_artifact"
-      ],
-      "primary_host_skill_aliases": [
-        "playwright"
-      ],
-      "conditional_host_skill_aliases": [
-        "agent-browser",
-        "playwright-pro"
-      ],
-      "selection_rule": "Use playwright for ordinary real-browser interaction and proof. Use agent-browser only when installed and its accessibility-tree/session model is the better fit; use playwright-pro only for test-suite generation, migration, repair, cloud matrix, or test-management work."
-    },
-    {
-      "id": "visual-verification",
-      "triggers": [
-        "desktop_visual_state",
-        "ui_visual_claim"
-      ],
-      "capability": "visual_capture",
-      "fallback": "block_visual_verified_claim",
-      "closure_evidence": [
-        "screenshot_or_equivalent",
-        "boundary_check"
-      ],
-      "primary_host_skill_aliases": [
-        "screenshot"
-      ],
-      "conditional_host_skill_aliases": [
-        "playwright",
-        "agent-browser"
-      ],
-      "selection_rule": "Use screenshot for desktop/OS capture. Use Playwright or agent-browser capture only when the claim is inside a browser flow and the captured artifact covers the required viewport and layout boundaries."
-    },
-    {
-      "id": "test-design",
-      "triggers": [
-        "test_design",
-        "coverage_gap",
-        "behavior_change"
-      ],
-      "capability": "test_engineering",
-      "fallback": "block_verified_behavior_change",
-      "closure_evidence": [
-        "relevant_test_or_explicit_gap",
-        "command_result"
-      ],
-      "primary_host_skill_aliases": [
-        "tdd-guide"
-      ],
-      "conditional_host_skill_aliases": [
-        "senior-qa",
-        "api-test-suite-builder",
-        "playwright-pro"
-      ],
-      "selection_rule": "Use tdd-guide for unit/behavior tests. Use senior-qa for coverage and application test strategy, api-test-suite-builder for API suites, and playwright-pro for E2E suite operations."
-    },
-    {
-      "id": "package-release",
-      "triggers": [
-        "install",
-        "package",
-        "release"
-      ],
-      "capability": "package_validation",
-      "fallback": "allow_native_package_validation_with_disclosure",
-      "closure_evidence": [
-        "artifact_validation",
-        "post_result_inspection"
-      ],
-      "primary_host_skill_aliases": [
-        "release-manager"
-      ],
-      "conditional_host_skill_aliases": [
-        "ci-cd-pipeline-builder"
-      ],
-      "selection_rule": "Use release-manager for release readiness and artifact closure when available. When it is unavailable, native build/package validation plus post-result inspection may close a local install or package task with the gap disclosed. Use ci-cd-pipeline-builder when pipeline design or repair is part of the release work."
-    },
-    {
-      "id": "ui-implementation",
-      "triggers": [
-        "net_new_ui",
-        "substantial_ui_refactor",
-        "approved_ui_mockup"
-      ],
-      "capability": "frontend_ui_implementation",
-      "primary_host_skill_aliases": [
-        "senior-frontend"
-      ],
-      "conditional_host_skill_aliases": [
-        "figma-implement-design"
-      ],
-      "selection_rule": "Use senior-frontend only after requirements and mockup gates close. Use figma-implement-design when an approved Figma node is the implementation source; it does not replace requirements grilling or mockup approval.",
-      "fallback": "block_before_ui_code",
-      "closure_evidence": [
-        "approved_requirements_brief",
-        "approved_mockup_or_explicit_opt_out",
-        "implementation_validation",
-        "visual_verification_plan"
-      ]
-    },
-    {
-      "id": "extension-security-review",
-      "triggers": [
-        "untrusted_extension"
-      ],
-      "capability": "untrusted_extension_security_audit",
-      "primary_host_skill_aliases": [
-        "skill-security-auditor"
-      ],
-      "conditional_host_skill_aliases": [],
-      "selection_rule": "Use skill-security-auditor before installing or trusting an external skill or plugin. General source-code security review is not an equivalent extension-trust audit.",
-      "fallback": "block_verified_review_or_install",
-      "closure_evidence": [
-        "self_refuted_findings",
-        "trust_decision",
-        "dependency_or_behavior_audit"
-      ]
-    }
-  ],
-  "non_default_skill_policy": [
-    {
-      "skill": "self-improving-agent",
-      "status": "manual_only",
-      "reason": "Its Claude-oriented auto-memory and rule-promotion paths must not automatically write persistent rules or replace project-native AGENTS.md, PROJECT_MAP.md, CODE_MAP.md, or .learnings/ERRORS.md."
-    },
-    {
-      "skill": "database-schema-designer",
-      "status": "specialized_only",
-      "reason": "Use only for schema-focused work; database-designer remains the default for broader database design so both are not invoked for the same decision."
-    },
-    {
-      "skill": "ms365-tenant-manager",
-      "status": "specialized_only",
-      "reason": "High-impact tenant administration; never activate from generic engineering routing."
-    },
-    {
-      "skill": "aws-solution-architect",
-      "status": "specialized_only",
-      "reason": "Use only for explicit AWS architecture or migration requests."
-    }
-  ]
+    "schema_version":  3,
+    "purpose":  "Canonical capability routes with an ordered primary skill and explicitly conditional supplements; aliases identify candidates, not installed or trusted tools.",
+    "completion_policy":  "A missing required evidence capability blocks implementation or verified completion. A missing specialist blocks only routes whose fallback is strict; routes that explicitly allow native evidence fallback may proceed with disclosure and matching evidence. Workflow enforcement validates recorded route progression; it never claims unsupported host-native interception. Never claim an unavailable skill was used.",
+    "routes":  [
+                   {
+                       "id":  "requirements-grilling",
+                       "triggers":  [
+                                        "major_feature",
+                                        "net_new_ui",
+                                        "substantial_ui_refactor"
+                                    ],
+                       "capability":  "requirements_grilling",
+                       "fallback":  "block_before_specification",
+                       "closure_evidence":  [
+                                                "single_question_dialogue",
+                                                "approved_requirements_brief",
+                                                "brief_validator_result"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "product-requirements-grilling"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+
+                                                          ],
+                       "selection_rule":  "Use the first-party product-requirements-grilling skill. No generic interview or hiring skill is an equivalent.",
+                       "order":  10,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "specification"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none"
+                   },
+                   {
+                       "id":  "ui-design",
+                       "triggers":  [
+                                        "net_new_ui",
+                                        "substantial_ui_refactor"
+                                    ],
+                       "capability":  "ui_design_and_mockup",
+                       "fallback":  "block_before_ui_code",
+                       "closure_evidence":  [
+                                                "approved_requirements_brief",
+                                                "mockup_requested_or_explicit_opt_out",
+                                                "approved_mockup_or_explicit_opt_out",
+                                                "visual_verification_plan"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "imagegen"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "nano-banana-pro",
+                                                              "taste-skill"
+                                                          ],
+                       "selection_rule":  "Use imagegen (or an explicitly approved equivalent image-generation capability) for the mockup/edit. nano-banana-pro is an approved equivalent only when installed; taste-skill may guide art direction but cannot replace image generation. Do not use a frontend implementation skill as mockup evidence.",
+                       "order":  20,
+                       "requires_routes":  [
+                                               "requirements-grilling"
+                                           ],
+                       "blocked_transitions":  [
+                                                   "ui_code"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "explicit_user_opt_out_of_mockup_only"
+                   },
+                   {
+                       "id":  "code-review",
+                       "triggers":  [
+                                        "code_audit",
+                                        "pull_request_review",
+                                        "release_review"
+                                    ],
+                       "capability":  "code_review",
+                       "fallback":  "block_verified_review",
+                       "closure_evidence":  [
+                                                "review_report",
+                                                "severity_and_evidence"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "review-agent",
+                                                          "code-reviewer",
+                                                          "code-review"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "pr-review-expert"
+                                                          ],
+                       "selection_rule":  "Use review-agent or code-reviewer for a defect-first code review. The portable code-review skill is an approved conditional route when installed and selected. Use pr-review-expert only when the task specifically requires PR workflow, reviewability, or merge-readiness analysis; it supplements rather than replaces the review report.",
+                       "order":  70,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "verified_review"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none"
+                   },
+                   {
+                       "id":  "security-review",
+                       "triggers":  [
+                                        "security_review",
+                                        "security_sensitive_change"
+                                    ],
+                       "capability":  "security_review",
+                       "fallback":  "block_verified_review_or_install",
+                       "closure_evidence":  [
+                                                "self_refuted_findings",
+                                                "trust_decision"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "security-best-practices"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "senior-security",
+                                                              "senior-secops"
+                                                          ],
+                       "selection_rule":  "Use security-best-practices for supported source-code reviews. Use senior-security for threat modeling or secure architecture and senior-secops for CVE/compliance/infrastructure operations. A conditional specialty does not waive the primary review when the primary applies.",
+                       "order":  71,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "verified_review",
+                                                   "install"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none"
+                   },
+                   {
+                       "id":  "browser-verification",
+                       "triggers":  [
+                                        "dynamic_web_flow",
+                                        "browser_ui_verification"
+                                    ],
+                       "capability":  "browser_automation",
+                       "fallback":  "block_browser_verified_claim",
+                       "closure_evidence":  [
+                                                "fresh_browser_observation",
+                                                "captured_artifact"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "playwright"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "agent-browser",
+                                                              "playwright-pro"
+                                                          ],
+                       "selection_rule":  "Use playwright for ordinary real-browser interaction and proof. Use agent-browser only when installed and its accessibility-tree/session model is the better fit; use playwright-pro only for test-suite generation, migration, repair, cloud matrix, or test-management work.",
+                       "order":  50,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "browser_verified_claim"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none"
+                   },
+                   {
+                       "id":  "visual-verification",
+                       "triggers":  [
+                                        "desktop_visual_state",
+                                        "ui_visual_claim",
+                                        "small_visual_correction"
+                                    ],
+                       "capability":  "visual_capture",
+                       "fallback":  "block_visual_verified_claim",
+                       "closure_evidence":  [
+                                                "screenshot_or_equivalent",
+                                                "boundary_check"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "screenshot"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "playwright",
+                                                              "agent-browser"
+                                                          ],
+                       "selection_rule":  "Use screenshot for desktop/OS capture. Use Playwright or agent-browser capture only when the claim is inside a browser flow and the captured artifact covers the required viewport and layout boundaries.",
+                       "order":  60,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "visual_verified_claim"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none"
+                   },
+                   {
+                       "id":  "test-design",
+                       "triggers":  [
+                                        "test_design",
+                                        "coverage_gap",
+                                        "behavior_change"
+                                    ],
+                       "capability":  "test_engineering",
+                       "fallback":  "block_verified_behavior_change",
+                       "closure_evidence":  [
+                                                "relevant_test_or_explicit_gap",
+                                                "command_result"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "tdd-guide"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "senior-qa",
+                                                              "api-test-suite-builder",
+                                                              "playwright-pro"
+                                                          ],
+                       "selection_rule":  "Use tdd-guide for unit/behavior tests. Use senior-qa for coverage and application test strategy, api-test-suite-builder for API suites, and playwright-pro for E2E suite operations.",
+                       "order":  40,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "verified_behavior_change"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none"
+                   },
+                   {
+                       "id":  "package-release",
+                       "triggers":  [
+                                        "install",
+                                        "package",
+                                        "release",
+                                        "remote_release"
+                                    ],
+                       "capability":  "package_validation",
+                       "fallback":  "allow_native_package_validation_with_disclosure",
+                       "closure_evidence":  [
+                                                "artifact_validation",
+                                                "post_result_inspection"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "release-manager"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "ci-cd-pipeline-builder"
+                                                          ],
+                       "selection_rule":  "Use release-manager for release readiness and artifact closure when available. When it is unavailable, native build/package validation plus post-result inspection may close a local install or package task with the gap disclosed. Use ci-cd-pipeline-builder when pipeline design or repair is part of the release work.",
+                       "order":  80,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "package_or_release_completion"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "native_local_package_validation_only",
+                       "conditional_closure_evidence":  [
+                                                            {
+                                                                "field":  "external_effect",
+                                                                "values":  [
+                                                                               "remote_release"
+                                                                           ],
+                                                                "evidence":  [
+                                                                                 "exact_remote_target_confirmation"
+                                                                             ]
+                                                            }
+                                                        ]
+                   },
+                   {
+                       "id":  "ui-implementation",
+                       "triggers":  [
+                                        "net_new_ui",
+                                        "substantial_ui_refactor"
+                                    ],
+                       "capability":  "frontend_ui_implementation",
+                       "primary_host_skill_aliases":  [
+                                                          "senior-frontend"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "figma-implement-design"
+                                                          ],
+                       "selection_rule":  "Use senior-frontend only after requirements and mockup gates close. Use figma-implement-design when an approved Figma node is the implementation source; it does not replace requirements grilling or mockup approval.",
+                       "fallback":  "block_before_ui_code",
+                       "closure_evidence":  [
+                                                "approved_requirements_brief",
+                                                "approved_mockup_or_explicit_opt_out",
+                                                "implementation_validation",
+                                                "visual_verification_plan"
+                                            ],
+                       "order":  30,
+                       "requires_routes":  [
+                                               "requirements-grilling",
+                                               "ui-design"
+                                           ],
+                       "blocked_transitions":  [
+                                                   "ui_code"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none"
+                   },
+                   {
+                       "id":  "extension-security-review",
+                       "triggers":  [
+                                        "untrusted_extension"
+                                    ],
+                       "capability":  "untrusted_extension_security_audit",
+                       "primary_host_skill_aliases":  [
+                                                          "skill-security-auditor"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+
+                                                          ],
+                       "selection_rule":  "Use skill-security-auditor before installing or trusting an external skill or plugin. General source-code security review is not an equivalent extension-trust audit.",
+                       "fallback":  "block_verified_review_or_install",
+                       "closure_evidence":  [
+                                                "self_refuted_findings",
+                                                "trust_decision",
+                                                "dependency_or_behavior_audit"
+                                            ],
+                       "order":  72,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "verified_review",
+                                                   "install"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none"
+                   }
+               ],
+    "non_default_skill_policy":  [
+                                     {
+                                         "skill":  "self-improving-agent",
+                                         "status":  "manual_only",
+                                         "reason":  "Its Claude-oriented auto-memory and rule-promotion paths must not automatically write persistent rules or replace project-native AGENTS.md, PROJECT_MAP.md, CODE_MAP.md, or .learnings/ERRORS.md."
+                                     },
+                                     {
+                                         "skill":  "database-schema-designer",
+                                         "status":  "specialized_only",
+                                         "reason":  "Use only for schema-focused work; database-designer remains the default for broader database design so both are not invoked for the same decision."
+                                     },
+                                     {
+                                         "skill":  "ms365-tenant-manager",
+                                         "status":  "specialized_only",
+                                         "reason":  "High-impact tenant administration; never activate from generic engineering routing."
+                                     },
+                                     {
+                                         "skill":  "aws-solution-architect",
+                                         "status":  "specialized_only",
+                                         "reason":  "Use only for explicit AWS architecture or migration requests."
+                                     }
+                                 ],
+    "enforcement_contract":  "contracts/skill-enforcement.json"
 }

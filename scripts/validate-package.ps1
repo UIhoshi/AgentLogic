@@ -43,7 +43,13 @@ Assert-Exists -Root $RepoRoot -RelativePath "INSTALL.md" -Label "Human install g
 Assert-Exists -Root $RepoRoot -RelativePath "AGENT_INSTALL.md" -Label "Agent install guide"
 Assert-Exists -Root $RepoRoot -RelativePath "scripts/doctor.ps1" -Label "Install doctor"
 Assert-Exists -Root $RepoRoot -RelativePath "scripts/deploy-first-party-skill.ps1" -Label "First-party skill deployer"
+Assert-Exists -Root $RepoRoot -RelativePath "scripts/deploy-skill-enforcement.ps1" -Label "Skill enforcement deployer"
+Assert-Exists -Root $RepoRoot -RelativePath "scripts/skill-enforcement.ps1" -Label "Skill enforcement workflow gate"
+Assert-Exists -Root $RepoRoot -RelativePath "scripts/validate-skill-registry.ps1" -Label "Skill registry validator"
+Assert-Exists -Root $RepoRoot -RelativePath "scripts/test-skill-enforcement.ps1" -Label "Skill enforcement test"
 Assert-Exists -Root $RepoRoot -RelativePath "contracts/host-skill-capabilities.json" -Label "Host skill deployment contract"
+Assert-Exists -Root $RepoRoot -RelativePath "contracts/skill-registry.json" -Label "Portable skill registry"
+Assert-Exists -Root $RepoRoot -RelativePath "contracts/skill-enforcement.json" -Label "Skill enforcement contract"
 
 $manifest = Get-Content -Raw -Path $manifestPath | ConvertFrom-Json
 $schema = Get-Content -Raw -Path $schemaPath | ConvertFrom-Json
@@ -223,10 +229,19 @@ if ($manifest.current_version -match '^V6\.8\.[3-9]') {
         }
     }
 
+    foreach ($enforcementAsset in @("modules/53_V6_8_ProgrammingLevelSkillEnforcement.md", "contracts/skill-enforcement.json")) {
+        if ($defaultFiles -notcontains $enforcementAsset) {
+            Fail "Default profile '$($manifest.default_profile)' does not include '$enforcementAsset'."
+        }
+    }
+
     foreach ($adapter in @($manifest.adapters.PSObject.Properties.Value)) {
         $adapterContent = Get-Content -Raw -Path (Join-Path $RepoRoot $adapter)
         if ($adapterContent -notmatch [regex]::Escape("deploy-first-party-skill.ps1")) {
             Fail "Adapter '$adapter' does not deploy the required first-party skill."
+        }
+        if ($adapterContent -notmatch [regex]::Escape("deploy-skill-enforcement.ps1") -or $adapterContent -notmatch [regex]::Escape("-Verify")) {
+            Fail "Adapter '$adapter' does not deploy and post-verify the skill enforcement payload."
         }
     }
 

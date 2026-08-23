@@ -18,7 +18,9 @@ $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot "..\..")).Path
 $buildScript = Join-Path $repoRoot "scripts\build-profile.ps1"
 $skillsGovernanceScript = Join-Path $repoRoot "scripts\skills-governance.ps1"
 $deploySkillScript = Join-Path $repoRoot "scripts\deploy-first-party-skill.ps1"
+$deployEnforcementScript = Join-Path $repoRoot 'scripts\deploy-skill-enforcement.ps1'
 $productSkillTarget = Join-Path $UserHome '.claude\skills\product-requirements-grilling'
+$enforcementTarget = Join-Path $UserHome '.claude\AgentLogic\skill-enforcement'
 
 if (-not $TargetPath) {
     $TargetPath = Join-Path $UserHome ".claude\AgentLogic\CLAUDE.md"
@@ -33,6 +35,10 @@ powershell -NoProfile -ExecutionPolicy Bypass -File $buildScript -ProfileName $P
 if ($LASTEXITCODE -ne 0) { throw "build-profile.ps1 failed with exit code $LASTEXITCODE." }
 powershell -NoProfile -ExecutionPolicy Bypass -File $deploySkillScript -RepoRoot $repoRoot -TargetPath $productSkillTarget
 if ($LASTEXITCODE -ne 0) { throw "deploy-first-party-skill.ps1 failed with exit code $LASTEXITCODE." }
+powershell -NoProfile -ExecutionPolicy Bypass -File $deployEnforcementScript -RepoRoot $repoRoot -TargetPath $enforcementTarget
+if ($LASTEXITCODE -ne 0) { throw "deploy-skill-enforcement.ps1 failed with exit code $LASTEXITCODE." }
+powershell -NoProfile -ExecutionPolicy Bypass -File $deployEnforcementScript -RepoRoot $repoRoot -TargetPath $enforcementTarget -Verify
+if ($LASTEXITCODE -ne 0) { throw "Skill enforcement payload verification failed with exit code $LASTEXITCODE." }
 powershell -NoProfile -ExecutionPolicy Bypass -File $skillsGovernanceScript -TargetHost claude -UserHome $UserHome
 if ($LASTEXITCODE -ne 0) { throw "skills-governance.ps1 failed with exit code $LASTEXITCODE." }
 

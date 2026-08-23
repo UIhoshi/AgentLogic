@@ -92,6 +92,10 @@ On shell environments:
 
 ## Validate The Package
 
+Installation also deploys a verified `workflow_enforced` skill-routing payload for the selected
+host. This validates recorded preflight, invocation, and closure states; it does not claim
+host-native interception without a separately verified host hook.
+
 After installation or repository changes:
 
 ```powershell

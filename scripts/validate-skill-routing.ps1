@@ -1,4 +1,4 @@
-# MANDATORY LOGIC GATE
+﻿# MANDATORY LOGIC GATE
 #
 # Read `AGENTS.md` and `README.md` before making changes here.
 # Then follow the repository-declared logic entry chain.
@@ -6,47 +6,61 @@
 # If not, explicitly ask whether to forget/compress context first.
 # This is a blocking gate; do not begin implementation before it is complete.
 
-param([string]$RepoRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path)
-$ErrorActionPreference = "Stop"
-$registryPath = Join-Path $RepoRoot "contracts\skill-routing.json"
-$modulePath = Join-Path $RepoRoot "modules\49_V6_8_AutonomousSkillEnforcement.md"
-$hostCapabilitiesPath = Join-Path $RepoRoot "contracts\host-skill-capabilities.json"
-if (-not (Test-Path $registryPath)) { throw "Missing canonical skill routing registry: $registryPath" }
-if (-not (Test-Path $modulePath)) { throw "Missing autonomous skill enforcement module: $modulePath" }
-if (-not (Test-Path $hostCapabilitiesPath)) { throw "Missing host skill deployment contract: $hostCapabilitiesPath" }
-try { $registry = Get-Content -Raw -Encoding UTF8 $registryPath | ConvertFrom-Json } catch { throw "Invalid JSON in ${registryPath}: $($_.Exception.Message)" }
-if ($registry.schema_version -ne 2) { throw "Unsupported skill routing schema version." }
-try { $hostCapabilities = Get-Content -Raw -Encoding UTF8 $hostCapabilitiesPath | ConvertFrom-Json } catch { throw "Invalid JSON in ${hostCapabilitiesPath}: $($_.Exception.Message)" }
-if ($hostCapabilities.schema_version -ne 1 -or $hostCapabilities.first_party_skill -ne "product-requirements-grilling") { throw "Invalid host skill deployment contract." }
-foreach ($targetHostName in @('codex','claude','antigravity','generic')) { if (-not $hostCapabilities.hosts.$targetHostName.target_relative) { throw "Host deployment contract missing target for $targetHostName." } }
-if (-not $registry.completion_policy) { throw "Missing completion policy." }
+param([string]$RepoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path)
+$ErrorActionPreference = 'Stop'
+$routingPath = Join-Path $RepoRoot 'contracts\skill-routing.json'
+$registryPath = Join-Path $RepoRoot 'contracts\skill-registry.json'
+$enforcementPath = Join-Path $RepoRoot 'contracts\skill-enforcement.json'
+$modulePath = Join-Path $RepoRoot 'modules\49_V6_8_AutonomousSkillEnforcement.md'
+$hostCapabilitiesPath = Join-Path $RepoRoot 'contracts\host-skill-capabilities.json'
+foreach ($path in @($routingPath,$registryPath,$enforcementPath,$modulePath,$hostCapabilitiesPath)) { if (-not (Test-Path $path)) { throw "Missing autonomous enforcement asset: $path" } }
+try { $routing = Get-Content -Raw -Encoding UTF8 $routingPath | ConvertFrom-Json } catch { throw "Invalid skill routing JSON: $($_.Exception.Message)" }
+try { $enforcement = Get-Content -Raw -Encoding UTF8 $enforcementPath | ConvertFrom-Json } catch { throw "Invalid skill enforcement JSON: $($_.Exception.Message)" }
+try { $hostCapabilities = Get-Content -Raw -Encoding UTF8 $hostCapabilitiesPath | ConvertFrom-Json } catch { throw "Invalid host skill capability JSON: $($_.Exception.Message)" }
+if ($routing.schema_version -ne 3) { throw 'Unsupported skill routing schema version; expected 3.' }
+if ($enforcement.schema_version -ne 1) { throw 'Unsupported skill enforcement schema version; expected 1.' }
+if ($hostCapabilities.schema_version -ne 2 -or $hostCapabilities.first_party_skill -ne 'product-requirements-grilling') { throw 'Unsupported host skill capability schema version; expected 2.' }
+if ($routing.enforcement_contract -ne 'contracts/skill-enforcement.json') { throw 'Skill routing must reference the enforcement contract.' }
 $required = @('requirements-grilling','ui-design','ui-implementation','code-review','security-review','extension-security-review','browser-verification','visual-verification','test-design','package-release')
 $seen = @{}
-foreach ($route in @($registry.routes)) {
-  if (-not $route.id -or $seen[$route.id]) { throw "Route ids must be unique and non-empty." }; $seen[$route.id] = $true
-  foreach ($field in @('capability','fallback','selection_rule')) { if (-not $route.$field) { throw "Route '$($route.id)' is missing $field." } }
-  if (@($route.triggers).Count -eq 0 -or @($route.primary_host_skill_aliases).Count -eq 0 -or @($route.closure_evidence).Count -eq 0) { throw "Route '$($route.id)' needs triggers, primary aliases, and closure evidence." }
+$orders = @{}
+foreach ($route in @($routing.routes)) {
+    if ([string]::IsNullOrWhiteSpace($route.id) -or $seen.ContainsKey($route.id)) { throw 'Route ids must be unique and non-empty.' }; $seen[$route.id] = $true
+    foreach ($field in @('capability','fallback','selection_rule','order','exemption_policy')) { if ($null -eq $route.$field -or [string]::IsNullOrWhiteSpace([string]$route.$field)) { throw "Route '$($route.id)' is missing $field." } }
+    if ($orders.ContainsKey([int]$route.order)) { throw "Routes '$($orders[[int]$route.order])' and '$($route.id)' share order $($route.order)." }; $orders[[int]$route.order] = $route.id
+    foreach ($arrayField in @('triggers','primary_host_skill_aliases','closure_evidence','requires_routes','blocked_transitions','invocation_evidence')) { if ($null -eq $route.$arrayField) { throw "Route '$($route.id)' is missing $arrayField." } }
+    if (@($route.triggers).Count -eq 0 -or @($route.primary_host_skill_aliases).Count -eq 0 -or @($route.closure_evidence).Count -eq 0 -or @($route.invocation_evidence).Count -eq 0) { throw "Route '$($route.id)' needs triggers, primary aliases, invocation evidence, and closure evidence." }
 }
-foreach ($id in $required) { if (-not $seen[$id]) { throw "Missing required autonomous route '$id'." } }
-if (@($registry.routes | Where-Object { $_.id -eq 'ui-design' }).primary_host_skill_aliases -notcontains 'imagegen') { throw "UI-design must require imagegen as a primary mockup capability." }
-if (@($registry.routes | Where-Object { $_.id -eq 'ui-design' }).primary_host_skill_aliases -contains 'senior-frontend') { throw "UI-design must not treat frontend implementation as mockup capability." }
-if (@($registry.routes | Where-Object { $_.id -eq 'ui-implementation' }).primary_host_skill_aliases -notcontains 'senior-frontend') { throw "UI implementation must route to senior-frontend." }
-if (@($registry.routes | Where-Object { $_.id -eq 'code-review' }).primary_host_skill_aliases -notcontains 'review-agent') { throw "Code review must include the built-in review-agent." }
-if (@($registry.routes | Where-Object { $_.id -eq 'extension-security-review' }).primary_host_skill_aliases -notcontains 'skill-security-auditor') { throw "Untrusted extension review must require skill-security-auditor." }
-foreach ($policy in @($registry.non_default_skill_policy)) { foreach ($field in @('skill','status','reason')) { if (-not $policy.$field) { throw "Non-default skill policy is missing $field." } } }
-foreach ($requiredPath in @('skills\productivity\product-requirements-grilling\SKILL.md','skills\productivity\product-requirements-grilling\assets\requirements-brief.md','scripts\validate-requirements-brief.ps1')) { if (-not (Test-Path (Join-Path $RepoRoot $requiredPath))) { throw "Missing autonomous workflow asset: $requiredPath" } }
+foreach ($id in $required) { if (-not $seen.ContainsKey($id)) { throw "Missing required autonomous route '$id'." } }
+foreach ($route in @($routing.routes)) { foreach ($dependency in @($route.requires_routes)) { if (-not $seen.ContainsKey($dependency)) { throw "Route '$($route.id)' requires unknown route '$dependency'." } } }
+$uiDesign = @($routing.routes | Where-Object id -eq 'ui-design')[0]
+$uiImplementation = @($routing.routes | Where-Object id -eq 'ui-implementation')[0]
+$visual = @($routing.routes | Where-Object id -eq 'visual-verification')[0]
+$package = @($routing.routes | Where-Object id -eq 'package-release')[0]
+if (@($uiDesign.primary_host_skill_aliases) -notcontains 'imagegen') { throw 'UI-design must require imagegen as a primary mockup capability.' }
+if (@($uiImplementation.primary_host_skill_aliases) -notcontains 'senior-frontend') { throw 'UI implementation must route to senior-frontend.' }
+if (@($uiImplementation.requires_routes) -notcontains 'ui-design') { throw 'UI implementation must depend on UI design closure.' }
+if (@($visual.triggers) -notcontains 'small_visual_correction') { throw 'Visual verification must cover small visual corrections.' }
+if (@($package.conditional_closure_evidence | ForEach-Object { @($_.evidence) }) -notcontains 'exact_remote_target_confirmation') { throw 'Package/release must require exact remote target confirmation for remote releases.' }
+foreach ($field in @('required_fields','signal_rules')) { if ($null -eq $enforcement.task_classification.$field) { throw "Enforcement contract is missing task classification $field." } }
+foreach ($field in @('task_execution_record','project_skill_usage','enforcement_levels')) { if ($null -eq $enforcement.$field) { throw "Enforcement contract is missing $field." } }
+$knownSignals = @($enforcement.task_classification.signal_rules | ForEach-Object { @($_.signals) } | Sort-Object -Unique)
+foreach ($route in @($routing.routes)) {
+    foreach ($trigger in @($route.triggers)) {
+        if ($knownSignals -notcontains $trigger) { throw "Route '$($route.id)' has trigger '$trigger' that cannot be produced by the deterministic classification contract." }
+    }
+}
+if (-not $hostCapabilities.enforcement_payload -or $hostCapabilities.enforcement_payload.level -ne 'workflow_enforced' -or $hostCapabilities.enforcement_payload.native_tool_interception -ne $false) { throw 'Host capability contract must honestly declare the workflow enforcement payload.' }
+foreach ($hostName in @('codex','claude','antigravity','generic')) {
+    $hostEntry = $hostCapabilities.hosts.$hostName
+    if (-not $hostEntry.target_relative -or -not $hostEntry.enforcement) { throw "Host deployment contract is missing enforcement data for '$hostName'." }
+    foreach ($field in @('level','native_tool_interception','target_relative','command_relative','required_files')) { if ($null -eq $hostEntry.enforcement.$field) { throw "Host '$hostName' enforcement contract is missing $field." } }
+    if ($hostEntry.enforcement.level -ne 'workflow_enforced' -or $hostEntry.enforcement.native_tool_interception -ne $false) { throw "Host '$hostName' must not claim unsupported native tool interception." }
+    if (@($hostEntry.enforcement.required_files).Count -eq 0) { throw "Host '$hostName' has no required enforcement payload files." }
+}
 
+& powershell -NoProfile -ExecutionPolicy Bypass -File (Join-Path $RepoRoot 'scripts\validate-skill-registry.ps1') -RepoRoot $RepoRoot
+if ($LASTEXITCODE -ne 0) { throw 'Skill registry validation failed.' }
 $module = Get-Content -Raw -Encoding UTF8 $modulePath
 foreach ($anchor in @('Strict missing-capability policy','Software candidate reporting','invocation evidence')) { if ($module -notmatch [regex]::Escape($anchor)) { throw "Enforcement module missing anchor: $anchor" } }
-$governancePath = Join-Path $RepoRoot "modules\35_V6_5_SkillGovernanceAndMandatoryUse.md"
-$routingPath = Join-Path $RepoRoot "modules\48_V6_8_SkillAndToolRouting.md"
-foreach ($path in @($governancePath, $routingPath)) { if (-not (Test-Path $path)) { throw "Missing routing integration module: $path" } }
-$governance = Get-Content -Raw -Encoding UTF8 $governancePath
-if ($governance -notmatch [regex]::Escape('Concrete mandatory skill selection is defined only by `contracts/skill-routing.json` and Module 49.')) { throw 'Skill governance does not defer concrete mandatory selection to the canonical registry.' }
-$routing = Get-Content -Raw -Encoding UTF8 $routingPath
-foreach ($anchor in @('For a matched route, honor its declared fallback:', 'Module 49 and the schema-v2 contract override any older concrete skill names')) { if ($routing -notmatch [regex]::Escape($anchor)) { throw "Routing module missing canonical precedence anchor: $anchor" } }
-$affordancePath = Join-Path $RepoRoot "modules\51_V6_8_AffordanceFirstToolUse.md"
-if (-not (Test-Path $affordancePath)) { throw "Missing affordance-first tool-use module: $affordancePath" }
-$affordance = Get-Content -Raw -Encoding UTF8 $affordancePath
-foreach ($anchor in @('Natural operating model', 'Outcome-to-tool reflexes')) { if ($affordance -notmatch [regex]::Escape($anchor)) { throw "Affordance module missing anchor: $anchor" } }
-Write-Host "Autonomous skill routing validation passed ($($registry.routes.Count) routes)."
+Write-Host "Autonomous skill routing validation passed ($(@($routing.routes).Count) routes)."

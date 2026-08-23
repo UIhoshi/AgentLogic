@@ -26,7 +26,7 @@ CODE_MAP.md
   unconfirmed points.
 - `.learnings/ERRORS.md` contains concise records of material project errors: symptom, root
   cause, correction, prevention, and verification.
-- `CODE_MAP.md` is the mandatory text-first handover map for implementation projects. It records
+- `CODE_MAP.md` is the mandatory text-first handover map for implementation projects. Durable skill use is recorded in `.agentlogic/skill-usage.json` and summarized in its `## Skill Usage` section; task-level invocation records stay in `.specify/<task>/skill-execution.json`. It records
   entrypoints, module ownership, navigation-critical functions/classes, state or storage keys,
   interface/event surfaces, validation commands, and a reviewed commit or freshness marker. It is
   not a source dump, runtime proof, or replacement for targeted reads.
@@ -62,7 +62,7 @@ working tree and tracked records.
 - A structural change (new/moved entrypoint, module boundary, flow, permission boundary,
   dependency boundary, or validation command) must update `PROJECT_MAP.md` in the same
   project commit.
-- An affected key-flow, symbol-ownership, state/storage, interface/event, or validation change
+- An affected key-flow, symbol-ownership, state/storage, interface/event, validation change, or durable skill adoption/replacement/upgrade/retirement
   must update `CODE_MAP.md` in the same project commit.
 - A material unexpected failure, user correction, or root-cause repair must update
   `.learnings/ERRORS.md` in the same project commit after the correction is understood.

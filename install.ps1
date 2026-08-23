@@ -102,6 +102,21 @@ if (-not (Test-Path $installedSkillPath)) {
     throw "Post-install verification failed; required first-party skill was not deployed: $installedSkillPath"
 }
 
+$enforcementPayloadRoot = switch ($TargetHost) {
+    "codex" { Join-Path $UserHome ".codex\agentlogic\skill-enforcement" }
+    "claude" { Join-Path $UserHome ".claude\AgentLogic\skill-enforcement" }
+    "antigravity" { Join-Path $UserHome ".gemini\antigravity-cli\AgentLogic\skill-enforcement" }
+    "generic" {
+        $genericBundle = if ($TargetPath) { $TargetPath } else { Join-Path $repoRoot "dist\generic\AGENTLOGIC.md" }
+        Join-Path (Split-Path -Parent $genericBundle) "skill-enforcement"
+    }
+}
+$enforcementDeployer = Join-Path $repoRoot "scripts\deploy-skill-enforcement.ps1"
+& powershell -NoProfile -ExecutionPolicy Bypass -File $enforcementDeployer -RepoRoot $repoRoot -TargetPath $enforcementPayloadRoot -Verify
+if ($LASTEXITCODE -ne 0) {
+    throw "Post-install verification failed; skill enforcement payload is missing or stale: $enforcementPayloadRoot"
+}
+
 # Legacy files are moved only after the new target is verified. The selected target is protected.
 $legacyFiles = @()
 if ($TargetHost -eq "antigravity") {
@@ -134,6 +149,7 @@ foreach ($legacyFile in $legacyFiles) {
 Write-Host "Installed AgentLogic into $TargetHost."
 Write-Host ("Verified targets: {0}" -f ($installedTargets -join ", "))
 Write-Host "Verified first-party skill: $installedSkillPath"
+Write-Host "Verified workflow-enforcement payload: $enforcementPayloadRoot"
 if ($backupRoot) {
     Write-Host "Legacy files were backed up to: $backupRoot"
 }

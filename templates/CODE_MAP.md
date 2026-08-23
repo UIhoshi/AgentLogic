@@ -25,11 +25,19 @@
 | --- | --- | --- | --- | --- |
 | | | | | |
 
+## Skill Usage
+| Durable flow | Capability / skill | Trigger | Source of truth | Reviewed commit |
+| --- | --- | --- | --- | --- |
+| | | | .agentlogic/skill-usage.json | |
+
+> Keep only durable flow-to-skill records here. Store task-level invocation evidence in .specify/<task>/skill-execution.json; never include secrets, private prompts, raw logs, or machine paths.
+
 ## Validation and Known Gaps
 - **Validation commands:**
 - **Unconfirmed points:**
 
 ## Update Rules
+- When a durable skill is adopted, replaced, upgraded, or retired, update .agentlogic/skill-usage.json and this Skill Usage summary in the same commit.
 - Refresh this map in the same commit as an affected entrypoint, module boundary, key flow,
   symbol ownership, storage/configuration contract, interface/event surface, or validation command.
 - Keep it concise; do not paste source, raw logs, secrets, machine paths, or generated graph output.
