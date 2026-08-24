@@ -4359,7 +4359,8 @@ profile bundle, or prose-only mention is an alternative path.
                                                     "untrusted_extension",
                                                     "test_design",
                                                     "coverage_gap",
-                                                    "pull_request_review"
+                                                    "pull_request_review",
+                                                    "release_review"
                                                 ],
                                 "signal_rules":  [
                                                      {

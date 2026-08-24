@@ -8,3 +8,4 @@
 - [x] T6 Update modules, profiles, and active version documentation.
 - [x] T7 Rebuild bundles and run logic/package/enforcement validation.
 - [x] T8 Compile shipping review evidence and update task status.
+- [x] T9 Block dependent-route invocation until prerequisite routes close; preserve standalone default-root behavior, add regression tests, and re-run the release validation matrix.

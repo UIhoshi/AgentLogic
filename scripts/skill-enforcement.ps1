@@ -9,7 +9,7 @@ param(
     [Parameter(Mandatory)]
     [ValidateSet('initialize','preflight','record-invocation','closure','validate-project-usage')]
     [string]$Mode,
-    [string]$RepoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path,
+    [string]$RepoRoot,
     [string]$TaskStatePath,
     [string]$TaskId,
     [ValidateSet('read_only','documentation','trivial_fix','feature','major_feature','refactor','code_audit','security_review','install','package','release')]
@@ -28,6 +28,9 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
+if ([string]::IsNullOrWhiteSpace($RepoRoot)) {
+    $RepoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
+}
 function Read-Json([string]$Path, [string]$Label) {
     if (-not (Test-Path -LiteralPath $Path)) { throw "Missing ${Label}: $Path" }
     try { return Get-Content -Raw -Encoding UTF8 -LiteralPath $Path | ConvertFrom-Json } catch { throw "Invalid $Label JSON: $($_.Exception.Message)" }
@@ -46,6 +49,13 @@ function Get-RouteRecord([object]$State, [string]$Id) {
     $record = @($State.routes | Where-Object { $_.route_id -eq $Id })
     if ($record.Count -ne 1) { throw "Task state is missing exactly one record for route '$Id'." }
     return $record[0]
+}
+function Assert-ClosedDependencies([object]$State, [object]$Route, [string]$Transition) {
+    foreach ($dependency in @($Route.requires_routes)) {
+        if ((Get-RouteRecord -State $State -Id $dependency).state -ne 'closed') {
+            throw "Route '$($Route.id)' cannot $Transition before required route '$dependency' closes."
+        }
+    }
 }
 function Get-Signals([object]$Classification, [object]$Contract) {
     $signals = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
@@ -156,6 +166,7 @@ $route = Get-Route -Routing $routing -Id $RouteId
 $record = Get-RouteRecord -State $state -Id $RouteId
 if ($Mode -eq 'record-invocation') {
     if ($record.state -notin @('preflight_passed','invoked')) { throw "Route '$RouteId' requires preflight before invocation." }
+    Assert-ClosedDependencies -State $state -Route $route -Transition 'record invocation'
     if (@($Evidence).Count -eq 0) { throw 'record-invocation requires at least one -Evidence value.' }
     Add-UniqueEvidence -RouteRecord $record -Property 'invocation_evidence' -Values @('invocation_record') + @($Evidence)
     $record.state = 'invoked'
@@ -166,7 +177,7 @@ if ($Mode -eq 'record-invocation') {
 
 if ($Mode -eq 'closure') {
     if ($record.state -ne 'invoked') { throw "Route '$RouteId' requires an invocation record before closure." }
-    foreach ($dependency in @($route.requires_routes)) { if ((Get-RouteRecord -State $state -Id $dependency).state -ne 'closed') { throw "Route '$RouteId' cannot close before required route '$dependency' closes." } }
+    Assert-ClosedDependencies -State $state -Route $route -Transition 'close'
     Add-UniqueEvidence -RouteRecord $record -Property 'closure_evidence' -Values @($Evidence)
     $missingInvocation = @($route.invocation_evidence | Where-Object { @($record.invocation_evidence) -notcontains $_ })
     $missingClosure = @(Get-RequiredClosureEvidence -Route $route -Classification $state.classification | Where-Object { @($record.closure_evidence) -notcontains $_ })

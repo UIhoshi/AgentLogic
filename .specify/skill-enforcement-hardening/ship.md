@@ -46,3 +46,16 @@ database, remote API, or secret surface.
 The environment does not provide the registry's `review-agent` or `code-reviewer` capability, so no
 capability-qualified formal code-review report is claimed. The static self-refuting review above is
 not a replacement for that route.
+
+## Post-review correction — dependency gating
+
+- **Finding:** `ui-implementation` could record invocation before the `requirements-grilling` and
+  `ui-design` routes closed, because dependency checks ran only during route closure.
+- **Correction:** `skill-enforcement.ps1` now asserts every `requires_routes` dependency before
+  recording invocation and reuses the same assertion at closure. It also resolves its default
+  repository root after PowerShell parameter binding, so documented standalone invocation works.
+- **Counter-argument:** A caller may still bypass the workflow command entirely. That is outside
+  this workflow gate's declared enforcement boundary and cannot be represented as host-native
+  interception.
+- **Status:** **Verified for recorded workflow state.** The negative UI-route invocation fixture
+  and the no-`-RepoRoot` project-usage fixture both fail/pass as expected.

@@ -1,15 +1,20 @@
 # V6.8.6 Release Handoff
 
-Status: **paused before push/release** at the user's request. Local WIP commit: `93b171a`.
+Status: **pending final code review and release authorization**. Base local WIP commit: `93b171a`;
+the review correction is currently uncommitted.
 
 ## Completed
 - Implemented V6.8.6 portable-skill registry, lifecycle records, route state machine, deployment payloads, project Skill Usage tracking, and documentation/version promotion.
 - Installed and selected the portable `code-review` skill for this release review.
-- Local validation previously passed: entry checker, registry/routing tests, workflow tests, package validation, and maintainer check. Bundles must be rebuilt once the pending review fix is applied.
+- The P1 dependency-gating finding is fixed: dependent routes now require closed predecessors
+  before invocation, with a negative UI-route regression test.
+- Post-correction validation passed: entry checker, requirements-brief validator, registry/routing validators, workflow tests (including the negative UI-route and default-root regressions), project Skill Usage validation, package validation, maintainer check, and `git diff --check`. All four bundles were rebuilt.
 - GitHub target verified: `UIhoshi/AgentLogic`, authenticated; tag and release `v6.8.6` do not yet exist.
 
-## Blocking review finding (P1)
-`ui-implementation` can currently record invocation before its required `requirements-grilling` and `ui-design` routes have closed. `scripts/skill-enforcement.ps1` checks dependencies only at route closure, leaving `block_before_ui_code` incomplete. Next session must enforce prerequisites before invocation (and add a negative UI-route test) before re-running validation and releasing.
+## Resolved review finding (P1)
+`ui-implementation` previously could record invocation before its required `requirements-grilling`
+and `ui-design` routes had closed. `scripts/skill-enforcement.ps1` now enforces prerequisites before
+invocation and closure; `scripts/test-skill-enforcement.ps1` covers the rejected UI-route attempt.
 
 ## Release ledger
 - `.specify/v6-8-6-release/skill-execution.json` is initialized and preflight-passed.

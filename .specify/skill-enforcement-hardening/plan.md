@@ -11,7 +11,7 @@
 
 ### Executable enforcement
 
-- Add a common `scripts/skill-enforcement.ps1` command with `preflight`, `record-invocation`, `closure`, and `validate-project-usage` modes. It validates a task record under `.specify/<task>/skill-execution.json` against the contracts and refuses invalid lifecycle states.
+- Add a common `scripts/skill-enforcement.ps1` command with `preflight`, `record-invocation`, `closure`, and `validate-project-usage` modes. It resolves its default repository root after parameter binding, validates a task record under `.specify/<task>/skill-execution.json` against the contracts, and refuses invalid lifecycle states. Required route dependencies must be closed before a dependent route can record invocation as well as before it can close.
 - Add `scripts/deploy-skill-enforcement.ps1`, used by every adapter, to copy the command and required contracts to the declared host payload location and post-verify checksums/files.
 - Add `scripts/validate-skill-registry.ps1` and extend `scripts/validate-skill-routing.ps1`; package validation invokes both. Add deterministic script tests with positive and negative fixtures.
 - Enforcement is a **workflow gate**: it proves recorded, contract-valid route progression and blocks supported lifecycle states. It explicitly does not represent unsupported host-native interception as fact.
@@ -38,6 +38,7 @@
 | 5 | strict deployment blocks all supported hosts due to missing host hooks | Hosts differ and some have no native interception API | Deploy a common workflow gate to all; report `workflow_enforced` versus `native_tool_interception`; never silently claim stronger capability. |
 | 6 | CODE_MAP becomes an unbounded invocation log | Every task can use many skills | Keep only durable flow-to-skill rows in CODE_MAP; task events remain in `.specify/`; validate the dedicated JSON source. |
 | 7 | broad registry updates misclassify security/CTF skills | Legacy subskills have sparse metadata | Default to `manual_only`, retain reason, and require later reviewed promotion. |
+| 8 | an implementation skill can be recorded before its requirements or mockup routes have completed | Checking dependencies only at closure leaves `block_before_ui_code` unenforced during invocation | Assert every `requires_routes` dependency is closed before `record-invocation`; add a negative UI implementation fixture. |
 
 ## Tasks
 
@@ -47,3 +48,4 @@
 4. Upgrade all adapters and host capability declarations; verify strictness labels.
 5. Update module/version/profile/template documentation and package validation.
 6. Rebuild bundles, run test/validation matrix, inspect diffs, and compile shipping review record.
+7. Enforce route prerequisites before invocation, preserve standalone default-root invocation, and add negative UI-route lifecycle tests.

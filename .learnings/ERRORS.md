@@ -1,5 +1,11 @@
-﻿# Project Error Log
+# Project Error Log
 
+## 2026-08-24 – `$PSScriptRoot` was unavailable in a PowerShell parameter default
+- Symptom: Running `scripts/skill-enforcement.ps1` without `-RepoRoot` failed before validation with an empty `Join-Path` argument.
+- Root cause: Windows PowerShell evaluated the parameter default before `$PSScriptRoot` was reliably available.
+- Correction: Resolve the default repository root after parameter binding instead of inside the parameter declaration.
+- Prevention: Cover the documented no-`-RepoRoot` invocation path in the script's regression test.
+- Verification: `validate-project-usage` succeeds against the fixture when invoked without `-RepoRoot`.
 ## 2026-08-11 - Direct HTTP anti-bot response was treated as page inaccessibility
 - Symptom: A public-page collection task initially stopped after a direct HTTP request returned a site verification page.
 - Root cause: The execution path treated a transport-level response as conclusive and did not immediately use the available real-browser rendering path.
