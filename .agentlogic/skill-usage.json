@@ -29,7 +29,7 @@
                                      "V6.8.6 release review"
                                  ],
                        "trigger":  "release_review",
-                       "source":  "portable skill installed at ~/.codex/skills/code-review",
+                       "source":  "host-provided portable skill",
                        "status":  "active"
                    }
                ]

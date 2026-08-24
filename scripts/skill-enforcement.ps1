@@ -24,6 +24,7 @@ param(
     [string[]]$AvailableSkill = @(),
     [string]$RouteId,
     [string[]]$Evidence = @(),
+    [string]$RemoteTarget,
     [string]$ProjectRoot
 )
 
@@ -118,7 +119,19 @@ if ($Mode -eq 'validate-project-usage') {
     if ($usage.schema_version -ne 1) { throw "Unsupported project skill usage schema version: $($usage.schema_version)" }
     foreach ($skill in @($usage.skills)) { foreach ($field in @($contract.project_skill_usage.required_skill_fields)) { if ($null -eq $skill.$field -or [string]::IsNullOrWhiteSpace([string]$skill.$field)) { throw "Project skill usage record is missing '$field'." } } }
     if (-not (Test-Path -LiteralPath $codeMapPath)) { throw "Missing project CODE_MAP.md: $codeMapPath" }
-    if ((Get-Content -Raw -Encoding UTF8 -LiteralPath $codeMapPath) -notmatch '(?m)^## Skill Usage\s*$') { throw 'CODE_MAP.md is missing the required ## Skill Usage summary.' }
+    $codeMap = Get-Content -Raw -Encoding UTF8 -LiteralPath $codeMapPath
+    if ($codeMap -notmatch '(?m)^## Skill Usage\s*$') { throw 'CODE_MAP.md is missing the required ## Skill Usage summary.' }
+    $rows = @($codeMap -split '\r?\n' | Where-Object { $_ -match '^\|\s*[^|-].*\|\s*$' -and $_ -notmatch '^\|\s*Durable flow\s*\|' })
+    foreach ($skill in @($usage.skills)) {
+        foreach ($flow in @($skill.flows)) {
+            $found = $false
+            foreach ($row in $rows) {
+                $cells = @($row.Trim().Trim('|').Split('|') | ForEach-Object { $_.Trim().Trim('`') })
+                if ($cells.Count -ge 5 -and $cells[0] -ieq $flow -and $cells[1] -eq $skill.skill_id -and $cells[2] -eq $skill.trigger -and $cells[3] -eq '.agentlogic/skill-usage.json' -and $cells[4] -eq $usage.reviewed_commit) { $found = $true; break }
+            }
+            if (-not $found) { throw "CODE_MAP.md is missing a matching Skill Usage row for '$($skill.skill_id)' flow '$flow'." }
+        }
+    }
     Write-Host "Project skill usage validation passed: $ProjectRoot"
     exit 0
 }
@@ -132,7 +145,7 @@ if ($Mode -eq 'initialize') {
         $route = Get-Route -Routing $routing -Id $id
 $availablePrimary = @($route.primary_host_skill_aliases | Where-Object { @($AvailableSkill) -contains $_ })
         $selectedSkill = if ($availablePrimary.Count -gt 0) { $availablePrimary[0] } else { @($route.primary_host_skill_aliases)[0] }
-        [ordered]@{ route_id=$id; state='pending'; selected_skill=$selectedSkill; available_skills=@(); invocation_evidence=@(); closure_evidence=@(); blocked_reason=$null }
+        [ordered]@{ route_id=$id; state='pending'; selected_skill=$selectedSkill; available_skills=@(); invocation_evidence=@(); closure_evidence=@(); remote_target=$null; blocked_reason=$null }
     }
     $state = [ordered]@{ schema_version=1; task_id=$TaskId; classification=$classification; matched_route_ids=$matched; routes=@($routeRecords) }
     Write-Json -Path $TaskStatePath -Value $state
@@ -178,6 +191,18 @@ if ($Mode -eq 'record-invocation') {
 if ($Mode -eq 'closure') {
     if ($record.state -ne 'invoked') { throw "Route '$RouteId' requires an invocation record before closure." }
     Assert-ClosedDependencies -State $state -Route $route -Transition 'close'
+    $requiresRemoteTarget = $false
+    foreach ($conditional in @($route.conditional_closure_evidence)) {
+        $actual = @($state.classification.($conditional.field))
+        if ($conditional.requires_remote_target -and @($actual | Where-Object { @($conditional.values) -contains $_ }).Count -gt 0) {
+            $requiresRemoteTarget = $true
+            break
+        }
+    }
+    if ($requiresRemoteTarget) {
+        if ([string]::IsNullOrWhiteSpace($RemoteTarget)) { throw "Route '$RouteId' requires an exact -RemoteTarget before closure." }
+        $record | Add-Member -Force -NotePropertyName remote_target -NotePropertyValue $RemoteTarget
+    }
     Add-UniqueEvidence -RouteRecord $record -Property 'closure_evidence' -Values @($Evidence)
     $missingInvocation = @($route.invocation_evidence | Where-Object { @($record.invocation_evidence) -notcontains $_ })
     $missingClosure = @(Get-RequiredClosureEvidence -Route $route -Classification $state.classification | Where-Object { @($record.closure_evidence) -notcontains $_ })

@@ -22,7 +22,8 @@
                                                    "modules/30_ToolQuestionBoundaryMatrix.md",
                                                    "modules/31_ToolMisuseAndAntiPatternMatrix.md",
                                                    "modules/53_V6_8_ProgrammingLevelSkillEnforcement.md",
-                                                   "contracts/skill-enforcement.json"
+                                                   "contracts/skill-enforcement.json",
+                                                   "contracts/skill-registry.json"
                                                ]
                                  },
                      "core-enhanced":  {
@@ -56,7 +57,8 @@
                                                          "contracts/skill-routing.json",
                                                          "contracts/host-skill-capabilities.json",
                                                          "modules/53_V6_8_ProgrammingLevelSkillEnforcement.md",
-                                                         "contracts/skill-enforcement.json"
+                                                         "contracts/skill-enforcement.json",
+                                                         "contracts/skill-registry.json"
                                                      ]
                                        },
                      "github-publishing":  {
@@ -116,7 +118,8 @@
                                                              "modules/51_V6_8_AffordanceFirstToolUse.md",
                                                              "modules/52_V6_8_Img2ThreeJs3DWebIntegration.md",
                                                              "modules/53_V6_8_ProgrammingLevelSkillEnforcement.md",
-                                                             "contracts/skill-enforcement.json"
+                                                             "contracts/skill-enforcement.json",
+                                                             "contracts/skill-registry.json"
                                                          ]
                                            },
                      "governance-reference":  {
@@ -172,7 +175,8 @@
                                                                 "modules/51_V6_8_AffordanceFirstToolUse.md",
                                                                 "modules/52_V6_8_Img2ThreeJs3DWebIntegration.md",
                                                                 "modules/53_V6_8_ProgrammingLevelSkillEnforcement.md",
-                                                                "contracts/skill-enforcement.json"
+                                                                "contracts/skill-enforcement.json",
+                                                                "contracts/skill-registry.json"
                                                             ]
                                               }
                  },
@@ -227,6 +231,7 @@
                                                                          "contracts/skill-registry.json",
                                                                          "contracts/skill-routing.json",
                                                                          "contracts/skill-enforcement.json",
+                                                                         "contracts/skill-registry.json",
                                                                          "contracts/host-skill-capabilities.json"
                                                                      ]
                          },

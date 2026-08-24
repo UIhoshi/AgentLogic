@@ -4002,7 +4002,8 @@ For the reference-based interactive 3D route:
                                                                            ],
                                                                 "evidence":  [
                                                                                  "exact_remote_target_confirmation"
-                                                                             ]
+                                                                             ],
+                                                                "requires_remote_target":  true
                                                             }
                                                         ]
                    },
@@ -4599,4 +4600,1184 @@ profile bundle, or prose-only mention is an alternative path.
 }
 
 ## END FILE: contracts/skill-enforcement.json
+
+---
+
+## BEGIN FILE: contracts/skill-registry.json
+
+{
+    "schema_version":  1,
+    "purpose":  "Complete explicit lifecycle registry for every portable AgentLogic SKILL.md entrypoint. A path is not automatically eligible for routing unless its record and route contract say so.",
+    "lifecycle_states":  [
+                             "mandatory",
+                             "conditional",
+                             "manual_only",
+                             "archived",
+                             "deprecated"
+                         ],
+    "records":  [
+                    {
+                        "id":  "skills-agent-browser-skill-data-agentcore-skill-md",
+                        "entrypoint":  "skills/agent-browser/skill-data/agentcore/SKILL.md",
+                        "family":  "agent-browser",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                    },
+                    {
+                        "id":  "skills-agent-browser-skill-data-core-skill-md",
+                        "entrypoint":  "skills/agent-browser/skill-data/core/SKILL.md",
+                        "family":  "agent-browser",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                    },
+                    {
+                        "id":  "skills-agent-browser-skill-data-dogfood-skill-md",
+                        "entrypoint":  "skills/agent-browser/skill-data/dogfood/SKILL.md",
+                        "family":  "agent-browser",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                    },
+                    {
+                        "id":  "skills-agent-browser-skill-data-electron-skill-md",
+                        "entrypoint":  "skills/agent-browser/skill-data/electron/SKILL.md",
+                        "family":  "agent-browser",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                    },
+                    {
+                        "id":  "skills-agent-browser-skill-data-slack-skill-md",
+                        "entrypoint":  "skills/agent-browser/skill-data/slack/SKILL.md",
+                        "family":  "agent-browser",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                    },
+                    {
+                        "id":  "skills-agent-browser-skill-data-vercel-sandbox-skill-md",
+                        "entrypoint":  "skills/agent-browser/skill-data/vercel-sandbox/SKILL.md",
+                        "family":  "agent-browser",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                    },
+                    {
+                        "id":  "skills-agent-browser-skills-agent-browser-skill-md",
+                        "entrypoint":  "skills/agent-browser/skills/agent-browser/SKILL.md",
+                        "family":  "agent-browser",
+                        "lifecycle":  "conditional",
+                        "route_ids":  [
+                                          "browser-verification"
+                                      ],
+                        "reason":  "Conditional browser-proof capability when its accessibility-tree/session model is a better fit."
+                    },
+                    {
+                        "id":  "skills-engineering-ask-matt-skill-md",
+                        "entrypoint":  "skills/engineering/ask-matt/SKILL.md",
+                        "family":  "engineering",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                    },
+                    {
+                        "id":  "skills-engineering-codebase-design-skill-md",
+                        "entrypoint":  "skills/engineering/codebase-design/SKILL.md",
+                        "family":  "engineering",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                    },
+                    {
+                        "id":  "skills-engineering-code-review-skill-md",
+                        "entrypoint":  "skills/engineering/code-review/SKILL.md",
+                        "family":  "engineering",
+                        "lifecycle":  "conditional",
+                        "route_ids":  [
+                                          "code-review"
+                                      ],
+                        "reason":  "Portable defect and specification review capability for review tasks when installed and selected by the code-review route."
+                    },
+                    {
+                        "id":  "skills-engineering-diagnosing-bugs-skill-md",
+                        "entrypoint":  "skills/engineering/diagnosing-bugs/SKILL.md",
+                        "family":  "engineering",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Engineering workflow skill retained for explicit selection; no canonical automatic route has been reviewed yet."
+                    },
+                    {
+                        "id":  "skills-engineering-domain-modeling-skill-md",
+                        "entrypoint":  "skills/engineering/domain-modeling/SKILL.md",
+                        "family":  "engineering",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                    },
+                    {
+                        "id":  "skills-engineering-grill-with-docs-skill-md",
+                        "entrypoint":  "skills/engineering/grill-with-docs/SKILL.md",
+                        "family":  "engineering",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                    },
+                    {
+                        "id":  "skills-engineering-implement-skill-md",
+                        "entrypoint":  "skills/engineering/implement/SKILL.md",
+                        "family":  "engineering",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Engineering workflow skill retained for explicit selection; no canonical automatic route has been reviewed yet."
+                    },
+                    {
+                        "id":  "skills-engineering-improve-codebase-architecture-skill-md",
+                        "entrypoint":  "skills/engineering/improve-codebase-architecture/SKILL.md",
+                        "family":  "engineering",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                    },
+                    {
+                        "id":  "skills-engineering-prototype-skill-md",
+                        "entrypoint":  "skills/engineering/prototype/SKILL.md",
+                        "family":  "engineering",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                    },
+                    {
+                        "id":  "skills-engineering-research-skill-md",
+                        "entrypoint":  "skills/engineering/research/SKILL.md",
+                        "family":  "engineering",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Engineering workflow skill retained for explicit selection; no canonical automatic route has been reviewed yet."
+                    },
+                    {
+                        "id":  "skills-engineering-resolving-merge-conflicts-skill-md",
+                        "entrypoint":  "skills/engineering/resolving-merge-conflicts/SKILL.md",
+                        "family":  "engineering",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                    },
+                    {
+                        "id":  "skills-engineering-setup-matt-pocock-skills-skill-md",
+                        "entrypoint":  "skills/engineering/setup-matt-pocock-skills/SKILL.md",
+                        "family":  "engineering",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                    },
+                    {
+                        "id":  "skills-engineering-tdd-skill-md",
+                        "entrypoint":  "skills/engineering/tdd/SKILL.md",
+                        "family":  "engineering",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Engineering workflow skill retained for explicit selection; no canonical automatic route has been reviewed yet."
+                    },
+                    {
+                        "id":  "skills-engineering-to-spec-skill-md",
+                        "entrypoint":  "skills/engineering/to-spec/SKILL.md",
+                        "family":  "engineering",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                    },
+                    {
+                        "id":  "skills-engineering-to-tickets-skill-md",
+                        "entrypoint":  "skills/engineering/to-tickets/SKILL.md",
+                        "family":  "engineering",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                    },
+                    {
+                        "id":  "skills-engineering-triage-skill-md",
+                        "entrypoint":  "skills/engineering/triage/SKILL.md",
+                        "family":  "engineering",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                    },
+                    {
+                        "id":  "skills-engineering-wayfinder-skill-md",
+                        "entrypoint":  "skills/engineering/wayfinder/SKILL.md",
+                        "family":  "engineering",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Engineering workflow skill retained for explicit selection; no canonical automatic route has been reviewed yet."
+                    },
+                    {
+                        "id":  "skills-nano-banana-pro-skill-md",
+                        "entrypoint":  "skills/nano-banana-pro/SKILL.md",
+                        "family":  "nano-banana-pro",
+                        "lifecycle":  "conditional",
+                        "route_ids":  [
+                                          "ui-design"
+                                      ],
+                        "reason":  "Optional equivalent image-generation capability when installed and explicitly approved."
+                    },
+                    {
+                        "id":  "skills-ponytail-skill-md",
+                        "entrypoint":  "skills/ponytail/SKILL.md",
+                        "family":  "ponytail",
+                        "lifecycle":  "conditional",
+                        "route_ids":  [
+                                          "test-design"
+                                      ],
+                        "reason":  "Conditional implementation discipline for behavior changes."
+                    },
+                    {
+                        "id":  "skills-ponytail-audit-skill-md",
+                        "entrypoint":  "skills/ponytail-audit/SKILL.md",
+                        "family":  "ponytail-audit",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                    },
+                    {
+                        "id":  "skills-ponytail-debt-skill-md",
+                        "entrypoint":  "skills/ponytail-debt/SKILL.md",
+                        "family":  "ponytail-debt",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                    },
+                    {
+                        "id":  "skills-ponytail-gain-skill-md",
+                        "entrypoint":  "skills/ponytail-gain/SKILL.md",
+                        "family":  "ponytail-gain",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                    },
+                    {
+                        "id":  "skills-ponytail-help-skill-md",
+                        "entrypoint":  "skills/ponytail-help/SKILL.md",
+                        "family":  "ponytail-help",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                    },
+                    {
+                        "id":  "skills-ponytail-review-skill-md",
+                        "entrypoint":  "skills/ponytail-review/SKILL.md",
+                        "family":  "ponytail-review",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                    },
+                    {
+                        "id":  "skills-productivity-grilling-skill-md",
+                        "entrypoint":  "skills/productivity/grilling/SKILL.md",
+                        "family":  "productivity",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                    },
+                    {
+                        "id":  "skills-productivity-grill-me-skill-md",
+                        "entrypoint":  "skills/productivity/grill-me/SKILL.md",
+                        "family":  "productivity",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                    },
+                    {
+                        "id":  "skills-productivity-handoff-skill-md",
+                        "entrypoint":  "skills/productivity/handoff/SKILL.md",
+                        "family":  "productivity",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                    },
+                    {
+                        "id":  "skills-productivity-product-requirements-grilling-skill-md",
+                        "entrypoint":  "skills/productivity/product-requirements-grilling/SKILL.md",
+                        "family":  "productivity",
+                        "lifecycle":  "mandatory",
+                        "route_ids":  [
+                                          "requirements-grilling"
+                                      ],
+                        "reason":  "Canonical first-party requirements-grilling capability."
+                    },
+                    {
+                        "id":  "skills-productivity-teach-skill-md",
+                        "entrypoint":  "skills/productivity/teach/SKILL.md",
+                        "family":  "productivity",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                    },
+                    {
+                        "id":  "skills-productivity-writing-great-skills-skill-md",
+                        "entrypoint":  "skills/productivity/writing-great-skills/SKILL.md",
+                        "family":  "productivity",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-ad-certificate-abuse-skill-md",
+                        "entrypoint":  "skills/reverse-skill/CTF-Sandbox-Orchestrator/competition-ad-certificate-abuse/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-agent-cloud-skill-md",
+                        "entrypoint":  "skills/reverse-skill/CTF-Sandbox-Orchestrator/competition-agent-cloud/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-android-hooking-skill-md",
+                        "entrypoint":  "skills/reverse-skill/CTF-Sandbox-Orchestrator/competition-android-hooking/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-browser-persistence-skill-md",
+                        "entrypoint":  "skills/reverse-skill/CTF-Sandbox-Orchestrator/competition-browser-persistence/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-bundle-sourcemap-recovery-skill-md",
+                        "entrypoint":  "skills/reverse-skill/CTF-Sandbox-Orchestrator/competition-bundle-sourcemap-recovery/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-cloud-metadata-path-skill-md",
+                        "entrypoint":  "skills/reverse-skill/CTF-Sandbox-Orchestrator/competition-cloud-metadata-path/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-container-runtime-skill-md",
+                        "entrypoint":  "skills/reverse-skill/CTF-Sandbox-Orchestrator/competition-container-runtime/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-crypto-mobile-skill-md",
+                        "entrypoint":  "skills/reverse-skill/CTF-Sandbox-Orchestrator/competition-crypto-mobile/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-custom-protocol-replay-skill-md",
+                        "entrypoint":  "skills/reverse-skill/CTF-Sandbox-Orchestrator/competition-custom-protocol-replay/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-dpapi-credential-chain-skill-md",
+                        "entrypoint":  "skills/reverse-skill/CTF-Sandbox-Orchestrator/competition-dpapi-credential-chain/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-file-parser-chain-skill-md",
+                        "entrypoint":  "skills/reverse-skill/CTF-Sandbox-Orchestrator/competition-file-parser-chain/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-firmware-layout-skill-md",
+                        "entrypoint":  "skills/reverse-skill/CTF-Sandbox-Orchestrator/competition-firmware-layout/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-forensic-timeline-skill-md",
+                        "entrypoint":  "skills/reverse-skill/CTF-Sandbox-Orchestrator/competition-forensic-timeline/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-graphql-rpc-drift-skill-md",
+                        "entrypoint":  "skills/reverse-skill/CTF-Sandbox-Orchestrator/competition-graphql-rpc-drift/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-identity-windows-skill-md",
+                        "entrypoint":  "skills/reverse-skill/CTF-Sandbox-Orchestrator/competition-identity-windows/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-ios-runtime-skill-md",
+                        "entrypoint":  "skills/reverse-skill/CTF-Sandbox-Orchestrator/competition-ios-runtime/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-jwt-claim-confusion-skill-md",
+                        "entrypoint":  "skills/reverse-skill/CTF-Sandbox-Orchestrator/competition-jwt-claim-confusion/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-k8s-control-plane-skill-md",
+                        "entrypoint":  "skills/reverse-skill/CTF-Sandbox-Orchestrator/competition-k8s-control-plane/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-kerberos-delegation-skill-md",
+                        "entrypoint":  "skills/reverse-skill/CTF-Sandbox-Orchestrator/competition-kerberos-delegation/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-kernel-container-escape-skill-md",
+                        "entrypoint":  "skills/reverse-skill/CTF-Sandbox-Orchestrator/competition-kernel-container-escape/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-linux-credential-pivot-skill-md",
+                        "entrypoint":  "skills/reverse-skill/CTF-Sandbox-Orchestrator/competition-linux-credential-pivot/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-lsass-ticket-material-skill-md",
+                        "entrypoint":  "skills/reverse-skill/CTF-Sandbox-Orchestrator/competition-lsass-ticket-material/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-mailbox-abuse-skill-md",
+                        "entrypoint":  "skills/reverse-skill/CTF-Sandbox-Orchestrator/competition-mailbox-abuse/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-malware-config-skill-md",
+                        "entrypoint":  "skills/reverse-skill/CTF-Sandbox-Orchestrator/competition-malware-config/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-oauth-oidc-chain-skill-md",
+                        "entrypoint":  "skills/reverse-skill/CTF-Sandbox-Orchestrator/competition-oauth-oidc-chain/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-pcap-protocol-skill-md",
+                        "entrypoint":  "skills/reverse-skill/CTF-Sandbox-Orchestrator/competition-pcap-protocol/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-prompt-injection-skill-md",
+                        "entrypoint":  "skills/reverse-skill/CTF-Sandbox-Orchestrator/competition-prompt-injection/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-queue-worker-drift-skill-md",
+                        "entrypoint":  "skills/reverse-skill/CTF-Sandbox-Orchestrator/competition-queue-worker-drift/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-race-condition-state-drift-skill-md",
+                        "entrypoint":  "skills/reverse-skill/CTF-Sandbox-Orchestrator/competition-race-condition-state-drift/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-relay-coercion-chain-skill-md",
+                        "entrypoint":  "skills/reverse-skill/CTF-Sandbox-Orchestrator/competition-relay-coercion-chain/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-request-normalization-smuggling-skill-md",
+                        "entrypoint":  "skills/reverse-skill/CTF-Sandbox-Orchestrator/competition-request-normalization-smuggling/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-reverse-pwn-skill-md",
+                        "entrypoint":  "skills/reverse-skill/CTF-Sandbox-Orchestrator/competition-reverse-pwn/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-runtime-routing-skill-md",
+                        "entrypoint":  "skills/reverse-skill/CTF-Sandbox-Orchestrator/competition-runtime-routing/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-ssrf-metadata-pivot-skill-md",
+                        "entrypoint":  "skills/reverse-skill/CTF-Sandbox-Orchestrator/competition-ssrf-metadata-pivot/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-stego-media-skill-md",
+                        "entrypoint":  "skills/reverse-skill/CTF-Sandbox-Orchestrator/competition-stego-media/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-supply-chain-skill-md",
+                        "entrypoint":  "skills/reverse-skill/CTF-Sandbox-Orchestrator/competition-supply-chain/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-template-render-path-skill-md",
+                        "entrypoint":  "skills/reverse-skill/CTF-Sandbox-Orchestrator/competition-template-render-path/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-web-runtime-skill-md",
+                        "entrypoint":  "skills/reverse-skill/CTF-Sandbox-Orchestrator/competition-web-runtime/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-websocket-runtime-skill-md",
+                        "entrypoint":  "skills/reverse-skill/CTF-Sandbox-Orchestrator/competition-websocket-runtime/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-windows-pivot-skill-md",
+                        "entrypoint":  "skills/reverse-skill/CTF-Sandbox-Orchestrator/competition-windows-pivot/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-ctf-sandbox-orchestrator-skill-md",
+                        "entrypoint":  "skills/reverse-skill/CTF-Sandbox-Orchestrator/ctf-sandbox-orchestrator/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-skills-api-security-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/api-security/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-skills-apk-reverse-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/apk-reverse/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-skills-attack-chain-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/attack-chain/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-skills-binary-diff-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/binary-diff/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-skills-browser-automation-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/browser-automation/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-skills-diagram-generator-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/diagram-generator/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-skills-docs-generator-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/docs-generator/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-skills-dotnet-reverse-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/dotnet-reverse/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-skills-edr-bypass-re-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/edr-bypass-re/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-skills-firmware-pentest-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/firmware-pentest/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-skills-ida-reverse-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/ida-reverse/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-skills-js-reverse-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/js-reverse/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-skills-llm-security-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/llm-security/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-skills-malware-analysis-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/malware-analysis/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-skills-mobile-reverse-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/mobile-reverse/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-skills-patch-diff-exploit-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/patch-diff-exploit/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-skills-pentest-tools-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/pentest-tools/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-skills-pentest-tools-src-hunter-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/pentest-tools/src-hunter/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-skills-pwn-chain-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/pwn-chain/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-skills-radare2-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/radare2/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-skills-reverse-engineering-dsl-vm-reverse-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/reverse-engineering/dsl-vm-reverse/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-skills-reverse-engineering-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/reverse-engineering/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-skills-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-reverse-skill-skills-supply-chain-security-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/supply-chain-security/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                    },
+                    {
+                        "id":  "skills-self-improvement-self-improving-agent-skill-md",
+                        "entrypoint":  "skills/self-improvement/self-improving-agent/SKILL.md",
+                        "family":  "self-improvement",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Persistent-memory or rule-promotion behavior is manual-only under project-native knowledge sync."
+                    },
+                    {
+                        "id":  "skills-taste-skill-skills-brandkit-skill-md",
+                        "entrypoint":  "skills/taste-skill/skills/brandkit/SKILL.md",
+                        "family":  "taste-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                    },
+                    {
+                        "id":  "skills-taste-skill-skills-brutalist-skill-skill-md",
+                        "entrypoint":  "skills/taste-skill/skills/brutalist-skill/SKILL.md",
+                        "family":  "taste-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                    },
+                    {
+                        "id":  "skills-taste-skill-skills-gpt-tasteskill-skill-md",
+                        "entrypoint":  "skills/taste-skill/skills/gpt-tasteskill/SKILL.md",
+                        "family":  "taste-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                    },
+                    {
+                        "id":  "skills-taste-skill-skills-imagegen-frontend-mobile-skill-md",
+                        "entrypoint":  "skills/taste-skill/skills/imagegen-frontend-mobile/SKILL.md",
+                        "family":  "taste-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                    },
+                    {
+                        "id":  "skills-taste-skill-skills-imagegen-frontend-web-skill-md",
+                        "entrypoint":  "skills/taste-skill/skills/imagegen-frontend-web/SKILL.md",
+                        "family":  "taste-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                    },
+                    {
+                        "id":  "skills-taste-skill-skills-image-to-code-skill-skill-md",
+                        "entrypoint":  "skills/taste-skill/skills/image-to-code-skill/SKILL.md",
+                        "family":  "taste-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                    },
+                    {
+                        "id":  "skills-taste-skill-skills-minimalist-skill-skill-md",
+                        "entrypoint":  "skills/taste-skill/skills/minimalist-skill/SKILL.md",
+                        "family":  "taste-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                    },
+                    {
+                        "id":  "skills-taste-skill-skills-output-skill-skill-md",
+                        "entrypoint":  "skills/taste-skill/skills/output-skill/SKILL.md",
+                        "family":  "taste-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                    },
+                    {
+                        "id":  "skills-taste-skill-skills-redesign-skill-skill-md",
+                        "entrypoint":  "skills/taste-skill/skills/redesign-skill/SKILL.md",
+                        "family":  "taste-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                    },
+                    {
+                        "id":  "skills-taste-skill-skills-soft-skill-skill-md",
+                        "entrypoint":  "skills/taste-skill/skills/soft-skill/SKILL.md",
+                        "family":  "taste-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                    },
+                    {
+                        "id":  "skills-taste-skill-skills-stitch-skill-skill-md",
+                        "entrypoint":  "skills/taste-skill/skills/stitch-skill/SKILL.md",
+                        "family":  "taste-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                    },
+                    {
+                        "id":  "skills-taste-skill-skills-taste-skill-skill-md",
+                        "entrypoint":  "skills/taste-skill/skills/taste-skill/SKILL.md",
+                        "family":  "taste-skill",
+                        "lifecycle":  "conditional",
+                        "route_ids":  [
+                                          "ui-design"
+                                      ],
+                        "reason":  "Conditional UI art-direction capability; it cannot replace image generation."
+                    },
+                    {
+                        "id":  "skills-taste-skill-skills-taste-skill-v1-skill-md",
+                        "entrypoint":  "skills/taste-skill/skills/taste-skill-v1/SKILL.md",
+                        "family":  "taste-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                    }
+                ]
+}
+
+## END FILE: contracts/skill-registry.json
 

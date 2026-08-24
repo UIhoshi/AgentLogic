@@ -292,7 +292,8 @@
                                                                            ],
                                                                 "evidence":  [
                                                                                  "exact_remote_target_confirmation"
-                                                                             ]
+                                                                             ],
+                                                                "requires_remote_target":  true
                                                             }
                                                         ]
                    },

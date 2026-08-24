@@ -40,6 +40,10 @@ try {
     & $gate -Mode closure -RepoRoot $RepoRoot -TaskStatePath $releasePath -RouteId code-review -Evidence review_report,severity_and_evidence
     & $gate -Mode record-invocation -RepoRoot $RepoRoot -TaskStatePath $releasePath -RouteId package-release -Evidence release_manager_run
     Expect-Failure { & $gate -Mode closure -RepoRoot $RepoRoot -TaskStatePath $releasePath -RouteId package-release -Evidence artifact_validation,post_result_inspection } 'remote release without exact target confirmation'
+    & $gate -Mode closure -RepoRoot $RepoRoot -TaskStatePath $releasePath -RouteId package-release -Evidence artifact_validation,post_result_inspection,exact_remote_target_confirmation -RemoteTarget 'UIhoshi/AgentLogic@v6.8.6'
+    $releaseState = Get-Content -Raw -LiteralPath $releasePath | ConvertFrom-Json
+    $recordedRemoteTarget = @($releaseState.routes | Where-Object { $_.route_id -eq 'package-release' } | Select-Object -ExpandProperty remote_target)
+    if ($recordedRemoteTarget.Count -ne 1 -or $recordedRemoteTarget[0] -ne 'UIhoshi/AgentLogic@v6.8.6') { throw 'Remote release target was not recorded.' }
 
     $packagePath = Join-Path $root 'package.json'
     & $gate -Mode initialize -RepoRoot $RepoRoot -TaskStatePath $packagePath -TaskId package -TaskClass package -ChangeScope isolated -UiScope none -ExternalEffect local_package -ClaimType none
@@ -59,9 +63,11 @@ try {
     $projectRoot = Join-Path $root 'project'
     New-Item -ItemType Directory -Force -Path (Join-Path $projectRoot '.agentlogic') | Out-Null
     '{"schema_version":1,"reviewed_commit":"abc123","skills":[{"skill_id":"tdd-guide","capability":"test_engineering","flows":["validation"],"trigger":"behavior_change","source":"host","status":"active"}]}' | Set-Content -LiteralPath (Join-Path $projectRoot '.agentlogic\skill-usage.json') -Encoding utf8
-    "# Code Map`n`n## Skill Usage`n| Flow | Skill | Trigger | Source of truth |`n| --- | --- | --- | --- |`n| validation | tdd-guide | behavior_change | .agentlogic/skill-usage.json |" | Set-Content -LiteralPath (Join-Path $projectRoot 'CODE_MAP.md') -Encoding utf8
+    "# Code Map`n`n## Skill Usage`n| Durable flow | Capability / skill | Trigger | Source of truth | Reviewed commit |`n| --- | --- | --- | --- | --- |`n| validation | tdd-guide | behavior_change | .agentlogic/skill-usage.json | abc123 |" | Set-Content -LiteralPath (Join-Path $projectRoot 'CODE_MAP.md') -Encoding utf8
     & $gate -Mode validate-project-usage -RepoRoot $RepoRoot -ProjectRoot $projectRoot
     & $gate -Mode validate-project-usage -ProjectRoot $projectRoot
+    (Get-Content -Raw -LiteralPath (Join-Path $projectRoot 'CODE_MAP.md')).Replace('behavior_change','incorrect_trigger') | Set-Content -LiteralPath (Join-Path $projectRoot 'CODE_MAP.md') -Encoding utf8
+    Expect-Failure { & $gate -Mode validate-project-usage -RepoRoot $RepoRoot -ProjectRoot $projectRoot } 'inconsistent CODE_MAP Skill Usage row'
 
     Write-Host 'Skill enforcement tests passed.'
 }

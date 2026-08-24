@@ -36,8 +36,7 @@ current source and matching verification before making a strong claim.
 | --- | --- | --- | --- | --- |
 | Major feature specification | `product-requirements-grilling` | `major_feature` | `.agentlogic/skill-usage.json` | `34eab55 + V6.8.6 release worktree` |
 | Behavior-change validation | `tdd-guide` | `behavior_change` | `.agentlogic/skill-usage.json` | `34eab55 + V6.8.6 release worktree` |
-| V6.8.6 release review | code-review | elease_review | .agentlogic/skill-usage.json | 34eab55 + V6.8.6 release worktree |
-
+| V6.8.6 release review | `code-review` | `release_review` | `.agentlogic/skill-usage.json` | `34eab55 + V6.8.6 release worktree` |
 > This summary is intentionally concise. Per-task invocation evidence for the programming-level
 > enforcement upgrade is stored in `.specify/skill-enforcement-hardening/skill-execution.json`.
 
