@@ -27,8 +27,10 @@ The following files are one system and must be updated together:
 
 - `contracts/skill-registry.json`: exactly one lifecycle record for every `skills/**/SKILL.md`.
   Valid lifecycle states are `mandatory`, `conditional`, `manual_only`, `archived`, and
-  `deprecated`. Existing skills with insufficient reviewed trigger metadata default to
-  `manual_only`.
+  `deprecated`. Every record also carries validated activation metadata: a route candidate derives
+  its triggers from the canonical route contract, while a manual record selects only through the
+  controlled manual-selection taxonomy. Existing skills with insufficient reviewed automatic-route
+  evidence default to `manual_only` rather than becoming automatic.
 - `contracts/skill-routing.json`: ordered task routes, triggers, dependencies, required invocation
   evidence, closure evidence, fallback/exemption policy, and blocked transitions.
 - `contracts/skill-enforcement.json`: valid task classification dimensions, signal derivation,
@@ -39,6 +41,10 @@ The following files are one system and must be updated together:
 Adding a new portable skill without a registry record is a package-validation failure. Promoting a
 skill from `manual_only` requires a reviewed trigger, route/fallback decision, invocation evidence,
 closure evidence, host availability posture, and test coverage.
+
+Use `scripts/audit-skill-duplicates.ps1` to identify exact-content and duplicate declared-name
+candidates. The command is read-only; a candidate must still pass the four-part duplication test in
+Module 35 before its files or registry record may be removed.
 
 ## 3. Required task state machine
 

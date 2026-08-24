@@ -247,3 +247,8 @@ required skill selection, invocation evidence, closure evidence, and future inte
 machine-checkable. The workflow gate is explicit about its boundary: it validates recorded process
 state and never claims host-native tool interception without a verified host hook. See
 `modules/53_V6_8_ProgrammingLevelSkillEnforcement.md`.
+
+Registry records also declare validated activation metadata. Route candidates derive triggers from
+the canonical routing contract; unreviewed, security-sensitive, and niche capabilities remain
+manual with controlled selection conditions. `scripts/audit-skill-duplicates.ps1` provides
+read-only duplicate-candidate evidence and never authorizes deletion by itself.

@@ -1,4 +1,4 @@
-﻿# MANDATORY LOGIC GATE
+# MANDATORY LOGIC GATE
 #
 # Read `AGENTS.md` and `README.md` before making changes here.
 # Then follow the repository-declared logic entry chain.
@@ -19,11 +19,22 @@ if (-not (Test-Path -LiteralPath $RegistryPath)) { throw "Missing skill registry
 if (-not (Test-Path -LiteralPath $SkillsRoot)) { throw "Missing portable skills root: $SkillsRoot" }
 
 try { $registry = Get-Content -Raw -Encoding UTF8 -LiteralPath $RegistryPath | ConvertFrom-Json } catch { throw "Invalid skill registry JSON: $($_.Exception.Message)" }
+$routingPath = Join-Path $RepoRoot 'contracts\skill-routing.json'
+if (-not (Test-Path -LiteralPath $routingPath)) { throw "Missing skill routing contract: $routingPath" }
+try { $routing = Get-Content -Raw -Encoding UTF8 -LiteralPath $routingPath | ConvertFrom-Json } catch { throw "Invalid skill routing JSON: $($_.Exception.Message)" }
+$routeById = @{}
+foreach ($route in @($routing.routes)) {
+    if ([string]::IsNullOrWhiteSpace([string]$route.id) -or $routeById.ContainsKey([string]$route.id)) { throw "Skill routing contains an invalid or duplicate route id: $($route.id)" }
+    $routeById[[string]$route.id] = $route
+}
 if ($registry.schema_version -ne 1) { throw "Unsupported skill registry schema version: $($registry.schema_version)" }
 $states = @($registry.lifecycle_states)
 $expectedStates = @('mandatory','conditional','manual_only','archived','deprecated')
 if ((@($states | Sort-Object) -join ',') -ne (@($expectedStates | Sort-Object) -join ',')) { throw 'Skill registry lifecycle_states must be the canonical five states.' }
-
+$activationModes = @($registry.activation_modes)
+if ((@($activationModes | Sort-Object) -join ',') -ne ((@('manual','route_candidate') | Sort-Object) -join ',')) { throw 'Skill registry activation_modes must be manual and route_candidate.' }
+$manualTriggers = @($registry.manual_selection_triggers)
+if ($manualTriggers.Count -eq 0 -or @($manualTriggers | Where-Object { [string]::IsNullOrWhiteSpace([string]$_) }).Count -gt 0 -or @($manualTriggers | Sort-Object -Unique).Count -ne $manualTriggers.Count) { throw 'Skill registry manual_selection_triggers must be a non-empty unique list.' }
 $recordsByPath = @{}
 $recordsById = @{}
 foreach ($record in @($registry.records)) {
@@ -31,6 +42,24 @@ foreach ($record in @($registry.records)) {
         if ([string]::IsNullOrWhiteSpace([string]$record.$field)) { throw "Skill registry record is missing '$field'." }
     }
     if ($states -notcontains $record.lifecycle) { throw "Skill registry record '$($record.id)' has invalid lifecycle '$($record.lifecycle)'." }
+    if ($null -eq $record.activation -or [string]::IsNullOrWhiteSpace([string]$record.activation.mode)) { throw "Skill registry record '$($record.id)' is missing activation metadata." }
+    if ($activationModes -notcontains $record.activation.mode) { throw "Skill registry record '$($record.id)' has invalid activation mode '$($record.activation.mode)'." }
+    $activationTriggers = @($record.activation.triggers)
+    if ($activationTriggers.Count -eq 0 -or @($activationTriggers | Where-Object { [string]::IsNullOrWhiteSpace([string]$_) }).Count -gt 0 -or @($activationTriggers | Sort-Object -Unique).Count -ne $activationTriggers.Count) { throw "Skill registry record '$($record.id)' needs unique non-empty activation triggers." }
+    $routable = $record.lifecycle -in @('mandatory','conditional')
+    if ($routable) {
+        if ($record.activation.mode -ne 'route_candidate') { throw "Routable skill '$($record.id)' must use route_candidate activation." }
+        $expectedTriggers = @()
+        foreach ($routeId in @($record.route_ids)) {
+            if (-not $routeById.ContainsKey([string]$routeId)) { throw "Routable skill '$($record.id)' references unknown route '$routeId'." }
+            $expectedTriggers += @($routeById[[string]$routeId].triggers)
+        }
+        $expectedTriggers = @($expectedTriggers | Sort-Object -Unique)
+        if ((@($activationTriggers | Sort-Object) -join '|') -ne ($expectedTriggers -join '|')) { throw "Routable skill '$($record.id)' activation triggers must match its routed triggers." }
+    } else {
+        if ($record.activation.mode -ne 'manual') { throw "Non-routable skill '$($record.id)' must use manual activation." }
+        if (@($activationTriggers | Where-Object { $manualTriggers -notcontains $_ }).Count -gt 0) { throw "Manual skill '$($record.id)' has activation triggers outside manual_selection_triggers." }
+    }
     if ($record.entrypoint -notmatch '^skills/.+/SKILL\.md$') { throw "Skill registry entrypoint must be a portable SKILL.md path: $($record.entrypoint)" }
     $key = $record.entrypoint.ToLowerInvariant()
     if ($recordsByPath.ContainsKey($key)) { throw "Duplicate registry entrypoint: $($record.entrypoint)" }

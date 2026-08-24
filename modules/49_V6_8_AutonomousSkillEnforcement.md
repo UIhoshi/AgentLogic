@@ -19,6 +19,17 @@ Before implementation, review, or a verified completion claim, record:
 An alias is only a candidate. The agent must confirm that the matching host skill is available and
 must read/invoke it before claiming that route was followed.
 
+## Portable-skill activation metadata
+
+Every portable registry record declares explicit activation metadata. `mandatory` and
+`conditional` records are `route_candidate` entries whose triggers are derived from the canonical
+route contract; `manual_only` records are `manual` entries whose controlled selection conditions
+make their scope visible without auto-enabling them. In particular, security/CTF, persistent-memory,
+and other unreviewed specialties remain manual even when their metadata names a relevant task.
+Use `scripts/audit-skill-duplicates.ps1` for read-only SHA-256 and front-matter-name candidate
+discovery. A candidate is not deletion authority: removal still requires proof that it contributes
+no unique workflow, scripts, templates, references, or risk boundary.
+
 ## Strict missing-capability policy
 
 For a mandatory route, missing required evidence capability, denied permission, or failed required

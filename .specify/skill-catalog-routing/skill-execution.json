@@ -1,0 +1,36 @@
+{
+    "schema_version":  1,
+    "task_id":  "skill-catalog-routing",
+    "classification":  {
+                           "task_class":  "refactor",
+                           "change_scope":  "multi_file",
+                           "ui_scope":  "none",
+                           "external_effect":  "none",
+                           "claim_types":  [
+                                               "behavior_change"
+                                           ]
+                       },
+    "matched_route_ids":  [
+                              "test-design"
+                          ],
+    "routes":  [
+                   {
+                       "route_id":  "test-design",
+                       "state":  "invoked",
+                       "selected_skill":  "tdd-guide",
+                       "available_skills":  [
+                                                "tdd-guide"
+                                            ],
+                       "closure_evidence":  [
+
+                                            ],
+                       "remote_target":  null,
+                       "blocked_reason":  null,
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ]
+                   }
+               ]
+}

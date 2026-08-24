@@ -11,7 +11,7 @@
 
 ## L3 — Control & Verification
 - Controls: permissions, tool-permission risk gates, extension trust, programming-level skill routing and workflow enforcement, package validation, and entry-gate checks.
-- Validation commands: `node scripts/check-logic-entry.js`; `scripts/validate-skill-registry.ps1`; `scripts/validate-skill-routing.ps1`; `scripts/test-skill-enforcement.ps1`; `scripts/validate-package.ps1`; and
+- Validation commands: `node scripts/check-logic-entry.js`; `scripts/audit-skill-duplicates.ps1`; `scripts/validate-skill-registry.ps1`; `scripts/test-skill-registry.ps1`; `scripts/validate-skill-routing.ps1`; `scripts/test-skill-enforcement.ps1`; `scripts/validate-package.ps1`; and
   `scripts/maintainer-check.ps1` for release-level changes.
 
 ## L4 — Base & Dependencies

@@ -46,6 +46,8 @@ Assert-Exists -Root $RepoRoot -RelativePath "scripts/deploy-first-party-skill.ps
 Assert-Exists -Root $RepoRoot -RelativePath "scripts/deploy-skill-enforcement.ps1" -Label "Skill enforcement deployer"
 Assert-Exists -Root $RepoRoot -RelativePath "scripts/skill-enforcement.ps1" -Label "Skill enforcement workflow gate"
 Assert-Exists -Root $RepoRoot -RelativePath "scripts/validate-skill-registry.ps1" -Label "Skill registry validator"
+Assert-Exists -Root $RepoRoot -RelativePath "scripts/audit-skill-duplicates.ps1" -Label "Skill duplicate auditor"
+Assert-Exists -Root $RepoRoot -RelativePath "scripts/test-skill-registry.ps1" -Label "Skill registry activation test"
 Assert-Exists -Root $RepoRoot -RelativePath "scripts/test-skill-enforcement.ps1" -Label "Skill enforcement test"
 Assert-Exists -Root $RepoRoot -RelativePath "contracts/host-skill-capabilities.json" -Label "Host skill deployment contract"
 Assert-Exists -Root $RepoRoot -RelativePath "contracts/skill-registry.json" -Label "Portable skill registry"

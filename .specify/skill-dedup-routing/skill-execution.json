@@ -1,0 +1,37 @@
+{
+    "schema_version":  1,
+    "task_id":  "skill-dedup-routing",
+    "classification":  {
+                           "task_class":  "refactor",
+                           "change_scope":  "multi_file",
+                           "ui_scope":  "none",
+                           "external_effect":  "none",
+                           "claim_types":  [
+                                               "behavior_change"
+                                           ]
+                       },
+    "matched_route_ids":  [
+                              "test-design"
+                          ],
+    "routes":  [
+                   {
+                       "route_id":  "test-design",
+                       "state":  "closed",
+                       "selected_skill":  "tdd-guide",
+                       "available_skills":  [
+                                                "tdd-guide"
+                                            ],
+                       "remote_target":  null,
+                       "blocked_reason":  null,
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "closure_evidence":  [
+                                                "relevant_test_or_explicit_gap",
+                                                "command_result"
+                                            ]
+                   }
+               ]
+}

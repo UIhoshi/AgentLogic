@@ -738,6 +738,11 @@ machine-checkable. The workflow gate is explicit about its boundary: it validate
 state and never claims host-native tool interception without a verified host hook. See
 `modules/53_V6_8_ProgrammingLevelSkillEnforcement.md`.
 
+Registry records also declare validated activation metadata. Route candidates derive triggers from
+the canonical routing contract; unreviewed, security-sensitive, and niche capabilities remain
+manual with controlled selection conditions. `scripts/audit-skill-duplicates.ps1` provides
+read-only duplicate-candidate evidence and never authorizes deletion by itself.
+
 ## END FILE: versions/AgentLogic_V6_8_6.md
 
 ---
@@ -3274,6 +3279,17 @@ Before implementation, review, or a verified completion claim, record:
 An alias is only a candidate. The agent must confirm that the matching host skill is available and
 must read/invoke it before claiming that route was followed.
 
+## Portable-skill activation metadata
+
+Every portable registry record declares explicit activation metadata. `mandatory` and
+`conditional` records are `route_candidate` entries whose triggers are derived from the canonical
+route contract; `manual_only` records are `manual` entries whose controlled selection conditions
+make their scope visible without auto-enabling them. In particular, security/CTF, persistent-memory,
+and other unreviewed specialties remain manual even when their metadata names a relevant task.
+Use `scripts/audit-skill-duplicates.ps1` for read-only SHA-256 and front-matter-name candidate
+discovery. A candidate is not deletion authority: removal still requires proof that it contributes
+no unique workflow, scripts, templates, references, or risk boundary.
+
 ## Strict missing-capability policy
 
 For a mandatory route, missing required evidence capability, denied permission, or failed required
@@ -4224,8 +4240,10 @@ The following files are one system and must be updated together:
 
 - `contracts/skill-registry.json`: exactly one lifecycle record for every `skills/**/SKILL.md`.
   Valid lifecycle states are `mandatory`, `conditional`, `manual_only`, `archived`, and
-  `deprecated`. Existing skills with insufficient reviewed trigger metadata default to
-  `manual_only`.
+  `deprecated`. Every record also carries validated activation metadata: a route candidate derives
+  its triggers from the canonical route contract, while a manual record selects only through the
+  controlled manual-selection taxonomy. Existing skills with insufficient reviewed automatic-route
+  evidence default to `manual_only` rather than becoming automatic.
 - `contracts/skill-routing.json`: ordered task routes, triggers, dependencies, required invocation
   evidence, closure evidence, fallback/exemption policy, and blocked transitions.
 - `contracts/skill-enforcement.json`: valid task classification dimensions, signal derivation,
@@ -4236,6 +4254,10 @@ The following files are one system and must be updated together:
 Adding a new portable skill without a registry record is a package-validation failure. Promoting a
 skill from `manual_only` requires a reviewed trigger, route/fallback decision, invocation evidence,
 closure evidence, host availability posture, and test coverage.
+
+Use `scripts/audit-skill-duplicates.ps1` to identify exact-content and duplicate declared-name
+candidates. The command is read-only; a candidate must still pass the four-part duplication test in
+Module 35 before its files or registry record may be removed.
 
 ## 3. Required task state machine
 
@@ -4624,7 +4646,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "dynamic_browser_or_session_task",
+                                                            "permission_and_scope_confirmed"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-agent-browser-skill-data-core-skill-md",
@@ -4634,7 +4664,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "dynamic_browser_or_session_task",
+                                                            "permission_and_scope_confirmed"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-agent-browser-skill-data-dogfood-skill-md",
@@ -4644,7 +4682,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "dynamic_browser_or_session_task",
+                                                            "permission_and_scope_confirmed"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-agent-browser-skill-data-electron-skill-md",
@@ -4654,7 +4700,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "dynamic_browser_or_session_task",
+                                                            "permission_and_scope_confirmed"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-agent-browser-skill-data-slack-skill-md",
@@ -4664,7 +4718,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "dynamic_browser_or_session_task",
+                                                            "permission_and_scope_confirmed"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-agent-browser-skill-data-vercel-sandbox-skill-md",
@@ -4674,7 +4736,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "dynamic_browser_or_session_task",
+                                                            "permission_and_scope_confirmed"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-agent-browser-skills-agent-browser-skill-md",
@@ -4684,7 +4754,14 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
                                           "browser-verification"
                                       ],
-                        "reason":  "Conditional browser-proof capability when its accessibility-tree/session model is a better fit."
+                        "reason":  "Conditional browser-proof capability when its accessibility-tree/session model is a better fit.",
+                        "activation":  {
+                                           "mode":  "route_candidate",
+                                           "triggers":  [
+                                                            "browser_ui_verification",
+                                                            "dynamic_web_flow"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-engineering-ask-matt-skill-md",
@@ -4694,7 +4771,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "task_specific_domain_match",
+                                                            "permission_and_scope_confirmed"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-engineering-codebase-design-skill-md",
@@ -4704,7 +4789,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "task_specific_domain_match",
+                                                            "permission_and_scope_confirmed"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-engineering-code-review-skill-md",
@@ -4714,7 +4807,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
                                           "code-review"
                                       ],
-                        "reason":  "Portable defect and specification review capability for review tasks when installed and selected by the code-review route."
+                        "reason":  "Portable defect and specification review capability for review tasks when installed and selected by the code-review route.",
+                        "activation":  {
+                                           "mode":  "route_candidate",
+                                           "triggers":  [
+                                                            "code_audit",
+                                                            "pull_request_review",
+                                                            "release_review"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-engineering-diagnosing-bugs-skill-md",
@@ -4724,7 +4825,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Engineering workflow skill retained for explicit selection; no canonical automatic route has been reviewed yet."
+                        "reason":  "Engineering workflow skill retained for explicit selection; no canonical automatic route has been reviewed yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "task_specific_domain_match",
+                                                            "permission_and_scope_confirmed"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-engineering-domain-modeling-skill-md",
@@ -4734,7 +4843,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "task_specific_domain_match",
+                                                            "permission_and_scope_confirmed"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-engineering-grill-with-docs-skill-md",
@@ -4744,7 +4861,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "task_specific_domain_match",
+                                                            "permission_and_scope_confirmed"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-engineering-implement-skill-md",
@@ -4754,7 +4879,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Engineering workflow skill retained for explicit selection; no canonical automatic route has been reviewed yet."
+                        "reason":  "Engineering workflow skill retained for explicit selection; no canonical automatic route has been reviewed yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "task_specific_domain_match",
+                                                            "permission_and_scope_confirmed"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-engineering-improve-codebase-architecture-skill-md",
@@ -4764,7 +4897,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "task_specific_domain_match",
+                                                            "permission_and_scope_confirmed"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-engineering-prototype-skill-md",
@@ -4774,7 +4915,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "task_specific_domain_match",
+                                                            "permission_and_scope_confirmed"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-engineering-research-skill-md",
@@ -4784,7 +4933,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Engineering workflow skill retained for explicit selection; no canonical automatic route has been reviewed yet."
+                        "reason":  "Engineering workflow skill retained for explicit selection; no canonical automatic route has been reviewed yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "task_specific_domain_match",
+                                                            "permission_and_scope_confirmed"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-engineering-resolving-merge-conflicts-skill-md",
@@ -4794,7 +4951,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "task_specific_domain_match",
+                                                            "permission_and_scope_confirmed"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-engineering-setup-matt-pocock-skills-skill-md",
@@ -4804,7 +4969,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "task_specific_domain_match",
+                                                            "permission_and_scope_confirmed"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-engineering-tdd-skill-md",
@@ -4814,7 +4987,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Engineering workflow skill retained for explicit selection; no canonical automatic route has been reviewed yet."
+                        "reason":  "Engineering workflow skill retained for explicit selection; no canonical automatic route has been reviewed yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "task_specific_domain_match",
+                                                            "permission_and_scope_confirmed"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-engineering-to-spec-skill-md",
@@ -4824,7 +5005,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "task_specific_domain_match",
+                                                            "permission_and_scope_confirmed"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-engineering-to-tickets-skill-md",
@@ -4834,7 +5023,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "task_specific_domain_match",
+                                                            "permission_and_scope_confirmed"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-engineering-triage-skill-md",
@@ -4844,7 +5041,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "task_specific_domain_match",
+                                                            "permission_and_scope_confirmed"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-engineering-wayfinder-skill-md",
@@ -4854,7 +5059,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Engineering workflow skill retained for explicit selection; no canonical automatic route has been reviewed yet."
+                        "reason":  "Engineering workflow skill retained for explicit selection; no canonical automatic route has been reviewed yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "task_specific_domain_match",
+                                                            "permission_and_scope_confirmed"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-nano-banana-pro-skill-md",
@@ -4864,7 +5077,14 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
                                           "ui-design"
                                       ],
-                        "reason":  "Optional equivalent image-generation capability when installed and explicitly approved."
+                        "reason":  "Optional equivalent image-generation capability when installed and explicitly approved.",
+                        "activation":  {
+                                           "mode":  "route_candidate",
+                                           "triggers":  [
+                                                            "net_new_ui",
+                                                            "substantial_ui_refactor"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-ponytail-skill-md",
@@ -4874,7 +5094,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
                                           "test-design"
                                       ],
-                        "reason":  "Conditional implementation discipline for behavior changes."
+                        "reason":  "Conditional implementation discipline for behavior changes.",
+                        "activation":  {
+                                           "mode":  "route_candidate",
+                                           "triggers":  [
+                                                            "behavior_change",
+                                                            "coverage_gap",
+                                                            "test_design"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-ponytail-audit-skill-md",
@@ -4884,7 +5112,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "task_specific_domain_match",
+                                                            "permission_and_scope_confirmed"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-ponytail-debt-skill-md",
@@ -4894,7 +5130,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "task_specific_domain_match",
+                                                            "permission_and_scope_confirmed"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-ponytail-gain-skill-md",
@@ -4904,7 +5148,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "task_specific_domain_match",
+                                                            "permission_and_scope_confirmed"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-ponytail-help-skill-md",
@@ -4914,7 +5166,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "task_specific_domain_match",
+                                                            "permission_and_scope_confirmed"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-ponytail-review-skill-md",
@@ -4924,7 +5184,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "task_specific_domain_match",
+                                                            "permission_and_scope_confirmed"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-productivity-grilling-skill-md",
@@ -4934,7 +5202,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "product_workflow_match",
+                                                            "permission_and_scope_confirmed"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-productivity-grill-me-skill-md",
@@ -4944,7 +5220,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "product_workflow_match",
+                                                            "permission_and_scope_confirmed"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-productivity-handoff-skill-md",
@@ -4954,7 +5238,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "product_workflow_match",
+                                                            "permission_and_scope_confirmed"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-productivity-product-requirements-grilling-skill-md",
@@ -4964,7 +5256,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
                                           "requirements-grilling"
                                       ],
-                        "reason":  "Canonical first-party requirements-grilling capability."
+                        "reason":  "Canonical first-party requirements-grilling capability.",
+                        "activation":  {
+                                           "mode":  "route_candidate",
+                                           "triggers":  [
+                                                            "major_feature",
+                                                            "net_new_ui",
+                                                            "substantial_ui_refactor"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-productivity-teach-skill-md",
@@ -4974,7 +5274,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "product_workflow_match",
+                                                            "permission_and_scope_confirmed"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-productivity-writing-great-skills-skill-md",
@@ -4984,7 +5292,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "product_workflow_match",
+                                                            "permission_and_scope_confirmed"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-ad-certificate-abuse-skill-md",
@@ -4994,7 +5310,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-agent-cloud-skill-md",
@@ -5004,7 +5328,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-android-hooking-skill-md",
@@ -5014,7 +5346,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-browser-persistence-skill-md",
@@ -5024,7 +5364,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-bundle-sourcemap-recovery-skill-md",
@@ -5034,7 +5382,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-cloud-metadata-path-skill-md",
@@ -5044,7 +5400,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-container-runtime-skill-md",
@@ -5054,7 +5418,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-crypto-mobile-skill-md",
@@ -5064,7 +5436,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-custom-protocol-replay-skill-md",
@@ -5074,7 +5454,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-dpapi-credential-chain-skill-md",
@@ -5084,7 +5472,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-file-parser-chain-skill-md",
@@ -5094,7 +5490,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-firmware-layout-skill-md",
@@ -5104,7 +5508,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-forensic-timeline-skill-md",
@@ -5114,7 +5526,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-graphql-rpc-drift-skill-md",
@@ -5124,7 +5544,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-identity-windows-skill-md",
@@ -5134,7 +5562,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-ios-runtime-skill-md",
@@ -5144,7 +5580,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-jwt-claim-confusion-skill-md",
@@ -5154,7 +5598,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-k8s-control-plane-skill-md",
@@ -5164,7 +5616,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-kerberos-delegation-skill-md",
@@ -5174,7 +5634,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-kernel-container-escape-skill-md",
@@ -5184,7 +5652,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-linux-credential-pivot-skill-md",
@@ -5194,7 +5670,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-lsass-ticket-material-skill-md",
@@ -5204,7 +5688,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-mailbox-abuse-skill-md",
@@ -5214,7 +5706,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-malware-config-skill-md",
@@ -5224,7 +5724,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-oauth-oidc-chain-skill-md",
@@ -5234,7 +5742,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-pcap-protocol-skill-md",
@@ -5244,7 +5760,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-prompt-injection-skill-md",
@@ -5254,7 +5778,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-queue-worker-drift-skill-md",
@@ -5264,7 +5796,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-race-condition-state-drift-skill-md",
@@ -5274,7 +5814,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-relay-coercion-chain-skill-md",
@@ -5284,7 +5832,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-request-normalization-smuggling-skill-md",
@@ -5294,7 +5850,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-reverse-pwn-skill-md",
@@ -5304,7 +5868,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-runtime-routing-skill-md",
@@ -5314,7 +5886,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-ssrf-metadata-pivot-skill-md",
@@ -5324,7 +5904,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-stego-media-skill-md",
@@ -5334,7 +5922,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-supply-chain-skill-md",
@@ -5344,7 +5940,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-template-render-path-skill-md",
@@ -5354,7 +5958,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-web-runtime-skill-md",
@@ -5364,7 +5976,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-websocket-runtime-skill-md",
@@ -5374,7 +5994,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-windows-pivot-skill-md",
@@ -5384,7 +6012,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-ctf-sandbox-orchestrator-skill-md",
@@ -5394,7 +6030,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-skills-api-security-skill-md",
@@ -5404,7 +6048,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-skills-apk-reverse-skill-md",
@@ -5414,7 +6066,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-skills-attack-chain-skill-md",
@@ -5424,7 +6084,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-skills-binary-diff-skill-md",
@@ -5434,7 +6102,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-skills-browser-automation-skill-md",
@@ -5444,7 +6120,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-skills-diagram-generator-skill-md",
@@ -5454,7 +6138,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-skills-docs-generator-skill-md",
@@ -5464,7 +6156,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-skills-dotnet-reverse-skill-md",
@@ -5474,7 +6174,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-skills-edr-bypass-re-skill-md",
@@ -5484,7 +6192,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-skills-firmware-pentest-skill-md",
@@ -5494,7 +6210,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-skills-ida-reverse-skill-md",
@@ -5504,7 +6228,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-skills-js-reverse-skill-md",
@@ -5514,7 +6246,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-skills-llm-security-skill-md",
@@ -5524,7 +6264,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-skills-malware-analysis-skill-md",
@@ -5534,7 +6282,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-skills-mobile-reverse-skill-md",
@@ -5544,7 +6300,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-skills-patch-diff-exploit-skill-md",
@@ -5554,7 +6318,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-skills-pentest-tools-skill-md",
@@ -5564,7 +6336,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-skills-pentest-tools-src-hunter-skill-md",
@@ -5574,7 +6354,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-skills-pwn-chain-skill-md",
@@ -5584,7 +6372,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-skills-radare2-skill-md",
@@ -5594,7 +6390,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-skills-reverse-engineering-dsl-vm-reverse-skill-md",
@@ -5604,7 +6408,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-skills-reverse-engineering-skill-md",
@@ -5614,7 +6426,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-skills-skill-md",
@@ -5624,7 +6444,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-reverse-skill-skills-supply-chain-security-skill-md",
@@ -5634,7 +6462,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review."
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-self-improvement-self-improving-agent-skill-md",
@@ -5644,7 +6480,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Persistent-memory or rule-promotion behavior is manual-only under project-native knowledge sync."
+                        "reason":  "Persistent-memory or rule-promotion behavior is manual-only under project-native knowledge sync.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "verified_redacted_lesson",
+                                                            "no_autonomous_persistent_write"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-taste-skill-skills-brandkit-skill-md",
@@ -5654,7 +6498,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "visual_design_workflow",
+                                                            "permission_and_scope_confirmed"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-taste-skill-skills-brutalist-skill-skill-md",
@@ -5664,7 +6516,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "visual_design_workflow",
+                                                            "permission_and_scope_confirmed"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-taste-skill-skills-gpt-tasteskill-skill-md",
@@ -5674,7 +6534,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "visual_design_workflow",
+                                                            "permission_and_scope_confirmed"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-taste-skill-skills-imagegen-frontend-mobile-skill-md",
@@ -5684,7 +6552,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "visual_design_workflow",
+                                                            "permission_and_scope_confirmed"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-taste-skill-skills-imagegen-frontend-web-skill-md",
@@ -5694,7 +6570,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "visual_design_workflow",
+                                                            "permission_and_scope_confirmed"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-taste-skill-skills-image-to-code-skill-skill-md",
@@ -5704,7 +6588,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "visual_design_workflow",
+                                                            "permission_and_scope_confirmed"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-taste-skill-skills-minimalist-skill-skill-md",
@@ -5714,7 +6606,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "visual_design_workflow",
+                                                            "permission_and_scope_confirmed"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-taste-skill-skills-output-skill-skill-md",
@@ -5724,7 +6624,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "visual_design_workflow",
+                                                            "permission_and_scope_confirmed"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-taste-skill-skills-redesign-skill-skill-md",
@@ -5734,7 +6642,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "visual_design_workflow",
+                                                            "permission_and_scope_confirmed"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-taste-skill-skills-soft-skill-skill-md",
@@ -5744,7 +6660,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "visual_design_workflow",
+                                                            "permission_and_scope_confirmed"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-taste-skill-skills-stitch-skill-skill-md",
@@ -5754,7 +6678,15 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "visual_design_workflow",
+                                                            "permission_and_scope_confirmed"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-taste-skill-skills-taste-skill-skill-md",
@@ -5764,7 +6696,14 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
                                           "ui-design"
                                       ],
-                        "reason":  "Conditional UI art-direction capability; it cannot replace image generation."
+                        "reason":  "Conditional UI art-direction capability; it cannot replace image generation.",
+                        "activation":  {
+                                           "mode":  "route_candidate",
+                                           "triggers":  [
+                                                            "net_new_ui",
+                                                            "substantial_ui_refactor"
+                                                        ]
+                                       }
                     },
                     {
                         "id":  "skills-taste-skill-skills-taste-skill-v1-skill-md",
@@ -5774,9 +6713,33 @@ profile bundle, or prose-only mention is an alternative path.
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet."
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "visual_design_workflow",
+                                                            "permission_and_scope_confirmed"
+                                                        ]
+                                       }
                     }
-                ]
+                ],
+    "activation_modes":  [
+                             "route_candidate",
+                             "manual"
+                         ],
+    "manual_selection_triggers":  [
+                                      "explicit_user_request",
+                                      "task_specific_domain_match",
+                                      "permission_and_scope_confirmed",
+                                      "authorized_security_or_ctf_scope",
+                                      "isolated_or_approved_environment",
+                                      "dynamic_browser_or_session_task",
+                                      "product_workflow_match",
+                                      "visual_design_workflow",
+                                      "verified_redacted_lesson",
+                                      "no_autonomous_persistent_write"
+                                  ]
 }
 
 ## END FILE: contracts/skill-registry.json
