@@ -52,7 +52,7 @@ The current logic-entry chain is:
 
 1. `00_START_HERE.md`
 2. `README.md`
-3. `versions/AgentLogic_V6_8_6.md`
+3. `versions/AgentLogic_V6_8_7.md`
 4. `modules/01_MasterLogic.md`
 5. `modules/15_LogicEntryChecklist.md`
 
@@ -108,7 +108,7 @@ and unnecessary process overhead.
 
 ## Project-Native Knowledge Sync
 
-For business-project work, the project repository—not a separate history checkout—is the
+For business-project work, the project repository鈥攏ot a separate history checkout鈥攊s the
 default synchronization surface for project facts. Before implementation, run the safe
 freshness check and read the tracked project `AGENTS.md`, `PROJECT_MAP.md`, `CODE_MAP.md`, and
 `.learnings/ERRORS.md` as defined by `modules/46_V6_8_ProjectKnowledgeSync.md`.
@@ -133,4 +133,4 @@ This repository is logic infrastructure, not a business-project workspace.
 
 - Human-first entry: `00_START_HERE.md`
 - Stable host binding entry: `MAIN.md`
-- Versioned main logic source: `versions/AgentLogic_V6_8_6.md`
+- Versioned main logic source: `versions/AgentLogic_V6_8_7.md`

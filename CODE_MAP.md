@@ -21,7 +21,7 @@ current source and matching verification before making a strong claim.
 ## Interfaces and state
 
 - `manifest.json`: current version, profile membership, host output contract.
-- `versions/AgentLogic_V6_8_6.md`: stable version-source narrative.
+- `versions/AgentLogic_V6_8_7.md`: stable version-source narrative.
 - `contracts/skill-registry.json`: explicit lifecycle record for every portable `SKILL.md`.
 - `contracts/skill-routing.json`: ordered capability routes, dependencies, closure evidence, and required durable artifact kinds.
 - `contracts/skill-enforcement.json`: classification and workflow-gate state contract.
@@ -37,9 +37,9 @@ current source and matching verification before making a strong claim.
 
 | Durable flow | Capability / skill | Trigger | Source of truth | Reviewed commit |
 | --- | --- | --- | --- | --- |
-| Major feature specification | `product-requirements-grilling` | `major_feature` | `.agentlogic/skill-usage.json` | `34eab55 + V6.8.6 release worktree` |
-| Behavior-change validation | `tdd-guide` | `behavior_change` | `.agentlogic/skill-usage.json` | `34eab55 + V6.8.6 release worktree` |
-| V6.8.6 release review | `code-review` | `release_review` | `.agentlogic/skill-usage.json` | `34eab55 + V6.8.6 release worktree` |
+| Major feature specification | `product-requirements-grilling` | `major_feature` | `.agentlogic/skill-usage.json` | `34eab55 + V6.8.7 release worktree` |
+| Behavior-change validation | `tdd-guide` | `behavior_change` | `.agentlogic/skill-usage.json` | `34eab55 + V6.8.7 release worktree` |
+| V6.8.7 release review | `code-review` | `release_review` | `.agentlogic/skill-usage.json` | `34eab55 + V6.8.7 release worktree` |
 > This summary is intentionally concise. Per-task invocation evidence for the programming-level
 > enforcement upgrade is stored in `.specify/skill-enforcement-hardening/skill-execution.json`.
 

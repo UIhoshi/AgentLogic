@@ -17,11 +17,11 @@ Do not continue deeper reading, modify files, delete files, perform write action
 or begin implementation before the logic-entry loop above has been completed.
 -->
 
-# 🌌 AgentLogic: Autonomous Evolving Rule Engine (V6.8.6)
+# 馃寣 AgentLogic: Autonomous Evolving Rule Engine (V6.8.7)
 
 [![Agentic Code](https://img.shields.io/badge/Agent-Autonomous-blueviolet?style=flat-square)](https://github.com/UIhoshi/AgentLogic)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/Version-V6.8.6_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_8_6.md)
+[![Version](https://img.shields.io/badge/Version-V6.8.7_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_8_7.md)
 
 AgentLogic is a versioned primary-logic package designed to be pulled into local AI coding hosts (such as Codex, Claude Code, Gemini Pro) and used as their default operating mind. It consolidates multi-turn session workflows, tool selection matrix, security sandbox auditing, and dynamic domain extensions.
 
@@ -31,7 +31,7 @@ AgentLogic is a versioned primary-logic package designed to be pulled into local
 
 ---
 
-## 🚀 Quick Start & Deployment
+## 馃殌 Quick Start & Deployment
 
 For local diagnostic runs and host deployment, execute the following commands in sequence:
 
@@ -43,7 +43,7 @@ For local diagnostic runs and host deployment, execute the following commands in
 
 ---
 
-## 🏗️ 4-Layer Architecture Matrix (Grid & Subsystems)
+## 馃彈锔?4-Layer Architecture Matrix (Grid & Subsystems)
 
 We organize rules and code into a **4-layer progressive abstraction model** to prevent context budget bloat:
 
@@ -70,24 +70,24 @@ graph TD
 
 | Abstraction Layer | Primary Core Responsibility | Included Files / Directories |
 | :--- | :--- | :--- |
-| **L1: Strategy & Entry** | Defines entrypoints, environment injection, REPL startup gates, and context forget/reset rules. | - [00_START_HERE.md](./00_START_HERE.md) (起手式)<br>- [MAIN.md](./MAIN.md) (Stable Host Binding)<br>- [AGENTS.md](./AGENTS.md) (Agent Entry)<br>- [15_LogicEntryChecklist.md](./modules/15_LogicEntryChecklist.md) (Gate Checklist)<br>- [13_MandatoryLogicGateTemplate.md](./modules/13_MandatoryLogicGateTemplate.md) (Header Gating) |
+| **L1: Strategy & Entry** | Defines entrypoints, environment injection, REPL startup gates, and context forget/reset rules. | - [00_START_HERE.md](./00_START_HERE.md) (璧锋墜寮?<br>- [MAIN.md](./MAIN.md) (Stable Host Binding)<br>- [AGENTS.md](./AGENTS.md) (Agent Entry)<br>- [15_LogicEntryChecklist.md](./modules/15_LogicEntryChecklist.md) (Gate Checklist)<br>- [13_MandatoryLogicGateTemplate.md](./modules/13_MandatoryLogicGateTemplate.md) (Header Gating) |
 | **L2: Session & Loop** | Manages the single-turn execution cycle, prevents vibe-coding, and structures the SDD lifecycle. | - [03_AgenticLoop.md](./modules/03_AgenticLoop.md) (Agentic Cycle)<br>- [38_SpecDrivenDevelopment.md](./modules/38_V6_6_SpecDrivenDevelopment.md) (SDD Lifecycle)<br>- [20_V6_5_RuntimeModes.md](./modules/20_V6_5_RuntimeModes.md) (Context Adaptation)<br>- [28_V6_5_TerminologyAndModuleBoundaries.md](./modules/28_V6_5_TerminologyAndModuleBoundaries.md) (Boundary Rules) |
 | **L3: Control & Auditing** | Establishes high-friction verification rules, security-risk matrix, and visual frontend taste checks. | - [29_MandatoryVerificationMatrix.md](./modules/29_MandatoryVerificationMatrix.md) (Verification Matrix)<br>- [39_TasteFrontendDesign.md](./modules/39_V6_6_TasteFrontendDesign.md) (Aesthetic & Spacing Audit)<br>- [30_ToolQuestionBoundaryMatrix.md](./modules/30_ToolQuestionBoundaryMatrix.md) (Credential Boundary)<br>- [31_ToolMisuseAndAntiPatternMatrix.md](./modules/31_ToolMisuseAndAntiPatternMatrix.md) (Anti-Pattern Gating) |
 | **L4: Base & Drivers** | Low-level command execution, raw tool controllers, portable skill files, and original frontend reference templates. | - `skills/` (Logic-Carried Domain Skills)<br>  * [agent-browser](./skills/agent-browser/) (Accessibility Browser CLI)<br>  * [nano-banana-pro](./skills/nano-banana-pro/) (Gemini Mockup Engine)<br>  * [self-improvement](./skills/self-improvement/) (Error Log & Self-Correction)<br>- [`templates/frontend/`](./templates/frontend/) (Original, unbranded UI starting points)<br>- [35_V6_5_SkillGovernanceAndMandatoryUse.md](./modules/35_V6_5_SkillGovernanceAndMandatoryUse.md) (Governance Rules) |
 
 ---
 
-## 🛠️ Self-Improvement & Learning Feed
+## 馃洜锔?Self-Improvement & Learning Feed
 
 This rule package supports **automated self-evolution** and developer logging:
 
 ```
 [Unexpected Error / User Correction / Best Practice Found]
-                      │
-                      ▼ (1) Automatically log to:
+                      鈹?
+                      鈻?(1) Automatically log to:
        .learnings/ (LEARNINGS.md / ERRORS.md)
-                      │
-                      ▼ (2) Exceeds threshold (Recurrence >= 3)
+                      鈹?
+                      鈻?(2) Exceeds threshold (Recurrence >= 3)
       Systemic rules extracted and merged into:
             CLAUDE.md / AGENTS.md
 ```
@@ -95,7 +95,7 @@ This rule package supports **automated self-evolution** and developer logging:
 > [!TIP]
 > **Design-First Prototyping Gate**: Net-new UI and substantial UI refactors require a text-to-image mockup and user review before implementation. A clearly classified small visual correction may skip a new mockup, but still requires visual verification; an explicit user opt-out always bypasses mockup approval.
 
-## 🎨 Original Frontend Template Library
+## 馃帹 Original Frontend Template Library
 
 [`templates/frontend/`](./templates/frontend/) contains a small, dependency-free set of original,
 unbranded HTML/CSS starting points: an editorial landing page, an analytics dashboard, and a
@@ -105,7 +105,7 @@ no third-party images, fonts, logos, remote assets, or copied Open Design code.
 
 ---
 
-## 📚 External References & Integrated Sources
+## 馃摎 External References & Integrated Sources
 
 During its evolutionary cycles, AgentLogic has integrated concepts and structures from the following open-source GitHub projects:
 
@@ -131,11 +131,11 @@ During its evolutionary cycles, AgentLogic has integrated concepts and structure
 
 ---
 
-## ⚖️ Maintenance Constraints
+## 鈿栵笍 Maintenance Constraints
 
 1. **Keep it Pure**: No business logic or project-specific implementations should be written into `AgentLogic` rule files.
 2. **Specify Before Writing**: Always compile technical blueprints to `.specify/spec.md` and `.specify/plan.md` before touching code.
-3. **Generate via Bundle**: Never edit `dist/` bundles manually. Always write updates to version files (e.g. `versions/AgentLogic_V6_8_6.md`), then run `build-profile.ps1` to rebuild the adapter targets.
+3. **Generate via Bundle**: Never edit `dist/` bundles manually. Always write updates to version files (e.g. `versions/AgentLogic_V6_8_7.md`), then run `build-profile.ps1` to rebuild the adapter targets.
 ## V6.8 Operational Integration
 
 The default `core-enhanced` profile includes
@@ -144,7 +144,7 @@ It translates useful provider-neutral patterns from
 [`xai-org/grok-build`](https://github.com/xai-org/grok-build) into contracts for
 rule discovery, session state, compaction, permissions, extension trust,
 subagents, headless execution, memory freshness, and bounded background work.
-These contracts complement—not replace—the existing SDD, Red-Team, SRA,
+These contracts complement鈥攏ot replace鈥攖he existing SDD, Red-Team, SRA,
 verification, and history-synchronization gates.
 
 The same profile also includes
@@ -161,12 +161,12 @@ for approved reference-image model reconstruction, and a
 required evidence tool before the narrowest matching skill. Neither module installs or trusts
 external skills automatically.
 
-V6.8.6 keeps `core-enhanced` focused on high-frequency execution: start from the desired outcome,
+V6.8.7 keeps `core-enhanced` focused on high-frequency execution: start from the desired outcome,
 select the native evidence/action tool, then add a specialist skill only when it materially helps.
 The complete narrative governance set remains available through the `governance-reference` profile
 for deep maintenance and policy audits.
 
-## V6.8.6 Project-Native Knowledge Sync
+## V6.8.7 Project-Native Knowledge Sync
 
 Business projects synchronize their own concise operational facts and symbol-level navigation with code through tracked
 `AGENTS.md`, `PROJECT_MAP.md`, `CODE_MAP.md`, and `.learnings/ERRORS.md`. `CODE_MAP.md` is the mandatory
@@ -185,6 +185,6 @@ workflow gate. Projects keep durable Skill Usage facts in `.agentlogic/skill-usa
 concise `CODE_MAP.md` summary. The gate validates recorded workflow state; it does not claim
 host-native tool interception unless a host-specific hook is separately verified.
 
-## V6.8.6 — Programming-Level Skill Enforcement
+## V6.8.7 鈥?Programming-Level Skill Enforcement
 
-V6.8.6 adds a machine-checkable portable-skill registry, lifecycle states, deterministic route selection, invocation/closure evidence, cross-host deployment checks, and project-level Skill Usage records in `.agentlogic/skill-usage.json` and `CODE_MAP.md`. It prevents required skill routes from being silently skipped while clearly stating the boundary: enforcement verifies recorded workflow state and does not claim host-native interception unless a verified host hook exists. See [CHANGELOG.md](./CHANGELOG.md) and [Module 53](./modules/53_V6_8_ProgrammingLevelSkillEnforcement.md).
+V6.8.7 adds a machine-checkable portable-skill registry, lifecycle states, deterministic route selection, invocation/closure evidence, cross-host deployment checks, and project-level Skill Usage records in `.agentlogic/skill-usage.json` and `CODE_MAP.md`. It prevents required skill routes from being silently skipped while clearly stating the boundary: enforcement verifies recorded workflow state and does not claim host-native interception unless a verified host hook exists. See [CHANGELOG.md](./CHANGELOG.md) and [Module 53](./modules/53_V6_8_ProgrammingLevelSkillEnforcement.md).

@@ -1,9 +1,9 @@
-# MANDATORY AGENT EXECUTIVE PROTOCOL (AgentLogic V6.8.6)
+# MANDATORY AGENT EXECUTIVE PROTOCOL (AgentLogic V6.8.7)
 
 - Host target: generic
 - Profile: core-enhanced
 - Stable entry: MAIN.md
-- Version: V6.8.6
+- Version: V6.8.7
 
 > [!CRITICAL]
 > **EXECUTION vs SUMMARIZATION MANDATE**:
@@ -84,7 +84,7 @@ validation, review, packaging, or rule synchronization work, the agent MUST full
 following files from beginning to end in this exact order:
 
 1. `README.md`
-2. `versions/AgentLogic_V6_8_6.md`
+2. `versions/AgentLogic_V6_8_7.md`
 3. `modules/01_MasterLogic.md`
 4. `modules/15_LogicEntryChecklist.md`
 
@@ -167,11 +167,11 @@ Do not continue deeper reading, modify files, delete files, perform write action
 or begin implementation before the logic-entry loop above has been completed.
 -->
 
-# 🌌 AgentLogic: Autonomous Evolving Rule Engine (V6.8.6)
+# 馃寣 AgentLogic: Autonomous Evolving Rule Engine (V6.8.7)
 
 [![Agentic Code](https://img.shields.io/badge/Agent-Autonomous-blueviolet?style=flat-square)](https://github.com/UIhoshi/AgentLogic)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/Version-V6.8.6_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_8_6.md)
+[![Version](https://img.shields.io/badge/Version-V6.8.7_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_8_7.md)
 
 AgentLogic is a versioned primary-logic package designed to be pulled into local AI coding hosts (such as Codex, Claude Code, Gemini Pro) and used as their default operating mind. It consolidates multi-turn session workflows, tool selection matrix, security sandbox auditing, and dynamic domain extensions.
 
@@ -181,7 +181,7 @@ AgentLogic is a versioned primary-logic package designed to be pulled into local
 
 ---
 
-## 🚀 Quick Start & Deployment
+## 馃殌 Quick Start & Deployment
 
 For local diagnostic runs and host deployment, execute the following commands in sequence:
 
@@ -193,7 +193,7 @@ For local diagnostic runs and host deployment, execute the following commands in
 
 ---
 
-## 🏗️ 4-Layer Architecture Matrix (Grid & Subsystems)
+## 馃彈锔?4-Layer Architecture Matrix (Grid & Subsystems)
 
 We organize rules and code into a **4-layer progressive abstraction model** to prevent context budget bloat:
 
@@ -220,24 +220,24 @@ graph TD
 
 | Abstraction Layer | Primary Core Responsibility | Included Files / Directories |
 | :--- | :--- | :--- |
-| **L1: Strategy & Entry** | Defines entrypoints, environment injection, REPL startup gates, and context forget/reset rules. | - [00_START_HERE.md](./00_START_HERE.md) (起手式)<br>- [MAIN.md](./MAIN.md) (Stable Host Binding)<br>- [AGENTS.md](./AGENTS.md) (Agent Entry)<br>- [15_LogicEntryChecklist.md](./modules/15_LogicEntryChecklist.md) (Gate Checklist)<br>- [13_MandatoryLogicGateTemplate.md](./modules/13_MandatoryLogicGateTemplate.md) (Header Gating) |
+| **L1: Strategy & Entry** | Defines entrypoints, environment injection, REPL startup gates, and context forget/reset rules. | - [00_START_HERE.md](./00_START_HERE.md) (璧锋墜寮?<br>- [MAIN.md](./MAIN.md) (Stable Host Binding)<br>- [AGENTS.md](./AGENTS.md) (Agent Entry)<br>- [15_LogicEntryChecklist.md](./modules/15_LogicEntryChecklist.md) (Gate Checklist)<br>- [13_MandatoryLogicGateTemplate.md](./modules/13_MandatoryLogicGateTemplate.md) (Header Gating) |
 | **L2: Session & Loop** | Manages the single-turn execution cycle, prevents vibe-coding, and structures the SDD lifecycle. | - [03_AgenticLoop.md](./modules/03_AgenticLoop.md) (Agentic Cycle)<br>- [38_SpecDrivenDevelopment.md](./modules/38_V6_6_SpecDrivenDevelopment.md) (SDD Lifecycle)<br>- [20_V6_5_RuntimeModes.md](./modules/20_V6_5_RuntimeModes.md) (Context Adaptation)<br>- [28_V6_5_TerminologyAndModuleBoundaries.md](./modules/28_V6_5_TerminologyAndModuleBoundaries.md) (Boundary Rules) |
 | **L3: Control & Auditing** | Establishes high-friction verification rules, security-risk matrix, and visual frontend taste checks. | - [29_MandatoryVerificationMatrix.md](./modules/29_MandatoryVerificationMatrix.md) (Verification Matrix)<br>- [39_TasteFrontendDesign.md](./modules/39_V6_6_TasteFrontendDesign.md) (Aesthetic & Spacing Audit)<br>- [30_ToolQuestionBoundaryMatrix.md](./modules/30_ToolQuestionBoundaryMatrix.md) (Credential Boundary)<br>- [31_ToolMisuseAndAntiPatternMatrix.md](./modules/31_ToolMisuseAndAntiPatternMatrix.md) (Anti-Pattern Gating) |
 | **L4: Base & Drivers** | Low-level command execution, raw tool controllers, portable skill files, and original frontend reference templates. | - `skills/` (Logic-Carried Domain Skills)<br>  * [agent-browser](./skills/agent-browser/) (Accessibility Browser CLI)<br>  * [nano-banana-pro](./skills/nano-banana-pro/) (Gemini Mockup Engine)<br>  * [self-improvement](./skills/self-improvement/) (Error Log & Self-Correction)<br>- [`templates/frontend/`](./templates/frontend/) (Original, unbranded UI starting points)<br>- [35_V6_5_SkillGovernanceAndMandatoryUse.md](./modules/35_V6_5_SkillGovernanceAndMandatoryUse.md) (Governance Rules) |
 
 ---
 
-## 🛠️ Self-Improvement & Learning Feed
+## 馃洜锔?Self-Improvement & Learning Feed
 
 This rule package supports **automated self-evolution** and developer logging:
 
 ```
 [Unexpected Error / User Correction / Best Practice Found]
-                      │
-                      ▼ (1) Automatically log to:
+                      鈹?
+                      鈻?(1) Automatically log to:
        .learnings/ (LEARNINGS.md / ERRORS.md)
-                      │
-                      ▼ (2) Exceeds threshold (Recurrence >= 3)
+                      鈹?
+                      鈻?(2) Exceeds threshold (Recurrence >= 3)
       Systemic rules extracted and merged into:
             CLAUDE.md / AGENTS.md
 ```
@@ -245,7 +245,7 @@ This rule package supports **automated self-evolution** and developer logging:
 > [!TIP]
 > **Design-First Prototyping Gate**: Net-new UI and substantial UI refactors require a text-to-image mockup and user review before implementation. A clearly classified small visual correction may skip a new mockup, but still requires visual verification; an explicit user opt-out always bypasses mockup approval.
 
-## 🎨 Original Frontend Template Library
+## 馃帹 Original Frontend Template Library
 
 [`templates/frontend/`](./templates/frontend/) contains a small, dependency-free set of original,
 unbranded HTML/CSS starting points: an editorial landing page, an analytics dashboard, and a
@@ -255,7 +255,7 @@ no third-party images, fonts, logos, remote assets, or copied Open Design code.
 
 ---
 
-## 📚 External References & Integrated Sources
+## 馃摎 External References & Integrated Sources
 
 During its evolutionary cycles, AgentLogic has integrated concepts and structures from the following open-source GitHub projects:
 
@@ -281,11 +281,11 @@ During its evolutionary cycles, AgentLogic has integrated concepts and structure
 
 ---
 
-## ⚖️ Maintenance Constraints
+## 鈿栵笍 Maintenance Constraints
 
 1. **Keep it Pure**: No business logic or project-specific implementations should be written into `AgentLogic` rule files.
 2. **Specify Before Writing**: Always compile technical blueprints to `.specify/spec.md` and `.specify/plan.md` before touching code.
-3. **Generate via Bundle**: Never edit `dist/` bundles manually. Always write updates to version files (e.g. `versions/AgentLogic_V6_8_6.md`), then run `build-profile.ps1` to rebuild the adapter targets.
+3. **Generate via Bundle**: Never edit `dist/` bundles manually. Always write updates to version files (e.g. `versions/AgentLogic_V6_8_7.md`), then run `build-profile.ps1` to rebuild the adapter targets.
 ## V6.8 Operational Integration
 
 The default `core-enhanced` profile includes
@@ -294,7 +294,7 @@ It translates useful provider-neutral patterns from
 [`xai-org/grok-build`](https://github.com/xai-org/grok-build) into contracts for
 rule discovery, session state, compaction, permissions, extension trust,
 subagents, headless execution, memory freshness, and bounded background work.
-These contracts complement—not replace—the existing SDD, Red-Team, SRA,
+These contracts complement鈥攏ot replace鈥攖he existing SDD, Red-Team, SRA,
 verification, and history-synchronization gates.
 
 The same profile also includes
@@ -311,12 +311,12 @@ for approved reference-image model reconstruction, and a
 required evidence tool before the narrowest matching skill. Neither module installs or trusts
 external skills automatically.
 
-V6.8.6 keeps `core-enhanced` focused on high-frequency execution: start from the desired outcome,
+V6.8.7 keeps `core-enhanced` focused on high-frequency execution: start from the desired outcome,
 select the native evidence/action tool, then add a specialist skill only when it materially helps.
 The complete narrative governance set remains available through the `governance-reference` profile
 for deep maintenance and policy audits.
 
-## V6.8.6 Project-Native Knowledge Sync
+## V6.8.7 Project-Native Knowledge Sync
 
 Business projects synchronize their own concise operational facts and symbol-level navigation with code through tracked
 `AGENTS.md`, `PROJECT_MAP.md`, `CODE_MAP.md`, and `.learnings/ERRORS.md`. `CODE_MAP.md` is the mandatory
@@ -335,9 +335,9 @@ workflow gate. Projects keep durable Skill Usage facts in `.agentlogic/skill-usa
 concise `CODE_MAP.md` summary. The gate validates recorded workflow state; it does not claim
 host-native tool interception unless a host-specific hook is separately verified.
 
-## V6.8.6 — Programming-Level Skill Enforcement
+## V6.8.7 鈥?Programming-Level Skill Enforcement
 
-V6.8.6 adds a machine-checkable portable-skill registry, lifecycle states, deterministic route selection, invocation/closure evidence, cross-host deployment checks, and project-level Skill Usage records in `.agentlogic/skill-usage.json` and `CODE_MAP.md`. It prevents required skill routes from being silently skipped while clearly stating the boundary: enforcement verifies recorded workflow state and does not claim host-native interception unless a verified host hook exists. See [CHANGELOG.md](./CHANGELOG.md) and [Module 53](./modules/53_V6_8_ProgrammingLevelSkillEnforcement.md).
+V6.8.7 adds a machine-checkable portable-skill registry, lifecycle states, deterministic route selection, invocation/closure evidence, cross-host deployment checks, and project-level Skill Usage records in `.agentlogic/skill-usage.json` and `CODE_MAP.md`. It prevents required skill routes from being silently skipped while clearly stating the boundary: enforcement verifies recorded workflow state and does not claim host-native interception unless a verified host hook exists. See [CHANGELOG.md](./CHANGELOG.md) and [Module 53](./modules/53_V6_8_ProgrammingLevelSkillEnforcement.md).
 
 ## END FILE: README.md
 
@@ -399,7 +399,7 @@ The current logic-entry chain is:
 
 1. `00_START_HERE.md`
 2. `README.md`
-3. `versions/AgentLogic_V6_8_6.md`
+3. `versions/AgentLogic_V6_8_7.md`
 4. `modules/01_MasterLogic.md`
 5. `modules/15_LogicEntryChecklist.md`
 
@@ -455,7 +455,7 @@ and unnecessary process overhead.
 
 ## Project-Native Knowledge Sync
 
-For business-project work, the project repository—not a separate history checkout—is the
+For business-project work, the project repository鈥攏ot a separate history checkout鈥攊s the
 default synchronization surface for project facts. Before implementation, run the safe
 freshness check and read the tracked project `AGENTS.md`, `PROJECT_MAP.md`, `CODE_MAP.md`, and
 `.learnings/ERRORS.md` as defined by `modules/46_V6_8_ProjectKnowledgeSync.md`.
@@ -480,28 +480,28 @@ This repository is logic infrastructure, not a business-project workspace.
 
 - Human-first entry: `00_START_HERE.md`
 - Stable host binding entry: `MAIN.md`
-- Versioned main logic source: `versions/AgentLogic_V6_8_6.md`
+- Versioned main logic source: `versions/AgentLogic_V6_8_7.md`
 
 ## END FILE: AGENTS.md
 
 ---
 
-## BEGIN FILE: versions/AgentLogic_V6_8_6.md
+## BEGIN FILE: versions/AgentLogic_V6_8_7.md
 
-# AgentLogic V6.8.6
+# AgentLogic V6.8.7
 
-Status: **Current Stable V6.8.6 Line**.
+Status: **Current Stable V6.8.7 Line**.
 Promoted from V6.8.1 with project-native knowledge synchronization: project L1-L4 maps and
 redacted error records now travel with the corresponding project repository rather than
 requiring a separate history repository for ordinary work.
 
-This file defines the stable V6.8.6 logic line. It operationalizes the core V6 philosophy with deep integrations for cybersecurity routing, structured specification-driven workflows, premium anti-slop frontend design rules, visual system matrix mapping, shipping audits, project-native knowledge synchronization, and interactive human-readable project summaries.
+This file defines the stable V6.8.7 logic line. It operationalizes the core V6 philosophy with deep integrations for cybersecurity routing, structured specification-driven workflows, premium anti-slop frontend design rules, visual system matrix mapping, shipping audits, project-native knowledge synchronization, and interactive human-readable project summaries.
 
 ---
 
-## 1. The V6.8.6 Mandate
+## 1. The V6.8.7 Mandate
 
-V6.8.6 extends the V6.8 line with a project-native synchronization contract designed to keep
+V6.8.7 extends the V6.8 line with a project-native synchronization contract designed to keep
 project code, L1-L4 facts, and durable error lessons on the same Git timeline.
 
 Key Enhancements:
@@ -527,7 +527,7 @@ Key Enhancements:
   reading, creating, editing, repairing, or verifying `.docx`, `.xlsx`, or `.pptx` files. The route
   is blocked until OfficeCLI is separately pinned, security-audited, trusted, installed, and
   permitted; it requires structure inspection plus rendered and compatible-open verification.
-- **Affordance-First Tool Use**: Adds a compact intent → evidence → native tool → specialist →
+- **Affordance-First Tool Use**: Adds a compact intent 鈫?evidence 鈫?native tool 鈫?specialist 鈫?
   closure rule, and makes the default profile an execution-focused bundle while retaining a full
   `governance-reference` profile for deep policy work. See
   `modules/51_V6_8_AffordanceFirstToolUse.md`.
@@ -588,9 +588,9 @@ The V6.8.1 line is supported by a modular suite of governance rules:
 - `modules/37_V6_6_CybersecuritySkillsRouter.md`: Router configuration, security analysis toolchains, and field journal logging.
 - `modules/38_V6_6_SpecDrivenDevelopment.md`: Guidelines and 8-phase lifecycle for Spec-Driven Development, including mandatory Red-Team Gate.
 - `modules/39_V6_6_TasteFrontendDesign.md`: Aesthetic standards, visual dials tuning, and anti-slop UI/UX audit rules.
-- `modules/41_V6_7_AIShippingAndReviewabilityAudit.md`: AI Shipping & Reviewability Audit (SRA) 闁?Core+Conditional shipping artifacts, universal self-refute principle, trust boundary crossing enumeration, and Verification Matrix integration.
-- `modules/42_V6_7_PonytailLazySeniorDevLadder.md`: Ponytail Lazy Senior Developer's Ladder 闁?7-rung YAGNI implementation ladder, root-cause bug-fixing rules, and SDD integration.
-- `modules/43_V6_7_MattPocockSkillsIntegration.md`: Matt Pocock Skills Integration 闁?Grilling plan interview flow, CONTEXT.md ubiquitous vocabulary glossary, and Architectural Decision Records (ADRs) specifications.
+- `modules/41_V6_7_AIShippingAndReviewabilityAudit.md`: AI Shipping & Reviewability Audit (SRA) 闂?Core+Conditional shipping artifacts, universal self-refute principle, trust boundary crossing enumeration, and Verification Matrix integration.
+- `modules/42_V6_7_PonytailLazySeniorDevLadder.md`: Ponytail Lazy Senior Developer's Ladder 闂?7-rung YAGNI implementation ladder, root-cause bug-fixing rules, and SDD integration.
+- `modules/43_V6_7_MattPocockSkillsIntegration.md`: Matt Pocock Skills Integration 闂?Grilling plan interview flow, CONTEXT.md ubiquitous vocabulary glossary, and Architectural Decision Records (ADRs) specifications.
 
 - `modules/44_V6_8_GrokBuildOperationalIntegration.md`: Provider-neutral operational contracts translated from the audited Grok Build runtime and user guides.
 - `modules/45_V6_8_GraphifyCodeMapIntegration.md`: Optional external code-map policy, Graph Preview Gate, and external-extension trust boundary.
@@ -611,16 +611,16 @@ The V6.8.1 line is supported by a modular suite of governance rules:
 
 ## 3. Stable Promotion Summary
 
-The V6.8.6 line is now promoted to stable status.
+The V6.8.7 line is now promoted to stable status.
 - **Stable Entry**: `MAIN.md`
-- **Current Version**: `V6.8.6`
-- **Default Profile**: `core-enhanced` (a lean V6.8.6 execution bundle with project-native knowledge synchronization, risk/verification gates, SDD, UI, SRA, operational contracts, and policy-only external research integration)
+- **Current Version**: `V6.8.7`
+- **Default Profile**: `core-enhanced` (a lean V6.8.7 execution bundle with project-native knowledge synchronization, risk/verification gates, SDD, UI, SRA, operational contracts, and policy-only external research integration)
 
 ---
 
 ## 4. Reference Source Registration
 
-The V6.8.6 stable line integrates the following external source repositories:
+The V6.8.7 stable line integrates the following external source repositories:
 
 - **Cybersecurity Skills Router**:
   - Source URL: `https://github.com/zhaoxuya520/reverse-skill`
@@ -681,7 +681,7 @@ The V6.8.6 stable line integrates the following external source repositories:
 
 ## 5. Skill-System Integration Rule
 
-V6.8.6 treats general programming skills, cybersecurity domain skills, visual design skills, and operational integration contracts as portable, logic-carried assets under the `skills/` and `modules/` directories. The Grok Build comparison remains a method-layer reference and does not grant trust to external executable extensions.
+V6.8.7 treats general programming skills, cybersecurity domain skills, visual design skills, and operational integration contracts as portable, logic-carried assets under the `skills/` and `modules/` directories. The Grok Build comparison remains a method-layer reference and does not grant trust to external executable extensions.
 
 Key stable rules:
 - Logic package rules outrank individual skills.
@@ -730,7 +730,7 @@ The enhanced profile includes Module 49 and the canonical routing registry. Mand
 
 ## 8. Programming-Level Skill Enforcement
 
-V6.8.6 now registers every portable `SKILL.md` through `contracts/skill-registry.json` and requires
+V6.8.7 now registers every portable `SKILL.md` through `contracts/skill-registry.json` and requires
 explicit lifecycle status before a skill can be automatically routed. The schema-v3 routing contract,
 task-enforcement state machine, cross-host workflow payload, and project Skill Usage records make
 required skill selection, invocation evidence, closure evidence, and future integrations
@@ -743,167 +743,167 @@ the canonical routing contract; unreviewed, security-sensitive, and niche capabi
 manual with controlled selection conditions. `scripts/audit-skill-duplicates.ps1` provides
 read-only duplicate-candidate evidence and never authorizes deletion by itself.
 
-## END FILE: versions/AgentLogic_V6_8_6.md
+## END FILE: versions/AgentLogic_V6_8_7.md
 
 ---
 
 ## BEGIN FILE: modules/01_MasterLogic.md
 
-# AgentLogic V6.8.6 Master Logic
+# AgentLogic V6.8.7 Master Logic
 
-本文件是 AgentLogic 仓库的项目级主逻辑摘要。它描述本仓库中的规则、验证、安装和
-打包资产，不描述任何外部业务项目或某个具体 Agentic CLI 产品的源码事实。
+鏈枃浠舵槸 AgentLogic 浠撳簱鐨勯」鐩骇涓婚€昏緫鎽樿銆傚畠鎻忚堪鏈粨搴撲腑鐨勮鍒欍€侀獙璇併€佸畨瑁呭拰
+鎵撳寘璧勪骇锛屼笉鎻忚堪浠讳綍澶栭儴涓氬姟椤圭洰鎴栨煇涓叿浣?Agentic CLI 浜у搧鐨勬簮鐮佷簨瀹炪€?
 
-## 1. 当前仓库定位
+## 1. 褰撳墠浠撳簱瀹氫綅
 
-- 本仓库是可安装到本地 AI coding host 的主逻辑基础设施（method layer）。
-- 事实来源是仓库内的入口文档、版本源文件、模块、脚本、manifest 和生成输出。
-- 外部项目、比较仓库和 `reference/` 原始层只能作为参考证据，不能自动升级为当前仓库事实。
-- 当前稳定绑定入口是 `MAIN.md`；当前版本源文件由 `manifest.json` 的 `main_logic_file` 指定。
+- 鏈粨搴撴槸鍙畨瑁呭埌鏈湴 AI coding host 鐨勪富閫昏緫鍩虹璁炬柦锛坢ethod layer锛夈€?
+- 浜嬪疄鏉ユ簮鏄粨搴撳唴鐨勫叆鍙ｆ枃妗ｃ€佺増鏈簮鏂囦欢銆佹ā鍧椼€佽剼鏈€乵anifest 鍜岀敓鎴愯緭鍑恒€?
+- 澶栭儴椤圭洰銆佹瘮杈冧粨搴撳拰 `reference/` 鍘熷灞傚彧鑳戒綔涓哄弬鑰冭瘉鎹紝涓嶈兘鑷姩鍗囩骇涓哄綋鍓嶄粨搴撲簨瀹炪€?
+- 褰撳墠绋冲畾缁戝畾鍏ュ彛鏄?`MAIN.md`锛涘綋鍓嶇増鏈簮鏂囦欢鐢?`manifest.json` 鐨?`main_logic_file` 鎸囧畾銆?
 
-## 2. 当前仓库的四层映射
+## 2. 褰撳墠浠撳簱鐨勫洓灞傛槧灏?
 
-### L1：入口与宿主表面 (Entry & Host Surface)
+### L1锛氬叆鍙ｄ笌瀹夸富琛ㄩ潰 (Entry & Host Surface)
 
-- 人类入口：`00_START_HERE.md`
-- Agent 入口：`AGENTS.md`
-- 稳定宿主入口：`MAIN.md`
-- 仓库说明：`README.md`
-- 安装说明：`AGENT_INSTALL.md`、`INSTALL.md`
-- 宿主适配器：`adapters/`
+- 浜虹被鍏ュ彛锛歚00_START_HERE.md`
+- Agent 鍏ュ彛锛歚AGENTS.md`
+- 绋冲畾瀹夸富鍏ュ彛锛歚MAIN.md`
+- 浠撳簱璇存槑锛歚README.md`
+- 瀹夎璇存槑锛歚AGENT_INSTALL.md`銆乣INSTALL.md`
+- 瀹夸富閫傞厤鍣細`adapters/`
 
-### L2：会话规则与开发生命周期 (Session & Development Lifecycle)
+### L2锛氫細璇濊鍒欎笌寮€鍙戠敓鍛藉懆鏈?(Session & Development Lifecycle)
 
-- 稳定版本源：`versions/AgentLogic_V6_8_6.md`
-- 主逻辑摘要：`modules/01_MasterLogic.md`
-- Agent 强制规则：`modules/12_AgentEnforcement.md`
-- 入口清单：`modules/15_LogicEntryChecklist.md`
-- Agentic loop 合同：`modules/03_AgenticLoop.md`
-- SDD 生命周期：`modules/38_V6_6_SpecDrivenDevelopment.md`
-- Graphify 代码地图与预览门：`modules/45_V6_8_GraphifyCodeMapIntegration.md`
-- 参考到界面工作流：`modules/47_V6_8_ReferenceToInterfaceWorkflow.md`
-- 技能与工具路由：`modules/48_V6_8_SkillAndToolRouting.md`
-- 外部研究与交付物整合：`modules/50_V6_8_ExternalResearchAndArtifactIntegration.md`
-- 工具可供性优先路由：`modules/51_V6_8_AffordanceFirstToolUse.md`
-- 交互式 3D 网页模型策略：`modules/52_V6_8_Img2ThreeJs3DWebIntegration.md`
-- 编程级技能强制：`modules/53_V6_8_ProgrammingLevelSkillEnforcement.md`、`contracts/skill-registry.json`、`contracts/skill-enforcement.json`
-- 任务规格与状态：`.specify/`
+- 绋冲畾鐗堟湰婧愶細`versions/AgentLogic_V6_8_7.md`
+- 涓婚€昏緫鎽樿锛歚modules/01_MasterLogic.md`
+- Agent 寮哄埗瑙勫垯锛歚modules/12_AgentEnforcement.md`
+- 鍏ュ彛娓呭崟锛歚modules/15_LogicEntryChecklist.md`
+- Agentic loop 鍚堝悓锛歚modules/03_AgenticLoop.md`
+- SDD 鐢熷懡鍛ㄦ湡锛歚modules/38_V6_6_SpecDrivenDevelopment.md`
+- Graphify 浠ｇ爜鍦板浘涓庨瑙堥棬锛歚modules/45_V6_8_GraphifyCodeMapIntegration.md`
+- 鍙傝€冨埌鐣岄潰宸ヤ綔娴侊細`modules/47_V6_8_ReferenceToInterfaceWorkflow.md`
+- 鎶€鑳戒笌宸ュ叿璺敱锛歚modules/48_V6_8_SkillAndToolRouting.md`
+- 澶栭儴鐮旂┒涓庝氦浠樼墿鏁村悎锛歚modules/50_V6_8_ExternalResearchAndArtifactIntegration.md`
+- 宸ュ叿鍙緵鎬т紭鍏堣矾鐢憋細`modules/51_V6_8_AffordanceFirstToolUse.md`
+- 浜や簰寮?3D 缃戦〉妯″瀷绛栫暐锛歚modules/52_V6_8_Img2ThreeJs3DWebIntegration.md`
+- 缂栫▼绾ф妧鑳藉己鍒讹細`modules/53_V6_8_ProgrammingLevelSkillEnforcement.md`銆乣contracts/skill-registry.json`銆乣contracts/skill-enforcement.json`
+- 浠诲姟瑙勬牸涓庣姸鎬侊細`.specify/`
 
-### L3：安全、权限与验证控制 (Safety & Verification Control)
+### L3锛氬畨鍏ㄣ€佹潈闄愪笌楠岃瘉鎺у埗 (Safety & Verification Control)
 
-- 任务适用性入口：`AGENTS.md`
-- 权限与安全：`modules/05_PermissionsAndSafety.md`、`modules/23_V6_5_PermissionAndOutputPipeline.md`
-- 验证矩阵：`modules/29_MandatoryVerificationMatrix.md`
-- 工具边界：`modules/30_ToolQuestionBoundaryMatrix.md`
-- 反模式纠偏：`modules/31_ToolMisuseAndAntiPatternMatrix.md`
-- 技能与工具路由：`modules/48_V6_8_SkillAndToolRouting.md`
-- 规则入口校验：`scripts/check-logic-entry.js`
-- 包校验：`scripts/validate-package.ps1`
-- 维护者校验：`scripts/maintainer-check.ps1`
-- 环境诊断：`scripts/doctor.ps1`
+- 浠诲姟閫傜敤鎬у叆鍙ｏ細`AGENTS.md`
+- 鏉冮檺涓庡畨鍏細`modules/05_PermissionsAndSafety.md`銆乣modules/23_V6_5_PermissionAndOutputPipeline.md`
+- 楠岃瘉鐭╅樀锛歚modules/29_MandatoryVerificationMatrix.md`
+- 宸ュ叿杈圭晫锛歚modules/30_ToolQuestionBoundaryMatrix.md`
+- 鍙嶆ā寮忕籂鍋忥細`modules/31_ToolMisuseAndAntiPatternMatrix.md`
+- 鎶€鑳戒笌宸ュ叿璺敱锛歚modules/48_V6_8_SkillAndToolRouting.md`
+- 瑙勫垯鍏ュ彛鏍￠獙锛歚scripts/check-logic-entry.js`
+- 鍖呮牎楠岋細`scripts/validate-package.ps1`
+- 缁存姢鑰呮牎楠岋細`scripts/maintainer-check.ps1`
+- 鐜璇婃柇锛歚scripts/doctor.ps1`
 
-### L4：规则资产、技能与生成输出 (Assets & Generated Outputs)
+### L4锛氳鍒欒祫浜с€佹妧鑳戒笌鐢熸垚杈撳嚭 (Assets & Generated Outputs)
 
-- 可移植技能：`skills/`
-- SDD 工具层：`spec-kit/`
-- 原始参考层：`reference/`
-- 宿主 bundle：`dist/`
-- bundle 生成器：`scripts/build-profile.ps1`
-- 版本与 profile 清单：`manifest.json`、`manifest.schema.json`
+- 鍙Щ妞嶆妧鑳斤細`skills/`
+- SDD 宸ュ叿灞傦細`spec-kit/`
+- 鍘熷鍙傝€冨眰锛歚reference/`
+- 瀹夸富 bundle锛歚dist/`
+- bundle 鐢熸垚鍣細`scripts/build-profile.ps1`
+- 鐗堟湰涓?profile 娓呭崟锛歚manifest.json`銆乣manifest.schema.json`
 
-## 3. 统一入口顺序
+## 3. 缁熶竴鍏ュ彛椤哄簭
 
-正式编码轮次必须按以下顺序执行：
+姝ｅ紡缂栫爜杞蹇呴』鎸変互涓嬮『搴忔墽琛岋細
 
-1. 读取 `AGENTS.md` 和 `README.md`。
-2. 读取 `00_START_HERE.md`，确认当前稳定入口和适用边界。
-3. 判断任务是只读审计、文档变更、孤立修复、功能/重构、UI、安装/发布中的哪一类。
-4. 判断是否延续上一轮 coding；若不是，必须询问是否 `forget/compress context`，不得使用
-   Token 阈值静默跳过。
-5. 按 `00_START_HERE.md` 声明的 full-read chain 完整读取版本源、主逻辑和入口清单。
-6. 建立最小事实地图，再执行匹配的 SDD、权限、验证或发布门槛。
+1. 璇诲彇 `AGENTS.md` 鍜?`README.md`銆?
+2. 璇诲彇 `00_START_HERE.md`锛岀‘璁ゅ綋鍓嶇ǔ瀹氬叆鍙ｅ拰閫傜敤杈圭晫銆?
+3. 鍒ゆ柇浠诲姟鏄彧璇诲璁°€佹枃妗ｅ彉鏇淬€佸绔嬩慨澶嶃€佸姛鑳?閲嶆瀯銆乁I銆佸畨瑁?鍙戝竷涓殑鍝竴绫汇€?
+4. 鍒ゆ柇鏄惁寤剁画涓婁竴杞?coding锛涜嫢涓嶆槸锛屽繀椤昏闂槸鍚?`forget/compress context`锛屼笉寰椾娇鐢?
+   Token 闃堝€奸潤榛樿烦杩囥€?
+5. 鎸?`00_START_HERE.md` 澹版槑鐨?full-read chain 瀹屾暣璇诲彇鐗堟湰婧愩€佷富閫昏緫鍜屽叆鍙ｆ竻鍗曘€?
+6. 寤虹珛鏈€灏忎簨瀹炲湴鍥撅紝鍐嶆墽琛屽尮閰嶇殑 SDD銆佹潈闄愩€侀獙璇佹垨鍙戝竷闂ㄦ銆?
 
-只读问题不需要伪造实现计划；但任何写入、安装、打包或规则同步都必须先完成适用的门槛。
+鍙闂涓嶉渶瑕佷吉閫犲疄鐜拌鍒掞紱浣嗕换浣曞啓鍏ャ€佸畨瑁呫€佹墦鍖呮垨瑙勫垯鍚屾閮藉繀椤诲厛瀹屾垚閫傜敤鐨勯棬妲涖€?
 
-## 4. 能力状态必须分层表达
+## 4. 鑳藉姏鐘舵€佸繀椤诲垎灞傝〃杈?
 
-任何能力结论都必须区分：
+浠讳綍鑳藉姏缁撹閮藉繀椤诲尯鍒嗭細
 
-- 规则是否声明
-- 文件或 profile 是否注册
-- 运行时是否可用
-- 权限是否允许执行
-- 是否经过匹配的验证工具确认
+- 瑙勫垯鏄惁澹版槑
+- 鏂囦欢鎴?profile 鏄惁娉ㄥ唽
+- 杩愯鏃舵槸鍚﹀彲鐢?
+- 鏉冮檺鏄惁鍏佽鎵ц
+- 鏄惁缁忚繃鍖归厤鐨勯獙璇佸伐鍏风‘璁?
 
-搜索结果、静态读取、构建成功或历史记忆都不能单独证明运行时、视觉或远程事实。
+鎼滅储缁撴灉銆侀潤鎬佽鍙栥€佹瀯寤烘垚鍔熸垨鍘嗗彶璁板繂閮戒笉鑳藉崟鐙瘉鏄庤繍琛屾椂銆佽瑙夋垨杩滅▼浜嬪疄銆?
 
-## 5. UI 实施前置门槛
+## 5. UI 瀹炴柦鍓嶇疆闂ㄦ
 
-任何正式 UI 实施（页面、屏幕、组件、布局、视觉设计或 UI 样式变更）之前，必须：
+浠讳綍姝ｅ紡 UI 瀹炴柦锛堥〉闈€佸睆骞曘€佺粍浠躲€佸竷灞€銆佽瑙夎璁℃垨 UI 鏍峰紡鍙樻洿锛変箣鍓嶏紝蹇呴』锛?
 
-1. 使用文生图工具生成即将实施的 UI 预览图。
-2. 将预览图展示给用户查看（若聊天界面或客户端环境不支持直接渲染显示，应将图片生成后保存到项目文件夹如 `.specify/mockups/` 下，明确提示绝对文件路径以供用户自行查看）。
-3. 等待用户确认；用户可以批准预览，也可以明确说不需要该步骤。
-4. 只有批准或明确 opt-out 后，才允许开始 UI 代码实施。
+1. 浣跨敤鏂囩敓鍥惧伐鍏风敓鎴愬嵆灏嗗疄鏂界殑 UI 棰勮鍥俱€?
+2. 灏嗛瑙堝浘灞曠ず缁欑敤鎴锋煡鐪嬶紙鑻ヨ亰澶╃晫闈㈡垨瀹㈡埛绔幆澧冧笉鏀寔鐩存帴娓叉煋鏄剧ず锛屽簲灏嗗浘鐗囩敓鎴愬悗淇濆瓨鍒伴」鐩枃浠跺す濡?`.specify/mockups/` 涓嬶紝鏄庣‘鎻愮ず缁濆鏂囦欢璺緞浠ヤ緵鐢ㄦ埛鑷鏌ョ湅锛夈€?
+3. 绛夊緟鐢ㄦ埛纭锛涚敤鎴峰彲浠ユ壒鍑嗛瑙堬紝涔熷彲浠ユ槑纭涓嶉渶瑕佽姝ラ銆?
+4. 鍙湁鎵瑰噯鎴栨槑纭?opt-out 鍚庯紝鎵嶅厑璁稿紑濮?UI 浠ｇ爜瀹炴柦銆?
 
-用户没有明确 opt-out 时，不得把“内容改动、响应式修复、无障碍修复或小改动”当作默认豁免。
-UI 实施完成后仍必须执行截图、父子布局边界、溢出、换行和实际容器宽度验证。
+鐢ㄦ埛娌℃湁鏄庣‘ opt-out 鏃讹紝涓嶅緱鎶娾€滃唴瀹规敼鍔ㄣ€佸搷搴斿紡淇銆佹棤闅滅淇鎴栧皬鏀瑰姩鈥濆綋浣滈粯璁よ眮鍏嶃€?
+UI 瀹炴柦瀹屾垚鍚庝粛蹇呴』鎵ц鎴浘銆佺埗瀛愬竷灞€杈圭晫銆佹孩鍑恒€佹崲琛屽拰瀹為檯瀹瑰櫒瀹藉害楠岃瘉銆?
 
-## 6. 项目知识与规则同步
+## 6. 椤圭洰鐭ヨ瘑涓庤鍒欏悓姝?
 
-- 业务项目的同步事实是项目自身 Git 跟踪的 `AGENTS.md`、`PROJECT_MAP.md`、`CODE_MAP.md` 和
-  `.learnings/ERRORS.md`，而不是外置日志仓库。
-- 接手项目时先 `git fetch --prune`（可用时）并检查分支、工作树和差异，再读取这三份文件；
-  任何 pull/checkout/merge 仍需作为单独的状态变更确认。
-- 结构变化必须同提交更新 `PROJECT_MAP.md`；关键函数/状态/接口导航变化必须同提交更新 `CODE_MAP.md`；重要错误纠正必须同提交更新
-  `.learnings/ERRORS.md`；`.specify/` 和 `docs/adr/` 仅在相应门槛触发时使用。
-- `modification_history` 可保留为跨项目经验和历史归档，但不阻断普通业务项目的编码或发布。
-- 不得把密钥、个人路径、私有提示词、原始日志或默认 Graphify 输出写入已跟踪知识文件或 bundle。
+- 涓氬姟椤圭洰鐨勫悓姝ヤ簨瀹炴槸椤圭洰鑷韩 Git 璺熻釜鐨?`AGENTS.md`銆乣PROJECT_MAP.md`銆乣CODE_MAP.md` 鍜?
+  `.learnings/ERRORS.md`锛岃€屼笉鏄缃棩蹇椾粨搴撱€?
+- 鎺ユ墜椤圭洰鏃跺厛 `git fetch --prune`锛堝彲鐢ㄦ椂锛夊苟妫€鏌ュ垎鏀€佸伐浣滄爲鍜屽樊寮傦紝鍐嶈鍙栬繖涓変唤鏂囦欢锛?
+  浠讳綍 pull/checkout/merge 浠嶉渶浣滀负鍗曠嫭鐨勭姸鎬佸彉鏇寸‘璁ゃ€?
+- 缁撴瀯鍙樺寲蹇呴』鍚屾彁浜ゆ洿鏂?`PROJECT_MAP.md`锛涘叧閿嚱鏁?鐘舵€?鎺ュ彛瀵艰埅鍙樺寲蹇呴』鍚屾彁浜ゆ洿鏂?`CODE_MAP.md`锛涢噸瑕侀敊璇籂姝ｅ繀椤诲悓鎻愪氦鏇存柊
+  `.learnings/ERRORS.md`锛沗.specify/` 鍜?`docs/adr/` 浠呭湪鐩稿簲闂ㄦ瑙﹀彂鏃朵娇鐢ㄣ€?
+- `modification_history` 鍙繚鐣欎负璺ㄩ」鐩粡楠屽拰鍘嗗彶褰掓。锛屼絾涓嶉樆鏂櫘閫氫笟鍔￠」鐩殑缂栫爜鎴栧彂甯冦€?
+- 涓嶅緱鎶婂瘑閽ャ€佷釜浜鸿矾寰勩€佺鏈夋彁绀鸿瘝銆佸師濮嬫棩蹇楁垨榛樿 Graphify 杈撳嚭鍐欏叆宸茶窡韪煡璇嗘枃浠舵垨 bundle銆?
 
-## 7. 目录边界与打包规则
+## 7. 鐩綍杈圭晫涓庢墦鍖呰鍒?
 
-- `AgentLogic` 目录只能保存逻辑、模块、技能、脚本、规格和生成 bundle。
-- 不得在本仓库创建无关业务源码、依赖安装结果、临时测试或业务日志。
-- `dist/` 只能由 `scripts/build-profile.ps1` 生成，禁止手工编辑。
-- `manifest.json` 是 profile、宿主输出和适配器的机器可读事实源。
-- `reference/` 和历史版本文件不应默认注入为当前运行规则，除非 profile 明确列出。
+- `AgentLogic` 鐩綍鍙兘淇濆瓨閫昏緫銆佹ā鍧椼€佹妧鑳姐€佽剼鏈€佽鏍煎拰鐢熸垚 bundle銆?
+- 涓嶅緱鍦ㄦ湰浠撳簱鍒涘缓鏃犲叧涓氬姟婧愮爜銆佷緷璧栧畨瑁呯粨鏋溿€佷复鏃舵祴璇曟垨涓氬姟鏃ュ織銆?
+- `dist/` 鍙兘鐢?`scripts/build-profile.ps1` 鐢熸垚锛岀姝㈡墜宸ョ紪杈戙€?
+- `manifest.json` 鏄?profile銆佸涓昏緭鍑哄拰閫傞厤鍣ㄧ殑鏈哄櫒鍙浜嬪疄婧愩€?
+- `reference/` 鍜屽巻鍙茬増鏈枃浠朵笉搴旈粯璁ゆ敞鍏ヤ负褰撳墠杩愯瑙勫垯锛岄櫎闈?profile 鏄庣‘鍒楀嚭銆?
 
-## 8. 变更后的最小验证
+## 8. 鍙樻洿鍚庣殑鏈€灏忛獙璇?
 
-- 文档或规则变更：运行 `node scripts/check-logic-entry.js` 和链接检查。
-- manifest、profile、bundle 或安装变更：运行 `scripts/validate-package.ps1`。
-- 版本、宿主或发布变更：运行 `scripts/maintainer-check.ps1`，并检查生成输出和 git diff。
-- 环境与宿主判断：运行 `scripts/doctor.ps1`。
-- 任何高风险或外部状态变更都必须做目标确认和结果确认。
+- 鏂囨。鎴栬鍒欏彉鏇达細杩愯 `node scripts/check-logic-entry.js` 鍜岄摼鎺ユ鏌ャ€?
+- manifest銆乸rofile銆乥undle 鎴栧畨瑁呭彉鏇达細杩愯 `scripts/validate-package.ps1`銆?
+- 鐗堟湰銆佸涓绘垨鍙戝竷鍙樻洿锛氳繍琛?`scripts/maintainer-check.ps1`锛屽苟妫€鏌ョ敓鎴愯緭鍑哄拰 git diff銆?
+- 鐜涓庡涓诲垽鏂細杩愯 `scripts/doctor.ps1`銆?
+- 浠讳綍楂橀闄╂垨澶栭儴鐘舵€佸彉鏇撮兘蹇呴』鍋氱洰鏍囩‘璁ゅ拰缁撴灉纭銆?
 
-## 9. 持续执行边界
+## 9. 鎸佺画鎵ц杈圭晫
 
-用户明确要求持续执行时，当前计划内的阅读、修改、验证和修复视为同一执行轮次。
-只有用户要求停止、计划完成需要新的战略方向、出现无法从本地事实解决的阻塞，或即将进行
-高风险不可逆操作时，才暂停请求输入。
+鐢ㄦ埛鏄庣‘瑕佹眰鎸佺画鎵ц鏃讹紝褰撳墠璁″垝鍐呯殑闃呰銆佷慨鏀广€侀獙璇佸拰淇瑙嗕负鍚屼竴鎵ц杞銆?
+鍙湁鐢ㄦ埛瑕佹眰鍋滄銆佽鍒掑畬鎴愰渶瑕佹柊鐨勬垬鐣ユ柟鍚戙€佸嚭鐜版棤娉曚粠鏈湴浜嬪疄瑙ｅ喅鐨勯樆濉烇紝鎴栧嵆灏嗚繘琛?
+楂橀闄╀笉鍙€嗘搷浣滄椂锛屾墠鏆傚仠璇锋眰杈撳叆銆?
 
-## 10. 强制文本代码地图与可选图谱预览
+## 10. 寮哄埗鏂囨湰浠ｇ爜鍦板浘涓庡彲閫夊浘璋遍瑙?
 
-- 每个完整工作流业务项目必须维护根目录 `CODE_MAP.md`，用于入口、模块、关键符号、状态和接口的文本导航；它不是运行时证明，必须以当前源码复核。
-- `modules/45_V6_8_GraphifyCodeMapIntegration.md` 提供按需可视化代码地图策略，不是默认安装的外部依赖。
-- `modules/50_V6_8_ExternalResearchAndArtifactIntegration.md` 定义 OfficeCLI、PixelRAG 和
-  Firecrawl 的来源政策；Office 文件处理必须走经信任的 OfficeCLI 路线，其他来源仍不得从该政策推断
-  已安装、可信或可调用。
-- `modules/51_V6_8_AffordanceFirstToolUse.md` 要求从任务意图和所需证据自然选择工具；
-  默认 profile 以执行为中心，完整治理内容在 `governance-reference` profile 中按需加载。
-- `modules/52_V6_8_Img2ThreeJs3DWebIntegration.md` 定义可选的交互式 3D 网页模型路线：
-  静态 3D 感视觉走 UI 路径，通用 3D 交互走原生 Three.js 路径，只有经批准的参考图模型重建
-  才能候选 `img2threejs`，且不得推断已安装、可信或可执行。
-- 多模块功能、重大重构、架构或发布工作在 Converge/Ship 时应询问用户是否需要代码视图预览。
-- 用户明确同意后，才可在目标业务项目中生成 `graphify-out/`；不得默认在 AgentLogic 仓库内生成，也不得把外部图谱结果当作运行时事实证明。
-- `modules/53_V6_8_ProgrammingLevelSkillEnforcement.md` 要求每个可携带 `SKILL.md` 在机器可读注册表中有生命周期状态；匹配路由必须经过可执行的 preflight、invocation 与 closure 记录。该工作流门不等同于未验证的宿主原生工具拦截。
+- 姣忎釜瀹屾暣宸ヤ綔娴佷笟鍔￠」鐩繀椤荤淮鎶ゆ牴鐩綍 `CODE_MAP.md`锛岀敤浜庡叆鍙ｃ€佹ā鍧椼€佸叧閿鍙枫€佺姸鎬佸拰鎺ュ彛鐨勬枃鏈鑸紱瀹冧笉鏄繍琛屾椂璇佹槑锛屽繀椤讳互褰撳墠婧愮爜澶嶆牳銆?
+- `modules/45_V6_8_GraphifyCodeMapIntegration.md` 鎻愪緵鎸夐渶鍙鍖栦唬鐮佸湴鍥剧瓥鐣ワ紝涓嶆槸榛樿瀹夎鐨勫閮ㄤ緷璧栥€?
+- `modules/50_V6_8_ExternalResearchAndArtifactIntegration.md` 瀹氫箟 OfficeCLI銆丳ixelRAG 鍜?
+  Firecrawl 鐨勬潵婧愭斂绛栵紱Office 鏂囦欢澶勭悊蹇呴』璧扮粡淇′换鐨?OfficeCLI 璺嚎锛屽叾浠栨潵婧愪粛涓嶅緱浠庤鏀跨瓥鎺ㄦ柇
+  宸插畨瑁呫€佸彲淇℃垨鍙皟鐢ㄣ€?
+- `modules/51_V6_8_AffordanceFirstToolUse.md` 瑕佹眰浠庝换鍔℃剰鍥惧拰鎵€闇€璇佹嵁鑷劧閫夋嫨宸ュ叿锛?
+  榛樿 profile 浠ユ墽琛屼负涓績锛屽畬鏁存不鐞嗗唴瀹瑰湪 `governance-reference` profile 涓寜闇€鍔犺浇銆?
+- `modules/52_V6_8_Img2ThreeJs3DWebIntegration.md` 瀹氫箟鍙€夌殑浜や簰寮?3D 缃戦〉妯″瀷璺嚎锛?
+  闈欐€?3D 鎰熻瑙夎蛋 UI 璺緞锛岄€氱敤 3D 浜や簰璧板師鐢?Three.js 璺緞锛屽彧鏈夌粡鎵瑰噯鐨勫弬鑰冨浘妯″瀷閲嶅缓
+  鎵嶈兘鍊欓€?`img2threejs`锛屼笖涓嶅緱鎺ㄦ柇宸插畨瑁呫€佸彲淇℃垨鍙墽琛屻€?
+- 澶氭ā鍧楀姛鑳姐€侀噸澶ч噸鏋勩€佹灦鏋勬垨鍙戝竷宸ヤ綔鍦?Converge/Ship 鏃跺簲璇㈤棶鐢ㄦ埛鏄惁闇€瑕佷唬鐮佽鍥鹃瑙堛€?
+- 鐢ㄦ埛鏄庣‘鍚屾剰鍚庯紝鎵嶅彲鍦ㄧ洰鏍囦笟鍔￠」鐩腑鐢熸垚 `graphify-out/`锛涗笉寰楅粯璁ゅ湪 AgentLogic 浠撳簱鍐呯敓鎴愶紝涔熶笉寰楁妸澶栭儴鍥捐氨缁撴灉褰撲綔杩愯鏃朵簨瀹炶瘉鏄庛€?
+- `modules/53_V6_8_ProgrammingLevelSkillEnforcement.md` 瑕佹眰姣忎釜鍙惡甯?`SKILL.md` 鍦ㄦ満鍣ㄥ彲璇绘敞鍐岃〃涓湁鐢熷懡鍛ㄦ湡鐘舵€侊紱鍖归厤璺敱蹇呴』缁忚繃鍙墽琛岀殑 preflight銆乮nvocation 涓?closure 璁板綍銆傝宸ヤ綔娴侀棬涓嶇瓑鍚屼簬鏈獙璇佺殑瀹夸富鍘熺敓宸ュ叿鎷︽埅銆?
 
-## 11. 项目内 L1-L4 地图
+## 11. 椤圭洰鍐?L1-L4 鍦板浘
 
-- 每个业务项目使用根目录 `PROJECT_MAP.md` 保存其真实 L1-L4 映射，不复制本逻辑包。
-- 每个业务项目使用根目录 `CODE_MAP.md` 保存可交接的符号级导航地图。
-- 此地图和 `.learnings/ERRORS.md` 必须与项目代码一起提交并跨设备同步。
-- 具体模板、脱敏边界和安全同步步骤由 `modules/46_V6_8_ProjectKnowledgeSync.md` 定义。
+- 姣忎釜涓氬姟椤圭洰浣跨敤鏍圭洰褰?`PROJECT_MAP.md` 淇濆瓨鍏剁湡瀹?L1-L4 鏄犲皠锛屼笉澶嶅埗鏈€昏緫鍖呫€?
+- 姣忎釜涓氬姟椤圭洰浣跨敤鏍圭洰褰?`CODE_MAP.md` 淇濆瓨鍙氦鎺ョ殑绗﹀彿绾у鑸湴鍥俱€?
+- 姝ゅ湴鍥惧拰 `.learnings/ERRORS.md` 蹇呴』涓庨」鐩唬鐮佷竴璧锋彁浜ゅ苟璺ㄨ澶囧悓姝ャ€?
+- 鍏蜂綋妯℃澘銆佽劚鏁忚竟鐣屽拰瀹夊叏鍚屾姝ラ鐢?`modules/46_V6_8_ProjectKnowledgeSync.md` 瀹氫箟銆?
 
 ## END FILE: modules/01_MasterLogic.md
 

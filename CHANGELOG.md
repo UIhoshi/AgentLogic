@@ -1,4 +1,17 @@
-﻿# Changelog
+# Changelog
+
+## V6.8.7 — 2026-08-27
+
+### Added
+- Product-first automatic skill workflow for substantial website/UI work: requirements, design direction, mockup approval or opt-out, implementation, behavior testing, browser and visual verification, review, and handover.
+- Workflow-graph contract, complete portable-skill catalog (116 skills), route-state validation, and durable artifact hash evidence.
+
+### Changed
+- Mandatory routes choose a verified available primary or conditional capability and validate prerequisite closure before invocation and completion.
+- The host deployment payload now carries routing, registry, graph, and enforcement contracts consistently across supported hosts.
+
+### Removed
+- No global Codex Hook is installed or configured; project workflows remain stateful, explicit, and host-agnostic.
 
 ## V6.8.6 — 2026-08-23
 

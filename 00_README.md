@@ -22,113 +22,113 @@ or begin implementation before the logic-entry loop above has been completed.
 > `README.md` is the canonical English repository README and entry documentation. This file is retained as a legacy/reference document and is not part of the formal logic-entry chain.
 
 
-# 🌌 AgentLogic: 智能体级本地自进化规则引擎 (V6.8.6)
+# 馃寣 AgentLogic: 鏅鸿兘浣撶骇鏈湴鑷繘鍖栬鍒欏紩鎿?(V6.8.7)
 
 [![Agentic Code](https://img.shields.io/badge/Agent-Autonomous-blueviolet?style=flat-square)](https://github.com/UIhoshi/AgentLogic)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/Version-V6.8.6_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_8_6.md)
+[![Version](https://img.shields.io/badge/Version-V6.8.7_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_8_7.md)
 
-AgentLogic 是一套专为本地 AI 编码宿主（如 Codex, Claude Code, Gemini Pro）设计的**分层规则引擎**。它将多轮会话规范、工具首选策略、安全沙箱拦截及专业领域扩展集成打包，作为 AI 智能体的“主运行心智”。
+AgentLogic 鏄竴濂椾笓涓烘湰鍦?AI 缂栫爜瀹夸富锛堝 Codex, Claude Code, Gemini Pro锛夎璁＄殑**鍒嗗眰瑙勫垯寮曟搸**銆傚畠灏嗗杞細璇濊鑼冦€佸伐鍏烽閫夌瓥鐣ャ€佸畨鍏ㄦ矙绠辨嫤鎴強涓撲笟棰嗗煙鎵╁睍闆嗘垚鎵撳寘锛屼綔涓?AI 鏅鸿兘浣撶殑鈥滀富杩愯蹇冩櫤鈥濄€?
 
 > [!IMPORTANT]
-> **开发前置卡点**：本仓库是逻辑基础设施，而非普通的业务项目。
-> 在进行任何逻辑修改或新项目绑定前，AI 智能体**必须**以 `00_START_HERE.md` 为起点，完成完整的逻辑链闭环自检。
+> **寮€鍙戝墠缃崱鐐?*锛氭湰浠撳簱鏄€昏緫鍩虹璁炬柦锛岃€岄潪鏅€氱殑涓氬姟椤圭洰銆?
+> 鍦ㄨ繘琛屼换浣曢€昏緫淇敼鎴栨柊椤圭洰缁戝畾鍓嶏紝AI 鏅鸿兘浣?*蹇呴』**浠?`00_START_HERE.md` 涓鸿捣鐐癸紝瀹屾垚瀹屾暣鐨勯€昏緫閾鹃棴鐜嚜妫€銆?
 
 ---
 
-## 🚀 快速启动与部署
+## 馃殌 蹇€熷惎鍔ㄤ笌閮ㄧ讲
 
-对于本地环境的诊断与部署，请严格执行以下指令：
+瀵逛簬鏈湴鐜鐨勮瘖鏂笌閮ㄧ讲锛岃涓ユ牸鎵ц浠ヤ笅鎸囦护锛?
 
-| 操作步骤 | 运行指令 (PowerShell) | 核心作用 |
+| 鎿嶄綔姝ラ | 杩愯鎸囦护 (PowerShell) | 鏍稿績浣滅敤 |
 | :--- | :--- | :--- |
-| **1. 环境诊断** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\doctor.ps1` | 检测仓库健康度，读取元数据，生成推荐安装指令 |
-| **2. 一键安装** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost antigravity` | 清理老旧残留逻辑，构建并部署当前宿主对应的规则包 |
-| **3. 本地验证** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\maintainer-check.ps1` | 运行安全与链接完备性校验，确保四层架构无坏链 |
+| **1. 鐜璇婃柇** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\doctor.ps1` | 妫€娴嬩粨搴撳仴搴峰害锛岃鍙栧厓鏁版嵁锛岀敓鎴愭帹鑽愬畨瑁呮寚浠?|
+| **2. 涓€閿畨瑁?* | `powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost antigravity` | 娓呯悊鑰佹棫娈嬬暀閫昏緫锛屾瀯寤哄苟閮ㄧ讲褰撳墠瀹夸富瀵瑰簲鐨勮鍒欏寘 |
+| **3. 鏈湴楠岃瘉** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\maintainer-check.ps1` | 杩愯瀹夊叏涓庨摼鎺ュ畬澶囨€ф牎楠岋紝纭繚鍥涘眰鏋舵瀯鏃犲潖閾?|
 
 ---
 
-## 🏗️ 架构矩阵与模块映射 (4-Layer Grid Matrix)
+## 馃彈锔?鏋舵瀯鐭╅樀涓庢ā鍧楁槧灏?(4-Layer Grid Matrix)
 
-本仓库拒绝线性的规则堆砌，将所有模块按**四层抽象**进行分级治理，避免上下文膨胀：
+鏈粨搴撴嫆缁濈嚎鎬х殑瑙勫垯鍫嗙爩锛屽皢鎵€鏈夋ā鍧楁寜**鍥涘眰鎶借薄**杩涜鍒嗙骇娌荤悊锛岄伩鍏嶄笂涓嬫枃鑶ㄨ儉锛?
 
 ```mermaid
 graph TD
-    subgraph L1 [L1: 入口与战略层]
+    subgraph L1 [L1: 鍏ュ彛涓庢垬鐣ュ眰]
         Entry[MAIN.md / AGENTS.md] --> Startup{Startup Gate}
         Startup --> Check[00_START_HERE.md]
     end
-    subgraph L2 [L2: 会话与循环层]
+    subgraph L2 [L2: 浼氳瘽涓庡惊鐜眰]
         Check --> Loop[03_AgenticLoop.md]
         Loop --> SDD[38_SpecDrivenDevelopment.md]
     end
-    subgraph L3 [L3: 执行与控制层]
+    subgraph L3 [L3: 鎵ц涓庢帶鍒跺眰]
         SDD --> Verify[29_MandatoryVerificationMatrix.md]
         Verify --> Taste[39_TasteFrontendDesign.md]
     end
-    subgraph L4 [L4: 基底与驱动层]
+    subgraph L4 [L4: 鍩哄簳涓庨┍鍔ㄥ眰]
         Taste --> Skills[skills/ agent-browser & nano-banana-pro]
     end
 ```
 
-### 模块详细清单
+### 妯″潡璇︾粏娓呭崟
 
-| 抽象层级 | 核心职责 | 包含的规则文件 / 目录 |
+| 鎶借薄灞傜骇 | 鏍稿績鑱岃矗 | 鍖呭惈鐨勮鍒欐枃浠?/ 鐩綍 |
 | :--- | :--- | :--- |
-| **L1: Strategy & Entry**<br>(战略与入口层) | 确立 AI 的起手式，进行会话挂起/激活以及环境自检。 | - [00_START_HERE.md](./00_START_HERE.md) (起手式)<br>- [MAIN.md](./MAIN.md) (宿主绑定入口)<br>- [AGENTS.md](./AGENTS.md) (智能体规范)<br>- [15_LogicEntryChecklist.md](./modules/15_LogicEntryChecklist.md) (自检清单)<br>- [13_MandatoryLogicGateTemplate.md](./modules/13_MandatoryLogicGateTemplate.md) (强制拦截门) |
-| **L2: Session & Loop**<br>(会话与循环层) | 规范多轮对话中的思维演进，避免 Vibe Coding (盲目写代码)。 | - [03_AgenticLoop.md](./modules/03_AgenticLoop.md) (执行循环)<br>- [38_SpecDrivenDevelopment.md](./modules/38_V6_6_SpecDrivenDevelopment.md) (SDD 规格驱动六阶段)<br>- [20_V6_5_RuntimeModes.md](./modules/20_V6_5_RuntimeModes.md) (运行模式)<br>- [28_V6_5_TerminologyAndModuleBoundaries.md](./modules/28_V6_5_TerminologyAndModuleBoundaries.md) (规则边界) |
-| **L3: Control & Auditing**<br>(执行与控制层) | 拦截高风险操作，建立严格的结论验证矩阵与代码质量自审机制。 | - [29_MandatoryVerificationMatrix.md](./modules/29_MandatoryVerificationMatrix.md) (强验证矩阵)<br>- [39_TasteFrontendDesign.md](./modules/39_V6_6_TasteFrontendDesign.md) (视觉品味与 UI 审计)<br>- [30_ToolQuestionBoundaryMatrix.md](./modules/30_ToolQuestionBoundaryMatrix.md) (提问凭证边界)<br>- [31_ToolMisuseAndAntiPatternMatrix.md](./modules/31_ToolMisuseAndAntiPatternMatrix.md) (反模式纠偏) |
-| **L4: Drivers & Skills**<br>(基底与驱动层) | 底层原子执行驱动与可移植技能插件。支持上下文联动与自纠错。 | - `skills/` (可移植领域技能包)<br>  * [agent-browser](./skills/agent-browser/) (网页动态自动化控制)<br>  * [nano-banana-pro](./skills/nano-banana-pro/) (Gemini 多模态视觉原型)<br>  * [self-improvement](./skills/self-improvement/) (自学习与错误记录)<br>- [35_V6_5_SkillGovernanceAndMandatoryUse.md](./modules/35_V6_5_SkillGovernanceAndMandatoryUse.md) (技能治理规则) |
+| **L1: Strategy & Entry**<br>(鎴樼暐涓庡叆鍙ｅ眰) | 纭珛 AI 鐨勮捣鎵嬪紡锛岃繘琛屼細璇濇寕璧?婵€娲讳互鍙婄幆澧冭嚜妫€銆?| - [00_START_HERE.md](./00_START_HERE.md) (璧锋墜寮?<br>- [MAIN.md](./MAIN.md) (瀹夸富缁戝畾鍏ュ彛)<br>- [AGENTS.md](./AGENTS.md) (鏅鸿兘浣撹鑼?<br>- [15_LogicEntryChecklist.md](./modules/15_LogicEntryChecklist.md) (鑷娓呭崟)<br>- [13_MandatoryLogicGateTemplate.md](./modules/13_MandatoryLogicGateTemplate.md) (寮哄埗鎷︽埅闂? |
+| **L2: Session & Loop**<br>(浼氳瘽涓庡惊鐜眰) | 瑙勮寖澶氳疆瀵硅瘽涓殑鎬濈淮婕旇繘锛岄伩鍏?Vibe Coding (鐩茬洰鍐欎唬鐮?銆?| - [03_AgenticLoop.md](./modules/03_AgenticLoop.md) (鎵ц寰幆)<br>- [38_SpecDrivenDevelopment.md](./modules/38_V6_6_SpecDrivenDevelopment.md) (SDD 瑙勬牸椹卞姩鍏樁娈?<br>- [20_V6_5_RuntimeModes.md](./modules/20_V6_5_RuntimeModes.md) (杩愯妯″紡)<br>- [28_V6_5_TerminologyAndModuleBoundaries.md](./modules/28_V6_5_TerminologyAndModuleBoundaries.md) (瑙勫垯杈圭晫) |
+| **L3: Control & Auditing**<br>(鎵ц涓庢帶鍒跺眰) | 鎷︽埅楂橀闄╂搷浣滐紝寤虹珛涓ユ牸鐨勭粨璁洪獙璇佺煩闃典笌浠ｇ爜璐ㄩ噺鑷鏈哄埗銆?| - [29_MandatoryVerificationMatrix.md](./modules/29_MandatoryVerificationMatrix.md) (寮洪獙璇佺煩闃?<br>- [39_TasteFrontendDesign.md](./modules/39_V6_6_TasteFrontendDesign.md) (瑙嗚鍝佸懗涓?UI 瀹¤)<br>- [30_ToolQuestionBoundaryMatrix.md](./modules/30_ToolQuestionBoundaryMatrix.md) (鎻愰棶鍑瘉杈圭晫)<br>- [31_ToolMisuseAndAntiPatternMatrix.md](./modules/31_ToolMisuseAndAntiPatternMatrix.md) (鍙嶆ā寮忕籂鍋? |
+| **L4: Drivers & Skills**<br>(鍩哄簳涓庨┍鍔ㄥ眰) | 搴曞眰鍘熷瓙鎵ц椹卞姩涓庡彲绉绘鎶€鑳芥彃浠躲€傛敮鎸佷笂涓嬫枃鑱斿姩涓庤嚜绾犻敊銆?| - `skills/` (鍙Щ妞嶉鍩熸妧鑳藉寘)<br>  * [agent-browser](./skills/agent-browser/) (缃戦〉鍔ㄦ€佽嚜鍔ㄥ寲鎺у埗)<br>  * [nano-banana-pro](./skills/nano-banana-pro/) (Gemini 澶氭ā鎬佽瑙夊師鍨?<br>  * [self-improvement](./skills/self-improvement/) (鑷涔犱笌閿欒璁板綍)<br>- [35_V6_5_SkillGovernanceAndMandatoryUse.md](./modules/35_V6_5_SkillGovernanceAndMandatoryUse.md) (鎶€鑳芥不鐞嗚鍒? |
 
 ---
 
-## 🛠️ 自学习与持续进化规约
+## 馃洜锔?鑷涔犱笌鎸佺画杩涘寲瑙勭害
 
-本系统不仅是被动规则，更具备**动态自纠错与沉淀能力**：
+鏈郴缁熶笉浠呮槸琚姩瑙勫垯锛屾洿鍏峰**鍔ㄦ€佽嚜绾犻敊涓庢矇娣€鑳藉姏**锛?
 
 ```
-[系统报错 / 用户纠偏 / 发现更佳实践]
-       │
-       ▼ (1) 自动记录至 
+[绯荤粺鎶ラ敊 / 鐢ㄦ埛绾犲亸 / 鍙戠幇鏇翠匠瀹炶返]
+       鈹?
+       鈻?(1) 鑷姩璁板綍鑷?
   .learnings/ (LEARNINGS.md / ERRORS.md)
-       │
-       ▼ (2) 触发自进化判定 (频次 >= 3)
-  提炼核心规则 ──➔ 写入 CLAUDE.md / AGENTS.md
+       鈹?
+       鈻?(2) 瑙﹀彂鑷繘鍖栧垽瀹?(棰戞 >= 3)
+  鎻愮偧鏍稿績瑙勫垯 鈹€鈹€鉃?鍐欏叆 CLAUDE.md / AGENTS.md
 ```
 
 > [!TIP]
-> **设计图前置确认工作流**：在为用户开发任何 App 界面或网页时，本规则会强制我先使用多模态视觉模型生成设计效果图，在您确认审美设计后才开始写代码。
+> **璁捐鍥惧墠缃‘璁ゅ伐浣滄祦**锛氬湪涓虹敤鎴峰紑鍙戜换浣?App 鐣岄潰鎴栫綉椤垫椂锛屾湰瑙勫垯浼氬己鍒舵垜鍏堜娇鐢ㄥ妯℃€佽瑙夋ā鍨嬬敓鎴愯璁℃晥鏋滃浘锛屽湪鎮ㄧ‘璁ゅ缇庤璁″悗鎵嶅紑濮嬪啓浠ｇ爜銆?
 
 ---
 
-## 📚 外部参考与借鉴项目
+## 馃摎 澶栭儴鍙傝€冧笌鍊熼壌椤圭洰
 
-AgentLogic 的演进离不开开源社区的启发。我们在设计中深度参考了以下优秀项目：
+AgentLogic 鐨勬紨杩涚涓嶅紑寮€婧愮ぞ鍖虹殑鍚彂銆傛垜浠湪璁捐涓繁搴﹀弬鑰冧簡浠ヤ笅浼樼椤圭洰锛?
 
-| 开源项目名称 | GitHub 仓库 / 文档地址 | 核心借鉴与贡献点 |
+| 寮€婧愰」鐩悕绉?| GitHub 浠撳簱 / 鏂囨。鍦板潃 | 鏍稿績鍊熼壌涓庤础鐚偣 |
 | :--- | :--- | :--- |
-| **Linux Kernel Map** | [makelinux/linux_kernel_map](https://github.com/makelinux/linux_kernel_map) | 启发了四层矩阵式地图结构 ([40_AgentLogicSystemMap.md](./modules/40_AgentLogicSystemMap.md)) |
-| **Agent Browser** | [vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser) | 提供了智能体级别的 AOM 无头浏览器交互方案 |
-| **Nano Banana Pro** | [google-gemini/imagen](https://ai.google.dev/) | 带来了多模态前置视觉确认与审美升级工作流 |
-| **Self-Improvement Agent** | [peterskoett/self-improving-agent](https://github.com/peterskoett/self-improving-agent) | 贡献了结构化日志自省与频发规则沉淀自进化框架 |
-| **Spec Kit** | [github/spec-kit](https://github.com/github/spec-kit) | SDD 规格驱动开发周期设计与质量契约自检 |
-| **Taste Skill** | [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill) | 物理弹簧运动、色彩明度标准与防 slop 排版规范 |
-| **PM Skills (AI Shipping)** | [phuryn/pm-skills](https://github.com/phuryn/pm-skills) | 引入 AI 交付与可评审性审计 (SRA) 机制，规范 vibe-coded 交付件 |
-| **Ponytail (Lazy Dev)** | [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) | 引入 7 步“最懒资深开发开发阶梯”（YAGNI、复用优先、原生优先）防代码膨胀 |
-| **Matt Pocock Skills** | [mattpocock/skills](https://github.com/mattpocock/skills) | 引入交互式单步 Grilling 拷问、`CONTEXT.md` 通用领域词汇表与 ADR 决策记录 |
-| **Cybersecurity Skills Router** | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | 引入恶意软件分析、APK 逆向、前端反混淆解密和固件审计技能调度 |
-| **Grok Build (对照参考)** | [xai-org/grok-build](https://github.com/xai-org/grok-build) | 对照分析服务商中立的运行时执行、状态保留压缩以及安全拒绝覆盖策略 |
-| **Graphify（外部代码地图参考）** | [Graphify-Labs/graphify](https://github.com/Graphify-Labs/graphify) | 提供可选的可查询项目图谱与经用户同意的代码视图预览流程 |
-| **MengTo Skills（工作流对照）** | [MengTo/Skills](https://github.com/MengTo/Skills) | 为可选的参考素材到界面工作流提供采集、提取和验证方法；不直接导入外部技能 |
-| **OfficeCLI（Office 文档工作流对照）** | [iOfficeAI/OfficeCLI](https://github.com/iOfficeAI/OfficeCLI) | 对用户要求的 Word/Excel/PowerPoint 文件处理，定义经单独信任与安装后的强制工具路线；不导入二进制、skill 或运行时 |
-| **PixelRAG（视觉文档工作流对照）** | [StarTrail-org/PixelRAG](https://github.com/StarTrail-org/PixelRAG) | 定义可选视觉文档发现政策；不取代浏览器或截图验证 |
-| **Firecrawl（外部采集工作流对照）** | [firecrawl/firecrawl](https://github.com/firecrawl/firecrawl) | 定义经同意的公开网页采集政策；不打包 API、SDK 或服务 |
-| **img2threejs（交互式 3D 网页工作流对照）** | [img2threejs/img2threejs](https://github.com/img2threejs/img2threejs) | 为经批准的参考图程序化 Three.js 模型重建提供可选路线；不打包 skill 或运行时 |
+| **Linux Kernel Map** | [makelinux/linux_kernel_map](https://github.com/makelinux/linux_kernel_map) | 鍚彂浜嗗洓灞傜煩闃靛紡鍦板浘缁撴瀯 ([40_AgentLogicSystemMap.md](./modules/40_AgentLogicSystemMap.md)) |
+| **Agent Browser** | [vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser) | 鎻愪緵浜嗘櫤鑳戒綋绾у埆鐨?AOM 鏃犲ご娴忚鍣ㄤ氦浜掓柟妗?|
+| **Nano Banana Pro** | [google-gemini/imagen](https://ai.google.dev/) | 甯︽潵浜嗗妯℃€佸墠缃瑙夌‘璁や笌瀹＄編鍗囩骇宸ヤ綔娴?|
+| **Self-Improvement Agent** | [peterskoett/self-improving-agent](https://github.com/peterskoett/self-improving-agent) | 璐＄尞浜嗙粨鏋勫寲鏃ュ織鑷渷涓庨鍙戣鍒欐矇娣€鑷繘鍖栨鏋?|
+| **Spec Kit** | [github/spec-kit](https://github.com/github/spec-kit) | SDD 瑙勬牸椹卞姩寮€鍙戝懆鏈熻璁′笌璐ㄩ噺濂戠害鑷 |
+| **Taste Skill** | [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill) | 鐗╃悊寮圭哀杩愬姩銆佽壊褰╂槑搴︽爣鍑嗕笌闃?slop 鎺掔増瑙勮寖 |
+| **PM Skills (AI Shipping)** | [phuryn/pm-skills](https://github.com/phuryn/pm-skills) | 寮曞叆 AI 浜や粯涓庡彲璇勫鎬у璁?(SRA) 鏈哄埗锛岃鑼?vibe-coded 浜や粯浠?|
+| **Ponytail (Lazy Dev)** | [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) | 寮曞叆 7 姝モ€滄渶鎳掕祫娣卞紑鍙戝紑鍙戦樁姊€濓紙YAGNI銆佸鐢ㄤ紭鍏堛€佸師鐢熶紭鍏堬級闃蹭唬鐮佽啫鑳€ |
+| **Matt Pocock Skills** | [mattpocock/skills](https://github.com/mattpocock/skills) | 寮曞叆浜や簰寮忓崟姝?Grilling 鎷烽棶銆乣CONTEXT.md` 閫氱敤棰嗗煙璇嶆眹琛ㄤ笌 ADR 鍐崇瓥璁板綍 |
+| **Cybersecurity Skills Router** | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | 寮曞叆鎭舵剰杞欢鍒嗘瀽銆丄PK 閫嗗悜銆佸墠绔弽娣锋穯瑙ｅ瘑鍜屽浐浠跺璁℃妧鑳借皟搴?|
+| **Grok Build (瀵圭収鍙傝€?** | [xai-org/grok-build](https://github.com/xai-org/grok-build) | 瀵圭収鍒嗘瀽鏈嶅姟鍟嗕腑绔嬬殑杩愯鏃舵墽琛屻€佺姸鎬佷繚鐣欏帇缂╀互鍙婂畨鍏ㄦ嫆缁濊鐩栫瓥鐣?|
+| **Graphify锛堝閮ㄤ唬鐮佸湴鍥惧弬鑰冿級** | [Graphify-Labs/graphify](https://github.com/Graphify-Labs/graphify) | 鎻愪緵鍙€夌殑鍙煡璇㈤」鐩浘璋变笌缁忕敤鎴峰悓鎰忕殑浠ｇ爜瑙嗗浘棰勮娴佺▼ |
+| **MengTo Skills锛堝伐浣滄祦瀵圭収锛?* | [MengTo/Skills](https://github.com/MengTo/Skills) | 涓哄彲閫夌殑鍙傝€冪礌鏉愬埌鐣岄潰宸ヤ綔娴佹彁渚涢噰闆嗐€佹彁鍙栧拰楠岃瘉鏂规硶锛涗笉鐩存帴瀵煎叆澶栭儴鎶€鑳?|
+| **OfficeCLI锛圤ffice 鏂囨。宸ヤ綔娴佸鐓э級** | [iOfficeAI/OfficeCLI](https://github.com/iOfficeAI/OfficeCLI) | 瀵圭敤鎴疯姹傜殑 Word/Excel/PowerPoint 鏂囦欢澶勭悊锛屽畾涔夌粡鍗曠嫭淇′换涓庡畨瑁呭悗鐨勫己鍒跺伐鍏疯矾绾匡紱涓嶅鍏ヤ簩杩涘埗銆乻kill 鎴栬繍琛屾椂 |
+| **PixelRAG锛堣瑙夋枃妗ｅ伐浣滄祦瀵圭収锛?* | [StarTrail-org/PixelRAG](https://github.com/StarTrail-org/PixelRAG) | 瀹氫箟鍙€夎瑙夋枃妗ｅ彂鐜版斂绛栵紱涓嶅彇浠ｆ祻瑙堝櫒鎴栨埅鍥鹃獙璇?|
+| **Firecrawl锛堝閮ㄩ噰闆嗗伐浣滄祦瀵圭収锛?* | [firecrawl/firecrawl](https://github.com/firecrawl/firecrawl) | 瀹氫箟缁忓悓鎰忕殑鍏紑缃戦〉閲囬泦鏀跨瓥锛涗笉鎵撳寘 API銆丼DK 鎴栨湇鍔?|
+| **img2threejs锛堜氦浜掑紡 3D 缃戦〉宸ヤ綔娴佸鐓э級** | [img2threejs/img2threejs](https://github.com/img2threejs/img2threejs) | 涓虹粡鎵瑰噯鐨勫弬鑰冨浘绋嬪簭鍖?Three.js 妯″瀷閲嶅缓鎻愪緵鍙€夎矾绾匡紱涓嶆墦鍖?skill 鎴栬繍琛屾椂 |
 
 ---
 
-## ⚖️ 维护原则与边界
+## 鈿栵笍 缁存姢鍘熷垯涓庤竟鐣?
 
-1. **逻辑包纯粹性**：本仓库是规则元数据，不能写入具体的业务项目代码。
-2. **防盲目执行**：AI 助理在进行复杂重构或方案设计前，必须在 `.specify/` 下完成 `spec.md` (规格) 和 `plan.md` (技术规划)。
-3. **版本隔离**：修改核心机制时，应优先回写 `versions/AgentLogic_V6_8_6.md`，然后重新运行 `build-profile.ps1` 进行编译部署。
+1. **閫昏緫鍖呯函绮规€?*锛氭湰浠撳簱鏄鍒欏厓鏁版嵁锛屼笉鑳藉啓鍏ュ叿浣撶殑涓氬姟椤圭洰浠ｇ爜銆?
+2. **闃茬洸鐩墽琛?*锛欰I 鍔╃悊鍦ㄨ繘琛屽鏉傞噸鏋勬垨鏂规璁捐鍓嶏紝蹇呴』鍦?`.specify/` 涓嬪畬鎴?`spec.md` (瑙勬牸) 鍜?`plan.md` (鎶€鏈鍒?銆?
+3. **鐗堟湰闅旂**锛氫慨鏀规牳蹇冩満鍒舵椂锛屽簲浼樺厛鍥炲啓 `versions/AgentLogic_V6_8_7.md`锛岀劧鍚庨噸鏂拌繍琛?`build-profile.ps1` 杩涜缂栬瘧閮ㄧ讲銆?
