@@ -17,7 +17,8 @@ $payload = @(
     'scripts/skill-enforcement.ps1',
     'contracts/skill-enforcement.json',
     'contracts/skill-routing.json',
-    'contracts/skill-registry.json'
+    'contracts/skill-registry.json',
+    'contracts/skill-workflow-graph.json'
 )
 foreach ($relative in $payload) {
     $source = Join-Path $RepoRoot $relative

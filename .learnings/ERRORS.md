@@ -1,4 +1,10 @@
 # Project Error Log
+## 2026-08-27 - PowerShell interpolation treated a label followed by a colon as a drive-qualified variable
+- Symptom: The new workflow-graph validator failed to parse at `"Missing $Label: $Path"`.
+- Root cause: PowerShell interpreted `$Label:` as a variable reference with a drive qualifier.
+- Correction: Delimited the variable as `${Label}` before the colon.
+- Prevention: Use `${name}` whenever a PowerShell variable is immediately followed by `:` in an interpolated string; run the new script directly before broader validation.
+- Verification: `validate-skill-workflow-graph.ps1` and its cyclic-fixture regression test pass.
 
 ## 2026-08-24 – `$PSScriptRoot` was unavailable in a PowerShell parameter default
 - Symptom: Running `scripts/skill-enforcement.ps1` without `-RepoRoot` failed before validation with an empty `Join-Path` argument.

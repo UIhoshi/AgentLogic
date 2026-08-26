@@ -16,13 +16,10 @@
     "routes":  [
                    {
                        "route_id":  "test-design",
-                       "state":  "invoked",
+                       "state":  "closed",
                        "selected_skill":  "tdd-guide",
                        "available_skills":  [
                                                 "tdd-guide"
-                                            ],
-                       "closure_evidence":  [
-
                                             ],
                        "remote_target":  null,
                        "blocked_reason":  null,
@@ -30,7 +27,24 @@
                                                    "selected_skill",
                                                    "availability_check",
                                                    "invocation_record"
-                                               ]
+                                               ],
+                       "closure_evidence":  [
+                                                "relevant_test_or_explicit_gap",
+                                                "command_result"
+                                            ],
+                       "workflow_requires":  [
+
+                                             ],
+                       "artifacts":  [
+                                         {
+                                             "kind":  "behavior_result",
+                                             "path":  ".specify/skill-catalog-routing/artifacts/behavior-result.md",
+                                             "sha256":  "6540CA1458C4D2EFD547A3BC1A43EE6E00F811CFE4D385D0EE819526C2389B7B"
+                                         }
+                                     ]
                    }
-               ]
+               ],
+    "workflow_pipeline_ids":  [
+
+                              ]
 }

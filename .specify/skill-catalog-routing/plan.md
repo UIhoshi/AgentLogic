@@ -42,17 +42,17 @@ persistent-memory skills remain manual.
   security request.
 - Registry validator and negative fixtures.
 - Existing routing/enforcement/package/maintainer validation and bundle regeneration.
-## Deferred next step — Inter-skill workflow graph
+## Inter-skill workflow graph
 
 Do not treat skill selection as a flat list. Add a workflow-graph contract in the next session in
 which each selected skill declares `requires`, `consumes`, `produces`, `blocks`, and
 `verification`.
 
-Initial UI chain to implement after user review:
+Implemented UI-chain topology:
 
 ```text
-requirements grilling -> design-direction selection -> image mockup -> user approval
--> frontend implementation -> behavior + browser/screenshot verification -> handover
+product classification -> requirements grilling -> design-direction selection -> image mockup -> user approval
+-> frontend implementation -> behavior + browser/screenshot verification -> code review -> handover
 ```
 
 - Requirements grilling produces an approved requirements brief.
@@ -61,6 +61,10 @@ requirements grilling -> design-direction selection -> image mockup -> user appr
   approval.
 - Frontend implementation is blocked until the approved mockup or an explicit opt-out exists.
 - Test and visual-verification routes consume implementation results and close behavior and visible
-  claims separately.
+  claims separately; code review consumes that evidence before handover.
 
-This is a planned contract only; no additional route has been activated in this session.
+The standard website pipeline is selected from product classification, so the user answers product,
+content, risk, and design questions rather than choosing skills. `skill-enforcement.ps1` adds the
+graph routes to the task record and blocks review until the graph's behavior and browser/visual
+verification predecessors close. The graph does not elevate restricted manual capabilities or claim
+host-native tool interception; route preflight, availability, permissions, and closure evidence remain required.

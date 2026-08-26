@@ -12,7 +12,8 @@ or project handover.
 The enforcement level is deliberately explicit:
 
 - **workflow_enforced** means the installed command validates task classification, matched routes,
-  selected capabilities, invocation records, closure evidence, and permitted state transitions.
+  selected capabilities, invocation records, closure evidence, integrity-checked artifact records,
+  and permitted state transitions.
   Missing strict evidence blocks the declared workflow transition.
 - **native_tool_interception** means a host-native mechanism can observe or prevent an individual
   tool call. Do not claim this level unless the host contract and post-install verification prove it.
@@ -20,6 +21,16 @@ The enforcement level is deliberately explicit:
 A workflow ledger is evidence of a contract-valid recorded process, not proof of invisible host
 behavior. An unrecorded skill invocation remains unverified; a host without native interception
 must state that limitation rather than presenting workflow enforcement as a sandbox.
+
+## 1.1 Product-first automatic orchestration
+
+Users describe outcomes, not skill names. For an ordinary website request, classification starts
+the requirements, design-direction, mockup, implementation, verification, review, and handover
+pipeline automatically. The user is asked product questions (for example audience, restaurant
+menu, booking needs, and visual direction), never asked to choose an internal skill. Manual
+selection is reserved for restricted paths such as credentials, external writes, security/CTF,
+reversing, and persistent-memory changes. Run `scripts/skill-catalog.ps1 -Mode website-pipeline`
+to inspect the canonical website-delivery chain.
 
 ## 2. Canonical contracts
 
@@ -35,6 +46,26 @@ The following files are one system and must be updated together:
   evidence, closure evidence, fallback/exemption policy, and blocked transitions.
 - `contracts/skill-enforcement.json`: valid task classification dimensions, signal derivation,
   task-record state machine, and project skill-usage schema.
+- `contracts/skill-workflow-graph.json`: artifact-level handoffs between selected skills. Each
+  graph node declares prerequisites, consumed and produced artifacts, blocked transitions,
+  verification evidence, and whether a user ever selects a skill. Its `website-delivery`
+  pipeline is selected automatically from product classification: users decide product and
+  design facts, never internal skills. `skill-enforcement.ps1` reads the graph when initializing
+  a matching task, adds every route in the selected pipeline, and records graph-derived route
+  prerequisites (for example, review waits for behavior and browser/visual verification). It
+  does not claim host-native interception.
+
+### 2.1 Durable artifact evidence
+
+For routes that close a durable workflow claim, string labels alone are insufficient. Closure records
+an artifact kind, path, and SHA-256 digest; later dependent transitions re-check that the file still
+exists and has not changed. The standard website pipeline requires records for its requirements
+brief, design direction, mockup/opt-out decision, implementation validation, behavior result,
+browser observation, visual capture, review report, and handover. Tracked task records should use
+project-relative paths and must never include secrets or machine-specific paths.
+
+Preflight selects an available primary alias first, then an available conditional alias, before an
+explicit native fallback. It must not block solely because the first preferred alias is absent.
 - `contracts/host-skill-capabilities.json`: each host's installed workflow-gate payload and its
   honestly declared native-interception status.
 
@@ -102,8 +133,14 @@ Run:
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\validate-skill-registry.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\validate-skill-routing.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\test-skill-enforcement.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\validate-skill-workflow-graph.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\test-skill-workflow-graph.ps1
 ```
 
 `validate-package.ps1` invokes the registry and routing checks. Future integrations must add the
 skill registry record and any reviewed route changes before the package can validate; no installer,
 profile bundle, or prose-only mention is an alternative path.
+
+Use `skill-enforcement.ps1 -Mode validate -TaskStatePath .specify/<task>/skill-execution.json`
+to re-check every closed route's recorded artifact path and SHA-256 before relying on a persisted
+task state.

@@ -49,9 +49,12 @@ Assert-Exists -Root $RepoRoot -RelativePath "scripts/validate-skill-registry.ps1
 Assert-Exists -Root $RepoRoot -RelativePath "scripts/audit-skill-duplicates.ps1" -Label "Skill duplicate auditor"
 Assert-Exists -Root $RepoRoot -RelativePath "scripts/test-skill-registry.ps1" -Label "Skill registry activation test"
 Assert-Exists -Root $RepoRoot -RelativePath "scripts/test-skill-enforcement.ps1" -Label "Skill enforcement test"
+Assert-Exists -Root $RepoRoot -RelativePath "scripts/validate-skill-workflow-graph.ps1" -Label "Skill workflow graph validator"
+Assert-Exists -Root $RepoRoot -RelativePath "scripts/test-skill-workflow-graph.ps1" -Label "Skill workflow graph test"
 Assert-Exists -Root $RepoRoot -RelativePath "contracts/host-skill-capabilities.json" -Label "Host skill deployment contract"
 Assert-Exists -Root $RepoRoot -RelativePath "contracts/skill-registry.json" -Label "Portable skill registry"
 Assert-Exists -Root $RepoRoot -RelativePath "contracts/skill-enforcement.json" -Label "Skill enforcement contract"
+Assert-Exists -Root $RepoRoot -RelativePath "contracts/skill-workflow-graph.json" -Label "Skill workflow graph contract"
 
 $manifest = Get-Content -Raw -Path $manifestPath | ConvertFrom-Json
 $schema = Get-Content -Raw -Path $schemaPath | ConvertFrom-Json
@@ -235,6 +238,9 @@ if ($manifest.current_version -match '^V6\.8\.[3-9]') {
         if ($defaultFiles -notcontains $enforcementAsset) {
             Fail "Default profile '$($manifest.default_profile)' does not include '$enforcementAsset'."
         }
+    }
+    if ($defaultFiles -notcontains "contracts/skill-workflow-graph.json") {
+        Fail "Default profile '$($manifest.default_profile)' does not include the skill workflow graph contract."
     }
 
     foreach ($adapter in @($manifest.adapters.PSObject.Properties.Value)) {

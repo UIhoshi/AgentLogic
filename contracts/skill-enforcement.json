@@ -260,6 +260,7 @@
                                                           "schema_version",
                                                           "task_id",
                                                           "classification",
+                                                          "workflow_pipeline_ids",
                                                           "matched_route_ids",
                                                           "routes"
                                                       ],

@@ -1,0 +1,261 @@
+{
+    "schema_version":  1,
+    "purpose":  "Machine-readable inter-skill workflow graph. It models artifact flow and blocking boundaries without claiming host-native tool interception or replacing route enforcement.",
+    "selection_postures":  [
+                               "route",
+                               "guided",
+                               "manual"
+                           ],
+    "orchestration_policy":  {
+                                 "standard_product_workflow":  "automatic_from_task_classification",
+                                 "user_skill_selection_required":  false,
+                                 "user_interaction_rule":  "Ask users only for product, content, risk, and design decisions. Never ask them to choose an internal skill or route.",
+                                 "restricted_manual_paths":  [
+                                                                 "security",
+                                                                 "credentials",
+                                                                 "external_writes",
+                                                                 "ctf_or_reversing",
+                                                                 "persistent_memory"
+                                                             ]
+                             },
+    "external_inputs":  [
+                            "task_classification",
+                            "explicit_user_intent",
+                            "current_ui_state",
+                            "implementation_result"
+                        ],
+    "default_pipelines":  [
+                              {
+                                  "id":  "website-delivery",
+                                  "triggers":  [
+                                                   "net_new_ui",
+                                                   "substantial_ui_refactor"
+                                               ],
+                                  "user_skill_selection_required":  false,
+                                  "nodes":  [
+                                                "requirements-grilling",
+                                                "design-direction-selection",
+                                                "image-mockup",
+                                                "frontend-implementation",
+                                                "behavior-verification",
+                                                "browser-and-visual-verification",
+                                                "code-review",
+                                                "handover"
+                                            ]
+                              }
+                          ],
+    "nodes":  [
+                  {
+                      "id":  "requirements-grilling",
+                      "posture":  "route",
+                      "user_skill_selection_required":  false,
+                      "route_ids":  [
+                                        "requirements-grilling"
+                                    ],
+                      "requires":  [
+
+                                   ],
+                      "consumes":  [
+                                       "task_classification"
+                                   ],
+                      "produces":  [
+                                       "approved_requirements_brief"
+                                   ],
+                      "blocks":  [
+                                     "specification",
+                                     "ui_design",
+                                     "ui_implementation"
+                                 ],
+                      "verification":  [
+                                           "single_question_dialogue",
+                                           "approved_requirements_brief",
+                                           "brief_validator_result"
+                                       ]
+                  },
+                  {
+                      "id":  "design-direction-selection",
+                      "posture":  "route",
+                      "user_skill_selection_required":  false,
+                      "route_ids":  [
+                                        "design-direction"
+                                    ],
+                      "requires":  [
+                                       "requirements-grilling"
+                                   ],
+                      "consumes":  [
+                                       "approved_requirements_brief",
+                                       "explicit_user_intent"
+                                   ],
+                      "produces":  [
+                                       "selected_design_direction"
+                                   ],
+                      "blocks":  [
+                                     "mockup_generation"
+                                 ],
+                      "verification":  [
+                                           "selected_or_user_confirmed_design_direction"
+                                       ]
+                  },
+                  {
+                      "id":  "image-mockup",
+                      "posture":  "route",
+                      "user_skill_selection_required":  false,
+                      "route_ids":  [
+                                        "ui-design"
+                                    ],
+                      "requires":  [
+                                       "requirements-grilling",
+                                       "design-direction-selection"
+                                   ],
+                      "consumes":  [
+                                       "approved_requirements_brief",
+                                       "selected_design_direction"
+                                   ],
+                      "produces":  [
+                                       "approved_mockup_or_explicit_opt_out"
+                                   ],
+                      "blocks":  [
+                                     "ui_code"
+                                 ],
+                      "verification":  [
+                                           "approved_requirements_brief",
+                                           "mockup_requested_or_explicit_opt_out",
+                                           "approved_mockup_or_explicit_opt_out",
+                                           "visual_verification_plan"
+                                       ]
+                  },
+                  {
+                      "id":  "frontend-implementation",
+                      "posture":  "route",
+                      "user_skill_selection_required":  false,
+                      "route_ids":  [
+                                        "ui-implementation"
+                                    ],
+                      "requires":  [
+                                       "requirements-grilling",
+                                       "image-mockup"
+                                   ],
+                      "consumes":  [
+                                       "approved_requirements_brief",
+                                       "approved_mockup_or_explicit_opt_out"
+                                   ],
+                      "produces":  [
+                                       "implementation_result"
+                                   ],
+                      "blocks":  [
+                                     "ui_code"
+                                 ],
+                      "verification":  [
+                                           "approved_requirements_brief",
+                                           "approved_mockup_or_explicit_opt_out",
+                                           "implementation_validation",
+                                           "visual_verification_plan"
+                                       ]
+                  },
+                  {
+                      "id":  "behavior-verification",
+                      "posture":  "route",
+                      "user_skill_selection_required":  false,
+                      "route_ids":  [
+                                        "test-design"
+                                    ],
+                      "requires":  [
+                                       "frontend-implementation"
+                                   ],
+                      "consumes":  [
+                                       "implementation_result"
+                                   ],
+                      "produces":  [
+                                       "behavior_verification_evidence"
+                                   ],
+                      "blocks":  [
+                                     "verified_behavior_change"
+                                 ],
+                      "verification":  [
+                                           "relevant_test_or_explicit_gap",
+                                           "command_result"
+                                       ]
+                  },
+                  {
+                      "id":  "browser-and-visual-verification",
+                      "posture":  "route",
+                      "user_skill_selection_required":  false,
+                      "route_ids":  [
+                                        "browser-verification",
+                                        "visual-verification"
+                                    ],
+                      "requires":  [
+                                       "frontend-implementation"
+                                   ],
+                      "consumes":  [
+                                       "implementation_result",
+                                       "current_ui_state"
+                                   ],
+                      "produces":  [
+                                       "browser_verification_evidence",
+                                       "visual_verification_evidence"
+                                   ],
+                      "blocks":  [
+                                     "browser_verified_claim",
+                                     "visual_verified_claim"
+                                 ],
+                      "verification":  [
+                                           "fresh_browser_observation",
+                                           "captured_artifact",
+                                           "screenshot_or_equivalent",
+                                           "boundary_check"
+                                       ]
+                  },
+                  {
+                      "id":  "code-review",
+                      "posture":  "route",
+                      "user_skill_selection_required":  false,
+                      "route_ids":  [
+                                        "code-review"
+                                    ],
+                      "requires":  [
+                                       "behavior-verification",
+                                       "browser-and-visual-verification"
+                                   ],
+                      "consumes":  [
+                                       "implementation_result",
+                                       "behavior_verification_evidence",
+                                       "browser_verification_evidence",
+                                       "visual_verification_evidence"
+                                   ],
+                      "produces":  [
+                                       "review_report"
+                                   ],
+                      "blocks":  [
+                                     "verified_review"
+                                 ],
+                      "verification":  [
+                                           "review_report",
+                                           "severity_and_evidence"
+                                       ]
+                  },
+                  {
+                      "id":  "handover",
+                      "posture":  "route",
+                      "user_skill_selection_required":  false,
+                      "route_ids":  [
+                                        "handover"
+                                    ],
+                      "requires":  [
+                                       "code-review"
+                                   ],
+                      "consumes":  [
+                                       "review_report"
+                                   ],
+                      "produces":  [
+                                       "reviewable_handover"
+                                   ],
+                      "blocks":  [
+                                     "handover"
+                                 ],
+                      "verification":  [
+                                           "reviewable_handover"
+                                       ]
+                  }
+              ]
+}

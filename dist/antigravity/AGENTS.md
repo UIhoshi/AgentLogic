@@ -3762,7 +3762,10 @@ For the reference-based interactive 3D route:
                                                    "availability_check",
                                                    "invocation_record"
                                                ],
-                       "exemption_policy":  "none"
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+                                                     "requirements_brief"
+                                                 ]
                    },
                    {
                        "id":  "ui-design",
@@ -3788,7 +3791,8 @@ For the reference-based interactive 3D route:
                        "selection_rule":  "Use imagegen (or an explicitly approved equivalent image-generation capability) for the mockup/edit. nano-banana-pro is an approved equivalent only when installed; taste-skill may guide art direction but cannot replace image generation. Do not use a frontend implementation skill as mockup evidence.",
                        "order":  20,
                        "requires_routes":  [
-                                               "requirements-grilling"
+                                               "requirements-grilling",
+                                               "design-direction"
                                            ],
                        "blocked_transitions":  [
                                                    "ui_code"
@@ -3798,7 +3802,10 @@ For the reference-based interactive 3D route:
                                                    "availability_check",
                                                    "invocation_record"
                                                ],
-                       "exemption_policy":  "explicit_user_opt_out_of_mockup_only"
+                       "exemption_policy":  "explicit_user_opt_out_of_mockup_only",
+                       "artifact_requirements":  [
+                                                     "mockup_or_opt_out_record"
+                                                 ]
                    },
                    {
                        "id":  "code-review",
@@ -3834,7 +3841,10 @@ For the reference-based interactive 3D route:
                                                    "availability_check",
                                                    "invocation_record"
                                                ],
-                       "exemption_policy":  "none"
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+                                                     "review_report"
+                                                 ]
                    },
                    {
                        "id":  "security-review",
@@ -3869,7 +3879,10 @@ For the reference-based interactive 3D route:
                                                    "availability_check",
                                                    "invocation_record"
                                                ],
-                       "exemption_policy":  "none"
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+
+                                                 ]
                    },
                    {
                        "id":  "browser-verification",
@@ -3903,7 +3916,10 @@ For the reference-based interactive 3D route:
                                                    "availability_check",
                                                    "invocation_record"
                                                ],
-                       "exemption_policy":  "none"
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+                                                     "browser_observation"
+                                                 ]
                    },
                    {
                        "id":  "visual-verification",
@@ -3938,7 +3954,10 @@ For the reference-based interactive 3D route:
                                                    "availability_check",
                                                    "invocation_record"
                                                ],
-                       "exemption_policy":  "none"
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+                                                     "visual_capture"
+                                                 ]
                    },
                    {
                        "id":  "test-design",
@@ -3974,7 +3993,10 @@ For the reference-based interactive 3D route:
                                                    "availability_check",
                                                    "invocation_record"
                                                ],
-                       "exemption_policy":  "none"
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+                                                     "behavior_result"
+                                                 ]
                    },
                    {
                        "id":  "package-release",
@@ -4021,7 +4043,10 @@ For the reference-based interactive 3D route:
                                                                              ],
                                                                 "requires_remote_target":  true
                                                             }
-                                                        ]
+                                                        ],
+                       "artifact_requirements":  [
+
+                                                 ]
                    },
                    {
                        "id":  "ui-implementation",
@@ -4057,7 +4082,10 @@ For the reference-based interactive 3D route:
                                                    "availability_check",
                                                    "invocation_record"
                                                ],
-                       "exemption_policy":  "none"
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+                                                     "implementation_validation_record"
+                                                 ]
                    },
                    {
                        "id":  "extension-security-review",
@@ -4091,7 +4119,80 @@ For the reference-based interactive 3D route:
                                                    "availability_check",
                                                    "invocation_record"
                                                ],
-                       "exemption_policy":  "none"
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+
+                                                 ]
+                   },
+                   {
+                       "id":  "design-direction",
+                       "triggers":  [
+                                        "net_new_ui",
+                                        "substantial_ui_refactor"
+                                    ],
+                       "capability":  "design_direction",
+                       "fallback":  "allow_native_design_direction",
+                       "closure_evidence":  [
+                                                "selected_or_user_confirmed_design_direction"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "taste-skill"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+
+                                                          ],
+                       "selection_rule":  "Use taste-skill when available to derive a design direction from the approved requirements brief. Otherwise record the direction through the native design-direction fallback; users decide visual facts, never the internal skill.",
+                       "order":  15,
+                       "requires_routes":  [
+                                               "requirements-grilling"
+                                           ],
+                       "blocked_transitions":  [
+                                                   "mockup_generation"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+                                                     "design_direction_record"
+                                                 ]
+                   },
+                   {
+                       "id":  "handover",
+                       "triggers":  [
+                                        "net_new_ui",
+                                        "substantial_ui_refactor"
+                                    ],
+                       "capability":  "handover",
+                       "fallback":  "allow_native_handover",
+                       "closure_evidence":  [
+                                                "reviewable_handover"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "changelog-generator"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+
+                                                          ],
+                       "selection_rule":  "Use changelog-generator when available to produce a reviewable handover. Otherwise record the handover through the native fallback after review closes.",
+                       "order":  75,
+                       "requires_routes":  [
+                                               "code-review"
+                                           ],
+                       "blocked_transitions":  [
+                                                   "handover"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+                                                     "handover_record"
+                                                 ]
                    }
                ],
     "non_default_skill_policy":  [
@@ -4142,7 +4243,8 @@ For the reference-based interactive 3D route:
                                                                            "scripts/skill-enforcement.ps1",
                                                                            "contracts/skill-enforcement.json",
                                                                            "contracts/skill-routing.json",
-                                                                           "contracts/skill-registry.json"
+                                                                           "contracts/skill-registry.json",
+                                                                           "contracts/skill-workflow-graph.json"
                                                                        ]
                                                 }
                             },
@@ -4157,7 +4259,8 @@ For the reference-based interactive 3D route:
                                                                             "scripts/skill-enforcement.ps1",
                                                                             "contracts/skill-enforcement.json",
                                                                             "contracts/skill-routing.json",
-                                                                            "contracts/skill-registry.json"
+                                                                            "contracts/skill-registry.json",
+                                                                            "contracts/skill-workflow-graph.json"
                                                                         ]
                                                  }
                              },
@@ -4172,7 +4275,8 @@ For the reference-based interactive 3D route:
                                                                                  "scripts/skill-enforcement.ps1",
                                                                                  "contracts/skill-enforcement.json",
                                                                                  "contracts/skill-routing.json",
-                                                                                 "contracts/skill-registry.json"
+                                                                                 "contracts/skill-registry.json",
+                                                                                 "contracts/skill-workflow-graph.json"
                                                                              ]
                                                       }
                                   },
@@ -4187,7 +4291,8 @@ For the reference-based interactive 3D route:
                                                                              "scripts/skill-enforcement.ps1",
                                                                              "contracts/skill-enforcement.json",
                                                                              "contracts/skill-routing.json",
-                                                                             "contracts/skill-registry.json"
+                                                                             "contracts/skill-registry.json",
+                                                                             "contracts/skill-workflow-graph.json"
                                                                          ]
                                                   }
                               }
@@ -4200,7 +4305,8 @@ For the reference-based interactive 3D route:
                                               "scripts/skill-enforcement.ps1",
                                               "contracts/skill-enforcement.json",
                                               "contracts/skill-routing.json",
-                                              "contracts/skill-registry.json"
+                                              "contracts/skill-registry.json",
+                                              "contracts/skill-workflow-graph.json"
                                           ]
                             }
 }
@@ -4225,7 +4331,8 @@ or project handover.
 The enforcement level is deliberately explicit:
 
 - **workflow_enforced** means the installed command validates task classification, matched routes,
-  selected capabilities, invocation records, closure evidence, and permitted state transitions.
+  selected capabilities, invocation records, closure evidence, integrity-checked artifact records,
+  and permitted state transitions.
   Missing strict evidence blocks the declared workflow transition.
 - **native_tool_interception** means a host-native mechanism can observe or prevent an individual
   tool call. Do not claim this level unless the host contract and post-install verification prove it.
@@ -4233,6 +4340,16 @@ The enforcement level is deliberately explicit:
 A workflow ledger is evidence of a contract-valid recorded process, not proof of invisible host
 behavior. An unrecorded skill invocation remains unverified; a host without native interception
 must state that limitation rather than presenting workflow enforcement as a sandbox.
+
+## 1.1 Product-first automatic orchestration
+
+Users describe outcomes, not skill names. For an ordinary website request, classification starts
+the requirements, design-direction, mockup, implementation, verification, review, and handover
+pipeline automatically. The user is asked product questions (for example audience, restaurant
+menu, booking needs, and visual direction), never asked to choose an internal skill. Manual
+selection is reserved for restricted paths such as credentials, external writes, security/CTF,
+reversing, and persistent-memory changes. Run `scripts/skill-catalog.ps1 -Mode website-pipeline`
+to inspect the canonical website-delivery chain.
 
 ## 2. Canonical contracts
 
@@ -4248,6 +4365,26 @@ The following files are one system and must be updated together:
   evidence, closure evidence, fallback/exemption policy, and blocked transitions.
 - `contracts/skill-enforcement.json`: valid task classification dimensions, signal derivation,
   task-record state machine, and project skill-usage schema.
+- `contracts/skill-workflow-graph.json`: artifact-level handoffs between selected skills. Each
+  graph node declares prerequisites, consumed and produced artifacts, blocked transitions,
+  verification evidence, and whether a user ever selects a skill. Its `website-delivery`
+  pipeline is selected automatically from product classification: users decide product and
+  design facts, never internal skills. `skill-enforcement.ps1` reads the graph when initializing
+  a matching task, adds every route in the selected pipeline, and records graph-derived route
+  prerequisites (for example, review waits for behavior and browser/visual verification). It
+  does not claim host-native interception.
+
+### 2.1 Durable artifact evidence
+
+For routes that close a durable workflow claim, string labels alone are insufficient. Closure records
+an artifact kind, path, and SHA-256 digest; later dependent transitions re-check that the file still
+exists and has not changed. The standard website pipeline requires records for its requirements
+brief, design direction, mockup/opt-out decision, implementation validation, behavior result,
+browser observation, visual capture, review report, and handover. Tracked task records should use
+project-relative paths and must never include secrets or machine-specific paths.
+
+Preflight selects an available primary alias first, then an available conditional alias, before an
+explicit native fallback. It must not block solely because the first preferred alias is absent.
 - `contracts/host-skill-capabilities.json`: each host's installed workflow-gate payload and its
   honestly declared native-interception status.
 
@@ -4315,11 +4452,17 @@ Run:
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\validate-skill-registry.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\validate-skill-routing.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\test-skill-enforcement.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\validate-skill-workflow-graph.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\test-skill-workflow-graph.ps1
 ```
 
 `validate-package.ps1` invokes the registry and routing checks. Future integrations must add the
 skill registry record and any reviewed route changes before the package can validate; no installer,
 profile bundle, or prose-only mention is an alternative path.
+
+Use `skill-enforcement.ps1 -Mode validate -TaskStatePath .specify/<task>/skill-execution.json`
+to re-check every closed route's recorded artifact path and SHA-256 before relying on a persisted
+task state.
 
 ## END FILE: modules/53_V6_8_ProgrammingLevelSkillEnforcement.md
 
@@ -4589,6 +4732,7 @@ profile bundle, or prose-only mention is an alternative path.
                                                           "schema_version",
                                                           "task_id",
                                                           "classification",
+                                                          "workflow_pipeline_ids",
                                                           "matched_route_ids",
                                                           "routes"
                                                       ],
@@ -4653,7 +4797,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "dynamic_browser_or_session_task",
                                                             "permission_and_scope_confirmed"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Run agent-browser on AWS Bedrock AgentCore cloud browsers. Use when the user wants to use AgentCore, run browser automation on AWS, use a cloud browser with AWS credentials, or needs a managed browser session backed by AWS infrastructure. Triggers include \"use agentcore\", \"run on…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "dynamic_browser_or_session_task",
+                                                                    "permission_and_scope_confirmed"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -4671,7 +4825,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "dynamic_browser_or_session_task",
                                                             "permission_and_scope_confirmed"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Core agent-browser usage guide. Read this before running any agent-browser commands. Covers the snapshot-and-ref workflow, navigating pages, interacting with elements (click, fill, type, select), extracting text and data, taking screenshots, managing tabs, handling forms and auth…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "dynamic_browser_or_session_task",
+                                                                    "permission_and_scope_confirmed"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -4684,12 +4848,25 @@ profile bundle, or prose-only mention is an alternative path.
                                       ],
                         "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
                         "activation":  {
-                                           "mode":  "manual",
+                                           "mode":  "guided_candidate",
                                            "triggers":  [
                                                             "explicit_user_request",
                                                             "dynamic_browser_or_session_task",
                                                             "permission_and_scope_confirmed"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Systematically explore and test a web application to find bugs, UX issues, and other problems. Use when asked to \"dogfood\", \"QA\", \"exploratory test\", \"find issues\", \"bug hunt\", \"test this app/site/platform\", or review the quality of a web application. Produces a structured report…",
+                                           "explicit_signals":  [
+                                                                    "explore",
+                                                                    "application",
+                                                                    "bugs,",
+                                                                    "issues,",
+                                                                    "reproducible",
+                                                                    "findings."
+                                                                ],
+                                           "inferred_signals":  [
+                                                                    "task_brief_matches_reviewed_purpose"
+                                                                ],
+                                           "confirmation_policy":  "single_confirmation_when_competing_candidates_match"
                                        }
                     },
                     {
@@ -4707,7 +4884,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "dynamic_browser_or_session_task",
                                                             "permission_and_scope_confirmed"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Automate Electron desktop apps (VS Code, Slack, Discord, Figma, Notion, Spotify, etc.) using agent-browser via Chrome DevTools Protocol. Use when the user needs to interact with an Electron app, automate a desktop app, connect to a running app, control a native app, or test an El…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "dynamic_browser_or_session_task",
+                                                                    "permission_and_scope_confirmed"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -4725,7 +4912,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "dynamic_browser_or_session_task",
                                                             "permission_and_scope_confirmed"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Interact with Slack workspaces using browser automation. Use when the user needs to check unread channels, navigate Slack, send messages, extract data, find information, search conversations, or automate any Slack task. Triggers include \"check my Slack\", \"what channels have unrea…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "dynamic_browser_or_session_task",
+                                                                    "permission_and_scope_confirmed"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -4743,7 +4940,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "dynamic_browser_or_session_task",
                                                             "permission_and_scope_confirmed"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Run agent-browser + Chrome inside Vercel Sandbox microVMs for browser automation from any Vercel-deployed app. Use when the user needs browser automation in a Vercel app (Next.js, SvelteKit, Nuxt, Remix, Astro, etc.), wants to run headless Chrome without binary size limits, needs…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "dynamic_browser_or_session_task",
+                                                                    "permission_and_scope_confirmed"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -4760,7 +4967,16 @@ profile bundle, or prose-only mention is an alternative path.
                                            "triggers":  [
                                                             "browser_ui_verification",
                                                             "dynamic_web_flow"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Browser automation CLI for AI agents. Use when the user needs to interact with websites, including navigating pages, filling forms, clicking buttons, taking screenshots, extracting data, testing web apps, or automating any browser task. Triggers include requests to \"open a websit…",
+                                           "explicit_signals":  [
+                                                                    "browser_ui_verification",
+                                                                    "dynamic_web_flow"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "route_enforced"
                                        }
                     },
                     {
@@ -4778,7 +4994,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "task_specific_domain_match",
                                                             "permission_and_scope_confirmed"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Ask which skill or flow fits your situation. A router over the skills in this repo.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "task_specific_domain_match",
+                                                                    "permission_and_scope_confirmed"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -4791,12 +5017,26 @@ profile bundle, or prose-only mention is an alternative path.
                                       ],
                         "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
                         "activation":  {
-                                           "mode":  "manual",
+                                           "mode":  "guided_candidate",
                                            "triggers":  [
                                                             "explicit_user_request",
                                                             "task_specific_domain_match",
                                                             "permission_and_scope_confirmed"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Shared vocabulary for designing deep modules. Use when the user wants to design or improve a module\u0027s interface, find deepening opportunities, decide where a seam goes, make code more testable or AI-navigable, or when another skill needs the deep-module vocabulary.",
+                                           "explicit_signals":  [
+                                                                    "design",
+                                                                    "deep",
+                                                                    "module",
+                                                                    "boundaries,",
+                                                                    "interfaces,",
+                                                                    "seams,",
+                                                                    "testability."
+                                                                ],
+                                           "inferred_signals":  [
+                                                                    "task_brief_matches_reviewed_purpose"
+                                                                ],
+                                           "confirmation_policy":  "single_confirmation_when_competing_candidates_match"
                                        }
                     },
                     {
@@ -4814,7 +5054,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "code_audit",
                                                             "pull_request_review",
                                                             "release_review"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes — Standards (does the code follow this repo\u0027s documented coding standards?) and Spec (does the code match what the originating issue/PRD asked for?). Runs both reviews in parallel sub-agent…",
+                                           "explicit_signals":  [
+                                                                    "code_audit",
+                                                                    "pull_request_review",
+                                                                    "release_review"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "route_enforced"
                                        }
                     },
                     {
@@ -4827,12 +5077,25 @@ profile bundle, or prose-only mention is an alternative path.
                                       ],
                         "reason":  "Engineering workflow skill retained for explicit selection; no canonical automatic route has been reviewed yet.",
                         "activation":  {
-                                           "mode":  "manual",
+                                           "mode":  "guided_candidate",
                                            "triggers":  [
                                                             "explicit_user_request",
                                                             "task_specific_domain_match",
                                                             "permission_and_scope_confirmed"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Diagnosis loop for hard bugs and performance regressions. Use when the user says \"diagnose\"/\"debug this\", or reports something broken/throwing/failing/slow.",
+                                           "explicit_signals":  [
+                                                                    "diagnose",
+                                                                    "bugs,",
+                                                                    "failures,",
+                                                                    "regressions,",
+                                                                    "performance",
+                                                                    "problems."
+                                                                ],
+                                           "inferred_signals":  [
+                                                                    "task_brief_matches_reviewed_purpose"
+                                                                ],
+                                           "confirmation_policy":  "single_confirmation_when_competing_candidates_match"
                                        }
                     },
                     {
@@ -4845,12 +5108,26 @@ profile bundle, or prose-only mention is an alternative path.
                                       ],
                         "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
                         "activation":  {
-                                           "mode":  "manual",
+                                           "mode":  "guided_candidate",
                                            "triggers":  [
                                                             "explicit_user_request",
                                                             "task_specific_domain_match",
                                                             "permission_and_scope_confirmed"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Build and sharpen a project\u0027s domain model. Use when the user wants to pin down domain terminology or a ubiquitous language, record an architectural decision, or when another skill needs to maintain the domain model.",
+                                           "explicit_signals":  [
+                                                                    "define",
+                                                                    "domain",
+                                                                    "vocabulary,",
+                                                                    "bounded",
+                                                                    "contexts,",
+                                                                    "architectural",
+                                                                    "terminology."
+                                                                ],
+                                           "inferred_signals":  [
+                                                                    "task_brief_matches_reviewed_purpose"
+                                                                ],
+                                           "confirmation_policy":  "single_confirmation_when_competing_candidates_match"
                                        }
                     },
                     {
@@ -4868,7 +5145,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "task_specific_domain_match",
                                                             "permission_and_scope_confirmed"
-                                                        ]
+                                                        ],
+                                           "purpose":  "A relentless interview to sharpen a plan or design, which also creates docs (ADR\u0027s and glossary) as we go.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "task_specific_domain_match",
+                                                                    "permission_and_scope_confirmed"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -4886,7 +5173,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "task_specific_domain_match",
                                                             "permission_and_scope_confirmed"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Implement a piece of work based on a spec or set of tickets.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "task_specific_domain_match",
+                                                                    "permission_and_scope_confirmed"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -4904,7 +5201,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "task_specific_domain_match",
                                                             "permission_and_scope_confirmed"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "task_specific_domain_match",
+                                                                    "permission_and_scope_confirmed"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -4922,7 +5229,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "task_specific_domain_match",
                                                             "permission_and_scope_confirmed"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Build a throwaway prototype to answer a design question. Use when the user wants to sanity-check whether a state model or logic feels right, or explore what a UI should look like.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "task_specific_domain_match",
+                                                                    "permission_and_scope_confirmed"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -4935,12 +5252,25 @@ profile bundle, or prose-only mention is an alternative path.
                                       ],
                         "reason":  "Engineering workflow skill retained for explicit selection; no canonical automatic route has been reviewed yet.",
                         "activation":  {
-                                           "mode":  "manual",
+                                           "mode":  "guided_candidate",
                                            "triggers":  [
                                                             "explicit_user_request",
                                                             "task_specific_domain_match",
                                                             "permission_and_scope_confirmed"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Investigate a question against high-trust primary sources and capture the findings as a Markdown file in the repo. Use when the user wants a topic researched, docs or API facts gathered, or reading legwork delegated to a background agent.",
+                                           "explicit_signals":  [
+                                                                    "research",
+                                                                    "question",
+                                                                    "with",
+                                                                    "high-trust",
+                                                                    "primary",
+                                                                    "sources."
+                                                                ],
+                                           "inferred_signals":  [
+                                                                    "task_brief_matches_reviewed_purpose"
+                                                                ],
+                                           "confirmation_policy":  "single_confirmation_when_competing_candidates_match"
                                        }
                     },
                     {
@@ -4953,12 +5283,24 @@ profile bundle, or prose-only mention is an alternative path.
                                       ],
                         "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
                         "activation":  {
-                                           "mode":  "manual",
+                                           "mode":  "guided_candidate",
                                            "triggers":  [
                                                             "explicit_user_request",
                                                             "task_specific_domain_match",
                                                             "permission_and_scope_confirmed"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Use when you need to resolve an in-progress git merge/rebase conflict.",
+                                           "explicit_signals":  [
+                                                                    "resolve",
+                                                                    "in-progress",
+                                                                    "merge",
+                                                                    "rebase",
+                                                                    "conflict."
+                                                                ],
+                                           "inferred_signals":  [
+                                                                    "task_brief_matches_reviewed_purpose"
+                                                                ],
+                                           "confirmation_policy":  "single_confirmation_when_competing_candidates_match"
                                        }
                     },
                     {
@@ -4976,7 +5318,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "task_specific_domain_match",
                                                             "permission_and_scope_confirmed"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Configure this repo for the engineering skills — set up its issue tracker, triage label vocabulary, and domain doc layout. Run once before first use of the other engineering skills.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "task_specific_domain_match",
+                                                                    "permission_and_scope_confirmed"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -4994,7 +5346,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "task_specific_domain_match",
                                                             "permission_and_scope_confirmed"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Test-driven development. Use when the user wants to build features or fix bugs test-first, mentions \"red-green-refactor\", or wants integration tests.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "task_specific_domain_match",
+                                                                    "permission_and_scope_confirmed"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5012,7 +5374,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "task_specific_domain_match",
                                                             "permission_and_scope_confirmed"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Turn the current conversation into a spec and publish it to the project issue tracker — no interview, just synthesis of what you\u0027ve already discussed.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "task_specific_domain_match",
+                                                                    "permission_and_scope_confirmed"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5030,7 +5402,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "task_specific_domain_match",
                                                             "permission_and_scope_confirmed"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Break a plan, spec, or the current conversation into a set of tracer-bullet tickets, each declaring its blocking edges, published to the configured tracker — edges as text in one file per ticket locally, or native blocking links on a real tracker.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "task_specific_domain_match",
+                                                                    "permission_and_scope_confirmed"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5043,12 +5425,27 @@ profile bundle, or prose-only mention is an alternative path.
                                       ],
                         "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
                         "activation":  {
-                                           "mode":  "manual",
+                                           "mode":  "guided_candidate",
                                            "triggers":  [
                                                             "explicit_user_request",
                                                             "task_specific_domain_match",
                                                             "permission_and_scope_confirmed"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Move issues and external PRs through a state machine of triage roles — categorise, verify, grill if needed, and write agent-ready briefs.",
+                                           "explicit_signals":  [
+                                                                    "triage",
+                                                                    "issues",
+                                                                    "external",
+                                                                    "pull",
+                                                                    "requests",
+                                                                    "into",
+                                                                    "agent-ready",
+                                                                    "briefs."
+                                                                ],
+                                           "inferred_signals":  [
+                                                                    "task_brief_matches_reviewed_purpose"
+                                                                ],
+                                           "confirmation_policy":  "single_confirmation_when_competing_candidates_match"
                                        }
                     },
                     {
@@ -5061,12 +5458,28 @@ profile bundle, or prose-only mention is an alternative path.
                                       ],
                         "reason":  "Engineering workflow skill retained for explicit selection; no canonical automatic route has been reviewed yet.",
                         "activation":  {
-                                           "mode":  "manual",
+                                           "mode":  "guided_candidate",
                                            "triggers":  [
                                                             "explicit_user_request",
                                                             "task_specific_domain_match",
                                                             "permission_and_scope_confirmed"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Plan a huge chunk of work — more than one agent session can hold — as a shared map of decision tickets on your issue tracker, and resolve them one at a time until the way to the destination is clear.",
+                                           "explicit_signals":  [
+                                                                    "plan",
+                                                                    "long-running",
+                                                                    "work",
+                                                                    "across",
+                                                                    "multiple",
+                                                                    "sessions",
+                                                                    "using",
+                                                                    "decision",
+                                                                    "tickets."
+                                                                ],
+                                           "inferred_signals":  [
+                                                                    "task_brief_matches_reviewed_purpose"
+                                                                ],
+                                           "confirmation_policy":  "single_confirmation_when_competing_candidates_match"
                                        }
                     },
                     {
@@ -5083,7 +5496,16 @@ profile bundle, or prose-only mention is an alternative path.
                                            "triggers":  [
                                                             "net_new_ui",
                                                             "substantial_ui_refactor"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Generate or edit images via Gemini 3 Pro Image (Nano Banana Pro).",
+                                           "explicit_signals":  [
+                                                                    "net_new_ui",
+                                                                    "substantial_ui_refactor"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "route_enforced"
                                        }
                     },
                     {
@@ -5101,7 +5523,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "behavior_change",
                                                             "coverage_gap",
                                                             "test_design"
-                                                        ]
+                                                        ],
+                                           "purpose":  "\u003e",
+                                           "explicit_signals":  [
+                                                                    "behavior_change",
+                                                                    "coverage_gap",
+                                                                    "test_design"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "route_enforced"
                                        }
                     },
                     {
@@ -5119,7 +5551,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "task_specific_domain_match",
                                                             "permission_and_scope_confirmed"
-                                                        ]
+                                                        ],
+                                           "purpose":  "\u003e",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "task_specific_domain_match",
+                                                                    "permission_and_scope_confirmed"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5137,7 +5579,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "task_specific_domain_match",
                                                             "permission_and_scope_confirmed"
-                                                        ]
+                                                        ],
+                                           "purpose":  "\u003e",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "task_specific_domain_match",
+                                                                    "permission_and_scope_confirmed"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5155,7 +5607,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "task_specific_domain_match",
                                                             "permission_and_scope_confirmed"
-                                                        ]
+                                                        ],
+                                           "purpose":  "\u003e",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "task_specific_domain_match",
+                                                                    "permission_and_scope_confirmed"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5173,7 +5635,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "task_specific_domain_match",
                                                             "permission_and_scope_confirmed"
-                                                        ]
+                                                        ],
+                                           "purpose":  "\u003e",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "task_specific_domain_match",
+                                                                    "permission_and_scope_confirmed"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5191,7 +5663,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "task_specific_domain_match",
                                                             "permission_and_scope_confirmed"
-                                                        ]
+                                                        ],
+                                           "purpose":  "\u003e",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "task_specific_domain_match",
+                                                                    "permission_and_scope_confirmed"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5209,7 +5691,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "product_workflow_match",
                                                             "permission_and_scope_confirmed"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, or uses any \u0027grill\u0027 trigger phrases.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "product_workflow_match",
+                                                                    "permission_and_scope_confirmed"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5227,7 +5719,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "product_workflow_match",
                                                             "permission_and_scope_confirmed"
-                                                        ]
+                                                        ],
+                                           "purpose":  "A relentless interview to sharpen a plan or design.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "product_workflow_match",
+                                                                    "permission_and_scope_confirmed"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5240,12 +5742,26 @@ profile bundle, or prose-only mention is an alternative path.
                                       ],
                         "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
                         "activation":  {
-                                           "mode":  "manual",
+                                           "mode":  "guided_candidate",
                                            "triggers":  [
                                                             "explicit_user_request",
                                                             "product_workflow_match",
                                                             "permission_and_scope_confirmed"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Compact the current conversation into a handoff document for another agent to pick up.",
+                                           "explicit_signals":  [
+                                                                    "create",
+                                                                    "compact",
+                                                                    "handoff",
+                                                                    "resume",
+                                                                    "packet",
+                                                                    "another",
+                                                                    "agent."
+                                                                ],
+                                           "inferred_signals":  [
+                                                                    "task_brief_matches_reviewed_purpose"
+                                                                ],
+                                           "confirmation_policy":  "single_confirmation_when_competing_candidates_match"
                                        }
                     },
                     {
@@ -5263,7 +5779,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "major_feature",
                                                             "net_new_ui",
                                                             "substantial_ui_refactor"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Clarify product requirements and net-new or substantially redesigned UI before specification, mockup generation, or implementation. Use for new projects, major features, new screens, substantial layout changes, bookings, payments, permissions, and other high-impact user flows. As…",
+                                           "explicit_signals":  [
+                                                                    "major_feature",
+                                                                    "net_new_ui",
+                                                                    "substantial_ui_refactor"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "route_enforced"
                                        }
                     },
                     {
@@ -5281,7 +5807,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "product_workflow_match",
                                                             "permission_and_scope_confirmed"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Teach the user a new skill or concept, within this workspace.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "product_workflow_match",
+                                                                    "permission_and_scope_confirmed"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5299,7 +5835,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "product_workflow_match",
                                                             "permission_and_scope_confirmed"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Reference for writing and editing skills well — the vocabulary and principles that make a skill predictable.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "product_workflow_match",
+                                                                    "permission_and_scope_confirmed"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5317,7 +5863,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Internal downstream skill for ctf-sandbox-orchestrator. CTF-sandbox workflow for AD CS, certificate templates, enrollment rights, EKUs, SAN controls, PKINIT, certificate mapping, and cert-based privilege paths. Use when the user asks about ESC-style abuse, certificate templates,…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5335,7 +5891,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Internal downstream skill for ctf-sandbox-orchestrator. CTF-sandbox workflow for AI-agent, prompt-injection, MCP or toolchain, cloud, container, CI/CD, and supply-chain challenges. Use when the user asks to analyze prompt-to-tool flows, retrieval poisoning, mounted secrets, deplo…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5353,7 +5919,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Internal downstream skill for ctf-sandbox-orchestrator. CTF-sandbox workflow for Android APK hooking, Frida tracing, request-signing recovery, SSL pinning bypass, JNI boundary inspection, and app trust-boundary analysis. Use when the user asks to hook an APK, inspect signer logic…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5371,7 +5947,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Internal downstream skill for ctf-sandbox-orchestrator. CTF-sandbox workflow for browser cookies, localStorage, sessionStorage, IndexedDB, Cache Storage, service workers, offline caches, and client-side session persistence. Use when the user asks to inspect browser state, replay…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5389,7 +5975,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Internal downstream skill for ctf-sandbox-orchestrator. CTF-sandbox workflow for source maps, build manifests, chunk registries, emitted bundles, obfuscated loader flow, and frontend runtime recovery. Use when the user asks to reconstruct served JavaScript structure, inspect sour…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5407,7 +6003,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Internal downstream skill for ctf-sandbox-orchestrator. CTF-sandbox workflow for cloud metadata services, instance identity, workload identity, link-local credential paths, role assumption, and metadata-to-privilege trust edges. Use when the user asks to inspect metadata-service…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5425,7 +6031,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Internal downstream skill for ctf-sandbox-orchestrator. CTF-sandbox workflow for live container runtime analysis, mounted secrets, sidecars, namespaces, init containers, entrypoint drift, and route-to-container resolution. Use when the user asks why a live container differs from…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5443,7 +6059,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Internal downstream skill for ctf-sandbox-orchestrator. CTF-sandbox workflow for crypto, encoding, steganography, APK, IPA, and mobile trust-boundary challenges. Use when the user asks to decode a blob, recover a transform chain or key, inspect hidden media payloads, hook an APK…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5461,7 +6087,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Internal downstream skill for ctf-sandbox-orchestrator. CTF-sandbox workflow for custom binary or text protocol recovery, handshake reconstruction, framing, sequence control, checksums, stateful replay, and accepted-session reproduction. Use when the user asks to decode an unknow…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5479,7 +6115,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Internal downstream skill for ctf-sandbox-orchestrator. CTF-sandbox workflow for DPAPI masterkeys, vault blobs, browser credential stores, protected secrets, domain backup keys, and secret-to-acceptance replay chains. Use when the user asks to inspect DPAPI blobs or masterkeys, r…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5497,7 +6143,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Internal downstream skill for ctf-sandbox-orchestrator. CTF-sandbox workflow for file uploads, imports, previews, archive extraction, format conversion, parser invocation, and deserialization chains. Use when the user asks to inspect an upload or import path, trace archive extrac…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5515,7 +6171,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Internal downstream skill for ctf-sandbox-orchestrator. CTF-sandbox workflow for firmware images, partition tables, boot chains, update packages, extracted filesystems, embedded configs, and device-facing trust boundaries. Use when the user asks to unpack firmware, map partition…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5533,7 +6199,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Internal downstream skill for ctf-sandbox-orchestrator. CTF-sandbox workflow for DFIR chronology, cross-artifact correlation, persistence chains, and incident timeline reconstruction. Use when the user asks to build a forensic timeline, correlate EVTX, PCAP, registry, disk, memor…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5551,7 +6227,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Internal downstream skill for ctf-sandbox-orchestrator. CTF-sandbox workflow for GraphQL schemas, persisted queries, RPC manifests, generated clients, OpenAPI drift, hidden operations, and contract-to-handler mismatches. Use when the user asks to inspect GraphQL or RPC requests,…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5569,7 +6255,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Internal downstream skill for ctf-sandbox-orchestrator. CTF-sandbox workflow for Active Directory, Kerberos, LDAP, OAuth, enterprise messaging, Windows host forensics, credential material, and lateral-movement challenges. Use when the user asks to trace tickets or tokens, inspect…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5587,7 +6283,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Internal downstream skill for ctf-sandbox-orchestrator. CTF-sandbox workflow for IPA runtime analysis, Frida hooks, Objective-C or Swift method tracing, Keychain inspection, SSL pinning bypass, URL scheme handling, and iOS request-signing recovery. Use when the user asks to hook…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5605,7 +6311,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Internal downstream skill for ctf-sandbox-orchestrator. CTF-sandbox workflow for JWT, JWS, and JWE validation paths, header parsing, key selection, claim acceptance, audience and issuer checks, role derivation, and token-to-identity confusion bugs. Use when the user asks to inspe…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5623,7 +6339,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Internal downstream skill for ctf-sandbox-orchestrator. CTF-sandbox workflow for Kubernetes API analysis, service-account trust, RBAC edges, admission and controller behavior, cluster secrets, workload mutation, and namespace-scoped drift. Use when the user asks to inspect kube A…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5641,7 +6367,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Internal downstream skill for ctf-sandbox-orchestrator. CTF-sandbox workflow for Kerberos delegation, SPN trust edges, S4U abuse, RBCD, constrained or unconstrained delegation, and service-ticket acceptance. Use when the user asks about constrained delegation, unconstrained deleg…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5659,7 +6395,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Internal downstream skill for ctf-sandbox-orchestrator. CTF-sandbox workflow for kernel attack surface, namespace and cgroup boundaries, container isolation assumptions, syscall paths, and escape primitive verification. Use when the user asks to analyze container-to-host escape p…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5677,7 +6423,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Internal downstream skill for ctf-sandbox-orchestrator. CTF-sandbox workflow for Linux credential artifacts, service tokens, SSH material, cloud and container secrets, socket-level trust, and host-to-host pivot chains. Use when the user asks to trace Linux auth artifacts, accepte…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5695,7 +6451,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Internal downstream skill for ctf-sandbox-orchestrator. CTF-sandbox workflow for LSASS-resident secrets, Windows logon sessions, Kerberos ticket caches, DPAPI-backed material, SSP artifacts, and replayable credential extraction. Use when the user asks to inspect LSASS memory, rec…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5713,7 +6479,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Internal downstream skill for ctf-sandbox-orchestrator. CTF-sandbox workflow for enterprise mail abuse, OAuth consent, inbox or forwarding rules, transport rules, shared mailbox access, phishing chains, and token-to-mailbox side effects. Use when the user asks to trace mailbox ru…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5731,7 +6507,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Internal downstream skill for ctf-sandbox-orchestrator. CTF-sandbox workflow for malware configuration recovery, staged payload boundaries, beacon parameter extraction, and IOC decoding. Use when the user asks to recover a malware config, decode C2 or beacon fields, unpack staged…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5749,7 +6535,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Internal downstream skill for ctf-sandbox-orchestrator. CTF-sandbox workflow for OAuth, OIDC, redirect flows, state or nonce handling, PKCE, token exchange, refresh logic, claim mapping, and accepted login paths. Use when the user asks to trace redirects, callback parameters, sco…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5767,7 +6563,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Internal downstream skill for ctf-sandbox-orchestrator. CTF-sandbox workflow for packet capture analysis, session reconstruction, application-protocol decoding, stream reassembly, beacon timing, and packet-to-process correlation. Use when the user asks to analyze a PCAP, rebuild…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5785,7 +6591,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Internal downstream skill for ctf-sandbox-orchestrator. CTF-sandbox workflow for prompt-injection, retrieval poisoning, memory contamination, planner drift, MCP or tool-boundary abuse, and agent exfiltration challenges. Use when the user asks to analyze prompt injection, retrieva…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5803,7 +6619,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Internal downstream skill for ctf-sandbox-orchestrator. CTF-sandbox workflow for queues, async workers, cron jobs, delayed tasks, retry behavior, worker-only config drift, and payload-to-side-effect chains. Use when the user asks to trace a queue payload, inspect async job execut…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5821,7 +6647,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Internal downstream skill for ctf-sandbox-orchestrator. CTF-sandbox workflow for race windows, ordering bugs, idempotency failures, lock gaps, concurrent worker drift, and state inconsistencies that produce decisive effects. Use when the user asks to reproduce timing-sensitive bu…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5839,7 +6675,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Internal downstream skill for ctf-sandbox-orchestrator. CTF-sandbox workflow for forced-auth coercion, relay chains, target selection, NTLM or related acceptance paths, and coercion-to-privilege transitions. Use when the user asks to trace a coercion primitive, follow a relay pat…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5857,7 +6703,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Internal downstream skill for ctf-sandbox-orchestrator. CTF-sandbox workflow for parser differentials, HTTP normalization gaps, ambiguous headers, path decoding drift, transfer-framing mismatches, and request smuggling routes. Use when the user asks to trace proxy and backend par…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5875,7 +6731,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Internal downstream skill for ctf-sandbox-orchestrator. CTF-sandbox workflow for reverse engineering, malware, DFIR, firmware, pwnable, and native exploit challenges. Use when the user asks to reverse a binary, unpack a sample, inspect a memory dump or PCAP, recover malware behav…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5893,7 +6759,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Internal downstream skill for ctf-sandbox-orchestrator. CTF-sandbox workflow for reverse proxies, Host headers, forwarded headers, vhost routing, websocket upgrades, path-prefix rewriting, base-URL derivation, and multi-node route resolution. Use when the user asks which host or…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5911,7 +6787,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Internal downstream skill for ctf-sandbox-orchestrator. CTF-sandbox workflow for SSRF reachability, internal route probing, metadata-service access, credential pivoting, and token-to-accepted-privilege chains. Use when the user asks to trace SSRF sources, internal hosts, metadata…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5929,7 +6815,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Internal downstream skill for ctf-sandbox-orchestrator. CTF-sandbox workflow for image, audio, video, document, and container steganography. Use when the user asks to inspect metadata, alpha or palette channels, LSBs, thumbnails, appended trailers, QR fragments, transcoding artif…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5947,7 +6843,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Internal downstream skill for ctf-sandbox-orchestrator. CTF-sandbox workflow for CI/CD, registry, dependency drift, artifact provenance, image build, release pipeline, and runtime consumer challenges. Use when the user asks to trace dependency drift, registry pulls, malicious pac…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5965,7 +6871,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Internal downstream skill for ctf-sandbox-orchestrator. CTF-sandbox workflow for SSR, template rendering, route loaders, hydration payloads, server-client render boundaries, and template-to-handler enforcement gaps. Use when the user asks to inspect SSR or template routes, trace…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -5983,7 +6899,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Internal downstream skill for ctf-sandbox-orchestrator. CTF-sandbox workflow for CTF web, API, SSR, frontend, queue-backed app, and routing challenges. Use when the user asks to inspect a site or API, follow real browser requests, debug auth or session flow, trace uploads or work…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -6001,7 +6927,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Internal downstream skill for ctf-sandbox-orchestrator. CTF-sandbox workflow for WebSocket and SSE handshakes, auth material, subscription state, realtime message schemas, reconnect behavior, and frame-driven runtime effects. Use when the user asks to inspect a WebSocket or SSE h…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -6019,7 +6955,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Internal downstream skill for ctf-sandbox-orchestrator. CTF-sandbox workflow for Kerberos, WinRM, SMB, RDP, Windows credential material, replayable tickets, delegation edges, and host-to-host pivot chains. Use when the user asks to replay Kerberos material, trace a WinRM, SMB, or…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -6037,7 +6983,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Default entrypoint and master ctf-sandbox-orchestrator workflow for CTF, exploit, reverse engineering, DFIR, pwnable, crypto, stego, mobile, AI-agent, cloud, container, Active Directory, Windows-host, and identity challenges. Use first when the user presents challenge infrastruct…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -6055,7 +7011,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -6073,7 +7039,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "在 CLI 环境下做 Android APK 逆向时使用。适用于 APK 解包、Java 反编译、smali 修改、重打包、Frida 动态 Hook，以及按需切换到 so/native 分析。优先使用本机已安装的 jadx、apktool、frida、adb、ida-reverse、radare2。",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -6091,7 +7067,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -6109,7 +7095,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "|",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -6127,7 +7123,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "|",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -6145,7 +7151,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "generate, refine, validate, and render diagrams from natural language, notes, code snippets, schemas, tables, or existing diagram source. use for flowcharts, swimlanes, sequence diagrams, state diagrams, er diagrams, class diagrams, architecture/c4-style diagrams, dependency grap…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -6163,7 +7179,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "|",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -6181,7 +7207,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  ".NET / C# 二进制逆向。当目标是 .NET assembly（PE 头含 CLR、.exe/.dll 托管程序）、C# 编译产物（含 NativeAOT）、红队 Sharp* 工具（Rubeus / SharpHound / SharpHound 等）、.NET 混淆程序（ConfuserEx / SmartAssembly / Babel / Eazfuscator）、.NET loader / info-stealer / 套壳 malware 时使用。优先用 dnSpyEx + de4dot，需要 AI 直接操作时联动 dnSpy MCP。…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -6199,7 +7235,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "|",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -6217,7 +7263,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "|",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -6235,7 +7291,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "|",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -6253,7 +7319,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "在使用 js-reverse-mcp 做前端 JavaScript 逆向时使用，适用于签名链路定位、页面观察取证、运行时采样、本地补环境复现与证据化输出。优先适配当前环境里的 js-reverse_* 工具，需要更强的浏览器/CDP/Hook 面时联动 jshookmcp。",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -6271,7 +7347,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -6289,7 +7375,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -6307,7 +7403,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -6325,7 +7431,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "|",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -6343,7 +7459,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "|",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -6361,7 +7487,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "实战 SRC / 众测 / Bug bounty 漏洞挖掘工作流 skill。包含：5 阶段方法论（intake → recon → enum → hunt → report）、19 个攻击类 playbook（SQLi/XSS/RCE/SSRF/IDOR/CSRF/Path Traversal/File Upload/SSTI/XXE/Race/HTTP Smuggling/OAuth/JWT/SAML/GraphQL/Mobile/LLM/DoS）、305 个结构化 payload、263 个 WAF/EDR 绕过变体、2887 份 HackerOn…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -6379,7 +7515,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "|",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -6397,7 +7543,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "|",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -6415,7 +7571,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -6433,7 +7599,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Provides reverse engineering techniques. Use when the main job is to understand how a compiled, obfuscated, packed, or virtualized target works before exploiting or solving it, including binaries, APKs, WASM, firmware, custom VMs, bytecode, malware-like loaders, and anti-debug or…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -6451,7 +7627,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -6469,7 +7655,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "authorized_security_or_ctf_scope",
                                                             "isolated_or_approved_environment"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -6487,7 +7683,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "verified_redacted_lesson",
                                                             "no_autonomous_persistent_write"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Captures learnings, errors, and corrections to enable continuous improvement. Use when: (1) A command or operation fails unexpectedly, (2) User corrects Claude (\u0027No, that\u0027s wrong...\u0027, \u0027Actually...\u0027), (3) User requests a capability that doesn\u0027t exist, (4) An external API or tool f…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "verified_redacted_lesson",
+                                                                    "no_autonomous_persistent_write"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -6505,7 +7711,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "visual_design_workflow",
                                                             "permission_and_scope_confirmed"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Premium brand-kit image generation skill for creating high-end brand-guidelines boards, logo systems, identity decks, and visual-world presentations. Trained for minimalist, cinematic, editorial, dark-tech, luxury, cultural, security, gaming, developer-tool, and consumer-app bran…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "visual_design_workflow",
+                                                                    "permission_and_scope_confirmed"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -6523,7 +7739,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "visual_design_workflow",
                                                             "permission_and_scope_confirmed"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Raw mechanical interfaces fusing Swiss typographic print with military terminal aesthetics. Rigid grids, extreme type scale contrast, utilitarian color, analog degradation effects. For data-heavy dashboards, portfolios, or editorial sites that need to feel like declassified bluep…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "visual_design_workflow",
+                                                                    "permission_and_scope_confirmed"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -6541,7 +7767,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "visual_design_workflow",
                                                             "permission_and_scope_confirmed"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Elite UX/UI \u0026 Advanced GSAP Motion Engineer. Enforces Python-driven true randomization for layout variance, strict AIDA page structure, wide editorial typography (bans 6-line wraps), gapless bento grids, strict GSAP ScrollTriggers (pinning, stacking, scrubbing), inline micro-imag…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "visual_design_workflow",
+                                                                    "permission_and_scope_confirmed"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -6559,7 +7795,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "visual_design_workflow",
                                                             "permission_and_scope_confirmed"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Elite mobile app image-generation skill for creating premium, app-native screen concepts and flows. Designed for iOS, Android, and cross-platform mobile products. Prioritizes clean hierarchy, comfortably readable text, strong multi-screen consistency, controlled color palettes, n…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "visual_design_workflow",
+                                                                    "permission_and_scope_confirmed"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -6577,7 +7823,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "visual_design_workflow",
                                                             "permission_and_scope_confirmed"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Elite frontend image-direction skill for generating premium, conversion-aware website design references. CRITICAL OUTPUT RULE — generate ONE separate horizontal image FOR EVERY section. A landing page with 8 sections produces 8 images. Never compress multiple sections into one im…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "visual_design_workflow",
+                                                                    "permission_and_scope_confirmed"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -6595,7 +7851,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "visual_design_workflow",
                                                             "permission_and_scope_confirmed"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Elite website image-to-code skill for Codex. For visually important web tasks, it must first generate the design image(s) itself, deeply analyze them, then implement the website to match them as closely as possible. In Codex, it must prefer large, readable, section-specific image…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "visual_design_workflow",
+                                                                    "permission_and_scope_confirmed"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -6613,7 +7879,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "visual_design_workflow",
                                                             "permission_and_scope_confirmed"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Clean editorial-style interfaces. Warm monochrome palette, typographic contrast, flat bento grids, muted pastels. No gradients, no heavy shadows.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "visual_design_workflow",
+                                                                    "permission_and_scope_confirmed"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -6631,7 +7907,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "visual_design_workflow",
                                                             "permission_and_scope_confirmed"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Overrides default LLM truncation behavior. Enforces complete code generation, bans placeholder patterns, and handles token-limit splits cleanly. Apply to any task requiring exhaustive, unabridged output.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "visual_design_workflow",
+                                                                    "permission_and_scope_confirmed"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -6644,12 +7930,25 @@ profile bundle, or prose-only mention is an alternative path.
                                       ],
                         "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
                         "activation":  {
-                                           "mode":  "manual",
+                                           "mode":  "guided_candidate",
                                            "triggers":  [
                                                             "explicit_user_request",
                                                             "visual_design_workflow",
                                                             "permission_and_scope_confirmed"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Upgrades existing websites and apps to premium quality. Audits current design, identifies generic AI patterns, and applies high-end design standards without breaking functionality. Works with any CSS framework or vanilla CSS.",
+                                           "explicit_signals":  [
+                                                                    "redesign",
+                                                                    "visually",
+                                                                    "upgrade",
+                                                                    "existing",
+                                                                    "website",
+                                                                    "application."
+                                                                ],
+                                           "inferred_signals":  [
+                                                                    "task_brief_matches_reviewed_purpose"
+                                                                ],
+                                           "confirmation_policy":  "single_confirmation_when_competing_candidates_match"
                                        }
                     },
                     {
@@ -6667,7 +7966,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "visual_design_workflow",
                                                             "permission_and_scope_confirmed"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Teaches the AI to design like a high-end agency. Defines the exact fonts, spacing, shadows, card structures, and animations that make a website feel expensive. Blocks all the common defaults that make AI designs look cheap or generic.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "visual_design_workflow",
+                                                                    "permission_and_scope_confirmed"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -6685,7 +7994,17 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "visual_design_workflow",
                                                             "permission_and_scope_confirmed"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Semantic Design System Skill for Google Stitch. Generates agent-friendly DESIGN.md files that enforce premium, anti-generic UI standards — strict typography, calibrated color, asymmetric layouts, perpetual micro-motion, and hardware-accelerated performance.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "visual_design_workflow",
+                                                                    "permission_and_scope_confirmed"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -6702,7 +8021,16 @@ profile bundle, or prose-only mention is an alternative path.
                                            "triggers":  [
                                                             "net_new_ui",
                                                             "substantial_ui_refactor"
-                                                        ]
+                                                        ],
+                                           "purpose":  "Anti-slop frontend skill for landing pages, portfolios, and redesigns. The agent reads the brief, infers the right design direction, and ships interfaces that do not look templated. Real design systems when applicable, audit-first on redesigns, strict pre-flight check.",
+                                           "explicit_signals":  [
+                                                                    "net_new_ui",
+                                                                    "substantial_ui_refactor"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "route_enforced"
                                        }
                     },
                     {
@@ -6720,13 +8048,24 @@ profile bundle, or prose-only mention is an alternative path.
                                                             "explicit_user_request",
                                                             "visual_design_workflow",
                                                             "permission_and_scope_confirmed"
-                                                        ]
+                                                        ],
+                                           "purpose":  "The original v1 taste-skill, preserved for projects depending on its exact behavior. The current default is `design-taste-frontend` (v2 experimental), which is a substantial rewrite. Use this v1 install name only if you need exact backward compatibility.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "visual_design_workflow",
+                                                                    "permission_and_scope_confirmed"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     }
                 ],
     "activation_modes":  [
+                             "manual",
                              "route_candidate",
-                             "manual"
+                             "guided_candidate"
                          ],
     "manual_selection_triggers":  [
                                       "explicit_user_request",
@@ -6743,4 +8082,272 @@ profile bundle, or prose-only mention is an alternative path.
 }
 
 ## END FILE: contracts/skill-registry.json
+
+---
+
+## BEGIN FILE: contracts/skill-workflow-graph.json
+
+{
+    "schema_version":  1,
+    "purpose":  "Machine-readable inter-skill workflow graph. It models artifact flow and blocking boundaries without claiming host-native tool interception or replacing route enforcement.",
+    "selection_postures":  [
+                               "route",
+                               "guided",
+                               "manual"
+                           ],
+    "orchestration_policy":  {
+                                 "standard_product_workflow":  "automatic_from_task_classification",
+                                 "user_skill_selection_required":  false,
+                                 "user_interaction_rule":  "Ask users only for product, content, risk, and design decisions. Never ask them to choose an internal skill or route.",
+                                 "restricted_manual_paths":  [
+                                                                 "security",
+                                                                 "credentials",
+                                                                 "external_writes",
+                                                                 "ctf_or_reversing",
+                                                                 "persistent_memory"
+                                                             ]
+                             },
+    "external_inputs":  [
+                            "task_classification",
+                            "explicit_user_intent",
+                            "current_ui_state",
+                            "implementation_result"
+                        ],
+    "default_pipelines":  [
+                              {
+                                  "id":  "website-delivery",
+                                  "triggers":  [
+                                                   "net_new_ui",
+                                                   "substantial_ui_refactor"
+                                               ],
+                                  "user_skill_selection_required":  false,
+                                  "nodes":  [
+                                                "requirements-grilling",
+                                                "design-direction-selection",
+                                                "image-mockup",
+                                                "frontend-implementation",
+                                                "behavior-verification",
+                                                "browser-and-visual-verification",
+                                                "code-review",
+                                                "handover"
+                                            ]
+                              }
+                          ],
+    "nodes":  [
+                  {
+                      "id":  "requirements-grilling",
+                      "posture":  "route",
+                      "user_skill_selection_required":  false,
+                      "route_ids":  [
+                                        "requirements-grilling"
+                                    ],
+                      "requires":  [
+
+                                   ],
+                      "consumes":  [
+                                       "task_classification"
+                                   ],
+                      "produces":  [
+                                       "approved_requirements_brief"
+                                   ],
+                      "blocks":  [
+                                     "specification",
+                                     "ui_design",
+                                     "ui_implementation"
+                                 ],
+                      "verification":  [
+                                           "single_question_dialogue",
+                                           "approved_requirements_brief",
+                                           "brief_validator_result"
+                                       ]
+                  },
+                  {
+                      "id":  "design-direction-selection",
+                      "posture":  "route",
+                      "user_skill_selection_required":  false,
+                      "route_ids":  [
+                                        "design-direction"
+                                    ],
+                      "requires":  [
+                                       "requirements-grilling"
+                                   ],
+                      "consumes":  [
+                                       "approved_requirements_brief",
+                                       "explicit_user_intent"
+                                   ],
+                      "produces":  [
+                                       "selected_design_direction"
+                                   ],
+                      "blocks":  [
+                                     "mockup_generation"
+                                 ],
+                      "verification":  [
+                                           "selected_or_user_confirmed_design_direction"
+                                       ]
+                  },
+                  {
+                      "id":  "image-mockup",
+                      "posture":  "route",
+                      "user_skill_selection_required":  false,
+                      "route_ids":  [
+                                        "ui-design"
+                                    ],
+                      "requires":  [
+                                       "requirements-grilling",
+                                       "design-direction-selection"
+                                   ],
+                      "consumes":  [
+                                       "approved_requirements_brief",
+                                       "selected_design_direction"
+                                   ],
+                      "produces":  [
+                                       "approved_mockup_or_explicit_opt_out"
+                                   ],
+                      "blocks":  [
+                                     "ui_code"
+                                 ],
+                      "verification":  [
+                                           "approved_requirements_brief",
+                                           "mockup_requested_or_explicit_opt_out",
+                                           "approved_mockup_or_explicit_opt_out",
+                                           "visual_verification_plan"
+                                       ]
+                  },
+                  {
+                      "id":  "frontend-implementation",
+                      "posture":  "route",
+                      "user_skill_selection_required":  false,
+                      "route_ids":  [
+                                        "ui-implementation"
+                                    ],
+                      "requires":  [
+                                       "requirements-grilling",
+                                       "image-mockup"
+                                   ],
+                      "consumes":  [
+                                       "approved_requirements_brief",
+                                       "approved_mockup_or_explicit_opt_out"
+                                   ],
+                      "produces":  [
+                                       "implementation_result"
+                                   ],
+                      "blocks":  [
+                                     "ui_code"
+                                 ],
+                      "verification":  [
+                                           "approved_requirements_brief",
+                                           "approved_mockup_or_explicit_opt_out",
+                                           "implementation_validation",
+                                           "visual_verification_plan"
+                                       ]
+                  },
+                  {
+                      "id":  "behavior-verification",
+                      "posture":  "route",
+                      "user_skill_selection_required":  false,
+                      "route_ids":  [
+                                        "test-design"
+                                    ],
+                      "requires":  [
+                                       "frontend-implementation"
+                                   ],
+                      "consumes":  [
+                                       "implementation_result"
+                                   ],
+                      "produces":  [
+                                       "behavior_verification_evidence"
+                                   ],
+                      "blocks":  [
+                                     "verified_behavior_change"
+                                 ],
+                      "verification":  [
+                                           "relevant_test_or_explicit_gap",
+                                           "command_result"
+                                       ]
+                  },
+                  {
+                      "id":  "browser-and-visual-verification",
+                      "posture":  "route",
+                      "user_skill_selection_required":  false,
+                      "route_ids":  [
+                                        "browser-verification",
+                                        "visual-verification"
+                                    ],
+                      "requires":  [
+                                       "frontend-implementation"
+                                   ],
+                      "consumes":  [
+                                       "implementation_result",
+                                       "current_ui_state"
+                                   ],
+                      "produces":  [
+                                       "browser_verification_evidence",
+                                       "visual_verification_evidence"
+                                   ],
+                      "blocks":  [
+                                     "browser_verified_claim",
+                                     "visual_verified_claim"
+                                 ],
+                      "verification":  [
+                                           "fresh_browser_observation",
+                                           "captured_artifact",
+                                           "screenshot_or_equivalent",
+                                           "boundary_check"
+                                       ]
+                  },
+                  {
+                      "id":  "code-review",
+                      "posture":  "route",
+                      "user_skill_selection_required":  false,
+                      "route_ids":  [
+                                        "code-review"
+                                    ],
+                      "requires":  [
+                                       "behavior-verification",
+                                       "browser-and-visual-verification"
+                                   ],
+                      "consumes":  [
+                                       "implementation_result",
+                                       "behavior_verification_evidence",
+                                       "browser_verification_evidence",
+                                       "visual_verification_evidence"
+                                   ],
+                      "produces":  [
+                                       "review_report"
+                                   ],
+                      "blocks":  [
+                                     "verified_review"
+                                 ],
+                      "verification":  [
+                                           "review_report",
+                                           "severity_and_evidence"
+                                       ]
+                  },
+                  {
+                      "id":  "handover",
+                      "posture":  "route",
+                      "user_skill_selection_required":  false,
+                      "route_ids":  [
+                                        "handover"
+                                    ],
+                      "requires":  [
+                                       "code-review"
+                                   ],
+                      "consumes":  [
+                                       "review_report"
+                                   ],
+                      "produces":  [
+                                       "reviewable_handover"
+                                   ],
+                      "blocks":  [
+                                     "handover"
+                                 ],
+                      "verification":  [
+                                           "reviewable_handover"
+                                       ]
+                  }
+              ]
+}
+
+## END FILE: contracts/skill-workflow-graph.json
 

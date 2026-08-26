@@ -28,3 +28,21 @@ choice remains ambiguous, and manual-only handling for restricted capabilities.
 - Conflicting visual styles are reported as a one-question confirmation requirement.
 - No reverse-skill or persistent-memory record becomes inferred/automatic.
 - Existing registry, routing, enforcement, package, and generated-bundle validation passes.
+
+## Product-first workflow hardening addendum
+
+The standard website-delivery flow must be executable rather than only documented.
+
+1. Design direction and handover are recorded routes. Design direction must close before a mockup
+   can be invoked; handover must close after code review.
+2. A closure claim that represents a durable artifact must include a structured artifact record:
+   an allowed artifact kind, an existing path, and the SHA-256 observed when the record is made.
+   The workflow state stores these records and re-checks them before later transitions.
+3. The standard website route requires artifacts for: requirements brief, design-direction record,
+   mockup-or-opt-out record, implementation validation, behavior result, browser observation,
+   visual capture, review report, and handover.
+4. Preflight must choose a currently available primary alias, then an available conditional alias,
+   before applying a route's explicit native fallback. It must not remain blocked merely because
+   the first listed alias is unavailable while another approved alias is present.
+5. A verified host-native interception hook is not assumed. The contracts must retain the honest
+   `workflow_enforced` boundary until an actual Codex hook is separately evidenced.

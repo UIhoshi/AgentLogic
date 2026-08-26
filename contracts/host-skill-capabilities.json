@@ -15,7 +15,8 @@
                                                                            "scripts/skill-enforcement.ps1",
                                                                            "contracts/skill-enforcement.json",
                                                                            "contracts/skill-routing.json",
-                                                                           "contracts/skill-registry.json"
+                                                                           "contracts/skill-registry.json",
+                                                                           "contracts/skill-workflow-graph.json"
                                                                        ]
                                                 }
                             },
@@ -30,7 +31,8 @@
                                                                             "scripts/skill-enforcement.ps1",
                                                                             "contracts/skill-enforcement.json",
                                                                             "contracts/skill-routing.json",
-                                                                            "contracts/skill-registry.json"
+                                                                            "contracts/skill-registry.json",
+                                                                            "contracts/skill-workflow-graph.json"
                                                                         ]
                                                  }
                              },
@@ -45,7 +47,8 @@
                                                                                  "scripts/skill-enforcement.ps1",
                                                                                  "contracts/skill-enforcement.json",
                                                                                  "contracts/skill-routing.json",
-                                                                                 "contracts/skill-registry.json"
+                                                                                 "contracts/skill-registry.json",
+                                                                                 "contracts/skill-workflow-graph.json"
                                                                              ]
                                                       }
                                   },
@@ -60,7 +63,8 @@
                                                                              "scripts/skill-enforcement.ps1",
                                                                              "contracts/skill-enforcement.json",
                                                                              "contracts/skill-routing.json",
-                                                                             "contracts/skill-registry.json"
+                                                                             "contracts/skill-registry.json",
+                                                                             "contracts/skill-workflow-graph.json"
                                                                          ]
                                                   }
                               }
@@ -73,7 +77,8 @@
                                               "scripts/skill-enforcement.ps1",
                                               "contracts/skill-enforcement.json",
                                               "contracts/skill-routing.json",
-                                              "contracts/skill-registry.json"
+                                              "contracts/skill-registry.json",
+                                              "contracts/skill-workflow-graph.json"
                                           ]
                             }
 }

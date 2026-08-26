@@ -36,7 +36,10 @@
                                                    "availability_check",
                                                    "invocation_record"
                                                ],
-                       "exemption_policy":  "none"
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+                                                     "requirements_brief"
+                                                 ]
                    },
                    {
                        "id":  "ui-design",
@@ -62,7 +65,8 @@
                        "selection_rule":  "Use imagegen (or an explicitly approved equivalent image-generation capability) for the mockup/edit. nano-banana-pro is an approved equivalent only when installed; taste-skill may guide art direction but cannot replace image generation. Do not use a frontend implementation skill as mockup evidence.",
                        "order":  20,
                        "requires_routes":  [
-                                               "requirements-grilling"
+                                               "requirements-grilling",
+                                               "design-direction"
                                            ],
                        "blocked_transitions":  [
                                                    "ui_code"
@@ -72,7 +76,10 @@
                                                    "availability_check",
                                                    "invocation_record"
                                                ],
-                       "exemption_policy":  "explicit_user_opt_out_of_mockup_only"
+                       "exemption_policy":  "explicit_user_opt_out_of_mockup_only",
+                       "artifact_requirements":  [
+                                                     "mockup_or_opt_out_record"
+                                                 ]
                    },
                    {
                        "id":  "code-review",
@@ -108,7 +115,10 @@
                                                    "availability_check",
                                                    "invocation_record"
                                                ],
-                       "exemption_policy":  "none"
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+                                                     "review_report"
+                                                 ]
                    },
                    {
                        "id":  "security-review",
@@ -143,7 +153,10 @@
                                                    "availability_check",
                                                    "invocation_record"
                                                ],
-                       "exemption_policy":  "none"
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+
+                                                 ]
                    },
                    {
                        "id":  "browser-verification",
@@ -177,7 +190,10 @@
                                                    "availability_check",
                                                    "invocation_record"
                                                ],
-                       "exemption_policy":  "none"
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+                                                     "browser_observation"
+                                                 ]
                    },
                    {
                        "id":  "visual-verification",
@@ -212,7 +228,10 @@
                                                    "availability_check",
                                                    "invocation_record"
                                                ],
-                       "exemption_policy":  "none"
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+                                                     "visual_capture"
+                                                 ]
                    },
                    {
                        "id":  "test-design",
@@ -248,7 +267,10 @@
                                                    "availability_check",
                                                    "invocation_record"
                                                ],
-                       "exemption_policy":  "none"
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+                                                     "behavior_result"
+                                                 ]
                    },
                    {
                        "id":  "package-release",
@@ -295,7 +317,10 @@
                                                                              ],
                                                                 "requires_remote_target":  true
                                                             }
-                                                        ]
+                                                        ],
+                       "artifact_requirements":  [
+
+                                                 ]
                    },
                    {
                        "id":  "ui-implementation",
@@ -331,7 +356,10 @@
                                                    "availability_check",
                                                    "invocation_record"
                                                ],
-                       "exemption_policy":  "none"
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+                                                     "implementation_validation_record"
+                                                 ]
                    },
                    {
                        "id":  "extension-security-review",
@@ -365,7 +393,80 @@
                                                    "availability_check",
                                                    "invocation_record"
                                                ],
-                       "exemption_policy":  "none"
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+
+                                                 ]
+                   },
+                   {
+                       "id":  "design-direction",
+                       "triggers":  [
+                                        "net_new_ui",
+                                        "substantial_ui_refactor"
+                                    ],
+                       "capability":  "design_direction",
+                       "fallback":  "allow_native_design_direction",
+                       "closure_evidence":  [
+                                                "selected_or_user_confirmed_design_direction"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "taste-skill"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+
+                                                          ],
+                       "selection_rule":  "Use taste-skill when available to derive a design direction from the approved requirements brief. Otherwise record the direction through the native design-direction fallback; users decide visual facts, never the internal skill.",
+                       "order":  15,
+                       "requires_routes":  [
+                                               "requirements-grilling"
+                                           ],
+                       "blocked_transitions":  [
+                                                   "mockup_generation"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+                                                     "design_direction_record"
+                                                 ]
+                   },
+                   {
+                       "id":  "handover",
+                       "triggers":  [
+                                        "net_new_ui",
+                                        "substantial_ui_refactor"
+                                    ],
+                       "capability":  "handover",
+                       "fallback":  "allow_native_handover",
+                       "closure_evidence":  [
+                                                "reviewable_handover"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "changelog-generator"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+
+                                                          ],
+                       "selection_rule":  "Use changelog-generator when available to produce a reviewable handover. Otherwise record the handover through the native fallback after review closes.",
+                       "order":  75,
+                       "requires_routes":  [
+                                               "code-review"
+                                           ],
+                       "blocked_transitions":  [
+                                                   "handover"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+                                                     "handover_record"
+                                                 ]
                    }
                ],
     "non_default_skill_policy":  [

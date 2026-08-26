@@ -32,7 +32,7 @@ $states = @($registry.lifecycle_states)
 $expectedStates = @('mandatory','conditional','manual_only','archived','deprecated')
 if ((@($states | Sort-Object) -join ',') -ne (@($expectedStates | Sort-Object) -join ',')) { throw 'Skill registry lifecycle_states must be the canonical five states.' }
 $activationModes = @($registry.activation_modes)
-if ((@($activationModes | Sort-Object) -join ',') -ne ((@('manual','route_candidate') | Sort-Object) -join ',')) { throw 'Skill registry activation_modes must be manual and route_candidate.' }
+if ((@($activationModes | Sort-Object) -join ',') -ne ((@('manual','route_candidate','guided_candidate') | Sort-Object) -join ',')) { throw 'Skill registry activation_modes must be manual, route_candidate, and guided_candidate.' }
 $manualTriggers = @($registry.manual_selection_triggers)
 if ($manualTriggers.Count -eq 0 -or @($manualTriggers | Where-Object { [string]::IsNullOrWhiteSpace([string]$_) }).Count -gt 0 -or @($manualTriggers | Sort-Object -Unique).Count -ne $manualTriggers.Count) { throw 'Skill registry manual_selection_triggers must be a non-empty unique list.' }
 $recordsByPath = @{}
@@ -47,6 +47,9 @@ foreach ($record in @($registry.records)) {
     $activationTriggers = @($record.activation.triggers)
     if ($activationTriggers.Count -eq 0 -or @($activationTriggers | Where-Object { [string]::IsNullOrWhiteSpace([string]$_) }).Count -gt 0 -or @($activationTriggers | Sort-Object -Unique).Count -ne $activationTriggers.Count) { throw "Skill registry record '$($record.id)' needs unique non-empty activation triggers." }
     $routable = $record.lifecycle -in @('mandatory','conditional')
+    foreach ($field in @('purpose','explicit_signals','confirmation_policy')) { if ($null -eq $record.activation.$field -or [string]::IsNullOrWhiteSpace([string]$record.activation.$field)) { throw "Skill registry record '$($record.id)' is missing activation $field." } }
+    if ($null -eq $record.activation.inferred_signals) { throw "Skill registry record '$($record.id)' is missing activation inferred_signals." }
+    foreach ($field in @('explicit_signals','inferred_signals')) { if (@($record.activation.$field | Where-Object { [string]::IsNullOrWhiteSpace([string]$_) }).Count -gt 0) { throw "Skill registry record '$($record.id)' has empty activation $field." } }
     if ($routable) {
         if ($record.activation.mode -ne 'route_candidate') { throw "Routable skill '$($record.id)' must use route_candidate activation." }
         $expectedTriggers = @()
@@ -57,8 +60,9 @@ foreach ($record in @($registry.records)) {
         $expectedTriggers = @($expectedTriggers | Sort-Object -Unique)
         if ((@($activationTriggers | Sort-Object) -join '|') -ne ($expectedTriggers -join '|')) { throw "Routable skill '$($record.id)' activation triggers must match its routed triggers." }
     } else {
-        if ($record.activation.mode -ne 'manual') { throw "Non-routable skill '$($record.id)' must use manual activation." }
+        if ($record.activation.mode -notin @('manual','guided_candidate')) { throw "Non-routable skill '$($record.id)' must use manual or guided_candidate activation." }
         if (@($activationTriggers | Where-Object { $manualTriggers -notcontains $_ }).Count -gt 0) { throw "Manual skill '$($record.id)' has activation triggers outside manual_selection_triggers." }
+        if ($record.activation.mode -eq 'guided_candidate' -and @($record.activation.inferred_signals).Count -eq 0) { throw "Guided skill '$($record.id)' requires inferred signals." }
     }
     if ($record.entrypoint -notmatch '^skills/.+/SKILL\.md$') { throw "Skill registry entrypoint must be a portable SKILL.md path: $($record.entrypoint)" }
     $key = $record.entrypoint.ToLowerInvariant()

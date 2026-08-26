@@ -10,8 +10,8 @@
 - Key modules: `modules/01_MasterLogic.md`, Modules 29–31, 35, 38–39, 41, 44–53.
 
 ## L3 — Control & Verification
-- Controls: permissions, tool-permission risk gates, extension trust, programming-level skill routing and workflow enforcement, package validation, and entry-gate checks.
-- Validation commands: `node scripts/check-logic-entry.js`; `scripts/audit-skill-duplicates.ps1`; `scripts/validate-skill-registry.ps1`; `scripts/test-skill-registry.ps1`; `scripts/validate-skill-routing.ps1`; `scripts/test-skill-enforcement.ps1`; `scripts/validate-package.ps1`; and
+- Controls: permissions, tool-permission risk gates, extension trust, programming-level skill routing, product-first automatic website workflow selection (without user skill choice), graph-derived route dependencies that block review before verification, artifact-path/hash integrity checks, guided catalog query, workflow enforcement, package validation, and entry-gate checks.
+- Validation commands: `node scripts/check-logic-entry.js`; `scripts/audit-skill-duplicates.ps1`; `scripts/validate-skill-registry.ps1`; `scripts/test-skill-registry.ps1`; `scripts/validate-skill-routing.ps1`; `scripts/validate-skill-workflow-graph.ps1`; `scripts/test-skill-workflow-graph.ps1`; `scripts/test-skill-enforcement.ps1`; `scripts/validate-package.ps1`; and
   `scripts/maintainer-check.ps1` for release-level changes.
 
 ## L4 — Base & Dependencies

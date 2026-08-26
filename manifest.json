@@ -58,7 +58,8 @@
                                                          "contracts/host-skill-capabilities.json",
                                                          "modules/53_V6_8_ProgrammingLevelSkillEnforcement.md",
                                                          "contracts/skill-enforcement.json",
-                                                         "contracts/skill-registry.json"
+                                                         "contracts/skill-registry.json",
+                                                         "contracts/skill-workflow-graph.json"
                                                      ]
                                        },
                      "github-publishing":  {
