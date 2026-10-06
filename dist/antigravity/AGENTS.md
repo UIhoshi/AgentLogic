@@ -698,9 +698,13 @@ Key stable rules:
 - PixelRAG and Firecrawl remain optional external-source policies. They do not grant
   automatic artifact generation, visual-proof closure, network collection, credential use,
   installation authority, or trust.
-- OfficeCLI is mandatory only for user-requested Office-file processing after its separate
+- OfficeCLI is mandatory only for user-requested Office-file processing after its
   availability, trust, and install gates close; it does not grant an automatic binary installation,
   host-skill deployment, update permission, or visual-proof closure.
+- Requested installations with missing audits or capabilities use Module 49's prerequisite bundle:
+  disclose the exact missing items, sources, targets, reviews, effects, and verification once, then
+  ask whether to perform the disclosed sequence together. One scoped approval avoids repeated
+  ordinary confirmations but never waives failed audits, host permissions, or a new material risk.
 - The default `core-enhanced` profile is the concise execution layer. The
   `governance-reference` profile retains the full narrative governance set for deep maintenance,
   policy, and audit work. Tool choice starts from the work outcome and required evidence; an
@@ -3303,6 +3307,39 @@ must not silently replace a strict specialized route with generic reasoning or a
 Explicit opt-outs remain limited to their existing contracts, such as the UI mockup opt-out. They do
 not waive requirements discovery, security evidence, or visual/runtime proof.
 
+## Prerequisite bundle and single-consent installation
+
+When the user requests installation or enablement and a required audit, tool, dependency, or trust
+decision is missing, do not turn the dependency chain into repeated surprise questions. First do
+read-only preflight against the current host and present one concise, actionable bundle:
+
+1. State that installation cannot safely proceed **yet**, and distinguish already available
+   capabilities from the exact missing items. Do not ask the user to install an item that is already
+   available; if no permitted route exists, say so rather than inventing one.
+2. For each proposed item, give its purpose, source and pinned version/commit when known, exact
+   install/enable target, required security and integrity reviews, expected local/external effects,
+   credentials or data egress, and the post-install check or recovery path. Mark unresolved facts
+   explicitly; do not describe a candidate as trusted or installed.
+3. Ask **once** whether the user wants the listed reviews, prerequisite setup, and requested
+   installation performed together. An explicit yes authorizes only the disclosed targets and
+   actions; it is not blanket consent for future installs or a waiver of host permissions.
+4. Within that approved scope, run the reviews before trusting or executing the candidate, then
+   perform bounded steps and post-result verification without asking again at every ordinary
+   boundary. Stop if a mandatory check fails, permission is denied, or a required capability
+   remains unavailable. Report the blocker and the next safe option instead of retrying blindly.
+5. If discovery changes the source/version, target, data destination, credential need, external
+   effect, or risk materially, present the delta and obtain a new decision before that new action.
+   Never silently add a dependency or extend the approval to a different product or host.
+
+If the security-audit capability itself is missing, include that gap in the same bundle. Use an
+already trusted first-party/local review path when permitted; otherwise remain blocked and offer a
+reviewable setup option. Do not fetch an untrusted auditor and let it certify its own installation.
+The bundle reduces conversation friction, not the underlying audit or permission standard.
+
+Suggested user-facing shape (render in the user's language): “I cannot safely install this yet.
+Missing: [only the actual gaps]. I can review [source/version] and install [listed items] to
+[targets], then run [checks]; [notable risks/effects]. Shall I do these together?”
+
 ## Core routes
 
 - Major features, net-new UI, and substantial UI refactors require single-question requirements
@@ -3432,7 +3469,9 @@ equivalent route.
 
 - If OfficeCLI is not installed, trusted, and permitted in the current target project or host, do
   not mutate the Office file and do not claim a verified Office-file result. State the missing
-  capability and request the separate installation decision.
+  capability and follow Module 49's prerequisite-bundle rule. One explicit decision may cover the
+  disclosed audits, missing prerequisites, and OfficeCLI installation together; do not request
+  another decision for each ordinary step within that approved scope.
 - Installation requires explicit user consent, a pinned release or commit, publisher/license and
   checksum or signature verification, and the external skill/plugin security-audit route. Do not
   execute `curl | bash`, `irm | iex`, or any installer behavior that automatically deploys skills

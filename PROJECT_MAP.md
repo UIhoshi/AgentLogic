@@ -26,7 +26,7 @@
 - [ ] No host-local availability of optional browser, screenshot, security, or profiling skills is
   implied by this repository map.
 
-- Autonomous routing: contracts/skill-routing.json and Module 49 define canonical capabilities, strict gaps, and software-candidate reporting.
+- Autonomous routing: contracts/skill-routing.json and Module 49 define canonical capabilities, strict gaps, software-candidate reporting, and a single scoped consent bundle for disclosed installation prerequisites without waiving audits or host permissions.
 
 - Product/UI discovery: `skills/productivity/product-requirements-grilling/` produces a user-approved requirements brief; `scripts/validate-requirements-brief.ps1` checks it before mockup/UI implementation. The Codex adapter deploys this first-party skill to `.codex/skills/`.
 

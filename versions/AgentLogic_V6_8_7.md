@@ -208,9 +208,13 @@ Key stable rules:
 - PixelRAG and Firecrawl remain optional external-source policies. They do not grant
   automatic artifact generation, visual-proof closure, network collection, credential use,
   installation authority, or trust.
-- OfficeCLI is mandatory only for user-requested Office-file processing after its separate
+- OfficeCLI is mandatory only for user-requested Office-file processing after its
   availability, trust, and install gates close; it does not grant an automatic binary installation,
   host-skill deployment, update permission, or visual-proof closure.
+- Requested installations with missing audits or capabilities use Module 49's prerequisite bundle:
+  disclose the exact missing items, sources, targets, reviews, effects, and verification once, then
+  ask whether to perform the disclosed sequence together. One scoped approval avoids repeated
+  ordinary confirmations but never waives failed audits, host permissions, or a new material risk.
 - The default `core-enhanced` profile is the concise execution layer. The
   `governance-reference` profile retains the full narrative governance set for deep maintenance,
   policy, and audit work. Tool choice starts from the work outcome and required evidence; an

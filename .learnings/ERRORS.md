@@ -1,4 +1,11 @@
 # Project Error Log
+## 2026-10-06 - Installation prerequisites caused repeated confirmation prompts
+- Symptom: A requested OfficeCLI setup expanded into separate questions for review tooling, audits, and installation, despite one bounded objective.
+- Root cause: The strict missing-capability and consent rules did not say to disclose the full prerequisite chain before asking.
+- Correction: Module 49 now requires a scoped prerequisite bundle and one explicit decision for the listed review/setup/install sequence; Module 50 follows it for OfficeCLI.
+- Prevention: Re-ask only for a failed gate or materially changed source, target, permission, data destination, or risk; never treat bundle approval as audit bypass.
+- Verification: Generated bundles and package/maintainer checks pass; no installer execution is implied by this rule change.
+
 ## 2026-08-27 - PowerShell interpolation treated a label followed by a colon as a drive-qualified variable
 - Symptom: The new workflow-graph validator failed to parse at `"Missing $Label: $Path"`.
 - Root cause: PowerShell interpreted `$Label:` as a variable reference with a drive qualifier.

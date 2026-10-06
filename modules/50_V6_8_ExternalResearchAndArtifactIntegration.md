@@ -35,7 +35,9 @@ equivalent route.
 
 - If OfficeCLI is not installed, trusted, and permitted in the current target project or host, do
   not mutate the Office file and do not claim a verified Office-file result. State the missing
-  capability and request the separate installation decision.
+  capability and follow Module 49's prerequisite-bundle rule. One explicit decision may cover the
+  disclosed audits, missing prerequisites, and OfficeCLI installation together; do not request
+  another decision for each ordinary step within that approved scope.
 - Installation requires explicit user consent, a pinned release or commit, publisher/license and
   checksum or signature verification, and the external skill/plugin security-audit route. Do not
   execute `curl | bash`, `irm | iex`, or any installer behavior that automatically deploys skills
