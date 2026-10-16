@@ -59,10 +59,11 @@
                                                           "imagegen"
                                                       ],
                        "conditional_host_skill_aliases":  [
+                                                              "image-generator",
                                                               "nano-banana-pro",
                                                               "taste-skill"
                                                           ],
-                       "selection_rule":  "Use imagegen (or an explicitly approved equivalent image-generation capability) for the mockup/edit. nano-banana-pro is an approved equivalent only when installed; taste-skill may guide art direction but cannot replace image generation. Do not use a frontend implementation skill as mockup evidence.",
+                       "selection_rule":  "Use imagegen (or an explicitly approved equivalent image-generation capability such as Antigravity's built-in image-generator subagent or nano-banana-pro when installed) for the mockup/edit; taste-skill may guide art direction but cannot replace image generation. Do not use a frontend implementation skill as mockup evidence.",
                        "order":  20,
                        "requires_routes":  [
                                                "requirements-grilling",

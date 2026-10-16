@@ -133,7 +133,11 @@ capability; it does not turn every routine task into a skill-selection ceremony.
 
 The `product-requirements-grilling` skill is a first-party requirement, not merely a Codex-local
 convenience. Every supported adapter must deploy it and post-verify its `SKILL.md` path according
-to `contracts/host-skill-capabilities.json`. A generic installation places it beside the generated
+to `contracts/host-skill-capabilities.json`. For Antigravity, whose per-file rule limit (`24 KB`)
+requires a delegation hook in `GEMINI.md` rather than inlining the full bundle, the adapter must
+also inline the blocking **UI Preview & Requirements Gate** directly inside `GEMINI.md` and register
+the host-local skills directory in `config/skills.json`, mapping `ui-design` image generation to
+Antigravity's built-in `image-generator` subagent or `nano-banana-pro`. A generic installation places it beside the generated
 bundle under `skills/`; the generic host integrator must load that colocated skill before treating
 requirements-grilling as available. The deployment contract does not claim that third-party or
 system skills are installed.

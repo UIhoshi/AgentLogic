@@ -688,7 +688,7 @@ Key stable rules:
 - The Cybersecurity Skills Router governs reversing, CTFs, and security audits; it does not replace general verification rules but adds specific tool constraints.
 - Spec-Driven Development templates and presets are verified through code compilation and test runs.
 - The Taste Frontend Design skill enforces layout, motion, and typography standards on all visual interfaces.
-- For Antigravity CLI (which relies on `~/.gemini/GEMINI.md` for rule loading and `~/.gemini/AgentLogic/GEMINI.md` for agent-level priority detection), the installer configures rule hooks at both paths simultaneously, while cleaning up any stale/duplicate legacy logic files during installation.
+- For Antigravity CLI (which relies on `~/.gemini/GEMINI.md` for rule loading with a 24 KB per-file cap and `~/.gemini/AgentLogic/GEMINI.md` for agent-level priority detection), the installer configures UTF-8 rule hooks at both paths with the Startup Gate and Mandatory UI Preview & Requirements Gate inlined directly, registers the host-local skills root in `~/.gemini/config/skills.json`, and maps UI mockup generation to Antigravity's `image-generator` subagent or `nano-banana-pro`.
 - The `agent-browser` skill provides deterministic accessibility-tree browser automation, preferred dynamically when dynamic page rendering, multi-step actions, or session-isolated login tracking is required.
 - The `ponytail` skill channels a lazy senior developer, enforcing the 7-rung ladder (YAGNI, reuse, stdlib, native, dependency, one-line, min-code) to prevent vibe-coding slop and over-engineering.
 - The `mattpocock/skills` integration mandates interactive grilling (single-question stress-testing), root-level `CONTEXT.md` vocabulary maps, and docs/adr/ numbered Architectural Decision Records.
@@ -2486,7 +2486,7 @@ For redesigns or visual upgrades of existing projects, follow this checklist:
 For net-new UI and substantial UI refactors, the Agent MUST NOT write production HTML/CSS/JS/UI code directly. Instead, follow this mandatory visual prototyping gate. A clearly classified small visual correction may skip a new mockup under Module 49, but must still pass visual verification; ambiguous changes follow this gate. An explicit user instruction not to use the preview step also bypasses mockup approval:
 
 1. **Prompt Formulation**: Formulate a highly detailed visual layout and style prompt based on the user's requirements (specifying typography, layout variance dials, HSL color palette, and visual density).
-2. **Prototyping**: Invoke the text-to-image generation tool to generate a visual mockup / design image of the proposed UI.
+2. **Prototyping**: Invoke the host's text-to-image generation capability (e.g., `imagegen` on Codex, `invoke_subagent(TypeName="image-generator")` or `nano-banana-pro` on Antigravity) to generate a visual mockup / design image of the proposed UI. Never skip this step merely because a tool is named `image-generator` instead of `imagegen`.
 3. **Artifact Review & Storage**: Save the generated image as a persistent artifact. If the host environment or chat client prevents direct visual rendering, save the mockup image directly to a visible folder within the project workspace (e.g., `.specify/mockups/` or the conversation artifacts folder), state the absolute file path clearly, and instruct the user to view the file locally.
 4. **Interactive Consent**: Wait for the user to inspect the visual design mockup (either directly in the chat UI or via the local saved file path) and either explicitly approve it or explicitly opt out of the preview gate.
 5. **Implementation**: Only after approval or explicit opt-out may the Agent proceed to code implementation. If the user requests changes, refine the prompt, re-run image generation, and present the updated design.
@@ -3397,7 +3397,11 @@ capability; it does not turn every routine task into a skill-selection ceremony.
 
 The `product-requirements-grilling` skill is a first-party requirement, not merely a Codex-local
 convenience. Every supported adapter must deploy it and post-verify its `SKILL.md` path according
-to `contracts/host-skill-capabilities.json`. A generic installation places it beside the generated
+to `contracts/host-skill-capabilities.json`. For Antigravity, whose per-file rule limit (`24 KB`)
+requires a delegation hook in `GEMINI.md` rather than inlining the full bundle, the adapter must
+also inline the blocking **UI Preview & Requirements Gate** directly inside `GEMINI.md` and register
+the host-local skills directory in `config/skills.json`, mapping `ui-design` image generation to
+Antigravity's built-in `image-generator` subagent or `nano-banana-pro`. A generic installation places it beside the generated
 bundle under `skills/`; the generic host integrator must load that colocated skill before treating
 requirements-grilling as available. The deployment contract does not claim that third-party or
 system skills are installed.
@@ -3824,10 +3828,11 @@ For the reference-based interactive 3D route:
                                                           "imagegen"
                                                       ],
                        "conditional_host_skill_aliases":  [
+                                                              "image-generator",
                                                               "nano-banana-pro",
                                                               "taste-skill"
                                                           ],
-                       "selection_rule":  "Use imagegen (or an explicitly approved equivalent image-generation capability) for the mockup/edit. nano-banana-pro is an approved equivalent only when installed; taste-skill may guide art direction but cannot replace image generation. Do not use a frontend implementation skill as mockup evidence.",
+                       "selection_rule":  "Use imagegen (or an explicitly approved equivalent image-generation capability such as Antigravity's built-in image-generator subagent or nano-banana-pro when installed) for the mockup/edit; taste-skill may guide art direction but cannot replace image generation. Do not use a frontend implementation skill as mockup evidence.",
                        "order":  20,
                        "requires_routes":  [
                                                "requirements-grilling",
