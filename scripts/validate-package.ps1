@@ -268,6 +268,20 @@ if ($manifest.current_version -match '^V6\.(8\.[3-9]|9\.)') {
     }
 }
 
+$cp1252 = [System.Text.Encoding]::GetEncoding(1252)
+$operationalPs1Files = @(Get-ChildItem -Path (Join-Path $RepoRoot "scripts") -Filter *.ps1) + @(Get-ChildItem -Path (Join-Path $RepoRoot "adapters") -Recurse -Filter *.ps1) + @(Get-Item -Path (Join-Path $RepoRoot "install.ps1"))
+foreach ($ps1File in $operationalPs1Files) {
+    $bytes = [System.IO.File]::ReadAllBytes($ps1File.FullName)
+    $hasBom = ($bytes.Length -ge 3 -and $bytes[0] -eq 0xEF -and $bytes[1] -eq 0xBB -and $bytes[2] -eq 0xBF)
+    $textForParser = if ($hasBom) { [System.Text.Encoding]::UTF8.GetString($bytes, 3, $bytes.Length - 3) } else { $cp1252.GetString($bytes) }
+    $tokens = $null
+    $parseErrors = $null
+    [void][System.Management.Automation.Language.Parser]::ParseInput($textForParser, [ref]$tokens, [ref]$parseErrors)
+    if ($parseErrors -and $parseErrors.Count -gt 0) {
+        Fail "PowerShell script '$($ps1File.FullName)' failed CP1252 (Windows PowerShell 5.1 default) syntax parse: $($parseErrors[0].Message)"
+    }
+}
+
 $buildScript = Join-Path $RepoRoot "scripts\build-profile.ps1"
 foreach ($hostName in $manifest.host_outputs.PSObject.Properties.Name) {
     & powershell -NoProfile -ExecutionPolicy Bypass -File $buildScript -ProfileName $manifest.default_profile -TargetHost $hostName -Verify

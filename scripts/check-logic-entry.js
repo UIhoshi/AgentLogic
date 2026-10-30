@@ -414,6 +414,32 @@ function checkCodeMapReadability() {
   ok(`${relPath} is valid UTF-8 and contains no disallowed control characters.`);
 }
 
+function checkOperationalPowerShellAsciiSafety() {
+  for (const relPath of OPERATIONAL_ENTRY_FILES) {
+    if (!relPath.endsWith('.ps1')) continue;
+    const fullPath = path.join(ROOT, relPath);
+    if (!fs.existsSync(fullPath)) continue;
+    const buf = fs.readFileSync(fullPath);
+    const hasBom = buf.length >= 3 && buf[0] === 0xef && buf[1] === 0xbb && buf[2] === 0xbf;
+    const startIdx = hasBom ? 3 : 0;
+    let nonAsciiByte = -1;
+    let nonAsciiOffset = -1;
+    for (let i = startIdx; i < buf.length; i++) {
+      if (buf[i] > 0x7f) {
+        nonAsciiByte = buf[i];
+        nonAsciiOffset = i;
+        break;
+      }
+    }
+    if (nonAsciiByte !== -1 && !hasBom) {
+      fail(
+        `PowerShell entry script '${relPath}' contains non-ASCII byte 0x${nonAsciiByte.toString(16)} at offset ${nonAsciiOffset} without UTF-8 BOM (breaks Windows PowerShell 5.1 under CP1252). Use pure ASCII with \\uXXXX escapes.`
+      );
+    }
+  }
+  ok('All operational PowerShell entry scripts are CP1252 / Windows PowerShell 5.1 encoding-safe.');
+}
+
 function main() {
   console.log('Checking repository logic-entry enforcement...\n');
 
@@ -434,6 +460,7 @@ function main() {
   checkExternalReferences();
   checkProjectKnowledgeSyncContract();
   checkCodeMapReadability();
+  checkOperationalPowerShellAsciiSafety();
 
   if (hasError) {
     console.error('\nLogic-entry check FAILED.');

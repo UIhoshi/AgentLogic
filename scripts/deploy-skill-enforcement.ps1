@@ -1,4 +1,4 @@
-﻿# MANDATORY LOGIC GATE
+# MANDATORY LOGIC GATE
 #
 # Read `AGENTS.md` and `README.md` before making changes here.
 # Then follow the repository-declared logic entry chain.

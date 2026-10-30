@@ -8,27 +8,24 @@
 > [!CRITICAL]
 > **CROSS-HOST MANDATORY BLOCKING GATES (Antigravity / Claude Code / OpenAI Codex / Generic)**:
 >
-> **Gate 1 鈥?Startup Context-Reset & Autonomous Role Recommendation Gate (Turn 1 Blocking)**:
+> **Gate 1 — Startup Context-Reset & Autonomous Role Recommendation Gate (Turn 1 Blocking)**:
 > Do NOT merely read, recite, or summarize AgentLogic rules as passive background text. On Turn 1 of any new project or non-continuation task, you MUST interactively execute BOTH:
-> 1. **Context-Reset Confirmation**: Ask whether the current task extends the previous coding round, and if not, whether to orget/compress context (in the user's active language):
->    - Chinese: '褰撳墠浠诲姟鏄惁灞炰簬涓婁竴杞?coding 鐨勫欢缁紵鑻ヤ笉鏄紝璇风‘璁ゆ槸鍚﹂渶瑕?forget/compress context銆?
+> 1. **Context-Reset Confirmation**: Ask whether the current task extends the previous coding round, and if not, whether to `forget/compress context` (in the user's active language):
+>    - Chinese: '当前任务是否属于上一轮 coding 的延续？若不是，请确认是否需要 forget/compress context。'
 >    - English: 'Does the current task extend the previous coding round? If not, please confirm whether to forget/compress context.'
-> 2. **Autonomous Role Recommendation & Selection (
-ole-persona-router)**: Analyze the project domain, recommend the #1 best-fit Lead Role (with a 1-sentence rationale), and present the 7-role selection menu ([1] Principal Systems Architect & Full-Stack Lead, [2] UI/UX Creative Design Director, [3] Reverse Engineering & Reconstruction Specialist, [4] Management Consultant & Office Architect, [5] Multimodal Creative Director (Image/Video/Music), [6] Chief Showrunner & Novel Architect, [7] Enterprise Flowchart & Architecture Cartographer) so the user can confirm or switch the executing persona.
+> 2. **Autonomous Role Recommendation & Selection (`role-persona-router`)**: Analyze the project domain, recommend the #1 best-fit Lead Role (with a 1-sentence rationale), and present the 7-role selection menu (`[1] Principal Systems Architect & Full-Stack Lead`, `[2] UI/UX Creative Design Director`, `[3] Reverse Engineering & Reconstruction Specialist`, `[4] Management Consultant & Office Architect`, `[5] Multimodal Creative Director (Image/Video/Music)`, `[6] Chief Showrunner & Novel Architect`, `[7] Enterprise Flowchart & Architecture Cartographer`) so the user can confirm or switch the executing persona.
 >
-> **Gate 2 鈥?Pure UI Design (ui-ux-pro-max) + Mandatory Text-to-Image Preview Gate (Blocking Before UI Code)**:
-> Before writing or modifying production frontend/UI code for any new UI or substantial redesign (unless the user explicitly opts out): (a) run product-requirements-grilling one question at a time -> (b) run ui-ux-pro-max (skills/design/ui-ux-pro-max/SKILL.md) to derive a pure UI/UX design specification (industry color palette, font pairing, grid anatomy) -> (c) combine that specification with imagegen / image-generator / multimodal-media-director / 
-ano-banana-pro to generate a visual UI mockup image -> (d) obtain user approval before writing UI code.
+> **Gate 2 — Pure UI Design (`ui-ux-pro-max`) + Mandatory Text-to-Image Preview Gate (Blocking Before UI Code)**:
+> Before writing or modifying production frontend/UI code for any new UI or substantial redesign (unless the user explicitly opts out): (a) run `product-requirements-grilling` one question at a time -> (b) run `ui-ux-pro-max` (`skills/design/ui-ux-pro-max/SKILL.md`) to derive a pure UI/UX design specification (industry color palette, font pairing, grid anatomy) -> (c) combine that specification with `imagegen` / `image-generator` / `multimodal-media-director` / `nano-banana-pro` to generate a visual UI mockup image -> (d) obtain user approval before writing UI code.
 >
-> **Gate 3 鈥?Encounter -> Auto-Use Domain Capabilities (Zero Manual Skill Selection)**:
+> **Gate 3 — Encounter -> Auto-Use Domain Capabilities (Zero Manual Skill Selection)**:
 > Never wait for the user to name a skill. Automatically activate the matching first-party skill when encountering:
-> - **Binaries / Bytecode / Obfuscated Bundles** -> decompile-reconstruction (GhidraMCP / ida-reverse / jadx / ilspycmd / pycdc / webcrack)
-> - **Post-Implementation Polish / Code Refactoring** -> code-simplifier (st-grep structural rewrite + guard clauses + zero behavior regression)
-> - **Word / Excel / PPT Documents (.docx/.xlsx/.pptx)** -> office-pro-suite (executive typography, live Excel formulas with blue/black/green color coding, 16:9 action-title slides)
-> - **Text-to-Image / Video / Music Generation** -> multimodal-media-director (art direction, shot-by-shot camera storyboards, musical arrangement with BPM/Key/Metatags)
-> - **Novel / Fiction / Script Writing** -> 
-ovel-story-architect (.story-bible/ continuity compiler, scene beat sheets, anti-AI-cliche prose filter)
-> - **Flowcharts / Swimlanes / Architecture Diagrams** -> diagram-flowchart-architect (.drawio XML, .excalidraw JSON, and themed Mermaid)
+> - **Binaries / Bytecode / Obfuscated Bundles** -> `decompile-reconstruction` (`GhidraMCP` / `ida-reverse` / `jadx` / `ilspycmd` / `pycdc` / `webcrack`)
+> - **Post-Implementation Polish / Code Refactoring** -> `code-simplifier` (`ast-grep` structural rewrite + guard clauses + zero behavior regression)
+> - **Word / Excel / PPT Documents (`.docx`/`.xlsx`/`.pptx`)** -> `office-pro-suite` (executive typography, live Excel formulas with blue/black/green color coding, 16:9 action-title slides)
+> - **Text-to-Image / Video / Music Generation** -> `multimodal-media-director` (art direction, shot-by-shot camera storyboards, musical arrangement with BPM/Key/Metatags)
+> - **Novel / Fiction / Script Writing** -> `novel-story-architect` (`.story-bible/` continuity compiler, scene beat sheets, anti-AI-cliche prose filter)
+> - **Flowcharts / Swimlanes / Architecture Diagrams** -> `diagram-flowchart-architect` (`.drawio` XML, `.excalidraw` JSON, and themed `Mermaid`)
 
 This is a generated primary-logic bundle. Regenerate it from scripts/build-profile.ps1 instead of editing it by hand.
 

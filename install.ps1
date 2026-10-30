@@ -74,7 +74,10 @@ if ($LASTEXITCODE -ne 0) {
 $installedTargets = @()
 switch ($TargetHost) {
     "codex" { $installedTargets += Join-Path $UserHome ".codex\agentlogic\model_instructions.md" }
-    "claude" { $installedTargets += if ($TargetPath) { $TargetPath } else { Join-Path $UserHome ".claude\AgentLogic\CLAUDE.md" } }
+    "claude" {
+        $installedTargets += if ($TargetPath) { $TargetPath } else { Join-Path $UserHome ".claude\AgentLogic\CLAUDE.md" }
+        if (-not $TargetPath) { $installedTargets += Join-Path $UserHome ".claude\CLAUDE.md" }
+    }
     "antigravity" {
         $installedTargets += if ($TargetPath) { $TargetPath } else { Join-Path $UserHome ".gemini\GEMINI.md" }
         $installedTargets += Join-Path $UserHome ".gemini\antigravity-cli\AgentLogic\AGENTS_BUNDLE.md"

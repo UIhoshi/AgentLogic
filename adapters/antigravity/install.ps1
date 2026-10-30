@@ -84,6 +84,7 @@ $bundlePathUri = $bundlePath.Replace('\', '/')
 $enforcementScriptUri = (Join-Path $enforcementTarget 'scripts\skill-enforcement.ps1').Replace('\', '/')
 $skillsRootUri = $skillsRoot.Replace('\', '/')
 
+$emDash = [regex]::Unescape('\u2014')
 $zhStartupPrompt = [regex]::Unescape('\u5f53\u524d\u4efb\u52a1\u662f\u5426\u5c5e\u4e8e\u4e0a\u4e00\u8f6e coding \u7684\u5ef6\u7eed\uff1f\u82e5\u4e0d\u662f\uff0c\u8bf7\u786e\u8ba4\u662f\u5426\u9700\u8981 forget/compress context\u3002')
 $zhSkipMockup = [regex]::Unescape('\u4e0d\u9700\u8981\u5148\u753b\u56fe')
 
@@ -94,7 +95,7 @@ $hookTemplate = @'
 - The agent MUST prioritize the local AgentLogic rule-set (located at [AgentLogic](file:///__REPO_ROOT_URI__)) as the highest-priority logic and execute its mandatory reading chain and blocking gates first.
 - The compiled master rules are stored in [AGENTS_BUNDLE.md](file:///__BUNDLE_PATH_URI__). Because Antigravity caps individual rule files at 24 KB, the four non-negotiable blocking gates and automatic skill triggers from `AGENTS_BUNDLE.md` are inlined directly below and MUST be executed in every workspace:
 
-## Gate 1: Startup Context-Reset & Autonomous Role Recommendation Gate (Turn 1 Blocking — All Projects)
+## Gate 1: Startup Context-Reset & Autonomous Role Recommendation Gate (Turn 1 Blocking __EM_DASH__ All Projects)
 - **EXECUTION vs SUMMARIZATION MANDATE**: You MUST NOT merely read, recite, or summarize AgentLogic rules as passive background text. On Turn 1 of any new project or non-continuation task, you MUST ACTUALLY EXECUTE BOTH steps below interactively:
   1. **Context-Reset Confirmation**: Ask whether the current task extends the previous coding round, and if not, whether to `forget/compress context` in the user's interaction language:
      - Chinese: "__ZH_STARTUP_PROMPT__"
@@ -140,6 +141,7 @@ $hookContent = $hookTemplate.
     Replace('__BUNDLE_PATH_URI__', $bundlePathUri).
     Replace('__ENFORCEMENT_SCRIPT_URI__', $enforcementScriptUri).
     Replace('__SKILLS_ROOT_URI__', $skillsRootUri).
+    Replace('__EM_DASH__', $emDash).
     Replace('__ZH_STARTUP_PROMPT__', $zhStartupPrompt).
     Replace('__ZH_SKIP_MOCKUP__', $zhSkipMockup)
 
