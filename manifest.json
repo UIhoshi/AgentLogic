@@ -217,13 +217,6 @@
                              "external_research_and_artifacts":  [
                                                                      "modules/50_V6_8_ExternalResearchAndArtifactIntegration.md"
                                                                  ],
-                             "reference_raw_layers":  [
-                                                          "reference/raw_tools/",
-                                                          "reference/raw_tooling/",
-                                                          "reference/raw_permissions/",
-                                                          "reference/raw_extensions/",
-                                                          "reference/raw_commands/"
-                                                      ],
                              "affordance_first_tool_use":  [
                                                                "modules/51_V6_8_AffordanceFirstToolUse.md"
                                                            ],
