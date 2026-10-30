@@ -488,7 +488,7 @@ This repository is logic infrastructure, not a business-project workspace.
 
 - Do not treat it as an application repository.
 - Do not create unrelated business code here.
-- Do not treat reference raw layers as default prompt material unless explicitly requested.
+- Do not commit raw reference material (such as extracted CLI sources) to this repository; keep it in an untracked local archive and never treat it as default prompt material.
 
 ## Stable Host Binding
 
@@ -682,7 +682,7 @@ V6.9.0 enforces identical automatic routing across Antigravity (`~/.gemini/GEMIN
 
 - 本仓库是可安装到本地 AI coding host 的主逻辑基础设施（method layer）。
 - 事实来源是仓库内的入口文档、版本源文件、模块、脚本、manifest 和生成输出。
-- 外部项目、比较仓库和 `reference/` 原始层只能作为参考证据，不能自动升级为当前仓库事实。
+- 外部项目、比较仓库和本地原始参考资料只能作为参考证据，不能自动升级为当前仓库事实。
 - 当前稳定绑定入口是 `MAIN.md`；当前版本源文件由 `manifest.json` 的 `main_logic_file` 指定。
 
 ## 2. 当前仓库的四层映射
@@ -730,7 +730,7 @@ V6.9.0 enforces identical automatic routing across Antigravity (`~/.gemini/GEMIN
 
 - 可移植技能：`skills/`（含第一方自动触发技能 `product-requirements-grilling`、`code-simplifier`、`decompile-reconstruction`）
 - SDD 工具层：`spec-kit/`
-- 原始参考层：`reference/`
+- 原始参考层：不入库（仅保留在仓库外的本地存档；`reference/` 已被 `.gitignore` 排除）
 - 宿主 bundle：`dist/`
 - bundle 生成器：`scripts/build-profile.ps1`
 - 版本与 profile 清单：`manifest.json`、`manifest.schema.json`
@@ -790,7 +790,7 @@ UI 实施完成后仍必须执行截图、父子布局边界、溢出、换行�
 - 不得在本仓库创建无关业务源码、依赖安装结果、临时测试或业务日志。
 - `dist/` 只能由 `scripts/build-profile.ps1` 生成，禁止手工编辑。
 - `manifest.json` 是 profile、宿主输出和适配器的机器可读事实源。
-- `reference/` 和历史版本文件不应默认注入为当前运行规则，除非 profile 明确列出。
+- 原始参考资料（如外部 CLI 解包内容）不得提交到本仓库；历史版本文件不应默认注入为当前运行规则，除非 profile 明确列出。
 
 ## 8. 变更后的最小验证
 

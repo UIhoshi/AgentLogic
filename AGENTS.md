@@ -127,7 +127,7 @@ This repository is logic infrastructure, not a business-project workspace.
 
 - Do not treat it as an application repository.
 - Do not create unrelated business code here.
-- Do not treat reference raw layers as default prompt material unless explicitly requested.
+- Do not commit raw reference material (such as extracted CLI sources) to this repository; keep it in an untracked local archive and never treat it as default prompt material.
 
 ## Stable Host Binding
 

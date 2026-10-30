@@ -33,7 +33,7 @@ Do not rename, relocate, or repurpose these files casually.
 - `modules/`
   reusable operating-rule modules
 - `reference/`
-  non-default reference material
+  git-ignored, local-only raw reference archive; never committed or bundled
 - `adapters/`
   host-specific installation layer
 - `scripts/`
@@ -112,7 +112,7 @@ High-risk changes must be validated end to end.
 ## Do Not Do These
 
 - Do not bind hosts directly to files under `versions/`
-- Do not treat `reference/` content as default bundle material unless explicitly opting in
+- Do not commit `reference/` content; it is a git-ignored local-only archive, never bundle material
 - Do not edit generated files in `dist/` by hand
 - Do not change `current_version` without also changing `main_logic_file`
 - Do not introduce a new host path convention without documenting it in `README.md`

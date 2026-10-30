@@ -59,7 +59,7 @@ That means the rules here are meant to apply across:
 2. Use the `core-enhanced` profile by default unless a host or user explicitly selects another profile.
 3. Preserve the mandatory startup and forget/compress rules contained in the bundled files.
 4. Keep versioned files as historical sources; keep `MAIN.md` as the only stable host binding target.
-5. Treat `reference/raw_*` directories as reference layers, not default prompt material.
+5. Do not commit raw reference material; keep it in an untracked local archive (`reference/` is git-ignored) and never treat it as default prompt material.
 
 ## Recommended Host Behavior
 

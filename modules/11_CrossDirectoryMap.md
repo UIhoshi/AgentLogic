@@ -21,7 +21,7 @@ Agentic CLI application's `src/` directory.
 | **L1: Entry & Host Surface** | Human/agent entry, stable binding, installation guidance, host integration | `00_START_HERE.md`, `AGENTS.md`, `README.md`, `MAIN.md`, `AGENT_INSTALL.md`, `INSTALL.md`, `adapters/` |
 | **L2: Lifecycle & Logic** | Version source, master logic, session rules, SDD, task state | `versions/`, `modules/01_MasterLogic.md`, `modules/03_AgenticLoop.md`, `modules/12_AgentEnforcement.md`, `modules/15_LogicEntryChecklist.md`, `modules/38_V6_6_SpecDrivenDevelopment.md`, `.specify/` |
 | **L3: Control & Verification** | Manifest contracts, permissions, evidence boundaries, package and entry validation | `manifest.json`, `manifest.schema.json`, `modules/05_PermissionsAndSafety.md`, `modules/29_MandatoryVerificationMatrix.md`, `modules/30_ToolQuestionBoundaryMatrix.md`, `modules/31_ToolMisuseAndAntiPatternMatrix.md`, `scripts/` |
-| **L4: Assets & Outputs** | Portable skills, original frontend reference templates, reference layers, generated host bundles and profile build | `skills/`, `templates/frontend/`, `spec-kit/`, `reference/`, `dist/`, `scripts/build-profile.ps1` |
+| **L4: Assets & Outputs** | Portable skills, original frontend reference templates, generated host bundles and profile build (raw reference material is kept in an untracked local archive) | `skills/`, `templates/frontend/`, `spec-kit/`, `dist/`, `scripts/build-profile.ps1` |
 
 ## Operational flow
 
@@ -37,5 +37,5 @@ L1 entry docs
 
 When a new logic module, script, adapter, profile, or generated output is added, update the
 corresponding source-of-truth map and run `node scripts/check-logic-entry.js` plus
-`scripts/validate-package.ps1`. External project architecture belongs in `reference/` or an
+`scripts/validate-package.ps1`. External project architecture belongs in an untracked local archive or an
 explicit comparison document and must not be presented as current repository fact.
