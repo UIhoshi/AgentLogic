@@ -1,36 +1,116 @@
 {
-    "schema_version":  1,
-    "reviewed_commit":  "34eab55 + V6.8.6 release worktree",
-    "skills":  [
-                   {
-                       "skill_id":  "product-requirements-grilling",
-                       "capability":  "requirements_grilling",
-                       "flows":  [
-                                     "major feature specification"
-                                 ],
-                       "trigger":  "major_feature",
-                       "source":  "first-party portable skill",
-                       "status":  "active"
-                   },
-                   {
-                       "skill_id":  "tdd-guide",
-                       "capability":  "test_engineering",
-                       "flows":  [
-                                     "behavior-change validation"
-                                 ],
-                       "trigger":  "behavior_change",
-                       "source":  "host-provided skill",
-                       "status":  "active"
-                   },
-                   {
-                       "skill_id":  "code-review",
-                       "capability":  "code_review",
-                       "flows":  [
-                                     "V6.8.6 release review"
-                                 ],
-                       "trigger":  "release_review",
-                       "source":  "host-provided portable skill",
-                       "status":  "active"
-                   }
-               ]
+  "schema_version": 1,
+  "reviewed_commit": "056c70b + V6.9.0 release worktree",
+  "skills": [
+    {
+      "skill_id": "role-persona-router",
+      "capability": "role_persona_routing",
+      "flows": [
+        "Turn 1 startup role recommendation and persona selection"
+      ],
+      "trigger": "role_selection",
+      "source": "first-party portable skill",
+      "status": "active"
+    },
+    {
+      "skill_id": "product-requirements-grilling",
+      "capability": "requirements_grilling",
+      "flows": [
+        "Major feature specification"
+      ],
+      "trigger": "major_feature",
+      "source": "first-party portable skill",
+      "status": "active"
+    },
+    {
+      "skill_id": "ui-ux-pro-max",
+      "capability": "design_direction",
+      "flows": [
+        "Pure UI/UX design specification coupled with text-to-image mockup"
+      ],
+      "trigger": "net_new_ui",
+      "source": "first-party portable skill",
+      "status": "active"
+    },
+    {
+      "skill_id": "multimodal-media-director",
+      "capability": "multimodal_media_generation",
+      "flows": [
+        "Automatic text-to-image, text-to-video, and text-to-music direction"
+      ],
+      "trigger": "multimodal_media",
+      "source": "first-party portable skill",
+      "status": "active"
+    },
+    {
+      "skill_id": "office-pro-suite",
+      "capability": "office_document_design_and_processing",
+      "flows": [
+        "Automatic Word, Excel, and PowerPoint professional design and standardization"
+      ],
+      "trigger": "office_document",
+      "source": "first-party portable skill",
+      "status": "active"
+    },
+    {
+      "skill_id": "novel-story-architect",
+      "capability": "long_form_fiction_and_story_bible",
+      "flows": [
+        "Automatic Story Bible continuity compilation and anti-AI-cliche novel drafting"
+      ],
+      "trigger": "novel_writing",
+      "source": "first-party portable skill",
+      "status": "active"
+    },
+    {
+      "skill_id": "diagram-flowchart-architect",
+      "capability": "diagram_and_flowchart_architecture",
+      "flows": [
+        "Automatic Draw.io, Excalidraw, and themed Mermaid flowchart generation"
+      ],
+      "trigger": "diagram_flowchart",
+      "source": "first-party portable skill",
+      "status": "active"
+    },
+    {
+      "skill_id": "tdd-guide",
+      "capability": "test_engineering",
+      "flows": [
+        "Behavior-change validation"
+      ],
+      "trigger": "behavior_change",
+      "source": "host-provided skill",
+      "status": "active"
+    },
+    {
+      "skill_id": "code-simplifier",
+      "capability": "code_refinement",
+      "flows": [
+        "Automatic code refinement and AST refactoring"
+      ],
+      "trigger": "code_refinement",
+      "source": "first-party portable skill",
+      "status": "active"
+    },
+    {
+      "skill_id": "decompile-reconstruction",
+      "capability": "decompile_reconstruction",
+      "flows": [
+        "Automatic binary/bundle decompilation and clean-room reconstruction"
+      ],
+      "trigger": "decompile_reconstruction",
+      "source": "first-party portable skill",
+      "status": "active"
+    },
+    {
+      "skill_id": "code-review",
+      "capability": "code_review",
+      "flows": [
+        "V6.9.0 release review"
+      ],
+      "trigger": "release_review",
+      "source": "host-provided portable skill",
+      "status": "active"
+    }
+  ]
 }

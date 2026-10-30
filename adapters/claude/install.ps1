@@ -33,6 +33,13 @@ if ($targetDir) {
 
 powershell -NoProfile -ExecutionPolicy Bypass -File $buildScript -ProfileName $ProfileName -TargetHost claude -OutputPath $TargetPath
 if ($LASTEXITCODE -ne 0) { throw "build-profile.ps1 failed with exit code $LASTEXITCODE." }
+
+# Also mirror to ~/.claude/CLAUDE.md when installing to the default ~/.claude/AgentLogic/CLAUDE.md path so Claude Code CLI loads it automatically
+$rootClaudeMd = Join-Path $UserHome ".claude\CLAUDE.md"
+if ($TargetPath -eq (Join-Path $UserHome ".claude\AgentLogic\CLAUDE.md")) {
+    Copy-Item -LiteralPath $TargetPath -Destination $rootClaudeMd -Force
+}
+
 powershell -NoProfile -ExecutionPolicy Bypass -File $deploySkillScript -RepoRoot $repoRoot -TargetPath $productSkillTarget
 if ($LASTEXITCODE -ne 0) { throw "deploy-first-party-skill.ps1 failed with exit code $LASTEXITCODE." }
 powershell -NoProfile -ExecutionPolicy Bypass -File $deployEnforcementScript -RepoRoot $repoRoot -TargetPath $enforcementTarget

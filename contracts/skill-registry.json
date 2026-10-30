@@ -207,6 +207,103 @@
                                        }
                     },
                     {
+                        "id":  "skills-creative-multimodal-media-director-skill-md",
+                        "entrypoint":  "skills/creative/multimodal-media-director/SKILL.md",
+                        "family":  "creative",
+                        "lifecycle":  "conditional",
+                        "route_ids":  [
+                                          "multimodal-media",
+                                          "ui-design"
+                                      ],
+                        "reason":  "First-party multimodal director for text-to-image, text-to-video storyboards, and text-to-music arrangement.",
+                        "activation":  {
+                                           "mode":  "route_candidate",
+                                           "triggers":  [
+                                                            "multimodal_media",
+                                                            "net_new_ui",
+                                                            "substantial_ui_refactor"
+                                                        ],
+                                           "purpose":  "Automatically direct and execute text-to-image, text-to-video, and text-to-music generation workflows.",
+                                           "explicit_signals":  [
+                                                                    "text-to-image",
+                                                                    "text-to-video",
+                                                                    "text-to-music",
+                                                                    "generate image",
+                                                                    "generate video",
+                                                                    "generate music",
+                                                                    "bgm"
+                                                                ],
+                                           "inferred_signals":  [
+                                                                    "visual mockup generation",
+                                                                    "video storyboard",
+                                                                    "musical arrangement"
+                                                                ],
+                                           "confirmation_policy":  "automatic_for_matched_route"
+                                       }
+                    },
+                    {
+                        "id":  "skills-creative-novel-story-architect-skill-md",
+                        "entrypoint":  "skills/creative/novel-story-architect/SKILL.md",
+                        "family":  "creative",
+                        "lifecycle":  "conditional",
+                        "route_ids":  [
+                                          "novel-writing"
+                                      ],
+                        "reason":  "First-party long-form fiction and novel creation engine with Story Bible continuity checking and anti-AI-cliche prose rules.",
+                        "activation":  {
+                                           "mode":  "route_candidate",
+                                           "triggers":  [
+                                                            "novel_writing"
+                                                        ],
+                                           "purpose":  "Automatically manage Story Bibles, scene beat sheets, anti-AI-cliche drafting, and continuity checks for novels and stories.",
+                                           "explicit_signals":  [
+                                                                    "novel",
+                                                                    "fiction",
+                                                                    "story writing",
+                                                                    "chapter",
+                                                                    "world-building",
+                                                                    "screenplay"
+                                                                ],
+                                           "inferred_signals":  [
+                                                                    "long-form narrative",
+                                                                    "character arc",
+                                                                    "plot outline"
+                                                                ],
+                                           "confirmation_policy":  "automatic_for_matched_route"
+                                       }
+                    },
+                    {
+                        "id":  "skills-design-ui-ux-pro-max-skill-md",
+                        "entrypoint":  "skills/design/ui-ux-pro-max/SKILL.md",
+                        "family":  "design",
+                        "lifecycle":  "mandatory",
+                        "route_ids":  [
+                                          "design-direction",
+                                          "ui-design"
+                                      ],
+                        "reason":  "First-party pure UI/UX design-system intelligence that derives industry palettes, typography pairings, and layout specifications and drives text-to-image mockup generation before UI code.",
+                        "activation":  {
+                                           "mode":  "route_candidate",
+                                           "triggers":  [
+                                                            "net_new_ui",
+                                                            "substantial_ui_refactor"
+                                                        ],
+                                           "purpose":  "Derive pure UI/UX design specifications and mandatory text-to-image mockup prompts before any frontend implementation.",
+                                           "explicit_signals":  [
+                                                                    "ui design",
+                                                                    "frontend design",
+                                                                    "color palette",
+                                                                    "typography pairing",
+                                                                    "ui mockup"
+                                                                ],
+                                           "inferred_signals":  [
+                                                                    "new page or screen",
+                                                                    "substantial interface redesign"
+                                                                ],
+                                           "confirmation_policy":  "automatic_for_matched_route"
+                                       }
+                    },
+                    {
                         "id":  "skills-engineering-ask-matt-skill-md",
                         "entrypoint":  "skills/engineering/ask-matt/SKILL.md",
                         "family":  "engineering",
@@ -295,6 +392,54 @@
                                        }
                     },
                     {
+                        "id":  "skills-engineering-code-simplifier-skill-md",
+                        "entrypoint":  "skills/engineering/code-simplifier/SKILL.md",
+                        "family":  "engineering",
+                        "lifecycle":  "conditional",
+                        "route_ids":  [
+                                          "code-refinement"
+                                      ],
+                        "reason":  "First-party automatic post-implementation code simplification and AST-aware refactoring capability.",
+                        "activation":  {
+                                           "mode":  "route_candidate",
+                                           "triggers":  [
+                                                            "code_refinement"
+                                                        ],
+                                           "purpose":  "Autonomous post-implementation code refinement, AST-aware structural refactoring, and 80/20 code-smell cleanup without altering behavior. Triggered automatically after feature/refactor implementation or when simplifying, cleaning up, or refactoring code.",
+                                           "explicit_signals":  [
+                                                                    "code_refinement"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "route_enforced"
+                                       }
+                    },
+                    {
+                        "id":  "skills-engineering-decompile-reconstruction-skill-md",
+                        "entrypoint":  "skills/engineering/decompile-reconstruction/SKILL.md",
+                        "family":  "engineering",
+                        "lifecycle":  "conditional",
+                        "route_ids":  [
+                                          "decompile-reconstruction"
+                                      ],
+                        "reason":  "First-party automatic binary/bytecode/bundle decompilation and clean-room source reconstruction capability.",
+                        "activation":  {
+                                           "mode":  "route_candidate",
+                                           "triggers":  [
+                                                            "decompile_reconstruction"
+                                                        ],
+                                           "purpose":  "Autonomous binary/bytecode/bundle decompilation and clean-room source code reconstruction. Triggered automatically when the user provides or asks to analyze, decompile, deobfuscate, or recover readable/compilable source code or algorithms from compiled binaries (PE/ELF/Mach-O/DLL/SO), Android APKs/JARs, .NET assemblies, Python bytecode (.pyc), WASM, or bundled/minified/obfuscated JS/Electron apps.",
+                                           "explicit_signals":  [
+                                                                    "decompile_reconstruction"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "route_enforced"
+                                       }
+                    },
+                    {
                         "id":  "skills-engineering-diagnosing-bugs-skill-md",
                         "entrypoint":  "skills/engineering/diagnosing-bugs/SKILL.md",
                         "family":  "engineering",
@@ -323,6 +468,38 @@
                                                                     "task_brief_matches_reviewed_purpose"
                                                                 ],
                                            "confirmation_policy":  "single_confirmation_when_competing_candidates_match"
+                                       }
+                    },
+                    {
+                        "id":  "skills-engineering-diagram-flowchart-architect-skill-md",
+                        "entrypoint":  "skills/engineering/diagram-flowchart-architect/SKILL.md",
+                        "family":  "engineering",
+                        "lifecycle":  "conditional",
+                        "route_ids":  [
+                                          "diagram-flowchart"
+                                      ],
+                        "reason":  "First-party flowchart, swimlane, and architecture diagram generator across Draw.io (.drawio), Excalidraw (.excalidraw), and themed Mermaid.",
+                        "activation":  {
+                                           "mode":  "route_candidate",
+                                           "triggers":  [
+                                                            "diagram_flowchart"
+                                                        ],
+                                           "purpose":  "Automatically generate zero-overlap flowcharts, swimlanes, and architecture diagrams in .drawio, .excalidraw, and Mermaid.",
+                                           "explicit_signals":  [
+                                                                    "flowchart",
+                                                                    "diagram",
+                                                                    "drawio",
+                                                                    "excalidraw",
+                                                                    "mermaid",
+                                                                    "architecture diagram",
+                                                                    "swimlane"
+                                                                ],
+                                           "inferred_signals":  [
+                                                                    "process map",
+                                                                    "sequence diagram",
+                                                                    "system topology"
+                                                                ],
+                                           "confirmation_policy":  "automatic_for_matched_route"
                                        }
                     },
                     {
@@ -736,34 +913,6 @@
                                        }
                     },
                     {
-                        "id":  "skills-ponytail-skill-md",
-                        "entrypoint":  "skills/ponytail/SKILL.md",
-                        "family":  "ponytail",
-                        "lifecycle":  "conditional",
-                        "route_ids":  [
-                                          "test-design"
-                                      ],
-                        "reason":  "Conditional implementation discipline for behavior changes.",
-                        "activation":  {
-                                           "mode":  "route_candidate",
-                                           "triggers":  [
-                                                            "behavior_change",
-                                                            "coverage_gap",
-                                                            "test_design"
-                                                        ],
-                                           "purpose":  "\u003e",
-                                           "explicit_signals":  [
-                                                                    "behavior_change",
-                                                                    "coverage_gap",
-                                                                    "test_design"
-                                                                ],
-                                           "inferred_signals":  [
-
-                                                                ],
-                                           "confirmation_policy":  "route_enforced"
-                                       }
-                    },
-                    {
                         "id":  "skills-ponytail-audit-skill-md",
                         "entrypoint":  "skills/ponytail-audit/SKILL.md",
                         "family":  "ponytail-audit",
@@ -904,6 +1053,34 @@
                                        }
                     },
                     {
+                        "id":  "skills-ponytail-skill-md",
+                        "entrypoint":  "skills/ponytail/SKILL.md",
+                        "family":  "ponytail",
+                        "lifecycle":  "conditional",
+                        "route_ids":  [
+                                          "test-design"
+                                      ],
+                        "reason":  "Conditional implementation discipline for behavior changes.",
+                        "activation":  {
+                                           "mode":  "route_candidate",
+                                           "triggers":  [
+                                                            "behavior_change",
+                                                            "coverage_gap",
+                                                            "test_design"
+                                                        ],
+                                           "purpose":  "\u003e",
+                                           "explicit_signals":  [
+                                                                    "behavior_change",
+                                                                    "coverage_gap",
+                                                                    "test_design"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "route_enforced"
+                                       }
+                    },
+                    {
                         "id":  "skills-productivity-grilling-skill-md",
                         "entrypoint":  "skills/productivity/grilling/SKILL.md",
                         "family":  "productivity",
@@ -992,6 +1169,38 @@
                                        }
                     },
                     {
+                        "id":  "skills-productivity-office-pro-suite-skill-md",
+                        "entrypoint":  "skills/productivity/office-pro-suite/SKILL.md",
+                        "family":  "productivity",
+                        "lifecycle":  "conditional",
+                        "route_ids":  [
+                                          "office-document"
+                                      ],
+                        "reason":  "First-party professional design and standardization suite for Word (.docx), Excel (.xlsx), and PowerPoint (.pptx).",
+                        "activation":  {
+                                           "mode":  "route_candidate",
+                                           "triggers":  [
+                                                            "office_document"
+                                                        ],
+                                           "purpose":  "Automatically enforce executive typography in Word, dynamic formula modeling in Excel, and action-title visual design in PowerPoint.",
+                                           "explicit_signals":  [
+                                                                    "word",
+                                                                    "docx",
+                                                                    "excel",
+                                                                    "xlsx",
+                                                                    "powerpoint",
+                                                                    "pptx",
+                                                                    "office document"
+                                                                ],
+                                           "inferred_signals":  [
+                                                                    "spreadsheet model",
+                                                                    "presentation deck",
+                                                                    "formal report document"
+                                                                ],
+                                           "confirmation_policy":  "automatic_for_matched_route"
+                                       }
+                    },
+                    {
                         "id":  "skills-productivity-product-requirements-grilling-skill-md",
                         "entrypoint":  "skills/productivity/product-requirements-grilling/SKILL.md",
                         "family":  "productivity",
@@ -1017,6 +1226,34 @@
 
                                                                 ],
                                            "confirmation_policy":  "route_enforced"
+                                       }
+                    },
+                    {
+                        "id":  "skills-productivity-role-persona-router-skill-md",
+                        "entrypoint":  "skills/productivity/role-persona-router/SKILL.md",
+                        "family":  "productivity",
+                        "lifecycle":  "mandatory",
+                        "route_ids":  [
+                                          "role-selection"
+                                      ],
+                        "reason":  "First-party startup role recommendation and interactive expert persona router applied at the start of every project.",
+                        "activation":  {
+                                           "mode":  "route_candidate",
+                                           "triggers":  [
+                                                            "role_selection"
+                                                        ],
+                                           "purpose":  "Automatically recommend the best-fit expert role and present the 7-role selection menu at the start of every new project.",
+                                           "explicit_signals":  [
+                                                                    "role selection",
+                                                                    "persona recommendation",
+                                                                    "new project kickoff",
+                                                                    "expert role menu"
+                                                                ],
+                                           "inferred_signals":  [
+                                                                    "turn 1 project start",
+                                                                    "non-continuation task kickoff"
+                                                                ],
+                                           "confirmation_policy":  "automatic_for_matched_route"
                                        }
                     },
                     {

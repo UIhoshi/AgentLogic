@@ -58,6 +58,30 @@ Generated from contracts/skill-registry.json. It recommends only selection postu
 - Inferred signals: 
 - Confirmation: route_enforced
 
+## skills-creative-multimodal-media-director-skill-md
+- Entry: `skills/creative/multimodal-media-director/SKILL.md`
+- Lifecycle / posture: `conditional` / `route_candidate`
+- Purpose: Automatically direct and execute text-to-image, text-to-video, and text-to-music generation workflows.
+- Explicit signals: text-to-image, text-to-video, text-to-music, generate image, generate video, generate music, bgm
+- Inferred signals: visual mockup generation, video storyboard, musical arrangement
+- Confirmation: automatic_for_matched_route
+
+## skills-creative-novel-story-architect-skill-md
+- Entry: `skills/creative/novel-story-architect/SKILL.md`
+- Lifecycle / posture: `conditional` / `route_candidate`
+- Purpose: Automatically manage Story Bibles, scene beat sheets, anti-AI-cliche drafting, and continuity checks for novels and stories.
+- Explicit signals: novel, fiction, story writing, chapter, world-building, screenplay
+- Inferred signals: long-form narrative, character arc, plot outline
+- Confirmation: automatic_for_matched_route
+
+## skills-design-ui-ux-pro-max-skill-md
+- Entry: `skills/design/ui-ux-pro-max/SKILL.md`
+- Lifecycle / posture: `mandatory` / `route_candidate`
+- Purpose: Derive pure UI/UX design specifications and mandatory text-to-image mockup prompts before any frontend implementation.
+- Explicit signals: ui design, frontend design, color palette, typography pairing, ui mockup
+- Inferred signals: new page or screen, substantial interface redesign
+- Confirmation: automatic_for_matched_route
+
 ## skills-engineering-ask-matt-skill-md
 - Entry: `skills/engineering/ask-matt/SKILL.md`
 - Lifecycle / posture: `manual_only` / `manual`
@@ -82,6 +106,22 @@ Generated from contracts/skill-registry.json. It recommends only selection postu
 - Inferred signals: 
 - Confirmation: route_enforced
 
+## skills-engineering-code-simplifier-skill-md
+- Entry: `skills/engineering/code-simplifier/SKILL.md`
+- Lifecycle / posture: `conditional` / `route_candidate`
+- Purpose: Autonomous post-implementation code refinement, AST-aware structural refactoring, and 80/20 code-smell cleanup without altering behavior. Triggered automatically after feature/refactor implementation or when simplifying, cleaning up, or refactoring code.
+- Explicit signals: code_refinement
+- Inferred signals: 
+- Confirmation: route_enforced
+
+## skills-engineering-decompile-reconstruction-skill-md
+- Entry: `skills/engineering/decompile-reconstruction/SKILL.md`
+- Lifecycle / posture: `conditional` / `route_candidate`
+- Purpose: Autonomous binary/bytecode/bundle decompilation and clean-room source code reconstruction. Triggered automatically when the user provides or asks to analyze, decompile, deobfuscate, or recover readable/compilable source code or algorithms from compiled binaries (PE/ELF/Mach-O/DLL/SO), Android APKs/JARs, .NET assemblies, Python bytecode (.pyc), WASM, or bundled/minified/obfuscated JS/Electron apps.
+- Explicit signals: decompile_reconstruction
+- Inferred signals: 
+- Confirmation: route_enforced
+
 ## skills-engineering-diagnosing-bugs-skill-md
 - Entry: `skills/engineering/diagnosing-bugs/SKILL.md`
 - Lifecycle / posture: `manual_only` / `guided_candidate`
@@ -89,6 +129,14 @@ Generated from contracts/skill-registry.json. It recommends only selection postu
 - Explicit signals: diagnose, bugs,, failures,, regressions,, performance, problems.
 - Inferred signals: task_brief_matches_reviewed_purpose
 - Confirmation: single_confirmation_when_competing_candidates_match
+
+## skills-engineering-diagram-flowchart-architect-skill-md
+- Entry: `skills/engineering/diagram-flowchart-architect/SKILL.md`
+- Lifecycle / posture: `conditional` / `route_candidate`
+- Purpose: Automatically generate zero-overlap flowcharts, swimlanes, and architecture diagrams in .drawio, .excalidraw, and Mermaid.
+- Explicit signals: flowchart, diagram, drawio, excalidraw, mermaid, architecture diagram, swimlane
+- Inferred signals: process map, sequence diagram, system topology
+- Confirmation: automatic_for_matched_route
 
 ## skills-engineering-domain-modeling-skill-md
 - Entry: `skills/engineering/domain-modeling/SKILL.md`
@@ -274,6 +322,14 @@ Generated from contracts/skill-registry.json. It recommends only selection postu
 - Inferred signals: task_brief_matches_reviewed_purpose
 - Confirmation: single_confirmation_when_competing_candidates_match
 
+## skills-productivity-office-pro-suite-skill-md
+- Entry: `skills/productivity/office-pro-suite/SKILL.md`
+- Lifecycle / posture: `conditional` / `route_candidate`
+- Purpose: Automatically enforce executive typography in Word, dynamic formula modeling in Excel, and action-title visual design in PowerPoint.
+- Explicit signals: word, docx, excel, xlsx, powerpoint, pptx, office document
+- Inferred signals: spreadsheet model, presentation deck, formal report document
+- Confirmation: automatic_for_matched_route
+
 ## skills-productivity-product-requirements-grilling-skill-md
 - Entry: `skills/productivity/product-requirements-grilling/SKILL.md`
 - Lifecycle / posture: `mandatory` / `route_candidate`
@@ -281,6 +337,14 @@ Generated from contracts/skill-registry.json. It recommends only selection postu
 - Explicit signals: major_feature, net_new_ui, substantial_ui_refactor
 - Inferred signals: 
 - Confirmation: route_enforced
+
+## skills-productivity-role-persona-router-skill-md
+- Entry: `skills/productivity/role-persona-router/SKILL.md`
+- Lifecycle / posture: `mandatory` / `route_candidate`
+- Purpose: Automatically recommend the best-fit expert role and present the 7-role selection menu at the start of every new project.
+- Explicit signals: role selection, persona recommendation, new project kickoff, expert role menu
+- Inferred signals: turn 1 project start, non-continuation task kickoff
+- Confirmation: automatic_for_matched_route
 
 ## skills-productivity-teach-skill-md
 - Entry: `skills/productivity/teach/SKILL.md`

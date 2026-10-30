@@ -9,7 +9,7 @@
     "orchestration_policy":  {
                                  "standard_product_workflow":  "automatic_from_task_classification",
                                  "user_skill_selection_required":  false,
-                                 "user_interaction_rule":  "Ask users only for product, content, risk, and design decisions. Never ask them to choose an internal skill or route.",
+                                 "user_interaction_rule":  "Ask users only for product, role, content, risk, and design decisions. Never ask them to choose an internal skill or route.",
                                  "restricted_manual_paths":  [
                                                                  "security",
                                                                  "credentials",
@@ -22,7 +22,12 @@
                             "task_classification",
                             "explicit_user_intent",
                             "current_ui_state",
-                            "implementation_result"
+                            "implementation_result",
+                            "binary_or_bundle_target",
+                            "office_document_request",
+                            "multimodal_creative_brief",
+                            "narrative_story_request",
+                            "diagram_architecture_request"
                         ],
     "default_pipelines":  [
                               {
@@ -42,9 +47,104 @@
                                                 "code-review",
                                                 "handover"
                                             ]
+                              },
+                              {
+                                  "id":  "code-refactoring-and-refinement",
+                                  "triggers":  [
+                                                   "code_refinement"
+                                               ],
+                                  "user_skill_selection_required":  false,
+                                  "nodes":  [
+                                                "code-refinement"
+                                            ]
+                              },
+                              {
+                                  "id":  "decompile-and-reconstruct",
+                                  "triggers":  [
+                                                   "decompile_reconstruction"
+                                               ],
+                                  "user_skill_selection_required":  false,
+                                  "nodes":  [
+                                                "decompile-reconstruction"
+                                            ]
+                              },
+                              {
+                                  "id":  "startup-role-selection",
+                                  "triggers":  [
+                                                   "role_selection"
+                                               ],
+                                  "user_skill_selection_required":  false,
+                                  "nodes":  [
+                                                "role-selection"
+                                            ]
+                              },
+                              {
+                                  "id":  "office-document-delivery",
+                                  "triggers":  [
+                                                   "office_document"
+                                               ],
+                                  "user_skill_selection_required":  false,
+                                  "nodes":  [
+                                                "office-document"
+                                            ]
+                              },
+                              {
+                                  "id":  "multimodal-creative-delivery",
+                                  "triggers":  [
+                                                   "multimodal_media"
+                                               ],
+                                  "user_skill_selection_required":  false,
+                                  "nodes":  [
+                                                "multimodal-media"
+                                            ]
+                              },
+                              {
+                                  "id":  "novel-story-delivery",
+                                  "triggers":  [
+                                                   "novel_writing"
+                                               ],
+                                  "user_skill_selection_required":  false,
+                                  "nodes":  [
+                                                "novel-writing"
+                                            ]
+                              },
+                              {
+                                  "id":  "diagram-flowchart-delivery",
+                                  "triggers":  [
+                                                   "diagram_flowchart"
+                                               ],
+                                  "user_skill_selection_required":  false,
+                                  "nodes":  [
+                                                "diagram-flowchart"
+                                            ]
                               }
                           ],
     "nodes":  [
+                  {
+                      "id":  "role-selection",
+                      "posture":  "route",
+                      "user_skill_selection_required":  false,
+                      "route_ids":  [
+                                        "role-selection"
+                                    ],
+                      "requires":  [
+
+                                   ],
+                      "consumes":  [
+                                       "task_classification",
+                                       "explicit_user_intent"
+                                   ],
+                      "produces":  [
+                                       "confirmed_role_persona"
+                                   ],
+                      "blocks":  [
+                                     "project_kickoff"
+                                 ],
+                      "verification":  [
+                                           "recommended_role_menu_presented",
+                                           "selected_or_confirmed_role_persona"
+                                       ]
+                  },
                   {
                       "id":  "requirements-grilling",
                       "posture":  "route",
@@ -150,6 +250,150 @@
                                            "approved_mockup_or_explicit_opt_out",
                                            "implementation_validation",
                                            "visual_verification_plan"
+                                       ]
+                  },
+                  {
+                      "id":  "code-refinement",
+                      "posture":  "route",
+                      "user_skill_selection_required":  false,
+                      "route_ids":  [
+                                        "code-refinement"
+                                    ],
+                      "requires":  [
+
+                                   ],
+                      "consumes":  [
+                                       "implementation_result"
+                                   ],
+                      "produces":  [
+                                       "refined_implementation_result"
+                                   ],
+                      "blocks":  [
+                                     "verified_refinement"
+                                 ],
+                      "verification":  [
+                                           "refinement_or_smell_check",
+                                           "behavior_preserved_verification"
+                                       ]
+                  },
+                  {
+                      "id":  "decompile-reconstruction",
+                      "posture":  "route",
+                      "user_skill_selection_required":  false,
+                      "route_ids":  [
+                                        "decompile-reconstruction"
+                                    ],
+                      "requires":  [
+
+                                   ],
+                      "consumes":  [
+                                       "binary_or_bundle_target"
+                                   ],
+                      "produces":  [
+                                       "reconstructed_source_or_architecture"
+                                   ],
+                      "blocks":  [
+                                     "verified_decompile_reconstruction"
+                                 ],
+                      "verification":  [
+                                           "target_format_and_toolchain_triage",
+                                           "decompiled_or_reconstructed_artifact"
+                                       ]
+                  },
+                  {
+                      "id":  "multimodal-media",
+                      "posture":  "route",
+                      "user_skill_selection_required":  false,
+                      "route_ids":  [
+                                        "multimodal-media"
+                                    ],
+                      "requires":  [
+
+                                   ],
+                      "consumes":  [
+                                       "multimodal_creative_brief"
+                                   ],
+                      "produces":  [
+                                       "generated_multimodal_asset"
+                                   ],
+                      "blocks":  [
+                                     "verified_multimodal_media"
+                                 ],
+                      "verification":  [
+                                           "structured_media_prompt_or_storyboard",
+                                           "generated_media_or_production_sheet"
+                                       ]
+                  },
+                  {
+                      "id":  "office-document",
+                      "posture":  "route",
+                      "user_skill_selection_required":  false,
+                      "route_ids":  [
+                                        "office-document"
+                                    ],
+                      "requires":  [
+
+                                   ],
+                      "consumes":  [
+                                       "office_document_request"
+                                   ],
+                      "produces":  [
+                                       "standardized_office_document"
+                                   ],
+                      "blocks":  [
+                                     "verified_office_document"
+                                 ],
+                      "verification":  [
+                                           "office_design_and_formula_standard_check",
+                                           "generated_or_verified_office_artifact"
+                                       ]
+                  },
+                  {
+                      "id":  "novel-writing",
+                      "posture":  "route",
+                      "user_skill_selection_required":  false,
+                      "route_ids":  [
+                                        "novel-writing"
+                                    ],
+                      "requires":  [
+
+                                   ],
+                      "consumes":  [
+                                       "narrative_story_request"
+                                   ],
+                      "produces":  [
+                                       "continuity_verified_story_chapter"
+                                   ],
+                      "blocks":  [
+                                     "verified_novel_chapter"
+                                 ],
+                      "verification":  [
+                                           "story_bible_and_scene_beat_check",
+                                           "anti_ai_cliche_and_continuity_audit"
+                                       ]
+                  },
+                  {
+                      "id":  "diagram-flowchart",
+                      "posture":  "route",
+                      "user_skill_selection_required":  false,
+                      "route_ids":  [
+                                        "diagram-flowchart"
+                                    ],
+                      "requires":  [
+
+                                   ],
+                      "consumes":  [
+                                       "diagram_architecture_request"
+                                   ],
+                      "produces":  [
+                                       "verified_diagram_artifact"
+                                   ],
+                      "blocks":  [
+                                     "verified_diagram_output"
+                                 ],
+                      "verification":  [
+                                           "spatial_zoning_and_zero_overlap_check",
+                                           "diagram_artifact_or_mermaid_preview"
                                        ]
                   },
                   {

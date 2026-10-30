@@ -83,6 +83,15 @@ Missing: [only the actual gaps]. I can review [source/version] and install [list
 - Net-new/substantial UI then requires image generation, user approval or explicit opt-out, and
   visual verification after implementation. Clearly classified small corrections may skip a new
   mockup but never visual verification.
+- Refactoring and post-implementation code refinement (`code-refinement`) automatically invoke
+  `code-simplifier` (locking a green test baseline, eliminating deep nesting/nested ternaries and
+  80/20 code smells, preferring `ast-grep` (`sg`) for multi-site structural rewrites, and
+  re-verifying zero behavior regression).
+- Engineering binary/bytecode/bundle decompilation and clean-room source reconstruction
+  (`decompile-reconstruction`) automatically invoke `decompile-reconstruction` whenever the user
+  provides or asks to analyze/decompile/reconstruct `.exe`, `.dll`, `.so`, `.apk`, `.jar`, `.pyc`,
+  `.wasm`, `.asar`, or obfuscated `.js` targets, orchestrating `idapro_*`, `ghidra-mcp`/headless,
+  `jadx`, `ilspycmd`/`dnSpyEx`, `pycdc`, or `webcrack` into structured, address-cited source code.
 - Code audits, PR reviews, and release reviews require a code-review capability and a severity-
   backed review report. Security-scoped reviews additionally require security capability.
 - Dynamic browser claims require browser automation; desktop/visible claims require capture.
@@ -131,15 +140,17 @@ capability; it does not turn every routine task into a skill-selection ceremony.
 
 ## Cross-host first-party skill availability
 
-The `product-requirements-grilling` skill is a first-party requirement, not merely a Codex-local
-convenience. Every supported adapter must deploy it and post-verify its `SKILL.md` path according
-to `contracts/host-skill-capabilities.json`. For Antigravity, whose per-file rule limit (`24 KB`)
+The `product-requirements-grilling`, `code-simplifier`, and `decompile-reconstruction` skills are
+first-party capabilities deployed across all supported adapters (`codex`, `claude`, `antigravity`,
+`generic`) via `scripts/deploy-first-party-skill.ps1` according to
+`contracts/host-skill-capabilities.json`. For Antigravity, whose per-file rule limit (`24 KB`)
 requires a delegation hook in `GEMINI.md` rather than inlining the full bundle, the adapter must
-also inline the blocking **UI Preview & Requirements Gate** directly inside `GEMINI.md` and register
+also inline the blocking **UI Preview & Requirements Gate** and **Automatic Decompilation
+Reconstruction & Code Refinement Gate** directly inside `GEMINI.md` and register
 the host-local skills directory in `config/skills.json`, mapping `ui-design` image generation to
-Antigravity's built-in `image-generator` subagent or `nano-banana-pro`. A generic installation places it beside the generated
-bundle under `skills/`; the generic host integrator must load that colocated skill before treating
-requirements-grilling as available. The deployment contract does not claim that third-party or
+Antigravity's built-in `image-generator` subagent or `nano-banana-pro`. A generic installation places them beside the generated
+bundle under `skills/`; the generic host integrator must load those colocated skills before treating
+them as available. The deployment contract does not claim that third-party or
 system skills are installed.
 
 ## Non-default and persistent-memory skills

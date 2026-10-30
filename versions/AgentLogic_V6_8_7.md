@@ -45,6 +45,13 @@ Key Enhancements:
   3D webpage models: static visuals stay on the UI route, generic interaction stays on the native
   Three.js route, and reference-image model reconstruction may select `img2threejs` only after
   explicit trust and installation gates. See `modules/52_V6_8_Img2ThreeJs3DWebIntegration.md`.
+- **Automatic Decompilation Reconstruction & Post-Implementation Code Refinement**: Adds two
+  first-party portable skills (`decompile-reconstruction` and `code-simplifier`) that trigger
+  automatically via task classification (`decompile_or_reconstruct` and `refactor` / `code_refinement`
+  claims) without requiring manual user skill selection. Decompilation orchestrates `morluto/rea`,
+  `GhidraMCP`, `ida-reverse`, `jadx`, `ilspycmd`, `pycdc`, and `webcrack` for clean-room source
+  reconstruction; Code Refinement enforces a 3-tier ladder (Ponytail pre-coding -> `code-simplifier`
+  + `ast-grep` post-coding -> `improve-codebase-architecture` macro module deepening).
 - **Map-First Navigation and Risk Closure**: Inherited projects refresh their project/code maps
   before broad discovery; owned projects maintain maps as flows evolve. The default profile keeps
   the tool-permission risk matrix needed by the affordance-first execution rule.
@@ -186,6 +193,26 @@ The V6.8.7 stable line integrates the following external source repositories:
   - Source URL: `https://github.com/img2threejs/img2threejs`
   - Integration path: `modules/52_V6_8_Img2ThreeJs3DWebIntegration.md`
   - Observed on `2026-08-08`; `main` pinned for review at `d6673386f89673a58736f8d398dd16ece67874f5`; policy-only, no source checkout, skill, or runtime installed
+- **Reverse Engineer Anything (REA — decompilation & clean-room reconstruction reference)**:
+  - Source URL: `https://github.com/morluto/rea`
+  - Integration path: `skills/engineering/decompile-reconstruction/SKILL.md`
+  - Integration date: `2026-10-30`; methodology translated into portable first-party skill, no external runtime bundled
+- **GhidraMCP (headless binary decompilation reference)**:
+  - Source URL: `https://github.com/LaurieWired/GhidraMCP`
+  - Integration path: `skills/engineering/decompile-reconstruction/SKILL.md`
+  - Integration date: `2026-10-30`; review-required optional backend in `docs/software-candidates.md`
+- **Anthropic Official Claude Plugins (`code-simplifier` reference)**:
+  - Source URL: `https://github.com/anthropics/claude-plugins-official`
+  - Integration path: `skills/engineering/code-simplifier/SKILL.md`
+  - Integration date: `2026-10-30`; post-implementation code refinement workflow integrated as a first-party portable skill
+- **ast-grep (structural AST search & rewrite reference)**:
+  - Source URL: `https://github.com/ast-grep/ast-grep`
+  - Integration path: `skills/engineering/code-simplifier/SKILL.md`
+  - Integration date: `2026-10-30`; AST-aware multi-site refactoring pattern integrated, optional CLI candidate recorded in `docs/software-candidates.md`
+- **Superpowers (test-verified refactoring loop reference)**:
+  - Source URL: `https://github.com/obra/superpowers`
+  - Integration path: `skills/engineering/code-simplifier/SKILL.md`
+  - Integration date: `2026-10-30`; Red-Green-Refactor verification loop integrated into `code-simplifier`
 
 ---
 
@@ -198,7 +225,7 @@ Key stable rules:
 - The Cybersecurity Skills Router governs reversing, CTFs, and security audits; it does not replace general verification rules but adds specific tool constraints.
 - Spec-Driven Development templates and presets are verified through code compilation and test runs.
 - The Taste Frontend Design skill enforces layout, motion, and typography standards on all visual interfaces.
-- For Antigravity CLI (which relies on `~/.gemini/GEMINI.md` for rule loading with a 24 KB per-file cap and `~/.gemini/AgentLogic/GEMINI.md` for agent-level priority detection), the installer configures UTF-8 rule hooks at both paths with the Startup Gate and Mandatory UI Preview & Requirements Gate inlined directly, registers the host-local skills root in `~/.gemini/config/skills.json`, and maps UI mockup generation to Antigravity's `image-generator` subagent or `nano-banana-pro`.
+- For Antigravity CLI (which relies on `~/.gemini/GEMINI.md` for rule loading with a 24 KB per-file cap and `~/.gemini/AgentLogic/GEMINI.md` for agent-level priority detection), the installer configures UTF-8 rule hooks at both paths with the Startup Gate, Mandatory UI Preview & Requirements Gate, and Automatic Decompilation Reconstruction & Code Refinement Gate inlined directly, registers the host-local skills root in `~/.gemini/config/skills.json`, deploys first-party skills (`product-requirements-grilling`, `code-simplifier`, `decompile-reconstruction`), and maps UI mockup generation to Antigravity's `image-generator` subagent or `nano-banana-pro`.
 - The `agent-browser` skill provides deterministic accessibility-tree browser automation, preferred dynamically when dynamic page rendering, multi-step actions, or session-isolated login tracking is required.
 - The `ponytail` skill channels a lazy senior developer, enforcing the 7-rung ladder (YAGNI, reuse, stdlib, native, dependency, one-line, min-code) to prevent vibe-coding slop and over-engineering.
 - The `mattpocock/skills` integration mandates interactive grilling (single-question stress-testing), root-level `CONTEXT.md` vocabulary maps, and docs/adr/ numbered Architectural Decision Records.

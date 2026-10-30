@@ -39,8 +39,9 @@ try {
     $uiPath = Join-Path $root 'ui.json'
     $uiBrief = New-Artifact 'ui-requirements-brief'; $designDirection = New-Artifact 'ui-design-direction'; $mockup = New-Artifact 'ui-mockup'; $implementation = New-Artifact 'ui-implementation-validation'; $behavior = New-Artifact 'ui-behavior-result'; $browser = New-Artifact 'ui-browser-observation'; $visual = New-Artifact 'ui-visual-capture'; $review = New-Artifact 'ui-review-report'; $handover = New-Artifact 'ui-handover'
     & $gate -Mode initialize -RepoRoot $RepoRoot -TaskStatePath $uiPath -TaskId ui -TaskClass major_feature -ChangeScope multi_file -UiScope substantial_refactor -ExternalEffect none -ClaimType behavior_change
-    & $gate -Mode preflight -RepoRoot $RepoRoot -TaskStatePath $uiPath -AvailableSkill product-requirements-grilling,imagegen,senior-frontend,tdd-guide,playwright,screenshot,code-reviewer
+    & $gate -Mode preflight -RepoRoot $RepoRoot -TaskStatePath $uiPath -AvailableSkill product-requirements-grilling,ui-ux-pro-max,imagegen,senior-frontend,tdd-guide,playwright,screenshot,code-reviewer
     $uiState = Get-Content -Raw -LiteralPath $uiPath | ConvertFrom-Json
+    if (@($uiState.routes | Where-Object route_id -eq 'design-direction')[0].selected_skill -ne 'ui-ux-pro-max') { throw 'Preflight did not select ui-ux-pro-max as the primary design-direction skill.' }
     if (@($uiState.routes | Where-Object route_id -eq 'code-review')[0].selected_skill -ne 'code-reviewer') { throw 'Preflight did not switch code review to an available approved alias.' }
     Expect-Failure { & $gate -Mode record-invocation -RepoRoot $RepoRoot -TaskStatePath $uiPath -RouteId ui-implementation -Evidence senior_frontend_run } 'UI implementation invocation before requirements and UI design close'
     & $gate -Mode record-invocation -RepoRoot $RepoRoot -TaskStatePath $uiPath -RouteId requirements-grilling -Evidence skill_file_read
@@ -48,7 +49,7 @@ try {
     Set-Content -LiteralPath $uiBrief -Value 'tampered' -Encoding utf8
     Expect-Failure { & $gate -Mode record-invocation -RepoRoot $RepoRoot -TaskStatePath $uiPath -RouteId design-direction -Evidence native_design_direction_run } 'Design direction after a tampered requirements artifact'
     Set-Content -LiteralPath $uiBrief -Value 'evidence:ui-requirements-brief' -Encoding utf8
-    & $gate -Mode record-invocation -RepoRoot $RepoRoot -TaskStatePath $uiPath -RouteId design-direction -Evidence native_design_direction_run
+    & $gate -Mode record-invocation -RepoRoot $RepoRoot -TaskStatePath $uiPath -RouteId design-direction -Evidence ui_ux_pro_max_run
     & $gate -Mode closure -RepoRoot $RepoRoot -TaskStatePath $uiPath -RouteId design-direction -Evidence selected_or_user_confirmed_design_direction -Artifact "design_direction_record=$designDirection"
     & $gate -Mode record-invocation -RepoRoot $RepoRoot -TaskStatePath $uiPath -RouteId ui-design -Evidence imagegen_run
     & $gate -Mode closure -RepoRoot $RepoRoot -TaskStatePath $uiPath -RouteId ui-design -Evidence approved_requirements_brief,mockup_requested_or_explicit_opt_out,approved_mockup_or_explicit_opt_out,visual_verification_plan -Artifact "mockup_or_opt_out_record=$mockup"
@@ -68,6 +69,42 @@ try {
     & $gate -Mode closure -RepoRoot $RepoRoot -TaskStatePath $uiPath -RouteId handover -Evidence reviewable_handover -Artifact "handover_record=$handover"
     & $gate -Mode validate -RepoRoot $RepoRoot -TaskStatePath $uiPath
 
+    $refactorPath = Join-Path $root 'refactor.json'
+    $refactorBehavior = New-Artifact 'refactor-behavior-result'
+    & $gate -Mode initialize -RepoRoot $RepoRoot -TaskStatePath $refactorPath -TaskId refactor -TaskClass refactor -ChangeScope multi_file -UiScope none -ExternalEffect none -ClaimType code_refinement
+    & $gate -Mode preflight -RepoRoot $RepoRoot -TaskStatePath $refactorPath -AvailableSkill code-simplifier,tdd-guide
+    $refactorState = Get-Content -Raw -LiteralPath $refactorPath | ConvertFrom-Json
+    if (@($refactorState.routes | Where-Object route_id -eq 'code-refinement')[0].selected_skill -ne 'code-simplifier') { throw 'Refactor did not automatically select code-simplifier on code-refinement route.' }
+    & $gate -Mode record-invocation -RepoRoot $RepoRoot -TaskStatePath $refactorPath -RouteId code-refinement -Evidence code_simplifier_run
+    & $gate -Mode closure -RepoRoot $RepoRoot -TaskStatePath $refactorPath -RouteId code-refinement -Evidence refinement_or_smell_check,behavior_preserved_verification
+    & $gate -Mode record-invocation -RepoRoot $RepoRoot -TaskStatePath $refactorPath -RouteId test-design -Evidence test_plan
+    & $gate -Mode closure -RepoRoot $RepoRoot -TaskStatePath $refactorPath -RouteId test-design -Evidence relevant_test_or_explicit_gap,command_result -Artifact "behavior_result=$refactorBehavior"
+    & $gate -Mode validate -RepoRoot $RepoRoot -TaskStatePath $refactorPath
+
+    $decompilePath = Join-Path $root 'decompile.json'
+    & $gate -Mode initialize -RepoRoot $RepoRoot -TaskStatePath $decompilePath -TaskId decompile -TaskClass decompile_or_reconstruct -ChangeScope isolated -UiScope none -ExternalEffect none -ClaimType decompile_reconstruction
+    & $gate -Mode preflight -RepoRoot $RepoRoot -TaskStatePath $decompilePath -AvailableSkill decompile-reconstruction
+    $decompileState = Get-Content -Raw -LiteralPath $decompilePath | ConvertFrom-Json
+    if (@($decompileState.routes | Where-Object route_id -eq 'decompile-reconstruction')[0].selected_skill -ne 'decompile-reconstruction') { throw 'Decompile task did not automatically select decompile-reconstruction route.' }
+    & $gate -Mode record-invocation -RepoRoot $RepoRoot -TaskStatePath $decompilePath -RouteId decompile-reconstruction -Evidence decompile_reconstruction_run
+    & $gate -Mode closure -RepoRoot $RepoRoot -TaskStatePath $decompilePath -RouteId decompile-reconstruction -Evidence target_format_and_toolchain_triage,decompiled_or_reconstructed_artifact
+    & $gate -Mode validate -RepoRoot $RepoRoot -TaskStatePath $decompilePath
+
+    $v69Path = Join-Path $root 'v69-domains.json'
+    & $gate -Mode initialize -RepoRoot $RepoRoot -TaskStatePath $v69Path -TaskId v69 -TaskClass office_document -ChangeScope isolated -UiScope none -ExternalEffect none -ClaimType role_selection,office_document,multimodal_media,novel_writing,diagram_flowchart
+    & $gate -Mode preflight -RepoRoot $RepoRoot -TaskStatePath $v69Path -AvailableSkill role-persona-router,office-pro-suite,multimodal-media-director,novel-story-architect,diagram-flowchart-architect
+    & $gate -Mode record-invocation -RepoRoot $RepoRoot -TaskStatePath $v69Path -RouteId role-selection -Evidence role_persona_router_run
+    & $gate -Mode closure -RepoRoot $RepoRoot -TaskStatePath $v69Path -RouteId role-selection -Evidence recommended_role_menu_presented,selected_or_confirmed_role_persona
+    & $gate -Mode record-invocation -RepoRoot $RepoRoot -TaskStatePath $v69Path -RouteId multimodal-media -Evidence multimodal_media_director_run
+    & $gate -Mode closure -RepoRoot $RepoRoot -TaskStatePath $v69Path -RouteId multimodal-media -Evidence structured_media_prompt_or_storyboard,generated_media_or_production_sheet
+    & $gate -Mode record-invocation -RepoRoot $RepoRoot -TaskStatePath $v69Path -RouteId office-document -Evidence office_pro_suite_run
+    & $gate -Mode closure -RepoRoot $RepoRoot -TaskStatePath $v69Path -RouteId office-document -Evidence office_design_and_formula_standard_check,generated_or_verified_office_artifact
+    & $gate -Mode record-invocation -RepoRoot $RepoRoot -TaskStatePath $v69Path -RouteId novel-writing -Evidence novel_story_architect_run
+    & $gate -Mode closure -RepoRoot $RepoRoot -TaskStatePath $v69Path -RouteId novel-writing -Evidence story_bible_and_scene_beat_check,anti_ai_cliche_and_continuity_audit
+    & $gate -Mode record-invocation -RepoRoot $RepoRoot -TaskStatePath $v69Path -RouteId diagram-flowchart -Evidence diagram_flowchart_architect_run
+    & $gate -Mode closure -RepoRoot $RepoRoot -TaskStatePath $v69Path -RouteId diagram-flowchart -Evidence spatial_zoning_and_zero_overlap_check,diagram_artifact_or_mermaid_preview
+    & $gate -Mode validate -RepoRoot $RepoRoot -TaskStatePath $v69Path
+
     $releasePath = Join-Path $root 'release.json'
     $releaseReview = New-Artifact 'release-review-report'
     & $gate -Mode initialize -RepoRoot $RepoRoot -TaskStatePath $releasePath -TaskId release -TaskClass release -ChangeScope isolated -UiScope none -ExternalEffect remote_release -ClaimType release_review -AvailableSkill code-review,release-manager
@@ -76,18 +113,16 @@ try {
     & $gate -Mode closure -RepoRoot $RepoRoot -TaskStatePath $releasePath -RouteId code-review -Evidence review_report,severity_and_evidence -Artifact "review_report=$releaseReview"
     & $gate -Mode record-invocation -RepoRoot $RepoRoot -TaskStatePath $releasePath -RouteId package-release -Evidence release_manager_run
     Expect-Failure { & $gate -Mode closure -RepoRoot $RepoRoot -TaskStatePath $releasePath -RouteId package-release -Evidence artifact_validation,post_result_inspection } 'remote release without exact target confirmation'
-    & $gate -Mode closure -RepoRoot $RepoRoot -TaskStatePath $releasePath -RouteId package-release -Evidence artifact_validation,post_result_inspection,exact_remote_target_confirmation -RemoteTarget 'UIhoshi/AgentLogic@v6.8.6'
+    & $gate -Mode closure -RepoRoot $RepoRoot -TaskStatePath $releasePath -RouteId package-release -Evidence artifact_validation,post_result_inspection,exact_remote_target_confirmation -RemoteTarget 'UIhoshi/AgentLogic@v6.9.0'
     $releaseState = Get-Content -Raw -LiteralPath $releasePath | ConvertFrom-Json
     $recordedRemoteTarget = @($releaseState.routes | Where-Object { $_.route_id -eq 'package-release' } | Select-Object -ExpandProperty remote_target)
-    if ($recordedRemoteTarget.Count -ne 1 -or $recordedRemoteTarget[0] -ne 'UIhoshi/AgentLogic@v6.8.6') { throw 'Remote release target was not recorded.' }
+    if ($recordedRemoteTarget.Count -ne 1 -or $recordedRemoteTarget[0] -ne 'UIhoshi/AgentLogic@v6.9.0') { throw 'Remote release target was not recorded.' }
 
     $packagePath = Join-Path $root 'package.json'
     & $gate -Mode initialize -RepoRoot $RepoRoot -TaskStatePath $packagePath -TaskId package -TaskClass package -ChangeScope isolated -UiScope none -ExternalEffect local_package -ClaimType none
     & $gate -Mode preflight -RepoRoot $RepoRoot -TaskStatePath $packagePath
     & $gate -Mode record-invocation -RepoRoot $RepoRoot -TaskStatePath $packagePath -RouteId package-release -Evidence native_package_validation_run
     & $gate -Mode closure -RepoRoot $RepoRoot -TaskStatePath $packagePath -RouteId package-release -Evidence artifact_validation,post_result_inspection
-
-
 
     $fixtureSkills = Join-Path $root 'registry-fixture\skills\example'
     New-Item -ItemType Directory -Force -Path $fixtureSkills | Out-Null

@@ -3,8 +3,8 @@
     "role":  "primary-local-logic",
     "description":  "Versioned primary logic package intended to be pulled into local AI coding hosts as the default operating logic.",
     "entry":  "MAIN.md",
-    "current_version":  "V6.8.7",
-    "main_logic_file":  "versions/AgentLogic_V6_8_7.md",
+    "current_version":  "V6.9.0",
+    "main_logic_file":  "versions/AgentLogic_V6_9_0.md",
     "default_profile":  "core-enhanced",
     "profiles":  {
                      "minimal":  {
@@ -15,7 +15,7 @@
                                                    "AGENT_INSTALL.md",
                                                    "README.md",
                                                    "AGENTS.md",
-                                                   "versions/AgentLogic_V6_8_7.md",
+                                                   "versions/AgentLogic_V6_9_0.md",
                                                    "modules/12_AgentEnforcement.md",
                                                    "modules/15_LogicEntryChecklist.md",
                                                    "modules/29_MandatoryVerificationMatrix.md",
@@ -32,7 +32,7 @@
                                                          "00_START_HERE.md",
                                                          "README.md",
                                                          "AGENTS.md",
-                                                         "versions/AgentLogic_V6_8_7.md",
+                                                         "versions/AgentLogic_V6_9_0.md",
                                                          "modules/01_MasterLogic.md",
                                                          "modules/03_AgenticLoop.md",
                                                          "modules/05_PermissionsAndSafety.md",
@@ -59,7 +59,8 @@
                                                          "modules/53_V6_8_ProgrammingLevelSkillEnforcement.md",
                                                          "contracts/skill-enforcement.json",
                                                          "contracts/skill-registry.json",
-                                                         "contracts/skill-workflow-graph.json"
+                                                         "contracts/skill-workflow-graph.json",
+                                                         "modules/54_V6_9_RoleAndMultimodalCreativeGovernance.md"
                                                      ]
                                        },
                      "github-publishing":  {
@@ -70,7 +71,7 @@
                                                              "AGENT_INSTALL.md",
                                                              "README.md",
                                                              "AGENTS.md",
-                                                             "versions/AgentLogic_V6_8_7.md",
+                                                             "versions/AgentLogic_V6_9_0.md",
                                                              "modules/01_MasterLogic.md",
                                                              "modules/03_AgenticLoop.md",
                                                              "modules/05_PermissionsAndSafety.md",
@@ -120,7 +121,8 @@
                                                              "modules/52_V6_8_Img2ThreeJs3DWebIntegration.md",
                                                              "modules/53_V6_8_ProgrammingLevelSkillEnforcement.md",
                                                              "contracts/skill-enforcement.json",
-                                                             "contracts/skill-registry.json"
+                                                             "contracts/skill-registry.json",
+                                                             "modules/54_V6_9_RoleAndMultimodalCreativeGovernance.md"
                                                          ]
                                            },
                      "governance-reference":  {
@@ -131,7 +133,7 @@
                                                                 "AGENT_INSTALL.md",
                                                                 "README.md",
                                                                 "AGENTS.md",
-                                                                "versions/AgentLogic_V6_8_7.md",
+                                                                "versions/AgentLogic_V6_9_0.md",
                                                                 "modules/01_MasterLogic.md",
                                                                 "modules/03_AgenticLoop.md",
                                                                 "modules/05_PermissionsAndSafety.md",
@@ -177,7 +179,8 @@
                                                                 "modules/52_V6_8_Img2ThreeJs3DWebIntegration.md",
                                                                 "modules/53_V6_8_ProgrammingLevelSkillEnforcement.md",
                                                                 "contracts/skill-enforcement.json",
-                                                                "contracts/skill-registry.json"
+                                                                "contracts/skill-registry.json",
+                                                                "modules/54_V6_9_RoleAndMultimodalCreativeGovernance.md"
                                                             ]
                                               }
                  },

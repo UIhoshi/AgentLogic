@@ -362,7 +362,7 @@ function checkProjectKnowledgeSyncContract() {
     return;
   }
 
-  if (!/^V6\.8\.[2-9]/.test(parsed.current_version || '')) return;
+  if (!/^V6\.(8\.[2-9]|9\.)/.test(parsed.current_version || '')) return;
 
   const modulePath = 'modules/46_V6_8_ProjectKnowledgeSync.md';
   const content = readFileSafe(modulePath);

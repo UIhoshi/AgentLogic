@@ -20,6 +20,9 @@ skill or GitHub repository is involved.
 | Visual PDF/page/chart retrieval | PixelRAG | `StarTrail-org/PixelRAG` candidate | Pin source and audit CLI/model/plugin behavior, local-vs-hosted data flow, and browser patch effects before installation. |
 | Broad public-web collection | Firecrawl | `firecrawl/firecrawl` candidate | Confirm AGPL-3.0 implications, hosted/self-hosted data boundary, URL scope, credentials, and interaction side effects before install or API use. |
 | Reference-image procedural model for an interactive 3D webpage | img2threejs | `img2threejs/img2threejs` candidate | Pin a reviewed commit; audit executable scripts and reference/data rights; confirm target-project Three.js scope and explicit user intent before install or execution. |
+| Open-source native binary decompilation & MCP bridge (when IDA Pro is unavailable) | Ghidra + GhidraMCP | NSA `NationalSecurityAgency/ghidra` + `LaurieWired/GhidraMCP` candidate | Pin release/commit; verify JDK and Ghidra SHA256; audit MCP bridge scripts before installation or plugin loading. |
+| Multi-target binary/bytecode/bundle decompilation & clean-room reconstruction CLI | REA / jadx / ILSpy (`ilspycmd`) / `pycdc` / `webcrack` | `morluto/rea`, `skylot/jadx`, `icsharpcode/ILSpy`, `zrax/pycdc`, `j4k0xb/webcrack` candidates | Pin exact version/commit; audit package dependencies and local execution scope; use single-consent prerequisite bundle before installing. |
+| AST-aware structural code search and multi-file refactoring | ast-grep (`sg`) | `ast-grep/ast-grep` / `ast-grep/agent-skill` candidate | Pin release binary or cargo/npm version; verify local-only execution before installing. |
 | Containers/local dependency services | Docker Desktop or an approved open-source alternative | Vendor/open-source candidate | Confirm licensing, WSL/virtualization impact, and organization policy before install. |
 
 Never interpret a listed candidate as trusted, installed, or permitted.

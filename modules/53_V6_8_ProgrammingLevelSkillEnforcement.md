@@ -1,4 +1,4 @@
-﻿# V6.8 Programming-Level Skill Enforcement
+# V6.8 Programming-Level Skill Enforcement
 
 Status: **Active in the enhanced profiles.**
 
@@ -24,13 +24,22 @@ must state that limitation rather than presenting workflow enforcement as a sand
 
 ## 1.1 Product-first automatic orchestration
 
-Users describe outcomes, not skill names. For an ordinary website request, classification starts
-the requirements, design-direction, mockup, implementation, verification, review, and handover
-pipeline automatically. The user is asked product questions (for example audience, restaurant
-menu, booking needs, and visual direction), never asked to choose an internal skill. Manual
-selection is reserved for restricted paths such as credentials, external writes, security/CTF,
-reversing, and persistent-memory changes. Run `scripts/skill-catalog.ps1 -Mode website-pipeline`
-to inspect the canonical website-delivery chain.
+Users describe outcomes, not skill names.
+- For an ordinary website request, classification starts the requirements, design-direction, mockup,
+  implementation, verification, review, and handover pipeline automatically. The user is asked
+  product questions (for example audience, restaurant menu, booking needs, and visual direction),
+  never asked to choose an internal skill.
+- For code refactoring and post-implementation polish (`code_refinement`), the agent automatically
+  activates `code-simplifier` (locking a green test baseline, flattening deep nesting/nested
+  ternaries, applying `ast-grep` structural rewrites across multiple call sites when available, and
+  re-verifying zero behavior change).
+- For binary, bytecode, or obfuscated bundle analysis (`decompile_or_reconstruct`), the agent
+  automatically activates `decompile-reconstruction` (triage -> `idapro_*` / `ghidra-mcp` / `jadx` /
+  `ilspycmd` / `pycdc` / `webcrack` extraction -> struct/type and control-flow recovery ->
+  compilation or equivalence check).
+- Manual selection is reserved for restricted paths such as credentials, external writes,
+  offensive security/CTF exploitation, and persistent-memory changes. Run
+  `scripts/skill-catalog.ps1 -Mode website-pipeline` to inspect the canonical website-delivery chain.
 
 ## 2. Canonical contracts
 

@@ -12,7 +12,7 @@ param(
     [string]$RepoRoot,
     [string]$TaskStatePath,
     [string]$TaskId,
-    [ValidateSet('read_only','documentation','trivial_fix','feature','major_feature','refactor','code_audit','security_review','install','package','release')]
+    [ValidateSet('read_only','documentation','trivial_fix','feature','major_feature','refactor','decompile_or_reconstruct','office_document','multimodal_media','novel_writing','diagram_flowchart','code_audit','security_review','install','package','release')]
     [string]$TaskClass,
     [ValidateSet('isolated','multi_file','architectural')]
     [string]$ChangeScope,
@@ -85,14 +85,14 @@ function Get-WorkflowPipelineIds([object]$Classification, [object]$Graph, [objec
 }
 function Get-MatchedRouteIds([object]$Classification, [object]$Routing, [object]$Contract, [object]$Graph) {
     $signals = Get-Signals -Classification $Classification -Contract $Contract
-    $matches = foreach ($route in @($Routing.routes)) {
+    $matches = @(foreach ($route in @($Routing.routes)) {
         if (@($route.triggers | Where-Object { $signals -contains $_ }).Count -gt 0) { $route }
-    }
-    $workflowRouteIds = foreach ($pipelineId in @(Get-WorkflowPipelineIds -Classification $Classification -Graph $Graph -Contract $Contract)) {
+    })
+    $workflowRouteIds = @(foreach ($pipelineId in @(Get-WorkflowPipelineIds -Classification $Classification -Graph $Graph -Contract $Contract)) {
         $pipeline = @($Graph.default_pipelines | Where-Object id -eq $pipelineId)[0]
         foreach ($nodeId in @($pipeline.nodes)) { @($Graph.nodes | Where-Object id -eq $nodeId)[0].route_ids }
-    }
-    return @($matches.id + $workflowRouteIds | Sort-Object -Unique | ForEach-Object { @($Routing.routes | Where-Object id -eq $_)[0] } | Sort-Object order | ForEach-Object id)
+    })
+    return @(@($matches | ForEach-Object id) + $workflowRouteIds | Where-Object { $_ } | Sort-Object -Unique | ForEach-Object { @($Routing.routes | Where-Object id -eq $_)[0] } | Sort-Object order | ForEach-Object id)
 }
 function Get-WorkflowRequires([string]$RouteId, [object]$Classification, [object]$Graph, [object]$Contract) {
     $required = @()
@@ -196,7 +196,7 @@ if ($Mode -eq 'initialize') {
     $matched = @(Get-MatchedRouteIds -Classification $classificationObject -Routing $script:routing -Contract $contract -Graph $graph)
     $routeRecords = foreach ($id in $matched) {
         $route = Get-Route -Routing $script:routing -Id $id
-$availablePrimary = @($route.primary_host_skill_aliases | Where-Object { @($AvailableSkill) -contains $_ })
+        $availablePrimary = @($route.primary_host_skill_aliases | Where-Object { @($AvailableSkill) -contains $_ })
         $selectedSkill = if ($availablePrimary.Count -gt 0) { $availablePrimary[0] } else { @($route.primary_host_skill_aliases)[0] }
         [ordered]@{ route_id=$id; state='pending'; selected_skill=$selectedSkill; workflow_requires=@(Get-WorkflowRequires -RouteId $id -Classification $classificationObject -Graph $graph -Contract $contract); available_skills=@(); invocation_evidence=@(); closure_evidence=@(); remote_target=$null; blocked_reason=$null }
     }

@@ -25,6 +25,8 @@ Safety and evidence gates remain part of the loop rather than a second, unrelate
 | find where code, a rule, or a file lives | the current code map first; local search only to fill or refresh a missing map entry | a direct read of the mapped owner and relevant boundary |
 | understand or modify an existing behavior | the mapped flow, then only its callers, callees, state/config, and tests | an explicit impact path before editing |
 | write or change a known local artifact | bounded edit/write tool | the matching test, build, or runtime evidence |
+| refine, simplify, or refactor modified code | `code-simplifier` (with `ast-grep` / `sg` for multi-site structural rewrites when available) after green baseline | zero-behavior-change test verification and flattened/clean diff |
+| analyze, decompile, or reconstruct source from a binary, APK/JAR, `.NET` DLL, `.pyc`, WASM, or obfuscated JS bundle | `decompile-reconstruction` (`idapro_*` / `ghidra-mcp` / `jadx` / `ilspycmd` / `pycdc` / `webcrack`) | address-cited clean-room source reconstruction plus compilation or I/O equivalence proof |
 | prove behavior runs | test, build, command, or runtime tool | inspected command/result output |
 | see a UI, layout, screenshot, or visual document | screenshot or real browser capture | visual evidence plus containment/overflow checks |
 | read, edit, repair, or verify a requested Word, Excel, or PowerPoint file | trusted OfficeCLI document route | structured inspection, bounded mutation, flushed output, and rendered/compatible-open evidence |

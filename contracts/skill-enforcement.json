@@ -20,6 +20,11 @@
                                                    "feature",
                                                    "major_feature",
                                                    "refactor",
+                                                   "decompile_or_reconstruct",
+                                                   "office_document",
+                                                   "multimodal_media",
+                                                   "novel_writing",
+                                                   "diagram_flowchart",
                                                    "code_audit",
                                                    "security_review",
                                                    "install",
@@ -44,7 +49,14 @@
                                                     ],
                                 "claim_types":  [
                                                     "none",
+                                                    "role_selection",
                                                     "behavior_change",
+                                                    "code_refinement",
+                                                    "decompile_reconstruction",
+                                                    "office_document",
+                                                    "multimodal_media",
+                                                    "novel_writing",
+                                                    "diagram_flowchart",
                                                     "browser_ui",
                                                     "dynamic_web_flow",
                                                     "desktop_visual_state",
@@ -70,11 +82,65 @@
                                                      {
                                                          "field":  "task_class",
                                                          "values":  [
-                                                                        "feature",
-                                                                        "refactor"
+                                                                        "feature"
                                                                     ],
                                                          "signals":  [
                                                                          "behavior_change"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "task_class",
+                                                         "values":  [
+                                                                        "refactor"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "behavior_change",
+                                                                         "code_refinement"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "task_class",
+                                                         "values":  [
+                                                                        "decompile_or_reconstruct"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "decompile_reconstruction"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "task_class",
+                                                         "values":  [
+                                                                        "office_document"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "office_document"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "task_class",
+                                                         "values":  [
+                                                                        "multimodal_media"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "multimodal_media"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "task_class",
+                                                         "values":  [
+                                                                        "novel_writing"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "novel_writing"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "task_class",
+                                                         "values":  [
+                                                                        "diagram_flowchart"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "diagram_flowchart"
                                                                      ]
                                                      },
                                                      {
@@ -170,6 +236,69 @@
                                                          "signals":  [
                                                                          "release",
                                                                          "remote_release"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "role_selection"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "role_selection"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "code_refinement"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "code_refinement"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "decompile_reconstruction"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "decompile_reconstruction"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "office_document"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "office_document"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "multimodal_media"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "multimodal_media"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "novel_writing"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "novel_writing"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "diagram_flowchart"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "diagram_flowchart"
                                                                      ]
                                                      },
                                                      {
@@ -271,7 +400,7 @@
                                                  "closed",
                                                  "blocked"
                                              ],
-                                  "location":  ".specify/\u003ctask\u003e/skill-execution.json"
+                                  "location":  ".specify/<task>/skill-execution.json"
                               },
     "project_skill_usage":  {
                                 "location":  ".agentlogic/skill-usage.json",
@@ -289,6 +418,6 @@
                                                               "status"
                                                           ],
                                 "code_map_heading":  "Skill Usage",
-                                "transient_task_records":  ".specify/\u003ctask\u003e/skill-execution.json"
+                                "transient_task_records":  ".specify/<task>/skill-execution.json"
                             }
 }

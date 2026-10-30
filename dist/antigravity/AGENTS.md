@@ -1,21 +1,34 @@
-# MANDATORY AGENT EXECUTIVE PROTOCOL (AgentLogic V6.8.7)
+# MANDATORY AGENT EXECUTIVE PROTOCOL (AgentLogic V6.9.0)
 
 - Host target: antigravity
 - Profile: core-enhanced
 - Stable entry: MAIN.md
-- Version: V6.8.7
+- Version: V6.9.0
 
 > [!CRITICAL]
-> **EXECUTION vs SUMMARIZATION MANDATE**:
-> Do NOT merely read, recite, or summarize AgentLogic rules as passive background text when starting a session, receiving a prompt, or answering logic queries.
-> You MUST ACTUALLY EXECUTE the Startup Gate protocol interactively on Turn 1:
-> 1. Classify the user task.
-> 2. Judge whether the task extends the previous coding round.
-> 3. If NOT an extension, explicitly ask the user whether to orget/compress context before proceeding (matching the user's interaction language):
->    - Chinese: '当前任务是否属于上一轮 coding 的延续？若不是，请确认是否需要 forget/compress context。'
+> **CROSS-HOST MANDATORY BLOCKING GATES (Antigravity / Claude Code / OpenAI Codex / Generic)**:
+>
+> **Gate 1 鈥?Startup Context-Reset & Autonomous Role Recommendation Gate (Turn 1 Blocking)**:
+> Do NOT merely read, recite, or summarize AgentLogic rules as passive background text. On Turn 1 of any new project or non-continuation task, you MUST interactively execute BOTH:
+> 1. **Context-Reset Confirmation**: Ask whether the current task extends the previous coding round, and if not, whether to orget/compress context (in the user's active language):
+>    - Chinese: '褰撳墠浠诲姟鏄惁灞炰簬涓婁竴杞?coding 鐨勫欢缁紵鑻ヤ笉鏄紝璇风‘璁ゆ槸鍚﹂渶瑕?forget/compress context銆?
 >    - English: 'Does the current task extend the previous coding round? If not, please confirm whether to forget/compress context.'
->    - Other languages: Output the matching context-reset confirmation in the user's language.
-> 4. Execute the Mandatory Full-Read Chain before deeper project planning or code implementation.
+> 2. **Autonomous Role Recommendation & Selection (
+ole-persona-router)**: Analyze the project domain, recommend the #1 best-fit Lead Role (with a 1-sentence rationale), and present the 7-role selection menu ([1] Principal Systems Architect & Full-Stack Lead, [2] UI/UX Creative Design Director, [3] Reverse Engineering & Reconstruction Specialist, [4] Management Consultant & Office Architect, [5] Multimodal Creative Director (Image/Video/Music), [6] Chief Showrunner & Novel Architect, [7] Enterprise Flowchart & Architecture Cartographer) so the user can confirm or switch the executing persona.
+>
+> **Gate 2 鈥?Pure UI Design (ui-ux-pro-max) + Mandatory Text-to-Image Preview Gate (Blocking Before UI Code)**:
+> Before writing or modifying production frontend/UI code for any new UI or substantial redesign (unless the user explicitly opts out): (a) run product-requirements-grilling one question at a time -> (b) run ui-ux-pro-max (skills/design/ui-ux-pro-max/SKILL.md) to derive a pure UI/UX design specification (industry color palette, font pairing, grid anatomy) -> (c) combine that specification with imagegen / image-generator / multimodal-media-director / 
+ano-banana-pro to generate a visual UI mockup image -> (d) obtain user approval before writing UI code.
+>
+> **Gate 3 鈥?Encounter -> Auto-Use Domain Capabilities (Zero Manual Skill Selection)**:
+> Never wait for the user to name a skill. Automatically activate the matching first-party skill when encountering:
+> - **Binaries / Bytecode / Obfuscated Bundles** -> decompile-reconstruction (GhidraMCP / ida-reverse / jadx / ilspycmd / pycdc / webcrack)
+> - **Post-Implementation Polish / Code Refactoring** -> code-simplifier (st-grep structural rewrite + guard clauses + zero behavior regression)
+> - **Word / Excel / PPT Documents (.docx/.xlsx/.pptx)** -> office-pro-suite (executive typography, live Excel formulas with blue/black/green color coding, 16:9 action-title slides)
+> - **Text-to-Image / Video / Music Generation** -> multimodal-media-director (art direction, shot-by-shot camera storyboards, musical arrangement with BPM/Key/Metatags)
+> - **Novel / Fiction / Script Writing** -> 
+ovel-story-architect (.story-bible/ continuity compiler, scene beat sheets, anti-AI-cliche prose filter)
+> - **Flowcharts / Swimlanes / Architecture Diagrams** -> diagram-flowchart-architect (.drawio XML, .excalidraw JSON, and themed Mermaid)
 
 This is a generated primary-logic bundle. Regenerate it from scripts/build-profile.ps1 instead of editing it by hand.
 
@@ -84,7 +97,7 @@ validation, review, packaging, or rule synchronization work, the agent MUST full
 following files from beginning to end in this exact order:
 
 1. `README.md`
-2. `versions/AgentLogic_V6_8_7.md`
+2. `versions/AgentLogic_V6_9_0.md`
 3. `modules/01_MasterLogic.md`
 4. `modules/15_LogicEntryChecklist.md`
 
@@ -167,13 +180,13 @@ Do not continue deeper reading, modify files, delete files, perform write action
 or begin implementation before the logic-entry loop above has been completed.
 -->
 
-# 馃寣 AgentLogic: Autonomous Evolving Rule Engine (V6.8.7)
+# 🌌 AgentLogic: Autonomous Evolving Rule Engine (V6.9.0)
 
 [![Agentic Code](https://img.shields.io/badge/Agent-Autonomous-blueviolet?style=flat-square)](https://github.com/UIhoshi/AgentLogic)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/Version-V6.8.7_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_8_7.md)
+[![Version](https://img.shields.io/badge/Version-V6.9.0_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_9_0.md)
 
-AgentLogic is a versioned primary-logic package designed to be pulled into local AI coding hosts (such as Codex, Claude Code, Gemini Pro) and used as their default operating mind. It consolidates multi-turn session workflows, tool selection matrix, security sandbox auditing, and dynamic domain extensions.
+AgentLogic is a versioned primary-logic package designed to be pulled into local AI coding hosts (**Antigravity / Gemini**, **Claude Code**, **OpenAI Codex / GPT**) and used as their default operating mind. It consolidates multi-turn session workflows, **Turn 1 autonomous role recommendation**, **pure UI/UX design + text-to-image mockup coupling**, **zero-manual-selection domain skill routing**, security sandbox auditing, and project-native knowledge synchronization.
 
 > [!IMPORTANT]
 > **Repository Gating Warning**: This repository represents core logic infrastructure, not a generic business workspace.
@@ -181,81 +194,98 @@ AgentLogic is a versioned primary-logic package designed to be pulled into local
 
 ---
 
-## 馃殌 Quick Start & Deployment
+## 🚀 Quick Start & Deployment
 
-For local diagnostic runs and host deployment, execute the following commands in sequence:
+For local diagnostic runs and cross-host deployment (`antigravity`, `claude`, `codex`), execute the following commands in sequence:
 
 | Step | PowerShell Command | Primary Purpose |
 | :--- | :--- | :--- |
 | **1. Diagnosis** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\doctor.ps1` | Analyzes repository layout, checks manifests, and recommends installers |
-| **2. Install** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost antigravity` | Validates, builds, verifies, and deploys the fresh host-ready ruleset |
-| **3. Validation** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\maintainer-check.ps1` | Verifies structural link integrity and validates the compiled adapter bundles |
+| **2. Install** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost antigravity` | Validates, builds, verifies, and deploys the fresh host-ready ruleset and 9 first-party skills (`antigravity` / `claude` / `codex`) |
+| **3. Validation** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\maintainer-check.ps1` | Verifies structural link integrity, 124 registered skills, 19 auto-routes, and compiled adapter bundles |
 
 ---
 
-## 馃彈锔?4-Layer Architecture Matrix (Grid & Subsystems)
+## 🏛️ 4-Layer Architecture & V6.9 Autonomous Execution Flow
 
-We organize rules and code into a **4-layer progressive abstraction model** to prevent context budget bloat:
+We organize rules, blocking gates, and auto-triggered capabilities into a **4-layer progressive abstraction model** so every host executes the same deterministic workflow without manual `/skill` selection:
 
 ```mermaid
-graph TD
-    subgraph L1 [L1: Strategy & Entry Layer]
-        Entry[MAIN.md / AGENTS.md] --> Startup{Startup Gate}
-        Startup --> Check[00_START_HERE.md]
+flowchart TD
+    subgraph L1 ["L1: Strategy, Entry & Role Gate (Turn 1 Blocking)"]
+        Entry["MAIN.md / AGENTS.md / Host Global Rules"] --> Gate1{"Gate 1: Startup & Context Gate"}
+        Gate1 -->|"Ask forget/compress context"| RoleRouter["role-persona-router (Auto #1 Role Recommendation + 7-Role Menu)"]
+        RoleRouter --> Check["00_START_HERE.md & Knowledge Sync (PROJECT_MAP / CODE_MAP)"]
     end
-    subgraph L2 [L2: Session & Loop Layer]
-        Check --> Loop[03_AgenticLoop.md]
-        Loop --> SDD[38_SpecDrivenDevelopment.md]
+
+    subgraph L2 ["L2: Session, SDD & Automatic Task Router (19 Routes)"]
+        Check --> Router{"Gate 3: Encounter -> Auto-Route"}
+        Router -->|"UI / Frontend Task"| Grilling["product-requirements-grilling (1-Question-at-a-Time Brief)"]
+        Router -->|"Feature / Refactor"| SDD["38_SpecDrivenDevelopment.md (Spec -> Red-Team -> Plan -> Tasks)"]
+        Router -->|"Domain / Creative / Reverse Task"| DomainDispatch["Zero-Manual-Selection Domain Dispatch"]
     end
-    subgraph L3 [L3: Control & Auditing Layer]
-        SDD --> Verify[29_MandatoryVerificationMatrix.md]
-        Verify --> Taste[39_TasteFrontendDesign.md]
+
+    subgraph L3 ["L3: Design, Auditing & Verification Gates"]
+        Grilling --> UIProMax["Gate 2: ui-ux-pro-max (Pure Palette / Typography / Grid Spec)"]
+        UIProMax --> MockupGate["Mandatory Text-to-Image UI Mockup + User Approval Gate"]
+        MockupGate --> UIImpl["Frontend Implementation & Browser / Visual Verification"]
+        SDD --> CodeSimp["code-simplifier (Post-Implementation AST & Guard-Clause Polish)"]
+        CodeSimp --> Verify["29_MandatoryVerificationMatrix.md & SRA Audit"]
     end
-    subgraph L4 [L4: Base & Drivers Layer]
-        Taste --> Skills[skills/ agent-browser & nano-banana-pro]
+
+    subgraph L4 ["L4: First-Party Auto-Triggered Skills & Drivers (124 Portable Skills)"]
+        UIImpl --> BrowserSkill["agent-browser & nano-banana-pro"]
+        DomainDispatch --> Decompile["decompile-reconstruction (IDA / Ghidra / jadx / webcrack -> Clean-Room Source)"]
+        DomainDispatch --> MediaDir["multimodal-media-director (Text-to-Image / Video Storyboard / Music Arrangement)"]
+        DomainDispatch --> OfficePro["office-pro-suite (Executive Word .docx / Dynamic Excel .xlsx / Action-Title PPT .pptx)"]
+        DomainDispatch --> NovelArch["novel-story-architect (.story-bible/ Continuity + Scene Beats + Anti-AI-Cliche)"]
+        DomainDispatch --> DiagramArch["diagram-flowchart-architect (.drawio XML / .excalidraw JSON / Themed Mermaid)"]
     end
+
+    classDef l1 fill:#dbeafe,stroke:#1d4ed8,color:#1e3a8a,stroke-width:2px
+    classDef l2 fill:#fef3c7,stroke:#b45309,color:#78350f,stroke-width:2px
+    classDef l3 fill:#fce7f3,stroke:#be185d,color:#831843,stroke-width:2px
+    classDef l4 fill:#dcfce7,stroke:#15803d,color:#14532d,stroke-width:2px
+
+    class Entry,Gate1,RoleRouter,Check l1
+    class Router,Grilling,SDD,DomainDispatch l2
+    class UIProMax,MockupGate,UIImpl,CodeSimp,Verify l3
+    class BrowserSkill,Decompile,MediaDir,OfficePro,NovelArch,DiagramArch l4
 ```
 
 ### Detailed Module Mapping
 
 | Abstraction Layer | Primary Core Responsibility | Included Files / Directories |
 | :--- | :--- | :--- |
-| **L1: Strategy & Entry** | Defines entrypoints, environment injection, REPL startup gates, and context forget/reset rules. | - [00_START_HERE.md](./00_START_HERE.md) (璧锋墜寮?<br>- [MAIN.md](./MAIN.md) (Stable Host Binding)<br>- [AGENTS.md](./AGENTS.md) (Agent Entry)<br>- [15_LogicEntryChecklist.md](./modules/15_LogicEntryChecklist.md) (Gate Checklist)<br>- [13_MandatoryLogicGateTemplate.md](./modules/13_MandatoryLogicGateTemplate.md) (Header Gating) |
-| **L2: Session & Loop** | Manages the single-turn execution cycle, prevents vibe-coding, and structures the SDD lifecycle. | - [03_AgenticLoop.md](./modules/03_AgenticLoop.md) (Agentic Cycle)<br>- [38_SpecDrivenDevelopment.md](./modules/38_V6_6_SpecDrivenDevelopment.md) (SDD Lifecycle)<br>- [20_V6_5_RuntimeModes.md](./modules/20_V6_5_RuntimeModes.md) (Context Adaptation)<br>- [28_V6_5_TerminologyAndModuleBoundaries.md](./modules/28_V6_5_TerminologyAndModuleBoundaries.md) (Boundary Rules) |
-| **L3: Control & Auditing** | Establishes high-friction verification rules, security-risk matrix, and visual frontend taste checks. | - [29_MandatoryVerificationMatrix.md](./modules/29_MandatoryVerificationMatrix.md) (Verification Matrix)<br>- [39_TasteFrontendDesign.md](./modules/39_V6_6_TasteFrontendDesign.md) (Aesthetic & Spacing Audit)<br>- [30_ToolQuestionBoundaryMatrix.md](./modules/30_ToolQuestionBoundaryMatrix.md) (Credential Boundary)<br>- [31_ToolMisuseAndAntiPatternMatrix.md](./modules/31_ToolMisuseAndAntiPatternMatrix.md) (Anti-Pattern Gating) |
-| **L4: Base & Drivers** | Low-level command execution, raw tool controllers, portable skill files, and original frontend reference templates. | - `skills/` (Logic-Carried Domain Skills)<br>  * [agent-browser](./skills/agent-browser/) (Accessibility Browser CLI)<br>  * [nano-banana-pro](./skills/nano-banana-pro/) (Gemini Mockup Engine)<br>  * [self-improvement](./skills/self-improvement/) (Error Log & Self-Correction)<br>- [`templates/frontend/`](./templates/frontend/) (Original, unbranded UI starting points)<br>- [35_V6_5_SkillGovernanceAndMandatoryUse.md](./modules/35_V6_5_SkillGovernanceAndMandatoryUse.md) (Governance Rules) |
+| **L1: Strategy & Entry** | Defines entrypoints, Turn 1 context-reset confirmation, autonomous `#1` role recommendation (`role-persona-router`), and project-native knowledge sync. | - [00_START_HERE.md](./00_START_HERE.md) (起手式)<br>- [MAIN.md](./MAIN.md) (Stable Host Binding)<br>- [AGENTS.md](./AGENTS.md) (Agent Entry)<br>- [15_LogicEntryChecklist.md](./modules/15_LogicEntryChecklist.md) (Gate Checklist)<br>- [54_V6_9_RoleAndMultimodalCreativeGovernance.md](./modules/54_V6_9_RoleAndMultimodalCreativeGovernance.md) (V6.9 Role & Creative Gates) |
+| **L2: Session & Loop** | Manages the single-turn execution cycle, single-question requirements grilling, SDD lifecycle, and 19-route zero-manual-selection dispatch. | - [03_AgenticLoop.md](./modules/03_AgenticLoop.md) (Agentic Cycle)<br>- [38_SpecDrivenDevelopment.md](./modules/38_V6_6_SpecDrivenDevelopment.md) (SDD Lifecycle)<br>- [48_V6_8_SkillAndToolRouting.md](./modules/48_V6_8_SkillAndToolRouting.md) (Autonomous Skill & Tool Routing)<br>- [53_V6_8_ProgrammingLevelSkillEnforcement.md](./modules/53_V6_8_ProgrammingLevelSkillEnforcement.md) (Skill Enforcement State Machine) |
+| **L3: Control & Auditing** | Establishes pure UI/UX design-first + mandatory text-to-image mockup gating, post-implementation code simplification, and verification matrices. | - [29_MandatoryVerificationMatrix.md](./modules/29_MandatoryVerificationMatrix.md) (Verification Matrix)<br>- [39_TasteFrontendDesign.md](./modules/39_V6_6_TasteFrontendDesign.md) (Aesthetic & Spacing Audit)<br>- [30_ToolQuestionBoundaryMatrix.md](./modules/30_ToolQuestionBoundaryMatrix.md) (Credential Boundary)<br>- [31_ToolMisuseAndAntiPatternMatrix.md](./modules/31_ToolMisuseAndAntiPatternMatrix.md) (Anti-Pattern Gating) |
+| **L4: Base & Drivers** | 9 first-party auto-deployed domain skills across all hosts (`~/.gemini/skills`, `~/.claude/skills`, `~/.codex/skills`), 124 portable skills, and original UI templates. | - `skills/` (9 First-Party Auto-Triggered Skills + 124 Registered Portable Skills)<br>  * [role-persona-router](./skills/productivity/role-persona-router/) (Turn 1 Role Recommendation & 7-Role Menu)<br>  * [product-requirements-grilling](./skills/productivity/product-requirements-grilling/) (Single-Question Requirements Brief)<br>  * [ui-ux-pro-max](./skills/design/ui-ux-pro-max/) (Pure UI/UX Design Spec + Mandatory Text-to-Image Coupling)<br>  * [multimodal-media-director](./skills/creative/multimodal-media-director/) (Text-to-Image / Video Storyboard / Music Production)<br>  * [office-pro-suite](./skills/productivity/office-pro-suite/) (Executive Word `.docx`, Excel `.xlsx`, PowerPoint `.pptx`)<br>  * [novel-story-architect](./skills/creative/novel-story-architect/) (`.story-bible/` Continuity & Anti-AI-Cliché Fiction Engine)<br>  * [diagram-flowchart-architect](./skills/engineering/diagram-flowchart-architect/) (`.drawio` XML, `.excalidraw` JSON & Themed Mermaid)<br>  * [code-simplifier](./skills/engineering/code-simplifier/) (Auto Post-Implementation Code Refinement & AST Rewrite)<br>  * [decompile-reconstruction](./skills/engineering/decompile-reconstruction/) (Auto Decompilation & Clean-Room Source Reconstruction)<br>- [`templates/frontend/`](./templates/frontend/) (Original, unbranded UI starting points) |
 
 ---
 
-## 馃洜锔?Self-Improvement & Learning Feed
+## 🛠️ Self-Improvement & Learning Feed
 
 This rule package supports **automated self-evolution** and developer logging:
 
-```
-[Unexpected Error / User Correction / Best Practice Found]
-                      鈹?
-                      鈻?(1) Automatically log to:
-       .learnings/ (LEARNINGS.md / ERRORS.md)
-                      鈹?
-                      鈻?(2) Exceeds threshold (Recurrence >= 3)
-      Systemic rules extracted and merged into:
-            CLAUDE.md / AGENTS.md
+```mermaid
+flowchart LR
+    A["Unexpected Error / User Correction / Best Practice"] -->|"1. Log to"| B[".learnings/ (LEARNINGS.md & ERRORS.md)"]
+    B -->|"2. Recurrence >= 3"| C["Promote Systemic Rule into AGENTS.md / CLAUDE.md / CODE_MAP.md"]
 ```
 
 > [!TIP]
-> **Design-First Prototyping Gate**: Net-new UI and substantial UI refactors require a text-to-image mockup and user review before implementation. A clearly classified small visual correction may skip a new mockup, but still requires visual verification; an explicit user opt-out always bypasses mockup approval.
+> **Pure Design + Mandatory Text-to-Image Mockup Gate (`ui-ux-pro-max`)**: Net-new UI and substantial UI refactors MUST first complete single-question requirements grilling, derive a pure `ui-ux-pro-max` visual design specification (industry palette, font pairing, spatial grid), and generate a **text-to-image mockup** for user approval before any frontend code is written.
 
-## 馃帹 Original Frontend Template Library
+## 🎨 Original Frontend Template Library
 
 [`templates/frontend/`](./templates/frontend/) contains a small, dependency-free set of original,
 unbranded HTML/CSS starting points: an editorial landing page, an analytics dashboard, and a
-settings surface. They complement the Taste skill rather than replacing it: Taste governs visual
-direction and verification, while the templates provide reusable structural baselines. They contain
-no third-party images, fonts, logos, remote assets, or copied Open Design code.
+settings surface. They complement `ui-ux-pro-max` and Taste governance rather than replacing them: `ui-ux-pro-max` governs pure visual design specification and mandatory text-to-image mockup synthesis, while the templates provide reusable structural baselines. They contain no third-party images, fonts, logos, remote assets, or copied Open Design code.
 
 ---
 
-## 馃摎 External References & Integrated Sources
+## 📚 External References & Integrated Sources
 
 During its evolutionary cycles, AgentLogic has integrated concepts and structures from the following open-source GitHub projects:
 
@@ -278,66 +308,45 @@ During its evolutionary cycles, AgentLogic has integrated concepts and structure
 | **PixelRAG (visual-document workflow comparison)** | [StarTrail-org/PixelRAG](https://github.com/StarTrail-org/PixelRAG) | Defines an optional visual-document discovery policy; it does not replace browser or screenshot verification |
 | **Firecrawl (external-collection workflow comparison)** | [firecrawl/firecrawl](https://github.com/firecrawl/firecrawl) | Defines an optional consent-bound public-web collection policy; no API, SDK, or service is bundled |
 | **img2threejs (interactive 3D-web workflow comparison)** | [img2threejs/img2threejs](https://github.com/img2threejs/img2threejs) | Defines an optional reference-image-to-procedural-Three.js model route for approved interactive 3D web work; no skill or runtime is bundled |
+| **Reverse Engineer Anything (REA)** | [morluto/rea](https://github.com/morluto/rea) | Informs the automatic `decompile-reconstruction` clean-room binary/bundle source reconstruction workflow |
+| **GhidraMCP** | [LaurieWired/GhidraMCP](https://github.com/LaurieWired/GhidraMCP) | Provides the open-source headless binary decompilation MCP benchmark for `decompile-reconstruction` |
+| **Anthropic Official Claude Plugins (`code-simplifier`)** | [anthropics/claude-plugins-official](https://github.com/anthropics/claude-plugins-official) | Informs the automatic post-implementation `code-simplifier` complexity reduction and guard-clause refinement pass |
+| **ast-grep** | [ast-grep/ast-grep](https://github.com/ast-grep/ast-grep) | Provides structural AST search and multi-site refactoring rules inside `code-simplifier` |
+| **Superpowers** | [obra/superpowers](https://github.com/obra/superpowers) | Establishes the test-verified Red-Green-Refactor verification loop for code refinement |
+| **UI/UX Pro Max Skill** | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | Provides pure UI/UX design-system intelligence (palettes, font pairings, layout grids) coupled with text-to-image mockups |
+| **Google Cloud GenMedia Creative Studio** | [GoogleCloudPlatform/vertex-ai-creative-studio](https://github.com/GoogleCloudPlatform/vertex-ai-creative-studio) | Informs multimodal Text-to-Image (Imagen), Text-to-Video (Veo), and Text-to-Music (Lyria) orchestration |
+| **EachLabs Multimodal Skills** | [eachlabs/skills](https://github.com/eachlabs/skills) | Informs cross-model image, video storyboard, and audio generation workflows |
+| **MiniMax MCP** | [MiniMax-AI/MiniMax-MCP](https://github.com/MiniMax-AI/MiniMax-MCP) | Provides Hailuo Video and MiniMax Music MCP generation reference patterns |
+| **Claude Image Gen** | [guinacio/claude-image-gen](https://github.com/guinacio/claude-image-gen) | Informs aspect-ratio, reference-image guidance, and inpainting controls for UI and illustration mockups |
+| **Anthropic Official Document Skills** | [anthropics/skills](https://github.com/anthropics/skills) | Establishes executive Word (.docx), dynamic-formula Excel (.xlsx), and action-title PowerPoint (.pptx) standards |
+| **The Agency (agency-agents)** | [msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents) | Informs the 7 specialist role personas in the Turn 1 Autonomous Role Recommendation Gate |
+| **BMAD-METHOD** | [bmad-code-org/BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) | Informs multi-role Lead + Supporting Squad orchestration and artifact handoffs |
+| **Oh-Story ClaudeCode** | [zenstory-ai/oh-story-claudecode](https://github.com/zenstory-ai/oh-story-claudecode) | Informs web-novel pacing, Golden 3-Chapter structure, and anti-AI-cliche prose filtering |
+| **Story Skills** | [danjdewhurst/story-skills](https://github.com/danjdewhurst/story-skills) | Establishes the `.story-bible/` continuity compiler and 4-point chapter audit |
+| **Awesome Novel Studio** | [MJbae/awesome-novel-studio](https://github.com/MJbae/awesome-novel-studio) | Informs the 5-stage macro-to-scene-beat narrative drafting pipeline |
+| **Draw.io Official MCP & Skill** | [jgraph/drawio-mcp](https://github.com/jgraph/drawio-mcp) | Provides native `.drawio` XML and orthogonal layout rules for enterprise flowcharts |
+| **Agents365 Draw.io Skill** | [Agents365-ai/drawio-skill](https://github.com/Agents365-ai/drawio-skill) | Informs multi-view architecture, swimlane, and ER schema generation in `.drawio` |
+| **Excalidraw Diagram Skill** | [coleam00/excalidraw-diagram-skill](https://github.com/coleam00/excalidraw-diagram-skill) | Informs color-zoned hand-drawn system design diagrams in `.excalidraw` |
 
 ---
 
-## 鈿栵笍 Maintenance Constraints
+## ⚖️ Maintenance Constraints
 
 1. **Keep it Pure**: No business logic or project-specific implementations should be written into `AgentLogic` rule files.
 2. **Specify Before Writing**: Always compile technical blueprints to `.specify/spec.md` and `.specify/plan.md` before touching code.
-3. **Generate via Bundle**: Never edit `dist/` bundles manually. Always write updates to version files (e.g. `versions/AgentLogic_V6_8_7.md`), then run `build-profile.ps1` to rebuild the adapter targets.
-## V6.8 Operational Integration
+3. **Generate via Bundle**: Never edit `dist/` bundles manually. Always write updates to version files (e.g. `versions/AgentLogic_V6_9_0.md`), then run `build-profile.ps1` to rebuild the adapter targets.
 
-The default `core-enhanced` profile includes
-[`modules/44_V6_8_GrokBuildOperationalIntegration.md`](./modules/44_V6_8_GrokBuildOperationalIntegration.md).
-It translates useful provider-neutral patterns from
-[`xai-org/grok-build`](https://github.com/xai-org/grok-build) into contracts for
-rule discovery, session state, compaction, permissions, extension trust,
-subagents, headless execution, memory freshness, and bounded background work.
-These contracts complement鈥攏ot replace鈥攖he existing SDD, Red-Team, SRA,
-verification, and history-synchronization gates.
+## V6.9.0 Role & Multimodal Creative Governance
 
-The same profile also includes
-[`modules/45_V6_8_GraphifyCodeMapIntegration.md`](./modules/45_V6_8_GraphifyCodeMapIntegration.md).
-It defines an optional Graph Preview Gate: substantial tasks ask the user at Converge/Ship
-whether to generate a Graphify code view. Graphify is not installed or run automatically.
+The default `core-enhanced` profile includes [`modules/54_V6_9_RoleAndMultimodalCreativeGovernance.md`](./modules/54_V6_9_RoleAndMultimodalCreativeGovernance.md) alongside [`modules/44_V6_8_GrokBuildOperationalIntegration.md`](./modules/44_V6_8_GrokBuildOperationalIntegration.md), [`modules/45_V6_8_GraphifyCodeMapIntegration.md`](./modules/45_V6_8_GraphifyCodeMapIntegration.md), [`modules/47_V6_8_ReferenceToInterfaceWorkflow.md`](./modules/47_V6_8_ReferenceToInterfaceWorkflow.md), [`modules/48_V6_8_SkillAndToolRouting.md`](./modules/48_V6_8_SkillAndToolRouting.md), [`modules/52_V6_8_Img2ThreeJs3DWebIntegration.md`](./modules/52_V6_8_Img2ThreeJs3DWebIntegration.md), and [`modules/53_V6_8_ProgrammingLevelSkillEnforcement.md`](./modules/53_V6_8_ProgrammingLevelSkillEnforcement.md).
 
-The enhanced profile also provides an optional
-[`Reference-to-Interface Workflow`](./modules/47_V6_8_ReferenceToInterfaceWorkflow.md) for
-permitted video, page, screenshot, and HTML references, plus an optional
-[`img2threejs Interactive 3D Web Integration`](./modules/52_V6_8_Img2ThreeJs3DWebIntegration.md)
-for approved reference-image model reconstruction, and a
-[`Skill and Tool Routing`](./modules/48_V6_8_SkillAndToolRouting.md) matrix for selecting the
-required evidence tool before the narrowest matching skill. Neither module installs or trusts
-external skills automatically.
+- **Gate 1 (Turn 1 Context & Autonomous Role Gate)**: Every new project or non-continuation task triggers context-reset confirmation and [`role-persona-router`](./skills/productivity/role-persona-router/SKILL.md) to recommend the `#1` best-fit Lead Role + present a 7-role selection menu.
+- **Gate 2 (Pure UI Design + Mandatory Text-to-Image Coupling)**: Every net-new or substantially refactored UI runs [`product-requirements-grilling`](./skills/productivity/product-requirements-grilling/SKILL.md) $\rightarrow$ [`ui-ux-pro-max`](./skills/design/ui-ux-pro-max/SKILL.md) $\rightarrow$ [`multimodal-media-director`](./skills/creative/multimodal-media-director/SKILL.md) (`image-generator` / `nano-banana-pro`) and pauses for user approval before writing frontend code.
+- **Gate 3 (Encounter $\rightarrow$ Auto-Use Domain Capabilities)**: Compiled binaries/bundles trigger [`decompile-reconstruction`](./skills/engineering/decompile-reconstruction/SKILL.md); post-implementation code triggers [`code-simplifier`](./skills/engineering/code-simplifier/SKILL.md); `.docx`/`.xlsx`/`.pptx` tasks trigger [`office-pro-suite`](./skills/productivity/office-pro-suite/SKILL.md); image/video/music generation triggers [`multimodal-media-director`](./skills/creative/multimodal-media-director/SKILL.md); fiction/script tasks trigger [`novel-story-architect`](./skills/creative/novel-story-architect/SKILL.md); flowchart/architecture diagrams trigger [`diagram-flowchart-architect`](./skills/engineering/diagram-flowchart-architect/SKILL.md).
 
-V6.8.7 keeps `core-enhanced` focused on high-frequency execution: start from the desired outcome,
-select the native evidence/action tool, then add a specialist skill only when it materially helps.
-The complete narrative governance set remains available through the `governance-reference` profile
-for deep maintenance and policy audits.
+## V6.9.0 Project-Native Knowledge Sync & Skill Enforcement
 
-## V6.8.7 Project-Native Knowledge Sync
-
-Business projects synchronize their own concise operational facts and symbol-level navigation with code through tracked
-`AGENTS.md`, `PROJECT_MAP.md`, `CODE_MAP.md`, and `.learnings/ERRORS.md`. `CODE_MAP.md` is the mandatory
-text-first handover map; visual Graphify maps remain user-approved and optional. The global AgentLogic bundle is
-not copied into projects. Before relying on those records, check remote freshness safely with
-`git fetch --prune` and inspect the current branch/worktree; a pull remains a separate,
-confirmed state change. `.specify/` and `docs/adr/` are conditional, while raw logs, secrets,
-machine paths, private prompts, and default `graphify-out/` artifacts stay out of tracked
-knowledge. See [Project-Native Knowledge Sync](./modules/46_V6_8_ProjectKnowledgeSync.md).
-
-## Programming-Level Skill Enforcement
-
-The enhanced profiles register every portable skill, derive matched routes from structured task
-classification, and validate preflight, invocation, and closure evidence through a deployable
-workflow gate. Projects keep durable Skill Usage facts in `.agentlogic/skill-usage.json` and a
-concise `CODE_MAP.md` summary. The gate validates recorded workflow state; it does not claim
-host-native tool interception unless a host-specific hook is separately verified.
-
-## V6.8.7 鈥?Programming-Level Skill Enforcement
-
-V6.8.7 adds a machine-checkable portable-skill registry, lifecycle states, deterministic route selection, invocation/closure evidence, cross-host deployment checks, and project-level Skill Usage records in `.agentlogic/skill-usage.json` and `CODE_MAP.md`. It prevents required skill routes from being silently skipped while clearly stating the boundary: enforcement verifies recorded workflow state and does not claim host-native interception unless a verified host hook exists. See [CHANGELOG.md](./CHANGELOG.md) and [Module 53](./modules/53_V6_8_ProgrammingLevelSkillEnforcement.md).
+Business projects synchronize their own concise operational facts and symbol-level navigation with code through tracked `AGENTS.md`, `PROJECT_MAP.md`, `CODE_MAP.md`, and `.learnings/ERRORS.md`. See [Project-Native Knowledge Sync](./modules/46_V6_8_ProjectKnowledgeSync.md), [CHANGELOG.md](./CHANGELOG.md), and [Module 53](./modules/53_V6_8_ProgrammingLevelSkillEnforcement.md).
 
 ## END FILE: README.md
 
@@ -399,7 +408,7 @@ The current logic-entry chain is:
 
 1. `00_START_HERE.md`
 2. `README.md`
-3. `versions/AgentLogic_V6_8_7.md`
+3. `versions/AgentLogic_V6_9_0.md`
 4. `modules/01_MasterLogic.md`
 5. `modules/15_LogicEntryChecklist.md`
 
@@ -480,147 +489,66 @@ This repository is logic infrastructure, not a business-project workspace.
 
 - Human-first entry: `00_START_HERE.md`
 - Stable host binding entry: `MAIN.md`
-- Versioned main logic source: `versions/AgentLogic_V6_8_7.md`
+- Versioned main logic source: `versions/AgentLogic_V6_9_0.md`
 
 ## END FILE: AGENTS.md
 
 ---
 
-## BEGIN FILE: versions/AgentLogic_V6_8_7.md
+## BEGIN FILE: versions/AgentLogic_V6_9_0.md
 
-# AgentLogic V6.8.7
+# AgentLogic V6.9.0
 
-Status: **Current Stable V6.8.7 Line**.
-Promoted from V6.8.1 with project-native knowledge synchronization: project L1-L4 maps and
-redacted error records now travel with the corresponding project repository rather than
-requiring a separate history repository for ordinary work.
-
-This file defines the stable V6.8.7 logic line. It operationalizes the core V6 philosophy with deep integrations for cybersecurity routing, structured specification-driven workflows, premium anti-slop frontend design rules, visual system matrix mapping, shipping audits, project-native knowledge synchronization, and interactive human-readable project summaries.
+Status: **Current Stable V6.9.0 Line**.
+Promoted from V6.8.7 with **Autonomous Startup Role Recommendation (`role-persona-router`)**, **Pure UI/UX Design + Mandatory Text-to-Image Coupling (`ui-ux-pro-max`)**, **Multimodal Media Direction (`multimodal-media-director` for Image / Video / Music)**, **Office Professional Design & Standardization (`office-pro-suite` for Word / Excel / PPT)**, **Long-Form Novel & Story Architecture (`novel-story-architect`)**, **Multi-Format Flowchart & Architecture Diagramming (`diagram-flowchart-architect`)**, and **Cross-Host Parity across Antigravity, Claude Code, OpenAI Codex/GPT, and Generic bundles**.
 
 ---
 
-## 1. The V6.8.7 Mandate
+## 1. The V6.9.0 Mandate
 
-V6.8.7 extends the V6.8 line with a project-native synchronization contract designed to keep
-project code, L1-L4 facts, and durable error lessons on the same Git timeline.
+V6.9.0 unifies engineering rigor, visual design intelligence, multimodal media direction, executive Office document craftsmanship, narrative continuity, and autonomous role selection into a single "Encounter -> Auto-Use" operating system across all AI coding hosts.
 
 Key Enhancements:
-- **First Priority Enforcement**: Absolute prioritization of AgentLogic rules and workflows above generic cloud/system prompts if AgentLogic is detected as installed on the local system.
-- **Limited Initial View Prevention**: Support for scanning nested directories and placing a delegation hook in the workspace-level `AGENTS.md` to prevent agents starting in a parent workspace from ignoring local logic.
-- **Human-Readable Business Gates**: Interactive prompt checkpoints at the end of Grilling/Specification (Proposal Gate) and at the end of Ship/Completion (Handover Gate) to compile clean, non-technical project deliverables (PDF/Word/PPT slides).
-- **Mandatory UI Preview Gate**: Net-new UI and substantial UI refactors require a text-to-image preview and user review before formal UI code. A clearly classified small visual correction may skip a new mockup, but never visual verification; ambiguous scope defaults to the full preview path. Explicit user opt-out remains available.
-- **4-Layer System Mapping & Code Matrix**: Inspired by the Linux Kernel Map to organize rules, tools, and execution flows into a clean 4-tier grid, integrating [11_CrossDirectoryMap.md](../modules/11_CrossDirectoryMap.md) and [40_AgentLogicSystemMap.md](../modules/40_AgentLogicSystemMap.md).
-- **Cybersecurity Skills Routing**: Direct integration of `reverse-skill` domain-specific skill sets (APK reversing, malware analysis, frontend JS decryption, firmware analysis, and CTF solvers) and tool orchestration rules.
-- **Spec-Driven Development (SDD)**: Direct integration of `spec-kit` to enforce specifications as executable definitions of behavior, preventing "vibe coding."
-- **Taste Frontend Design**: Direct integration of `taste-skill` to enforce anti-slop premium interface design system layouts, micro-interactions, spring animations (GSAP), and visual quality standards.
-- **Expanded Core Governance Modules**: Incorporates modules 37, 38, 39, and 40 for cybersecurity routing, SDD lifecycle tracking, premium design system controls, and visual architecture matrix mapping.
-- **Grok Build Complementary Operations**: Adds provider-neutral contracts for rule discovery, session lineage, active-state-preserving compaction, deny-overrides policy compilation, extension trust, subagent capabilities, headless result envelopes, memory freshness, and bounded retries/background work. See `modules/44_V6_8_GrokBuildOperationalIntegration.md`.
-- **Graphify Code Map Integration**: Adds an optional external code-map workflow and a consent-based Graph Preview Gate for substantial projects at Converge/Ship. See `modules/45_V6_8_GraphifyCodeMapIntegration.md`.
-- **Project-Native Knowledge Sync**: Requires tracked project `AGENTS.md`, `PROJECT_MAP.md`, `CODE_MAP.md`, and `.learnings/ERRORS.md`. `CODE_MAP.md` is mandatory text-first function, state, and interface navigation; visual graph generation remains user-approved and optional. This replaces mandatory external-history checkout/push steps for ordinary project work. See `modules/46_V6_8_ProjectKnowledgeSync.md`.
-- **Reference-to-Interface Workflow**: Adds an optional, consent- and provenance-bound workflow for turning permitted videos, pages, screenshots, and HTML into constrained interface briefs, approved mockups, and verified implementations. See `modules/47_V6_8_ReferenceToInterfaceWorkflow.md`.
-- **Skill and Tool Routing**: Adds a compact mandatory problem-to-evidence-to-skill routing procedure without weakening the existing verification matrix. See `modules/48_V6_8_SkillAndToolRouting.md`.
-- **External Research and Artifact Integration**: Adds optional, policy-only boundaries for PixelRAG
-  visual-document discovery and Firecrawl external collection.
-  No source, plugin, API, or runtime dependency is imported. See
-  `modules/50_V6_8_ExternalResearchAndArtifactIntegration.md`.
-- **Office-Document Processing Route**: Adds a mandatory OfficeCLI route whenever the user requests
-  reading, creating, editing, repairing, or verifying `.docx`, `.xlsx`, or `.pptx` files. The route
-  is blocked until OfficeCLI is separately pinned, security-audited, trusted, installed, and
-  permitted; it requires structure inspection plus rendered and compatible-open verification.
-- **Affordance-First Tool Use**: Adds a compact intent 鈫?evidence 鈫?native tool 鈫?specialist 鈫?
-  closure rule, and makes the default profile an execution-focused bundle while retaining a full
-  `governance-reference` profile for deep policy work. See
-  `modules/51_V6_8_AffordanceFirstToolUse.md`.
-- **Interactive 3D Web Integration**: Adds an optional, policy-only route for approved interactive
-  3D webpage models: static visuals stay on the UI route, generic interaction stays on the native
-  Three.js route, and reference-image model reconstruction may select `img2threejs` only after
-  explicit trust and installation gates. See `modules/52_V6_8_Img2ThreeJs3DWebIntegration.md`.
-- **Map-First Navigation and Risk Closure**: Inherited projects refresh their project/code maps
-  before broad discovery; owned projects maintain maps as flows evolve. The default profile keeps
-  the tool-permission risk matrix needed by the affordance-first execution rule.
+- **Autonomous Startup Role Recommendation Gate (`role-persona-router`)**: Every new project or non-continuation coding round automatically recommends the #1 best-fit Lead Role (and supporting squad) alongside a 7-role expert selection menu (`msitarzewski/agency-agents` + `bmad-code-org/BMAD-METHOD`) during Turn 1 startup.
+- **Pure UI Design + Mandatory Text-to-Image Coupling (`ui-ux-pro-max`)**: Integrates `nextlevelbuilder/ui-ux-pro-max-skill` with `taste-skill` and text-to-image generation so every net-new UI or substantial redesign first derives a structured pure design specification (industry color palette, font pairing, spatial grid) and feeds it directly into text-to-image mockup generation before any UI code is written.
+- **Multimodal Media Director (`multimodal-media-director`)**: Integrates `GoogleCloudPlatform/vertex-ai-creative-studio` (`mcp-genmedia` for Imagen/Veo/Lyria), `eachlabs/skills`, `MiniMax-AI/MiniMax-MCP`, and `guinacio/claude-image-gen` for automatic Text-to-Image art direction, Text-to-Video shot-by-shot camera storyboards, and Text-to-Music BPM/Key/Metatag arrangement.
+- **Office Professional Design & Standardization (`office-pro-suite`)**: Integrates `anthropics/skills` (`docx`, `xlsx`, `pptx`) with `iOfficeAI/OfficeCLI` to enforce executive typography and three-line/zebra tables in Word, live dynamic formulas and Wall Street blue/black/green color coding in Excel, and 16:9 action-title layout variety in PowerPoint.
+- **Novel & Long-Form Story Architect (`novel-story-architect`)**: Integrates `zenstory-ai/oh-story-claudecode`, `danjdewhurst/story-skills`, and `MJbae/awesome-novel-studio` for `.story-bible/` continuity compilation, scene beat sheets, and strict anti-AI-cliché prose filtering.
+- **Diagram & Flowchart Architect (`diagram-flowchart-architect`)**: Integrates `jgraph/drawio-mcp`, `Agents365-ai/drawio-skill`, and `coleam00/excalidraw-diagram-skill` (`yctimlin/mcp_excalidraw`) for automatic `.drawio` XML, `.excalidraw` JSON, and syntax-validated themed `Mermaid` generation.
+- **Automatic Decompilation Reconstruction & Post-Implementation Code Refinement**: Retains and enforces `decompile-reconstruction` (`morluto/rea`, `LaurieWired/GhidraMCP`) and `code-simplifier` (`anthropics/claude-plugins-official`, `ast-grep/ast-grep`, `obra/superpowers`).
+- **Cross-Host Parity (`Antigravity` / `Claude Code` / `OpenAI Codex` / `Generic`)**: All 4 host bundles and installers carry identical top-level blocking gates and deploy all 9 first-party portable skills (`product-requirements-grilling`, `role-persona-router`, `ui-ux-pro-max`, `multimodal-media-director`, `office-pro-suite`, `novel-story-architect`, `diagram-flowchart-architect`, `code-simplifier`, `decompile-reconstruction`).
 
 ---
 
 ## 2. Core Governance Modules
 
-The V6.8.1 line is supported by a modular suite of governance rules:
+The V6.9.0 line is supported by the complete modular suite of governance rules:
 
 ### 2.1 Entry & Master Logic
-- `modules/01_MasterLogic.md`: Master logic outlining project-level CLI loops and mappings.
-- `modules/03_AgenticLoop.md`: Execution loop orchestration details and context compacting.
-- `modules/12_AgentEnforcement.md`: Agent behavior enforcement, read obligations, and gate checking rules.
-- `modules/13_MandatoryLogicGateTemplate.md`: File-level Mandatory Logic Gate header template.
-- `modules/15_LogicEntryChecklist.md`: Mandatory startup checklist for project entry and reset gating.
+- `modules/01_MasterLogic.md`, `modules/03_AgenticLoop.md`, `modules/12_AgentEnforcement.md`, `modules/13_MandatoryLogicGateTemplate.md`, `modules/15_LogicEntryChecklist.md`.
 
 ### 2.2 System & Code Mapping
-- `modules/11_CrossDirectoryMap.md`: The 4-layer (L1 to L4) codebase directory mapping matrix.
-- `modules/40_AgentLogicSystemMap.md`: The Linux Kernel Map-inspired visual grid matrix mapping subsystems to rows and columns.
+- `modules/11_CrossDirectoryMap.md`, `modules/40_AgentLogicSystemMap.md`, `modules/45_V6_8_GraphifyCodeMapIntegration.md`, `modules/46_V6_8_ProjectKnowledgeSync.md`.
 
-### 2.3 Tool Execution & Mapping
-- `modules/05_PermissionsAndSafety.md`: General safety boundaries, permissions, and command sandboxing.
-- `modules/21_V6_5_ToolUsageAndSelection.md`: General principles and tool choreography.
-- `modules/23_V6_5_PermissionAndOutputPipeline.md`: Permission gating implementation layer.
-- `modules/24_V6_5_ToolUsageMatrix.md`: Decision table for preferred tools.
-- `modules/25_V6_5_ToolCapabilityMapping.md`: Maps tool families to specific question types.
-- `modules/26_V6_5_INDEX.md`: Index of V6.5 files.
-- `modules/28_V6_5_TerminologyAndModuleBoundaries.md`: Definitions, terminology, and module boundaries.
-- `modules/30_ToolQuestionBoundaryMatrix.md`: Defines tool-family strength and forbidden-alone claims.
+### 2.3 Tool Execution, Risk & Verification
+- `modules/05_PermissionsAndSafety.md`, `modules/21_V6_5_ToolUsageAndSelection.md`, `modules/23_V6_5_PermissionAndOutputPipeline.md`, `modules/24_V6_5_ToolUsageMatrix.md`, `modules/25_V6_5_ToolCapabilityMapping.md`, `modules/27_V6_5_ToolPermissionRiskMatrix.md`, `modules/29_MandatoryVerificationMatrix.md`, `modules/30_ToolQuestionBoundaryMatrix.md`, `modules/31_ToolMisuseAndAntiPatternMatrix.md`.
 
-### 2.4 Risk & Verification
-- `modules/27_V6_5_ToolPermissionRiskMatrix.md`: Permission posture and risk class gating.
-- `modules/29_MandatoryVerificationMatrix.md`: Mapping of conclusion types to required evidence tools.
-- `modules/31_ToolMisuseAndAntiPatternMatrix.md`: Anti-pattern detection, correction recipes, and downgrade labels.
-
-### 2.5 Context & Lifecycle
-- `modules/20_V6_5_RuntimeModes.md`: Operational awareness of the current execution surface.
-- `modules/22_V6_5_HookLifecycle.md`: Mapping of event hooks and side-effect points.
-- `modules/32_V6_5_ContextAssemblyAndInstructionStacking.md`: Priority-based layering of instructions and memories.
-- `modules/33_V6_5_BackgroundConsolidationAndIdleLifecycle.md`: The "Dream Phase" for post-task memory extraction and cleanup.
-
-### 2.6 Project Fact Mapping
-- `modules/34_V6_5_ProjectFactMap_V2.md`: Standardized 4-tier fact map (User, Feedback, Project, Reference).
-
-### 2.7 Skill Governance
-- `modules/35_V6_5_SkillGovernanceAndMandatoryUse.md`: Deduplication policy, active-vs-archived skill posture, and mandatory skill-use situations.
-- `modules/36_V6_5_SkillZoneSeparation.md`: Separates host-local skill inventories from any logic-carried skill layer.
-
-### 2.8 Domain Integration Modules
-- `modules/37_V6_6_CybersecuritySkillsRouter.md`: Router configuration, security analysis toolchains, and field journal logging.
-- `modules/38_V6_6_SpecDrivenDevelopment.md`: Guidelines and 8-phase lifecycle for Spec-Driven Development, including mandatory Red-Team Gate.
-- `modules/39_V6_6_TasteFrontendDesign.md`: Aesthetic standards, visual dials tuning, and anti-slop UI/UX audit rules.
-- `modules/41_V6_7_AIShippingAndReviewabilityAudit.md`: AI Shipping & Reviewability Audit (SRA) 闂?Core+Conditional shipping artifacts, universal self-refute principle, trust boundary crossing enumeration, and Verification Matrix integration.
-- `modules/42_V6_7_PonytailLazySeniorDevLadder.md`: Ponytail Lazy Senior Developer's Ladder 闂?7-rung YAGNI implementation ladder, root-cause bug-fixing rules, and SDD integration.
-- `modules/43_V6_7_MattPocockSkillsIntegration.md`: Matt Pocock Skills Integration 闂?Grilling plan interview flow, CONTEXT.md ubiquitous vocabulary glossary, and Architectural Decision Records (ADRs) specifications.
-
-- `modules/44_V6_8_GrokBuildOperationalIntegration.md`: Provider-neutral operational contracts translated from the audited Grok Build runtime and user guides.
-- `modules/45_V6_8_GraphifyCodeMapIntegration.md`: Optional external code-map policy, Graph Preview Gate, and external-extension trust boundary.
-- `modules/46_V6_8_ProjectKnowledgeSync.md`: Project-native Git synchronization for project maps, mandatory textual code maps, and redacted error lessons.
-- `modules/47_V6_8_ReferenceToInterfaceWorkflow.md`: Optional reference capture, extraction, mockup, and verification workflow informed by MengTo/Skills.
-- `modules/48_V6_8_SkillAndToolRouting.md`: Operational problem-to-tool-and-skill routing matrix.
-- `modules/50_V6_8_ExternalResearchAndArtifactIntegration.md`: Source-specific policy
-  for OfficeCLI, PixelRAG, and Firecrawl.
-- `modules/51_V6_8_AffordanceFirstToolUse.md`: Normative outcome-to-tool selection rule and
-  context-budget posture.
-- `modules/52_V6_8_Img2ThreeJs3DWebIntegration.md`: Optional source-specific policy for
-  approved reference-image procedural-model reconstruction in interactive 3D web work.
-- `modules/53_V6_8_ProgrammingLevelSkillEnforcement.md`: Machine-checkable portable-skill
-  coverage, route state transitions, cross-host workflow-gate deployment, and project Skill Usage
-  handover contract.
+### 2.4 Domain, Skill Routing & V6.9 Creative/Role Modules
+- `modules/35_V6_5_SkillGovernanceAndMandatoryUse.md`, `modules/36_V6_5_SkillZoneSeparation.md`, `modules/37_V6_6_CybersecuritySkillsRouter.md`, `modules/38_V6_6_SpecDrivenDevelopment.md`, `modules/39_V6_6_TasteFrontendDesign.md`, `modules/41_V6_7_AIShippingAndReviewabilityAudit.md`, `modules/42_V6_7_PonytailLazySeniorDevLadder.md`, `modules/43_V6_7_MattPocockSkillsIntegration.md`, `modules/44_V6_8_GrokBuildOperationalIntegration.md`, `modules/47_V6_8_ReferenceToInterfaceWorkflow.md`, `modules/48_V6_8_SkillAndToolRouting.md`, `modules/49_V6_8_AutonomousSkillEnforcement.md`, `modules/50_V6_8_ExternalResearchAndArtifactIntegration.md`, `modules/51_V6_8_AffordanceFirstToolUse.md`, `modules/52_V6_8_Img2ThreeJs3DWebIntegration.md`, `modules/53_V6_8_ProgrammingLevelSkillEnforcement.md`, `modules/54_V6_9_RoleAndMultimodalCreativeGovernance.md`.
 
 ---
 
 ## 3. Stable Promotion Summary
 
-The V6.8.7 line is now promoted to stable status.
 - **Stable Entry**: `MAIN.md`
-- **Current Version**: `V6.8.7`
-- **Default Profile**: `core-enhanced` (a lean V6.8.7 execution bundle with project-native knowledge synchronization, risk/verification gates, SDD, UI, SRA, operational contracts, and policy-only external research integration)
+- **Current Version**: `V6.9.0`
+- **Default Profile**: `core-enhanced`
 
 ---
 
 ## 4. Reference Source Registration
 
-The V6.8.7 stable line integrates the following external source repositories:
+The V6.9.0 stable line integrates the following external source repositories:
 
 - **Cybersecurity Skills Router**:
   - Source URL: `https://github.com/zhaoxuya520/reverse-skill`
@@ -648,266 +576,253 @@ The V6.8.7 stable line integrates the following external source repositories:
   - Integration path: `skills/productivity/grilling/`, `skills/productivity/grill-me/`, `skills/engineering/grill-with-docs/`
 - **Grok Build (comparative reference)**:
   - Source URL: `https://github.com/xai-org/grok-build`
-  - Local comparison path: `../grok-build`
-  - Audited commit: `c68e39f60462f28d9be5e683d9cbe2c57b1a5027`
-  - Integration date: `2026-07-16`; source line: `main` (no runtime dependency imported)
+  - Integration path: `modules/44_V6_8_GrokBuildOperationalIntegration.md`
 - **Graphify (external code-map reference)**:
   - Source URL: `https://github.com/Graphify-Labs/graphify`
   - Integration path: `modules/45_V6_8_GraphifyCodeMapIntegration.md`
-  - Integration date: `2026-07-18`; reference line: `v8` (no runtime dependency or skill installed)
 - **MengTo Skills (workflow comparison)**:
   - Source URL: `https://github.com/MengTo/Skills`
-  - Integration paths: `modules/47_V6_8_ReferenceToInterfaceWorkflow.md`, `modules/48_V6_8_SkillAndToolRouting.md`
-  - Integration date: `2026-07-22`; no runtime dependency, executable skill, or source assets imported
+  - Integration path: `modules/47_V6_8_ReferenceToInterfaceWorkflow.md`
 - **OfficeCLI (Office-document workflow comparison)**:
   - Source URL: `https://github.com/iOfficeAI/OfficeCLI`
-  - Integration paths: `modules/50_V6_8_ExternalResearchAndArtifactIntegration.md`,
-    `modules/48_V6_8_SkillAndToolRouting.md`, and `modules/51_V6_8_AffordanceFirstToolUse.md`
-  - Reviewed release: `v1.0.144` on `2026-08-16`; policy-only, no binary, skill, plugin, or runtime installed
+  - Integration path: `modules/50_V6_8_ExternalResearchAndArtifactIntegration.md`, `skills/productivity/office-pro-suite/SKILL.md`
 - **PixelRAG (visual-document workflow comparison)**:
   - Source URL: `https://github.com/StarTrail-org/PixelRAG`
   - Integration path: `modules/50_V6_8_ExternalResearchAndArtifactIntegration.md`
-  - Integration date: `2026-07-28`; policy-only, no model, CLI, or plugin installed
 - **Firecrawl (external-collection workflow comparison)**:
   - Source URL: `https://github.com/firecrawl/firecrawl`
   - Integration path: `modules/50_V6_8_ExternalResearchAndArtifactIntegration.md`
-  - Integration date: `2026-07-28`; policy-only, no API, SDK, or self-hosted service installed
 - **img2threejs (interactive 3D-web workflow comparison)**:
   - Source URL: `https://github.com/img2threejs/img2threejs`
   - Integration path: `modules/52_V6_8_Img2ThreeJs3DWebIntegration.md`
-  - Observed on `2026-08-08`; `main` pinned for review at `d6673386f89673a58736f8d398dd16ece67874f5`; policy-only, no source checkout, skill, or runtime installed
+- **Reverse Engineer Anything (REA — decompilation & clean-room reconstruction reference)**:
+  - Source URL: `https://github.com/morluto/rea`
+  - Integration path: `skills/engineering/decompile-reconstruction/SKILL.md`
+- **GhidraMCP (headless binary decompilation reference)**:
+  - Source URL: `https://github.com/LaurieWired/GhidraMCP`
+  - Integration path: `skills/engineering/decompile-reconstruction/SKILL.md`
+- **Anthropic Official Claude Plugins (`code-simplifier` reference)**:
+  - Source URL: `https://github.com/anthropics/claude-plugins-official`
+  - Integration path: `skills/engineering/code-simplifier/SKILL.md`
+- **ast-grep (structural AST search & rewrite reference)**:
+  - Source URL: `https://github.com/ast-grep/ast-grep`
+  - Integration path: `skills/engineering/code-simplifier/SKILL.md`
+- **Superpowers (test-verified refactoring loop reference)**:
+  - Source URL: `https://github.com/obra/superpowers`
+  - Integration path: `skills/engineering/code-simplifier/SKILL.md`
+- **UI/UX Pro Max Skill (pure UI/UX design-system intelligence reference)**:
+  - Source URL: `https://github.com/nextlevelbuilder/ui-ux-pro-max-skill`
+  - Integration path: `skills/design/ui-ux-pro-max/SKILL.md`
+- **Google Cloud GenMedia Creative Studio (Imagen / Veo / Lyria multimodal reference)**:
+  - Source URL: `https://github.com/GoogleCloudPlatform/vertex-ai-creative-studio`
+  - Integration path: `skills/creative/multimodal-media-director/SKILL.md`
+- **EachLabs Multimodal Agent Skills (image / video / music workflow reference)**:
+  - Source URL: `https://github.com/eachlabs/skills`
+  - Integration path: `skills/creative/multimodal-media-director/SKILL.md`
+- **MiniMax MCP (Hailuo Video & MiniMax Music MCP reference)**:
+  - Source URL: `https://github.com/MiniMax-AI/MiniMax-MCP`
+  - Integration path: `skills/creative/multimodal-media-director/SKILL.md`
+- **Claude Image Gen (reference-guided image generation reference)**:
+  - Source URL: `https://github.com/guinacio/claude-image-gen`
+  - Integration path: `skills/creative/multimodal-media-director/SKILL.md`
+- **Anthropic Official Document Skills (`docx`, `xlsx`, `pptx` standardization reference)**:
+  - Source URL: `https://github.com/anthropics/skills`
+  - Integration path: `skills/productivity/office-pro-suite/SKILL.md`
+- **The Agency (`agency-agents` specialist persona reference)**:
+  - Source URL: `https://github.com/msitarzewski/agency-agents`
+  - Integration path: `skills/productivity/role-persona-router/SKILL.md`
+- **BMAD-METHOD (multi-role agile orchestration reference)**:
+  - Source URL: `https://github.com/bmad-code-org/BMAD-METHOD`
+  - Integration path: `skills/productivity/role-persona-router/SKILL.md`
+- **Oh-Story ClaudeCode (web-novel & anti-AI-slop fiction reference)**:
+  - Source URL: `https://github.com/zenstory-ai/oh-story-claudecode`
+  - Integration path: `skills/creative/novel-story-architect/SKILL.md`
+- **Story Skills (Story Bible continuity compiler reference)**:
+  - Source URL: `https://github.com/danjdewhurst/story-skills`
+  - Integration path: `skills/creative/novel-story-architect/SKILL.md`
+- **Awesome Novel Studio (5-stage narrative beat pipeline reference)**:
+  - Source URL: `https://github.com/MJbae/awesome-novel-studio`
+  - Integration path: `skills/creative/novel-story-architect/SKILL.md`
+- **Draw.io Official MCP & Skill (`jgraph/drawio-mcp` reference)**:
+  - Source URL: `https://github.com/jgraph/drawio-mcp`
+  - Integration path: `skills/engineering/diagram-flowchart-architect/SKILL.md`
+- **Agents365 Draw.io Architecture Skill (`Agents365-ai/drawio-skill` reference)**:
+  - Source URL: `https://github.com/Agents365-ai/drawio-skill`
+  - Integration path: `skills/engineering/diagram-flowchart-architect/SKILL.md`
+- **Excalidraw Diagram Skill (`coleam00/excalidraw-diagram-skill` reference)**:
+  - Source URL: `https://github.com/coleam00/excalidraw-diagram-skill`
+  - Integration path: `skills/engineering/diagram-flowchart-architect/SKILL.md`
 
 ---
 
-## 5. Skill-System Integration Rule
+## 5. Skill-System Integration & Cross-Host Execution Rule
 
-V6.8.7 treats general programming skills, cybersecurity domain skills, visual design skills, and operational integration contracts as portable, logic-carried assets under the `skills/` and `modules/` directories. The Grok Build comparison remains a method-layer reference and does not grant trust to external executable extensions.
+V6.9.0 enforces identical automatic routing across Antigravity (`~/.gemini/GEMINI.md` + `AGENTS_BUNDLE.md`), Claude Code (`~/.claude/CLAUDE.md` + `~/.claude/AgentLogic/CLAUDE.md`), OpenAI Codex (`~/.codex/agentlogic/model_instructions.md`), and Generic bundles (`dist/generic/AGENTLOGIC.md`):
+- Every new project starts with **Gate 1 (Context-Reset + Role Recommendation Menu)** via `role-persona-router`.
+- Every new UI or substantial UI refactor passes **Gate 2 (`product-requirements-grilling` $\rightarrow$ `ui-ux-pro-max` pure design specification $\rightarrow$ text-to-image mockup preview $\rightarrow$ user approval)** before UI code is written.
+- Every encountered domain task (`decompile-reconstruction`, `code-simplifier`, `office-pro-suite`, `multimodal-media-director`, `novel-story-architect`, `diagram-flowchart-architect`) triggers automatically from task classification without manual skill selection.
 
-Key stable rules:
-- Logic package rules outrank individual skills.
-- The Cybersecurity Skills Router governs reversing, CTFs, and security audits; it does not replace general verification rules but adds specific tool constraints.
-- Spec-Driven Development templates and presets are verified through code compilation and test runs.
-- The Taste Frontend Design skill enforces layout, motion, and typography standards on all visual interfaces.
-- For Antigravity CLI (which relies on `~/.gemini/GEMINI.md` for rule loading with a 24 KB per-file cap and `~/.gemini/AgentLogic/GEMINI.md` for agent-level priority detection), the installer configures UTF-8 rule hooks at both paths with the Startup Gate and Mandatory UI Preview & Requirements Gate inlined directly, registers the host-local skills root in `~/.gemini/config/skills.json`, and maps UI mockup generation to Antigravity's `image-generator` subagent or `nano-banana-pro`.
-- The `agent-browser` skill provides deterministic accessibility-tree browser automation, preferred dynamically when dynamic page rendering, multi-step actions, or session-isolated login tracking is required.
-- The `ponytail` skill channels a lazy senior developer, enforcing the 7-rung ladder (YAGNI, reuse, stdlib, native, dependency, one-line, min-code) to prevent vibe-coding slop and over-engineering.
-- The `mattpocock/skills` integration mandates interactive grilling (single-question stress-testing), root-level `CONTEXT.md` vocabulary maps, and docs/adr/ numbered Architectural Decision Records.
-- Graphify is an optional external code-map capability. It may guide project discovery and offer a user-approved graph preview, but it must be security-audited before installation and never replaces the Verification Matrix.
-- Project-specific structure, symbol navigation, and lessons are synchronized with project code through `AGENTS.md`, `PROJECT_MAP.md`, `CODE_MAP.md`, and `.learnings/ERRORS.md`; the optional `modification_history` archive is reserved for cross-project lessons and historical records.
-- Reference-to-interface work is optional and source-bound: it may use reviewed capture and analysis paths, but it never grants automatic trust, installation authority, asset-copy permission, or exemption from UI approval and visual verification.
-- PixelRAG and Firecrawl remain optional external-source policies. They do not grant
-  automatic artifact generation, visual-proof closure, network collection, credential use,
-  installation authority, or trust.
-- OfficeCLI is mandatory only for user-requested Office-file processing after its
-  availability, trust, and install gates close; it does not grant an automatic binary installation,
-  host-skill deployment, update permission, or visual-proof closure.
-- Requested installations with missing audits or capabilities use Module 49's prerequisite bundle:
-  disclose the exact missing items, sources, targets, reviews, effects, and verification once, then
-  ask whether to perform the disclosed sequence together. One scoped approval avoids repeated
-  ordinary confirmations but never waives failed audits, host permissions, or a new material risk.
-- The default `core-enhanced` profile is the concise execution layer. The
-  `governance-reference` profile retains the full narrative governance set for deep maintenance,
-  policy, and audit work. Tool choice starts from the work outcome and required evidence; an
-  unavailable specialist does not block a permitted native evidence path unless the route itself
-  is strict.
-- Code navigation is map-first: inherited projects freshness-check and repair project/code maps
-  before broad discovery; owned projects maintain those maps with each affected flow so change
-  impact can be found before editing.
-- `img2threejs` is an optional source-specific candidate for reference-image procedural models in
-  interactive 3D webpages. It does not activate for static 3D-feel UI visuals or generic Three.js
-  scenes, and it remains unavailable until separately reviewed, trusted, and installed.
-
-
-
----
-
-## 6. Future Iteration Reference-Source Rule
-
-For future logic iterations, a version line must explicitly record its external or comparative reference source when such a source materially influenced the update. At minimum, record:
-- Source repository URL.
-- Local integration/comparison path.
-- Date of integration and target release tag.
-
-## 7. Autonomous Skill Enforcement Addendum
-
-The enhanced profile includes Module 49 and the canonical routing registry. Mandatory task routes must record a mapped available skill, invocation evidence, and closure evidence; missing mandatory capabilities block implementation or verified completion rather than silently degrading. docs/software-candidates.md is a review-required decision queue, never an auto-install list.
-
-## 8. Programming-Level Skill Enforcement
-
-V6.8.7 now registers every portable `SKILL.md` through `contracts/skill-registry.json` and requires
-explicit lifecycle status before a skill can be automatically routed. The schema-v3 routing contract,
-task-enforcement state machine, cross-host workflow payload, and project Skill Usage records make
-required skill selection, invocation evidence, closure evidence, and future integrations
-machine-checkable. The workflow gate is explicit about its boundary: it validates recorded process
-state and never claims host-native tool interception without a verified host hook. See
-`modules/53_V6_8_ProgrammingLevelSkillEnforcement.md`.
-
-Registry records also declare validated activation metadata. Route candidates derive triggers from
-the canonical routing contract; unreviewed, security-sensitive, and niche capabilities remain
-manual with controlled selection conditions. `scripts/audit-skill-duplicates.ps1` provides
-read-only duplicate-candidate evidence and never authorizes deletion by itself.
-
-## END FILE: versions/AgentLogic_V6_8_7.md
+## END FILE: versions/AgentLogic_V6_9_0.md
 
 ---
 
 ## BEGIN FILE: modules/01_MasterLogic.md
 
-# AgentLogic V6.8.7 Master Logic
+# AgentLogic V6.9.0 Master Logic
 
-鏈枃浠舵槸 AgentLogic 浠撳簱鐨勯」鐩骇涓婚€昏緫鎽樿銆傚畠鎻忚堪鏈粨搴撲腑鐨勮鍒欍€侀獙璇併€佸畨瑁呭拰
-鎵撳寘璧勪骇锛屼笉鎻忚堪浠讳綍澶栭儴涓氬姟椤圭洰鎴栨煇涓叿浣?Agentic CLI 浜у搧鐨勬簮鐮佷簨瀹炪€?
+本文件是 AgentLogic 仓库的项目级主逻辑摘要。它描述本仓库中的规则、验证、安装和
+打包资产，不描述任何外部业务项目或某个具体 Agentic CLI 产品的源码事实。
 
-## 1. 褰撳墠浠撳簱瀹氫綅
+## 1. 当前仓库定位
 
-- 鏈粨搴撴槸鍙畨瑁呭埌鏈湴 AI coding host 鐨勪富閫昏緫鍩虹璁炬柦锛坢ethod layer锛夈€?
-- 浜嬪疄鏉ユ簮鏄粨搴撳唴鐨勫叆鍙ｆ枃妗ｃ€佺増鏈簮鏂囦欢銆佹ā鍧椼€佽剼鏈€乵anifest 鍜岀敓鎴愯緭鍑恒€?
-- 澶栭儴椤圭洰銆佹瘮杈冧粨搴撳拰 `reference/` 鍘熷灞傚彧鑳戒綔涓哄弬鑰冭瘉鎹紝涓嶈兘鑷姩鍗囩骇涓哄綋鍓嶄粨搴撲簨瀹炪€?
-- 褰撳墠绋冲畾缁戝畾鍏ュ彛鏄?`MAIN.md`锛涘綋鍓嶇増鏈簮鏂囦欢鐢?`manifest.json` 鐨?`main_logic_file` 鎸囧畾銆?
+- 本仓库是可安装到本地 AI coding host 的主逻辑基础设施（method layer）。
+- 事实来源是仓库内的入口文档、版本源文件、模块、脚本、manifest 和生成输出。
+- 外部项目、比较仓库和 `reference/` 原始层只能作为参考证据，不能自动升级为当前仓库事实。
+- 当前稳定绑定入口是 `MAIN.md`；当前版本源文件由 `manifest.json` 的 `main_logic_file` 指定。
 
-## 2. 褰撳墠浠撳簱鐨勫洓灞傛槧灏?
+## 2. 当前仓库的四层映射
 
-### L1锛氬叆鍙ｄ笌瀹夸富琛ㄩ潰 (Entry & Host Surface)
+### L1：入口与宿主表面 (Entry & Host Surface)
 
-- 浜虹被鍏ュ彛锛歚00_START_HERE.md`
-- Agent 鍏ュ彛锛歚AGENTS.md`
-- 绋冲畾瀹夸富鍏ュ彛锛歚MAIN.md`
-- 浠撳簱璇存槑锛歚README.md`
-- 瀹夎璇存槑锛歚AGENT_INSTALL.md`銆乣INSTALL.md`
-- 瀹夸富閫傞厤鍣細`adapters/`
+- 人类入口：`00_START_HERE.md`
+- Agent 入口：`AGENTS.md`
+- 稳定宿主入口：`MAIN.md`
+- 仓库说明：`README.md`
+- 安装说明：`AGENT_INSTALL.md`、`INSTALL.md`
+- 宿主适配器：`adapters/`
 
-### L2锛氫細璇濊鍒欎笌寮€鍙戠敓鍛藉懆鏈?(Session & Development Lifecycle)
+### L2：会话规则与开发生命周期 (Session & Development Lifecycle)
 
-- 绋冲畾鐗堟湰婧愶細`versions/AgentLogic_V6_8_7.md`
-- 涓婚€昏緫鎽樿锛歚modules/01_MasterLogic.md`
-- Agent 寮哄埗瑙勫垯锛歚modules/12_AgentEnforcement.md`
-- 鍏ュ彛娓呭崟锛歚modules/15_LogicEntryChecklist.md`
-- Agentic loop 鍚堝悓锛歚modules/03_AgenticLoop.md`
-- SDD 鐢熷懡鍛ㄦ湡锛歚modules/38_V6_6_SpecDrivenDevelopment.md`
-- Graphify 浠ｇ爜鍦板浘涓庨瑙堥棬锛歚modules/45_V6_8_GraphifyCodeMapIntegration.md`
-- 鍙傝€冨埌鐣岄潰宸ヤ綔娴侊細`modules/47_V6_8_ReferenceToInterfaceWorkflow.md`
-- 鎶€鑳戒笌宸ュ叿璺敱锛歚modules/48_V6_8_SkillAndToolRouting.md`
-- 澶栭儴鐮旂┒涓庝氦浠樼墿鏁村悎锛歚modules/50_V6_8_ExternalResearchAndArtifactIntegration.md`
-- 宸ュ叿鍙緵鎬т紭鍏堣矾鐢憋細`modules/51_V6_8_AffordanceFirstToolUse.md`
-- 浜や簰寮?3D 缃戦〉妯″瀷绛栫暐锛歚modules/52_V6_8_Img2ThreeJs3DWebIntegration.md`
-- 缂栫▼绾ф妧鑳藉己鍒讹細`modules/53_V6_8_ProgrammingLevelSkillEnforcement.md`銆乣contracts/skill-registry.json`銆乣contracts/skill-enforcement.json`
-- 浠诲姟瑙勬牸涓庣姸鎬侊細`.specify/`
+- 稳定版本源：`versions/AgentLogic_V6_9_0.md`
+- 主逻辑摘要：`modules/01_MasterLogic.md`
+- Agent 强制规则：`modules/12_AgentEnforcement.md`
+- 入口清单：`modules/15_LogicEntryChecklist.md`
+- Agentic loop 合同：`modules/03_AgenticLoop.md`
+- SDD 生命周期：`modules/38_V6_6_SpecDrivenDevelopment.md`
+- Graphify 代码地图与预览门：`modules/45_V6_8_GraphifyCodeMapIntegration.md`
+- 参考到界面工作流：`modules/47_V6_8_ReferenceToInterfaceWorkflow.md`
+- 技能与工具路由：`modules/48_V6_8_SkillAndToolRouting.md`
+- 外部研究与交付物整合：`modules/50_V6_8_ExternalResearchAndArtifactIntegration.md`
+- 工具可供性优先路由：`modules/51_V6_8_AffordanceFirstToolUse.md`
+- 交互式 3D 网页模型策略：`modules/52_V6_8_Img2ThreeJs3DWebIntegration.md`
+- 编程级技能强制：`modules/53_V6_8_ProgrammingLevelSkillEnforcement.md`、`contracts/skill-registry.json`、`contracts/skill-enforcement.json`
+- 任务规格与状态：`.specify/`
 
-### L3锛氬畨鍏ㄣ€佹潈闄愪笌楠岃瘉鎺у埗 (Safety & Verification Control)
+### L3：安全、权限与验证控制 (Safety & Verification Control)
 
-- 浠诲姟閫傜敤鎬у叆鍙ｏ細`AGENTS.md`
-- 鏉冮檺涓庡畨鍏細`modules/05_PermissionsAndSafety.md`銆乣modules/23_V6_5_PermissionAndOutputPipeline.md`
-- 楠岃瘉鐭╅樀锛歚modules/29_MandatoryVerificationMatrix.md`
-- 宸ュ叿杈圭晫锛歚modules/30_ToolQuestionBoundaryMatrix.md`
-- 鍙嶆ā寮忕籂鍋忥細`modules/31_ToolMisuseAndAntiPatternMatrix.md`
-- 鎶€鑳戒笌宸ュ叿璺敱锛歚modules/48_V6_8_SkillAndToolRouting.md`
-- 瑙勫垯鍏ュ彛鏍￠獙锛歚scripts/check-logic-entry.js`
-- 鍖呮牎楠岋細`scripts/validate-package.ps1`
-- 缁存姢鑰呮牎楠岋細`scripts/maintainer-check.ps1`
-- 鐜璇婃柇锛歚scripts/doctor.ps1`
+- 任务适用性入口：`AGENTS.md`
+- 权限与安全：`modules/05_PermissionsAndSafety.md`、`modules/23_V6_5_PermissionAndOutputPipeline.md`
+- 验证矩阵：`modules/29_MandatoryVerificationMatrix.md`
+- 工具边界：`modules/30_ToolQuestionBoundaryMatrix.md`
+- 反模式纠偏：`modules/31_ToolMisuseAndAntiPatternMatrix.md`
+- 技能与工具路由：`modules/48_V6_8_SkillAndToolRouting.md`
+- 规则入口校验：`scripts/check-logic-entry.js`
+- 包校验：`scripts/validate-package.ps1`
+- 维护者校验：`scripts/maintainer-check.ps1`
+- 环境诊断：`scripts/doctor.ps1`
 
-### L4锛氳鍒欒祫浜с€佹妧鑳戒笌鐢熸垚杈撳嚭 (Assets & Generated Outputs)
+### L4：规则资产、技能与生成输出 (Assets & Generated Outputs)
 
-- 鍙Щ妞嶆妧鑳斤細`skills/`
-- SDD 宸ュ叿灞傦細`spec-kit/`
-- 鍘熷鍙傝€冨眰锛歚reference/`
-- 瀹夸富 bundle锛歚dist/`
-- bundle 鐢熸垚鍣細`scripts/build-profile.ps1`
-- 鐗堟湰涓?profile 娓呭崟锛歚manifest.json`銆乣manifest.schema.json`
+- 可移植技能：`skills/`（含第一方自动触发技能 `product-requirements-grilling`、`code-simplifier`、`decompile-reconstruction`）
+- SDD 工具层：`spec-kit/`
+- 原始参考层：`reference/`
+- 宿主 bundle：`dist/`
+- bundle 生成器：`scripts/build-profile.ps1`
+- 版本与 profile 清单：`manifest.json`、`manifest.schema.json`
 
-## 3. 缁熶竴鍏ュ彛椤哄簭
+## 3. 统一入口顺序
 
-姝ｅ紡缂栫爜杞蹇呴』鎸変互涓嬮『搴忔墽琛岋細
+正式编码轮次必须按以下顺序执行：
 
-1. 璇诲彇 `AGENTS.md` 鍜?`README.md`銆?
-2. 璇诲彇 `00_START_HERE.md`锛岀‘璁ゅ綋鍓嶇ǔ瀹氬叆鍙ｅ拰閫傜敤杈圭晫銆?
-3. 鍒ゆ柇浠诲姟鏄彧璇诲璁°€佹枃妗ｅ彉鏇淬€佸绔嬩慨澶嶃€佸姛鑳?閲嶆瀯銆乁I銆佸畨瑁?鍙戝竷涓殑鍝竴绫汇€?
-4. 鍒ゆ柇鏄惁寤剁画涓婁竴杞?coding锛涜嫢涓嶆槸锛屽繀椤昏闂槸鍚?`forget/compress context`锛屼笉寰椾娇鐢?
-   Token 闃堝€奸潤榛樿烦杩囥€?
-5. 鎸?`00_START_HERE.md` 澹版槑鐨?full-read chain 瀹屾暣璇诲彇鐗堟湰婧愩€佷富閫昏緫鍜屽叆鍙ｆ竻鍗曘€?
-6. 寤虹珛鏈€灏忎簨瀹炲湴鍥撅紝鍐嶆墽琛屽尮閰嶇殑 SDD銆佹潈闄愩€侀獙璇佹垨鍙戝竷闂ㄦ銆?
+1. 读取 `AGENTS.md` 和 `README.md`。
+2. 读取 `00_START_HERE.md`，确认当前稳定入口和适用边界。
+3. 判断任务是只读审计、文档变更、独立修复、功能/重构、反编译还原、UI、安装/发布中的哪一类。
+4. 判断是否延续上一轮 coding；若不是，必须询问是否 `forget/compress context`，不得使用
+   Token 阈值静默跳过。
+5. 按 `00_START_HERE.md` 声明的 full-read chain 完整读取版本源、主逻辑和入口清单。
+6. 建立最小事实地图，再执行匹配的 SDD、权限、验证或发布门槛。
 
-鍙闂涓嶉渶瑕佷吉閫犲疄鐜拌鍒掞紱浣嗕换浣曞啓鍏ャ€佸畨瑁呫€佹墦鍖呮垨瑙勫垯鍚屾閮藉繀椤诲厛瀹屾垚閫傜敤鐨勯棬妲涖€?
+只读问题不需要伪造实现计划；但任何写入、安装、打包或规则同步都必须先完成适用的门槛。
 
-## 4. 鑳藉姏鐘舵€佸繀椤诲垎灞傝〃杈?
+## 4. 能力状态必须分层表达
 
-浠讳綍鑳藉姏缁撹閮藉繀椤诲尯鍒嗭細
+任何能力结论都必须区分：
 
-- 瑙勫垯鏄惁澹版槑
-- 鏂囦欢鎴?profile 鏄惁娉ㄥ唽
-- 杩愯鏃舵槸鍚﹀彲鐢?
-- 鏉冮檺鏄惁鍏佽鎵ц
-- 鏄惁缁忚繃鍖归厤鐨勯獙璇佸伐鍏风‘璁?
+- 规则是否声明
+- 文件或 profile 是否注册
+- 运行时是否可用
+- 权限是否允许执行
+- 是否经过匹配的验证工具确认
 
-鎼滅储缁撴灉銆侀潤鎬佽鍙栥€佹瀯寤烘垚鍔熸垨鍘嗗彶璁板繂閮戒笉鑳藉崟鐙瘉鏄庤繍琛屾椂銆佽瑙夋垨杩滅▼浜嬪疄銆?
+搜索结果、静态读取、构建成功或历史记忆都不能单独证明运行时、视觉或远程事实。
 
-## 5. UI 瀹炴柦鍓嶇疆闂ㄦ
+## 5. UI 实施前置门槛
 
-浠讳綍姝ｅ紡 UI 瀹炴柦锛堥〉闈€佸睆骞曘€佺粍浠躲€佸竷灞€銆佽瑙夎璁℃垨 UI 鏍峰紡鍙樻洿锛変箣鍓嶏紝蹇呴』锛?
+任何正式 UI 实施（页面、屏幕、组件、布局、视觉设计或 UI 样式变更）之前，必须：
 
-1. 浣跨敤鏂囩敓鍥惧伐鍏风敓鎴愬嵆灏嗗疄鏂界殑 UI 棰勮鍥俱€?
-2. 灏嗛瑙堝浘灞曠ず缁欑敤鎴锋煡鐪嬶紙鑻ヨ亰澶╃晫闈㈡垨瀹㈡埛绔幆澧冧笉鏀寔鐩存帴娓叉煋鏄剧ず锛屽簲灏嗗浘鐗囩敓鎴愬悗淇濆瓨鍒伴」鐩枃浠跺す濡?`.specify/mockups/` 涓嬶紝鏄庣‘鎻愮ず缁濆鏂囦欢璺緞浠ヤ緵鐢ㄦ埛鑷鏌ョ湅锛夈€?
-3. 绛夊緟鐢ㄦ埛纭锛涚敤鎴峰彲浠ユ壒鍑嗛瑙堬紝涔熷彲浠ユ槑纭涓嶉渶瑕佽姝ラ銆?
-4. 鍙湁鎵瑰噯鎴栨槑纭?opt-out 鍚庯紝鎵嶅厑璁稿紑濮?UI 浠ｇ爜瀹炴柦銆?
+1. 使用文生图工具生成即将实施的 UI 预览图。
+2. 将预览图展示给用户查看（若聊天界面或客户端环境不支持直接渲染显示，应将图片生成后保存到项目文件夹如 `.specify/mockups/` 下，明确提示绝对文件路径以供用户自行查看）。
+3. 等待用户确认；用户可以批准预览，也可以明确说不需要该步骤。
+4. 只有批准或明确 opt-out 后，才允许开始 UI 代码实施。
 
-鐢ㄦ埛娌℃湁鏄庣‘ opt-out 鏃讹紝涓嶅緱鎶娾€滃唴瀹规敼鍔ㄣ€佸搷搴斿紡淇銆佹棤闅滅淇鎴栧皬鏀瑰姩鈥濆綋浣滈粯璁よ眮鍏嶃€?
-UI 瀹炴柦瀹屾垚鍚庝粛蹇呴』鎵ц鎴浘銆佺埗瀛愬竷灞€杈圭晫銆佹孩鍑恒€佹崲琛屽拰瀹為檯瀹瑰櫒瀹藉害楠岃瘉銆?
+用户没有明确 opt-out 时，不得把“内容改动、响应式修复、无障碍修复或小改动”当作默认豁免。
+UI 实施完成后仍必须执行截图、父子布局边界、溢出、换行和实际容器宽度验证。
 
-## 6. 椤圭洰鐭ヨ瘑涓庤鍒欏悓姝?
+## 6. 项目知识与规则同步
 
-- 涓氬姟椤圭洰鐨勫悓姝ヤ簨瀹炴槸椤圭洰鑷韩 Git 璺熻釜鐨?`AGENTS.md`銆乣PROJECT_MAP.md`銆乣CODE_MAP.md` 鍜?
-  `.learnings/ERRORS.md`锛岃€屼笉鏄缃棩蹇椾粨搴撱€?
-- 鎺ユ墜椤圭洰鏃跺厛 `git fetch --prune`锛堝彲鐢ㄦ椂锛夊苟妫€鏌ュ垎鏀€佸伐浣滄爲鍜屽樊寮傦紝鍐嶈鍙栬繖涓変唤鏂囦欢锛?
-  浠讳綍 pull/checkout/merge 浠嶉渶浣滀负鍗曠嫭鐨勭姸鎬佸彉鏇寸‘璁ゃ€?
-- 缁撴瀯鍙樺寲蹇呴』鍚屾彁浜ゆ洿鏂?`PROJECT_MAP.md`锛涘叧閿嚱鏁?鐘舵€?鎺ュ彛瀵艰埅鍙樺寲蹇呴』鍚屾彁浜ゆ洿鏂?`CODE_MAP.md`锛涢噸瑕侀敊璇籂姝ｅ繀椤诲悓鎻愪氦鏇存柊
-  `.learnings/ERRORS.md`锛沗.specify/` 鍜?`docs/adr/` 浠呭湪鐩稿簲闂ㄦ瑙﹀彂鏃朵娇鐢ㄣ€?
-- `modification_history` 鍙繚鐣欎负璺ㄩ」鐩粡楠屽拰鍘嗗彶褰掓。锛屼絾涓嶉樆鏂櫘閫氫笟鍔￠」鐩殑缂栫爜鎴栧彂甯冦€?
-- 涓嶅緱鎶婂瘑閽ャ€佷釜浜鸿矾寰勩€佺鏈夋彁绀鸿瘝銆佸師濮嬫棩蹇楁垨榛樿 Graphify 杈撳嚭鍐欏叆宸茶窡韪煡璇嗘枃浠舵垨 bundle銆?
+- 业务项目的同步事实是项目自身 Git 跟踪的 `AGENTS.md`、`PROJECT_MAP.md`、`CODE_MAP.md` 和
+  `.learnings/ERRORS.md`，而不是外置日志仓库。
+- 接手项目时先 `git fetch --prune`（可用时）并检查分支、工作树和差异，再读取这三份文件；
+  任何 pull/checkout/merge 仍需作为独立的状态变更确认。
+- 结构变化必须同提交更新 `PROJECT_MAP.md`；关键函数/状态/接口导航变化必须同提交更新 `CODE_MAP.md`；重要错误纠正必须同提交更新
+  `.learnings/ERRORS.md`；`.specify/` 和 `docs/adr/` 仅在相应门槛触发时使用。
+- `modification_history` 可保留为跨项目经验和历史归档，但不阻断普通业务项目的编码或发布。
+- 不得把密钥、个人路径、私有提示词、原始日志或默认 Graphify 输出写入已跟踪知识文件或 bundle。
 
-## 7. 鐩綍杈圭晫涓庢墦鍖呰鍒?
+## 7. 目录边界与打包规则
 
-- `AgentLogic` 鐩綍鍙兘淇濆瓨閫昏緫銆佹ā鍧椼€佹妧鑳姐€佽剼鏈€佽鏍煎拰鐢熸垚 bundle銆?
-- 涓嶅緱鍦ㄦ湰浠撳簱鍒涘缓鏃犲叧涓氬姟婧愮爜銆佷緷璧栧畨瑁呯粨鏋溿€佷复鏃舵祴璇曟垨涓氬姟鏃ュ織銆?
-- `dist/` 鍙兘鐢?`scripts/build-profile.ps1` 鐢熸垚锛岀姝㈡墜宸ョ紪杈戙€?
-- `manifest.json` 鏄?profile銆佸涓昏緭鍑哄拰閫傞厤鍣ㄧ殑鏈哄櫒鍙浜嬪疄婧愩€?
-- `reference/` 鍜屽巻鍙茬増鏈枃浠朵笉搴旈粯璁ゆ敞鍏ヤ负褰撳墠杩愯瑙勫垯锛岄櫎闈?profile 鏄庣‘鍒楀嚭銆?
+- `AgentLogic` 目录只能保存逻辑、模块、技能、脚本、规格和生成 bundle。
+- 不得在本仓库创建无关业务源码、依赖安装结果、临时测试或业务日志。
+- `dist/` 只能由 `scripts/build-profile.ps1` 生成，禁止手工编辑。
+- `manifest.json` 是 profile、宿主输出和适配器的机器可读事实源。
+- `reference/` 和历史版本文件不应默认注入为当前运行规则，除非 profile 明确列出。
 
-## 8. 鍙樻洿鍚庣殑鏈€灏忛獙璇?
+## 8. 变更后的最小验证
 
-- 鏂囨。鎴栬鍒欏彉鏇达細杩愯 `node scripts/check-logic-entry.js` 鍜岄摼鎺ユ鏌ャ€?
-- manifest銆乸rofile銆乥undle 鎴栧畨瑁呭彉鏇达細杩愯 `scripts/validate-package.ps1`銆?
-- 鐗堟湰銆佸涓绘垨鍙戝竷鍙樻洿锛氳繍琛?`scripts/maintainer-check.ps1`锛屽苟妫€鏌ョ敓鎴愯緭鍑哄拰 git diff銆?
-- 鐜涓庡涓诲垽鏂細杩愯 `scripts/doctor.ps1`銆?
-- 浠讳綍楂橀闄╂垨澶栭儴鐘舵€佸彉鏇撮兘蹇呴』鍋氱洰鏍囩‘璁ゅ拰缁撴灉纭銆?
+- 文档或规则变更：运行 `node scripts/check-logic-entry.js` 和链接检查。
+- manifest、profile、bundle 或安装变更：运行 `scripts/validate-package.ps1`。
+- 版本、宿主或发布变更：运行 `scripts/maintainer-check.ps1`，并检查生成输出和 git diff。
+- 环境与宿主判断：运行 `scripts/doctor.ps1`。
+- 任何高风险或外部状态变更都必须做目标确认和结果确认。
 
-## 9. 鎸佺画鎵ц杈圭晫
+## 9. 持续执行边界
 
-鐢ㄦ埛鏄庣‘瑕佹眰鎸佺画鎵ц鏃讹紝褰撳墠璁″垝鍐呯殑闃呰銆佷慨鏀广€侀獙璇佸拰淇瑙嗕负鍚屼竴鎵ц杞銆?
-鍙湁鐢ㄦ埛瑕佹眰鍋滄銆佽鍒掑畬鎴愰渶瑕佹柊鐨勬垬鐣ユ柟鍚戙€佸嚭鐜版棤娉曚粠鏈湴浜嬪疄瑙ｅ喅鐨勯樆濉烇紝鎴栧嵆灏嗚繘琛?
-楂橀闄╀笉鍙€嗘搷浣滄椂锛屾墠鏆傚仠璇锋眰杈撳叆銆?
+用户明确要求持续执行时，当前计划内的阅读、修改、验证和修复视为同一执行轮次。
+只有用户要求停止、计划完成需要新的战略方向、出现无法从本地事实解决的阻塞，或即将进行
+高风险不可逆操作时，才暂停请求输入。
 
-## 10. 寮哄埗鏂囨湰浠ｇ爜鍦板浘涓庡彲閫夊浘璋遍瑙?
+## 10. 强制文本代码地图与可选图谱预览
 
-- 姣忎釜瀹屾暣宸ヤ綔娴佷笟鍔￠」鐩繀椤荤淮鎶ゆ牴鐩綍 `CODE_MAP.md`锛岀敤浜庡叆鍙ｃ€佹ā鍧椼€佸叧閿鍙枫€佺姸鎬佸拰鎺ュ彛鐨勬枃鏈鑸紱瀹冧笉鏄繍琛屾椂璇佹槑锛屽繀椤讳互褰撳墠婧愮爜澶嶆牳銆?
-- `modules/45_V6_8_GraphifyCodeMapIntegration.md` 鎻愪緵鎸夐渶鍙鍖栦唬鐮佸湴鍥剧瓥鐣ワ紝涓嶆槸榛樿瀹夎鐨勫閮ㄤ緷璧栥€?
-- `modules/50_V6_8_ExternalResearchAndArtifactIntegration.md` 瀹氫箟 OfficeCLI銆丳ixelRAG 鍜?
-  Firecrawl 鐨勬潵婧愭斂绛栵紱Office 鏂囦欢澶勭悊蹇呴』璧扮粡淇′换鐨?OfficeCLI 璺嚎锛屽叾浠栨潵婧愪粛涓嶅緱浠庤鏀跨瓥鎺ㄦ柇
-  宸插畨瑁呫€佸彲淇℃垨鍙皟鐢ㄣ€?
-- `modules/51_V6_8_AffordanceFirstToolUse.md` 瑕佹眰浠庝换鍔℃剰鍥惧拰鎵€闇€璇佹嵁鑷劧閫夋嫨宸ュ叿锛?
-  榛樿 profile 浠ユ墽琛屼负涓績锛屽畬鏁存不鐞嗗唴瀹瑰湪 `governance-reference` profile 涓寜闇€鍔犺浇銆?
-- `modules/52_V6_8_Img2ThreeJs3DWebIntegration.md` 瀹氫箟鍙€夌殑浜や簰寮?3D 缃戦〉妯″瀷璺嚎锛?
-  闈欐€?3D 鎰熻瑙夎蛋 UI 璺緞锛岄€氱敤 3D 浜や簰璧板師鐢?Three.js 璺緞锛屽彧鏈夌粡鎵瑰噯鐨勫弬鑰冨浘妯″瀷閲嶅缓
-  鎵嶈兘鍊欓€?`img2threejs`锛屼笖涓嶅緱鎺ㄦ柇宸插畨瑁呫€佸彲淇℃垨鍙墽琛屻€?
-- 澶氭ā鍧楀姛鑳姐€侀噸澶ч噸鏋勩€佹灦鏋勬垨鍙戝竷宸ヤ綔鍦?Converge/Ship 鏃跺簲璇㈤棶鐢ㄦ埛鏄惁闇€瑕佷唬鐮佽鍥鹃瑙堛€?
-- 鐢ㄦ埛鏄庣‘鍚屾剰鍚庯紝鎵嶅彲鍦ㄧ洰鏍囦笟鍔￠」鐩腑鐢熸垚 `graphify-out/`锛涗笉寰楅粯璁ゅ湪 AgentLogic 浠撳簱鍐呯敓鎴愶紝涔熶笉寰楁妸澶栭儴鍥捐氨缁撴灉褰撲綔杩愯鏃朵簨瀹炶瘉鏄庛€?
-- `modules/53_V6_8_ProgrammingLevelSkillEnforcement.md` 瑕佹眰姣忎釜鍙惡甯?`SKILL.md` 鍦ㄦ満鍣ㄥ彲璇绘敞鍐岃〃涓湁鐢熷懡鍛ㄦ湡鐘舵€侊紱鍖归厤璺敱蹇呴』缁忚繃鍙墽琛岀殑 preflight銆乮nvocation 涓?closure 璁板綍銆傝宸ヤ綔娴侀棬涓嶇瓑鍚屼簬鏈獙璇佺殑瀹夸富鍘熺敓宸ュ叿鎷︽埅銆?
+- 每个完整工作流业务项目必须维护根目录 `CODE_MAP.md`，用于入口、模块、关键符号、状态和接口的文本导航；它不是运行时证明，必须以当前源码复核。
+- `modules/45_V6_8_GraphifyCodeMapIntegration.md` 提供按需可视化代码地图策略，不是默认安装的外部依赖。
+- `modules/50_V6_8_ExternalResearchAndArtifactIntegration.md` 定义 OfficeCLI、PixelRAG 和
+  Firecrawl 的来源政策；Office 文件处理必须走经信任的 OfficeCLI 路线，其他来源仍不得从该政策推断
+  已安装、可信或可调用。
+- `modules/51_V6_8_AffordanceFirstToolUse.md` 要求从任务意图和所需证据自然选择工具；
+  默认 profile 以执行为中心，完整治理内容在 `governance-reference` profile 中按需加载。
+- `modules/52_V6_8_Img2ThreeJs3DWebIntegration.md` 定义可选的交互式 3D 网页模型路线：
+  静态 3D 感视觉走 UI 路径，通用 3D 交互走原生 Three.js 路径，只有经批准的参考图模型重建
+  才能候选 `img2threejs`，且不得推断已安装、可信或可执行。
+- 多模块功能、重大重构、架构或发布工作在 Converge/Ship 时应询问用户是否需要代码视图预览。
+- 用户明确同意后，才可在目标业务项目中生成 `graphify-out/`；不得默认在 AgentLogic 仓库内生成，也不得把外部图谱结果当作运行时事实证明。
+- `modules/53_V6_8_ProgrammingLevelSkillEnforcement.md` 要求每个可携带 `SKILL.md` 在机器可读注册表中有生命周期状态；匹配路由必须经过可执行的 preflight、invocation 与 closure 记录。遇到重构或代码改良任务时自动触发 `code-refinement`（`code-simplifier`），遇到二进制/字节码/混淆包反编译与源码还原任务时自动触发 `decompile-reconstruction`，无需用户手动指定 skill。该工作流门不等同于未验证的宿主原生工具拦截。
 
-## 11. 椤圭洰鍐?L1-L4 鍦板浘
+## 11. 项目内 L1-L4 地图
 
-- 姣忎釜涓氬姟椤圭洰浣跨敤鏍圭洰褰?`PROJECT_MAP.md` 淇濆瓨鍏剁湡瀹?L1-L4 鏄犲皠锛屼笉澶嶅埗鏈€昏緫鍖呫€?
-- 姣忎釜涓氬姟椤圭洰浣跨敤鏍圭洰褰?`CODE_MAP.md` 淇濆瓨鍙氦鎺ョ殑绗﹀彿绾у鑸湴鍥俱€?
-- 姝ゅ湴鍥惧拰 `.learnings/ERRORS.md` 蹇呴』涓庨」鐩唬鐮佷竴璧锋彁浜ゅ苟璺ㄨ澶囧悓姝ャ€?
-- 鍏蜂綋妯℃澘銆佽劚鏁忚竟鐣屽拰瀹夊叏鍚屾姝ラ鐢?`modules/46_V6_8_ProjectKnowledgeSync.md` 瀹氫箟銆?
+- 每个业务项目使用根目录 `PROJECT_MAP.md` 保存其真实 L1-L4 映射，不复制本逻辑包。
+- 每个业务项目使用根目录 `CODE_MAP.md` 保存可交接的符号级导航地图。
+- 此地图和 `.learnings/ERRORS.md` 必须与项目代码一起提交并跨设备同步。
+- 具体模板、脱敏边界和安全同步步骤由 `modules/46_V6_8_ProjectKnowledgeSync.md` 定义。
 
 ## END FILE: modules/01_MasterLogic.md
 
@@ -3210,7 +3125,9 @@ refine a specialist route or closure requirement.
 | --- | --- | --- | --- |
 | Take over or navigate a project feature, rule, or symbol | Freshness check → `PROJECT_MAP.md` / `CODE_MAP.md` → targeted search only for map gaps → targeted reads | `engineering/wayfinder`, `engineering/research` | Validate the mapped owner and relevant caller/config; update an affected map entry with the change. |
 | Diagnose a bug or unexpected command failure | Reproduce/log → search/read call chain → narrow fix → command validation | Narrowest installed debugging skill; project-native error record after a material correction | Verify root cause or label as unconfirmed; record material lessons without secrets. |
-| Implement/refactor behavior | Read boundary → reuse search → spec/task → bounded edit → tests/runtime | `engineering/implement`, `ponytail`, `engineering/tdd` | Match spec/task and execute relevant validation. |
+| Implement/refactor behavior | Read boundary → reuse search → spec/task → bounded edit → tests/runtime → post-implementation code simplification | `engineering/implement`, `ponytail`, `engineering/tdd`, `engineering/code-simplifier` | Match spec/task, run post-implementation refinement (`code-simplifier`), and execute relevant validation. |
+| Simplify, clean up, or structurally refactor code across files | Lock green baseline → 80/20 smell & nesting triage → AST-aware rewrite (`ast-grep` / `sg` when available) or atomic bounded edit → re-run tests | `engineering/code-simplifier`, `ponytail`, `engineering/improve-codebase-architecture` | Prove zero behavior regression and update `CODE_MAP.md` if symbols/flows changed. |
+| Decompile, deobfuscate, or reconstruct source code from binary/bytecode/bundle (`.exe`/`.dll`/`.so`/`.apk`/`.jar`/`.pyc`/`.wasm`/`.asar`/`.js`) | Read-only format triage → decompiler extraction (`idapro_*`, `ghidra-mcp`/headless, `jadx`, `ilspycmd`/`dnSpyEx`, `pycdc`, `webcrack`) → struct/type & control-flow recovery → compilation/equivalence check | `engineering/decompile-reconstruction`, `reverse-skill` (`ida-reverse`, `apk-reverse`, `dotnet-reverse`, `js-reverse`) | Cite binary addresses/offsets, recover structured code without `goto` slop, and verify compilation or input-output equivalence. |
 | Current library, product, release, or remote setting | Authoritative external lookup | Official-doc skill/path, `openai-docs` for OpenAI products | Cite or record the live authoritative source; memory is insufficient. |
 | Broad public-site discovery, mapping, or structured collection | Scope/data-egress approval → read-oriented collection → provenance review | Firecrawl only when separately installed, trusted, and approved under Module 50 | Preserve source URLs and meet the evidence route for each resulting claim. |
 | Dynamic web flow, SPA, login, or browser interaction | Real browser interaction and capture | `playwright`; `agent-browser` only under its conditional route rule | Observe the actual flow; static reading alone cannot close it. |
@@ -3347,6 +3264,15 @@ Missing: [only the actual gaps]. I can review [source/version] and install [list
 - Net-new/substantial UI then requires image generation, user approval or explicit opt-out, and
   visual verification after implementation. Clearly classified small corrections may skip a new
   mockup but never visual verification.
+- Refactoring and post-implementation code refinement (`code-refinement`) automatically invoke
+  `code-simplifier` (locking a green test baseline, eliminating deep nesting/nested ternaries and
+  80/20 code smells, preferring `ast-grep` (`sg`) for multi-site structural rewrites, and
+  re-verifying zero behavior regression).
+- Engineering binary/bytecode/bundle decompilation and clean-room source reconstruction
+  (`decompile-reconstruction`) automatically invoke `decompile-reconstruction` whenever the user
+  provides or asks to analyze/decompile/reconstruct `.exe`, `.dll`, `.so`, `.apk`, `.jar`, `.pyc`,
+  `.wasm`, `.asar`, or obfuscated `.js` targets, orchestrating `idapro_*`, `ghidra-mcp`/headless,
+  `jadx`, `ilspycmd`/`dnSpyEx`, `pycdc`, or `webcrack` into structured, address-cited source code.
 - Code audits, PR reviews, and release reviews require a code-review capability and a severity-
   backed review report. Security-scoped reviews additionally require security capability.
 - Dynamic browser claims require browser automation; desktop/visible claims require capture.
@@ -3395,15 +3321,17 @@ capability; it does not turn every routine task into a skill-selection ceremony.
 
 ## Cross-host first-party skill availability
 
-The `product-requirements-grilling` skill is a first-party requirement, not merely a Codex-local
-convenience. Every supported adapter must deploy it and post-verify its `SKILL.md` path according
-to `contracts/host-skill-capabilities.json`. For Antigravity, whose per-file rule limit (`24 KB`)
+The `product-requirements-grilling`, `code-simplifier`, and `decompile-reconstruction` skills are
+first-party capabilities deployed across all supported adapters (`codex`, `claude`, `antigravity`,
+`generic`) via `scripts/deploy-first-party-skill.ps1` according to
+`contracts/host-skill-capabilities.json`. For Antigravity, whose per-file rule limit (`24 KB`)
 requires a delegation hook in `GEMINI.md` rather than inlining the full bundle, the adapter must
-also inline the blocking **UI Preview & Requirements Gate** directly inside `GEMINI.md` and register
+also inline the blocking **UI Preview & Requirements Gate** and **Automatic Decompilation
+Reconstruction & Code Refinement Gate** directly inside `GEMINI.md` and register
 the host-local skills directory in `config/skills.json`, mapping `ui-design` image generation to
-Antigravity's built-in `image-generator` subagent or `nano-banana-pro`. A generic installation places it beside the generated
-bundle under `skills/`; the generic host integrator must load that colocated skill before treating
-requirements-grilling as available. The deployment contract does not claim that third-party or
+Antigravity's built-in `image-generator` subagent or `nano-banana-pro`. A generic installation places them beside the generated
+bundle under `skills/`; the generic host integrator must load those colocated skills before treating
+them as available. The deployment contract does not claim that third-party or
 system skills are installed.
 
 ## Non-default and persistent-memory skills
@@ -3610,6 +3538,8 @@ Safety and evidence gates remain part of the loop rather than a second, unrelate
 | find where code, a rule, or a file lives | the current code map first; local search only to fill or refresh a missing map entry | a direct read of the mapped owner and relevant boundary |
 | understand or modify an existing behavior | the mapped flow, then only its callers, callees, state/config, and tests | an explicit impact path before editing |
 | write or change a known local artifact | bounded edit/write tool | the matching test, build, or runtime evidence |
+| refine, simplify, or refactor modified code | `code-simplifier` (with `ast-grep` / `sg` for multi-site structural rewrites when available) after green baseline | zero-behavior-change test verification and flattened/clean diff |
+| analyze, decompile, or reconstruct source from a binary, APK/JAR, `.NET` DLL, `.pyc`, WASM, or obfuscated JS bundle | `decompile-reconstruction` (`idapro_*` / `ghidra-mcp` / `jadx` / `ilspycmd` / `pycdc` / `webcrack`) | address-cited clean-room source reconstruction plus compilation or I/O equivalence proof |
 | prove behavior runs | test, build, command, or runtime tool | inspected command/result output |
 | see a UI, layout, screenshot, or visual document | screenshot or real browser capture | visual evidence plus containment/overflow checks |
 | read, edit, repair, or verify a requested Word, Excel, or PowerPoint file | trusted OfficeCLI document route | structured inspection, bounded mutation, flushed output, and rendered/compatible-open evidence |
@@ -3773,6 +3703,41 @@ For the reference-based interactive 3D route:
     "completion_policy":  "A missing required evidence capability blocks implementation or verified completion. A missing specialist blocks only routes whose fallback is strict; routes that explicitly allow native evidence fallback may proceed with disclosure and matching evidence. Workflow enforcement validates recorded route progression; it never claims unsupported host-native interception. Never claim an unavailable skill was used.",
     "routes":  [
                    {
+                       "id":  "role-selection",
+                       "triggers":  [
+                                        "role_selection"
+                                    ],
+                       "capability":  "role_persona_routing",
+                       "fallback":  "allow_native_role_selection",
+                       "closure_evidence":  [
+                                                "recommended_role_menu_presented",
+                                                "selected_or_confirmed_role_persona"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "role-persona-router"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+
+                                                          ],
+                       "selection_rule":  "At the start of every new project or non-continuation task, automatically use role-persona-router to recommend the best-fit lead role (and supporting squad) alongside the compact 7-role selection menu, and bind the confirmed persona for the task lifecycle.",
+                       "order":  5,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "project_kickoff"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "active_continuation_only",
+                       "artifact_requirements":  [
+
+                                                 ]
+                   },
+                   {
                        "id":  "requirements-grilling",
                        "triggers":  [
                                         "major_feature",
@@ -3828,11 +3793,13 @@ For the reference-based interactive 3D route:
                                                           "imagegen"
                                                       ],
                        "conditional_host_skill_aliases":  [
+                                                              "multimodal-media-director",
                                                               "image-generator",
                                                               "nano-banana-pro",
+                                                              "ui-ux-pro-max",
                                                               "taste-skill"
                                                           ],
-                       "selection_rule":  "Use imagegen (or an explicitly approved equivalent image-generation capability such as Antigravity's built-in image-generator subagent or nano-banana-pro when installed) for the mockup/edit; taste-skill may guide art direction but cannot replace image generation. Do not use a frontend implementation skill as mockup evidence.",
+                       "selection_rule":  "Combine the pure design specification from ui-ux-pro-max with imagegen (or Antigravity's built-in image-generator subagent, multimodal-media-director, or nano-banana-pro) to generate the visual UI mockup before any UI code is written. Do not use a frontend implementation skill as mockup evidence.",
                        "order":  20,
                        "requires_routes":  [
                                                "requirements-grilling",
@@ -3849,6 +3816,150 @@ For the reference-based interactive 3D route:
                        "exemption_policy":  "explicit_user_opt_out_of_mockup_only",
                        "artifact_requirements":  [
                                                      "mockup_or_opt_out_record"
+                                                 ]
+                   },
+                   {
+                       "id":  "multimodal-media",
+                       "triggers":  [
+                                        "multimodal_media"
+                                    ],
+                       "capability":  "multimodal_media_generation",
+                       "fallback":  "allow_native_multimodal_director_with_disclosure",
+                       "closure_evidence":  [
+                                                "structured_media_prompt_or_storyboard",
+                                                "generated_media_or_production_sheet"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "multimodal-media-director"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "image-generator",
+                                                              "imagegen",
+                                                              "nano-banana-pro"
+                                                          ],
+                       "selection_rule":  "Automatically use multimodal-media-director whenever the user requests text-to-image, text-to-video, or text-to-music/audio generation. Formulate a professional art-direction prompt, shot-by-shot camera storyboard, or musical arrangement sheet (BPM/Key/Instrumentation/Metatags) and execute via the available host generator or MCP server.",
+                       "order":  22,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "verified_multimodal_media"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+
+                                                 ]
+                   },
+                   {
+                       "id":  "office-document",
+                       "triggers":  [
+                                        "office_document"
+                                    ],
+                       "capability":  "office_document_design_and_processing",
+                       "fallback":  "allow_native_office_suite_with_disclosure",
+                       "closure_evidence":  [
+                                                "office_design_and_formula_standard_check",
+                                                "generated_or_verified_office_artifact"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "office-pro-suite"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "docx",
+                                                              "xlsx",
+                                                              "pptx"
+                                                          ],
+                       "selection_rule":  "Automatically use office-pro-suite whenever creating, editing, formatting, or auditing Word (.docx), Excel (.xlsx), or PowerPoint (.pptx) files. Enforce named typography styles and three-line/zebra tables in Word, live dynamic formulas and institutional blue/black/green color coding in Excel, and 16:9 action-title visual variety in PowerPoint.",
+                       "order":  24,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "verified_office_document"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+
+                                                 ]
+                   },
+                   {
+                       "id":  "novel-writing",
+                       "triggers":  [
+                                        "novel_writing"
+                                    ],
+                       "capability":  "long_form_fiction_and_story_bible",
+                       "fallback":  "allow_native_novel_architect",
+                       "closure_evidence":  [
+                                                "story_bible_and_scene_beat_check",
+                                                "anti_ai_cliche_and_continuity_audit"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "novel-story-architect"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+
+                                                          ],
+                       "selection_rule":  "Automatically use novel-story-architect whenever writing, outlining, or continuing a novel, story, or script. Maintain the Story Bible (.story-bible/), verify scene beat sheets before drafting, enforce the anti-AI cliche ban list, and run the 4-point continuity check.",
+                       "order":  26,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "verified_novel_chapter"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+
+                                                 ]
+                   },
+                   {
+                       "id":  "diagram-flowchart",
+                       "triggers":  [
+                                        "diagram_flowchart"
+                                    ],
+                       "capability":  "diagram_and_flowchart_architecture",
+                       "fallback":  "allow_native_diagram_architect",
+                       "closure_evidence":  [
+                                                "spatial_zoning_and_zero_overlap_check",
+                                                "diagram_artifact_or_mermaid_preview"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "diagram-flowchart-architect"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+
+                                                          ],
+                       "selection_rule":  "Automatically use diagram-flowchart-architect whenever creating flowcharts, swimlanes, system architecture diagrams, sequence diagrams, or mind maps. Select .drawio XML for enterprise/Office deliverables, .excalidraw JSON for whiteboard/design flows, and syntax-validated themed Mermaid for instant markdown previews.",
+                       "order":  28,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "verified_diagram_output"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+
                                                  ]
                    },
                    {
@@ -4043,6 +4154,82 @@ For the reference-based interactive 3D route:
                                                  ]
                    },
                    {
+                       "id":  "decompile-reconstruction",
+                       "triggers":  [
+                                        "decompile_reconstruction"
+                                    ],
+                       "capability":  "decompile_and_reconstruct",
+                       "fallback":  "allow_native_decompile_triage_with_disclosure",
+                       "closure_evidence":  [
+                                                "target_format_and_toolchain_triage",
+                                                "decompiled_or_reconstructed_artifact"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "decompile-reconstruction"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "ida-reverse",
+                                                              "ghidra-mcp",
+                                                              "reverse-engineering",
+                                                              "dotnet-reverse",
+                                                              "apk-reverse",
+                                                              "js-reverse"
+                                                          ],
+                       "selection_rule":  "Automatically use decompile-reconstruction when analyzing, decompiling, deobfuscating, or recovering clean-room source code from compiled binaries (PE/ELF/Mach-O/DLL/SO), JVM/Android APKs/JARs, .NET assemblies, Python bytecode (.pyc), WASM, or bundled/minified/obfuscated JS/Electron packages. Orchestrate IDA Pro MCP (ida-reverse), Ghidra MCP/headless, jadx, ilspycmd/dnSpyEx, pycdc, or webcrack/ast-grep according to the detected target format; if specialized decompilers are absent, use native disassembly/triage tools and explicitly disclose the fidelity gap.",
+                       "order":  35,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "verified_decompile_reconstruction"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "native_decompile_triage_with_disclosure",
+                       "artifact_requirements":  [
+
+                                                 ]
+                   },
+                   {
+                       "id":  "code-refinement",
+                       "triggers":  [
+                                        "code_refinement"
+                                    ],
+                       "capability":  "code_refinement",
+                       "fallback":  "allow_native_code_refinement",
+                       "closure_evidence":  [
+                                                "refinement_or_smell_check",
+                                                "behavior_preserved_verification"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "code-simplifier"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "ponytail",
+                                                              "improve-codebase-architecture"
+                                                          ],
+                       "selection_rule":  "Automatically use code-simplifier after feature/refactor implementation or when refactoring/cleaning up code: lock the green baseline, triage 80/20 code smells and AI-generated nesting/slop, prefer ast-grep (sg) for multi-site structural rewrites, and verify zero behavior regression.",
+                       "order":  45,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "verified_refinement"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+
+                                                 ]
+                   },
+                   {
                        "id":  "package-release",
                        "triggers":  [
                                         "install",
@@ -4180,12 +4367,13 @@ For the reference-based interactive 3D route:
                                                 "selected_or_user_confirmed_design_direction"
                                             ],
                        "primary_host_skill_aliases":  [
+                                                          "ui-ux-pro-max",
                                                           "taste-skill"
                                                       ],
                        "conditional_host_skill_aliases":  [
 
                                                           ],
-                       "selection_rule":  "Use taste-skill when available to derive a design direction from the approved requirements brief. Otherwise record the direction through the native design-direction fallback; users decide visual facts, never the internal skill.",
+                       "selection_rule":  "Automatically use ui-ux-pro-max (paired with taste-skill) to derive a pure UI/UX design specification (industry color palette, font pairing, grid density, and layout anatomy) from the approved requirements brief before generating the text-to-image mockup.",
                        "order":  15,
                        "requires_routes":  [
                                                "requirements-grilling"
@@ -4275,6 +4463,40 @@ For the reference-based interactive 3D route:
     "purpose":  "Host deployment contract for AgentLogic first-party skills. It does not claim third-party or system skills are installed.",
     "first_party_skill":  "product-requirements-grilling",
     "source":  "skills/productivity/product-requirements-grilling",
+    "additional_first_party_skills":  [
+                                          {
+                                              "id":  "role-persona-router",
+                                              "source":  "skills/productivity/role-persona-router"
+                                          },
+                                          {
+                                              "id":  "ui-ux-pro-max",
+                                              "source":  "skills/design/ui-ux-pro-max"
+                                          },
+                                          {
+                                              "id":  "multimodal-media-director",
+                                              "source":  "skills/creative/multimodal-media-director"
+                                          },
+                                          {
+                                              "id":  "office-pro-suite",
+                                              "source":  "skills/productivity/office-pro-suite"
+                                          },
+                                          {
+                                              "id":  "novel-story-architect",
+                                              "source":  "skills/creative/novel-story-architect"
+                                          },
+                                          {
+                                              "id":  "diagram-flowchart-architect",
+                                              "source":  "skills/engineering/diagram-flowchart-architect"
+                                          },
+                                          {
+                                              "id":  "code-simplifier",
+                                              "source":  "skills/engineering/code-simplifier"
+                                          },
+                                          {
+                                              "id":  "decompile-reconstruction",
+                                              "source":  "skills/engineering/decompile-reconstruction"
+                                          }
+                                      ],
     "hosts":  {
                   "codex":  {
                                 "target_relative":  ".codex/skills/product-requirements-grilling",
@@ -4299,7 +4521,7 @@ For the reference-based interactive 3D route:
                                                      "native_tool_interception":  false,
                                                      "target_relative":  ".claude/AgentLogic/skill-enforcement",
                                                      "command_relative":  "scripts/skill-enforcement.ps1",
-                                                     "required_files":  [
+                                                    "required_files":  [
                                                                             "scripts/skill-enforcement.ps1",
                                                                             "contracts/skill-enforcement.json",
                                                                             "contracts/skill-routing.json",
@@ -4325,11 +4547,11 @@ For the reference-based interactive 3D route:
                                                       }
                                   },
                   "generic":  {
-                                  "target_relative":  "\u003cbundle-directory\u003e/skills/product-requirements-grilling",
+                                  "target_relative":  "<bundle-directory>/skills/product-requirements-grilling",
                                   "enforcement":  {
                                                       "level":  "workflow_enforced",
                                                       "native_tool_interception":  false,
-                                                      "target_relative":  "\u003cbundle-directory\u003e/skill-enforcement",
+                                                      "target_relative":  "<bundle-directory>/skill-enforcement",
                                                       "command_relative":  "scripts/skill-enforcement.ps1",
                                                       "required_files":  [
                                                                              "scripts/skill-enforcement.ps1",
@@ -4387,13 +4609,22 @@ must state that limitation rather than presenting workflow enforcement as a sand
 
 ## 1.1 Product-first automatic orchestration
 
-Users describe outcomes, not skill names. For an ordinary website request, classification starts
-the requirements, design-direction, mockup, implementation, verification, review, and handover
-pipeline automatically. The user is asked product questions (for example audience, restaurant
-menu, booking needs, and visual direction), never asked to choose an internal skill. Manual
-selection is reserved for restricted paths such as credentials, external writes, security/CTF,
-reversing, and persistent-memory changes. Run `scripts/skill-catalog.ps1 -Mode website-pipeline`
-to inspect the canonical website-delivery chain.
+Users describe outcomes, not skill names.
+- For an ordinary website request, classification starts the requirements, design-direction, mockup,
+  implementation, verification, review, and handover pipeline automatically. The user is asked
+  product questions (for example audience, restaurant menu, booking needs, and visual direction),
+  never asked to choose an internal skill.
+- For code refactoring and post-implementation polish (`code_refinement`), the agent automatically
+  activates `code-simplifier` (locking a green test baseline, flattening deep nesting/nested
+  ternaries, applying `ast-grep` structural rewrites across multiple call sites when available, and
+  re-verifying zero behavior change).
+- For binary, bytecode, or obfuscated bundle analysis (`decompile_or_reconstruct`), the agent
+  automatically activates `decompile-reconstruction` (triage -> `idapro_*` / `ghidra-mcp` / `jadx` /
+  `ilspycmd` / `pycdc` / `webcrack` extraction -> struct/type and control-flow recovery ->
+  compilation or equivalence check).
+- Manual selection is reserved for restricted paths such as credentials, external writes,
+  offensive security/CTF exploitation, and persistent-memory changes. Run
+  `scripts/skill-catalog.ps1 -Mode website-pipeline` to inspect the canonical website-delivery chain.
 
 ## 2. Canonical contracts
 
@@ -4536,6 +4767,11 @@ task state.
                                                    "feature",
                                                    "major_feature",
                                                    "refactor",
+                                                   "decompile_or_reconstruct",
+                                                   "office_document",
+                                                   "multimodal_media",
+                                                   "novel_writing",
+                                                   "diagram_flowchart",
                                                    "code_audit",
                                                    "security_review",
                                                    "install",
@@ -4560,7 +4796,14 @@ task state.
                                                     ],
                                 "claim_types":  [
                                                     "none",
+                                                    "role_selection",
                                                     "behavior_change",
+                                                    "code_refinement",
+                                                    "decompile_reconstruction",
+                                                    "office_document",
+                                                    "multimodal_media",
+                                                    "novel_writing",
+                                                    "diagram_flowchart",
                                                     "browser_ui",
                                                     "dynamic_web_flow",
                                                     "desktop_visual_state",
@@ -4586,11 +4829,65 @@ task state.
                                                      {
                                                          "field":  "task_class",
                                                          "values":  [
-                                                                        "feature",
-                                                                        "refactor"
+                                                                        "feature"
                                                                     ],
                                                          "signals":  [
                                                                          "behavior_change"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "task_class",
+                                                         "values":  [
+                                                                        "refactor"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "behavior_change",
+                                                                         "code_refinement"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "task_class",
+                                                         "values":  [
+                                                                        "decompile_or_reconstruct"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "decompile_reconstruction"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "task_class",
+                                                         "values":  [
+                                                                        "office_document"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "office_document"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "task_class",
+                                                         "values":  [
+                                                                        "multimodal_media"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "multimodal_media"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "task_class",
+                                                         "values":  [
+                                                                        "novel_writing"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "novel_writing"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "task_class",
+                                                         "values":  [
+                                                                        "diagram_flowchart"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "diagram_flowchart"
                                                                      ]
                                                      },
                                                      {
@@ -4686,6 +4983,69 @@ task state.
                                                          "signals":  [
                                                                          "release",
                                                                          "remote_release"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "role_selection"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "role_selection"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "code_refinement"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "code_refinement"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "decompile_reconstruction"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "decompile_reconstruction"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "office_document"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "office_document"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "multimodal_media"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "multimodal_media"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "novel_writing"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "novel_writing"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "diagram_flowchart"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "diagram_flowchart"
                                                                      ]
                                                      },
                                                      {
@@ -4787,7 +5147,7 @@ task state.
                                                  "closed",
                                                  "blocked"
                                              ],
-                                  "location":  ".specify/\u003ctask\u003e/skill-execution.json"
+                                  "location":  ".specify/<task>/skill-execution.json"
                               },
     "project_skill_usage":  {
                                 "location":  ".agentlogic/skill-usage.json",
@@ -4805,7 +5165,7 @@ task state.
                                                               "status"
                                                           ],
                                 "code_map_heading":  "Skill Usage",
-                                "transient_task_records":  ".specify/\u003ctask\u003e/skill-execution.json"
+                                "transient_task_records":  ".specify/<task>/skill-execution.json"
                             }
 }
 
@@ -5024,6 +5384,103 @@ task state.
                                        }
                     },
                     {
+                        "id":  "skills-creative-multimodal-media-director-skill-md",
+                        "entrypoint":  "skills/creative/multimodal-media-director/SKILL.md",
+                        "family":  "creative",
+                        "lifecycle":  "conditional",
+                        "route_ids":  [
+                                          "multimodal-media",
+                                          "ui-design"
+                                      ],
+                        "reason":  "First-party multimodal director for text-to-image, text-to-video storyboards, and text-to-music arrangement.",
+                        "activation":  {
+                                           "mode":  "route_candidate",
+                                           "triggers":  [
+                                                            "multimodal_media",
+                                                            "net_new_ui",
+                                                            "substantial_ui_refactor"
+                                                        ],
+                                           "purpose":  "Automatically direct and execute text-to-image, text-to-video, and text-to-music generation workflows.",
+                                           "explicit_signals":  [
+                                                                    "text-to-image",
+                                                                    "text-to-video",
+                                                                    "text-to-music",
+                                                                    "generate image",
+                                                                    "generate video",
+                                                                    "generate music",
+                                                                    "bgm"
+                                                                ],
+                                           "inferred_signals":  [
+                                                                    "visual mockup generation",
+                                                                    "video storyboard",
+                                                                    "musical arrangement"
+                                                                ],
+                                           "confirmation_policy":  "automatic_for_matched_route"
+                                       }
+                    },
+                    {
+                        "id":  "skills-creative-novel-story-architect-skill-md",
+                        "entrypoint":  "skills/creative/novel-story-architect/SKILL.md",
+                        "family":  "creative",
+                        "lifecycle":  "conditional",
+                        "route_ids":  [
+                                          "novel-writing"
+                                      ],
+                        "reason":  "First-party long-form fiction and novel creation engine with Story Bible continuity checking and anti-AI-cliche prose rules.",
+                        "activation":  {
+                                           "mode":  "route_candidate",
+                                           "triggers":  [
+                                                            "novel_writing"
+                                                        ],
+                                           "purpose":  "Automatically manage Story Bibles, scene beat sheets, anti-AI-cliche drafting, and continuity checks for novels and stories.",
+                                           "explicit_signals":  [
+                                                                    "novel",
+                                                                    "fiction",
+                                                                    "story writing",
+                                                                    "chapter",
+                                                                    "world-building",
+                                                                    "screenplay"
+                                                                ],
+                                           "inferred_signals":  [
+                                                                    "long-form narrative",
+                                                                    "character arc",
+                                                                    "plot outline"
+                                                                ],
+                                           "confirmation_policy":  "automatic_for_matched_route"
+                                       }
+                    },
+                    {
+                        "id":  "skills-design-ui-ux-pro-max-skill-md",
+                        "entrypoint":  "skills/design/ui-ux-pro-max/SKILL.md",
+                        "family":  "design",
+                        "lifecycle":  "mandatory",
+                        "route_ids":  [
+                                          "design-direction",
+                                          "ui-design"
+                                      ],
+                        "reason":  "First-party pure UI/UX design-system intelligence that derives industry palettes, typography pairings, and layout specifications and drives text-to-image mockup generation before UI code.",
+                        "activation":  {
+                                           "mode":  "route_candidate",
+                                           "triggers":  [
+                                                            "net_new_ui",
+                                                            "substantial_ui_refactor"
+                                                        ],
+                                           "purpose":  "Derive pure UI/UX design specifications and mandatory text-to-image mockup prompts before any frontend implementation.",
+                                           "explicit_signals":  [
+                                                                    "ui design",
+                                                                    "frontend design",
+                                                                    "color palette",
+                                                                    "typography pairing",
+                                                                    "ui mockup"
+                                                                ],
+                                           "inferred_signals":  [
+                                                                    "new page or screen",
+                                                                    "substantial interface redesign"
+                                                                ],
+                                           "confirmation_policy":  "automatic_for_matched_route"
+                                       }
+                    },
+                    {
                         "id":  "skills-engineering-ask-matt-skill-md",
                         "entrypoint":  "skills/engineering/ask-matt/SKILL.md",
                         "family":  "engineering",
@@ -5112,6 +5569,54 @@ task state.
                                        }
                     },
                     {
+                        "id":  "skills-engineering-code-simplifier-skill-md",
+                        "entrypoint":  "skills/engineering/code-simplifier/SKILL.md",
+                        "family":  "engineering",
+                        "lifecycle":  "conditional",
+                        "route_ids":  [
+                                          "code-refinement"
+                                      ],
+                        "reason":  "First-party automatic post-implementation code simplification and AST-aware refactoring capability.",
+                        "activation":  {
+                                           "mode":  "route_candidate",
+                                           "triggers":  [
+                                                            "code_refinement"
+                                                        ],
+                                           "purpose":  "Autonomous post-implementation code refinement, AST-aware structural refactoring, and 80/20 code-smell cleanup without altering behavior. Triggered automatically after feature/refactor implementation or when simplifying, cleaning up, or refactoring code.",
+                                           "explicit_signals":  [
+                                                                    "code_refinement"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "route_enforced"
+                                       }
+                    },
+                    {
+                        "id":  "skills-engineering-decompile-reconstruction-skill-md",
+                        "entrypoint":  "skills/engineering/decompile-reconstruction/SKILL.md",
+                        "family":  "engineering",
+                        "lifecycle":  "conditional",
+                        "route_ids":  [
+                                          "decompile-reconstruction"
+                                      ],
+                        "reason":  "First-party automatic binary/bytecode/bundle decompilation and clean-room source reconstruction capability.",
+                        "activation":  {
+                                           "mode":  "route_candidate",
+                                           "triggers":  [
+                                                            "decompile_reconstruction"
+                                                        ],
+                                           "purpose":  "Autonomous binary/bytecode/bundle decompilation and clean-room source code reconstruction. Triggered automatically when the user provides or asks to analyze, decompile, deobfuscate, or recover readable/compilable source code or algorithms from compiled binaries (PE/ELF/Mach-O/DLL/SO), Android APKs/JARs, .NET assemblies, Python bytecode (.pyc), WASM, or bundled/minified/obfuscated JS/Electron apps.",
+                                           "explicit_signals":  [
+                                                                    "decompile_reconstruction"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "route_enforced"
+                                       }
+                    },
+                    {
                         "id":  "skills-engineering-diagnosing-bugs-skill-md",
                         "entrypoint":  "skills/engineering/diagnosing-bugs/SKILL.md",
                         "family":  "engineering",
@@ -5140,6 +5645,38 @@ task state.
                                                                     "task_brief_matches_reviewed_purpose"
                                                                 ],
                                            "confirmation_policy":  "single_confirmation_when_competing_candidates_match"
+                                       }
+                    },
+                    {
+                        "id":  "skills-engineering-diagram-flowchart-architect-skill-md",
+                        "entrypoint":  "skills/engineering/diagram-flowchart-architect/SKILL.md",
+                        "family":  "engineering",
+                        "lifecycle":  "conditional",
+                        "route_ids":  [
+                                          "diagram-flowchart"
+                                      ],
+                        "reason":  "First-party flowchart, swimlane, and architecture diagram generator across Draw.io (.drawio), Excalidraw (.excalidraw), and themed Mermaid.",
+                        "activation":  {
+                                           "mode":  "route_candidate",
+                                           "triggers":  [
+                                                            "diagram_flowchart"
+                                                        ],
+                                           "purpose":  "Automatically generate zero-overlap flowcharts, swimlanes, and architecture diagrams in .drawio, .excalidraw, and Mermaid.",
+                                           "explicit_signals":  [
+                                                                    "flowchart",
+                                                                    "diagram",
+                                                                    "drawio",
+                                                                    "excalidraw",
+                                                                    "mermaid",
+                                                                    "architecture diagram",
+                                                                    "swimlane"
+                                                                ],
+                                           "inferred_signals":  [
+                                                                    "process map",
+                                                                    "sequence diagram",
+                                                                    "system topology"
+                                                                ],
+                                           "confirmation_policy":  "automatic_for_matched_route"
                                        }
                     },
                     {
@@ -5553,34 +6090,6 @@ task state.
                                        }
                     },
                     {
-                        "id":  "skills-ponytail-skill-md",
-                        "entrypoint":  "skills/ponytail/SKILL.md",
-                        "family":  "ponytail",
-                        "lifecycle":  "conditional",
-                        "route_ids":  [
-                                          "test-design"
-                                      ],
-                        "reason":  "Conditional implementation discipline for behavior changes.",
-                        "activation":  {
-                                           "mode":  "route_candidate",
-                                           "triggers":  [
-                                                            "behavior_change",
-                                                            "coverage_gap",
-                                                            "test_design"
-                                                        ],
-                                           "purpose":  "\u003e",
-                                           "explicit_signals":  [
-                                                                    "behavior_change",
-                                                                    "coverage_gap",
-                                                                    "test_design"
-                                                                ],
-                                           "inferred_signals":  [
-
-                                                                ],
-                                           "confirmation_policy":  "route_enforced"
-                                       }
-                    },
-                    {
                         "id":  "skills-ponytail-audit-skill-md",
                         "entrypoint":  "skills/ponytail-audit/SKILL.md",
                         "family":  "ponytail-audit",
@@ -5721,6 +6230,34 @@ task state.
                                        }
                     },
                     {
+                        "id":  "skills-ponytail-skill-md",
+                        "entrypoint":  "skills/ponytail/SKILL.md",
+                        "family":  "ponytail",
+                        "lifecycle":  "conditional",
+                        "route_ids":  [
+                                          "test-design"
+                                      ],
+                        "reason":  "Conditional implementation discipline for behavior changes.",
+                        "activation":  {
+                                           "mode":  "route_candidate",
+                                           "triggers":  [
+                                                            "behavior_change",
+                                                            "coverage_gap",
+                                                            "test_design"
+                                                        ],
+                                           "purpose":  "\u003e",
+                                           "explicit_signals":  [
+                                                                    "behavior_change",
+                                                                    "coverage_gap",
+                                                                    "test_design"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "route_enforced"
+                                       }
+                    },
+                    {
                         "id":  "skills-productivity-grilling-skill-md",
                         "entrypoint":  "skills/productivity/grilling/SKILL.md",
                         "family":  "productivity",
@@ -5809,6 +6346,38 @@ task state.
                                        }
                     },
                     {
+                        "id":  "skills-productivity-office-pro-suite-skill-md",
+                        "entrypoint":  "skills/productivity/office-pro-suite/SKILL.md",
+                        "family":  "productivity",
+                        "lifecycle":  "conditional",
+                        "route_ids":  [
+                                          "office-document"
+                                      ],
+                        "reason":  "First-party professional design and standardization suite for Word (.docx), Excel (.xlsx), and PowerPoint (.pptx).",
+                        "activation":  {
+                                           "mode":  "route_candidate",
+                                           "triggers":  [
+                                                            "office_document"
+                                                        ],
+                                           "purpose":  "Automatically enforce executive typography in Word, dynamic formula modeling in Excel, and action-title visual design in PowerPoint.",
+                                           "explicit_signals":  [
+                                                                    "word",
+                                                                    "docx",
+                                                                    "excel",
+                                                                    "xlsx",
+                                                                    "powerpoint",
+                                                                    "pptx",
+                                                                    "office document"
+                                                                ],
+                                           "inferred_signals":  [
+                                                                    "spreadsheet model",
+                                                                    "presentation deck",
+                                                                    "formal report document"
+                                                                ],
+                                           "confirmation_policy":  "automatic_for_matched_route"
+                                       }
+                    },
+                    {
                         "id":  "skills-productivity-product-requirements-grilling-skill-md",
                         "entrypoint":  "skills/productivity/product-requirements-grilling/SKILL.md",
                         "family":  "productivity",
@@ -5834,6 +6403,34 @@ task state.
 
                                                                 ],
                                            "confirmation_policy":  "route_enforced"
+                                       }
+                    },
+                    {
+                        "id":  "skills-productivity-role-persona-router-skill-md",
+                        "entrypoint":  "skills/productivity/role-persona-router/SKILL.md",
+                        "family":  "productivity",
+                        "lifecycle":  "mandatory",
+                        "route_ids":  [
+                                          "role-selection"
+                                      ],
+                        "reason":  "First-party startup role recommendation and interactive expert persona router applied at the start of every project.",
+                        "activation":  {
+                                           "mode":  "route_candidate",
+                                           "triggers":  [
+                                                            "role_selection"
+                                                        ],
+                                           "purpose":  "Automatically recommend the best-fit expert role and present the 7-role selection menu at the start of every new project.",
+                                           "explicit_signals":  [
+                                                                    "role selection",
+                                                                    "persona recommendation",
+                                                                    "new project kickoff",
+                                                                    "expert role menu"
+                                                                ],
+                                           "inferred_signals":  [
+                                                                    "turn 1 project start",
+                                                                    "non-continuation task kickoff"
+                                                                ],
+                                           "confirmation_policy":  "automatic_for_matched_route"
                                        }
                     },
                     {
@@ -8142,7 +8739,7 @@ task state.
     "orchestration_policy":  {
                                  "standard_product_workflow":  "automatic_from_task_classification",
                                  "user_skill_selection_required":  false,
-                                 "user_interaction_rule":  "Ask users only for product, content, risk, and design decisions. Never ask them to choose an internal skill or route.",
+                                 "user_interaction_rule":  "Ask users only for product, role, content, risk, and design decisions. Never ask them to choose an internal skill or route.",
                                  "restricted_manual_paths":  [
                                                                  "security",
                                                                  "credentials",
@@ -8155,7 +8752,12 @@ task state.
                             "task_classification",
                             "explicit_user_intent",
                             "current_ui_state",
-                            "implementation_result"
+                            "implementation_result",
+                            "binary_or_bundle_target",
+                            "office_document_request",
+                            "multimodal_creative_brief",
+                            "narrative_story_request",
+                            "diagram_architecture_request"
                         ],
     "default_pipelines":  [
                               {
@@ -8175,9 +8777,104 @@ task state.
                                                 "code-review",
                                                 "handover"
                                             ]
+                              },
+                              {
+                                  "id":  "code-refactoring-and-refinement",
+                                  "triggers":  [
+                                                   "code_refinement"
+                                               ],
+                                  "user_skill_selection_required":  false,
+                                  "nodes":  [
+                                                "code-refinement"
+                                            ]
+                              },
+                              {
+                                  "id":  "decompile-and-reconstruct",
+                                  "triggers":  [
+                                                   "decompile_reconstruction"
+                                               ],
+                                  "user_skill_selection_required":  false,
+                                  "nodes":  [
+                                                "decompile-reconstruction"
+                                            ]
+                              },
+                              {
+                                  "id":  "startup-role-selection",
+                                  "triggers":  [
+                                                   "role_selection"
+                                               ],
+                                  "user_skill_selection_required":  false,
+                                  "nodes":  [
+                                                "role-selection"
+                                            ]
+                              },
+                              {
+                                  "id":  "office-document-delivery",
+                                  "triggers":  [
+                                                   "office_document"
+                                               ],
+                                  "user_skill_selection_required":  false,
+                                  "nodes":  [
+                                                "office-document"
+                                            ]
+                              },
+                              {
+                                  "id":  "multimodal-creative-delivery",
+                                  "triggers":  [
+                                                   "multimodal_media"
+                                               ],
+                                  "user_skill_selection_required":  false,
+                                  "nodes":  [
+                                                "multimodal-media"
+                                            ]
+                              },
+                              {
+                                  "id":  "novel-story-delivery",
+                                  "triggers":  [
+                                                   "novel_writing"
+                                               ],
+                                  "user_skill_selection_required":  false,
+                                  "nodes":  [
+                                                "novel-writing"
+                                            ]
+                              },
+                              {
+                                  "id":  "diagram-flowchart-delivery",
+                                  "triggers":  [
+                                                   "diagram_flowchart"
+                                               ],
+                                  "user_skill_selection_required":  false,
+                                  "nodes":  [
+                                                "diagram-flowchart"
+                                            ]
                               }
                           ],
     "nodes":  [
+                  {
+                      "id":  "role-selection",
+                      "posture":  "route",
+                      "user_skill_selection_required":  false,
+                      "route_ids":  [
+                                        "role-selection"
+                                    ],
+                      "requires":  [
+
+                                   ],
+                      "consumes":  [
+                                       "task_classification",
+                                       "explicit_user_intent"
+                                   ],
+                      "produces":  [
+                                       "confirmed_role_persona"
+                                   ],
+                      "blocks":  [
+                                     "project_kickoff"
+                                 ],
+                      "verification":  [
+                                           "recommended_role_menu_presented",
+                                           "selected_or_confirmed_role_persona"
+                                       ]
+                  },
                   {
                       "id":  "requirements-grilling",
                       "posture":  "route",
@@ -8283,6 +8980,150 @@ task state.
                                            "approved_mockup_or_explicit_opt_out",
                                            "implementation_validation",
                                            "visual_verification_plan"
+                                       ]
+                  },
+                  {
+                      "id":  "code-refinement",
+                      "posture":  "route",
+                      "user_skill_selection_required":  false,
+                      "route_ids":  [
+                                        "code-refinement"
+                                    ],
+                      "requires":  [
+
+                                   ],
+                      "consumes":  [
+                                       "implementation_result"
+                                   ],
+                      "produces":  [
+                                       "refined_implementation_result"
+                                   ],
+                      "blocks":  [
+                                     "verified_refinement"
+                                 ],
+                      "verification":  [
+                                           "refinement_or_smell_check",
+                                           "behavior_preserved_verification"
+                                       ]
+                  },
+                  {
+                      "id":  "decompile-reconstruction",
+                      "posture":  "route",
+                      "user_skill_selection_required":  false,
+                      "route_ids":  [
+                                        "decompile-reconstruction"
+                                    ],
+                      "requires":  [
+
+                                   ],
+                      "consumes":  [
+                                       "binary_or_bundle_target"
+                                   ],
+                      "produces":  [
+                                       "reconstructed_source_or_architecture"
+                                   ],
+                      "blocks":  [
+                                     "verified_decompile_reconstruction"
+                                 ],
+                      "verification":  [
+                                           "target_format_and_toolchain_triage",
+                                           "decompiled_or_reconstructed_artifact"
+                                       ]
+                  },
+                  {
+                      "id":  "multimodal-media",
+                      "posture":  "route",
+                      "user_skill_selection_required":  false,
+                      "route_ids":  [
+                                        "multimodal-media"
+                                    ],
+                      "requires":  [
+
+                                   ],
+                      "consumes":  [
+                                       "multimodal_creative_brief"
+                                   ],
+                      "produces":  [
+                                       "generated_multimodal_asset"
+                                   ],
+                      "blocks":  [
+                                     "verified_multimodal_media"
+                                 ],
+                      "verification":  [
+                                           "structured_media_prompt_or_storyboard",
+                                           "generated_media_or_production_sheet"
+                                       ]
+                  },
+                  {
+                      "id":  "office-document",
+                      "posture":  "route",
+                      "user_skill_selection_required":  false,
+                      "route_ids":  [
+                                        "office-document"
+                                    ],
+                      "requires":  [
+
+                                   ],
+                      "consumes":  [
+                                       "office_document_request"
+                                   ],
+                      "produces":  [
+                                       "standardized_office_document"
+                                   ],
+                      "blocks":  [
+                                     "verified_office_document"
+                                 ],
+                      "verification":  [
+                                           "office_design_and_formula_standard_check",
+                                           "generated_or_verified_office_artifact"
+                                       ]
+                  },
+                  {
+                      "id":  "novel-writing",
+                      "posture":  "route",
+                      "user_skill_selection_required":  false,
+                      "route_ids":  [
+                                        "novel-writing"
+                                    ],
+                      "requires":  [
+
+                                   ],
+                      "consumes":  [
+                                       "narrative_story_request"
+                                   ],
+                      "produces":  [
+                                       "continuity_verified_story_chapter"
+                                   ],
+                      "blocks":  [
+                                     "verified_novel_chapter"
+                                 ],
+                      "verification":  [
+                                           "story_bible_and_scene_beat_check",
+                                           "anti_ai_cliche_and_continuity_audit"
+                                       ]
+                  },
+                  {
+                      "id":  "diagram-flowchart",
+                      "posture":  "route",
+                      "user_skill_selection_required":  false,
+                      "route_ids":  [
+                                        "diagram-flowchart"
+                                    ],
+                      "requires":  [
+
+                                   ],
+                      "consumes":  [
+                                       "diagram_architecture_request"
+                                   ],
+                      "produces":  [
+                                       "verified_diagram_artifact"
+                                   ],
+                      "blocks":  [
+                                     "verified_diagram_output"
+                                 ],
+                      "verification":  [
+                                           "spatial_zoning_and_zero_overlap_check",
+                                           "diagram_artifact_or_mermaid_preview"
                                        ]
                   },
                   {
@@ -8394,4 +9235,65 @@ task state.
 }
 
 ## END FILE: contracts/skill-workflow-graph.json
+
+---
+
+## BEGIN FILE: modules/54_V6_9_RoleAndMultimodalCreativeGovernance.md
+
+# V6.9.0 Role Persona Routing & Multimodal Creative Governance
+
+Status: **Current Stable V6.9.0 Line**.
+
+This module defines the V6.9.0 cross-host execution rules for **Autonomous Startup Role Recommendation (`role-persona-router`)**, **Pure UI/UX Design + Mandatory Text-to-Image Coupling (`ui-ux-pro-max`)**, **Multimodal Media Generation (`multimodal-media-director` for Image / Video / Music)**, **Office Professional Design & Standardization (`office-pro-suite` for Word / Excel / PPT)**, **Long-Form Novel & Story Engineering (`novel-story-architect`)**, and **Multi-Format Flowchart & Architecture Diagramming (`diagram-flowchart-architect`)**.
+
+---
+
+## 1. Cross-Host Parity Mandate (`Antigravity` / `Claude Code` / `OpenAI Codex` / `Generic`)
+
+Every host adapter (`adapters/antigravity/install.ps1`, `adapters/claude/install.ps1`, `adapters/codex/install.ps1`, `adapters/generic/install.ps1`) and every compiled bundle (`dist/antigravity/AGENTS.md`, `dist/claude/CLAUDE.md`, `dist/codex/model_instructions.md`, `dist/generic/AGENTLOGIC.md`) MUST enforce identical Turn 1 Role Recommendation, UI Design + Mockup Preview, and Encounter-Driven Auto-Use gates, and deploy all 9 first-party portable skills to the host's skill directory (`.gemini/skills/`, `.claude/skills/`, `.codex/skills/`, or `<bundle>/skills/`).
+
+---
+
+## 2. Gate 1 Extension: Startup Autonomous Role Recommendation (`role-persona-router`)
+
+At the beginning of **every new project or non-continuation coding round**, alongside the `forget/compress context` check, the agent MUST automatically invoke `skills/productivity/role-persona-router/SKILL.md`:
+
+1. **Recommend the #1 Best-Fit Lead Role** (or Lead + Supporting Squad) with a concise 1-sentence reason based on the user's task.
+2. **Present the Compact 7-Role Selection Menu**:
+   - `[1] Principal Systems Architect & Full-Stack Lead` (`systems-architect-lead`)
+   - `[2] UI/UX Creative Design Director & Frontend Craftsman` (`ui-ux-creative-director`)
+   - `[3] Reverse Engineering & Clean-Room Reconstruction Specialist` (`reverse-reconstruction-specialist`)
+   - `[4] Management Consultant & Financial/Office Architect` (`executive-office-consultant`)
+   - `[5] Multimodal Creative Director (Image / Video / Music)` (`multimodal-creative-director`)
+   - `[6] Chief Showrunner & Long-Form Novel Architect` (`master-novelist-showrunner`)
+   - `[7] Enterprise Architecture & Flowchart Cartographer` (`visual-systems-diagrammer`)
+3. **Bind Confirmed Persona**: Once the user confirms the recommendation or selects another role, lock that persona's quality standards and automatic skill pipeline for the duration of the project.
+
+---
+
+## 3. Gate 2 Extension: Pure UI Design (`ui-ux-pro-max`) + Text-to-Image Coupling
+
+For any net-new UI or substantial UI redesign (unless the user explicitly opts out of mockups):
+1. **Requirements Brief (`product-requirements-grilling`)**: Clarify unresolved product/UI decisions one question at a time.
+2. **Pure UI/UX Design Reasoning (`ui-ux-pro-max`)**: Derive the **Structured Visual Design Specification** (domain aesthetic archetype, exact HSL/Hex palette, typography pairing, spatial grid & whitespace density) **before** any mockup generation or code writing.
+3. **Mandatory Text-to-Image Mockup (`imagegen` / `image-generator` / `multimodal-media-director` / `nano-banana-pro`)**: Feed the `ui-ux-pro-max` specification directly into the text-to-image generator to produce a high-craft visual preview image, present both the specification and mockup image to the user, and wait for approval before writing UI code.
+
+---
+
+## 4. Gate 3 Extension: Encounter -> Auto-Use Domain Matrix (Zero Manual Skill Selection)
+
+The agent MUST never require the user to manually invoke a skill name. Whenever the task encounters any of the following domains, the corresponding route and first-party skill activate automatically:
+
+| Encountered Task / Signal | Automatic Route ID | Primary First-Party Skill | Core Enforcement & Deliverable Standard |
+| :--- | :--- | :--- | :--- |
+| **New Project Start (Turn 1)** | `role-selection` | `role-persona-router` | Recommend #1 Lead Role + present `[1]`–`[7]` role menu for user confirmation. |
+| **UI / Frontend Design & Mockup** | `design-direction` $\rightarrow$ `ui-design` | `ui-ux-pro-max` + `multimodal-media-director` | Pure design-system specification first, coupled with mandatory text-to-image mockup preview. |
+| **Text-to-Image / Video / Music** | `multimodal-media` | `multimodal-media-director` | Art-direction prompts (Image), shot-by-shot camera storyboards (Video), BPM/Key/Metatag arrangement sheets (Music). |
+| **Word / Excel / PPT (`.docx`/`.xlsx`/`.pptx`)** | `office-document` | `office-pro-suite` | Named styles & three-line/zebra tables in Word; live formulas & blue/black/green modeling convention in Excel; 16:9 action-title visual variety in PPT. |
+| **Novel / Fiction / Script Writing** | `novel-writing` | `novel-story-architect` | `.story-bible/` continuity ledger, scene beat sheets before drafting, strict anti-AI-cliché ban list, 4-point continuity check. |
+| **Flowcharts / Swimlanes / Architecture** | `diagram-flowchart` | `diagram-flowchart-architect` | Spatial zoning, semantic palette, zero-overlap orthogonal routing across `.drawio` XML, `.excalidraw` JSON, and themed `Mermaid`. |
+| **Binaries / Bytecode / Obfuscated Bundles** | `decompile-reconstruction` | `decompile-reconstruction` | Static triage (`GhidraMCP`/`ida-reverse`/`jadx`/`ilspycmd`/`pycdc`/`webcrack`) $\rightarrow$ clean-room source reconstruction. |
+| **Post-Implementation / Code Refactor** | `code-refinement` | `code-simplifier` | Lock green test baseline $\rightarrow$ guard-clause flattening $\rightarrow$ `ast-grep` (`sg`) structural rewrites $\rightarrow$ zero behavior regression. |
+
+## END FILE: modules/54_V6_9_RoleAndMultimodalCreativeGovernance.md
 

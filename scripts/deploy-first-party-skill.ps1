@@ -1,4 +1,4 @@
-﻿# MANDATORY LOGIC GATE
+# MANDATORY LOGIC GATE
 #
 # Read `AGENTS.md` and `README.md` before making changes here.
 # Then follow the repository-declared logic entry chain.
@@ -19,3 +19,23 @@ if (Test-Path $TargetPath) { Remove-Item -LiteralPath $TargetPath -Recurse -Forc
 Copy-Item -LiteralPath $source -Destination $TargetPath -Recurse -Force
 if (-not (Test-Path (Join-Path $TargetPath 'SKILL.md'))) { throw "Skill deployment did not create SKILL.md: $TargetPath" }
 Write-Host "Deployed first-party product requirements skill: $TargetPath"
+
+$companionSkills = @(
+    @{ Name = 'role-persona-router'; Relative = 'skills\productivity\role-persona-router' },
+    @{ Name = 'ui-ux-pro-max'; Relative = 'skills\design\ui-ux-pro-max' },
+    @{ Name = 'multimodal-media-director'; Relative = 'skills\creative\multimodal-media-director' },
+    @{ Name = 'office-pro-suite'; Relative = 'skills\productivity\office-pro-suite' },
+    @{ Name = 'novel-story-architect'; Relative = 'skills\creative\novel-story-architect' },
+    @{ Name = 'diagram-flowchart-architect'; Relative = 'skills\engineering\diagram-flowchart-architect' },
+    @{ Name = 'code-simplifier'; Relative = 'skills\engineering\code-simplifier' },
+    @{ Name = 'decompile-reconstruction'; Relative = 'skills\engineering\decompile-reconstruction' }
+)
+foreach ($skill in $companionSkills) {
+    $skillSource = Join-Path $RepoRoot $skill.Relative
+    if (-not (Test-Path (Join-Path $skillSource 'SKILL.md'))) { throw "Missing first-party skill '$($skill.Name)': $skillSource" }
+    $skillDest = Join-Path $parent $skill.Name
+    if (Test-Path $skillDest) { Remove-Item -LiteralPath $skillDest -Recurse -Force }
+    Copy-Item -LiteralPath $skillSource -Destination $skillDest -Recurse -Force
+    if (-not (Test-Path (Join-Path $skillDest 'SKILL.md'))) { throw "Skill deployment did not create SKILL.md: $skillDest" }
+    Write-Host "Deployed first-party skill: $skillDest"
+}

@@ -101,7 +101,7 @@ if (-not ($manifest.profiles.PSObject.Properties.Name -contains $manifest.defaul
     Fail "Default profile '$($manifest.default_profile)' is not defined in manifest.profiles."
 }
 
-if ($manifest.current_version -match '^V6\.8\.') {
+if ($manifest.current_version -match '^V6\.(8|9)\.') {
     $operationalModule = "modules/44_V6_8_GrokBuildOperationalIntegration.md"
     Assert-Exists -Root $RepoRoot -RelativePath $operationalModule -Label "V6.8 operational integration module"
 
@@ -200,7 +200,7 @@ foreach ($outputProperty in $manifest.host_outputs.PSObject.Properties) {
     }
 }
 
-if ($manifest.current_version -match '^V6\.8\.[2-9]') {
+if ($manifest.current_version -match '^V6\.(8\.[2-9]|9\.)') {
     $knowledgeModule = "modules/46_V6_8_ProjectKnowledgeSync.md"
     Assert-Exists -Root $RepoRoot -RelativePath $knowledgeModule -Label "V6.8 project-native knowledge-sync module"
 
@@ -221,7 +221,7 @@ if ($manifest.current_version -match '^V6\.8\.[2-9]') {
 & powershell -NoProfile -ExecutionPolicy Bypass -File (Join-Path $RepoRoot 'scripts\validate-skill-routing.ps1') -RepoRoot $RepoRoot
 if ($LASTEXITCODE -ne 0) { Fail 'Autonomous skill routing validation failed.' }
 
-if ($manifest.current_version -match '^V6\.8\.[3-9]') {
+if ($manifest.current_version -match '^V6\.(8\.[3-9]|9\.)') {
     $referenceWorkflowModule = "modules/47_V6_8_ReferenceToInterfaceWorkflow.md"
     $routingModule = "modules/48_V6_8_SkillAndToolRouting.md"
     Assert-Exists -Root $RepoRoot -RelativePath $referenceWorkflowModule -Label "V6.8 reference-to-interface workflow module"

@@ -4,6 +4,41 @@
     "completion_policy":  "A missing required evidence capability blocks implementation or verified completion. A missing specialist blocks only routes whose fallback is strict; routes that explicitly allow native evidence fallback may proceed with disclosure and matching evidence. Workflow enforcement validates recorded route progression; it never claims unsupported host-native interception. Never claim an unavailable skill was used.",
     "routes":  [
                    {
+                       "id":  "role-selection",
+                       "triggers":  [
+                                        "role_selection"
+                                    ],
+                       "capability":  "role_persona_routing",
+                       "fallback":  "allow_native_role_selection",
+                       "closure_evidence":  [
+                                                "recommended_role_menu_presented",
+                                                "selected_or_confirmed_role_persona"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "role-persona-router"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+
+                                                          ],
+                       "selection_rule":  "At the start of every new project or non-continuation task, automatically use role-persona-router to recommend the best-fit lead role (and supporting squad) alongside the compact 7-role selection menu, and bind the confirmed persona for the task lifecycle.",
+                       "order":  5,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "project_kickoff"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "active_continuation_only",
+                       "artifact_requirements":  [
+
+                                                 ]
+                   },
+                   {
                        "id":  "requirements-grilling",
                        "triggers":  [
                                         "major_feature",
@@ -59,11 +94,13 @@
                                                           "imagegen"
                                                       ],
                        "conditional_host_skill_aliases":  [
+                                                              "multimodal-media-director",
                                                               "image-generator",
                                                               "nano-banana-pro",
+                                                              "ui-ux-pro-max",
                                                               "taste-skill"
                                                           ],
-                       "selection_rule":  "Use imagegen (or an explicitly approved equivalent image-generation capability such as Antigravity's built-in image-generator subagent or nano-banana-pro when installed) for the mockup/edit; taste-skill may guide art direction but cannot replace image generation. Do not use a frontend implementation skill as mockup evidence.",
+                       "selection_rule":  "Combine the pure design specification from ui-ux-pro-max with imagegen (or Antigravity's built-in image-generator subagent, multimodal-media-director, or nano-banana-pro) to generate the visual UI mockup before any UI code is written. Do not use a frontend implementation skill as mockup evidence.",
                        "order":  20,
                        "requires_routes":  [
                                                "requirements-grilling",
@@ -80,6 +117,150 @@
                        "exemption_policy":  "explicit_user_opt_out_of_mockup_only",
                        "artifact_requirements":  [
                                                      "mockup_or_opt_out_record"
+                                                 ]
+                   },
+                   {
+                       "id":  "multimodal-media",
+                       "triggers":  [
+                                        "multimodal_media"
+                                    ],
+                       "capability":  "multimodal_media_generation",
+                       "fallback":  "allow_native_multimodal_director_with_disclosure",
+                       "closure_evidence":  [
+                                                "structured_media_prompt_or_storyboard",
+                                                "generated_media_or_production_sheet"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "multimodal-media-director"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "image-generator",
+                                                              "imagegen",
+                                                              "nano-banana-pro"
+                                                          ],
+                       "selection_rule":  "Automatically use multimodal-media-director whenever the user requests text-to-image, text-to-video, or text-to-music/audio generation. Formulate a professional art-direction prompt, shot-by-shot camera storyboard, or musical arrangement sheet (BPM/Key/Instrumentation/Metatags) and execute via the available host generator or MCP server.",
+                       "order":  22,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "verified_multimodal_media"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+
+                                                 ]
+                   },
+                   {
+                       "id":  "office-document",
+                       "triggers":  [
+                                        "office_document"
+                                    ],
+                       "capability":  "office_document_design_and_processing",
+                       "fallback":  "allow_native_office_suite_with_disclosure",
+                       "closure_evidence":  [
+                                                "office_design_and_formula_standard_check",
+                                                "generated_or_verified_office_artifact"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "office-pro-suite"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "docx",
+                                                              "xlsx",
+                                                              "pptx"
+                                                          ],
+                       "selection_rule":  "Automatically use office-pro-suite whenever creating, editing, formatting, or auditing Word (.docx), Excel (.xlsx), or PowerPoint (.pptx) files. Enforce named typography styles and three-line/zebra tables in Word, live dynamic formulas and institutional blue/black/green color coding in Excel, and 16:9 action-title visual variety in PowerPoint.",
+                       "order":  24,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "verified_office_document"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+
+                                                 ]
+                   },
+                   {
+                       "id":  "novel-writing",
+                       "triggers":  [
+                                        "novel_writing"
+                                    ],
+                       "capability":  "long_form_fiction_and_story_bible",
+                       "fallback":  "allow_native_novel_architect",
+                       "closure_evidence":  [
+                                                "story_bible_and_scene_beat_check",
+                                                "anti_ai_cliche_and_continuity_audit"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "novel-story-architect"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+
+                                                          ],
+                       "selection_rule":  "Automatically use novel-story-architect whenever writing, outlining, or continuing a novel, story, or script. Maintain the Story Bible (.story-bible/), verify scene beat sheets before drafting, enforce the anti-AI cliche ban list, and run the 4-point continuity check.",
+                       "order":  26,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "verified_novel_chapter"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+
+                                                 ]
+                   },
+                   {
+                       "id":  "diagram-flowchart",
+                       "triggers":  [
+                                        "diagram_flowchart"
+                                    ],
+                       "capability":  "diagram_and_flowchart_architecture",
+                       "fallback":  "allow_native_diagram_architect",
+                       "closure_evidence":  [
+                                                "spatial_zoning_and_zero_overlap_check",
+                                                "diagram_artifact_or_mermaid_preview"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "diagram-flowchart-architect"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+
+                                                          ],
+                       "selection_rule":  "Automatically use diagram-flowchart-architect whenever creating flowcharts, swimlanes, system architecture diagrams, sequence diagrams, or mind maps. Select .drawio XML for enterprise/Office deliverables, .excalidraw JSON for whiteboard/design flows, and syntax-validated themed Mermaid for instant markdown previews.",
+                       "order":  28,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "verified_diagram_output"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+
                                                  ]
                    },
                    {
@@ -274,6 +455,82 @@
                                                  ]
                    },
                    {
+                       "id":  "decompile-reconstruction",
+                       "triggers":  [
+                                        "decompile_reconstruction"
+                                    ],
+                       "capability":  "decompile_and_reconstruct",
+                       "fallback":  "allow_native_decompile_triage_with_disclosure",
+                       "closure_evidence":  [
+                                                "target_format_and_toolchain_triage",
+                                                "decompiled_or_reconstructed_artifact"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "decompile-reconstruction"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "ida-reverse",
+                                                              "ghidra-mcp",
+                                                              "reverse-engineering",
+                                                              "dotnet-reverse",
+                                                              "apk-reverse",
+                                                              "js-reverse"
+                                                          ],
+                       "selection_rule":  "Automatically use decompile-reconstruction when analyzing, decompiling, deobfuscating, or recovering clean-room source code from compiled binaries (PE/ELF/Mach-O/DLL/SO), JVM/Android APKs/JARs, .NET assemblies, Python bytecode (.pyc), WASM, or bundled/minified/obfuscated JS/Electron packages. Orchestrate IDA Pro MCP (ida-reverse), Ghidra MCP/headless, jadx, ilspycmd/dnSpyEx, pycdc, or webcrack/ast-grep according to the detected target format; if specialized decompilers are absent, use native disassembly/triage tools and explicitly disclose the fidelity gap.",
+                       "order":  35,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "verified_decompile_reconstruction"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "native_decompile_triage_with_disclosure",
+                       "artifact_requirements":  [
+
+                                                 ]
+                   },
+                   {
+                       "id":  "code-refinement",
+                       "triggers":  [
+                                        "code_refinement"
+                                    ],
+                       "capability":  "code_refinement",
+                       "fallback":  "allow_native_code_refinement",
+                       "closure_evidence":  [
+                                                "refinement_or_smell_check",
+                                                "behavior_preserved_verification"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "code-simplifier"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "ponytail",
+                                                              "improve-codebase-architecture"
+                                                          ],
+                       "selection_rule":  "Automatically use code-simplifier after feature/refactor implementation or when refactoring/cleaning up code: lock the green baseline, triage 80/20 code smells and AI-generated nesting/slop, prefer ast-grep (sg) for multi-site structural rewrites, and verify zero behavior regression.",
+                       "order":  45,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "verified_refinement"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+
+                                                 ]
+                   },
+                   {
                        "id":  "package-release",
                        "triggers":  [
                                         "install",
@@ -411,12 +668,13 @@
                                                 "selected_or_user_confirmed_design_direction"
                                             ],
                        "primary_host_skill_aliases":  [
+                                                          "ui-ux-pro-max",
                                                           "taste-skill"
                                                       ],
                        "conditional_host_skill_aliases":  [
 
                                                           ],
-                       "selection_rule":  "Use taste-skill when available to derive a design direction from the approved requirements brief. Otherwise record the direction through the native design-direction fallback; users decide visual facts, never the internal skill.",
+                       "selection_rule":  "Automatically use ui-ux-pro-max (paired with taste-skill) to derive a pure UI/UX design specification (industry color palette, font pairing, grid density, and layout anatomy) from the approved requirements brief before generating the text-to-image mockup.",
                        "order":  15,
                        "requires_routes":  [
                                                "requirements-grilling"

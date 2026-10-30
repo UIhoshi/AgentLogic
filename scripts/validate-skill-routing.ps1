@@ -1,4 +1,4 @@
-﻿# MANDATORY LOGIC GATE
+# MANDATORY LOGIC GATE
 #
 # Read `AGENTS.md` and `README.md` before making changes here.
 # Then follow the repository-declared logic entry chain.
@@ -22,7 +22,7 @@ if ($routing.schema_version -ne 3) { throw 'Unsupported skill routing schema ver
 if ($enforcement.schema_version -ne 1) { throw 'Unsupported skill enforcement schema version; expected 1.' }
 if ($hostCapabilities.schema_version -ne 2 -or $hostCapabilities.first_party_skill -ne 'product-requirements-grilling') { throw 'Unsupported host skill capability schema version; expected 2.' }
 if ($routing.enforcement_contract -ne 'contracts/skill-enforcement.json') { throw 'Skill routing must reference the enforcement contract.' }
-$required = @('requirements-grilling','design-direction','ui-design','ui-implementation','code-review','handover','security-review','extension-security-review','browser-verification','visual-verification','test-design','package-release')
+$required = @('role-selection','requirements-grilling','design-direction','ui-design','ui-implementation','multimodal-media','office-document','novel-writing','diagram-flowchart','decompile-reconstruction','test-design','code-refinement','code-review','handover','security-review','extension-security-review','browser-verification','visual-verification','package-release')
 $seen = @{}
 $orders = @{}
 foreach ($route in @($routing.routes)) {

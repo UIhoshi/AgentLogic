@@ -3,6 +3,40 @@
     "purpose":  "Host deployment contract for AgentLogic first-party skills. It does not claim third-party or system skills are installed.",
     "first_party_skill":  "product-requirements-grilling",
     "source":  "skills/productivity/product-requirements-grilling",
+    "additional_first_party_skills":  [
+                                          {
+                                              "id":  "role-persona-router",
+                                              "source":  "skills/productivity/role-persona-router"
+                                          },
+                                          {
+                                              "id":  "ui-ux-pro-max",
+                                              "source":  "skills/design/ui-ux-pro-max"
+                                          },
+                                          {
+                                              "id":  "multimodal-media-director",
+                                              "source":  "skills/creative/multimodal-media-director"
+                                          },
+                                          {
+                                              "id":  "office-pro-suite",
+                                              "source":  "skills/productivity/office-pro-suite"
+                                          },
+                                          {
+                                              "id":  "novel-story-architect",
+                                              "source":  "skills/creative/novel-story-architect"
+                                          },
+                                          {
+                                              "id":  "diagram-flowchart-architect",
+                                              "source":  "skills/engineering/diagram-flowchart-architect"
+                                          },
+                                          {
+                                              "id":  "code-simplifier",
+                                              "source":  "skills/engineering/code-simplifier"
+                                          },
+                                          {
+                                              "id":  "decompile-reconstruction",
+                                              "source":  "skills/engineering/decompile-reconstruction"
+                                          }
+                                      ],
     "hosts":  {
                   "codex":  {
                                 "target_relative":  ".codex/skills/product-requirements-grilling",
@@ -27,7 +61,7 @@
                                                      "native_tool_interception":  false,
                                                      "target_relative":  ".claude/AgentLogic/skill-enforcement",
                                                      "command_relative":  "scripts/skill-enforcement.ps1",
-                                                     "required_files":  [
+                                                    "required_files":  [
                                                                             "scripts/skill-enforcement.ps1",
                                                                             "contracts/skill-enforcement.json",
                                                                             "contracts/skill-routing.json",
@@ -53,11 +87,11 @@
                                                       }
                                   },
                   "generic":  {
-                                  "target_relative":  "\u003cbundle-directory\u003e/skills/product-requirements-grilling",
+                                  "target_relative":  "<bundle-directory>/skills/product-requirements-grilling",
                                   "enforcement":  {
                                                       "level":  "workflow_enforced",
                                                       "native_tool_interception":  false,
-                                                      "target_relative":  "\u003cbundle-directory\u003e/skill-enforcement",
+                                                      "target_relative":  "<bundle-directory>/skill-enforcement",
                                                       "command_relative":  "scripts/skill-enforcement.ps1",
                                                       "required_files":  [
                                                                              "scripts/skill-enforcement.ps1",
