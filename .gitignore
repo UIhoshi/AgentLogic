@@ -1,0 +1,7 @@
+# Local raw reference archives & personal scratch notes
+reference/
+scratch/
+.agentlogic-backup/
+graphify-out/
+*.tmp
+*.log

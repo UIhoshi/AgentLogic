@@ -1,0 +1,754 @@
+{
+    "schema_version":  3,
+    "purpose":  "Canonical capability routes with an ordered primary skill and explicitly conditional supplements; aliases identify candidates, not installed or trusted tools.",
+    "completion_policy":  "A missing required evidence capability blocks implementation or verified completion. A missing specialist blocks only routes whose fallback is strict; routes that explicitly allow native evidence fallback may proceed with disclosure and matching evidence. Workflow enforcement validates recorded route progression; it never claims unsupported host-native interception. Never claim an unavailable skill was used.",
+    "routes":  [
+                   {
+                       "id":  "role-selection",
+                       "triggers":  [
+                                        "role_selection"
+                                    ],
+                       "capability":  "role_persona_routing",
+                       "fallback":  "allow_native_role_selection",
+                       "closure_evidence":  [
+                                                "recommended_role_menu_presented",
+                                                "selected_or_confirmed_role_persona"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "role-persona-router"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+
+                                                          ],
+                       "selection_rule":  "At the start of every new project or non-continuation task, automatically use role-persona-router to recommend the best-fit lead role (and supporting squad) alongside the compact 7-role selection menu, and bind the confirmed persona for the task lifecycle.",
+                       "order":  5,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "project_kickoff"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "active_continuation_only",
+                       "artifact_requirements":  [
+
+                                                 ]
+                   },
+                   {
+                       "id":  "requirements-grilling",
+                       "triggers":  [
+                                        "major_feature",
+                                        "net_new_ui",
+                                        "substantial_ui_refactor"
+                                    ],
+                       "capability":  "requirements_grilling",
+                       "fallback":  "block_before_specification",
+                       "closure_evidence":  [
+                                                "single_question_dialogue",
+                                                "approved_requirements_brief",
+                                                "brief_validator_result"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "product-requirements-grilling"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+
+                                                          ],
+                       "selection_rule":  "Use the first-party product-requirements-grilling skill. No generic interview or hiring skill is an equivalent.",
+                       "order":  10,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "specification"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+                                                     "requirements_brief"
+                                                 ]
+                   },
+                   {
+                       "id":  "ui-design",
+                       "triggers":  [
+                                        "net_new_ui",
+                                        "substantial_ui_refactor"
+                                    ],
+                       "capability":  "ui_design_and_mockup",
+                       "fallback":  "block_before_ui_code",
+                       "closure_evidence":  [
+                                                "approved_requirements_brief",
+                                                "mockup_requested_or_explicit_opt_out",
+                                                "approved_mockup_or_explicit_opt_out",
+                                                "visual_verification_plan"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "imagegen"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "multimodal-media-director",
+                                                              "image-generator",
+                                                              "nano-banana-pro",
+                                                              "ui-ux-pro-max",
+                                                              "taste-skill"
+                                                          ],
+                       "selection_rule":  "Combine the pure design specification from ui-ux-pro-max with imagegen (or Antigravity's built-in image-generator subagent, multimodal-media-director, or nano-banana-pro) to generate the visual UI mockup before any UI code is written. Do not use a frontend implementation skill as mockup evidence.",
+                       "order":  20,
+                       "requires_routes":  [
+                                               "requirements-grilling",
+                                               "design-direction"
+                                           ],
+                       "blocked_transitions":  [
+                                                   "ui_code"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "explicit_user_opt_out_of_mockup_only",
+                       "artifact_requirements":  [
+                                                     "mockup_or_opt_out_record"
+                                                 ]
+                   },
+                   {
+                       "id":  "multimodal-media",
+                       "triggers":  [
+                                        "multimodal_media"
+                                    ],
+                       "capability":  "multimodal_media_generation",
+                       "fallback":  "allow_native_multimodal_director_with_disclosure",
+                       "closure_evidence":  [
+                                                "structured_media_prompt_or_storyboard",
+                                                "generated_media_or_production_sheet"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "multimodal-media-director"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "image-generator",
+                                                              "imagegen",
+                                                              "nano-banana-pro"
+                                                          ],
+                       "selection_rule":  "Automatically use multimodal-media-director whenever the user requests text-to-image, text-to-video, or text-to-music/audio generation. Formulate a professional art-direction prompt, shot-by-shot camera storyboard, or musical arrangement sheet (BPM/Key/Instrumentation/Metatags) and execute via the available host generator or MCP server.",
+                       "order":  22,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "verified_multimodal_media"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+
+                                                 ]
+                   },
+                   {
+                       "id":  "office-document",
+                       "triggers":  [
+                                        "office_document"
+                                    ],
+                       "capability":  "office_document_design_and_processing",
+                       "fallback":  "allow_native_office_suite_with_disclosure",
+                       "closure_evidence":  [
+                                                "office_design_and_formula_standard_check",
+                                                "generated_or_verified_office_artifact"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "office-pro-suite"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "docx",
+                                                              "xlsx",
+                                                              "pptx"
+                                                          ],
+                       "selection_rule":  "Automatically use office-pro-suite whenever creating, editing, formatting, or auditing Word (.docx), Excel (.xlsx), or PowerPoint (.pptx) files. Enforce named typography styles and three-line/zebra tables in Word, live dynamic formulas and institutional blue/black/green color coding in Excel, and 16:9 action-title visual variety in PowerPoint.",
+                       "order":  24,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "verified_office_document"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+
+                                                 ]
+                   },
+                   {
+                       "id":  "novel-writing",
+                       "triggers":  [
+                                        "novel_writing"
+                                    ],
+                       "capability":  "long_form_fiction_and_story_bible",
+                       "fallback":  "allow_native_novel_architect",
+                       "closure_evidence":  [
+                                                "story_bible_and_scene_beat_check",
+                                                "anti_ai_cliche_and_continuity_audit"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "novel-story-architect"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+
+                                                          ],
+                       "selection_rule":  "Automatically use novel-story-architect whenever writing, outlining, or continuing a novel, story, or script. Maintain the Story Bible (.story-bible/), verify scene beat sheets before drafting, enforce the anti-AI cliche ban list, and run the 4-point continuity check.",
+                       "order":  26,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "verified_novel_chapter"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+
+                                                 ]
+                   },
+                   {
+                       "id":  "diagram-flowchart",
+                       "triggers":  [
+                                        "diagram_flowchart"
+                                    ],
+                       "capability":  "diagram_and_flowchart_architecture",
+                       "fallback":  "allow_native_diagram_architect",
+                       "closure_evidence":  [
+                                                "spatial_zoning_and_zero_overlap_check",
+                                                "diagram_artifact_or_mermaid_preview"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "diagram-flowchart-architect"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+
+                                                          ],
+                       "selection_rule":  "Automatically use diagram-flowchart-architect whenever creating flowcharts, swimlanes, system architecture diagrams, sequence diagrams, or mind maps. Select .drawio XML for enterprise/Office deliverables, .excalidraw JSON for whiteboard/design flows, and syntax-validated themed Mermaid for instant markdown previews.",
+                       "order":  28,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "verified_diagram_output"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+
+                                                 ]
+                   },
+                   {
+                       "id":  "code-review",
+                       "triggers":  [
+                                        "code_audit",
+                                        "pull_request_review",
+                                        "release_review"
+                                    ],
+                       "capability":  "code_review",
+                       "fallback":  "block_verified_review",
+                       "closure_evidence":  [
+                                                "review_report",
+                                                "severity_and_evidence"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "review-agent",
+                                                          "code-reviewer",
+                                                          "code-review"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "pr-review-expert"
+                                                          ],
+                       "selection_rule":  "Use review-agent or code-reviewer for a defect-first code review. The portable code-review skill is an approved conditional route when installed and selected. Use pr-review-expert only when the task specifically requires PR workflow, reviewability, or merge-readiness analysis; it supplements rather than replaces the review report.",
+                       "order":  70,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "verified_review"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+                                                     "review_report"
+                                                 ]
+                   },
+                   {
+                       "id":  "security-review",
+                       "triggers":  [
+                                        "security_review",
+                                        "security_sensitive_change"
+                                    ],
+                       "capability":  "security_review",
+                       "fallback":  "block_verified_review_or_install",
+                       "closure_evidence":  [
+                                                "self_refuted_findings",
+                                                "trust_decision"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "security-best-practices"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "senior-security",
+                                                              "senior-secops"
+                                                          ],
+                       "selection_rule":  "Use security-best-practices for supported source-code reviews. Use senior-security for threat modeling or secure architecture and senior-secops for CVE/compliance/infrastructure operations. A conditional specialty does not waive the primary review when the primary applies.",
+                       "order":  71,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "verified_review",
+                                                   "install"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+
+                                                 ]
+                   },
+                   {
+                       "id":  "browser-verification",
+                       "triggers":  [
+                                        "dynamic_web_flow",
+                                        "browser_ui_verification"
+                                    ],
+                       "capability":  "browser_automation",
+                       "fallback":  "block_browser_verified_claim",
+                       "closure_evidence":  [
+                                                "fresh_browser_observation",
+                                                "captured_artifact"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "playwright"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "agent-browser",
+                                                              "playwright-pro"
+                                                          ],
+                       "selection_rule":  "Use playwright for ordinary real-browser interaction and proof. Use agent-browser only when installed and its accessibility-tree/session model is the better fit; use playwright-pro only for test-suite generation, migration, repair, cloud matrix, or test-management work.",
+                       "order":  50,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "browser_verified_claim"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+                                                     "browser_observation"
+                                                 ]
+                   },
+                   {
+                       "id":  "visual-verification",
+                       "triggers":  [
+                                        "desktop_visual_state",
+                                        "ui_visual_claim",
+                                        "small_visual_correction"
+                                    ],
+                       "capability":  "visual_capture",
+                       "fallback":  "block_visual_verified_claim",
+                       "closure_evidence":  [
+                                                "screenshot_or_equivalent",
+                                                "boundary_check"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "screenshot"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "playwright",
+                                                              "agent-browser"
+                                                          ],
+                       "selection_rule":  "Use screenshot for desktop/OS capture. Use Playwright or agent-browser capture only when the claim is inside a browser flow and the captured artifact covers the required viewport and layout boundaries.",
+                       "order":  60,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "visual_verified_claim"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+                                                     "visual_capture"
+                                                 ]
+                   },
+                   {
+                       "id":  "test-design",
+                       "triggers":  [
+                                        "test_design",
+                                        "coverage_gap",
+                                        "behavior_change"
+                                    ],
+                       "capability":  "test_engineering",
+                       "fallback":  "block_verified_behavior_change",
+                       "closure_evidence":  [
+                                                "relevant_test_or_explicit_gap",
+                                                "command_result"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "tdd-guide"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "senior-qa",
+                                                              "api-test-suite-builder",
+                                                              "playwright-pro"
+                                                          ],
+                       "selection_rule":  "Use tdd-guide for unit/behavior tests. Use senior-qa for coverage and application test strategy, api-test-suite-builder for API suites, and playwright-pro for E2E suite operations.",
+                       "order":  40,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "verified_behavior_change"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+                                                     "behavior_result"
+                                                 ]
+                   },
+                   {
+                       "id":  "decompile-reconstruction",
+                       "triggers":  [
+                                        "decompile_reconstruction"
+                                    ],
+                       "capability":  "decompile_and_reconstruct",
+                       "fallback":  "allow_native_decompile_triage_with_disclosure",
+                       "closure_evidence":  [
+                                                "target_format_and_toolchain_triage",
+                                                "decompiled_or_reconstructed_artifact"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "decompile-reconstruction"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "ida-reverse",
+                                                              "ghidra-mcp",
+                                                              "reverse-engineering",
+                                                              "dotnet-reverse",
+                                                              "apk-reverse",
+                                                              "js-reverse"
+                                                          ],
+                       "selection_rule":  "Automatically use decompile-reconstruction when analyzing, decompiling, deobfuscating, or recovering clean-room source code from compiled binaries (PE/ELF/Mach-O/DLL/SO), JVM/Android APKs/JARs, .NET assemblies, Python bytecode (.pyc), WASM, or bundled/minified/obfuscated JS/Electron packages. Orchestrate IDA Pro MCP (ida-reverse), Ghidra MCP/headless, jadx, ilspycmd/dnSpyEx, pycdc, or webcrack/ast-grep according to the detected target format; if specialized decompilers are absent, use native disassembly/triage tools and explicitly disclose the fidelity gap.",
+                       "order":  35,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "verified_decompile_reconstruction"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "native_decompile_triage_with_disclosure",
+                       "artifact_requirements":  [
+
+                                                 ]
+                   },
+                   {
+                       "id":  "code-refinement",
+                       "triggers":  [
+                                        "code_refinement"
+                                    ],
+                       "capability":  "code_refinement",
+                       "fallback":  "allow_native_code_refinement",
+                       "closure_evidence":  [
+                                                "refinement_or_smell_check",
+                                                "behavior_preserved_verification"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "code-simplifier"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "ponytail",
+                                                              "improve-codebase-architecture"
+                                                          ],
+                       "selection_rule":  "Automatically use code-simplifier after feature/refactor implementation or when refactoring/cleaning up code: lock the green baseline, triage 80/20 code smells and AI-generated nesting/slop, prefer ast-grep (sg) for multi-site structural rewrites, and verify zero behavior regression.",
+                       "order":  45,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "verified_refinement"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+
+                                                 ]
+                   },
+                   {
+                       "id":  "package-release",
+                       "triggers":  [
+                                        "install",
+                                        "package",
+                                        "release",
+                                        "remote_release"
+                                    ],
+                       "capability":  "package_validation",
+                       "fallback":  "allow_native_package_validation_with_disclosure",
+                       "closure_evidence":  [
+                                                "artifact_validation",
+                                                "post_result_inspection"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "release-manager"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "ci-cd-pipeline-builder"
+                                                          ],
+                       "selection_rule":  "Use release-manager for release readiness and artifact closure when available. When it is unavailable, native build/package validation plus post-result inspection may close a local install or package task with the gap disclosed. Use ci-cd-pipeline-builder when pipeline design or repair is part of the release work.",
+                       "order":  80,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "package_or_release_completion"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "native_local_package_validation_only",
+                       "conditional_closure_evidence":  [
+                                                            {
+                                                                "field":  "external_effect",
+                                                                "values":  [
+                                                                               "remote_release"
+                                                                           ],
+                                                                "evidence":  [
+                                                                                 "exact_remote_target_confirmation"
+                                                                             ],
+                                                                "requires_remote_target":  true
+                                                            }
+                                                        ],
+                       "artifact_requirements":  [
+
+                                                 ]
+                   },
+                   {
+                       "id":  "ui-implementation",
+                       "triggers":  [
+                                        "net_new_ui",
+                                        "substantial_ui_refactor"
+                                    ],
+                       "capability":  "frontend_ui_implementation",
+                       "primary_host_skill_aliases":  [
+                                                          "senior-frontend"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "figma-implement-design"
+                                                          ],
+                       "selection_rule":  "Use senior-frontend only after requirements and mockup gates close. Use figma-implement-design when an approved Figma node is the implementation source; it does not replace requirements grilling or mockup approval.",
+                       "fallback":  "block_before_ui_code",
+                       "closure_evidence":  [
+                                                "approved_requirements_brief",
+                                                "approved_mockup_or_explicit_opt_out",
+                                                "implementation_validation",
+                                                "visual_verification_plan"
+                                            ],
+                       "order":  30,
+                       "requires_routes":  [
+                                               "requirements-grilling",
+                                               "ui-design"
+                                           ],
+                       "blocked_transitions":  [
+                                                   "ui_code"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+                                                     "implementation_validation_record"
+                                                 ]
+                   },
+                   {
+                       "id":  "extension-security-review",
+                       "triggers":  [
+                                        "untrusted_extension"
+                                    ],
+                       "capability":  "untrusted_extension_security_audit",
+                       "primary_host_skill_aliases":  [
+                                                          "skill-security-auditor"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+
+                                                          ],
+                       "selection_rule":  "Use skill-security-auditor before installing or trusting an external skill or plugin. General source-code security review is not an equivalent extension-trust audit.",
+                       "fallback":  "block_verified_review_or_install",
+                       "closure_evidence":  [
+                                                "self_refuted_findings",
+                                                "trust_decision",
+                                                "dependency_or_behavior_audit"
+                                            ],
+                       "order":  72,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "verified_review",
+                                                   "install"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+
+                                                 ]
+                   },
+                   {
+                       "id":  "design-direction",
+                       "triggers":  [
+                                        "net_new_ui",
+                                        "substantial_ui_refactor"
+                                    ],
+                       "capability":  "design_direction",
+                       "fallback":  "allow_native_design_direction",
+                       "closure_evidence":  [
+                                                "selected_or_user_confirmed_design_direction"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "ui-ux-pro-max",
+                                                          "taste-skill"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+
+                                                          ],
+                       "selection_rule":  "Automatically use ui-ux-pro-max (paired with taste-skill) to derive a pure UI/UX design specification (industry color palette, font pairing, grid density, and layout anatomy) from the approved requirements brief before generating the text-to-image mockup.",
+                       "order":  15,
+                       "requires_routes":  [
+                                               "requirements-grilling"
+                                           ],
+                       "blocked_transitions":  [
+                                                   "mockup_generation"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+                                                     "design_direction_record"
+                                                 ]
+                   },
+                   {
+                       "id":  "handover",
+                       "triggers":  [
+                                        "net_new_ui",
+                                        "substantial_ui_refactor"
+                                    ],
+                       "capability":  "handover",
+                       "fallback":  "allow_native_handover",
+                       "closure_evidence":  [
+                                                "reviewable_handover"
+                                            ],
+                       "primary_host_skill_aliases":  [
+                                                          "changelog-generator"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+
+                                                          ],
+                       "selection_rule":  "Use changelog-generator when available to produce a reviewable handover. Otherwise record the handover through the native fallback after review closes.",
+                       "order":  75,
+                       "requires_routes":  [
+                                               "code-review"
+                                           ],
+                       "blocked_transitions":  [
+                                                   "handover"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+                                                     "handover_record"
+                                                 ]
+                   }
+               ],
+    "non_default_skill_policy":  [
+                                     {
+                                         "skill":  "self-improving-agent",
+                                         "status":  "manual_only",
+                                         "reason":  "Its Claude-oriented auto-memory and rule-promotion paths must not automatically write persistent rules or replace project-native AGENTS.md, PROJECT_MAP.md, CODE_MAP.md, or .learnings/ERRORS.md."
+                                     },
+                                     {
+                                         "skill":  "database-schema-designer",
+                                         "status":  "specialized_only",
+                                         "reason":  "Use only for schema-focused work; database-designer remains the default for broader database design so both are not invoked for the same decision."
+                                     },
+                                     {
+                                         "skill":  "ms365-tenant-manager",
+                                         "status":  "specialized_only",
+                                         "reason":  "High-impact tenant administration; never activate from generic engineering routing."
+                                     },
+                                     {
+                                         "skill":  "aws-solution-architect",
+                                         "status":  "specialized_only",
+                                         "reason":  "Use only for explicit AWS architecture or migration requests."
+                                     }
+                                 ],
+    "enforcement_contract":  "contracts/skill-enforcement.json"
+}

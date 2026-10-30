@@ -1,0 +1,423 @@
+{
+    "schema_version":  1,
+    "purpose":  "Machine-readable workflow-gate contract for task classification, route selection, recorded invocation, closure evidence, and project skill handover.",
+    "enforcement_levels":  {
+                               "workflow_enforced":  "The installed command validates and records route progression. It blocks contract states but does not claim invisible host tool interception.",
+                               "native_tool_interception":  "A host-native hook observes or prevents an individual tool action. Do not claim this level unless the host contract and post-install verification prove it."
+                           },
+    "task_classification":  {
+                                "required_fields":  [
+                                                        "task_class",
+                                                        "change_scope",
+                                                        "ui_scope",
+                                                        "external_effect",
+                                                        "claim_types"
+                                                    ],
+                                "task_class":  [
+                                                   "read_only",
+                                                   "documentation",
+                                                   "trivial_fix",
+                                                   "feature",
+                                                   "major_feature",
+                                                   "refactor",
+                                                   "decompile_or_reconstruct",
+                                                   "office_document",
+                                                   "multimodal_media",
+                                                   "novel_writing",
+                                                   "diagram_flowchart",
+                                                   "code_audit",
+                                                   "security_review",
+                                                   "install",
+                                                   "package",
+                                                   "release"
+                                               ],
+                                "change_scope":  [
+                                                     "isolated",
+                                                     "multi_file",
+                                                     "architectural"
+                                                 ],
+                                "ui_scope":  [
+                                                 "none",
+                                                 "small_correction",
+                                                 "net_new",
+                                                 "substantial_refactor"
+                                             ],
+                                "external_effect":  [
+                                                        "none",
+                                                        "local_package",
+                                                        "remote_release"
+                                                    ],
+                                "claim_types":  [
+                                                    "none",
+                                                    "role_selection",
+                                                    "behavior_change",
+                                                    "code_refinement",
+                                                    "decompile_reconstruction",
+                                                    "office_document",
+                                                    "multimodal_media",
+                                                    "novel_writing",
+                                                    "diagram_flowchart",
+                                                    "browser_ui",
+                                                    "dynamic_web_flow",
+                                                    "desktop_visual_state",
+                                                    "ui_visual",
+                                                    "security_sensitive",
+                                                    "untrusted_extension",
+                                                    "test_design",
+                                                    "coverage_gap",
+                                                    "pull_request_review",
+                                                    "release_review"
+                                                ],
+                                "signal_rules":  [
+                                                     {
+                                                         "field":  "task_class",
+                                                         "values":  [
+                                                                        "major_feature"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "major_feature",
+                                                                         "behavior_change"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "task_class",
+                                                         "values":  [
+                                                                        "feature"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "behavior_change"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "task_class",
+                                                         "values":  [
+                                                                        "refactor"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "behavior_change",
+                                                                         "code_refinement"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "task_class",
+                                                         "values":  [
+                                                                        "decompile_or_reconstruct"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "decompile_reconstruction"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "task_class",
+                                                         "values":  [
+                                                                        "office_document"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "office_document"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "task_class",
+                                                         "values":  [
+                                                                        "multimodal_media"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "multimodal_media"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "task_class",
+                                                         "values":  [
+                                                                        "novel_writing"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "novel_writing"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "task_class",
+                                                         "values":  [
+                                                                        "diagram_flowchart"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "diagram_flowchart"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "task_class",
+                                                         "values":  [
+                                                                        "code_audit"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "code_audit"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "task_class",
+                                                         "values":  [
+                                                                        "security_review"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "security_review"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "task_class",
+                                                         "values":  [
+                                                                        "install"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "install"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "task_class",
+                                                         "values":  [
+                                                                        "package"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "package"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "task_class",
+                                                         "values":  [
+                                                                        "release"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "release",
+                                                                         "release_review"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "ui_scope",
+                                                         "values":  [
+                                                                        "small_correction"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "small_visual_correction",
+                                                                         "ui_visual_claim"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "ui_scope",
+                                                         "values":  [
+                                                                        "net_new"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "net_new_ui",
+                                                                         "ui_visual_claim"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "ui_scope",
+                                                         "values":  [
+                                                                        "substantial_refactor"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "substantial_ui_refactor",
+                                                                         "ui_visual_claim"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "external_effect",
+                                                         "values":  [
+                                                                        "local_package"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "package"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "external_effect",
+                                                         "values":  [
+                                                                        "remote_release"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "release",
+                                                                         "remote_release"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "role_selection"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "role_selection"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "code_refinement"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "code_refinement"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "decompile_reconstruction"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "decompile_reconstruction"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "office_document"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "office_document"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "multimodal_media"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "multimodal_media"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "novel_writing"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "novel_writing"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "diagram_flowchart"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "diagram_flowchart"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "browser_ui"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "browser_ui_verification"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "ui_visual"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "ui_visual_claim"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "security_sensitive"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "security_sensitive_change"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "untrusted_extension"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "untrusted_extension"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "dynamic_web_flow"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "dynamic_web_flow"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "desktop_visual_state"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "desktop_visual_state"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "test_design"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "test_design"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "coverage_gap"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "coverage_gap"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "pull_request_review"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "pull_request_review"
+                                                                     ]
+                                                     }
+                                                 ]
+                            },
+    "task_execution_record":  {
+                                  "required_fields":  [
+                                                          "schema_version",
+                                                          "task_id",
+                                                          "classification",
+                                                          "workflow_pipeline_ids",
+                                                          "matched_route_ids",
+                                                          "routes"
+                                                      ],
+                                  "states":  [
+                                                 "pending",
+                                                 "preflight_passed",
+                                                 "invoked",
+                                                 "closed",
+                                                 "blocked"
+                                             ],
+                                  "location":  ".specify/<task>/skill-execution.json"
+                              },
+    "project_skill_usage":  {
+                                "location":  ".agentlogic/skill-usage.json",
+                                "required_fields":  [
+                                                        "schema_version",
+                                                        "reviewed_commit",
+                                                        "skills"
+                                                    ],
+                                "required_skill_fields":  [
+                                                              "skill_id",
+                                                              "capability",
+                                                              "flows",
+                                                              "trigger",
+                                                              "source",
+                                                              "status"
+                                                          ],
+                                "code_map_heading":  "Skill Usage",
+                                "transient_task_records":  ".specify/<task>/skill-execution.json"
+                            }
+}
