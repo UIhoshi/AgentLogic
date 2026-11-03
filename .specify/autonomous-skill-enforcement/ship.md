@@ -1,4 +1,4 @@
-﻿# Ship Review 鈥?Autonomous Skill Enforcement
+# Ship Review — Autonomous Skill Enforcement
 
 ## Scope
 

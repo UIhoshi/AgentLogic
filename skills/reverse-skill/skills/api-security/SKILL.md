@@ -1,3 +1,8 @@
+---
+name: api-security
+description: Authorized API security assessment, authentication/authorization auditing, and schema validation testing.
+---
+
 # API 安全测试
 
 ## ACTION REQUIRED（读完后立刻执行）

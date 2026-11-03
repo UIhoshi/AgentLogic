@@ -1,3 +1,8 @@
+---
+name: reverse-skills-router
+description: Master router for authorized reverse-engineering, binary analysis, and security assessment sub-skills.
+---
+
 # Reverse Engineering Skills Master Control
 
 本目录收录了一系列逆向工程相关的技能模块，每个子目录是一个独立模块，内含 `SKILL.md` 描述其适用场景、工具链和工作流程。

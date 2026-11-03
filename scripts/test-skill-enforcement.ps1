@@ -40,7 +40,7 @@ try {
     $uiBrief = New-Artifact 'ui-requirements-brief'; $designDirection = New-Artifact 'ui-design-direction'; $mockup = New-Artifact 'ui-mockup'; $implementation = New-Artifact 'ui-implementation-validation'; $behavior = New-Artifact 'ui-behavior-result'; $browser = New-Artifact 'ui-browser-observation'; $visual = New-Artifact 'ui-visual-capture'; $review = New-Artifact 'ui-review-report'; $handover = New-Artifact 'ui-handover'
     & $gate -Mode initialize -RepoRoot $RepoRoot -TaskStatePath $uiPath -TaskId ui -TaskClass major_feature -ChangeScope multi_file -UiScope substantial_refactor -ExternalEffect none -ClaimType behavior_change
     & $gate -Mode preflight -RepoRoot $RepoRoot -TaskStatePath $uiPath -AvailableSkill product-requirements-grilling,ui-ux-pro-max,imagegen,senior-frontend,tdd-guide,playwright,screenshot,code-reviewer
-    $uiState = Get-Content -Raw -LiteralPath $uiPath | ConvertFrom-Json
+    $uiState = Get-Content -Raw -Encoding UTF8 -LiteralPath $uiPath | ConvertFrom-Json
     if (@($uiState.routes | Where-Object route_id -eq 'design-direction')[0].selected_skill -ne 'ui-ux-pro-max') { throw 'Preflight did not select ui-ux-pro-max as the primary design-direction skill.' }
     if (@($uiState.routes | Where-Object route_id -eq 'code-review')[0].selected_skill -ne 'code-reviewer') { throw 'Preflight did not switch code review to an available approved alias.' }
     Expect-Failure { & $gate -Mode record-invocation -RepoRoot $RepoRoot -TaskStatePath $uiPath -RouteId ui-implementation -Evidence senior_frontend_run } 'UI implementation invocation before requirements and UI design close'
@@ -73,7 +73,7 @@ try {
     $refactorBehavior = New-Artifact 'refactor-behavior-result'
     & $gate -Mode initialize -RepoRoot $RepoRoot -TaskStatePath $refactorPath -TaskId refactor -TaskClass refactor -ChangeScope multi_file -UiScope none -ExternalEffect none -ClaimType code_refinement
     & $gate -Mode preflight -RepoRoot $RepoRoot -TaskStatePath $refactorPath -AvailableSkill code-simplifier,tdd-guide
-    $refactorState = Get-Content -Raw -LiteralPath $refactorPath | ConvertFrom-Json
+    $refactorState = Get-Content -Raw -Encoding UTF8 -LiteralPath $refactorPath | ConvertFrom-Json
     if (@($refactorState.routes | Where-Object route_id -eq 'code-refinement')[0].selected_skill -ne 'code-simplifier') { throw 'Refactor did not automatically select code-simplifier on code-refinement route.' }
     & $gate -Mode record-invocation -RepoRoot $RepoRoot -TaskStatePath $refactorPath -RouteId code-refinement -Evidence code_simplifier_run
     & $gate -Mode closure -RepoRoot $RepoRoot -TaskStatePath $refactorPath -RouteId code-refinement -Evidence refinement_or_smell_check,behavior_preserved_verification
@@ -84,7 +84,7 @@ try {
     $decompilePath = Join-Path $root 'decompile.json'
     & $gate -Mode initialize -RepoRoot $RepoRoot -TaskStatePath $decompilePath -TaskId decompile -TaskClass decompile_or_reconstruct -ChangeScope isolated -UiScope none -ExternalEffect none -ClaimType decompile_reconstruction
     & $gate -Mode preflight -RepoRoot $RepoRoot -TaskStatePath $decompilePath -AvailableSkill decompile-reconstruction
-    $decompileState = Get-Content -Raw -LiteralPath $decompilePath | ConvertFrom-Json
+    $decompileState = Get-Content -Raw -Encoding UTF8 -LiteralPath $decompilePath | ConvertFrom-Json
     if (@($decompileState.routes | Where-Object route_id -eq 'decompile-reconstruction')[0].selected_skill -ne 'decompile-reconstruction') { throw 'Decompile task did not automatically select decompile-reconstruction route.' }
     & $gate -Mode record-invocation -RepoRoot $RepoRoot -TaskStatePath $decompilePath -RouteId decompile-reconstruction -Evidence decompile_reconstruction_run
     & $gate -Mode closure -RepoRoot $RepoRoot -TaskStatePath $decompilePath -RouteId decompile-reconstruction -Evidence target_format_and_toolchain_triage,decompiled_or_reconstructed_artifact
@@ -114,7 +114,7 @@ try {
     & $gate -Mode record-invocation -RepoRoot $RepoRoot -TaskStatePath $releasePath -RouteId package-release -Evidence release_manager_run
     Expect-Failure { & $gate -Mode closure -RepoRoot $RepoRoot -TaskStatePath $releasePath -RouteId package-release -Evidence artifact_validation,post_result_inspection } 'remote release without exact target confirmation'
     & $gate -Mode closure -RepoRoot $RepoRoot -TaskStatePath $releasePath -RouteId package-release -Evidence artifact_validation,post_result_inspection,exact_remote_target_confirmation -RemoteTarget 'UIhoshi/AgentLogic@v6.9.0'
-    $releaseState = Get-Content -Raw -LiteralPath $releasePath | ConvertFrom-Json
+    $releaseState = Get-Content -Raw -Encoding UTF8 -LiteralPath $releasePath | ConvertFrom-Json
     $recordedRemoteTarget = @($releaseState.routes | Where-Object { $_.route_id -eq 'package-release' } | Select-Object -ExpandProperty remote_target)
     if ($recordedRemoteTarget.Count -ne 1 -or $recordedRemoteTarget[0] -ne 'UIhoshi/AgentLogic@v6.9.0') { throw 'Remote release target was not recorded.' }
 

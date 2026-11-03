@@ -1,3 +1,8 @@
+---
+name: dsl-vm-reverse
+description: Authorized reverse-engineering and clean-room analysis of custom JavaScript/WASM bytecode virtual machines.
+---
+
 # 🔄 DSL 自定义虚拟机逆向（DSL VM Reverse Engineering）
 
 > 用于逆向基于 JavaScript 实现的自定义 WASM 虚拟机/风控引擎

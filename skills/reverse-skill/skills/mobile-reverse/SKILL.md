@@ -1,4 +1,9 @@
-﻿# Mobile Reverse Engineering
+---
+name: mobile-reverse
+description: Authorized Android APK and iOS IPA reverse-engineering, decompilation, and mobile security auditing.
+---
+
+# Mobile Reverse Engineering
 
 ## ACTION REQUIRED（读完后立刻执行）
 

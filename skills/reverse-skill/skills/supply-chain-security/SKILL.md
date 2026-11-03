@@ -1,4 +1,9 @@
-﻿# Supply Chain Security Testing
+---
+name: supply-chain-security
+description: Authorized software supply-chain security auditing, dependency confusion detection, and CI/CD pipeline review.
+---
+
+# Supply Chain Security Testing
 
 ## ACTION REQUIRED（读完后立刻执行）
 

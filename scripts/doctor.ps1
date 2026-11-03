@@ -52,7 +52,7 @@ if (-not (Test-Path $manifestPath)) {
     throw "manifest.json was not found. Run this command from the AgentLogic repository root or pass -RepoRoot."
 }
 
-$manifest = Get-Content -Raw -Path $manifestPath | ConvertFrom-Json
+$manifest = Get-Content -Raw -Encoding UTF8 -Path $manifestPath | ConvertFrom-Json
 
 Write-Host "Package"
 Write-Host "-------"

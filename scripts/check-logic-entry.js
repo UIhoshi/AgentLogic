@@ -73,6 +73,8 @@ const ACTIVE_VERSION_FILES = [
   'modules/45_V6_8_GraphifyCodeMapIntegration.md',
   'modules/46_V6_8_ProjectKnowledgeSync.md',
   'modules/49_V6_8_AutonomousSkillEnforcement.md',
+  'modules/53_V6_8_ProgrammingLevelSkillEnforcement.md',
+  'modules/54_V6_9_RoleAndMultimodalCreativeGovernance.md',
 ];
 
 const GATE_ANCHORS = [
@@ -147,7 +149,9 @@ function checkActiveVersionAndPathHygiene() {
   }
 
   const expectedVersion = parsed.current_version;
-  const staleVersionPattern = /AgentLogic_V6_7_0|V6\.7\.0|AgentLogic_V6_7_1|V6\.7\.1/;
+  const staleVersionPattern = /AgentLogic_V6_7_0|V6\.7\.0|AgentLogic_V6_7_1|V6\.7\.1|AgentLogic_V6_8_[0-9]/;
+  const entryCurrentVersionFiles = ['AGENTS.md', 'README.md', '00_README.md', '00_START_HERE.md', 'AGENT_INSTALL.md', 'MAIN.md', 'modules/01_MasterLogic.md', 'modules/11_CrossDirectoryMap.md', 'modules/40_AgentLogicSystemMap.md'];
+  const mojibakePattern = /[\uFFFD\u9225]|\u00E2\u20AC/;
   const absoluteFileUriPattern = /file:\/\/(?:[A-Za-z]:|Users\/|home\/)/;
 
   for (const relPath of ACTIVE_VERSION_FILES) {
@@ -156,6 +160,8 @@ function checkActiveVersionAndPathHygiene() {
       fail(`Active version file not found: ${relPath}`);
       continue;
     }
+    if (mojibakePattern.test(content)) { fail(`Mojibake or replacement character detected in active file: ${relPath}`); }
+    if (entryCurrentVersionFiles.includes(relPath) && /V6\.8\.[0-9]/.test(content)) { fail(`Stale V6.8.x version reference found in entry/map file (expected ${expectedVersion}): ${relPath}`); }
     if (staleVersionPattern.test(content)) {
       fail(`Stale stable-version reference found in active file: ${relPath}`);
     }

@@ -1,4 +1,9 @@
-﻿# Attack Chain Orchestration Skill
+---
+name: attack-chain
+description: Authorized security assessment multi-stage attack-path modeling and defensive remediation analysis.
+---
+
+# Attack Chain Orchestration Skill
 
 ## ACTION REQUIRED（读完后立刻执行）
 

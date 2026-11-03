@@ -34,7 +34,7 @@ if (-not (Test-Path $configPath)) {
     [System.IO.File]::WriteAllText($configPath, "", [System.Text.UTF8Encoding]::new($false))
 }
 
-$config = Get-Content -Raw -Path $configPath
+$config = Get-Content -Raw -Encoding UTF8 -Path $configPath
 $line = "model_instructions_file = '$targetPath'"
 
 if ($config -match "(?m)^model_instructions_file\s*=") {

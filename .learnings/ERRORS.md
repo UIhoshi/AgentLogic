@@ -1,6 +1,12 @@
 # Project Error Log
+## 2026-11-03 - Stale V6.8.7 references, CP936 em-dash mojibake in `AGENTS.md`, and Windows Defender false-positive on raw XSS reference docs
+- Symptom: (1) `AGENTS.md` line 111 contained a CP936-corrupted em-dash (`repository—not a separate history checkout—is`), which propagated into all four compiled `dist/` bundles; (2) `AGENT_INSTALL.md` and `modules/40_AgentLogicSystemMap.md` still referenced `V6.8.7` / `versions/AgentLogic_V6_8_7.md`; (3) full-repo Markdown scans on Windows failed with `Operation did not complete successfully because the file contains a virus or potentially unwanted software` when reading three reference files under `skills/reverse-skill/` (`playbooks/xss.md`, `payloader/by-category/web/xss跨站脚本.md`, and `payloader/waf-bypass.md`).
+- Root cause: `scripts/check-logic-entry.js` and `scripts/validate-package.ps1` only checked for `V6.7.0`/`V6.7.1` stale versions and did not scan active Markdown files or generated bundles for CP936/CP1252 mojibake (`\u9225`, `\uFFFD`); additionally, three vendored security reference files contained raw `<script>` / `onerror=` / payload strings that triggered Windows Defender's real-time file filter on read.
+- Correction: Repaired the em-dash in `AGENTS.md`, `.learnings/ERRORS.md`, and `.specify/autonomous-skill-enforcement/ship.md`; updated `AGENT_INSTALL.md`, `modules/40_AgentLogicSystemMap.md`, and `modules/01_MasterLogic.md` to `V6.9.0`; added YAML front-matter `name:` headers to 8 `reverse-skill` `SKILL.md` files; defanged raw script/payload tags in the three security reference files; added explicit `-Encoding UTF8` to `Get-Content` calls across PowerShell scripts; and extended `scripts/check-logic-entry.js` and `scripts/validate-package.ps1` to reject `V6.8.x` stale references and mojibake characters.
+- Prevention: Enforce automated mojibake and stale-version checks across all active entry/module Markdown files and compiled `dist/` bundles in `check-logic-entry.js` and `validate-package.ps1`, and keep security reference examples defanged so host antivirus filters do not block file reads.
+- Verification: `node scripts/check-logic-entry.js`, `scripts/audit-skill-duplicates.ps1`, `scripts/maintainer-check.ps1`, and full-repository Markdown read scans pass with zero errors or Defender blocks.
 ## 2026-10-31 - Un-BOMed UTF-8 em-dash in `build-profile.ps1` broke Windows PowerShell 5.1 on GitHub Actions (CP1252)
-- Symptom: GitHub Actions workflow `Validate AgentLogic Package #85` (`windows-latest`) failed during `./scripts/validate-package.ps1` with `ParserError: Missing ')' in method call` at `scripts/build-profile.ps1:81` (`> **Gate 1 â€” Startup Context-Reset...`), while passing locally on a CP936 Windows machine; additionally, `~/.gemini/GEMINI.md` displayed `鈥?` instead of `—` in the Gate 1 header.
+- Symptom: GitHub Actions workflow `Validate AgentLogic Package #85` (`windows-latest`) failed during `./scripts/validate-package.ps1` with `ParserError: Missing ')' in method call` at `scripts/build-profile.ps1:81` (`> **Gate 1 [CP1252-garbled em-dash] Startup Context-Reset...`), while passing locally on a CP936 Windows machine; additionally, `~/.gemini/GEMINI.md` displayed a garbled CP936 em-dash instead of `—` in the Gate 1 header.
 - Root cause: `scripts/build-profile.ps1` and `adapters/antigravity/install.ps1` were saved as UTF-8 without BOM and contained literal em-dash characters (`—`, UTF-8 bytes `0xE2 0x80 0x94`). When `validate-package.ps1` invoked Windows PowerShell 5.1 (`powershell.exe`), PowerShell 5.1 decoded un-BOMed `.ps1` scripts using the system default ANSI code page (`Windows-1252` on GitHub Actions `windows-latest`, `CP936` locally). In `Windows-1252`, byte `0x94` maps to the right double quotation mark (`”`), which PowerShell's lexer treats as a closing string delimiter (`"`), prematurely terminating the double-quoted string literal at line 81.
 - Correction: Replaced literal non-ASCII characters (`—` and Chinese prompt text) in `scripts/build-profile.ps1` and `adapters/antigravity/install.ps1` with pure ASCII `[regex]::Unescape('\u2014')` / `\uXXXX` escapes, stripped the stray UTF-8 BOM from `scripts/deploy-skill-enforcement.ps1`, and added both a Node byte-level ASCII/BOM check in `scripts/check-logic-entry.js` and a simulated `CP1252` AST parse gate (`[System.Management.Automation.Language.Parser]::ParseInput`) in `scripts/validate-package.ps1`.
 - Prevention: Keep all operational `.ps1` scripts 100% pure ASCII (using `\uXXXX` escapes for any non-ASCII output text) and validate every `.ps1` file against `Windows-1252` parsing in `validate-package.ps1`.
@@ -40,7 +46,7 @@
 - Prevention: For public web-content tasks, when rendered-page evidence is required and a browser tool is available, attempt a normal browser snapshot before declaring the content inaccessible. Do not bypass CAPTCHA, authentication, or other access controls.
 - Verification: The browser snapshot exposed the article title, content sections, and external resource links while no resource downloads were performed.
 
-## 2026-07-22 鈥?PowerShell reserved-variable collision during bundle rebuild
+## 2026-07-22 — PowerShell reserved-variable collision during bundle rebuild
 - Symptom: The profile-build loop failed before invoking the build script.
 - Root cause: The loop variable was named `$host`, which collides with PowerShell's read-only
   automatic `$Host` variable.
@@ -48,7 +54,7 @@
 - Prevention: Avoid PowerShell automatic-variable names for loop and temporary variables.
 - Verification: All four host bundles subsequently rebuilt and passed package validation.
 
-## 2026-07-22 鈥?UTF-8 BOM broke a Node validation script
+## 2026-07-22 — UTF-8 BOM broke a Node validation script
 - Symptom: `node scripts/check-logic-entry.js` failed with `SyntaxError: Invalid or unexpected token` at the first character.
 - Root cause: PowerShell `Set-Content -Encoding utf8` wrote a BOM before the JavaScript shebang.
 - Correction: Rewrote the script as UTF-8 without BOM.

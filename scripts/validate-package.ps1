@@ -56,8 +56,8 @@ Assert-Exists -Root $RepoRoot -RelativePath "contracts/skill-registry.json" -Lab
 Assert-Exists -Root $RepoRoot -RelativePath "contracts/skill-enforcement.json" -Label "Skill enforcement contract"
 Assert-Exists -Root $RepoRoot -RelativePath "contracts/skill-workflow-graph.json" -Label "Skill workflow graph contract"
 
-$manifest = Get-Content -Raw -Path $manifestPath | ConvertFrom-Json
-$schema = Get-Content -Raw -Path $schemaPath | ConvertFrom-Json
+$manifest = Get-Content -Raw -Encoding UTF8 -Path $manifestPath | ConvertFrom-Json
+$schema = Get-Content -Raw -Encoding UTF8 -Path $schemaPath | ConvertFrom-Json
 
 $schemaHostNames = @($schema.properties.host_outputs.required)
 foreach ($hostName in $manifest.host_outputs.PSObject.Properties.Name) {
@@ -110,7 +110,7 @@ if ($manifest.current_version -match '^V6\.(8|9)\.') {
         Fail "Default profile '$($manifest.default_profile)' does not include '$operationalModule'."
     }
 
-    $operationalContent = Get-Content -Raw -Path (Join-Path $RepoRoot $operationalModule)
+    $operationalContent = Get-Content -Raw -Encoding UTF8 -Path (Join-Path $RepoRoot $operationalModule)
     foreach ($requiredContract in @(
         "Instruction and project-rule discovery contract",
         "Active-state-preserving compaction",
@@ -188,14 +188,14 @@ foreach ($outputProperty in $manifest.host_outputs.PSObject.Properties) {
 
     $outputPath = Join-Path $RepoRoot $outputProperty.Value
     Assert-Exists -Root $RepoRoot -RelativePath $outputProperty.Value -Label "Host output '$($outputProperty.Name)'"
-    $outputContent = Get-Content -Raw -Path $outputPath
+    $outputContent = Get-Content -Raw -Encoding UTF8 -Path $outputPath
     if ($outputContent -notmatch [regex]::Escape("- Version: $($manifest.current_version)")) {
         Fail "Host output '$($outputProperty.Name)' does not declare current version '$($manifest.current_version)'."
     }
     if ($outputContent -match 'file:///([A-Za-z]:|Users/|home/)') {
         Fail "Host output '$($outputProperty.Name)' contains a machine-specific absolute file URI."
     }
-    if ($outputContent -match 'AgentLogic_V6_7_0|V6\.7\.0|AgentLogic_V6_7_1') {
+    if ($outputContent -match 'AgentLogic_V6_7_0|V6\.7\.0|AgentLogic_V6_7_1|AgentLogic_V6_8_[0-9]|[\uFFFD\u9225]') {
         Fail "Host output '$($outputProperty.Name)' contains stale stable-version references."
     }
 }
@@ -209,7 +209,7 @@ if ($manifest.current_version -match '^V6\.(8\.[2-9]|9\.)') {
         Fail "Default profile '$($manifest.default_profile)' does not include '$knowledgeModule'."
     }
 
-    $knowledgeContent = Get-Content -Raw -Path (Join-Path $RepoRoot $knowledgeModule)
+    $knowledgeContent = Get-Content -Raw -Encoding UTF8 -Path (Join-Path $RepoRoot $knowledgeModule)
     Assert-Exists -Root $RepoRoot -RelativePath "templates/CODE_MAP.md" -Label "project code-map template"
     foreach ($requiredAnchor in @("AGENTS.md", "PROJECT_MAP.md", "CODE_MAP.md", ".learnings/ERRORS.md", "git fetch --prune")) {
         if ($knowledgeContent -notmatch [regex]::Escape($requiredAnchor)) {
@@ -244,7 +244,7 @@ if ($manifest.current_version -match '^V6\.(8\.[3-9]|9\.)') {
     }
 
     foreach ($adapter in @($manifest.adapters.PSObject.Properties.Value)) {
-        $adapterContent = Get-Content -Raw -Path (Join-Path $RepoRoot $adapter)
+        $adapterContent = Get-Content -Raw -Encoding UTF8 -Path (Join-Path $RepoRoot $adapter)
         if ($adapterContent -notmatch [regex]::Escape("deploy-first-party-skill.ps1")) {
             Fail "Adapter '$adapter' does not deploy the required first-party skill."
         }
@@ -253,14 +253,14 @@ if ($manifest.current_version -match '^V6\.(8\.[3-9]|9\.)') {
         }
     }
 
-    $referenceContent = Get-Content -Raw -Path (Join-Path $RepoRoot $referenceWorkflowModule)
+    $referenceContent = Get-Content -Raw -Encoding UTF8 -Path (Join-Path $RepoRoot $referenceWorkflowModule)
     foreach ($requiredAnchor in @("MengTo/Skills", "UI Preview Gate", "does not import")) {
         if ($referenceContent -notmatch [regex]::Escape($requiredAnchor)) {
             Fail "Reference-to-interface workflow is missing required contract: $requiredAnchor"
         }
     }
 
-    $routingContent = Get-Content -Raw -Path (Join-Path $RepoRoot $routingModule)
+    $routingContent = Get-Content -Raw -Encoding UTF8 -Path (Join-Path $RepoRoot $routingModule)
     foreach ($requiredAnchor in @("Mandatory routing procedure", "Problem-to-path matrix", "Skill available")) {
         if ($routingContent -notmatch [regex]::Escape($requiredAnchor)) {
             Fail "Skill-and-tool routing module is missing required contract: $requiredAnchor"
@@ -296,12 +296,12 @@ if ($manifest.main_logic_file -ne $expectedMainLogic) {
     Fail "main_logic_file '$($manifest.main_logic_file)' does not match current_version '$($manifest.current_version)'. Expected '$expectedMainLogic'."
 }
 
-$startHere = Get-Content -Raw -Path (Join-Path $RepoRoot "00_START_HERE.md")
+$startHere = Get-Content -Raw -Encoding UTF8 -Path (Join-Path $RepoRoot "00_START_HERE.md")
 if ($startHere -notmatch [regex]::Escape($manifest.main_logic_file)) {
     Fail "00_START_HERE.md does not reference the current main_logic_file."
 }
 
-$readme = Get-Content -Raw -Path (Join-Path $RepoRoot "README.md")
+$readme = Get-Content -Raw -Encoding UTF8 -Path (Join-Path $RepoRoot "README.md")
 if ($readme -notmatch [regex]::Escape($manifest.entry)) {
     Fail "README.md does not reference the stable entry defined by manifest.entry."
 }

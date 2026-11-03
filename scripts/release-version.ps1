@@ -48,7 +48,7 @@ if (-not (Test-Path $manifestPath)) {
     throw "manifest.json not found at $manifestPath"
 }
 
-$manifest = Get-Content -Raw -Path $manifestPath | ConvertFrom-Json
+$manifest = Get-Content -Raw -Encoding UTF8 -Path $manifestPath | ConvertFrom-Json
 $oldVersion = [string]$manifest.current_version
 $oldMainLogicFile = [string]$manifest.main_logic_file
 $oldVersionFileToken = ($oldVersion -replace '\.', '_')

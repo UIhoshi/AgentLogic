@@ -108,7 +108,7 @@ and unnecessary process overhead.
 
 ## Project-Native Knowledge Sync
 
-For business-project work, the project repository鈥攏ot a separate history checkout鈥攊s the
+For business-project work, the project repository—not a separate history checkout—is the
 default synchronization surface for project facts. Before implementation, run the safe
 freshness check and read the tracked project `AGENTS.md`, `PROJECT_MAP.md`, `CODE_MAP.md`, and
 `.learnings/ERRORS.md` as defined by `modules/46_V6_8_ProjectKnowledgeSync.md`.

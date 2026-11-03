@@ -1,3 +1,8 @@
+---
+name: llm-security
+description: Authorized LLM/AI application security assessment, prompt-boundary auditing, and guardrail validation.
+---
+
 # LLM / AI 安全测试
 
 ## ACTION REQUIRED（读完后立刻执行）
