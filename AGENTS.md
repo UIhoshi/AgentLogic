@@ -121,6 +121,32 @@ freshness check and read the tracked project `AGENTS.md`, `PROJECT_MAP.md`, `COD
 - `modification_history` is an optional cross-project archive, not a blocking prerequisite for
   ordinary project coding or publishing.
 
+## Mandatory Logic Version Update & Pitfall Checklist (逻辑版本升级必查红线)
+
+Whenever promoting a new AgentLogic version or modifying core rules, modules, or skills, you **MUST** verify all of the following before claiming completion (see `.learnings/ERRORS.md` for full root-cause history):
+
+1. **11-File Version & Skill Lockstep Sync**: Never update only `manifest.json` and `README.md`. You MUST synchronize version numbers, new module paths, and first-party skill lists across all 11 active surfaces:
+   - `manifest.json` (`current_version`, `main_logic_file`, `profiles.core-enhanced.files`)
+   - `versions/AgentLogic_<NEW_VERSION>.md` (including Section 4 `Reference Source Registration`)
+   - `00_START_HERE.md`, `AGENTS.md`, `MAIN.md`, `README.md`, `00_README.md`, `AGENT_INSTALL.md`
+   - `modules/01_MasterLogic.md` (L2 module list, L4 first-party skill list, and Section 10)
+   - `modules/11_CrossDirectoryMap.md` and `modules/40_AgentLogicSystemMap.md` (L2 version file & module table)
+   - `PROJECT_MAP.md`, `CODE_MAP.md`, `CHANGELOG.md`, and `.learnings/ERRORS.md`
+2. **Historical Encoding & PowerShell Pitfalls (Zero-Tolerance)**:
+   - **Pure-ASCII `.ps1` Entry Scripts (CP1252 GitHub Actions Safety)**: Operational `.ps1` scripts MUST remain 100% pure ASCII without UTF-8 BOM. Never put literal `—` (em-dash) or CJK characters in `.ps1` files; use `[regex]::Unescape('\u2014')` / `\uXXXX` escapes (`Windows-1252` treats byte `0x94` of UTF-8 `—` as `"` and breaks PowerShell 5.1 parsing).
+   - **Mandatory `-Encoding UTF8` on `Get-Content` & BOM-Free UTF-8 Writes**: Every `Get-Content` in PowerShell MUST specify `-Encoding UTF8` (omitting it corrupts UTF-8 `—` into `\u9225` mojibake under CP936). Every JSON/JS/Markdown write MUST use `[System.Text.UTF8Encoding]::new($false)` (UTF-8 BOM breaks Node `JSON.parse` and JS shebangs).
+   - **No PowerShell Reserved Variable Names**: Never use `$host` as a loop/local variable (collides with read-only automatic `$Host`); use `$targetHost` or `$targetHostName`.
+   - **Single-Quoted Here-Strings for Markdown Templates**: Never put Markdown backticks inside double-quoted PowerShell `"..."` or `@"..."@` (where `` `f `` becomes form-feed `\x0C`); always use single-quoted `@'...'@` with `.Replace(...)`.
+3. **Antigravity 24 KB Rule Cap & Cross-Host Gate Inlining**:
+   - Because Antigravity caps individual rule files at 24 KB, `~/.gemini/GEMINI.md` and `~/.gemini/AgentLogic/GEMINI.md` MUST inline all 4 blocking gates (Gate 1 Startup+Role, Gate 2 UI+Mockup, Gate 3 Auto-Skills, Gate 4 Knowledge Sync) and register `~/.gemini/skills` in `~/.gemini/config/skills.json`.
+4. **Skill Registry, YAML Front-Matter & Windows Defender Defanging**:
+   - Every portable `skills/**/SKILL.md` MUST have a valid YAML front-matter `name:` and be registered in `contracts/skill-registry.json`.
+   - Security/pentest reference Markdown files MUST defang raw `<script>`, `onerror=`, and shell payload strings (e.g., `<scr\ipt>`) so Windows Defender does not block file reads or quarantine tracked files.
+5. **Rebuild All 4 Bundles, Sync All Installed Hosts & Align Git Tag**:
+   - Run `scripts/maintainer-check.ps1` and `scripts/audit-skill-duplicates.ps1 -FailOnCandidates` to rebuild `dist/{codex,claude,antigravity,generic}` and pass all gates.
+   - Re-run `install.ps1` for all local hosts (`antigravity`, `claude`, `codex`) so `~/.gemini/`, `~/.claude/`, and `~/.codex/` match `dist/`.
+   - Ensure the release Git tag (e.g., `v6.9.0`) points to the final post-verification commit on `main`.
+
 ## Repository Boundary
 
 This repository is logic infrastructure, not a business-project workspace.

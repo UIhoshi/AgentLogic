@@ -126,6 +126,32 @@ UI 实施完成后仍必须执行截图、父子布局边界、溢出、换行�
 - 环境与宿主判断：运行 `scripts/doctor.ps1`。
 - 任何高风险或外部状态变更都必须做目标确认和结果确认。
 
+### 8.1 逻辑版本升级与规则变更必查红线（防遗漏与防历史踩坑清单）
+
+每次升级 AgentLogic 版本或修改核心模块/技能时，必须逐条核对以下红线（历史根因见 `.learnings/ERRORS.md`）：
+
+1. **11 处核心文档同频同步**：更新版本或新增模块/技能时，严禁只改 `manifest.json` 和 `README.md`。必须同步更新：
+   - `manifest.json`、`versions/AgentLogic_<新版本>.md`（含第 4 节外部引用注册）
+   - `00_START_HERE.md`、`AGENTS.md`、`MAIN.md`、`README.md`、`00_README.md`、`AGENT_INSTALL.md`
+   - `modules/01_MasterLogic.md`（L2 模块列表、L4 全部第一方技能列表、第 10 节）
+   - `modules/11_CrossDirectoryMap.md`、`modules/40_AgentLogicSystemMap.md`（L2 版本文件与模块表）
+   - `PROJECT_MAP.md`、`CODE_MAP.md`、`CHANGELOG.md`、`.learnings/ERRORS.md`
+2. **UTF-8 与 CP1252 编码红线**：
+   - 所有入口 `.ps1` 脚本必须保持 **100% 纯 ASCII 无 BOM**（禁止出现中文或字面量破折号 `—`，统一使用 `\uXXXX` 转义，防止 GitHub Actions `Windows-1252` 将 `0x94` 解析为右双引号导致语法崩溃）。
+   - PowerShell 读取文本/JSON 必须显式指定 `Get-Content -Encoding UTF8`（漏写会导致 CP936 将 `—` 损坏为 `\u9225` 乱码并扩散进 `dist/`）。
+   - 写入 JSON/JS/MD 必须使用无 BOM 的 `[System.Text.UTF8Encoding]::new($false)`（UTF-8 BOM 会导致 Node `JSON.parse` 与 JS shebang 报错）。
+3. **PowerShell 语法与宿主适配红线**：
+   - 禁止使用 `$host` 作为循环或局部变量（与只读自动变量 `$Host` 冲突）；在冒号前插值必须写成 `${Label}:`。
+   - 含反引号 `` ` `` 的 Markdown 模板禁止使用双引号 `@"..."@`（防止 `` `f `` 被转义为换页符 `\x0C`），必须使用单引号 `@'...'@`。
+   - Antigravity 全局规则文件 `~/.gemini/GEMINI.md`（受 24KB 上限约束）必须直接内联 Gates 1–4 阻塞门，并在 `~/.gemini/config/skills.json` 注册 `~/.gemini/skills`。
+4. **技能注册、YAML 头部与杀软防误报**：
+   - 每个 `skills/**/SKILL.md` 必须包含 YAML 头部 `name:` 并在 `contracts/skill-registry.json` 注册；
+   - 安全/逆向参考文档中的原始 `<script>`、`onerror=` 等高危特征必须无害化转义（如 `<scr\ipt>`），防止 Windows Defender 实时拦截或隔离文件。
+5. **四端重编译、本机三端同步与 Git Tag 对齐**：
+   - 必须运行 `scripts/maintainer-check.ps1` 与 `scripts/audit-skill-duplicates.ps1 -FailOnCandidates` 重新生成 `dist/{codex,claude,antigravity,generic}` 并通过校验；
+   - 重新运行 `install.ps1` 同步本机 `antigravity`、`claude`、`codex` 三端宿主；
+   - 确保 Git 版本标签（如 `v6.9.0`）指向最终验证通过的 `main` 提交，不留滞后提交。
+
 ## 9. 持续执行边界
 
 用户明确要求持续执行时，当前计划内的阅读、修改、验证和修复视为同一执行轮次。

@@ -79,3 +79,13 @@
 - [ ] If the task includes formal UI implementation, a text-to-image preview has been generated and shown to the user (or saved locally under the project workspace for manual inspection) before UI code is written
 - [ ] The user has reviewed/approved the preview (via the chat UI or locally saved file) or explicitly opted out of the preview step
 - [ ] No UI implementation began before one of those conditions was satisfied
+
+## 10. 逻辑包自身版本升级与规则修改必查清单 (AgentLogic Self-Update Gate)
+
+当任务属于修改 AgentLogic 自身版本、核心规则、模块或第一方技能时，结束前必须核对：
+
+- [ ] 已同步全部 11 处版本与架构映射文件（`manifest.json`、`versions/AgentLogic_<VER>.md`、`00_START_HERE.md`、`AGENTS.md`、`MAIN.md`、`README.md`、`00_README.md`、`AGENT_INSTALL.md`、`modules/01_MasterLogic.md`、`modules/11_CrossDirectoryMap.md`、`modules/40_AgentLogicSystemMap.md`、`PROJECT_MAP.md`、`CODE_MAP.md`）
+- [ ] 所有 `.ps1` 入口脚本保持 100% 纯 ASCII 无 BOM（无字面量 `—` 或中文），所有 `Get-Content` 均带 `-Encoding UTF8`，所有 JSON/JS/MD 写入均使用无 BOM UTF-8（无 `\u9225` 或 `\uFFFD` 乱码）
+- [ ] 所有便携 `skills/**/SKILL.md` 均包含 YAML front-matter `name:`，且安全参考文档中的 `<script>` / `onerror=` 已做防 Windows Defender 误报转义
+- [ ] 已运行 `scripts/maintainer-check.ps1` 与 `scripts/audit-skill-duplicates.ps1 -FailOnCandidates` 重新编译 `dist/` 四端 Bundle 并全部通过
+- [ ] 已运行 `install.ps1` 将最新 Bundle 与第一方技能同步部署至本机宿主（`antigravity` / `claude` / `codex`），且 Git 版本 Tag 已与最终提交对齐

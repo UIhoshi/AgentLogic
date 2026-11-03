@@ -333,6 +333,15 @@ During its evolutionary cycles, AgentLogic has integrated concepts and structure
 2. **Specify Before Writing**: Always compile technical blueprints to `.specify/spec.md` and `.specify/plan.md` before touching code.
 3. **Generate via Bundle**: Never edit `dist/` bundles manually. Always write updates to version files (e.g. `versions/AgentLogic_V6_9_0.md`), then run `build-profile.ps1` to rebuild the adapter targets.
 
+> [!IMPORTANT]
+> **Mandatory Version Update & Pitfall Checklist (逻辑版本更新必查红线)**:
+> Whenever promoting a version or updating core rules/skills, you **MUST** check and synchronize all items below (derived from `.learnings/ERRORS.md` historical post-mortems):
+> 1. **11-File Version & Skill Sync**: Synchronize `manifest.json`, `versions/AgentLogic_<VER>.md`, `00_START_HERE.md`, `AGENTS.md`, `MAIN.md`, `README.md`, `00_README.md`, `AGENT_INSTALL.md`, `modules/01_MasterLogic.md` (L2 + L4 9 first-party skills), `modules/11_CrossDirectoryMap.md`, `modules/40_AgentLogicSystemMap.md`, `PROJECT_MAP.md`, `CODE_MAP.md`, and `CHANGELOG.md`.
+> 2. **CP1252 & UTF-8 Encoding Redlines**: Keep all operational `.ps1` scripts 100% pure ASCII without BOM (use `\uXXXX` escapes instead of literal `—` or CJK text); always pass `-Encoding UTF8` to `Get-Content`; always write JSON/JS/MD using `[System.Text.UTF8Encoding]::new($false)` (no BOM, no `\u9225` CP936 mojibake).
+> 3. **PowerShell & Antigravity Pitfalls**: Never use `$host` as a variable name; never use double-quoted `@"..."@` for Markdown containing backticks (`` `f `` becomes `\x0C`); always inline Gates 1–4 in `~/.gemini/GEMINI.md` (24 KB cap) and register `~/.gemini/skills`.
+> 4. **Skill YAML & Defender Defanging**: Every `SKILL.md` must have YAML front-matter `name:`; security reference docs must defang raw `<script>` / `onerror=` strings to prevent Windows Defender false-positive quarantine.
+> 5. **4-Host Rebuild, Local Sync & Tag Alignment**: Run `scripts/maintainer-check.ps1` + `scripts/audit-skill-duplicates.ps1 -FailOnCandidates`, run `install.ps1` across `antigravity` / `claude` / `codex`, and align the Git release tag with the final `main` commit.
+
 ## V6.9.0 Role & Multimodal Creative Governance
 
 The default `core-enhanced` profile includes [`modules/54_V6_9_RoleAndMultimodalCreativeGovernance.md`](./modules/54_V6_9_RoleAndMultimodalCreativeGovernance.md) alongside [`modules/44_V6_8_GrokBuildOperationalIntegration.md`](./modules/44_V6_8_GrokBuildOperationalIntegration.md), [`modules/45_V6_8_GraphifyCodeMapIntegration.md`](./modules/45_V6_8_GraphifyCodeMapIntegration.md), [`modules/47_V6_8_ReferenceToInterfaceWorkflow.md`](./modules/47_V6_8_ReferenceToInterfaceWorkflow.md), [`modules/48_V6_8_SkillAndToolRouting.md`](./modules/48_V6_8_SkillAndToolRouting.md), [`modules/52_V6_8_Img2ThreeJs3DWebIntegration.md`](./modules/52_V6_8_Img2ThreeJs3DWebIntegration.md), and [`modules/53_V6_8_ProgrammingLevelSkillEnforcement.md`](./modules/53_V6_8_ProgrammingLevelSkillEnforcement.md).
@@ -481,6 +490,32 @@ freshness check and read the tracked project `AGENTS.md`, `PROJECT_MAP.md`, `COD
 - Do not track secrets, personal paths, private prompts, raw logs, or default Graphify output.
 - `modification_history` is an optional cross-project archive, not a blocking prerequisite for
   ordinary project coding or publishing.
+
+## Mandatory Logic Version Update & Pitfall Checklist (逻辑版本升级必查红线)
+
+Whenever promoting a new AgentLogic version or modifying core rules, modules, or skills, you **MUST** verify all of the following before claiming completion (see `.learnings/ERRORS.md` for full root-cause history):
+
+1. **11-File Version & Skill Lockstep Sync**: Never update only `manifest.json` and `README.md`. You MUST synchronize version numbers, new module paths, and first-party skill lists across all 11 active surfaces:
+   - `manifest.json` (`current_version`, `main_logic_file`, `profiles.core-enhanced.files`)
+   - `versions/AgentLogic_<NEW_VERSION>.md` (including Section 4 `Reference Source Registration`)
+   - `00_START_HERE.md`, `AGENTS.md`, `MAIN.md`, `README.md`, `00_README.md`, `AGENT_INSTALL.md`
+   - `modules/01_MasterLogic.md` (L2 module list, L4 first-party skill list, and Section 10)
+   - `modules/11_CrossDirectoryMap.md` and `modules/40_AgentLogicSystemMap.md` (L2 version file & module table)
+   - `PROJECT_MAP.md`, `CODE_MAP.md`, `CHANGELOG.md`, and `.learnings/ERRORS.md`
+2. **Historical Encoding & PowerShell Pitfalls (Zero-Tolerance)**:
+   - **Pure-ASCII `.ps1` Entry Scripts (CP1252 GitHub Actions Safety)**: Operational `.ps1` scripts MUST remain 100% pure ASCII without UTF-8 BOM. Never put literal `—` (em-dash) or CJK characters in `.ps1` files; use `[regex]::Unescape('\u2014')` / `\uXXXX` escapes (`Windows-1252` treats byte `0x94` of UTF-8 `—` as `"` and breaks PowerShell 5.1 parsing).
+   - **Mandatory `-Encoding UTF8` on `Get-Content` & BOM-Free UTF-8 Writes**: Every `Get-Content` in PowerShell MUST specify `-Encoding UTF8` (omitting it corrupts UTF-8 `—` into `\u9225` mojibake under CP936). Every JSON/JS/Markdown write MUST use `[System.Text.UTF8Encoding]::new($false)` (UTF-8 BOM breaks Node `JSON.parse` and JS shebangs).
+   - **No PowerShell Reserved Variable Names**: Never use `$host` as a loop/local variable (collides with read-only automatic `$Host`); use `$targetHost` or `$targetHostName`.
+   - **Single-Quoted Here-Strings for Markdown Templates**: Never put Markdown backticks inside double-quoted PowerShell `"..."` or `@"..."@` (where `` `f `` becomes form-feed `\x0C`); always use single-quoted `@'...'@` with `.Replace(...)`.
+3. **Antigravity 24 KB Rule Cap & Cross-Host Gate Inlining**:
+   - Because Antigravity caps individual rule files at 24 KB, `~/.gemini/GEMINI.md` and `~/.gemini/AgentLogic/GEMINI.md` MUST inline all 4 blocking gates (Gate 1 Startup+Role, Gate 2 UI+Mockup, Gate 3 Auto-Skills, Gate 4 Knowledge Sync) and register `~/.gemini/skills` in `~/.gemini/config/skills.json`.
+4. **Skill Registry, YAML Front-Matter & Windows Defender Defanging**:
+   - Every portable `skills/**/SKILL.md` MUST have a valid YAML front-matter `name:` and be registered in `contracts/skill-registry.json`.
+   - Security/pentest reference Markdown files MUST defang raw `<script>`, `onerror=`, and shell payload strings (e.g., `<scr\ipt>`) so Windows Defender does not block file reads or quarantine tracked files.
+5. **Rebuild All 4 Bundles, Sync All Installed Hosts & Align Git Tag**:
+   - Run `scripts/maintainer-check.ps1` and `scripts/audit-skill-duplicates.ps1 -FailOnCandidates` to rebuild `dist/{codex,claude,antigravity,generic}` and pass all gates.
+   - Re-run `install.ps1` for all local hosts (`antigravity`, `claude`, `codex`) so `~/.gemini/`, `~/.claude/`, and `~/.codex/` match `dist/`.
+   - Ensure the release Git tag (e.g., `v6.9.0`) points to the final post-verification commit on `main`.
 
 ## Repository Boundary
 
@@ -800,6 +835,32 @@ UI 实施完成后仍必须执行截图、父子布局边界、溢出、换行�
 - 版本、宿主或发布变更：运行 `scripts/maintainer-check.ps1`，并检查生成输出和 git diff。
 - 环境与宿主判断：运行 `scripts/doctor.ps1`。
 - 任何高风险或外部状态变更都必须做目标确认和结果确认。
+
+### 8.1 逻辑版本升级与规则变更必查红线（防遗漏与防历史踩坑清单）
+
+每次升级 AgentLogic 版本或修改核心模块/技能时，必须逐条核对以下红线（历史根因见 `.learnings/ERRORS.md`）：
+
+1. **11 处核心文档同频同步**：更新版本或新增模块/技能时，严禁只改 `manifest.json` 和 `README.md`。必须同步更新：
+   - `manifest.json`、`versions/AgentLogic_<新版本>.md`（含第 4 节外部引用注册）
+   - `00_START_HERE.md`、`AGENTS.md`、`MAIN.md`、`README.md`、`00_README.md`、`AGENT_INSTALL.md`
+   - `modules/01_MasterLogic.md`（L2 模块列表、L4 全部第一方技能列表、第 10 节）
+   - `modules/11_CrossDirectoryMap.md`、`modules/40_AgentLogicSystemMap.md`（L2 版本文件与模块表）
+   - `PROJECT_MAP.md`、`CODE_MAP.md`、`CHANGELOG.md`、`.learnings/ERRORS.md`
+2. **UTF-8 与 CP1252 编码红线**：
+   - 所有入口 `.ps1` 脚本必须保持 **100% 纯 ASCII 无 BOM**（禁止出现中文或字面量破折号 `—`，统一使用 `\uXXXX` 转义，防止 GitHub Actions `Windows-1252` 将 `0x94` 解析为右双引号导致语法崩溃）。
+   - PowerShell 读取文本/JSON 必须显式指定 `Get-Content -Encoding UTF8`（漏写会导致 CP936 将 `—` 损坏为 `\u9225` 乱码并扩散进 `dist/`）。
+   - 写入 JSON/JS/MD 必须使用无 BOM 的 `[System.Text.UTF8Encoding]::new($false)`（UTF-8 BOM 会导致 Node `JSON.parse` 与 JS shebang 报错）。
+3. **PowerShell 语法与宿主适配红线**：
+   - 禁止使用 `$host` 作为循环或局部变量（与只读自动变量 `$Host` 冲突）；在冒号前插值必须写成 `${Label}:`。
+   - 含反引号 `` ` `` 的 Markdown 模板禁止使用双引号 `@"..."@`（防止 `` `f `` 被转义为换页符 `\x0C`），必须使用单引号 `@'...'@`。
+   - Antigravity 全局规则文件 `~/.gemini/GEMINI.md`（受 24KB 上限约束）必须直接内联 Gates 1–4 阻塞门，并在 `~/.gemini/config/skills.json` 注册 `~/.gemini/skills`。
+4. **技能注册、YAML 头部与杀软防误报**：
+   - 每个 `skills/**/SKILL.md` 必须包含 YAML 头部 `name:` 并在 `contracts/skill-registry.json` 注册；
+   - 安全/逆向参考文档中的原始 `<script>`、`onerror=` 等高危特征必须无害化转义（如 `<scr\ipt>`），防止 Windows Defender 实时拦截或隔离文件。
+5. **四端重编译、本机三端同步与 Git Tag 对齐**：
+   - 必须运行 `scripts/maintainer-check.ps1` 与 `scripts/audit-skill-duplicates.ps1 -FailOnCandidates` 重新生成 `dist/{codex,claude,antigravity,generic}` 并通过校验；
+   - 重新运行 `install.ps1` 同步本机 `antigravity`、`claude`、`codex` 三端宿主；
+   - 确保 Git 版本标签（如 `v6.9.0`）指向最终验证通过的 `main` 提交，不留滞后提交。
 
 ## 9. 持续执行边界
 
@@ -1374,6 +1435,16 @@ Agent 至少必须完成：
 - [ ] If the task includes formal UI implementation, a text-to-image preview has been generated and shown to the user (or saved locally under the project workspace for manual inspection) before UI code is written
 - [ ] The user has reviewed/approved the preview (via the chat UI or locally saved file) or explicitly opted out of the preview step
 - [ ] No UI implementation began before one of those conditions was satisfied
+
+## 10. 逻辑包自身版本升级与规则修改必查清单 (AgentLogic Self-Update Gate)
+
+当任务属于修改 AgentLogic 自身版本、核心规则、模块或第一方技能时，结束前必须核对：
+
+- [ ] 已同步全部 11 处版本与架构映射文件（`manifest.json`、`versions/AgentLogic_<VER>.md`、`00_START_HERE.md`、`AGENTS.md`、`MAIN.md`、`README.md`、`00_README.md`、`AGENT_INSTALL.md`、`modules/01_MasterLogic.md`、`modules/11_CrossDirectoryMap.md`、`modules/40_AgentLogicSystemMap.md`、`PROJECT_MAP.md`、`CODE_MAP.md`）
+- [ ] 所有 `.ps1` 入口脚本保持 100% 纯 ASCII 无 BOM（无字面量 `—` 或中文），所有 `Get-Content` 均带 `-Encoding UTF8`，所有 JSON/JS/MD 写入均使用无 BOM UTF-8（无 `\u9225` 或 `\uFFFD` 乱码）
+- [ ] 所有便携 `skills/**/SKILL.md` 均包含 YAML front-matter `name:`，且安全参考文档中的 `<script>` / `onerror=` 已做防 Windows Defender 误报转义
+- [ ] 已运行 `scripts/maintainer-check.ps1` 与 `scripts/audit-skill-duplicates.ps1 -FailOnCandidates` 重新编译 `dist/` 四端 Bundle 并全部通过
+- [ ] 已运行 `install.ps1` 将最新 Bundle 与第一方技能同步部署至本机宿主（`antigravity` / `claude` / `codex`），且 Git 版本 Tag 已与最终提交对齐
 
 ## END FILE: modules/15_LogicEntryChecklist.md
 

@@ -89,6 +89,31 @@ Version bump expectations:
 - do not rewrite history by mutating old version files
 - allow retaining historical releases (suitable for the fast-iterating multimodal phase)
 
+### Mandatory Version Promotion & Historical Pitfall Checklist
+
+Before committing any version bump or core rule update, verify every item below (see `.learnings/ERRORS.md` for full incident post-mortems):
+
+1. **11-Surface Lockstep Update**:
+   - `manifest.json` (`current_version`, `main_logic_file`, `profiles.core-enhanced.files`)
+   - `versions/AgentLogic_<NEW_VERSION>.md` (including Section 4 `Reference Source Registration`)
+   - `00_START_HERE.md`, `AGENTS.md`, `MAIN.md`, `README.md`, `00_README.md`, `AGENT_INSTALL.md`
+   - `modules/01_MasterLogic.md` (L2 module list + L4 all 9 first-party skills + Section 10)
+   - `modules/11_CrossDirectoryMap.md` & `modules/40_AgentLogicSystemMap.md`
+   - `PROJECT_MAP.md`, `CODE_MAP.md`, `CHANGELOG.md`, and `.learnings/ERRORS.md`
+2. **Encoding & PowerShell Redlines**:
+   - Operational `.ps1` scripts must be **100% pure ASCII without BOM** (use `\uXXXX` escapes instead of literal `—` or CJK characters so `Windows-1252` on GitHub Actions does not fail).
+   - Every `Get-Content` must include `-Encoding UTF8` (prevents CP936 `\u9225` mojibake).
+   - Every JSON/JS/MD write must use `[System.Text.UTF8Encoding]::new($false)` (BOM-free UTF-8).
+   - Never use `$host` as a variable name; never use double-quoted `@"..."@` for Markdown templates containing backticks; delimit variables before colons as `${Label}:`.
+3. **Host Hook, Skill YAML & Antivirus Hygiene**:
+   - Keep Gates 1–4 inlined in `~/.gemini/GEMINI.md` (24 KB cap) and `~/.gemini/skills` registered in `~/.gemini/config/skills.json`.
+   - Ensure every `skills/**/SKILL.md` declares a YAML front-matter `name:`.
+   - Keep raw `<script>` / `onerror=` payloads defanged in security reference docs so Windows Defender never blocks reads or quarantines files.
+4. **Build, Local Sync & Git Tag Alignment**:
+   - Run `.\scripts\maintainer-check.ps1` and `.\scripts\audit-skill-duplicates.ps1 -FailOnCandidates`.
+   - Run `.\install.ps1` for `antigravity`, `claude`, and `codex` to keep local host installations in sync.
+   - Align the Git release tag (e.g., `v6.9.0`) with the final commit on `main`.
+
 ## Change Policy
 
 Safe change classes:

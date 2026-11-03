@@ -170,6 +170,15 @@ AgentLogic 的演进离不开开源社区的启发。我们在设计中深度参
 2. **防盲目执行**：AI 助理在进行复杂重构或方案设计前，必须在 `.specify/` 下完成 `spec.md` (规格) 和 `plan.md` (技术规划)。
 3. **版本隔离**：修改核心机制时，应优先回写 `versions/AgentLogic_V6_9_0.md`，然后重新运行 `build-profile.ps1` 进行编译部署。
 
+> [!IMPORTANT]
+> **逻辑版本升级必查红线清单（防漏改与防历史踩坑）**：
+> 每次升级版本或新增核心模块/技能时，**必须**逐条核对以下红线（详见 `.learnings/ERRORS.md` 历史复盘）：
+> 1. **11 处核心文档同频更新**：严禁只改 `manifest.json` 和 `README.md`。必须同步更新 `manifest.json`、`versions/AgentLogic_<新版本>.md`、`00_START_HERE.md`、`AGENTS.md`、`MAIN.md`、`README.md`、`00_README.md`、`AGENT_INSTALL.md`、`modules/01_MasterLogic.md`（含 L2 模块与 L4 第一方技能列表）、`modules/11_CrossDirectoryMap.md`、`modules/40_AgentLogicSystemMap.md`、`PROJECT_MAP.md`、`CODE_MAP.md` 与 `CHANGELOG.md`。
+> 2. **UTF-8 与 CP1252 编码红线**：所有入口 `.ps1` 脚本必须保持 100% 纯 ASCII 无 BOM（禁止直接写入中文或破折号 `—`，统一用 `\uXXXX` 转义，防止 GitHub Actions `Windows-1252` 将 `0x94` 误判为右双引号）；PowerShell 读取文本必须显式加 `Get-Content -Encoding UTF8`（防止 CP936 将 `—` 损坏为 `\u9225` 乱码）；写入 JSON/JS/MD 必须使用 `[System.Text.UTF8Encoding]::new($false)`（无 BOM）。
+> 3. **PowerShell 与宿主适配红线**：严禁使用 `$host` 作为循环变量；含反引号的 Markdown 模板严禁使用双引号 `@"..."@`（防止 `` `f `` 变成控制字符 `\x0C`）；Antigravity 全局钩子 `~/.gemini/GEMINI.md`（受 24KB 限制）必须直接内联 Gates 1–4 并注册 `~/.gemini/skills`。
+> 4. **技能头部与杀软防误报红线**：所有 `SKILL.md` 必须包含 YAML 头部 `name:`；安全参考文档中的原始 `<script>` / `onerror=` 必须做无害化转义（如 `<scr\ipt>`），防止 Windows Defender 拦截或隔离文件。
+> 5. **四端编译、本机同步与 Git 标签对齐**：必须运行 `scripts/maintainer-check.ps1` 与 `scripts/audit-skill-duplicates.ps1 -FailOnCandidates`，重新执行 `antigravity` / `claude` / `codex` 本地安装，并将 Git 版本标签对齐至最终提交。
+
 ---
 
 ## 🛡️ 安全合规、净室重构与第三方开源致谢声明

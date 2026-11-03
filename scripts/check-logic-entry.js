@@ -44,6 +44,7 @@ const OPERATIONAL_ENTRY_FILES = [
   'scripts/test-skill-workflow-graph.ps1',
   'scripts/validate-requirements-brief.ps1',
   'scripts/deploy-first-party-skill.ps1',
+  'scripts/release-version.ps1',
   'adapters/codex/install.ps1',
   'adapters/claude/install.ps1',
   'adapters/antigravity/install.ps1',
@@ -75,6 +76,9 @@ const ACTIVE_VERSION_FILES = [
   'modules/49_V6_8_AutonomousSkillEnforcement.md',
   'modules/53_V6_8_ProgrammingLevelSkillEnforcement.md',
   'modules/54_V6_9_RoleAndMultimodalCreativeGovernance.md',
+  'PROJECT_MAP.md',
+  'CODE_MAP.md',
+  'CONTRIBUTING.md',
 ];
 
 const GATE_ANCHORS = [
@@ -150,7 +154,7 @@ function checkActiveVersionAndPathHygiene() {
 
   const expectedVersion = parsed.current_version;
   const staleVersionPattern = /AgentLogic_V6_7_0|V6\.7\.0|AgentLogic_V6_7_1|V6\.7\.1|AgentLogic_V6_8_[0-9]/;
-  const entryCurrentVersionFiles = ['AGENTS.md', 'README.md', '00_README.md', '00_START_HERE.md', 'AGENT_INSTALL.md', 'MAIN.md', 'modules/01_MasterLogic.md', 'modules/11_CrossDirectoryMap.md', 'modules/40_AgentLogicSystemMap.md'];
+  const entryCurrentVersionFiles = ['AGENTS.md', 'README.md', '00_README.md', '00_START_HERE.md', 'AGENT_INSTALL.md', 'MAIN.md', 'modules/01_MasterLogic.md', 'modules/11_CrossDirectoryMap.md', 'modules/40_AgentLogicSystemMap.md', 'PROJECT_MAP.md', 'CODE_MAP.md'];
   const mojibakePattern = /[\uFFFD\u9225]|\u00E2\u20AC/;
   const absoluteFileUriPattern = /file:\/\/(?:[A-Za-z]:|Users\/|home\/)/;
 
@@ -162,6 +166,7 @@ function checkActiveVersionAndPathHygiene() {
     }
     if (mojibakePattern.test(content)) { fail(`Mojibake or replacement character detected in active file: ${relPath}`); }
     if (entryCurrentVersionFiles.includes(relPath) && /V6\.8\.[0-9]/.test(content)) { fail(`Stale V6.8.x version reference found in entry/map file (expected ${expectedVersion}): ${relPath}`); }
+    if (entryCurrentVersionFiles.includes(relPath) && !content.includes(expectedVersion) && !content.includes(parsed.main_logic_file)) { fail(`Entry/map file does not reference current version ${expectedVersion} or ${parsed.main_logic_file}: ${relPath}`); }
     if (staleVersionPattern.test(content)) {
       fail(`Stale stable-version reference found in active file: ${relPath}`);
     }
@@ -441,6 +446,12 @@ function checkOperationalPowerShellAsciiSafety() {
       fail(
         `PowerShell entry script '${relPath}' contains non-ASCII byte 0x${nonAsciiByte.toString(16)} at offset ${nonAsciiOffset} without UTF-8 BOM (breaks Windows PowerShell 5.1 under CP1252). Use pure ASCII with \\uXXXX escapes.`
       );
+    const lines = buf.toString('utf8').split(/\r?\n/);
+    lines.forEach((line, idx) => {
+      if (/\bGet-Content\b/.test(line) && !/-Encoding\s+UTF8/i.test(line)) {
+        fail(`PowerShell script '${relPath}:${idx + 1}' calls Get-Content without '-Encoding UTF8' (causes CP936/CP1252 mojibake).`);
+      }
+    });
     }
   }
   ok('All operational PowerShell entry scripts are CP1252 / Windows PowerShell 5.1 encoding-safe.');

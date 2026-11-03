@@ -1,3 +1,11 @@
+# MANDATORY LOGIC GATE
+#
+# Read `AGENTS.md` and `README.md` before making changes here.
+# Then follow the repository-declared logic entry chain.
+# Before every new coding round, determine whether this task extends the previous round.
+# If not, explicitly ask whether to forget/compress context first.
+# This is a blocking gate; do not begin implementation before it is complete.
+
 [CmdletBinding(SupportsShouldProcess = $true)]
 param(
     [Parameter(Mandatory = $true)]
@@ -105,12 +113,18 @@ if ($PSCmdlet.ShouldProcess($manifestPath, "Update manifest current_version and 
 
 $gitPrefix = (Join-Path $RepoRoot ".git") + [System.IO.Path]::DirectorySeparatorChar
 $distPrefix = (Join-Path $RepoRoot "dist") + [System.IO.Path]::DirectorySeparatorChar
+$refPrefix = (Join-Path $RepoRoot "reference") + [System.IO.Path]::DirectorySeparatorChar
+$specifyPrefix = (Join-Path $RepoRoot ".specify") + [System.IO.Path]::DirectorySeparatorChar
+$learningsPrefix = (Join-Path $RepoRoot ".learnings") + [System.IO.Path]::DirectorySeparatorChar
 
 $markdownFiles = Get-ChildItem -Path $RepoRoot -Recurse -File -Filter *.md |
     Where-Object {
         $_.FullName -ne $oldMainLogicPath -and
         -not $_.FullName.StartsWith($gitPrefix, [System.StringComparison]::OrdinalIgnoreCase) -and
-        -not $_.FullName.StartsWith($distPrefix, [System.StringComparison]::OrdinalIgnoreCase)
+        -not $_.FullName.StartsWith($distPrefix, [System.StringComparison]::OrdinalIgnoreCase) -and
+        -not $_.FullName.StartsWith($refPrefix, [System.StringComparison]::OrdinalIgnoreCase) -and
+        -not $_.FullName.StartsWith($specifyPrefix, [System.StringComparison]::OrdinalIgnoreCase) -and
+        -not $_.FullName.StartsWith($learningsPrefix, [System.StringComparison]::OrdinalIgnoreCase)
     }
 
 foreach ($file in $markdownFiles) {
@@ -120,7 +134,7 @@ foreach ($file in $markdownFiles) {
 
 # Version labels belong only to active entry/install surfaces. Historical specifications and
 # historical version files must keep their original version references.
-foreach ($relativePath in @("00_README.md", "README.md", "AGENT_INSTALL.md", "MAIN.md", "00_START_HERE.md", "AGENTS.md")) {
+foreach ($relativePath in @("00_README.md", "README.md", "AGENT_INSTALL.md", "MAIN.md", "00_START_HERE.md", "AGENTS.md", "modules/01_MasterLogic.md", "modules/11_CrossDirectoryMap.md", "modules/40_AgentLogicSystemMap.md", "PROJECT_MAP.md", "CODE_MAP.md")) {
     $path = Join-Path $RepoRoot $relativePath
     if (Test-Path $path) {
         Replace-InFile -Path $path -OldValue $oldVersion -NewValue $NewVersion
@@ -131,4 +145,4 @@ Write-Host "Prepared AgentLogic release update."
 Write-Host "Old version: $oldVersion"
 Write-Host "New version: $NewVersion"
 Write-Host "Main logic file: $newMainLogicFile"
-Write-Host "Next step: run scripts/validate-package.ps1"
+Write-Host "Next step: run scripts/maintainer-check.ps1, scripts/audit-skill-duplicates.ps1 -FailOnCandidates, and install.ps1 across antigravity/claude/codex."
