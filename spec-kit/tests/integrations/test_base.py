@@ -1,6 +1,9 @@
 """Tests for IntegrationOption, IntegrationBase, MarkdownIntegration, and primitives."""
 
+import inspect
+import shlex
 import sys
+from types import SimpleNamespace
 
 import pytest
 
@@ -49,6 +52,38 @@ class TestIntegrationBase:
     def test_options_default_empty(self):
         assert StubIntegration.options() == []
 
+    def test_runtime_config_default_accepts_empty_and_rejects_non_empty(self):
+        integration = StubIntegration()
+
+        integration.validate_runtime_config([], {})
+        with pytest.raises(ValueError, match="integration_args"):
+            integration.validate_runtime_config(["./agent.yaml"], {})
+        with pytest.raises(ValueError, match="integration_options.*unknown"):
+            integration.validate_runtime_config([], {"unknown": "value"})
+
+    def test_all_builtin_exec_builders_accept_runtime_config(self):
+        from specify_cli.integrations import INTEGRATION_REGISTRY
+
+        for key, integration in INTEGRATION_REGISTRY.items():
+            parameters = inspect.signature(integration.build_exec_args).parameters
+            assert "integration_args" in parameters, key
+            assert "integration_options" in parameters, key
+            assert "project_root" in parameters, key
+
+    def test_unsupported_exec_builders_reject_runtime_config_directly(self):
+        from specify_cli.integrations import INTEGRATION_REGISTRY
+
+        for integration in INTEGRATION_REGISTRY.values():
+            if (
+                type(integration).validate_runtime_config
+                is not IntegrationBase.validate_runtime_config
+            ):
+                continue
+            with pytest.raises(ValueError, match="integration_args"):
+                integration.build_exec_args(
+                    "prompt", integration_args=["unexpected"]
+                )
+
     def test_shared_commands_dir(self):
         i = StubIntegration()
         cmd_dir = i.shared_commands_dir()
@@ -93,6 +128,66 @@ class TestIntegrationBase:
         removed, skipped = i.uninstall(tmp_path, manifest)
         assert removed == []
         assert skipped == []
+
+    @pytest.mark.parametrize("force", [False, True])
+    def test_teardown_supports_legacy_remove_events(self, tmp_path, force):
+        calls = []
+
+        class LegacyIntegration(StubIntegration):
+            def remove_events(self, project_root, manifest):
+                calls.append((project_root, manifest))
+
+        integration = LegacyIntegration()
+        manifest = IntegrationManifest(integration.key, tmp_path)
+        generated = manifest.record_file(".stub/commands/speckit.plan.md", "# Plan\n")
+        manifest.save()
+
+        removed, skipped = integration.teardown(tmp_path, manifest, force=force)
+
+        assert calls == [(tmp_path, manifest)]
+        assert removed == [generated]
+        assert skipped == []
+        assert not generated.exists()
+        assert not manifest.manifest_path.exists()
+
+    @pytest.mark.parametrize("force", [False, True])
+    @pytest.mark.parametrize("style", ["keyword", "kwargs"])
+    def test_teardown_forwards_supported_force(self, tmp_path, force, style):
+        calls = []
+
+        class KeywordIntegration(StubIntegration):
+            def remove_events(self, project_root, manifest, *, force=False):
+                calls.append(force)
+
+        class KwargsIntegration(StubIntegration):
+            def remove_events(self, project_root, manifest, **kwargs):
+                calls.append(kwargs["force"])
+
+        integration = KeywordIntegration() if style == "keyword" else KwargsIntegration()
+        manifest = IntegrationManifest(integration.key, tmp_path)
+
+        integration.teardown(tmp_path, manifest, force=force)
+
+        assert calls == [force]
+
+    @pytest.mark.parametrize("force", [False, True])
+    def test_teardown_does_not_retry_remove_events_type_error(self, tmp_path, force):
+        calls = []
+
+        class BrokenIntegration(StubIntegration):
+            def remove_events(self, project_root, manifest, *, force=False):
+                calls.append(force)
+                raise TypeError("adapter cleanup failed")
+
+        integration = BrokenIntegration()
+        manifest = IntegrationManifest(integration.key, tmp_path)
+        generated = manifest.record_file(".stub/commands/speckit.plan.md", "# Plan\n")
+
+        with pytest.raises(TypeError, match="adapter cleanup failed"):
+            integration.teardown(tmp_path, manifest, force=force)
+
+        assert calls == [force]
+        assert generated.exists()
 
 
 class TestMarkdownIntegration:
@@ -179,71 +274,139 @@ class TestBasePrimitives:
 class TestBuildCommandInvocation:
     """Tests for build_command_invocation across integration types."""
 
-    def test_base_core_command_dotted(self):
-        i = StubIntegration()
-        assert i.build_command_invocation("speckit.plan") == "/speckit.plan"
-
-    def test_base_core_command_bare(self):
-        i = StubIntegration()
-        assert i.build_command_invocation("plan") == "/speckit.plan"
-
-    def test_base_core_command_with_args(self):
-        i = StubIntegration()
-        assert i.build_command_invocation("plan", "my feature") == "/speckit.plan my feature"
-
-    def test_base_extension_command(self):
-        i = StubIntegration()
-        assert i.build_command_invocation("speckit.git.commit") == "/speckit.git.commit"
-
-    def test_base_extension_command_bare(self):
-        i = StubIntegration()
-        assert i.build_command_invocation("git.commit") == "/speckit.git.commit"
-
-    def test_skills_core_command(self):
+    @pytest.mark.parametrize(
+        ("integration_key", "command_name", "args", "expected"),
+        [
+            ("stub", "speckit.plan", "", "/speckit.plan"),
+            ("stub", "plan", "", "/speckit.plan"),
+            ("stub", "plan", "my feature", "/speckit.plan my feature"),
+            ("stub", "speckit.git.commit", "", "/speckit.git.commit"),
+            ("stub", "git.commit", "", "/speckit.git.commit"),
+            ("forge", "speckit.plan", "", "/speckit-plan"),
+            ("forge", "plan", "", "/speckit-plan"),
+            ("forge", "speckit.git.commit", "fix typo", "/speckit-git-commit fix typo"),
+            ("cline", "speckit.plan", "", "/speckit-plan"),
+            ("cline", "git.commit", "fix typo", "/speckit-git-commit fix typo"),
+            ("codex", "speckit.plan", "", "$speckit-plan"),
+            ("codex", "plan", "", "$speckit-plan"),
+            ("codex", "speckit.git.commit", "", "$speckit-git-commit"),
+            ("codex", "git.commit", "fix typo", "$speckit-git-commit fix typo"),
+            ("kimi", "speckit.plan", "", "/skill:speckit-plan"),
+            ("kimi", "git.commit", "fix typo", "/skill:speckit-git-commit fix typo"),
+        ],
+    )
+    def test_native_invocation_styles(
+        self, integration_key, command_name, args, expected
+    ):
         from specify_cli.integrations import get_integration
-        i = get_integration("codex")
-        assert i.build_command_invocation("speckit.plan") == "/speckit-plan"
-        assert i.build_command_invocation("plan") == "/speckit-plan"
 
-    def test_skills_extension_command(self):
+        integration = (
+            StubIntegration()
+            if integration_key == "stub"
+            else get_integration(integration_key)
+        )
+
+        assert integration.build_command_invocation(command_name, args) == expected
+
+    @pytest.mark.parametrize("integration_key", ["codex", "zcode"])
+    def test_dollar_skill_post_processing_is_idempotent(self, integration_key):
         from specify_cli.integrations import get_integration
-        i = get_integration("codex")
-        assert i.build_command_invocation("speckit.git.commit") == "/speckit-git-commit"
-        assert i.build_command_invocation("git.commit") == "/speckit-git-commit"
 
-    def test_skills_extension_command_with_args(self):
+        content = (
+            "---\nname: test\n---\n\n"
+            "Literal slash invocation: /speckit-plan\n"
+            "- For each executable hook, output the following based on its flag:\n"
+        )
+        integration = get_integration(integration_key)
+        once = integration.post_process_skill_content(content)
+        twice = integration.post_process_skill_content(once)
+
+        assert twice == once
+        assert once.count("replace dots (`.`) with hyphens") == 1
+        assert "$speckit-git-commit" in once
+        assert "/speckit-plan" in once
+
+    def test_kimi_skill_post_processing_is_idempotent(self):
+        """Kimi's post_process_skill_content must be idempotent.
+
+        The hook-command note is injected with the /skill: prefix by the base
+        class (via get_invocation_prefix), so the idempotency check matches on
+        re-runs without requiring the broad /speckit- -> /skill:speckit- body
+        replacement to recognise a duplicate.
+        """
         from specify_cli.integrations import get_integration
-        i = get_integration("codex")
-        assert i.build_command_invocation("speckit.git.commit", "fix typo") == "/speckit-git-commit fix typo"
 
+        content = (
+            "---\nname: test\n---\n\n"
+            "Literal slash invocation: /speckit-plan\n"
+            "- For each executable hook, output the following based on its flag:\n"
+        )
+        integration = get_integration("kimi")
+        once = integration.post_process_skill_content(content)
+        twice = integration.post_process_skill_content(once)
+
+        assert twice == once
+        assert once.count("replace dots (`.`) with hyphens") == 1
+        assert "/skill:speckit-git-commit" in once
+
+    def test_get_invocation_prefix_skill_colon(self):
+        """get_invocation_prefix returns '/skill:' for Kimi in skills mode."""
+        from specify_cli._invocation_style import get_invocation_prefix
+
+        assert get_invocation_prefix("kimi", True) == "/skill:"
+        assert get_invocation_prefix("kimi", False) == "/"
+        assert get_invocation_prefix("codex", True) == "$"
+        assert get_invocation_prefix("claude", True) == "/"
 
 class TestResolveCommandRefs:
     """Tests for __SPECKIT_COMMAND_<NAME>__ placeholder resolution."""
 
-    def test_dot_separator_core_command(self):
-        text = "Run `__SPECKIT_COMMAND_PLAN__` to plan."
-        result = IntegrationBase.resolve_command_refs(text, ".")
-        assert result == "Run `/speckit.plan` to plan."
+    @pytest.mark.parametrize(
+        ("placeholder", "separator", "prefix", "expected"),
+        [
+            ("PLAN", ".", "/", "/speckit.plan"),
+            ("PLAN", "-", "/", "/speckit-plan"),
+            ("PLAN", "-", "$", "$speckit-plan"),
+            ("PLAN", "-", "/skill:", "/skill:speckit-plan"),
+            ("GIT_COMMIT", ".", "/", "/speckit.git.commit"),
+            ("GIT_COMMIT", "-", "/", "/speckit-git-commit"),
+            (
+                "AGENT-CONTEXT_UPDATE",
+                ".",
+                "/",
+                "/speckit.agent-context.update",
+            ),
+            (
+                "AGENT-CONTEXT_UPDATE",
+                "-",
+                "/",
+                "/speckit-agent-context-update",
+            ),
+            ("V2_PLAN", ".", "/", "/speckit.v2.plan"),
+        ],
+    )
+    def test_command_reference_rendering(
+        self, placeholder, separator, prefix, expected
+    ):
+        text = f"Run __SPECKIT_COMMAND_{placeholder}__ now."
+        result = IntegrationBase.resolve_command_refs(text, separator, prefix)
 
-    def test_hyphen_separator_core_command(self):
-        text = "Run `__SPECKIT_COMMAND_PLAN__` to plan."
-        result = IntegrationBase.resolve_command_refs(text, "-")
-        assert result == "Run `/speckit-plan` to plan."
+        assert result == f"Run {expected} now."
+
+    def test_process_template_kimi_uses_skill_colon_prefix(self):
+        """process_template must use /skill: prefix for Kimi without relying on
+        post_process_skill_content's broad replacement."""
+        text = "---\ndescription: test\n---\nRun `__SPECKIT_COMMAND_PLAN__` to plan."
+        result = IntegrationBase.process_template(
+            text, "kimi", "sh", invoke_separator="-"
+        )
+        assert "/skill:speckit-plan" in result
+        assert "/speckit-plan" not in result
 
     def test_multiple_placeholders(self):
         text = "__SPECKIT_COMMAND_SPECIFY__ then __SPECKIT_COMMAND_PLAN__ then __SPECKIT_COMMAND_TASKS__"
         result = IntegrationBase.resolve_command_refs(text, ".")
         assert result == "/speckit.specify then /speckit.plan then /speckit.tasks"
-
-    def test_extension_command_dot(self):
-        text = "Run __SPECKIT_COMMAND_GIT_COMMIT__ to commit."
-        result = IntegrationBase.resolve_command_refs(text, ".")
-        assert result == "Run /speckit.git.commit to commit."
-
-    def test_extension_command_hyphen(self):
-        text = "Run __SPECKIT_COMMAND_GIT_COMMIT__ to commit."
-        result = IntegrationBase.resolve_command_refs(text, "-")
-        assert result == "Run /speckit-git-commit to commit."
 
     def test_no_placeholders_unchanged(self):
         text = "No placeholders here."
@@ -292,15 +455,14 @@ class TestResolveCommandRefs:
         text = "Run __SPECKIT_COMMAND_plan__ to plan."
         assert IntegrationBase.resolve_command_refs(text, ".") == text
 
+    def test_leading_hyphen_not_matched(self):
+        text = "Run __SPECKIT_COMMAND_-PLAN__ to plan."
+        assert IntegrationBase.resolve_command_refs(text, ".") == text
+
     def test_placeholder_adjacent_to_text(self):
         text = "foo__SPECKIT_COMMAND_PLAN__bar"
         result = IntegrationBase.resolve_command_refs(text, ".")
         assert result == "foo/speckit.planbar"
-
-    def test_placeholder_with_digits(self):
-        text = "__SPECKIT_COMMAND_V2_PLAN__"
-        result = IntegrationBase.resolve_command_refs(text, ".")
-        assert result == "/speckit.v2.plan"
 
 
 class TestResolvePythonInterpreter:
@@ -477,19 +639,41 @@ class TestProcessTemplatePyScriptType:
         assert ".specify/scripts/bash/check-prerequisites.sh --json" in result
         assert "python" not in result
 
+    def test_body_scripts_example_does_not_override_frontmatter(self):
+        content = (
+            "---\n"
+            "scripts:\n"
+            "  sh: scripts/bash/real.sh --json\n"
+            "---\n"
+            "Run {SCRIPT} now.\n"
+            "```yaml\n"
+            "scripts:\n"
+            "  sh: examples/not-the-command.sh\n"
+            "```\n"
+        )
+
+        result = IntegrationBase.process_template(content, "agent", "sh")
+
+        assert ".specify/scripts/bash/real.sh --json" in result
+        assert "examples/not-the-command.sh" in result
+
     def test_py_quotes_interpreter_with_spaces(self, monkeypatch):
         # An interpreter path containing whitespace (e.g. Windows
         # ``Program Files``) must be quoted so it isn't split into args.
+        interpreter = r"C:\Program Files\Python\python.exe"
         monkeypatch.setattr(
             "specify_cli.integrations.base.shutil.which", lambda name: None
         )
         monkeypatch.setattr(
             "specify_cli.integrations.base.sys.executable",
-            r"C:\Program Files\Python\python.exe",
+            interpreter,
+        )
+        monkeypatch.setattr(
+            "specify_cli.integrations.base.os", SimpleNamespace(name="posix")
         )
         result = IntegrationBase.process_template(self.CONTENT, "agent", "py")
         assert (
-            '"C:\\Program Files\\Python\\python.exe" '
+            f"{shlex.quote(interpreter)} "
             ".specify/scripts/python/check-prerequisites.py --json"
         ) in result
 
@@ -510,6 +694,39 @@ class TestProcessTemplatePyScriptType:
             self.CONTENT, "agent", "py", project_root=tmp_path
         )
         assert ".venv/bin/python .specify/scripts/python/check-prerequisites.py" in result
+
+    def test_setup_py_falls_back_to_platform_shell(
+        self, monkeypatch, tmp_path
+    ):
+        template = tmp_path / "fallback.md"
+        template.write_text(
+            "---\n"
+            "scripts:\n"
+            "  sh: scripts/bash/check-prerequisites.sh --json\n"
+            "  ps: scripts/powershell/check-prerequisites.ps1 -Json\n"
+            "---\n"
+            "Run {SCRIPT} now.\n",
+            encoding="utf-8",
+        )
+        integration = StubIntegration()
+        monkeypatch.setattr(
+            integration, "list_command_templates", lambda: [template]
+        )
+
+        created = integration.setup(
+            tmp_path,
+            IntegrationManifest("stub", tmp_path),
+            script_type="py",
+        )
+
+        rendered = created[0].read_text(encoding="utf-8")
+        expected = (
+            ".specify/scripts/powershell/check-prerequisites.ps1"
+            if sys.platform == "win32"
+            else ".specify/scripts/bash/check-prerequisites.sh"
+        )
+        assert "{SCRIPT}" not in rendered
+        assert expected in rendered
 
 
 class TestInstallScriptsPython:

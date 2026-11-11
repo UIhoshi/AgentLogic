@@ -5,7 +5,7 @@ description: Autonomous post-implementation code refinement, AST-aware structura
 
 # Code Simplifier & AST-Aware Refactoring (`code-simplifier`)
 
- This skill refines and simplifies newly written or modified code for clarity, consistency, and maintainability **without changing external behavior**. It synthesizes patterns from Anthropic's official `code-simplifier` (`anthropics/claude-plugins-official`), `ast-grep` structural refactoring (`ast-grep/ast-grep`), and `obra/superpowers` Red-Green-Refactor discipline, complementing `ponytail` (pre-implementation YAGNI subtraction) and `improve-codebase-architecture` (macro module deepening).
+This skill refines and simplifies newly written or modified code for clarity, consistency, and maintainability **without changing external behavior**. It synthesizes patterns from Anthropic's official `code-simplifier` (`anthropics/claude-plugins-official`), `ast-grep` structural refactoring (`ast-grep/ast-grep`), `obra/superpowers` v7.0.2 Red-Green-Refactor & verification-before-completion discipline, and `DietrichGebert/ponytail` (pre-implementation YAGNI subtraction & `shortcut:` debt ledger), complementing `improve-codebase-architecture` (macro module deepening).
 
 ## Automatic Trigger Contract (Encounter -> Auto-Use)
 
@@ -47,12 +47,12 @@ When applying the refinements identified in Phase 2:
    - When `sg` is available and a structural pattern is being rewritten across multiple locations, use `sg run --pattern '<pattern>' --rewrite '<rewrite>'` (with metavariables like `$FUNC`, `$$$ARGS`) instead of fragile regex or repetitive manual edits.
 2. **Atomic Bounded Edits**:
    - When `ast-grep` is unavailable or the refinement is local to 1–2 hunks, apply bounded file edits one cohesive transformation at a time.
-   - **Preserve Documentation Integrity**: Never delete unrelated comments, docstrings, or mandatory logic-gate headers.
+   - **Preserve Documentation & Shortcut Ledger Integrity**: Never delete unrelated comments, docstrings, `shortcut: <limit>, <when to upgrade>` (or legacy `ponytail:`) debt markers, or mandatory logic-gate headers.
    - **Balance Clarity over Brevity**: Do not compress readable 4-line logic into an unreadable 1-line clever expression; explicit and boring beats dense and clever.
 
 ### Phase 4: Zero-Behavior-Change Verification & Closure
 
-1. Re-run the exact test, build, or runtime verification command from Phase 1 immediately after refinement.
+1. Re-run the exact test, build, or runtime verification command from Phase 1 immediately after refinement (`superpowers` verification-before-completion: inspect fresh command output in the current turn before claiming success).
 2. If any test or check breaks, **revert the offending simplification hunk immediately** rather than piling on workarounds.
 3. Update `CODE_MAP.md` if any public symbol, signature, or key flow path changed during the refactor.
 4. Record closure evidence (`refinement_or_smell_check` and `behavior_preserved_verification`).

@@ -13,12 +13,18 @@ from __future__ import annotations
 
 import urllib.error
 import urllib.request
-from fnmatch import fnmatch
 from typing import Callable
 from urllib.parse import urlparse
 
+from .._download_security import is_safe_download_redirect
 from . import get_provider
-from .config import AuthConfigEntry, _default_config_path, find_entries_for_url, load_auth_config
+from .config import (
+    AuthConfigEntry,
+    _default_config_path,
+    _host_matches_pattern,
+    find_entries_for_url,
+    load_auth_config,
+)
 
 
 _config_override: list[AuthConfigEntry] | None = None
@@ -53,15 +59,33 @@ def _load_config() -> list[AuthConfigEntry]:
 
 def _hostname_in_hosts(hostname: str, hosts: tuple[str, ...]) -> bool:
     """Return True if *hostname* matches any pattern in *hosts*."""
-    hostname = hostname.lower()
-    return any(p == hostname or fnmatch(hostname, p) for p in hosts)
+    return any(_host_matches_pattern(hostname, pattern) for pattern in hosts)
 
 
 RedirectValidator = Callable[[str, str], None]
 
 
+class RedirectPolicyError(urllib.error.URLError):
+    """A redirect rejected because it violates the client's security policy."""
+
+
+def _validate_strict_redirect(old_url: str, new_url: str) -> None:
+    if not is_safe_download_redirect(old_url, new_url):
+        raise RedirectPolicyError(
+            f"unsafe redirect to {new_url}: target must use HTTPS with a hostname, "
+            "must not enter a local target from a remote host, and may use HTTP only "
+            "within loopback (for example localhost, 127.0.0.1, ::1)"
+        )
+
+
 class _StripAuthOnRedirect(urllib.request.HTTPRedirectHandler):
-    """Drop ``Authorization`` when a redirect leaves trusted hosts or downgrades."""
+    """Redirect handler that guards every redirect it is installed for.
+
+    1. Run any caller-provided redirect validator.
+    2. Reject redirects that are not HTTPS with a hostname. HTTP loopback is
+       allowed only when the previous hop is also loopback.
+    3. Drop ``Authorization`` when a redirect leaves trusted hosts or downgrades.
+    """
 
     def __init__(
         self,
@@ -75,13 +99,16 @@ class _StripAuthOnRedirect(urllib.request.HTTPRedirectHandler):
     def redirect_request(self, req, fp, code, msg, headers, newurl):
         try:
             new_parsed = urlparse(newurl)
+            # Force urllib's syntax and range validation before following.
+            new_parsed.port
         except ValueError as exc:
             # Malformed redirect target (e.g. unterminated IPv6 bracket).
             # Surface as URLError so callers' download error handling applies.
-            raise urllib.error.URLError(f"malformed redirect URL: {exc}") from exc
+            raise RedirectPolicyError(f"malformed redirect URL: {exc}") from exc
 
         if self._redirect_validator is not None:
             self._redirect_validator(req.full_url, newurl)
+        _validate_strict_redirect(req.full_url, newurl)
 
         original_auth = (
             req.get_header("Authorization")
@@ -106,6 +133,8 @@ def build_request(url: str, extra_headers: dict[str, str] | None = None) -> urll
 
     Uses the first matching entry from ``auth.json`` whose token resolves.
     Returns a plain request when no entry matches or the file doesn't exist.
+    A ``github-cli`` acquisition failure raises immediately, without trying
+    later matching entries or returning an unauthenticated request.
     """
     headers: dict[str, str] = {}
     if extra_headers:
@@ -127,9 +156,9 @@ def build_request(url: str, extra_headers: dict[str, str] | None = None) -> urll
 def github_provider_hosts() -> tuple[str, ...]:
     """Return host patterns from every ``github`` provider entry in ``auth.json``.
 
-    Used to classify which hosts are GitHub Enterprise Server instances when
-    resolving release-asset download URLs. Returns an empty tuple when no
-    ``auth.json`` exists or it contains no ``github`` entries.
+    Used to classify trusted GitHub Enterprise Cloud and GitHub Enterprise
+    Server hosts when resolving release-asset download URLs. Returns an empty
+    tuple when no ``auth.json`` exists or it contains no ``github`` entries.
     """
     hosts: list[str] = []
     for entry in _load_config():
@@ -147,14 +176,23 @@ def open_url(
     """Open *url* with config-driven auth, redirect stripping, and fallthrough.
 
     1. Find ``auth.json`` entries whose hosts match the URL.
-    2. For each entry, resolve the token and try the request.
-    3. On 401/403 move to the next matching entry.
-    4. After all entries exhausted (or none matched), try unauthenticated.
+    2. For each entry, resolve the token and try the request. A ``github-cli``
+       acquisition failure raises immediately, with no credential or
+       unauthenticated fallback.
+    3. On HTTP 401/403 after successful acquisition, try the next matching entry.
+    4. After all entries exhausted without an acquisition failure (or none
+       matched), try unauthenticated.
     5. Non-auth errors (404, 500, network) raise immediately.
 
     *extra_headers* (e.g. ``Accept``) are merged into every attempt.
     *redirect_validator*, when provided, is called with ``(old_url, new_url)``
     before following each redirect and may raise to reject the redirect.
+
+    Every attempt uses an isolated opener so a process-wide opener installed
+    with ``urllib.request.install_opener`` cannot replace the redirect guard.
+    Redirect scheme safety: every attempt goes through
+    ``_StripAuthOnRedirect``, which rejects redirects to non-HTTPS URLs except
+    HTTP between loopback URLs, and rejects remote-to-local redirects.
     """
     entries = find_entries_for_url(url, _load_config())
 
@@ -188,7 +226,7 @@ def open_url(
 
     # No entry worked (or none matched) — unauthenticated fallback
     req = _make_req({})
-    if redirect_validator is not None:
-        opener = urllib.request.build_opener(_StripAuthOnRedirect((), redirect_validator))
-        return opener.open(req, timeout=timeout)
-    return urllib.request.urlopen(req, timeout=timeout)  # noqa: S310
+    # No auth is attached on this path, so the handler's host list is empty:
+    # here it runs redirect validation only, not auth stripping.
+    opener = urllib.request.build_opener(_StripAuthOnRedirect((), redirect_validator))
+    return opener.open(req, timeout=timeout)

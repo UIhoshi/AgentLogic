@@ -58,8 +58,8 @@ Before Phase 1, perform the project-native freshness check and read the current 
 
 ## 4. Location of Assets
 
-- **Specify CLI Codebase**: `spec-kit/src/`
-- **Extensions & Templates**: `spec-kit/extensions/`, `spec-kit/templates/`
-- **Presets & Workflows**: `spec-kit/presets/`, `spec-kit/workflows/`
+- **Specify CLI Codebase (`v1.3.3.dev0`)**: `spec-kit/src/`
+- **Bundled Extensions (`assess`, `github`) & Templates**: `spec-kit/extensions/`, `spec-kit/templates/`, `spec-kit/bundles/`
+- **Presets (`constitution-sync`) & Workflows (`assess`, `bugfix`)**: `spec-kit/presets/`, `spec-kit/workflows/`
 - **Specification Documentation**: `spec-kit/spec-driven.md`
 

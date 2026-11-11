@@ -66,6 +66,34 @@
                                        }
                     },
                     {
+                        "id":  "skills-agent-browser-skill-data-derive-client-skill-md",
+                        "entrypoint":  "skills/agent-browser/skill-data/derive-client/SKILL.md",
+                        "family":  "agent-browser",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "dynamic_browser_or_session_task",
+                                                            "permission_and_scope_confirmed"
+                                                        ],
+                                           "purpose":  "Reverse-engineer a website\u0027s internal API by recording browser traffic into a HAR file, then generate a standalone client or CLI that calls the endpoints directly, with no browser needed after the first recording. Use when asked to",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "dynamic_browser_or_session_task",
+                                                                    "permission_and_scope_confirmed"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
+                                       }
+                    },
+                    {
                         "id":  "skills-agent-browser-skill-data-dogfood-skill-md",
                         "entrypoint":  "skills/agent-browser/skill-data/dogfood/SKILL.md",
                         "family":  "agent-browser",
@@ -125,6 +153,34 @@
                                        }
                     },
                     {
+                        "id":  "skills-agent-browser-skill-data-protected-vercel-deployments-skill-md",
+                        "entrypoint":  "skills/agent-browser/skill-data/protected-vercel-deployments/SKILL.md",
+                        "family":  "agent-browser",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "dynamic_browser_or_session_task",
+                                                            "permission_and_scope_confirmed"
+                                                        ],
+                                           "purpose":  "Access and test Vercel deployments protected by Vercel Authentication, SSO, or Deployment Protection with agent-browser. Use when a preview or production URL redirects to a Vercel login page, returns a protection 401 or 403, or needs short-lived Trusted Sources OIDC authentication instead of a static bypass secret or public exception.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "dynamic_browser_or_session_task",
+                                                                    "permission_and_scope_confirmed"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
+                                       }
+                    },
+                    {
                         "id":  "skills-agent-browser-skill-data-slack-skill-md",
                         "entrypoint":  "skills/agent-browser/skill-data/slack/SKILL.md",
                         "family":  "agent-browser",
@@ -169,6 +225,34 @@
                                                             "permission_and_scope_confirmed"
                                                         ],
                                            "purpose":  "Run agent-browser + Chrome inside Vercel Sandbox microVMs for browser automation from any Vercel-deployed app. Use when the user needs browser automation in a Vercel app (Next.js, SvelteKit, Nuxt, Remix, Astro, etc.), wants to run headless Chrome without binary size limits, needs…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "dynamic_browser_or_session_task",
+                                                                    "permission_and_scope_confirmed"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
+                                       }
+                    },
+                    {
+                        "id":  "skills-agent-browser-skill-data-webmcp-gen-skill-md",
+                        "entrypoint":  "skills/agent-browser/skill-data/webmcp-gen/SKILL.md",
+                        "family":  "agent-browser",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "dynamic_browser_or_session_task",
+                                                            "permission_and_scope_confirmed"
+                                                        ],
+                                           "purpose":  "Build and validate experimental WebMCP tools for an existing web page. Use when an agent needs to expose a site\u0027s real workflows as page tools, create webmcp.init.js, define deterministic checks, or compare WebMCP with accessibility-tree automation.",
                                            "explicit_signals":  [
                                                                     "explicit_user_request",
                                                                     "dynamic_browser_or_session_task",
@@ -591,6 +675,34 @@
                                        }
                     },
                     {
+                        "id":  "skills-engineering-implement-spec-skill-md",
+                        "entrypoint":  "skills/engineering/implement-spec/SKILL.md",
+                        "family":  "engineering",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Engineering workflow skill retained for explicit selection; no canonical automatic route has been reviewed yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "task_specific_domain_match",
+                                                            "permission_and_scope_confirmed"
+                                                        ],
+                                           "purpose":  "Implement the result of /to-spec and /to-tickets in code.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "task_specific_domain_match",
+                                                                    "permission_and_scope_confirmed"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
+                                       }
+                    },
+                    {
                         "id":  "skills-engineering-improve-codebase-architecture-skill-md",
                         "entrypoint":  "skills/engineering/improve-codebase-architecture/SKILL.md",
                         "family":  "engineering",
@@ -607,6 +719,34 @@
                                                             "permission_and_scope_confirmed"
                                                         ],
                                            "purpose":  "Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "task_specific_domain_match",
+                                                                    "permission_and_scope_confirmed"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
+                                       }
+                    },
+                    {
+                        "id":  "skills-engineering-pr-skill-md",
+                        "entrypoint":  "skills/engineering/pr/SKILL.md",
+                        "family":  "engineering",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Engineering workflow skill retained for explicit selection; no canonical automatic route has been reviewed yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "task_specific_domain_match",
+                                                            "permission_and_scope_confirmed"
+                                                        ],
+                                           "purpose":  "Use when writing a PR body.",
                                            "explicit_signals":  [
                                                                     "explicit_user_request",
                                                                     "task_specific_domain_match",
@@ -705,6 +845,34 @@
                                                                     "task_brief_matches_reviewed_purpose"
                                                                 ],
                                            "confirmation_policy":  "single_confirmation_when_competing_candidates_match"
+                                       }
+                    },
+                    {
+                        "id":  "skills-engineering-retro-skill-md",
+                        "entrypoint":  "skills/engineering/retro/SKILL.md",
+                        "family":  "engineering",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Engineering workflow skill retained for explicit selection; no canonical automatic route has been reviewed yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "task_specific_domain_match",
+                                                            "permission_and_scope_confirmed"
+                                                        ],
+                                           "purpose":  "Conduct a retrospective on a coding session.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "task_specific_domain_match",
+                                                                    "permission_and_scope_confirmed"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
                                        }
                     },
                     {
@@ -887,6 +1055,34 @@
                                        }
                     },
                     {
+                        "id":  "skills-engineering-wizard-skill-md",
+                        "entrypoint":  "skills/engineering/wizard/SKILL.md",
+                        "family":  "engineering",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Engineering workflow skill retained for explicit selection; no canonical automatic route has been reviewed yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "task_specific_domain_match",
+                                                            "permission_and_scope_confirmed"
+                                                        ],
+                                           "purpose":  "Generate an interactive bash wizard that walks a human through steps only they can perform. Use when provisioning infrastructure, setting up credentials or CI secrets, walking an unfamiliar third-party dashboard, or running a one-off migration or cutover. Don\u0027t invoke this for steps the agent can perform itself.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "task_specific_domain_match",
+                                                                    "permission_and_scope_confirmed"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
+                                       }
+                    },
+                    {
                         "id":  "skills-nano-banana-pro-skill-md",
                         "entrypoint":  "skills/nano-banana-pro/SKILL.md",
                         "family":  "nano-banana-pro",
@@ -905,6 +1101,34 @@
                                            "explicit_signals":  [
                                                                     "net_new_ui",
                                                                     "substantial_ui_refactor"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "route_enforced"
+                                       }
+                    },
+                    {
+                        "id":  "skills-ponytail-skill-md",
+                        "entrypoint":  "skills/ponytail/SKILL.md",
+                        "family":  "ponytail",
+                        "lifecycle":  "conditional",
+                        "route_ids":  [
+                                          "test-design"
+                                      ],
+                        "reason":  "Conditional implementation discipline for behavior changes.",
+                        "activation":  {
+                                           "mode":  "route_candidate",
+                                           "triggers":  [
+                                                            "behavior_change",
+                                                            "coverage_gap",
+                                                            "test_design"
+                                                        ],
+                                           "purpose":  "\u003e",
+                                           "explicit_signals":  [
+                                                                    "behavior_change",
+                                                                    "coverage_gap",
+                                                                    "test_design"
                                                                 ],
                                            "inferred_signals":  [
 
@@ -1050,34 +1274,6 @@
 
                                                                 ],
                                            "confirmation_policy":  "explicit_user_intent_required"
-                                       }
-                    },
-                    {
-                        "id":  "skills-ponytail-skill-md",
-                        "entrypoint":  "skills/ponytail/SKILL.md",
-                        "family":  "ponytail",
-                        "lifecycle":  "conditional",
-                        "route_ids":  [
-                                          "test-design"
-                                      ],
-                        "reason":  "Conditional implementation discipline for behavior changes.",
-                        "activation":  {
-                                           "mode":  "route_candidate",
-                                           "triggers":  [
-                                                            "behavior_change",
-                                                            "coverage_gap",
-                                                            "test_design"
-                                                        ],
-                                           "purpose":  "\u003e",
-                                           "explicit_signals":  [
-                                                                    "behavior_change",
-                                                                    "coverage_gap",
-                                                                    "test_design"
-                                                                ],
-                                           "inferred_signals":  [
-
-                                                                ],
-                                           "confirmation_policy":  "route_enforced"
                                        }
                     },
                     {
@@ -1273,6 +1469,90 @@
                                                             "permission_and_scope_confirmed"
                                                         ],
                                            "purpose":  "Teach the user a new skill or concept, within this workspace.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "product_workflow_match",
+                                                                    "permission_and_scope_confirmed"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
+                                       }
+                    },
+                    {
+                        "id":  "skills-productivity-to-questionnaire-skill-md",
+                        "entrypoint":  "skills/productivity/to-questionnaire/SKILL.md",
+                        "family":  "productivity",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Productivity workflow skill retained for explicit selection; no canonical automatic route has been reviewed yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "product_workflow_match",
+                                                            "permission_and_scope_confirmed"
+                                                        ],
+                                           "purpose":  "Turn a decision you can\u0027t fully answer into a questionnaire for someone else to fill in.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "product_workflow_match",
+                                                                    "permission_and_scope_confirmed"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
+                                       }
+                    },
+                    {
+                        "id":  "skills-productivity-wait-what-skill-md",
+                        "entrypoint":  "skills/productivity/wait-what/SKILL.md",
+                        "family":  "productivity",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Productivity workflow skill retained for explicit selection; no canonical automatic route has been reviewed yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "product_workflow_match",
+                                                            "permission_and_scope_confirmed"
+                                                        ],
+                                           "purpose":  "Stop. That last message did not land: re-pitch it.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "product_workflow_match",
+                                                                    "permission_and_scope_confirmed"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
+                                       }
+                    },
+                    {
+                        "id":  "skills-productivity-writing-for-agents-skill-md",
+                        "entrypoint":  "skills/productivity/writing-for-agents/SKILL.md",
+                        "family":  "productivity",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Productivity workflow skill retained for explicit selection; no canonical automatic route has been reviewed yet.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "product_workflow_match",
+                                                            "permission_and_scope_confirmed"
+                                                        ],
+                                           "purpose":  "Writing documents for agents. Use when creating or editing skills, or modifying AGENTS.md or CLAUDE.md.",
                                            "explicit_signals":  [
                                                                     "explicit_user_request",
                                                                     "product_workflow_match",
@@ -2433,6 +2713,34 @@
                                        }
                     },
                     {
+                        "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-competition-zip-archive-skill-md",
+                        "entrypoint":  "skills/reverse-skill/CTF-Sandbox-Orchestrator/competition-zip-archive/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ],
+                                           "purpose":  "Internal downstream skill for ctf-sandbox-orchestrator. CTF-sandbox workflow for ZIP and PKZIP archive challenges, legacy ZipCrypto identification, known-plaintext recovery with bkcrack, key-based decryption, and reproducible extraction. Use when the user asks to solve an encrypted ZIP challenge, inspect ZipCrypto metadata, recover keys from a known file prefix, or unlock an archive without starting with password brute force. Use only after `$ctf-sandbox-orchestrator` has already established sandbox assumptions and routed here.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
+                                       }
+                    },
+                    {
                         "id":  "skills-reverse-skill-ctf-sandbox-orchestrator-ctf-sandbox-orchestrator-skill-md",
                         "entrypoint":  "skills/reverse-skill/CTF-Sandbox-Orchestrator/ctf-sandbox-orchestrator/SKILL.md",
                         "family":  "reverse-skill",
@@ -2573,6 +2881,34 @@
                                        }
                     },
                     {
+                        "id":  "skills-reverse-skill-skills-binary-ninja-reverse-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/binary-ninja-reverse/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ],
+                                           "purpose":  "Use for authorized binary analysis in Binary Ninja, including HLIL/MLIL/LLIL inspection, strings/imports/exports, cross-references, types, patch review, Python API automation, and optional Binary Ninja MCP or localhost HTTP integration.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
+                                       }
+                    },
+                    {
                         "id":  "skills-reverse-skill-skills-browser-automation-skill-md",
                         "entrypoint":  "skills/reverse-skill/skills/browser-automation/SKILL.md",
                         "family":  "reverse-skill",
@@ -2601,6 +2937,174 @@
                                        }
                     },
                     {
+                        "id":  "skills-reverse-skill-skills-browser-extension-reverse-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/browser-extension-reverse/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ],
+                                           "purpose":  "Use for authorized reverse engineering of browser extensions (Chrome/Firefox) including manifest analysis, background workers, and extension-based credential or traffic logic recovery.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
+                                       }
+                    },
+                    {
+                        "id":  "skills-reverse-skill-skills-case-review-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/case-review/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ],
+                                           "purpose":  "Reviews a reverse-skill case package for scope readiness, Evidence to Finding to Path traceability, work item coverage, timeline references, and optional artifact hash integrity before report handoff.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
+                                       }
+                    },
+                    {
+                        "id":  "skills-reverse-skill-skills-cloud-k8s-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/cloud-k8s/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ],
+                                           "purpose":  "Use for authorized cloud, container, and Kubernetes security assessment including metadata SSRF, IAM misconfig, container escape paths, and cluster RBAC review.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
+                                       }
+                    },
+                    {
+                        "id":  "skills-reverse-skill-skills-code-audit-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/code-audit/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ],
+                                           "purpose":  "Use for authorized source-code security review and SAST workflows including Semgrep, CodeQL patterns, dangerous API hunting, and fix verification.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
+                                       }
+                    },
+                    {
+                        "id":  "skills-reverse-skill-skills-ctf-sandbox-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/ctf-sandbox/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ],
+                                           "purpose":  "Thin PRIMARY for CTF / AWD / 靶场 multi-type orchestration. Hands off to the sidecar CTF-Sandbox-Orchestrator. Use when the user says CTF, AWD, 靶场, or 比赛题 and no more specific pwn/APK/IDA route already won.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
+                                       }
+                    },
+                    {
+                        "id":  "skills-reverse-skill-skills-database-security-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/database-security/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ],
+                                           "purpose":  "Use for authorized database security assessment covering PostgreSQL/MySQL/MSSQL/Mongo/Redis exposure, authz, UDF/command paths, and misconfiguration review.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
+                                       }
+                    },
+                    {
                         "id":  "skills-reverse-skill-skills-diagram-generator-skill-md",
                         "entrypoint":  "skills/reverse-skill/skills/diagram-generator/SKILL.md",
                         "family":  "reverse-skill",
@@ -2617,6 +3121,34 @@
                                                             "isolated_or_approved_environment"
                                                         ],
                                            "purpose":  "generate, refine, validate, and render diagrams from natural language, notes, code snippets, schemas, tables, or existing diagram source. use for flowcharts, swimlanes, sequence diagrams, state diagrams, er diagrams, class diagrams, architecture/c4-style diagrams, dependency grap…",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
+                                       }
+                    },
+                    {
+                        "id":  "skills-reverse-skill-skills-digital-forensics-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/digital-forensics/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ],
+                                           "purpose":  "Use for authorized digital forensics including memory dumps, disk timelines, PCAP investigation, artifact triage, and IR evidence preservation.",
                                            "explicit_signals":  [
                                                                     "explicit_user_request",
                                                                     "authorized_security_or_ctf_scope",
@@ -2713,6 +3245,34 @@
                                        }
                     },
                     {
+                        "id":  "skills-reverse-skill-skills-email-security-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/email-security/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ],
+                                           "purpose":  "Use for authorized email security review including phishing analysis, header authentication (SPF/DKIM/DMARC), BEC patterns, and mailbox token abuse research.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
+                                       }
+                    },
+                    {
                         "id":  "skills-reverse-skill-skills-firmware-pentest-skill-md",
                         "entrypoint":  "skills/reverse-skill/skills/firmware-pentest/SKILL.md",
                         "family":  "reverse-skill",
@@ -2741,6 +3301,90 @@
                                        }
                     },
                     {
+                        "id":  "skills-reverse-skill-skills-ghidra-reverse-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/ghidra-reverse/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ],
+                                           "purpose":  "Use for free/open reverse engineering with Ghidra (headless or GUI), including decompile, cross-refs, and optional Ghidra MCP workflows when IDA is unavailable.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
+                                       }
+                    },
+                    {
+                        "id":  "skills-reverse-skill-skills-go-rust-reverse-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/go-rust-reverse/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ],
+                                           "purpose":  "Use for reverse engineering stripped Go and Rust binaries including runtime recognition, pclntab/moduel data recovery, panic strings, and idiomatic decompilation recovery.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
+                                       }
+                    },
+                    {
+                        "id":  "skills-reverse-skill-skills-hardware-security-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/hardware-security/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ],
+                                           "purpose":  "Use for authorized hardware and embedded interface security research including UART/JTAG discovery, debug pad triage, secure boot overview, and offline firmware extraction support.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
+                                       }
+                    },
+                    {
                         "id":  "skills-reverse-skill-skills-ida-reverse-skill-md",
                         "entrypoint":  "skills/reverse-skill/skills/ida-reverse/SKILL.md",
                         "family":  "reverse-skill",
@@ -2757,6 +3401,34 @@
                                                             "isolated_or_approved_environment"
                                                         ],
                                            "purpose":  "|",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
+                                       }
+                    },
+                    {
+                        "id":  "skills-reverse-skill-skills-identity-federation-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/identity-federation/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ],
+                                           "purpose":  "Use for authorized assessment of federated identity systems including SAML, OIDC, OAuth2 flows, SSO misconfiguration, and token confusion issues.",
                                            "explicit_signals":  [
                                                                     "explicit_user_request",
                                                                     "authorized_security_or_ctf_scope",
@@ -2825,6 +3497,34 @@
                                        }
                     },
                     {
+                        "id":  "skills-reverse-skill-skills-macos-reverse-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/macos-reverse/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ],
+                                           "purpose":  "Use for authorized macOS and Mach-O reverse engineering including codesign, Objective-C/Swift recovery, endpoint security surfaces, and Apple platform malware analysis.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
+                                       }
+                    },
+                    {
                         "id":  "skills-reverse-skill-skills-malware-analysis-skill-md",
                         "entrypoint":  "skills/reverse-skill/skills/malware-analysis/SKILL.md",
                         "family":  "reverse-skill",
@@ -2869,6 +3569,34 @@
                                                             "isolated_or_approved_environment"
                                                         ],
                                            "purpose":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
+                                       }
+                    },
+                    {
+                        "id":  "skills-reverse-skill-skills-ot-ics-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/ot-ics/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ],
+                                           "purpose":  "Use for authorized OT/ICS security assessment covering Purdue model zoning, PLC/SCADA exposure, industrial protocol discovery, and safe passive-first evaluation.",
                                            "explicit_signals":  [
                                                                     "explicit_user_request",
                                                                     "authorized_security_or_ctf_scope",
@@ -2965,6 +3693,34 @@
                                        }
                     },
                     {
+                        "id":  "skills-reverse-skill-skills-protocol-reverse-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/protocol-reverse/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ],
+                                           "purpose":  "Use for authorized reverse engineering of custom binary protocols, Protobuf/gRPC, WebSocket frames, and PCAP-driven protocol recovery.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
+                                       }
+                    },
+                    {
                         "id":  "skills-reverse-skill-skills-pwn-chain-skill-md",
                         "entrypoint":  "skills/reverse-skill/skills/pwn-chain/SKILL.md",
                         "family":  "reverse-skill",
@@ -3009,6 +3765,34 @@
                                                             "isolated_or_approved_environment"
                                                         ],
                                            "purpose":  "|",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
+                                       }
+                    },
+                    {
+                        "id":  "skills-reverse-skill-skills-radio-sdr-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/radio-sdr/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ],
+                                           "purpose":  "Use for authorized RF/SDR security research including signal identification, replay feasibility study in shielded labs, and wireless protocol analysis outside classic Wi-Fi.",
                                            "explicit_signals":  [
                                                                     "explicit_user_request",
                                                                     "authorized_security_or_ctf_scope",
@@ -3121,6 +3905,146 @@
                                                             "isolated_or_approved_environment"
                                                         ],
                                            "purpose":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
+                                       }
+                    },
+                    {
+                        "id":  "skills-reverse-skill-skills-thick-client-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/thick-client/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ],
+                                           "purpose":  "Use for authorized security testing of desktop thick clients including local storage, update channels, IPC, traffic, and client-side trust boundaries.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
+                                       }
+                    },
+                    {
+                        "id":  "skills-reverse-skill-skills-threat-hunting-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/threat-hunting/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ],
+                                           "purpose":  "Use for blue-team threat hunting, detection engineering with Sigma/YARA, SIEM query design, and incident detection validation.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
+                                       }
+                    },
+                    {
+                        "id":  "skills-reverse-skill-skills-threat-intelligence-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/threat-intelligence/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ],
+                                           "purpose":  "Use for authorized OSINT and cyber threat intelligence that enriches IOCs, campaigns, impersonation, scams, or threat actors from public sources. Includes bounded X/Twitter search through Xquik, source preservation, corroboration, and evidence handoff.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
+                                       }
+                    },
+                    {
+                        "id":  "skills-reverse-skill-skills-wifi-wireless-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/wifi-wireless/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ],
+                                           "purpose":  "Use for authorized wireless security assessment including Wi-Fi capture, WPA handshake analysis, rogue AP detection research, and lab-only deauth testing.",
+                                           "explicit_signals":  [
+                                                                    "explicit_user_request",
+                                                                    "authorized_security_or_ctf_scope",
+                                                                    "isolated_or_approved_environment"
+                                                                ],
+                                           "inferred_signals":  [
+
+                                                                ],
+                                           "confirmation_policy":  "explicit_user_intent_required"
+                                       }
+                    },
+                    {
+                        "id":  "skills-reverse-skill-skills-windows-ad-skill-md",
+                        "entrypoint":  "skills/reverse-skill/skills/windows-ad/SKILL.md",
+                        "family":  "reverse-skill",
+                        "lifecycle":  "manual_only",
+                        "route_ids":  [
+
+                                      ],
+                        "reason":  "Security and CTF specialty requires explicit classification and trust/risk review.",
+                        "activation":  {
+                                           "mode":  "manual",
+                                           "triggers":  [
+                                                            "explicit_user_request",
+                                                            "authorized_security_or_ctf_scope",
+                                                            "isolated_or_approved_environment"
+                                                        ],
+                                           "purpose":  "Use for authorized Active Directory and Windows identity attacks including Kerberos, AD CS, BloodHound paths, NTLM relay, and domain privilege escalation research.",
                                            "explicit_signals":  [
                                                                     "explicit_user_request",
                                                                     "authorized_security_or_ctf_scope",

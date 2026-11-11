@@ -5,7 +5,7 @@ description: Professional design, formatting, and standardization suite for Word
 
 # Office Professional Design & Standardization Suite (`office-pro-suite`)
 
-This skill synthesizes the industry-gold-standard document design and engineering rules from **Anthropic Official Document Skills** (`anthropics/skills` — `docx`, `xlsx`, `pptx`) with AgentLogic's **OfficeCLI** governance contract (`iOfficeAI/OfficeCLI`, Module 50).
+This skill synthesizes the industry-gold-standard document design and engineering rules from **Anthropic Official Document Skills** (`anthropics/skills` — open-source Apache 2.0 `docx`, `xlsx`, `pptx`, `pdf`) with AgentLogic's **OfficeCLI** governance contract (`iOfficeAI/OfficeCLI`, Module 50).
 
 ## 1. Mandatory Automatic Activation Rule
 

@@ -15,10 +15,9 @@
   },
   "dependencies": {
     "@agent-browser/eve": "link:../../packages/@agent-browser/eve",
-    "@agent-browser/sandbox": "file:../../packages/@agent-browser/sandbox",
     "@vercel/connect": "0.2.2",
-    "ai": "7.0.0-beta.178",
-    "eve": "^0.22.5",
+    "ai": "7.0.102",
+    "eve": "^0.57.0",
     "zod": "4.4.3",
     "@radix-ui/react-use-controllable-state": "1.2.2",
     "@shikijs/core": "4.1.0",
@@ -50,12 +49,6 @@
     "typescript": "6.0.3",
     "@types/react": "19.2.15",
     "@types/react-dom": "19.2.3"
-  },
-  "overrides": {
-    "ai": "7.0.0-beta.178"
-  },
-  "resolutions": {
-    "ai": "7.0.0-beta.178"
   },
   "engines": {
     "node": "24.x"

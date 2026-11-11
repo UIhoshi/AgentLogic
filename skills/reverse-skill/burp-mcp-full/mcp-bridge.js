@@ -3,7 +3,7 @@
  * BurpSuite MCP Stdio Bridge
  * 
  * Bridges the custom HTTP API (port 9876) to standard MCP JSON-RPC 2.0 stdio protocol.
- * This allows any MCP client (Claude Code, Kiro, Cursor, Cline, etc.) to use all 63 Burp tools.
+ * This allows any MCP client (Claude Code, Kiro, Cursor, Cline, etc.) to use all 78 Burp tools.
  * 
  * Cross-platform: Works on Windows, Linux (Kali), macOS.
  * 
@@ -17,23 +17,74 @@
 
 const http = require('http');
 const readline = require('readline');
+const fs = require('fs');
+const os = require('os');
+const path = require('path');
 
 const BURP_HOST = process.env.BURP_MCP_HOST || '127.0.0.1';
 const BURP_PORT = parseInt(process.env.BURP_MCP_PORT || '9876', 10);
 
-// Tool definitions for MCP
+function resolveToken() {
+  if (process.env.BURP_MCP_TOKEN) return process.env.BURP_MCP_TOKEN;
+  try {
+    const tokenFile = path.join(os.homedir(), '.burp-mcp-token');
+    if (fs.existsSync(tokenFile)) return fs.readFileSync(tokenFile, 'utf8').trim();
+  } catch (e) { /* ignore */ }
+  return null;
+}
+
+const BURP_TOKEN = resolveToken();
+const AUTH_HEADERS = BURP_TOKEN ? { 'Authorization': `Bearer ${BURP_TOKEN}` } : {};
+
 let TOOLS = null;
+let toolsRequest = null;
 
 async function fetchTools() {
   return new Promise((resolve, reject) => {
-    http.get(`http://${BURP_HOST}:${BURP_PORT}/tools`, (res) => {
+    const req = http.request({
+      hostname: BURP_HOST, port: BURP_PORT, path: '/tools', method: 'GET',
+      headers: AUTH_HEADERS
+    }, (res) => {
       let data = '';
       res.on('data', chunk => data += chunk);
       res.on('end', () => {
+        if (res.statusCode !== 200) {
+          reject(new Error(`Cannot fetch tools: HTTP ${res.statusCode} ${data.slice(0, 200)}`));
+          return;
+        }
         try { resolve(JSON.parse(data)); } catch (e) { reject(e); }
       });
-    }).on('error', reject);
+    });
+    req.on('error', reject);
+    req.end();
   });
+}
+
+function disconnectedResponse(id) {
+  return {
+    jsonrpc: '2.0',
+    id,
+    error: {
+      code: -32000,
+      message: `Burp MCP not connected at ${BURP_HOST}:${BURP_PORT}. Start Burp with the "MCP Full Control" extension loaded, then retry.`
+    }
+  };
+}
+
+async function ensureTools() {
+  if (TOOLS) return TOOLS;
+  if (!toolsRequest) {
+    toolsRequest = fetchTools()
+      .then(tools => {
+        TOOLS = tools;
+        process.stderr.write(`[burp-mcp-bridge] Connected to Burp. ${TOOLS.length} tools available.\n`);
+        return TOOLS;
+      })
+      .finally(() => {
+        toolsRequest = null;
+      });
+  }
+  return toolsRequest;
 }
 
 async function callTool(toolName, params) {
@@ -41,11 +92,15 @@ async function callTool(toolName, params) {
     const body = JSON.stringify({ tool: toolName, params: params || {} });
     const req = http.request({
       hostname: BURP_HOST, port: BURP_PORT, path: '/', method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(body) }
+      headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(body), ...AUTH_HEADERS }
     }, (res) => {
       let data = '';
       res.on('data', chunk => data += chunk);
       res.on('end', () => {
+        if (res.statusCode === 403) {
+          reject(new Error('Burp MCP rejected the request: missing or invalid BURP_MCP_TOKEN. Set BURP_MCP_TOKEN to match the token in ~/.burp-mcp-token.'));
+          return;
+        }
         try { resolve(JSON.parse(data)); } catch (e) { resolve({ error: data }); }
       });
     });
@@ -77,8 +132,6 @@ function getToolDescription(name) {
     proxy_history: 'Get Burp proxy history with optional filtering by URL, method, status code',
     proxy_detail: 'Get full request/response details for a specific proxy history item by index',
     proxy_websocket: 'Get WebSocket message history',
-    proxy_listeners: 'Get proxy listener information',
-    proxy_match_replace: 'Manage match & replace rules',
     proxy_clear: 'Clear proxy history',
     proxy_history_filtered: 'Filter proxy history by annotation color or notes',
     send_request: 'Send an HTTP request through Burp and get the response',
@@ -96,7 +149,6 @@ function getToolDescription(name) {
     sitemap: 'Get site map entries with optional URL prefix filter',
     target_info: 'Get target information (hosts, technologies detected)',
     intercept_toggle: 'Enable or disable proxy intercept',
-    intercept_modify: 'Guidance for intercepting and modifying requests',
     encode: 'Encode a string (base64, url, hex)',
     decode: 'Decode a string (base64, url)',
     convert_request: 'Convert HTTP request method (e.g. GET to POST)',
@@ -126,8 +178,6 @@ function getToolDescription(name) {
     cookie_jar: 'View cookies in Burp cookie jar (with optional domain filter)',
     token_analysis: 'Analyze token entropy and randomness',
     sequencer: 'Analyze a batch of tokens for randomness quality',
-    export_cert: 'Get instructions for exporting Burp CA certificate',
-    websocket_send: 'Guidance for sending WebSocket messages',
     save_project: 'Save the current Burp project',
     burp_version: 'Get Burp Suite version information',
     add_issue: 'Manually add a vulnerability issue to the site map',
@@ -237,8 +287,7 @@ function getToolParams(name) {
   return schemas[name] || {};
 }
 
-// MCP JSON-RPC handler
-function handleRequest(msg) {
+async function handleRequest(msg) {
   const { method, id, params } = msg;
 
   switch (method) {
@@ -253,18 +302,31 @@ function handleRequest(msg) {
       return null; // No response needed
 
     case 'tools/list':
-      if (!TOOLS) return { jsonrpc: '2.0', id, error: { code: -32000, message: `Burp MCP not connected at ${BURP_HOST}:${BURP_PORT}. Start Burp with the "MCP Full Control" extension loaded, then reconnect.` } };
-      return { jsonrpc: '2.0', id, result: { tools: buildToolDefinitions(TOOLS) } };
+      try {
+        const tools = await ensureTools();
+        return { jsonrpc: '2.0', id, result: { tools: buildToolDefinitions(tools) } };
+      } catch (err) {
+        return disconnectedResponse(id);
+      }
 
     case 'tools/call': {
-      if (!TOOLS) return { jsonrpc: '2.0', id, error: { code: -32000, message: `Burp MCP not connected at ${BURP_HOST}:${BURP_PORT}. Start Burp with the "MCP Full Control" extension loaded, then reconnect.` } };
+      try {
+        await ensureTools();
+      } catch (err) {
+        return disconnectedResponse(id);
+      }
+      if (!params || typeof params.name !== 'string') {
+        return { jsonrpc: '2.0', id, error: { code: -32602, message: 'tools/call requires params.name' } };
+      }
       const toolName = params.name.replace(/^burp_/, '');
       const toolArgs = params.arguments || {};
-      return callTool(toolName, toolArgs).then(result => ({
-        jsonrpc: '2.0', id, result: { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] }
-      })).catch(err => ({
-        jsonrpc: '2.0', id, error: { code: -1, message: err.message || 'Tool call failed' }
-      }));
+      try {
+        const result = await callTool(toolName, toolArgs);
+        return { jsonrpc: '2.0', id, result: { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] } };
+      } catch (err) {
+        TOOLS = null;
+        return { jsonrpc: '2.0', id, error: { code: -1, message: err.message || 'Tool call failed' } };
+      }
     }
 
     default:
@@ -274,44 +336,38 @@ function handleRequest(msg) {
 
 // Main stdio loop
 async function main() {
-  // Try to fetch tools from Burp
   try {
-    TOOLS = await fetchTools();
-    process.stderr.write(`[burp-mcp-bridge] Connected to Burp. ${TOOLS.length} tools available.\n`);
+    await ensureTools();
   } catch (e) {
     process.stderr.write(`[burp-mcp-bridge] WARNING: Cannot connect to Burp at ${BURP_HOST}:${BURP_PORT}. Start Burp first.\n`);
-    TOOLS = null;
   }
 
   const rl = readline.createInterface({ input: process.stdin, terminal: false });
-  let buffer = '';
-
   let pending = 0;
   let stdinClosed = false;
 
-  rl.on('line', async (line) => {
-    buffer += line;
+  rl.on('line', (line) => {
+    if (!line.trim()) return;
     let msg;
     try {
-      msg = JSON.parse(buffer);
-      buffer = '';
+      msg = JSON.parse(line);
     } catch (e) {
-      if (e instanceof SyntaxError) return; // incomplete JSON, wait for more
-      buffer = '';
       process.stdout.write(JSON.stringify({ jsonrpc: '2.0', id: null, error: { code: -32700, message: 'Parse error' } }) + '\n');
       return;
     }
 
     pending++;
-    try {
-      const response = await handleRequest(msg);
-      if (response) process.stdout.write(JSON.stringify(response) + '\n');
-    } catch (err) {
-      process.stdout.write(JSON.stringify({ jsonrpc: '2.0', id: msg.id ?? null, error: { code: -1, message: err.message || 'Handler error' } }) + '\n');
-    } finally {
-      pending--;
-      if (stdinClosed && pending === 0) process.exit(0);
-    }
+    handleRequest(msg)
+      .then(response => {
+        if (response) process.stdout.write(JSON.stringify(response) + '\n');
+      })
+      .catch(err => {
+        process.stdout.write(JSON.stringify({ jsonrpc: '2.0', id: msg.id ?? null, error: { code: -1, message: err.message || 'Handler error' } }) + '\n');
+      })
+      .finally(() => {
+        pending--;
+        if (stdinClosed && pending === 0) process.exit(0);
+      });
   });
 
   rl.on('close', () => {

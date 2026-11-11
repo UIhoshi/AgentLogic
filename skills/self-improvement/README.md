@@ -10,23 +10,54 @@ https://github.com/pskoett/pskoett-ai-skills/tree/main/skills/self-improvement
 ## Repository Layout
 
 The publishable skill package is the [`self-improving-agent/`](self-improving-agent/)
-subfolder — that is what ClawdHub installs and what you copy into
+subfolder — that is what ClawHub installs and what you copy into
 `~/.openclaw/skills/`. Repo-level files (this README, `.github/` CI) stay
 outside the package on purpose.
 
 - Skill entry point: [`self-improving-agent/SKILL.md`](self-improving-agent/SKILL.md)
 - OpenClaw hook: [`self-improving-agent/hooks/openclaw/`](self-improving-agent/hooks/openclaw/)
 
-## Installation
+## Development and Amp orbs
+
+Use the Node.js version in `.nvmrc`, then run:
 
 ```bash
-clawdhub install self-improving-agent
+npm ci
+npm test
+npm run typecheck
+npm run check:shell
+```
+
+The root npm manifest and lockfile are development-only; the publishable skill
+subfolder remains dependency-free. Tests use an OpenClaw type stub, so no
+OpenClaw installation, credentials, or backing services are required.
+
+Amp runs `.agents/setup` to install the pinned Node.js toolchain and locked
+development dependencies before taking an orb snapshot. Warm setup runs reuse
+installed dependencies. A repository-scoped login-shell hook selects this Node
+version without replacing the orb's system Node. `.agents/resume` intentionally
+does no installation because there is no per-wake repair or authentication work.
+
+## Installation
+
+With OpenClaw's built-in skill installer — this installs into the active
+OpenClaw workspace:
+
+```bash
+openclaw skills install @pskoett/self-improving-agent
+```
+
+Or with the ClawHub CLI (`npm i -g clawhub`). Note this installs into
+`./skills` under the current working directory, not the workspace:
+
+```bash
+clawhub install @pskoett/self-improving-agent
 ```
 
 Or manually — copy the skill subfolder (not the repo root):
 
 ```bash
-git clone https://github.com/peterskoett/self-improving-agent.git /tmp/self-improving-agent-repo
+git clone https://github.com/pskoett/self-improving-agent.git /tmp/self-improving-agent-repo
 cp -r /tmp/self-improving-agent-repo/self-improving-agent ~/.openclaw/skills/self-improving-agent
 ```
 
@@ -40,12 +71,12 @@ Remade for OpenClaw from the original repo:
 ## Upgrading
 
 See `self-improving-agent/CHANGELOG.md` for version history and per-version
-upgrade notes. After upgrading, re-copy the OpenClaw hook and restart the
-gateway:
-
-```bash
-cp -r ~/.openclaw/skills/self-improving-agent/hooks/openclaw ~/.openclaw/hooks/self-improvement
-```
+upgrade notes. If using the optional hook, follow
+[Install or Upgrade the Hook](self-improving-agent/references/openclaw-integration.md#install-or-upgrade-the-hook).
+Locate the active copies, review local patches, preserve the old hook outside
+hook discovery, and restart the gateway after replacement. Do not blindly
+re-copy the directory: a repeated `cp -r` can nest it without updating the
+active handler.
 
 ## Uninstalling
 

@@ -30,13 +30,13 @@ When implementing or auditing user interfaces, the agent should configure and tu
 
 ---
 
-## 3. The Anti-Slop Redesign Workflow
+## 3. The Anti-Slop Redesign & `tasteskill 2.5.1` Workflow
 
-For redesigns or visual upgrades of existing projects, follow this checklist:
-1. **Audit Phase**: Conduct a full visual review to identify spacing inconsistency, low-contrast text, missing motion cues, or "default template" structures.
-2. **Token Set**: Declare a strict visual design system (typography scale, palette, spacing scale) before writing CSS.
-3. **Typography and Spacing**: Ensure proportional hierarchy (e.g. tracking/leading adjustments) and strict margin/padding boundaries.
-4. **Motion Enhancement**: Implement spring physics animations (preferably using GSAP or standard spring transitions) instead of linear ease functions.
+For redesigns, landing pages, or visual upgrades of existing projects, follow this checklist:
+1. **Business-Kind & Audit Phase**: Classify the business kind (`software`/`gaming`/`tech` vs. `product`/`service`/`place`) and conduct a full visual review to identify spacing inconsistency, low-contrast text, missing motion cues, or "default template" structures. Shader effects and code/telemetry scenes belong strictly on `software`, `gaming`, and `tech` pages.
+2. **Token Set & Master + Overrides Persistence**: Declare a strict visual design system (typography scale, 192 industry palettes, spacing scale, equal edges, one section per viewport height) in `design-system/<project>/MASTER.md` (or `.specify/<task>/design-spec.md`) before writing CSS.
+3. **Typography, Spacing & Resilient Text**: Ensure proportional hierarchy (`text-wrap: balance` on headings, `tabular-nums` on metrics, `+n` overflow disclosure on compact badge/chip lists) and strict margin/padding boundaries (`320px`/`390px` mobile collision checks and `>= 44px` tap targets).
+4. **Motion & Finish Gate**: Implement quiet micro-interactions, a purposeful hero entrance, and 1–2 dealt scroll moments (`skills/taste-skill/skills/taste-skill/scripts/gate.mjs` and `copy-lint.mjs` anti-slop copy checks).
 
 ---
 

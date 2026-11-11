@@ -1,222 +1,334 @@
 <p align="center">
   <img src="reverse-skill.png" alt="reverse-skill" width="140" />
 </p>
-
 <h1 align="center">reverse-skill</h1>
-<h3 align="center">Reverse Engineering / Authorized Penetration Testing / Security Research Skill Router Pack</h3>
+<h3 align="center">Cybersecurity Skills Router · 逆向技能路由包</h3>
 
-<p align="center"><em style="font-family: 'KaiTi', 'STKaiti', 'SimSun', serif; font-size: 1.3em; color: #999;">破暗而行，逆水为舟</em></p>
-
-<p align="center">AI-powered routing + On-demand toolchain bootstrapping + Self-evolving knowledge base<br/>
-逆向/渗透/安全技能路由包 — AI 自动路由 · 按需自举工具链 · 自动进化经验库</p>
+<p align="center"><em style="font-family: Georgia, serif; font-size: 1.2em; color: #777;">Navigate the dark waters, sail against the stream.</em></p>
 
 <p align="center">
+  <a href="https://github.com/zhaoxuya520/reverse-skill/releases"><img src="https://img.shields.io/badge/release-v1.0.1-blue" alt="release v1.0.1"></a>
   <a href="https://github.com/zhaoxuya520/reverse-skill/stargazers"><img src="https://img.shields.io/github/stars/zhaoxuya520/reverse-skill?style=flat&logo=github" alt="stars"></a>
   <a href="https://github.com/zhaoxuya520/reverse-skill/forks"><img src="https://img.shields.io/github/forks/zhaoxuya520/reverse-skill?style=flat&logo=github" alt="forks"></a>
   <a href="https://github.com/zhaoxuya520/reverse-skill/issues"><img src="https://img.shields.io/github/issues/zhaoxuya520/reverse-skill?style=flat&logo=github" alt="issues"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="license"></a>
+  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/changelog-Keep%20a%20Changelog-orange" alt="changelog"></a>
 </p>
 
 <p align="center">
+<a href="https://trendshift.io/repositories/43969?utm_source=repository-badge&amp;utm_medium=badge&amp;utm_campaign=badge-repository-43969" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/repositories/43969" alt="zhaoxuya520%2Freverse-skill | Trendshift" width="250" height="55"/></a>
   <a href="https://trendshift.io/repositories/43969?utm_source=trendshift-badge&amp;utm_medium=badge&amp;utm_campaign=badge-trendshift-43969" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/43969/daily" alt="zhaoxuya520%2Freverse-skill | Trendshift" width="250" height="55"/></a>
 </p>
 
 <br/>
-
 <p align="center">
-  <a href="#关于项目">关于</a> ·
-  <a href="#快速开始">快速开始</a> ·
-  <a href="#使用说明">使用说明</a> ·
-  <a href="skills/routing.md">路由矩阵</a> ·
-  <a href="README_AI.md">AI 引导</a> ·
-  <a href="#贡献">贡献</a>
+  <a href="#about">About</a> ·
+  <a href="#getting-started">Getting Started</a> ·
+  <a href="#usage">Usage</a> ·
+  <a href="https://reverse.apivix.com/docs/">Tutorial</a> ·
+  <a href="skills/MASTER-ROUTING.md">Fast route</a> ·
+  <a href="skills/routing.md">Routing</a> ·
+  <a href="skills/ops/">Ops contracts</a> ·
+  <a href="README_AI.md">AI Bootstrap</a> ·
+  <a href="#sponsors">Sponsors</a> ·
+  <a href="#contributing">Contributing</a>
 </p>
 
 <p align="center">
-  🌐 <a href="README_EN.md">English</a>
+  🌐 <a href="README_zh.md">中文</a> ·
+  <a href="https://reverse.apivix.com/">Project website</a> ·
+  <a href="https://reverse.apivix.com/docs/">Online tutorial</a>
 </p>
 
 <br/>
 
-<a id="关于项目"></a>
 
-## 关于项目
+<a id="about"></a>
 
-> **如果你是 AI Agent，直接跳转到 [README_AI.md](README_AI.md)，严格按照内容要求执行。**
+## About
 
-当 AI Agent（Claude Code、Codex CLI、Cursor 等）遇到 APK、二进制、前端 JS 加密、CTF 或渗透测试任务时，这套系统能让它先路由到正确的方法论，再调用本机工具执行，而不是盲目猜命令。
+> **If you are an AI Agent, jump to [README_AI.md](README_AI.md) and follow the instructions strictly.**
+
+When an AI agent (Claude Code, Codex, Cursor, OpenCode, or another compatible client) encounters an APK, a binary, frontend JS encryption, a CTF challenge, or a pentesting target, this package routes it to the right methodology, checks available tools, and executes a repeatable workflow instead of guessing commands.
 
 ```
-用户任务 → RULES.md → Skill Router → 目标 Skill → 工具 / MCP / 脚本 → 报告 + 经验沉淀
+User task
+  → RULES.md
+  → MASTER-ROUTING / master-route.ps1 (PRIMARY)
+  → case-init / scope.md (auth + network_profile; no target ACT until ready)
+  → Scenario skill → tools / MCP / scripts
+  → timeline + Evidence→Finding→Path → report + field-journal
 ```
 
-**为什么需要这个项目：**
-- AI Agent 面对 APK、ELF、JS、PCAP 不知道该用 jadx 还是 Frida 还是 IDA
-- 工具路径、MCP 服务、脚本入口分散在不同机器，迁移困难
-- 同样的问题每次重新踩坑，经验无法复用
+**Why this exists:**
+- AI agents don't know whether to use jadx, apktool, Frida, IDA, or BurpSuite for a given task
+- APK, ELF, JS, PCAP, and CTF tasks each need different playbooks
+- Tools, MCP servers, and scripts are scattered across machines
+- The same mistakes get repeated because experience isn't reused
 
-完整路由矩阵：[skills/routing.md](skills/routing.md)
+### Current status
+
+| Routing rules | Regression benchmark | Core skill modules | CI platforms | Client model |
+|---:|---:|---:|---|---|
+| 44 (R0–R45) | 175 cases | 45 tracked modules | Windows + Ubuntu | Client-neutral |
+
+The routing core is driven by one structured configuration, validated by cross-platform CI, and kept separate from optional client adapters.
+
+PRIMARY ladder: [skills/MASTER-ROUTING.md](skills/MASTER-ROUTING.md) · Full matrix: [skills/routing.md](skills/routing.md) · Ops: [skills/ops/](skills/ops/)
 
 <br/>
 
 <div align="center">
-  <a href="https://star-history.com/#zhaoxuya520/reverse-skill&Date">
-    <img src="https://api.star-history.com/svg?repos=zhaoxuya520/reverse-skill&type=Date" alt="Star History" width="650" />
+  <a href="https://www.star-history.com/?repos=zhaoxuya520%2Freverse-skill&amp;type=date&amp;legend=top-left">
+    <img src="https://history.apivix.com/star-history.svg?v=hourly-v1" alt="Star History chart for zhaoxuya520/reverse-skill" width="650" />
   </a>
 </div>
 
 <br/>
 
-<p align="right">(<a href="#关于项目">返回顶部</a>)</p>
+<p align="right">(<a href="#about">back to top</a>)</p>
 
-### 技术栈
+<a id="sponsors"></a>
+
+## Sponsors
+
+<table>
+  <tr>
+    <td align="center" width="220">
+      <a href="https://www.ucloud.cn/site/active/astraflow?ytag=geo_waituo_reverse">
+        <img src="docs/assets/sponsors/ucloud-astraflow.png" alt="UCloud AstraFlow" width="110" />
+      </a>
+      <br />
+      <strong>AstraFlow</strong>
+    </td>
+    <td>
+      <strong><a href="https://www.ucloud.cn/site/active/astraflow?ytag=geo_waituo_reverse">UCloud AstraFlow</a></strong> provides one-click access to 200+ leading open-source models, including Kimi K3, DeepSeek V4/V3, Qwen 3, GLM 5.2, and HappyHorse—no model training required, ready to use out of the box.
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="220">
+      <a href="https://www.atlascloud.ai/?ref=W3Q77C">
+        <img src="docs/assets/sponsors/atlas-cloud.svg" alt="Atlas Cloud" width="190" />
+      </a>
+      <br />
+      <a href="https://www.atlascloud.ai/oss-program">
+        <img src="https://www.atlascloud.ai/oss-program/powered-by-atlas-cloud.svg" alt="Powered by Atlas Cloud" height="24" />
+      </a>
+    </td>
+    <td>
+      <strong><a href="https://www.atlascloud.ai/?ref=W3Q77C">Atlas Cloud</a></strong> is a full-modal AI inference platform that provides unified API access to 400+ curated image, video, audio, 3D, and language models. Atlas Cloud supports reverse-skill with model services for cross-platform routing verification, documentation, and open security workflows.
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="220">
+      <a href="https://gokite.ai/">
+        <img src="https://gokite.ai/images/Kite_Logo.svg" alt="Kite AI" width="150" />
+      </a>
+    </td>
+    <td>
+      <strong><a href="https://gokite.ai/">Kite AI</a></strong> builds identity and payment infrastructure for the agent economy. Its support helps sustain reverse-skill's open-source maintenance, routing benchmarks, and platform-neutral security workflows.
+    </td>
+  </tr>
+</table>
+
+### Built With
 
 <p align="left">
   <img src="https://skillicons.dev/icons?i=py,nodejs,powershell,bash,java,docker,git&theme=light" /><br/>
-  <code>IDA Pro</code> · <code>radare2</code> · <code>Ghidra</code>
+  <code>IDA Pro</code> · <code>radare2</code> · <code>Ghidra</code> · <code>Binary Ninja</code>
 </p>
 
-<p align="right">(<a href="#关于项目">返回顶部</a>)</p>
+<p align="right">(<a href="#about">back to top</a>)</p>
 
-<a id="快速开始"></a>
+<a id="getting-started"></a>
 
-## 快速开始
+## Getting Started
 
-### 前置依赖
+### Prerequisites
 
-- **Java / JDK** — 运行 jadx、apktool
-- **Node.js 22.12+** — JS 工具链和 MCP 服务
-- **Python 3.x** — Frida 和辅助脚本
-- **代码 AI 客户端** — Claude Code、Codex CLI、Cursor 等
+- **Java / JDK** — for jadx and apktool
+- **Node.js 22.12+** — for JS toolchain and MCP servers
+- **Python 3.x** — for Frida and helper scripts
+- **A code AI client** — Claude Code, Codex, Cursor, OpenCode, or another compatible client
 
-### 安装
+### Installation
 
 ```
 git clone https://github.com/zhaoxuya520/reverse-skill.git
 ```
 
-### 初次使用
+Then refresh the tool index per platform:
 
-> **初次下载只需让Ai阅读[README_AI.md](README_AI.md)即可，无需其他操作。**
+| Platform | Command |
+|----------|---------|
+| Windows | `powershell -File skills/scripts/refresh-tool-index.ps1` |
+| Linux / macOS | `bash skills/scripts/refresh-tool-index.sh` |
+| Kali Linux | `bash kali/scripts/refresh-tool-index.sh` |
 
-各平台详细部署文档：
+Check [skills/tool-index.md](skills/tool-index.md) to see detected tools.
+
+Platform-specific docs:
 - **Kali Linux** → [kali/README-kali.md](kali/README-kali.md)
 - **Ubuntu/Debian** → [docs/platforms/linux.md](docs/platforms/linux.md)
 - **macOS** → [docs/platforms/macos.md](docs/platforms/macos.md)
 
-<p align="right">(<a href="#快速开始">返回顶部</a>)</p>
+<p align="right">(<a href="#getting-started">back to top</a>)</p>
 
-<a id="使用说明"></a>
+<a id="usage"></a>
 
-## 使用说明
+## Usage
 
-### 支持场景
+### Supported scenarios
 
-| 场景 | 入口 |
-|------|------|
-| APK / Android 逆向 | `skills/apk-reverse/` |
-| 二进制逆向 (exe/dll/so/elf) | `skills/ida-reverse/` / `skills/radare2/` |
-| 前端 JS 签名 / 加密参数 | `skills/js-reverse/` |
-| HTTP 抓包 / 请求重放 | anything-analyzer + `js-reverse/` |
-| 渗透测试 / 漏洞扫描 | `skills/pentest-tools/` |
-| CTF 竞赛 | `CTF-Sandbox-Orchestrator/` (40+ 子技能) |
-| 固件 / IoT | `skills/firmware-pentest/` |
-| 补丁差分 / N-day | `skills/patch-diff-exploit/` |
-| Pwn / 漏洞利用 | `skills/pwn-chain/` |
-| EDR 绕过 | `skills/edr-bypass-re/` |
-| LLM / AI 安全 | `skills/llm-security/` |
-| OLLVM 脱密 | `skills/reverse-engineering/references/ollvm-deobfuscation.md` |
-| 图表 / 报告 | `skills/diagram-generator/` / `skills/docs-generator/` |
+| Scenario | Entry |
+|----------|-------|
+| APK / Android analysis | `skills/apk-reverse/` |
+| iOS / mobile | `skills/mobile-reverse/` |
+| Binary reverse (exe/dll/so/elf) | `skills/ida-reverse/` / `skills/radare2/` |
+| Binary Ninja / HLIL / MLIL / MCP | `skills/binary-ninja-reverse/` |
+| .NET / C# | `skills/dotnet-reverse/` |
+| Frontend JS / encrypted params | `skills/js-reverse/` |
+| DSL VM / custom JS opcode VM | `skills/reverse-engineering/dsl-vm-reverse/` |
+| HTTP capture / request replay | anything-analyzer, Reqable MCP + `js-reverse/` |
+| Malware / YARA | `skills/malware-analysis/` |
+| Penetration testing / scanning | `skills/pentest-tools/` |
+| Attack chain / red-team orchestration | `skills/attack-chain/` |
+| Case evidence review / report handoff | `skills/case-review/` |
+| CTF competition | `CTF-Sandbox-Orchestrator/` (42 sub-skills) |
+| Firmware / IoT | `skills/firmware-pentest/` |
+| Patch diff / N-day | `skills/patch-diff-exploit/` |
+| Pwn / exploit development | `skills/pwn-chain/` |
+| EDR bypass | `skills/edr-bypass-re/` |
+| API / GraphQL | `skills/api-security/` |
+| Supply chain / SBOM | `skills/supply-chain-security/` |
+| LLM / AI security | `skills/llm-security/` |
+| OLLVM deobfuscation | `skills/reverse-engineering/references/ollvm-deobfuscation.md` |
+| Diagrams / reports | `skills/diagram-generator/` / `skills/docs-generator/` |
 
-### 关键文件
+### Key files
 
-| 文件 | 用途 |
-|------|------|
-| [README_AI.md](README_AI.md) | AI Agent 配置引导（Agent 必读） |
-| [RULES.md](RULES.md) | 全局路由规则 |
-| [skills/routing.md](skills/routing.md) | 路由矩阵（场景 → Skill） |
-| [skills/SKILL.md](skills/SKILL.md) | 总控入口 |
-| [skills/tool-index.md](skills/tool-index.md) | 本机工具索引（自动生成） |
+| File | Purpose |
+|------|---------|
+| [README_AI.md](README_AI.md) | AI agent bootstrap and configuration |
+| [RULES.md](RULES.md) | Global routing rules (scope gate before ACT) |
+| [skills/MASTER-ROUTING.md](skills/MASTER-ROUTING.md) | PRIMARY fast ladder |
+| [skills/routing.md](skills/routing.md) | Task → skill routing matrix |
+| [skills/SKILL.md](skills/SKILL.md) | Master entry point |
+| [skills/INDEX.md](skills/INDEX.md) | Auto-generated, client-neutral skill navigation index |
+| [skills/config/routing.json](skills/config/routing.json) | **Routing single source of truth** (43 rules, R0–R44) |
+| [skills/tool-index.md](skills/tool-index.md) | Local tool status (auto-generated) |
+| [skills/scripts/master-route.ps1](skills/scripts/master-route.ps1) | One-shot PRIMARY triage (reads routing.json) |
+| [skills/scripts/case-init.ps1](skills/scripts/case-init.ps1) | Case dir: scope / timeline / workitems |
+| [skills/case-review/](skills/case-review/) | Read-only Evidence graph review and artifact fixity checks |
+| [skills/scripts/test-routing.ps1](skills/scripts/test-routing.ps1) | Routing regression runner (173 benchmark cases) |
+| [skills/scripts/verify-routing-coherence.ps1](skills/scripts/verify-routing-coherence.ps1) | Structure + supply-chain pin gate checks |
+| [skills/scripts/extract-summaries.ps1](skills/scripts/extract-summaries.ps1) | Regenerates INDEX.md from skill frontmatter |
+| [AGENTS.md](AGENTS.md) | Platform-neutral repository instructions |
+| [skills/ops/](skills/ops/) | Scope, Evidence chain, roles, timeline (skill-router form) |
 
-### 仓库结构
+### Testing (run after any routing/config change)
+
+```powershell
+# 1. Routing regression — 173 (hint → expected PRIMARY) cases, fails CI on any mismatch
+powershell -NoProfile -ExecutionPolicy Bypass -File skills/scripts/test-routing.ps1
+# 2. Structure coherence + supply-chain pin gate (unpinned auto-install fails)
+powershell -NoProfile -ExecutionPolicy Bypass -File skills/scripts/verify-routing-coherence.ps1
+# 3. Smoke: verify + script parse + quick route matrix
+powershell -NoProfile -ExecutionPolicy Bypass -File skills/scripts/smoke.ps1
+# 4. INDEX.md drift check (regenerate with extract-summaries.ps1 if dirty)
+powershell -NoProfile -ExecutionPolicy Bypass -File skills/scripts/extract-summaries.ps1 -Check
+```
+
+GitHub Actions CI runs all of the above on **Windows + Ubuntu** for every push/PR.
+
+### Client-neutral integration
+
+The routing core, regression suite, manifests, and case workflow do not depend on a specific AI client. Claude Code, Codex, Cursor, OpenCode, and other clients should load the repository through their own adapter or project-instruction mechanism. Client-specific configuration must remain optional and outside the core routing contract.
+
+For Codex, the repository also exposes an optional adapter plugin at [`plugins/reverse-skill/`](plugins/reverse-skill/). It delegates to the repository's existing routing core and does not register external MCP servers automatically.
+
+### Repository layout
 
 ```
 .
-├── README.md              # 本文件
-├── README_EN.md           # 英文版
-├── README_AI.md           # AI Agent 配置引导
-├── RULES.md               # 全局路由规则
+├── README.md / README_zh.md / README_AI.md
+├── RULES.md / RULES_zh.md
 ├── skills/
-│   ├── SKILL.md           # 总控入口
-│   ├── routing.md         # 路由矩阵
-│   ├── field-journal/     # 经验日志
-│   ├── apk-reverse/       # APK 逆向
-│   ├── js-reverse/        # JS 逆向
-│   ├── ida-reverse/       # IDA Pro 工作流
-│   ├── radare2/           # radare2 分析
-│   ├── reverse-engineering/ # 通用逆向方法论
-│   ├── pentest-tools/     # 渗透测试
-│   ├── pwn-chain/         # 漏洞利用
-│   ├── patch-diff-exploit/ # N-day 分析
-│   ├── firmware-pentest/  # 固件 / IoT
-│   ├── edr-bypass-re/     # EDR 绕过
-│   ├── binary-diff/       # 符号迁移
-│   ├── browser-automation/ # 浏览器自动化
-│   ├── diagram-generator/ # 图表生成
-│   ├── docs-generator/    # 报告生成
-│   └── llm-security/      # LLM / AI 安全
-├── CTF-Sandbox-Orchestrator/ # CTF 子技能 (40+)
-├── docs/                     # 概览与架构文档
-└── kali/                     # Kali 辅助脚本
+│   ├── MASTER-ROUTING.md / SKILL.md / routing.md
+│   ├── ops/                   # ops contracts
+│   ├── scripts/               # master-route, case-init, bootstrap, verify
+│   ├── field-journal/
+│   ├── apk-reverse/ mobile-reverse/ js-reverse/ dotnet-reverse/
+│   ├── ida-reverse/ radare2/ reverse-engineering/ malware-analysis/
+│   ├── pentest-tools/ attack-chain/ pwn-chain/ firmware-pentest/
+│   ├── api-security/ supply-chain-security/ llm-security/
+│   └── ...
+├── CTF-Sandbox-Orchestrator/
+├── docs/
+├── kali/                      # see kali/README-kali.md
+└── work/                      # local cases (gitignored)
 ```
 
-<p align="right">(<a href="#使用说明">返回顶部</a>)</p>
+<p align="right">(<a href="#usage">back to top</a>)</p>
 
-<a id="贡献"></a>
+<a id="contributing"></a>
 
-## 贡献
+## Contributing
 
-欢迎任何贡献！Fork 本仓库 → 创建特性分支 → 提交 PR 即可。
+Contributions are welcome! Fork the repo, create a feature branch, and open a PR.
 
-1. Fork 项目
+1. Fork the Project
 2. `git checkout -b feature/AmazingFeature`
 3. `git commit -m 'Add some AmazingFeature'`
 4. `git push origin feature/AmazingFeature`
-5. 提交 Pull Request
+5. Open a Pull Request
 
-### 贡献者
+### Contributors
 
 <a href="https://github.com/zhaoxuya520/reverse-skill/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=zhaoxuya520/reverse-skill" alt="contributors" />
 </a>
 
-<p align="right">(<a href="#贡献">返回顶部</a>)</p>
+<p align="right">(<a href="#contributing">back to top</a>)</p>
 
-<a id="许可证"></a>
+<a id="license"></a>
 
-## ⚖️ 许可证
+## License
 
-本项目（`reverse-skill`）主体采用 **MIT License**（详见 [LICENSE](LICENSE)）。
+This project (`reverse-skill`) is primarily licensed under the **MIT License** (see [LICENSE](LICENSE)).
 
-**子模块与第三方依赖：**
-- **CTF-Sandbox-Orchestrator/**：**GNU GPLv3**
-- **Pentest Swarm AI**：原始项目为 **AGPL-3.0**，本仓库仅通过命令行/MCP 调用，不包含其源代码
-- 其他工具（jadx、frida、nmap、burpsuite-mcp 等）遵循各自官方许可
+**Submodule and third-party dependencies:**
+- **CTF-Sandbox-Orchestrator/**: **GNU GPLv3**
+- **Pentest Swarm AI**: Original project is **AGPL-3.0**. This repo only invokes it via CLI or MCP and does not include its source code
+- Other tools (jadx, frida, nmap, burpsuite-mcp, etc.) are subject to their respective official licenses
 
-<p align="right">(<a href="#许可证">返回顶部</a>)</p>
+<p align="right">(<a href="#license">back to top</a>)</p>
 
-<a id="致谢"></a>
+<a id="acknowledgments"></a>
 
-## 致谢
+## Acknowledgments
 
-感谢所有开源工具和项目的作者们。本仓库集成的工具涵盖逆向工程、渗透测试、CTF、安全分析等领域，每一个工具都是社区智慧的结晶。
+Thanks to all open-source tool authors. This project integrates tools across reverse engineering, penetration testing, CTF, and security analysis — every tool is the fruit of community effort.
 
-特别感谢 OLLVM 脱密生态的贡献者，以及所有为本仓库提供测试样本、提交 Issue 和 PR 的开发者。
+Special thanks to the OLLVM deobfuscation ecosystem contributors and everyone who submitted test samples, issues, and PRs.
 
-<p align="right">(<a href="#致谢">返回顶部</a>)</p>
+<p align="right">(<a href="#acknowledgments">back to top</a>)</p>
 
-## 联系方式
-- **邮箱**：`ww7517437@gmail.com`
-- **telegram群组**:
-(https://t.me/AI_And_Security)
-- **X (Twitter)**：[@apivixtls](https://x.com/apivixtls)
+## Contact
+
+- **Email:** [ww7517437@gmail.com](mailto:ww7517437@gmail.com)
+- **Issues:** [GitHub Issues](https://github.com/zhaoxuya520/reverse-skill/issues)
+
+## Disclaimer
+
+This project is intended solely for lawful security research, education, CTF competitions, and testing of systems that you own or have explicit authorization to assess.
+
+**Unauthorized access, scanning, exploitation, disruption, data acquisition, or any other use against systems without prior permission is strictly prohibited.** Users are solely responsible for complying with applicable laws, regulations, and the authorized scope of testing. The maintainers accept no liability for misuse of this project or for any resulting damage or legal consequences
+
+## Installation and download security
+
+See [Security Policy](SECURITY.md), [Installation and Download Security Guidance](docs/UV-AND-DOWNLOAD-SECURITY.md), and the [2026-09-03 repository security review](docs/SECURITY-REVIEW-2026-09-03.md).
+
+## Community quick start and issue triage
+
+See [Quick Start](docs/QUICKSTART_zh.md) and [Community Issue Triage](docs/COMMUNITY-ISSUE-TRIAGE.md) for installation, client integration, and how community issues are classified. Installation/archive security details remain in [Installation and Download Security Guidance](docs/UV-AND-DOWNLOAD-SECURITY.md).

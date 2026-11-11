@@ -6,10 +6,12 @@ from pathlib import Path
 from typing import Any, Callable
 
 import typer
+from rich.markup import escape
 
 from .._agent_config import SCRIPT_TYPE_CHOICES
 from .._console import console
 from ..integration_runtime import (
+    invoke_prefix_for_integration as _invoke_prefix_for_integration,
     invoke_separator_for_integration as _invoke_separator_for_integration,
     resolve_integration_options as _resolve_integration_options_impl,
     with_integration_setting as _with_integration_setting,
@@ -94,8 +96,10 @@ def _write_integration_json(
 
 def _refresh_init_options_speckit_version(project_root: Path) -> None:
     """Refresh only the Spec Kit version recorded in init-options.json."""
-    from .. import load_init_options, save_init_options
-    opts = load_init_options(project_root)
+    from .. import save_init_options
+    from .._file_policy import read_project_options
+
+    opts = read_project_options(project_root)
     if not isinstance(opts, dict) or not opts:
         return
     opts["speckit_version"] = _get_speckit_version()
@@ -104,11 +108,10 @@ def _refresh_init_options_speckit_version(project_root: Path) -> None:
 
 def _clear_init_options_for_integration(project_root: Path, integration_key: str) -> None:
     """Clear active integration keys from init-options.json when they match."""
-    from .. import (
-        load_init_options,
-        save_init_options,
-    )
-    opts = load_init_options(project_root)
+    from .. import save_init_options
+    from .._file_policy import read_project_options
+
+    opts = read_project_options(project_root)
     if opts.get("integration") == integration_key or opts.get("ai") == integration_key:
         opts.pop("integration", None)
         opts.pop("ai", None)
@@ -119,8 +122,11 @@ def _clear_init_options_for_integration(project_root: Path, integration_key: str
 def _remove_integration_json(project_root: Path) -> None:
     """Remove ``.specify/integration.json`` if it exists."""
     path = project_root / INTEGRATION_JSON
-    if path.exists():
-        path.unlink()
+    from ._file_changes import after_file_change, before_file_change
+
+    before_file_change(path, removal=True)
+    path.unlink(missing_ok=True)
+    after_file_change(path)
 
 
 # ---------------------------------------------------------------------------
@@ -206,7 +212,7 @@ def _parse_integration_options(integration: Any, raw_options: str) -> dict[str, 
     while i < len(tokens):
         token = tokens[i]
         if not token.startswith("-"):
-            console.print(f"[red]Error:[/red] Unexpected integration option value '{token}'.")
+            console.print(f"[red]Error:[/red] Unexpected integration option value '{escape(token)}'.")
             if allowed:
                 console.print(f"Allowed options: {allowed}")
             raise typer.Exit(1)
@@ -217,7 +223,7 @@ def _parse_integration_options(integration: Any, raw_options: str) -> dict[str, 
             name, value = name.split("=", 1)
         opt = declared.get(name)
         if not opt:
-            console.print(f"[red]Error:[/red] Unknown integration option '{token}'.")
+            console.print(f"[red]Error:[/red] Unknown integration option '{escape(token)}'.")
             if allowed:
                 console.print(f"Allowed options: {allowed}")
             raise typer.Exit(1)
@@ -240,6 +246,27 @@ def _parse_integration_options(integration: Any, raw_options: str) -> dict[str, 
     return parsed or None
 
 
+def _preflight_setup_or_exit(
+    integration: Any,
+    project_root: Path,
+    parsed_options: dict[str, Any] | None,
+    script_type: str,
+    action: str,
+) -> None:
+    """Run ``integration.preflight_setup()`` and exit before any write on refusal."""
+    try:
+        integration.preflight_setup(
+            project_root, parsed_options, script_type=script_type
+        )
+    except (ValueError, OSError) as exc:
+        console.print(
+            f"[red]Error:[/red] Cannot {action} integration "
+            f"'{escape(integration.key)}': {escape(_cli_error_detail(exc))}"
+        )
+        console.print("No files were changed.")
+        raise typer.Exit(1) from exc
+
+
 def _resolve_integration_options(
     integration: Any,
     state: dict[str, Any],
@@ -260,6 +287,7 @@ def _update_init_options_for_integration(
     project_root: Path,
     integration: Any,
     script_type: str | None = None,
+    parsed_options: dict[str, Any] | None = None,
 ) -> None:
     """Update init-options.json to reflect *integration* as the active one.
 
@@ -267,18 +295,22 @@ def _update_init_options_for_integration(
     agent-context extension, so this function never touches the extension
     or its config.
     """
-    from .. import (
-        load_init_options,
-        save_init_options,
-    )
-    from .base import SkillsIntegration
-    opts = load_init_options(project_root)
+    from .. import save_init_options
+    from .._file_policy import read_project_options
+
+    opts = read_project_options(project_root)
     opts["integration"] = integration.key
     opts["ai"] = integration.key
     opts["speckit_version"] = _get_speckit_version()
     if script_type:
         opts["script"] = script_type
-    if isinstance(integration, SkillsIntegration) or getattr(integration, "_skills_mode", False):
+    # Whether skills mode is active is owned by each integration via the
+    # ``is_skills_mode`` hook (base default honors ``--skills``;
+    # SkillsIntegration returns True; skills-first integrations with a legacy
+    # opt-out such as Bob override it). This keeps shared code free of
+    # ``isinstance`` / ``_skills_mode`` probing. Passing parsed_options lets it
+    # work on the ``use``/``install`` path where no setup() runs (issue #3550).
+    if integration.is_skills_mode(parsed_options, project_root=project_root):
         opts["ai_skills"] = True
     else:
         opts.pop("ai_skills", None)
@@ -314,6 +346,7 @@ def _set_default_integration(
         script_type=resolved_script,
         raw_options=raw_options,
         parsed_options=parsed_options,
+        project_root=project_root,
     )
 
     if refresh_templates:
@@ -322,7 +355,11 @@ def _set_default_integration(
                 project_root,
                 resolved_script,
                 invoke_separator=_invoke_separator_for_integration(
-                    integration, {"integration_settings": settings}, key, parsed_options
+                    integration, {"integration_settings": settings}, key, parsed_options,
+                    project_root=project_root,
+                ),
+                invoke_prefix=_invoke_prefix_for_integration(
+                    integration, key, parsed_options, project_root
                 ),
                 force=refresh_templates_force,
                 refresh_managed=True,
@@ -334,7 +371,9 @@ def _set_default_integration(
             ) from exc
 
     _write_integration_json(project_root, key, installed_keys, settings)
-    _update_init_options_for_integration(project_root, integration, script_type=resolved_script)
+    _update_init_options_for_integration(
+        project_root, integration, script_type=resolved_script, parsed_options=parsed_options
+    )
 
 
 def _set_default_integration_or_exit(*args: Any, **kwargs: Any) -> None:
@@ -380,23 +419,24 @@ def _register_extensions_for_agent(
     agent_key: str,
     *,
     continuing: str,
+    force: bool = False,
 ) -> None:
     """Register all enabled extensions' commands/skills for ``agent_key``.
 
     ``use`` / ``switch`` re-register enabled extensions for the agent they
-    activate; ``upgrade`` backfills them for the refreshed agent. Plain
-    ``install`` deliberately does not call this helper so adding a secondary
-    integration has no extension side effects until it is selected or upgraded.
-    See issue #2886.
+    activate (rescaffold); ``upgrade`` does so only for the *active*
+    integration. Plain ``install`` and upgrade of a non-active integration
+    deliberately skip this helper so a secondary integration has no extension
+    side effects until it is selected. See issues #2886 and #2948.
 
-    Known limitation: extension *skill* rendering is scoped to the active
-    agent (init-options track a single ``ai`` / ``ai_skills`` pair). A
-    skills-mode agent registered while it is *not* the active agent (e.g.
-    Copilot ``--skills`` registered while non-active) therefore
-    receives command files rather than skills here — matching ``extension
-    add``'s multi-agent behavior. ``use`` / ``switch`` avoid this because they
-    make the target the active agent first. Per-agent skills parity is tracked in
-    #2948.
+    Callers always pass the active agent (use/switch activate the target
+    before registering), so extension *skill* rendering — which is scoped to
+    the active ``ai`` / ``ai_skills`` init-options — matches ``agent_key``.
+
+    When ``force=True``, existing skill files are overwritten even when they
+    are not dev-mode symlinks. Pass ``force=True`` in the upgrade path so that
+    extension content is layered on top of the core-template files that
+    ``setup()`` just regenerated (fixes the skip-guard bug for skills mode).
 
     Best-effort: never aborts the surrounding integration operation. Callers
     invoke it *after* the use/upgrade/switch transaction has committed so a
@@ -405,7 +445,7 @@ def _register_extensions_for_agent(
     _best_effort_extension_op(
         project_root,
         agent_key,
-        lambda mgr, key: mgr.register_enabled_extensions_for_agent(key),
+        lambda mgr, key: mgr.register_enabled_extensions_for_agent(key, force=force),
         phase="register extension artifacts for",
         continuing=continuing,
     )
@@ -428,6 +468,211 @@ def _unregister_extensions_for_agent(
         agent_key,
         lambda mgr, key: mgr.unregister_agent_artifacts(key),
         phase="clean up extension artifacts for",
+        continuing=continuing,
+    )
+
+
+def _register_presets_for_agent(
+    project_root: Path,
+    agent_key: str,
+    *,
+    continuing: str,
+) -> None:
+    """Register all enabled presets' command overrides/skills for ``agent_key``.
+
+    Presets follow the same single-active rule as extensions (#2948):
+    ``use`` / ``switch`` re-register enabled presets for the agent they
+    activate (rescaffold), so a preset installed while a different
+    integration was active is not left targeting that inactive integration.
+
+    Best-effort: never aborts the surrounding integration operation.
+    """
+    try:
+        from ..presets import PresetManager
+
+        preset_mgr = PresetManager(project_root)
+        preset_mgr.register_enabled_presets_for_agent(agent_key)
+    except Exception as preset_err:
+        from .. import _print_cli_warning
+
+        _print_cli_warning(
+            "register preset artifacts for",
+            "integration",
+            agent_key,
+            preset_err,
+            continuing=continuing,
+        )
+
+
+def _snapshot_manifest_before_registration(
+    project_root: Path, agent_key: str,
+) -> tuple[Any, set[str]]:
+    """Snapshot an installed manifest's unmodified files before rescaffolding (#5078).
+
+    Same rules as ``check_modified()``, applied one file at a time after
+    ``record_existing()``'s path check, so no file outside the project is
+    read. A path that fails the check or can't be read counts as modified,
+    with a warning: its hash isn't refreshed after registration.
+    """
+    try:
+        from .manifest import IntegrationManifest, _sha256, _validate_record_path
+
+        manifest = IntegrationManifest.load(agent_key, project_root)
+        unmodified: set[str] = set()
+        for rel, expected_hash in manifest.files.items():
+            # RuntimeError is a symlink loop in Path.resolve() before 3.13.
+            try:
+                abs_path = _validate_record_path(Path(rel), manifest.project_root)
+                if not abs_path.exists() or (
+                    abs_path.is_file() and _sha256(abs_path) == expected_hash
+                ):
+                    unmodified.add(rel)
+            except (OSError, RuntimeError, ValueError) as file_err:
+                from .. import _print_cli_warning
+
+                _print_cli_warning(
+                    "snapshot manifest hash for",
+                    "file",
+                    rel,
+                    file_err,
+                    continuing="Its hash won't be refreshed after registration.",
+                )
+        return manifest, unmodified
+    except FileNotFoundError:
+        return None, set()
+    except Exception as manifest_err:  # noqa: BLE001 - manifest refresh is best-effort
+        from .. import _print_cli_warning
+
+        _print_cli_warning(
+            "snapshot manifest hashes for",
+            "integration",
+            agent_key,
+            manifest_err,
+            continuing="Continuing without refreshing manifest hashes.",
+        )
+        return None, set()
+
+
+def _resync_manifest_after_registration(
+    new_manifest: Any,
+    agent_key: str,
+    *,
+    continuing: str,
+    unmodified_files: set[str] | None = None,
+) -> None:
+    """Refresh tracked-file hashes after extensions/presets re-registration.
+
+    ``_register_extensions_for_agent`` / ``_register_presets_for_agent`` run
+    after ``new_manifest`` is saved and can overwrite files it already
+    tracks (e.g. a preset overriding a core command rendered as a skill).
+    For ``upgrade`` (#4696) and a new-target ``switch`` (#5078), nothing else
+    touches the project between the manifest save and these calls, so any
+    tracked file whose bytes now differ was changed by registration. Re-hash
+    it so ``check_modified()`` doesn't misreport a legitimate override.
+
+    ``use`` and installed-target ``switch`` reuse an older manifest (#5078).
+    They must pass ``unmodified_files`` from before registration; only those
+    files whose bytes changed are refreshed, preserving earlier user edits.
+    A new-target ``switch`` passes every tracked file, so files registration
+    didn't change keep their recovered markers.
+
+    Best-effort: registration itself is best-effort, so a failure here must
+    not abort the surrounding upgrade/use/switch transaction.
+    """
+    try:
+        from .manifest import _sha256, _validate_record_path
+
+        changed = False
+        for rel, expected_hash in new_manifest.files.items():
+            if unmodified_files is not None and rel not in unmodified_files:
+                continue
+            abs_path = new_manifest.project_root / rel
+            try:
+                if abs_path.is_symlink() or not abs_path.is_file():
+                    continue
+                # Only re-hash bytes registration changed: record_existing()
+                # also clears a file's recovered marker. Check the path the
+                # way record_existing() does before reading it.
+                if unmodified_files is not None and _sha256(
+                    _validate_record_path(Path(rel), new_manifest.project_root)
+                ) == expected_hash:
+                    continue
+                new_manifest.record_existing(rel)
+                changed = True
+            except (ValueError, OSError, RuntimeError) as file_err:
+                from .. import _print_cli_warning
+
+                _print_cli_warning(
+                    "resync manifest hash for",
+                    "file",
+                    str(rel),
+                    file_err,
+                    continuing="Continuing with the remaining files.",
+                )
+                continue
+        if changed:
+            new_manifest.save()
+    except Exception as resync_err:
+        from .. import _print_cli_warning
+
+        _print_cli_warning(
+            "resync manifest hashes for",
+            "integration",
+            agent_key,
+            resync_err,
+            continuing=continuing,
+        )
+
+
+def _unregister_presets_for_agent(
+    project_root: Path,
+    agent_key: str,
+    *,
+    continuing: str,
+) -> None:
+    """Best-effort removal of ``agent_key``'s preset command/skill artifacts.
+
+    Mirrors ``_unregister_extensions_for_agent``: used by ``switch`` when
+    uninstalling the previous integration so its preset command overrides
+    and skill mirrors don't linger as orphans in the old agent's directory
+    once a different (possibly not-yet-installed) integration becomes
+    active (#2948).
+
+    Best-effort: never aborts the surrounding integration operation.
+    """
+    try:
+        from ..presets import PresetManager
+
+        preset_mgr = PresetManager(project_root)
+        preset_mgr.unregister_agent_artifacts(agent_key)
+    except Exception as preset_err:
+        from .. import _print_cli_warning
+
+        _print_cli_warning(
+            "clean up preset artifacts for",
+            "integration",
+            agent_key,
+            preset_err,
+            continuing=continuing,
+        )
+
+
+def _unregister_enabled_extension_commands_for_agent(
+    project_root: Path,
+    agent_key: str,
+    *,
+    continuing: str,
+) -> None:
+    """Best-effort removal of enabled extension command artifacts for ``agent_key``."""
+    _best_effort_extension_op(
+        project_root,
+        agent_key,
+        lambda mgr, key: mgr.unregister_agent_artifacts(
+            key,
+            enabled_only=True,
+            commands_only=True,
+        ),
+        phase="clean up enabled extension command artifacts for",
         continuing=continuing,
     )
 

@@ -18,6 +18,14 @@ Generated from contracts/skill-registry.json. It recommends only selection postu
 - Inferred signals: 
 - Confirmation: explicit_user_intent_required
 
+## skills-agent-browser-skill-data-derive-client-skill-md
+- Entry: `skills/agent-browser/skill-data/derive-client/SKILL.md`
+- Lifecycle / posture: `manual_only` / `manual`
+- Purpose: Reverse-engineer a website's internal API by recording browser traffic into a HAR file, then generate a standalone client or CLI that calls the endpoints directly, with no browser needed after the first recording. Use when asked to
+- Explicit signals: explicit_user_request, dynamic_browser_or_session_task, permission_and_scope_confirmed
+- Inferred signals: 
+- Confirmation: explicit_user_intent_required
+
 ## skills-agent-browser-skill-data-dogfood-skill-md
 - Entry: `skills/agent-browser/skill-data/dogfood/SKILL.md`
 - Lifecycle / posture: `manual_only` / `guided_candidate`
@@ -34,6 +42,14 @@ Generated from contracts/skill-registry.json. It recommends only selection postu
 - Inferred signals: 
 - Confirmation: explicit_user_intent_required
 
+## skills-agent-browser-skill-data-protected-vercel-deployments-skill-md
+- Entry: `skills/agent-browser/skill-data/protected-vercel-deployments/SKILL.md`
+- Lifecycle / posture: `manual_only` / `manual`
+- Purpose: Access and test Vercel deployments protected by Vercel Authentication, SSO, or Deployment Protection with agent-browser. Use when a preview or production URL redirects to a Vercel login page, returns a protection 401 or 403, or needs short-lived Trusted Sources OIDC authentication instead of a static bypass secret or public exception.
+- Explicit signals: explicit_user_request, dynamic_browser_or_session_task, permission_and_scope_confirmed
+- Inferred signals: 
+- Confirmation: explicit_user_intent_required
+
 ## skills-agent-browser-skill-data-slack-skill-md
 - Entry: `skills/agent-browser/skill-data/slack/SKILL.md`
 - Lifecycle / posture: `manual_only` / `manual`
@@ -46,6 +62,14 @@ Generated from contracts/skill-registry.json. It recommends only selection postu
 - Entry: `skills/agent-browser/skill-data/vercel-sandbox/SKILL.md`
 - Lifecycle / posture: `manual_only` / `manual`
 - Purpose: Run agent-browser + Chrome inside Vercel Sandbox microVMs for browser automation from any Vercel-deployed app. Use when the user needs browser automation in a Vercel app (Next.js, SvelteKit, Nuxt, Remix, Astro, etc.), wants to run headless Chrome without binary size limits, needs…
+- Explicit signals: explicit_user_request, dynamic_browser_or_session_task, permission_and_scope_confirmed
+- Inferred signals: 
+- Confirmation: explicit_user_intent_required
+
+## skills-agent-browser-skill-data-webmcp-gen-skill-md
+- Entry: `skills/agent-browser/skill-data/webmcp-gen/SKILL.md`
+- Lifecycle / posture: `manual_only` / `manual`
+- Purpose: Build and validate experimental WebMCP tools for an existing web page. Use when an agent needs to expose a site's real workflows as page tools, create webmcp.init.js, define deterministic checks, or compare WebMCP with accessibility-tree automation.
 - Explicit signals: explicit_user_request, dynamic_browser_or_session_task, permission_and_scope_confirmed
 - Inferred signals: 
 - Confirmation: explicit_user_intent_required
@@ -162,6 +186,14 @@ Generated from contracts/skill-registry.json. It recommends only selection postu
 - Inferred signals: 
 - Confirmation: explicit_user_intent_required
 
+## skills-engineering-implement-spec-skill-md
+- Entry: `skills/engineering/implement-spec/SKILL.md`
+- Lifecycle / posture: `manual_only` / `manual`
+- Purpose: Implement the result of /to-spec and /to-tickets in code.
+- Explicit signals: explicit_user_request, task_specific_domain_match, permission_and_scope_confirmed
+- Inferred signals: 
+- Confirmation: explicit_user_intent_required
+
 ## skills-engineering-improve-codebase-architecture-skill-md
 - Entry: `skills/engineering/improve-codebase-architecture/SKILL.md`
 - Lifecycle / posture: `manual_only` / `manual`
@@ -174,6 +206,14 @@ Generated from contracts/skill-registry.json. It recommends only selection postu
 - Entry: `skills/engineering/prototype/SKILL.md`
 - Lifecycle / posture: `manual_only` / `manual`
 - Purpose: Build a throwaway prototype to answer a design question. Use when the user wants to sanity-check whether a state model or logic feels right, or explore what a UI should look like.
+- Explicit signals: explicit_user_request, task_specific_domain_match, permission_and_scope_confirmed
+- Inferred signals: 
+- Confirmation: explicit_user_intent_required
+
+## skills-engineering-pr-skill-md
+- Entry: `skills/engineering/pr/SKILL.md`
+- Lifecycle / posture: `manual_only` / `manual`
+- Purpose: Use when writing a PR body.
 - Explicit signals: explicit_user_request, task_specific_domain_match, permission_and_scope_confirmed
 - Inferred signals: 
 - Confirmation: explicit_user_intent_required
@@ -193,6 +233,14 @@ Generated from contracts/skill-registry.json. It recommends only selection postu
 - Explicit signals: resolve, in-progress, merge, rebase, conflict.
 - Inferred signals: task_brief_matches_reviewed_purpose
 - Confirmation: single_confirmation_when_competing_candidates_match
+
+## skills-engineering-retro-skill-md
+- Entry: `skills/engineering/retro/SKILL.md`
+- Lifecycle / posture: `manual_only` / `manual`
+- Purpose: Conduct a retrospective on a coding session.
+- Explicit signals: explicit_user_request, task_specific_domain_match, permission_and_scope_confirmed
+- Inferred signals: 
+- Confirmation: explicit_user_intent_required
 
 ## skills-engineering-setup-matt-pocock-skills-skill-md
 - Entry: `skills/engineering/setup-matt-pocock-skills/SKILL.md`
@@ -241,6 +289,14 @@ Generated from contracts/skill-registry.json. It recommends only selection postu
 - Explicit signals: plan, long-running, work, across, multiple, sessions, using, decision, tickets.
 - Inferred signals: task_brief_matches_reviewed_purpose
 - Confirmation: single_confirmation_when_competing_candidates_match
+
+## skills-engineering-wizard-skill-md
+- Entry: `skills/engineering/wizard/SKILL.md`
+- Lifecycle / posture: `manual_only` / `manual`
+- Purpose: Generate an interactive bash wizard that walks a human through steps only they can perform. Use when provisioning infrastructure, setting up credentials or CI secrets, walking an unfamiliar third-party dashboard, or running a one-off migration or cutover. Don't invoke this for steps the agent can perform itself.
+- Explicit signals: explicit_user_request, task_specific_domain_match, permission_and_scope_confirmed
+- Inferred signals: 
+- Confirmation: explicit_user_intent_required
 
 ## skills-nano-banana-pro-skill-md
 - Entry: `skills/nano-banana-pro/SKILL.md`
@@ -350,6 +406,30 @@ Generated from contracts/skill-registry.json. It recommends only selection postu
 - Entry: `skills/productivity/teach/SKILL.md`
 - Lifecycle / posture: `manual_only` / `manual`
 - Purpose: Teach the user a new skill or concept, within this workspace.
+- Explicit signals: explicit_user_request, product_workflow_match, permission_and_scope_confirmed
+- Inferred signals: 
+- Confirmation: explicit_user_intent_required
+
+## skills-productivity-to-questionnaire-skill-md
+- Entry: `skills/productivity/to-questionnaire/SKILL.md`
+- Lifecycle / posture: `manual_only` / `manual`
+- Purpose: Turn a decision you can't fully answer into a questionnaire for someone else to fill in.
+- Explicit signals: explicit_user_request, product_workflow_match, permission_and_scope_confirmed
+- Inferred signals: 
+- Confirmation: explicit_user_intent_required
+
+## skills-productivity-wait-what-skill-md
+- Entry: `skills/productivity/wait-what/SKILL.md`
+- Lifecycle / posture: `manual_only` / `manual`
+- Purpose: Stop. That last message did not land: re-pitch it.
+- Explicit signals: explicit_user_request, product_workflow_match, permission_and_scope_confirmed
+- Inferred signals: 
+- Confirmation: explicit_user_intent_required
+
+## skills-productivity-writing-for-agents-skill-md
+- Entry: `skills/productivity/writing-for-agents/SKILL.md`
+- Lifecycle / posture: `manual_only` / `manual`
+- Purpose: Writing documents for agents. Use when creating or editing skills, or modifying AGENTS.md or CLAUDE.md.
 - Explicit signals: explicit_user_request, product_workflow_match, permission_and_scope_confirmed
 - Inferred signals: 
 - Confirmation: explicit_user_intent_required
@@ -682,6 +762,14 @@ Generated from contracts/skill-registry.json. It recommends only selection postu
 - Inferred signals: 
 - Confirmation: explicit_user_intent_required
 
+## skills-reverse-skill-ctf-sandbox-orchestrator-competition-zip-archive-skill-md
+- Entry: `skills/reverse-skill/CTF-Sandbox-Orchestrator/competition-zip-archive/SKILL.md`
+- Lifecycle / posture: `manual_only` / `manual`
+- Purpose: Internal downstream skill for ctf-sandbox-orchestrator. CTF-sandbox workflow for ZIP and PKZIP archive challenges, legacy ZipCrypto identification, known-plaintext recovery with bkcrack, key-based decryption, and reproducible extraction. Use when the user asks to solve an encrypted ZIP challenge, inspect ZipCrypto metadata, recover keys from a known file prefix, or unlock an archive without starting with password brute force. Use only after `$ctf-sandbox-orchestrator` has already established sandbox assumptions and routed here.
+- Explicit signals: explicit_user_request, authorized_security_or_ctf_scope, isolated_or_approved_environment
+- Inferred signals: 
+- Confirmation: explicit_user_intent_required
+
 ## skills-reverse-skill-ctf-sandbox-orchestrator-ctf-sandbox-orchestrator-skill-md
 - Entry: `skills/reverse-skill/CTF-Sandbox-Orchestrator/ctf-sandbox-orchestrator/SKILL.md`
 - Lifecycle / posture: `manual_only` / `manual`
@@ -722,6 +810,14 @@ Generated from contracts/skill-registry.json. It recommends only selection postu
 - Inferred signals: 
 - Confirmation: explicit_user_intent_required
 
+## skills-reverse-skill-skills-binary-ninja-reverse-skill-md
+- Entry: `skills/reverse-skill/skills/binary-ninja-reverse/SKILL.md`
+- Lifecycle / posture: `manual_only` / `manual`
+- Purpose: Use for authorized binary analysis in Binary Ninja, including HLIL/MLIL/LLIL inspection, strings/imports/exports, cross-references, types, patch review, Python API automation, and optional Binary Ninja MCP or localhost HTTP integration.
+- Explicit signals: explicit_user_request, authorized_security_or_ctf_scope, isolated_or_approved_environment
+- Inferred signals: 
+- Confirmation: explicit_user_intent_required
+
 ## skills-reverse-skill-skills-browser-automation-skill-md
 - Entry: `skills/reverse-skill/skills/browser-automation/SKILL.md`
 - Lifecycle / posture: `manual_only` / `manual`
@@ -730,10 +826,66 @@ Generated from contracts/skill-registry.json. It recommends only selection postu
 - Inferred signals: 
 - Confirmation: explicit_user_intent_required
 
+## skills-reverse-skill-skills-browser-extension-reverse-skill-md
+- Entry: `skills/reverse-skill/skills/browser-extension-reverse/SKILL.md`
+- Lifecycle / posture: `manual_only` / `manual`
+- Purpose: Use for authorized reverse engineering of browser extensions (Chrome/Firefox) including manifest analysis, background workers, and extension-based credential or traffic logic recovery.
+- Explicit signals: explicit_user_request, authorized_security_or_ctf_scope, isolated_or_approved_environment
+- Inferred signals: 
+- Confirmation: explicit_user_intent_required
+
+## skills-reverse-skill-skills-case-review-skill-md
+- Entry: `skills/reverse-skill/skills/case-review/SKILL.md`
+- Lifecycle / posture: `manual_only` / `manual`
+- Purpose: Reviews a reverse-skill case package for scope readiness, Evidence to Finding to Path traceability, work item coverage, timeline references, and optional artifact hash integrity before report handoff.
+- Explicit signals: explicit_user_request, authorized_security_or_ctf_scope, isolated_or_approved_environment
+- Inferred signals: 
+- Confirmation: explicit_user_intent_required
+
+## skills-reverse-skill-skills-cloud-k8s-skill-md
+- Entry: `skills/reverse-skill/skills/cloud-k8s/SKILL.md`
+- Lifecycle / posture: `manual_only` / `manual`
+- Purpose: Use for authorized cloud, container, and Kubernetes security assessment including metadata SSRF, IAM misconfig, container escape paths, and cluster RBAC review.
+- Explicit signals: explicit_user_request, authorized_security_or_ctf_scope, isolated_or_approved_environment
+- Inferred signals: 
+- Confirmation: explicit_user_intent_required
+
+## skills-reverse-skill-skills-code-audit-skill-md
+- Entry: `skills/reverse-skill/skills/code-audit/SKILL.md`
+- Lifecycle / posture: `manual_only` / `manual`
+- Purpose: Use for authorized source-code security review and SAST workflows including Semgrep, CodeQL patterns, dangerous API hunting, and fix verification.
+- Explicit signals: explicit_user_request, authorized_security_or_ctf_scope, isolated_or_approved_environment
+- Inferred signals: 
+- Confirmation: explicit_user_intent_required
+
+## skills-reverse-skill-skills-ctf-sandbox-skill-md
+- Entry: `skills/reverse-skill/skills/ctf-sandbox/SKILL.md`
+- Lifecycle / posture: `manual_only` / `manual`
+- Purpose: Thin PRIMARY for CTF / AWD / 靶场 multi-type orchestration. Hands off to the sidecar CTF-Sandbox-Orchestrator. Use when the user says CTF, AWD, 靶场, or 比赛题 and no more specific pwn/APK/IDA route already won.
+- Explicit signals: explicit_user_request, authorized_security_or_ctf_scope, isolated_or_approved_environment
+- Inferred signals: 
+- Confirmation: explicit_user_intent_required
+
+## skills-reverse-skill-skills-database-security-skill-md
+- Entry: `skills/reverse-skill/skills/database-security/SKILL.md`
+- Lifecycle / posture: `manual_only` / `manual`
+- Purpose: Use for authorized database security assessment covering PostgreSQL/MySQL/MSSQL/Mongo/Redis exposure, authz, UDF/command paths, and misconfiguration review.
+- Explicit signals: explicit_user_request, authorized_security_or_ctf_scope, isolated_or_approved_environment
+- Inferred signals: 
+- Confirmation: explicit_user_intent_required
+
 ## skills-reverse-skill-skills-diagram-generator-skill-md
 - Entry: `skills/reverse-skill/skills/diagram-generator/SKILL.md`
 - Lifecycle / posture: `manual_only` / `manual`
 - Purpose: generate, refine, validate, and render diagrams from natural language, notes, code snippets, schemas, tables, or existing diagram source. use for flowcharts, swimlanes, sequence diagrams, state diagrams, er diagrams, class diagrams, architecture/c4-style diagrams, dependency grap…
+- Explicit signals: explicit_user_request, authorized_security_or_ctf_scope, isolated_or_approved_environment
+- Inferred signals: 
+- Confirmation: explicit_user_intent_required
+
+## skills-reverse-skill-skills-digital-forensics-skill-md
+- Entry: `skills/reverse-skill/skills/digital-forensics/SKILL.md`
+- Lifecycle / posture: `manual_only` / `manual`
+- Purpose: Use for authorized digital forensics including memory dumps, disk timelines, PCAP investigation, artifact triage, and IR evidence preservation.
 - Explicit signals: explicit_user_request, authorized_security_or_ctf_scope, isolated_or_approved_environment
 - Inferred signals: 
 - Confirmation: explicit_user_intent_required
@@ -762,6 +914,14 @@ Generated from contracts/skill-registry.json. It recommends only selection postu
 - Inferred signals: 
 - Confirmation: explicit_user_intent_required
 
+## skills-reverse-skill-skills-email-security-skill-md
+- Entry: `skills/reverse-skill/skills/email-security/SKILL.md`
+- Lifecycle / posture: `manual_only` / `manual`
+- Purpose: Use for authorized email security review including phishing analysis, header authentication (SPF/DKIM/DMARC), BEC patterns, and mailbox token abuse research.
+- Explicit signals: explicit_user_request, authorized_security_or_ctf_scope, isolated_or_approved_environment
+- Inferred signals: 
+- Confirmation: explicit_user_intent_required
+
 ## skills-reverse-skill-skills-firmware-pentest-skill-md
 - Entry: `skills/reverse-skill/skills/firmware-pentest/SKILL.md`
 - Lifecycle / posture: `manual_only` / `manual`
@@ -770,10 +930,42 @@ Generated from contracts/skill-registry.json. It recommends only selection postu
 - Inferred signals: 
 - Confirmation: explicit_user_intent_required
 
+## skills-reverse-skill-skills-ghidra-reverse-skill-md
+- Entry: `skills/reverse-skill/skills/ghidra-reverse/SKILL.md`
+- Lifecycle / posture: `manual_only` / `manual`
+- Purpose: Use for free/open reverse engineering with Ghidra (headless or GUI), including decompile, cross-refs, and optional Ghidra MCP workflows when IDA is unavailable.
+- Explicit signals: explicit_user_request, authorized_security_or_ctf_scope, isolated_or_approved_environment
+- Inferred signals: 
+- Confirmation: explicit_user_intent_required
+
+## skills-reverse-skill-skills-go-rust-reverse-skill-md
+- Entry: `skills/reverse-skill/skills/go-rust-reverse/SKILL.md`
+- Lifecycle / posture: `manual_only` / `manual`
+- Purpose: Use for reverse engineering stripped Go and Rust binaries including runtime recognition, pclntab/moduel data recovery, panic strings, and idiomatic decompilation recovery.
+- Explicit signals: explicit_user_request, authorized_security_or_ctf_scope, isolated_or_approved_environment
+- Inferred signals: 
+- Confirmation: explicit_user_intent_required
+
+## skills-reverse-skill-skills-hardware-security-skill-md
+- Entry: `skills/reverse-skill/skills/hardware-security/SKILL.md`
+- Lifecycle / posture: `manual_only` / `manual`
+- Purpose: Use for authorized hardware and embedded interface security research including UART/JTAG discovery, debug pad triage, secure boot overview, and offline firmware extraction support.
+- Explicit signals: explicit_user_request, authorized_security_or_ctf_scope, isolated_or_approved_environment
+- Inferred signals: 
+- Confirmation: explicit_user_intent_required
+
 ## skills-reverse-skill-skills-ida-reverse-skill-md
 - Entry: `skills/reverse-skill/skills/ida-reverse/SKILL.md`
 - Lifecycle / posture: `manual_only` / `manual`
 - Purpose: |
+- Explicit signals: explicit_user_request, authorized_security_or_ctf_scope, isolated_or_approved_environment
+- Inferred signals: 
+- Confirmation: explicit_user_intent_required
+
+## skills-reverse-skill-skills-identity-federation-skill-md
+- Entry: `skills/reverse-skill/skills/identity-federation/SKILL.md`
+- Lifecycle / posture: `manual_only` / `manual`
+- Purpose: Use for authorized assessment of federated identity systems including SAML, OIDC, OAuth2 flows, SSO misconfiguration, and token confusion issues.
 - Explicit signals: explicit_user_request, authorized_security_or_ctf_scope, isolated_or_approved_environment
 - Inferred signals: 
 - Confirmation: explicit_user_intent_required
@@ -794,6 +986,14 @@ Generated from contracts/skill-registry.json. It recommends only selection postu
 - Inferred signals: 
 - Confirmation: explicit_user_intent_required
 
+## skills-reverse-skill-skills-macos-reverse-skill-md
+- Entry: `skills/reverse-skill/skills/macos-reverse/SKILL.md`
+- Lifecycle / posture: `manual_only` / `manual`
+- Purpose: Use for authorized macOS and Mach-O reverse engineering including codesign, Objective-C/Swift recovery, endpoint security surfaces, and Apple platform malware analysis.
+- Explicit signals: explicit_user_request, authorized_security_or_ctf_scope, isolated_or_approved_environment
+- Inferred signals: 
+- Confirmation: explicit_user_intent_required
+
 ## skills-reverse-skill-skills-malware-analysis-skill-md
 - Entry: `skills/reverse-skill/skills/malware-analysis/SKILL.md`
 - Lifecycle / posture: `manual_only` / `manual`
@@ -806,6 +1006,14 @@ Generated from contracts/skill-registry.json. It recommends only selection postu
 - Entry: `skills/reverse-skill/skills/mobile-reverse/SKILL.md`
 - Lifecycle / posture: `manual_only` / `manual`
 - Purpose: Security and CTF specialty requires explicit classification and trust/risk review.
+- Explicit signals: explicit_user_request, authorized_security_or_ctf_scope, isolated_or_approved_environment
+- Inferred signals: 
+- Confirmation: explicit_user_intent_required
+
+## skills-reverse-skill-skills-ot-ics-skill-md
+- Entry: `skills/reverse-skill/skills/ot-ics/SKILL.md`
+- Lifecycle / posture: `manual_only` / `manual`
+- Purpose: Use for authorized OT/ICS security assessment covering Purdue model zoning, PLC/SCADA exposure, industrial protocol discovery, and safe passive-first evaluation.
 - Explicit signals: explicit_user_request, authorized_security_or_ctf_scope, isolated_or_approved_environment
 - Inferred signals: 
 - Confirmation: explicit_user_intent_required
@@ -834,6 +1042,14 @@ Generated from contracts/skill-registry.json. It recommends only selection postu
 - Inferred signals: 
 - Confirmation: explicit_user_intent_required
 
+## skills-reverse-skill-skills-protocol-reverse-skill-md
+- Entry: `skills/reverse-skill/skills/protocol-reverse/SKILL.md`
+- Lifecycle / posture: `manual_only` / `manual`
+- Purpose: Use for authorized reverse engineering of custom binary protocols, Protobuf/gRPC, WebSocket frames, and PCAP-driven protocol recovery.
+- Explicit signals: explicit_user_request, authorized_security_or_ctf_scope, isolated_or_approved_environment
+- Inferred signals: 
+- Confirmation: explicit_user_intent_required
+
 ## skills-reverse-skill-skills-pwn-chain-skill-md
 - Entry: `skills/reverse-skill/skills/pwn-chain/SKILL.md`
 - Lifecycle / posture: `manual_only` / `manual`
@@ -846,6 +1062,14 @@ Generated from contracts/skill-registry.json. It recommends only selection postu
 - Entry: `skills/reverse-skill/skills/radare2/SKILL.md`
 - Lifecycle / posture: `manual_only` / `manual`
 - Purpose: |
+- Explicit signals: explicit_user_request, authorized_security_or_ctf_scope, isolated_or_approved_environment
+- Inferred signals: 
+- Confirmation: explicit_user_intent_required
+
+## skills-reverse-skill-skills-radio-sdr-skill-md
+- Entry: `skills/reverse-skill/skills/radio-sdr/SKILL.md`
+- Lifecycle / posture: `manual_only` / `manual`
+- Purpose: Use for authorized RF/SDR security research including signal identification, replay feasibility study in shielded labs, and wireless protocol analysis outside classic Wi-Fi.
 - Explicit signals: explicit_user_request, authorized_security_or_ctf_scope, isolated_or_approved_environment
 - Inferred signals: 
 - Confirmation: explicit_user_intent_required
@@ -878,6 +1102,46 @@ Generated from contracts/skill-registry.json. It recommends only selection postu
 - Entry: `skills/reverse-skill/skills/supply-chain-security/SKILL.md`
 - Lifecycle / posture: `manual_only` / `manual`
 - Purpose: Security and CTF specialty requires explicit classification and trust/risk review.
+- Explicit signals: explicit_user_request, authorized_security_or_ctf_scope, isolated_or_approved_environment
+- Inferred signals: 
+- Confirmation: explicit_user_intent_required
+
+## skills-reverse-skill-skills-thick-client-skill-md
+- Entry: `skills/reverse-skill/skills/thick-client/SKILL.md`
+- Lifecycle / posture: `manual_only` / `manual`
+- Purpose: Use for authorized security testing of desktop thick clients including local storage, update channels, IPC, traffic, and client-side trust boundaries.
+- Explicit signals: explicit_user_request, authorized_security_or_ctf_scope, isolated_or_approved_environment
+- Inferred signals: 
+- Confirmation: explicit_user_intent_required
+
+## skills-reverse-skill-skills-threat-hunting-skill-md
+- Entry: `skills/reverse-skill/skills/threat-hunting/SKILL.md`
+- Lifecycle / posture: `manual_only` / `manual`
+- Purpose: Use for blue-team threat hunting, detection engineering with Sigma/YARA, SIEM query design, and incident detection validation.
+- Explicit signals: explicit_user_request, authorized_security_or_ctf_scope, isolated_or_approved_environment
+- Inferred signals: 
+- Confirmation: explicit_user_intent_required
+
+## skills-reverse-skill-skills-threat-intelligence-skill-md
+- Entry: `skills/reverse-skill/skills/threat-intelligence/SKILL.md`
+- Lifecycle / posture: `manual_only` / `manual`
+- Purpose: Use for authorized OSINT and cyber threat intelligence that enriches IOCs, campaigns, impersonation, scams, or threat actors from public sources. Includes bounded X/Twitter search through Xquik, source preservation, corroboration, and evidence handoff.
+- Explicit signals: explicit_user_request, authorized_security_or_ctf_scope, isolated_or_approved_environment
+- Inferred signals: 
+- Confirmation: explicit_user_intent_required
+
+## skills-reverse-skill-skills-wifi-wireless-skill-md
+- Entry: `skills/reverse-skill/skills/wifi-wireless/SKILL.md`
+- Lifecycle / posture: `manual_only` / `manual`
+- Purpose: Use for authorized wireless security assessment including Wi-Fi capture, WPA handshake analysis, rogue AP detection research, and lab-only deauth testing.
+- Explicit signals: explicit_user_request, authorized_security_or_ctf_scope, isolated_or_approved_environment
+- Inferred signals: 
+- Confirmation: explicit_user_intent_required
+
+## skills-reverse-skill-skills-windows-ad-skill-md
+- Entry: `skills/reverse-skill/skills/windows-ad/SKILL.md`
+- Lifecycle / posture: `manual_only` / `manual`
+- Purpose: Use for authorized Active Directory and Windows identity attacks including Kerberos, AD CS, BloodHound paths, NTLM relay, and domain privilege escalation research.
 - Explicit signals: explicit_user_request, authorized_security_or_ctf_scope, isolated_or_approved_environment
 - Inferred signals: 
 - Confirmation: explicit_user_intent_required

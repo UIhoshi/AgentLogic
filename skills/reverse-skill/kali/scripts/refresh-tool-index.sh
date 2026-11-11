@@ -53,18 +53,41 @@ GENERATED_AT=$(date '+%Y-%m-%d %H:%M:%S %z')
     echo "| 能力 | 工具可用 | MCP 已注册 | 服务在线 | 可自动安装 | 安装方式 |"
     echo "|------|---------|-----------|---------|-----------|---------|"
 
-    CAPABILITY_NAMES=("jadx" "apktool" "frida" "idalib-mcp" "jshookmcp" "anything-analyzer" "idapro" "r2" "adb" "agent-browser" "ghidra-mcp" "seclists" "proxycat" "burpsuite-mcp" "nmap" "sqlmap" "hashcat" "hydra" "gobuster" "ffuf" "msfconsole" "nuclei")
+    CAPABILITY_NAMES=("jadx" "apktool" "jeb-pro" "binaryninja" "frida" "idalib-mcp" "jshookmcp" "reqable-mcp" "xquik-mcp" "anything-analyzer" "idapro" "r2" "adb" "agent-browser" "ghidra-mcp" "seclists" "proxycat" "burpsuite-mcp" "nmap" "sqlmap" "hashcat" "hydra" "gobuster" "ffuf" "msfconsole" "nuclei" "pwntools" "bkcrack")
 
     for cap_name in "${CAPABILITY_NAMES[@]}"; do
         # 检查工具是否可用
         tool_available="✗"
-        if command -v "$cap_name" &>/dev/null; then
-            tool_available="✓"
-        fi
+        case "$cap_name" in
+            jeb-pro)
+                if command -v jeb &>/dev/null || [[ -x "$HOME/tools/JEB/jeb" ]] || [[ -x "$HOME/JEB/jeb" ]] || [[ -x "/opt/jeb/jeb" ]]; then
+                    tool_available="✓"
+                fi
+                ;;
+            binaryninja)
+                if command -v binaryninja &>/dev/null || command -v binaryninja-headless &>/dev/null || [[ -x "$HOME/BinaryNinja/binaryninja" ]] || [[ -x "/opt/binaryninja/binaryninja" ]]; then
+                    tool_available="✓"
+                fi
+                ;;
+            pwntools)
+                if command -v pwn &>/dev/null; then tool_available="✓"; fi
+                ;;
+            reqable-mcp|jshookmcp)
+                if command -v npx &>/dev/null; then tool_available="✓"; fi
+                ;;
+            *)
+                if command -v "$cap_name" &>/dev/null; then tool_available="✓"; fi
+                ;;
+        esac
 
         # 检查 MCP 注册状态
         mcp_registered="—"
-        mcp_check=$(check_mcp_registered "$cap_name")
+        mcp_name="$cap_name"
+        case "$cap_name" in
+            jshookmcp) mcp_name="jshook" ;;
+            xquik-mcp) mcp_name="xquik" ;;
+        esac
+        mcp_check=$(check_mcp_registered "$mcp_name")
         if [[ "$mcp_check" == "true" ]]; then
             mcp_registered="✓"
         fi
@@ -93,11 +116,18 @@ GENERATED_AT=$(date '+%Y-%m-%d %H:%M:%S %z')
             jadx|ghidra-mcp|seclists)
                 bootstrap_kind="github-release"
                 ;;
-            frida|idalib-mcp|proxycat)
+            frida|idalib-mcp|proxycat|pwntools)
                 bootstrap_kind="pip-package"
                 ;;
-            jshookmcp|agent-browser)
+            jshookmcp|reqable-mcp|agent-browser)
                 bootstrap_kind="npm-mcp"
+                ;;
+            xquik-mcp)
+                bootstrap_kind="remote-http-mcp"
+                ;;
+            jeb-pro|binaryninja)
+                bootstrap_kind="manual"
+                can_auto="✗"
                 ;;
             anything-analyzer|idapro)
                 bootstrap_kind="local-http-mcp"

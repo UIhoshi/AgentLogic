@@ -5,27 +5,33 @@
 ## CRITICAL: 路由判定执行协议
 
 1. `MUST` 先完成路由再执行，不允许“先做再补路由”。
-2. `MUST` 输出你的路由依据（目标类型/意图/工具链至少命中一项）。
-3. `MUST NOT` 因为“看起来差不多”把任务塞进不匹配 skill。
-4. `MUST` 在路由未命中时联网补充方法论，并提议新增 skill。
-5. `MUST NOT` 只回复“请给具体任务”；应先基于现有输入启动可确定步骤。
+2. `SHOULD` 先读 `MASTER-ROUTING.md` 或运行 `scripts/master-route.ps1` 定 PRIMARY；本表用于疑难补全。
+3. `MUST` 输出你的路由依据（目标类型/意图/工具链至少命中一项）。
+4. `MUST` 对目标 ACT 前完成 `case-init` / `scope.md`（`ops/scope-contract.md`）：`auth.status=granted` + `network_profile`。
+5. `MUST NOT` 因为“看起来差不多”把任务塞进不匹配 skill。
+6. `MUST` 在路由未命中时联网补充方法论，并提议新增 skill。
+7. `MUST NOT` 只回复“请给具体任务”；应先基于现有输入启动可确定步骤。
+8. 作战契约：`ops/`（证据链 / 角色 / 时间线 / IDENTITY）。
 ## 按目标类型
 
 | 目标类型 | 推荐入口 | 备选方案 |
 |---------|---------|---------|
-| APK / Android 应用 | `mobile-reverse/SKILL.md` — Frida/Objection/MobSF 全平台移动逆向 | `apk-reverse/` — 仅 Android 静态分析、jadx 反编译 |
+| APK / Android 应用 | `mobile-reverse/SKILL.md` — Frida/Objection/MobSF 全平台移动逆向 | `apk-reverse/` — 静态分析、jadx 反编译；可选已许可的 JEB Pro 交叉验证 |
 | iOS / IPA 应用 | `mobile-reverse/SKILL.md` — iOS 逆向 + Frida/Objection | `mobile-reverse/references/ios-reverse-guide.md` — iOS 专项 |
 | 二进制 exe/dll/so/elf | `ida-reverse/` — IDA Pro 反编译 | `radare2/` — CLI 分析，或 `reverse-engineering/tools.md` — GDB/Unicorn |
 | JavaScript / Web 前端 | `js-reverse/` — 5 阶段工作流 | anything-analyzer MCP 的浏览器工具，或 jshookmcp 的浏览器/CDP/Hook 能力 |
-| HTTP 抓包 / 浏览器采样 / 请求重放 | anything-analyzer MCP（23816） | `js-reverse/`、jshookmcp 或 `competition-web-runtime/` |
+| HTTP 抓包 / 浏览器采样 / 请求重放 | anything-analyzer MCP（23816） | Reqable MCP、`js-reverse/`、jshookmcp 或 `competition-web-runtime/` |
 | 固件 / IoT | `firmware-pentest/` — OWASP FSTM 全链路：提取→仿真→fuzz→利用 | `reverse-engineering/platforms.md` — 仅静态 RE / `reverse-engineering/tools.md` — Ghidra headless |
+| Binary Ninja / Binja | `binary-ninja-reverse/` — HLIL/MLIL/LLIL + Python API | 显式启用社区 MCP/本机 HTTP 适配器 |
 | WASM / Python 字节码 / .NET | `reverse-engineering/languages.md` | 按具体语言查对应章节 |
 | macOS / iOS | `reverse-engineering/platforms.md` — Mach-O/ObjC/Swift | — |
 | 内存转储 / PCAP | `reverse-engineering/platforms.md` | `reverse-engineering/patterns*.md` |
+| 已有 case / 证据交接审查 | `case-review/SKILL.md`: Evidence 图与 fixity 校验 | `docs-generator/`: 最终报告 |
 | 密码学 / 加解密算法 | `reverse-engineering/patterns*.md` — 密码学模式 | `js-reverse/`（如果是前端加密） |
 | 协议逆向 / 自定义协议 | `reverse-engineering/platforms.md` — 网络协议 | `js-reverse/`（如果是 WebSocket/HTTP） |
 | Go / Rust 二进制 | `reverse-engineering/languages-compiled.md` + `go-reverse.md` | `ida-reverse/` 或 `radare2/` |
 | **CTF 竞赛全栈** | `../CTF-Sandbox-Orchestrator/ctf-sandbox-orchestrator/SKILL.md` — 总控入口 | 按证据面路由到 40+ 子技能 |
+| **CTF ZIP / PKZIP 压缩包题** | `../CTF-Sandbox-Orchestrator/competition-zip-archive/SKILL.md` — legacy ZipCrypto + `bkcrack` 明文攻击 | 优先于密码暴力破解 |
 | Web 运行时 / API | `../CTF-Sandbox-Orchestrator/competition-web-runtime/SKILL.md` | — |
 | 云 / 容器 / K8s | `../CTF-Sandbox-Orchestrator/competition-agent-cloud/SKILL.md` | — |
 | Windows / AD / 身份 | `../CTF-Sandbox-Orchestrator/competition-identity-windows/SKILL.md` | — |
@@ -37,6 +43,7 @@
 | **REST / GraphQL / WebSocket API** | `api-security/SKILL.md` — 10 阶段方法论 | `pentest-tools/SKILL.md` — 基础 Web 渗透 |
 | **软件供应链 / SBOM / SCA** | `supply-chain-security/SKILL.md` — 六层治理框架 | `pentest-tools/SKILL.md` — 依赖扫描工具 |
 | **恶意软件 / 病毒样本** | `malware-analysis/SKILL.md` — 六阶段分析 + YARA/Sigma | `reverse-engineering/SKILL.md` — 仅通用逆向 / `ida-reverse/` 深度分析 |
+| **公开来源威胁情报 / OSINT** | `threat-intelligence/SKILL.md` — IOC 补充与活动关联 | 公开 X/Twitter 帖子必须由独立来源核验 |
 
 ## 按用户意图
 
@@ -48,6 +55,8 @@
 | "radare2 / r2 分析" | `radare2/SKILL.md` — CLI 工作流 |
 | "找前端签名/加密参数" | `js-reverse/SKILL.md` — Observe→Capture→Rebuild |
 | "jshookmcp / JS hook / CDP 调试" | `js-reverse/SKILL.md` — 仍走同一条 JS/Web 逆向链路；调用前先确认该 MCP server 已下载、已注册到客户端、已启用 |
+| "Reqable / Reqable MCP / 抓包重放" | `pentest-tools/SKILL.md` — 授权范围内的本地抓包与 API 工作流 |
+| "JEB / JEB Pro" | `apk-reverse/SKILL.md` — 已许可的 Android / ARM 交叉验证；先确认本机安装 |
 | "APK 解包/重打包/改 smali" | `apk-reverse/SKILL.md` — decode→rebuild-sign-install |
 | "过反调试/反检测" | `reverse-engineering/anti-analysis.md` |
 | "这是什么混淆/VM" | `reverse-engineering/patterns*.md` — 按模式查 |
@@ -60,7 +69,9 @@
 | "模拟执行/Unicorn" | `reverse-engineering/tools.md` — Unicorn 章节 |
 | "补环境/Node 复现" | `js-reverse/references/env-patching.md` |
 | "CTF 题/竞赛逆向" | `reverse-engineering/patterns-ctf*.md` |
+| "CTF ZIP/PKZIP/bkcrack/压缩包明文攻击" | `../CTF-Sandbox-Orchestrator/competition-zip-archive/SKILL.md` |
 | "写报告/写文档/出报告" | `docs-generator/` — 技术文档编写 |
+| "审查 case / 证据链 / 可追溯性" | `case-review/SKILL.md`: 只读 Evidence 图审查 |
 | "写 writeup" | `docs-generator/` — CTF writeup 模板 |
 | "打开网页/浏览器自动化/填表" | `browser-automation/SKILL.md` — Playwright 浏览器操作 |
 | "爬取页面/截图/自动化登录" | `browser-automation/SKILL.md` — 浏览器自动化 |
@@ -148,7 +159,28 @@
 | "Hydra/在线爆破/SSH 爆破" | `pentest-tools/SKILL.md` — 在线密码爆破 |
 | "Nikto/Web 服务器扫描" | `pentest-tools/SKILL.md` — Web 漏洞扫描 |
 | "Metasploit/msfconsole/exploit" | `pentest-tools/SKILL.md` — 利用框架 |
-| "Wireshark/抓包分析/PCAP" | `pentest-tools/SKILL.md` + `reverse-engineering/platforms.md` |
+| "Wireshark/抓包分析/PCAP" | `digital-forensics/` 或 `protocol-reverse/` |
+| "协议逆向/Protobuf/自定义协议" | `protocol-reverse/SKILL.md` |
+| "Ghidra/无 IDA" | `ghidra-reverse/SKILL.md` |
+| "Binary Ninja/Binja/HLIL/MLIL/Binary Ninja MCP" | `binary-ninja-reverse/SKILL.md` |
+| "K8s/容器逃逸/云安全" | `cloud-k8s/SKILL.md` |
+| "域渗透/BloodHound/Certipy/Kerberoast" | `windows-ad/SKILL.md` |
+| "取证/Volatility/内存转储" | `digital-forensics/SKILL.md` |
+| "代码审计/SAST/Semgrep" | `code-audit/SKILL.md` |
+| "开源情报/威胁情报/公开 X IOC 补充" | `threat-intelligence/SKILL.md` — 公开帖子仅作为待核验线索 |
+| "威胁狩猎/蓝队/检测工程" | `threat-hunting/SKILL.md` |
+| "游戏逆向/IL2CPP/Unity" | `reverse-engineering/SKILL.md` + seed-014 |
+| "WiFi/无线渗透/aircrack" | `wifi-wireless/SKILL.md` |
+| "浏览器扩展/Chrome 扩展/crx" | `browser-extension-reverse/SKILL.md` |
+| "工控/OT/ICS/SCADA/PLC" | `ot-ics/SKILL.md` |
+| "macOS逆向/Mach-O" | `macos-reverse/SKILL.md` |
+| "厚客户端/桌面客户端" | `thick-client/SKILL.md` |
+| "Go逆向/Rust逆向" | `go-rust-reverse/SKILL.md` |
+| "UART/JTAG/硬件调试" | `hardware-security/SKILL.md` |
+| "数据库安全/Redis/Mongo" | `database-security/SKILL.md` |
+| "钓鱼邮件/SPF/DKIM/DMARC" | `email-security/SKILL.md` |
+| "SAML/OIDC/SSO联邦" | `identity-federation/SKILL.md` |
+| "SDR/射频/HackRF" | `radio-sdr/SKILL.md` |
 | "BurpSuite/Web 代理/拦截" | `pentest-tools/SKILL.md` — Web 代理 |
 | "Responder/LLMNR 投毒/NBT-NS" | `pentest-tools/SKILL.md` — 内网投毒 |
 | "BloodHound/AD 路径/攻击图" | `pentest-tools/SKILL.md` — AD 攻击路径可视化 |
@@ -188,6 +220,8 @@
 | Frida | `reverse-engineering/tools-dynamic.md` |
 | GDB / rr（通用调试） | `reverse-engineering/tools.md` |
 | Ghidra (headless) | `reverse-engineering/tools.md` + Ghidra MCP（免费 IDA 替代，可通过 bootstrap 自动注册） |
+| Binary Ninja / binary-ninja-mcp | `binary-ninja-reverse/` — 商业 GUI/API + 显式启用的社区 MCP 回环桥 |
+| Python 3 标准库 | `case-review/`: 只读 case Evidence 图审查 |
 | angr / Qiling / Unicorn | `reverse-engineering/tools-dynamic.md` |
 | BinDiff / Diaphora | `reverse-engineering/tools-advanced.md` |
 | anything-analyzer MCP | 端口 23816 的 MCP 服务器（浏览器+HTTP 捕获+AI 分析） |

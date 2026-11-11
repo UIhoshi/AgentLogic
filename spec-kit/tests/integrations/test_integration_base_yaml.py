@@ -384,7 +384,6 @@ class YamlIntegrationTests:
         "checklist",
         "specify",
         "tasks",
-        "taskstoissues",
     ]
 
     def _expected_files(self, script_variant: str) -> list[str]:
@@ -402,12 +401,14 @@ class YamlIntegrationTests:
         files.append(".specify/init-options.json")
         files.append(f".specify/integrations/{self.KEY}.manifest.json")
         files.append(".specify/integrations/speckit.manifest.json")
+        files.append(".specify/.gitignore")
 
         if script_variant == "sh":
             for name in [
                 "check-prerequisites.sh",
                 "common.sh",
                 "create-new-feature.sh",
+                "resolve-template.sh",
                 "setup-plan.sh",
                 "setup-tasks.sh",
             ]:
@@ -417,6 +418,7 @@ class YamlIntegrationTests:
                 "check-prerequisites.ps1",
                 "common.ps1",
                 "create-new-feature.ps1",
+                "resolve-template.ps1",
                 "setup-plan.ps1",
                 "setup-tasks.ps1",
             ]:

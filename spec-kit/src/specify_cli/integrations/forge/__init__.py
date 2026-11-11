@@ -9,6 +9,7 @@ Forge has several unique behaviors compared to standard markdown agents:
 
 from __future__ import annotations
 
+from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any
 
@@ -90,6 +91,47 @@ class ForgeIntegration(MarkdownIntegration):
         "invoke_separator": "-",
     }
     invoke_separator = "-"
+
+    def build_exec_args(
+        self,
+        prompt: str,
+        *,
+        model: str | None = None,
+        output_json: bool = True,
+        integration_args: Sequence[str] | None = None,
+        integration_options: Mapping[str, Any] | None = None,
+        project_root: Path | None = None,
+    ) -> list[str] | None:
+        """Build CLI arguments for non-interactive ``forge`` execution.
+
+        ``MarkdownIntegration``'s default appends ``--model`` and
+        ``--output-format``, neither of which exists in the Forge CLI (see
+        issue #4666) — a dispatched step exits 2 at argument parsing
+        whenever either flag ends up appended (a configured ``model``, or
+        ``output_json=True``). Forge only accepts ``-p/--prompt``; ``model``
+        is deliberately dropped rather than remapped, since Forge selects it
+        out of band via ``forge config set model`` and its ``--agent`` flag
+        selects an agent ID, not a model.
+        """
+        self.validate_runtime_config(integration_args, integration_options)
+        args = [self._resolve_executable()]
+        # Forge's global flags parse before -p, so extra args go first
+        # (matches opencode / goose / codex / cursor-agent ordering).
+        self._apply_extra_args_env_var(args)
+        args.extend(["-p", prompt])
+        return args
+
+    def build_command_invocation(self, command_name: str, args: str = "") -> str:
+        """Forge installs hyphenated slash-commands (``/speckit-<name>``), so the
+        dispatch invocation must match. The inherited MarkdownIntegration default
+        builds the dotted ``/speckit.<name>``, which references a command Forge
+        never registered. Reuse the same hyphenation as the installed frontmatter
+        ``name`` (see ``format_forge_command_name``), mirroring the skills agents.
+        """
+        invocation = "/" + format_forge_command_name(command_name)
+        if args:
+            invocation = f"{invocation} {args}"
+        return invocation
 
     def setup(
         self,

@@ -74,12 +74,22 @@ class CatalogStackBase:
         try:
             parsed = urlparse(url)
             hostname = parsed.hostname
+            # Accessing ``port`` performs urllib's syntax/range validation;
+            # ``hostname`` alone does not, so a non-numeric or out-of-range
+            # port would otherwise pass validation here and only fail later,
+            # at fetch time, as an error this module does not translate --
+            # a raw http.client.InvalidURL for a non-numeric port, and a
+            # socket-layer failure for one that is merely out of range.
+            _ = parsed.port
         except ValueError:
             raise cls._error(f"Catalog URL is malformed: {url}") from None
         is_localhost = hostname in ("localhost", "127.0.0.1", "::1")
         if parsed.scheme != "https" and not (parsed.scheme == "http" and is_localhost):
+            # A scheme-less value (``example.com/catalog.json``) would otherwise read
+            # "got ://". The value itself is not echoed: callers render errors as Rich markup.
+            got = f"{parsed.scheme}://" if parsed.scheme else "a URL with no scheme"
             raise cls._error(
-                f"Catalog URL must use HTTPS (got {parsed.scheme}://). "
+                f"Catalog URL must use HTTPS (got {got}). "
                 "HTTP is only allowed for localhost."
             )
         # Check hostname, not netloc: netloc is truthy for host-less URLs like
@@ -149,7 +159,10 @@ class CatalogStackBase:
                 )
             try:
                 priority = int(raw_priority)
-            except (TypeError, ValueError):
+            except (TypeError, ValueError, OverflowError):
+                # OverflowError: int(float("inf")) — a YAML ``priority: .inf``
+                # would otherwise escape as an uncaught traceback instead of the
+                # clean validation error.
                 raise self._validation_error(
                     f"Invalid catalog config {config_path}: "
                     f"Invalid priority for catalog '{item.get('name', idx + 1)}': "

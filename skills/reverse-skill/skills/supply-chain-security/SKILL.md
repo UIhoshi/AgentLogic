@@ -1,8 +1,7 @@
 ---
 name: supply-chain-security
-description: Authorized software supply-chain security auditing, dependency confusion detection, and CI/CD pipeline review.
+description: Use for software supply-chain security assessment covering SBOM, SCA, CI/CD pipelines, container images, build integrity, dependency provenance, and vulnerability reachability.
 ---
-
 # Supply Chain Security Testing
 
 ## ACTION REQUIRED（读完后立刻执行）

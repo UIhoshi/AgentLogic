@@ -14,26 +14,31 @@ Provides:
 from __future__ import annotations
 
 import os
+import platform
 import re
 import shlex
 import shutil
 import subprocess
 import sys
 from abc import ABC
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
 import yaml
 
+from .._invocation_style import get_invocation_prefix, is_dollar_skills_agent
 from .._toml_string import escape_toml_basic as _escape_toml_basic
 from .._toml_string import has_illegal_toml_control as _has_illegal_toml_control
+from ..events import install_integration_events, remove_integration_events
+from ._capture import run_captured
 
 if TYPE_CHECKING:
     from .manifest import IntegrationManifest
 
 _HOOK_COMMAND_NOTE = (
-    "- When constructing slash commands from hook command names, "
+    "- When constructing command invocations from hook command names, "
     "replace dots (`.`) with hyphens (`-`). "
     "For example, `speckit.git.commit` → `/speckit-git-commit`.\n"
 )
@@ -48,7 +53,6 @@ _CORE_COMMAND_TEMPLATE_ORDER = (
     "checklist",
     "specify",
     "tasks",
-    "taskstoissues",
 )
 _CORE_COMMAND_TEMPLATE_RANK = {
     command: index for index, command in enumerate(_CORE_COMMAND_TEMPLATE_ORDER)
@@ -65,6 +69,15 @@ def yaml_quote(value: str) -> str:
     return yaml.safe_dump(
         str(value), default_style='"', allow_unicode=True, width=sys.maxsize
     ).strip()
+
+
+def resolve_registrar_config(integration: IntegrationBase) -> dict[str, Any]:
+    """Resolve static registrar overrides and integration-class defaults."""
+    config = dict(integration.registrar_config or {})
+    config.setdefault("invoke_separator", integration.invoke_separator)
+    if integration.dev_no_symlink:
+        config["dev_no_symlink"] = True
+    return config
 
 
 # ---------------------------------------------------------------------------
@@ -134,10 +147,15 @@ class IntegrationBase(ABC):
     multi_install_safe: bool = False
     """Whether this integration is declared safe to install alongside others.
 
-    Safe integrations must use a static, unique agent root and command
-    directory. Registry tests enforce those invariants for every
-    integration that sets this flag.
+    Safe integrations must emit no files or use a static, unique agent root
+    and command directory. Registry tests enforce these invariants.
     """
+
+    legacy_flat_command_dir: str | None = None
+    """Previous flat command directory retired after skill replacements exist."""
+
+    legacy_flat_command_extension: str | None = None
+    """File extension used by commands in ``legacy_flat_command_dir``."""
 
     def post_process_command_content(self, content: str) -> str:
         """Transform command content after format rendering.
@@ -152,24 +170,103 @@ class IntegrationBase(ABC):
         """
         return content
 
+    def process_registered_command(
+        self, frontmatter: dict[str, Any], body: str, *, source_id: str
+    ) -> tuple[dict[str, Any], str]:
+        """Transform a command's frontmatter and body before it is rendered.
+
+        Called by ``CommandRegistrar.register_commands()`` for every command it
+        registers for this integration, after script paths are adjusted and the
+        ``name`` field is injected, and before ``$ARGUMENTS`` and
+        ``__SPECKIT_COMMAND_*__`` tokens are resolved and the command is
+        rendered.  Unlike ``post_process_command_content()``, which only sees
+        the rendered text, this hook receives the parsed frontmatter and the
+        *source_id* (``"core"`` or an extension/preset id), so an integration
+        can apply rewrites that depend on where a command came from.
+
+        Subclasses may override it; they should return new objects rather
+        than mutating *frontmatter* in place.  The default implementation
+        returns both values unchanged.
+        """
+        return frontmatter, body
+
     # -- Public API -------------------------------------------------------
 
     @classmethod
     def options(cls) -> list[IntegrationOption]:
         """Return options this integration accepts. Default: none."""
-        return []
+        opts = []
+        if bool(getattr(cls, "CANONICAL_TO_NATIVE", None) and getattr(cls, "events_config_file", None)):
+            opts.append(
+                IntegrationOption(
+                    "--events",
+                    is_flag=False,
+                    default="true",
+                    help="Enable/disable runtime events (true|false, default: true)",
+                )
+            )
+        return opts
 
     def effective_invoke_separator(
-        self, parsed_options: dict[str, Any] | None = None
+        self,
+        parsed_options: dict[str, Any] | None = None,
+        project_root: Path | None = None,
     ) -> str:
         """Return the invoke separator for the given options.
 
         Subclasses whose separator depends on runtime options (e.g.
         Copilot in ``--skills`` mode) should override this method.
-        The default implementation ignores *parsed_options* and returns
-        the class-level ``invoke_separator``.
+        The default implementation ignores *parsed_options* and
+        *project_root* and returns the class-level ``invoke_separator``.
         """
         return self.invoke_separator
+
+    def invoke_separator_for_mode(self, skills_enabled: bool) -> str:
+        """Command-ref separator given the project's *resolved* skills state.
+
+        Registration paths (extension / preset command rendering) have no CLI
+        ``parsed_options`` — only the persisted ``ai_skills`` flag — so they
+        resolve the command-reference separator through this hook rather than
+        the static ``AGENT_CONFIGS[key]["invoke_separator"]`` value, which
+        cannot represent an agent whose separator differs between its skills
+        and command layouts.
+
+        The default is mode-independent and returns exactly what
+        ``_build_agent_configs`` would place in ``AGENT_CONFIGS`` (the
+        ``registrar_config`` override if present, else the class-level
+        ``invoke_separator``), so single-layout agents are unaffected.
+        Dual-mode agents whose separator depends on the layout (e.g. Bob:
+        ``-`` for skills, ``.`` for legacy commands) override this.
+        """
+        cfg = self.registrar_config or {}
+        return cfg.get("invoke_separator", self.invoke_separator)
+
+    def is_skills_mode(
+        self,
+        parsed_options: dict[str, Any] | None = None,
+        project_root: Path | None = None,
+    ) -> bool:
+        """Return whether this integration scaffolds skills for these options.
+
+        This is the single, well-defined hook the shared init/install/upgrade
+        machinery consults to decide whether to persist ``ai_skills=True`` and
+        render skill invocations.  It replaces ad-hoc ``isinstance`` /
+        ``getattr(self, "_skills_mode", ...)`` probing so an integration's
+        internal representation never has to leak into shared dispatch code.
+
+        *project_root* is optional context for the ``use`` / ``switch`` /
+        ``upgrade`` path, where no ``setup()`` runs and *parsed_options* may be
+        empty: dual-mode integrations can consult the already-installed
+        on-disk layout to avoid silently migrating an existing project to a
+        different mode.  The default ignores it.
+
+        The default for command-first integrations is skills mode only when
+        ``--skills`` was requested.
+        ``SkillsIntegration`` overrides this to return ``True`` by default;
+        skills-first integrations that expose a legacy opt-out (e.g. Bob)
+        override it to honor their own flag.
+        """
+        return bool((parsed_options or {}).get("skills"))
 
     def build_exec_args(
         self,
@@ -177,6 +274,9 @@ class IntegrationBase(ABC):
         *,
         model: str | None = None,
         output_json: bool = True,
+        integration_args: Sequence[str] | None = None,
+        integration_options: Mapping[str, Any] | None = None,
+        project_root: Path | None = None,
     ) -> list[str] | None:
         """Build CLI arguments for non-interactive execution.
 
@@ -186,7 +286,37 @@ class IntegrationBase(ABC):
 
         Subclasses for CLI-based integrations should override this.
         """
+        self.validate_runtime_config(integration_args, integration_options)
         return None
+
+    def validate_runtime_config(
+        self,
+        integration_args: Sequence[str] | None = None,
+        integration_options: Mapping[str, Any] | None = None,
+    ) -> None:
+        """Validate per-step CLI configuration for this integration.
+
+        Runtime configuration is deliberately separate from :meth:`options`,
+        which describes install-time ``--integration-options`` accepted by
+        ``specify init`` and the integration management commands. Integrations
+        opt in by overriding this hook and translating the validated values in
+        :meth:`build_exec_args` (or a custom :meth:`dispatch_command`).
+
+        The default accepts empty configuration for backward compatibility and
+        rejects non-empty values instead of silently ignoring a misspelled or
+        unsupported runtime option.
+        """
+        if integration_args:
+            raise ValueError(
+                f"Integration {self.key!r} does not support per-step "
+                "'integration_args'."
+            )
+        if integration_options:
+            option_names = ", ".join(sorted(str(key) for key in integration_options))
+            raise ValueError(
+                f"Integration {self.key!r} does not support per-step "
+                f"'integration_options' ({option_names})."
+            )
 
     def _resolve_executable(self) -> str:
         """Return the executable for this integration's CLI tool.
@@ -268,6 +398,29 @@ class IntegrationBase(ABC):
             invocation = f"{invocation} {args}"
         return invocation
 
+    def _build_dispatch_prompt(
+        self,
+        command_name: str,
+        args: str,
+        project_root: Path | None,
+    ) -> str:
+        """Return the dispatch prompt, given the target *project_root*.
+
+        Seam for integrations whose invocation depends on the project's
+        on-disk layout.  ``build_command_invocation()`` is a two-argument
+        contract implemented by every integration, so widening it to carry a
+        *project_root* would change a broad public surface for the sake of
+        the one caller that needs it.  Dispatch is that caller: it alone
+        knows which project the command is being run against, so dual-mode
+        integrations (e.g. Bob) resolve the layout here instead.
+
+        The default ignores *project_root* and preserves the previous
+        behaviour exactly.
+
+        See issue #4491.
+        """
+        return self.build_command_invocation(command_name, args)
+
     def dispatch_command(
         self,
         command_name: str,
@@ -277,19 +430,40 @@ class IntegrationBase(ABC):
         model: str | None = None,
         timeout: int = 600,
         stream: bool = True,
+        integration_args: Sequence[str] | None = None,
+        integration_options: Mapping[str, Any] | None = None,
+        output_json: bool | None = None,
+        capture_max_bytes: int | None = None,
     ) -> dict[str, Any]:
         """Dispatch a Spec Kit command through this integration's CLI.
 
         By default this builds a slash-command invocation with
-        ``build_command_invocation()`` and passes that prompt to
+        ``_build_dispatch_prompt()`` -- which defers to
+        ``build_command_invocation()`` unless the integration needs the
+        *project_root* to decide -- and passes that prompt to
         ``build_exec_args()`` to construct the CLI command line.
         Integrations with custom dispatch behavior can override
-        ``build_command_invocation()``, ``build_exec_args()``, or
-        ``dispatch_command()`` directly.
+        ``build_command_invocation()``, ``_build_dispatch_prompt()``,
+        ``build_exec_args()``, or ``dispatch_command()`` directly.
 
         When *stream* is ``True`` (the default), stdout and stderr are
         piped directly to the terminal so the user sees live output.
         When ``False``, output is captured and returned in the dict.
+
+        *output_json* selects the CLI's output format independently of
+        *stream*. ``None`` (the default) keeps the historical coupling:
+        text when streaming, structured output when capturing. Pass
+        ``False`` with ``stream=False`` to capture the CLI's textual
+        stdout.
+
+        *capture_max_bytes* selects bounded capture and requires
+        ``stream=False``: each stream is capped at that many raw bytes
+        (``-1`` for no cap) and decoded as UTF-8. The result then also
+        carries ``stdout_truncated``, ``stderr_truncated``, ``timed_out``,
+        and ``interrupted``, and a timeout or interruption is reported
+        there with the output read so far instead of being raised.
+        ``None`` (the default) keeps the unbounded capture, which raises
+        ``subprocess.TimeoutExpired``.
 
         Returns a dict with ``exit_code``, ``stdout``, and ``stderr``.
         Raises ``NotImplementedError`` if the integration does not
@@ -297,11 +471,22 @@ class IntegrationBase(ABC):
         """
         import subprocess
 
-        prompt = self.build_command_invocation(command_name, args)
+        if stream and capture_max_bytes is not None:
+            raise ValueError("capture_max_bytes requires stream=False.")
+
+        self.validate_runtime_config(integration_args, integration_options)
+        prompt = self._build_dispatch_prompt(command_name, args, project_root)
         # When streaming to the terminal, request text output so the
         # user sees readable output instead of raw JSONL events.
+        if output_json is None:
+            output_json = not stream
         exec_args = self.build_exec_args(
-            prompt, model=model, output_json=not stream
+            prompt,
+            model=model,
+            output_json=output_json,
+            integration_args=integration_args,
+            integration_options=integration_options,
+            project_root=project_root,
         )
 
         if exec_args is None:
@@ -344,6 +529,14 @@ class IntegrationBase(ABC):
                 "stdout": "",
                 "stderr": "",
             }
+
+        if capture_max_bytes is not None:
+            return run_captured(
+                exec_args,
+                cwd=cwd,
+                timeout=timeout,
+                max_bytes=capture_max_bytes,
+            ).as_dispatch_result()
 
         result = subprocess.run(
             exec_args,
@@ -429,7 +622,11 @@ class IntegrationBase(ABC):
         tracking) would otherwise be deleted even though they are still
         managed.  Subclasses list such paths here to protect them.
         """
-        return set()
+        exclusions = set()
+        if self.supports_events():
+            from ..events import events_stale_exclusions
+            exclusions.update(events_stale_exclusions(self.key))
+        return exclusions
 
     def commands_dest(self, project_root: Path) -> Path:
         """Return the absolute path to the commands output directory.
@@ -464,9 +661,13 @@ class IntegrationBase(ABC):
         written file.  The caller can post-process the file before
         recording it in the manifest.
         """
-        dest_dir.mkdir(parents=True, exist_ok=True)
         dst = dest_dir / filename
+        from ._file_changes import after_file_change, before_file_change
+
+        before_file_change(dst)
+        dest_dir.mkdir(parents=True, exist_ok=True)
         shutil.copy2(src, dst)
+        after_file_change(dst)
         return dst
 
     @staticmethod
@@ -496,9 +697,13 @@ class IntegrationBase(ABC):
         ``\r\n`` sequences in *content* are normalised to ``\n`` before
         writing.  Returns *dest*.
         """
-        dest.parent.mkdir(parents=True, exist_ok=True)
         normalized = content.replace("\r\n", "\n")
+        from ._file_changes import after_file_change, before_file_change
+
+        before_file_change(dest)
+        dest.parent.mkdir(parents=True, exist_ok=True)
         dest.write_bytes(normalized.encode("utf-8"))
+        after_file_change(dest)
         rel = dest.resolve().relative_to(project_root.resolve())
         manifest.record_existing(rel)
         return dest
@@ -534,14 +739,17 @@ class IntegrationBase(ABC):
         if not scripts_src:
             return []
 
+        from ._file_changes import before_file_change
+
         created: list[Path] = []
         scripts_dest = project_root / ".specify" / "integrations" / self.key / "scripts"
-        scripts_dest.mkdir(parents=True, exist_ok=True)
 
         for src_script in sorted(scripts_src.iterdir()):
             if not src_script.is_file():
                 continue
             dst_script = scripts_dest / src_script.name
+            before_file_change(dst_script)
+            scripts_dest.mkdir(parents=True, exist_ok=True)
             shutil.copy2(src_script, dst_script)
             if dst_script.suffix in (".sh", ".py"):
                 dst_script.chmod(dst_script.stat().st_mode | 0o111)
@@ -551,7 +759,9 @@ class IntegrationBase(ABC):
         return created
 
     @staticmethod
-    def resolve_command_refs(content: str, separator: str = ".") -> str:
+    def resolve_command_refs(
+        content: str, separator: str = ".", prefix: str = "/"
+    ) -> str:
         """Replace ``__SPECKIT_COMMAND_<NAME>__`` placeholders with invocations.
 
         Each placeholder encodes a command name in upper-case with
@@ -561,10 +771,20 @@ class IntegrationBase(ABC):
 
         * ``separator="."`` → ``/speckit.plan``, ``/speckit.git.commit``
         * ``separator="-"`` → ``/speckit-plan``, ``/speckit-git-commit``
+
+        A hyphen belongs to the segment it sits in rather than separating
+        segments, so ``__SPECKIT_COMMAND_AGENT-CONTEXT_UPDATE__`` resolves to
+        ``/speckit.agent-context.update``.
+
+        *prefix* defaults to ``"/"`` but may be ``"$"`` for agents whose
+        native skills invocation uses dollar-prefixed chat commands.
         """
         return re.sub(
-            r"__SPECKIT_COMMAND_([A-Z][A-Z0-9_]*)__",
-            lambda m: "/speckit" + separator + m.group(1).lower().replace("_", separator),
+            r"__SPECKIT_COMMAND_([A-Z][A-Z0-9_-]*)__",
+            lambda m: prefix
+            + "speckit"
+            + separator
+            + m.group(1).lower().replace("_", separator),
             content,
         )
 
@@ -620,6 +840,46 @@ class IntegrationBase(ABC):
         return sys.executable or "python3"
 
     @staticmethod
+    def build_python_invocation(
+        script_command: str, project_root: Path | None = None
+    ) -> str:
+        """Build a Python script command for the current platform shell."""
+        interpreter = IntegrationBase.resolve_python_interpreter(project_root)
+        if os.name == "nt" and not re.fullmatch(r"[A-Za-z0-9_./:\\-]+", interpreter):
+            quoted_interpreter = interpreter.replace("'", "''")
+            interpreter = f"& '{quoted_interpreter}'"
+        elif os.name != "nt":
+            interpreter = shlex.quote(interpreter)
+        return f"{interpreter} {script_command}"
+
+    @staticmethod
+    def select_script_variant(
+        requested: object, script_commands: dict[str, str]
+    ) -> str:
+        """Select the requested variant or a runnable platform fallback."""
+        if isinstance(requested, str) and requested in script_commands:
+            return requested
+
+        platform_variant = (
+            "ps" if platform.system().lower().startswith("win") else "sh"
+        )
+        secondary_variant = "sh" if platform_variant == "ps" else "ps"
+        fallbacks = (
+            (platform_variant, "py")
+            if requested == "py"
+            else (platform_variant, secondary_variant, "py")
+        )
+        for candidate in fallbacks:
+            if candidate in script_commands:
+                return candidate
+
+        available = ", ".join(sorted(script_commands)) or "none"
+        raise ValueError(
+            "No runnable script variant for this platform: "
+            f"requested {requested!r}; available: {available}"
+        )
+
+    @staticmethod
     def _interpreter_runs(path: str) -> bool:
         """Return True when *path* executes as a Python interpreter.
 
@@ -653,7 +913,8 @@ class IntegrationBase(ABC):
         """Process a raw command template into agent-ready content.
 
         Performs the same transformations as the release script:
-        1. Extract ``scripts.<script_type>`` value from YAML frontmatter
+        1. Select ``scripts.<script_type>`` from YAML frontmatter, falling
+           back to a runnable platform shell or Python variant when unavailable
         2. Replace ``{SCRIPT}`` with the extracted script command
         3. Strip ``scripts:`` section from frontmatter
         4. Replace ``{ARGS}`` and ``$ARGUMENTS`` with *arg_placeholder*
@@ -662,37 +923,46 @@ class IntegrationBase(ABC):
         7. Replace ``__SPECKIT_COMMAND_<NAME>__`` with invocation strings
         """
         # 1. Extract script command from frontmatter
-        script_command = ""
-        script_pattern = re.compile(
-            rf"^\s*{re.escape(script_type)}:\s*(.+)$", re.MULTILINE
-        )
+        script_commands: dict[str, str] = {}
+        script_pattern = re.compile(r"^\s*([A-Za-z0-9_-]+):\s*(.+)$")
         # Find the scripts: block
+        in_frontmatter = False
         in_scripts = False
         for line in content.splitlines():
-            if line.strip() == "scripts:":
+            if line == "---":
+                if in_frontmatter:
+                    break
+                in_frontmatter = True
+                continue
+            if not in_frontmatter:
+                continue
+            if line == "scripts:":
                 in_scripts = True
                 continue
             if in_scripts and line and not line[0].isspace():
-                in_scripts = False
+                break
             if in_scripts:
                 m = script_pattern.match(line)
                 if m:
-                    script_command = m.group(1).strip()
-                    break
+                    script_commands[m.group(1)] = m.group(2).strip()
+
+        selected_script_type = (
+            IntegrationBase.select_script_variant(script_type, script_commands)
+            if script_commands
+            else ""
+        )
+
+        script_command = script_commands.get(selected_script_type, "")
 
         # 2. Replace {SCRIPT}
         if script_command:
             # For the Python script type, prefix the resolved interpreter so
             # the command is portable (``.py`` files are not directly
             # executable on Windows).
-            if script_type == "py":
-                interpreter = IntegrationBase.resolve_python_interpreter(project_root)
-                # Quote the interpreter if it contains whitespace (e.g. an
-                # absolute ``sys.executable`` path under Windows
-                # ``Program Files``) so it isn't split into multiple args.
-                if any(ch.isspace() for ch in interpreter):
-                    interpreter = f'"{interpreter}"'
-                script_command = f"{interpreter} {script_command}"
+            if selected_script_type == "py":
+                script_command = IntegrationBase.build_python_invocation(
+                    script_command, project_root
+                )
             content = content.replace("{SCRIPT}", script_command)
 
         # 3. Strip scripts: section from frontmatter
@@ -738,9 +1008,28 @@ class IntegrationBase(ABC):
         content = CommandRegistrar.rewrite_project_relative_paths(content)
 
         # 8. Replace __SPECKIT_COMMAND_<NAME>__ with invocation strings
-        content = IntegrationBase.resolve_command_refs(content, invoke_separator)
+        invocation_prefix = get_invocation_prefix(
+            agent_name, invoke_separator == "-"
+        )
+        content = IntegrationBase.resolve_command_refs(
+            content, invoke_separator, invocation_prefix
+        )
 
         return content
+
+    def preflight_setup(
+        self,
+        project_root: Path,
+        parsed_options: dict[str, Any] | None = None,
+        *,
+        script_type: str | None = None,
+    ) -> None:
+        """Reject a planned ``setup()`` before the CLI writes shared files.
+
+        Install, switch and upgrade call this before touching shared
+        infrastructure. Raise ``ValueError`` or ``OSError`` to refuse.
+        The default accepts every setup.
+        """
 
     def setup(
         self,
@@ -802,7 +1091,57 @@ class IntegrationBase(ABC):
 
         Returns ``(removed, skipped)`` file lists.
         """
+        import inspect
+
+        remove_events = self.remove_events
+        try:
+            inspect.signature(remove_events).bind(project_root, manifest, force=force)
+        except TypeError:
+            remove_events(project_root, manifest)
+        else:
+            remove_events(project_root, manifest, force=force)
         return manifest.uninstall(project_root, force=force)
+
+    def emit_events(
+        self,
+        project_root: Path,
+        manifest: IntegrationManifest,
+        events: dict[str, dict[str, Any]] | None = None,
+        parsed_options: dict[str, Any] | None = None,
+        **opts: Any,
+    ) -> list[Path]:
+        """Emit native event configuration for this integration."""
+        return install_integration_events(
+            self, project_root, manifest, events or {}, force=opts.get("force", False)
+        )
+
+    def remove_events(
+        self,
+        project_root: Path,
+        manifest: IntegrationManifest,
+        *,
+        force: bool = False,
+    ) -> None:
+        """Remove Specify-authored event entries from native config."""
+        remove_integration_events(self, project_root, manifest, force=force)
+
+    def supports_events(self) -> bool:
+        """Return True if this integration supports agent-native events."""
+        return bool(getattr(self, "CANONICAL_TO_NATIVE", None) and getattr(self, "events_config_file", None))
+
+    # Context-injection envelope for hook stdout, keyed by canonical event
+    # (with "*" as the fallback). Not every agent injects a hook's plain-text
+    # stdout as model context: Gemini/Tabnine/Qwen/Devin are JSON-only
+    # protocols (plain text becomes user-facing noise), Copilot discards
+    # non-JSON stdout, and Cursor parses stdout as JSON. Values:
+    #   "hookSpecificOutput" → {"hookSpecificOutput": {"additionalContext": ...}}
+    #   "additionalContext"  → {"additionalContext": ...}   (top-level, Copilot)
+    #   "additional_context" → {"additional_context": ...}  (top-level, Cursor)
+    #   "suppress"           → emit nothing (strict-JSON agents on events whose
+    #                          output can't be used)
+    # Absent (no matching key and no "*") → plain stdout passthrough
+    # (Claude/Codex inject plain stdout; opencode injects via its TS plugin).
+    events_context_envelope: dict[str, str] = {}
 
     # -- Convenience helpers for subclasses -------------------------------
 
@@ -848,7 +1187,11 @@ class MarkdownIntegration(IntegrationBase):
         *,
         model: str | None = None,
         output_json: bool = True,
+        integration_args: Sequence[str] | None = None,
+        integration_options: Mapping[str, Any] | None = None,
+        project_root: Path | None = None,
     ) -> list[str] | None:
+        self.validate_runtime_config(integration_args, integration_options)
         if not self.config or not self.config.get("requires_cli"):
             return None
         args = [self._resolve_executable(), "-p", prompt]
@@ -908,6 +1251,13 @@ class MarkdownIntegration(IntegrationBase):
             created.append(dst_file)
 
 
+        # Install agent runtime events
+        event_files = self.emit_events(
+            project_root, manifest, events=opts.get("events"), parsed_options=parsed_options,
+            force=opts.get("force", False),
+        )
+        created.extend(event_files)
+
         return created
 
 
@@ -933,7 +1283,11 @@ class TomlIntegration(IntegrationBase):
         *,
         model: str | None = None,
         output_json: bool = True,
+        integration_args: Sequence[str] | None = None,
+        integration_options: Mapping[str, Any] | None = None,
+        project_root: Path | None = None,
     ) -> list[str] | None:
+        self.validate_runtime_config(integration_args, integration_options)
         if not self.config or not self.config.get("requires_cli"):
             return None
         args = [self._resolve_executable(), "-p", prompt]
@@ -1114,6 +1468,13 @@ class TomlIntegration(IntegrationBase):
             )
             created.append(dst_file)
 
+
+        # Install agent runtime events
+        event_files = self.emit_events(
+            project_root, manifest, events=opts.get("events"), parsed_options=parsed_options,
+            force=opts.get("force", False),
+        )
+        created.extend(event_files)
 
         return created
 
@@ -1351,6 +1712,13 @@ class YamlIntegration(IntegrationBase):
             created.append(dst_file)
 
 
+        # Install agent runtime events
+        event_files = self.emit_events(
+            project_root, manifest, events=opts.get("events"), parsed_options=parsed_options,
+            force=opts.get("force", False),
+        )
+        created.extend(event_files)
+
         return created
 
 
@@ -1376,13 +1744,25 @@ class SkillsIntegration(IntegrationBase):
 
     invoke_separator = "-"
 
+    def is_skills_mode(
+        self,
+        parsed_options: dict[str, Any] | None = None,
+        project_root: Path | None = None,
+    ) -> bool:
+        """Skills-native integrations scaffold skills unconditionally."""
+        return True
+
     def build_exec_args(
         self,
         prompt: str,
         *,
         model: str | None = None,
         output_json: bool = True,
+        integration_args: Sequence[str] | None = None,
+        integration_options: Mapping[str, Any] | None = None,
+        project_root: Path | None = None,
     ) -> list[str] | None:
+        self.validate_runtime_config(integration_args, integration_options)
         if not self.config or not self.config.get("requires_cli"):
             return None
         args = [self._resolve_executable(), "-p", prompt]
@@ -1412,18 +1792,21 @@ class SkillsIntegration(IntegrationBase):
         return project_root / folder / subdir
 
     def build_command_invocation(self, command_name: str, args: str = "") -> str:
-        """Skills use ``/speckit-<stem>`` (hyphenated directory name)."""
+        """Build the agent's native invocation for a hyphenated skill name."""
         stem = command_name
         if stem.startswith("speckit."):
             stem = stem[len("speckit."):]
 
-        invocation = "/speckit-" + stem.replace(".", "-")
+        prefix = "$" if is_dollar_skills_agent(self.key, True) else "/"
+        invocation = prefix + "speckit-" + stem.replace(".", "-")
         if args:
             invocation = f"{invocation} {args}"
         return invocation
 
     @staticmethod
-    def _inject_hook_command_note(content: str) -> str:
+    def _inject_hook_command_note(
+        content: str, invocation_prefix: str = "/"
+    ) -> str:
         """Insert a dot-to-hyphen note before each hook output instruction.
 
         Targets the line ``- For each executable hook, output the following``
@@ -1432,6 +1815,11 @@ class SkillsIntegration(IntegrationBase):
         above them.
         """
         note = _HOOK_COMMAND_NOTE.rstrip("\n")
+        if invocation_prefix != "/":
+            note = note.replace(
+                "`/speckit-git-commit`",
+                f"`{invocation_prefix}speckit-git-commit`",
+            )
 
         def repl(m: re.Match[str]) -> str:
             indent = m.group(1)
@@ -1465,10 +1853,13 @@ class SkillsIntegration(IntegrationBase):
         Called by external skill generators (presets, extensions) to let
         the integration inject agent-specific frontmatter or body
         transformations.  The base implementation injects shared skills
-        guidance for converting dotted hook command names to hyphenated
-        slash commands.  Subclasses may override — see ``ClaudeIntegration``.
+        guidance for converting dotted hook command names to the agent-native
+        hyphenated command invocation (e.g. ``/speckit-git-commit`` or
+        ``$speckit-git-commit``).  Subclasses may override -- see
+        ``ClaudeIntegration``.
         """
-        return self._inject_hook_command_note(content)
+        invocation_prefix = get_invocation_prefix(self.key, True)
+        return self._inject_hook_command_note(content, invocation_prefix)
 
     def setup(
         self,
@@ -1519,13 +1910,27 @@ class SkillsIntegration(IntegrationBase):
             command_name = src_file.stem  # e.g. "plan"
             skill_name = f"speckit-{command_name.replace('.', '-')}"
 
-            # Parse frontmatter for description
+            # Parse frontmatter for description. Locate the closing ``---`` on
+            # its own line rather than with ``raw.split("---", 2)`` — a bare
+            # substring split stops at the first ``---`` *anywhere*, including
+            # one inside a value such as ``description: Separate sections
+            # with ---``, which truncates the frontmatter and drops later keys.
+            # The block between the delimiters is parsed unstripped so trailing
+            # newlines in literal (``|``) block scalars survive.
             frontmatter: dict[str, Any] = {}
             if raw.startswith("---"):
-                parts = raw.split("---", 2)
-                if len(parts) >= 3:
+                fm_lines = raw.splitlines(keepends=True)
+                fm_close = next(
+                    (
+                        i
+                        for i in range(1, len(fm_lines))
+                        if fm_lines[i].rstrip() == "---"
+                    ),
+                    None,
+                )
+                if fm_close is not None:
                     try:
-                        fm = yaml.safe_load(parts[1])
+                        fm = yaml.safe_load("".join(fm_lines[1:fm_close]))
                         if isinstance(fm, dict):
                             frontmatter = fm
                     except yaml.YAMLError:
@@ -1540,11 +1945,27 @@ class SkillsIntegration(IntegrationBase):
             # Strip the processed frontmatter — we rebuild it for skills.
             # Preserve leading whitespace in the body to match release ZIP
             # output byte-for-byte (the template body starts with \n after
-            # the closing ---).
+            # the closing ---). Scan for the closing ``---`` on its own line
+            # rather than ``split("---", 2)`` so a ``---`` embedded in a value
+            # does not truncate the frontmatter and spill it into the body.
             if processed_body.startswith("---"):
-                parts = processed_body.split("---", 2)
-                if len(parts) >= 3:
-                    processed_body = parts[2]
+                body_lines = processed_body.splitlines(keepends=True)
+                close_idx = next(
+                    (
+                        i
+                        for i in range(1, len(body_lines))
+                        if body_lines[i].rstrip() == "---"
+                    ),
+                    None,
+                )
+                if close_idx is not None:
+                    # Keep whatever trails the ``---`` marker on the closing
+                    # line (normally just the newline) so the body stays
+                    # byte-for-byte identical to ``split("---", 2)[2]``. The
+                    # line-anchored check guarantees ``---`` sits at index 0.
+                    processed_body = body_lines[close_idx][3:] + "".join(
+                        body_lines[close_idx + 1 :]
+                    )
 
             # Select description — use the original template description
             # to stay byte-for-byte identical with release ZIP output.
@@ -1577,5 +1998,12 @@ class SkillsIntegration(IntegrationBase):
             )
             created.append(dst)
 
+
+        # Install agent runtime events
+        event_files = self.emit_events(
+            project_root, manifest, events=opts.get("events"), parsed_options=parsed_options,
+            force=opts.get("force", False),
+        )
+        created.extend(event_files)
 
         return created

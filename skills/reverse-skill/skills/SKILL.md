@@ -1,8 +1,7 @@
 ---
 name: reverse-skills-router
-description: Master router for authorized reverse-engineering, binary analysis, and security assessment sub-skills.
+description: Routes reverse engineering, exploitation, penetration testing, malware, mobile, firmware, browser automation, documentation, and security tasks to the appropriate specialist skill. Use when a task spans modules or the correct reverse-skill entrypoint is unclear.
 ---
-
 # Reverse Engineering Skills Master Control
 
 本目录收录了一系列逆向工程相关的技能模块，每个子目录是一个独立模块，内含 `SKILL.md` 描述其适用场景、工具链和工作流程。
@@ -11,11 +10,13 @@ description: Master router for authorized reverse-engineering, binary analysis, 
 
 读完本文件后，不允许只回复“已读/已理解”。必须按顺序执行：
 
-1. `NOW`：读取 `routing.md`，按“目标类型 + 用户意图 + 工具链”三轴完成路由判定。
-2. `NOW`：读取目标子模块 `SKILL.md`，提取第一步可执行动作。
-3. `NEXT`：若涉及本机工具，读取 `tool-index.md` 校验路径与可用性；禁止凭经验猜路径。
-4. `THEN`：若缺工具，调用 `scripts/bootstrap-reverse.ps1` 自动补齐后继续任务。
-5. `ACT`：执行任务，不要停留在“等待用户下一条确认”状态。
+1. `NOW`：跑平台原生 router（Windows `scripts/master-route.ps1`；Linux/macOS/Kali `scripts/master-route.sh`），从 `config/routing.json` 定 PRIMARY；疑难再读 `routing.md` 三轴附录。
+2. `NOW`：平台原生 `case-init` 落地当前分析项目的 `work/<case>/scope.md`；**auth 未 granted 禁止对目标 ACT**。本地离线样本使用 `offline-sample` preset + explicit sample；Force 不得绕过硬门。
+3. `ACT`：立即打开 PRIMARY `SKILL.md` 执行 ACTION REQUIRED。
+4. `NEXT`：工具路径只认 `tool-index.md`；缺工具 → 平台原生 bootstrap（仅 manifest）。
+5. 结论用 Evidence→Finding→Path。报告/journal 是 SHOULD，除非用户要交付物。
+
+**身份**：见 `ops/IDENTITY.md`（轻量路由包 + 工具自举 + journal；**不是** Z3r0 式平台）。
 
 如果路由无法命中，必须先联网补充方法论并提议新增 skill，禁止硬塞到不匹配模块。
 
@@ -35,8 +36,9 @@ description: Master router for authorized reverse-engineering, binary analysis, 
 | **IDA Pro 逆向** | `ida-reverse/` | IDA Pro MCP HTTP 服务器（72 个工具）：反编译、反汇编、数据流追踪、交叉引用 |
 | **前端 JS 逆向** | `js-reverse/` | 浏览器端签名定位、加密参数分析、运行时采样、Node 补环境复现；优先用现有 `js-reverse_*`，需要更强的浏览器/CDP/Hook 面时接入 jshookmcp，但前提是先把该 MCP server 下载/注册并启用 |
 | **radare2 分析** | `radare2/` | CLI 二进制侦察、反汇编、patch：r2 / rabin2 / rasm2 / radiff2 |
-| **CTF 竞赛全栈** | `../CTF-Sandbox-Orchestrator/` | 40+ 子技能：Web/逆向/Pwn/云/容器/AD/取证/隐写/移动端/密码学，由总控统一编排 |
+| **CTF 入口** | `ctf-sandbox/` | 单 PRIMARY；下游仍在 sidecar `../CTF-Sandbox-Orchestrator/` |
 | **技术文档编写** | `docs-generator/` | 任务完成后自动生成逆向报告、渗透报告、CTF writeup、签名逆向报告 |
+| **Evidence 图审查** | `case-review/` | 校验 scope、Evidence→Finding→Path 可追溯性、workitems、timeline 与 artifact hash |
 | **浏览器与桌面自动化** | `browser-automation/` | 浏览器操作（Playwright）+ Windows 桌面应用操作（OpenReverse UIA/CUA）+ 网络观察 |
 | **跨版本符号迁移** | `binary-diff/` | 有旧版符号迁移到新版、缺 PDB 推导、程序更新后批量迁移函数名 |
 | **N-day 补丁差分→利用** | `patch-diff-exploit/` | 从厂商补丁定位漏洞点、写 PoC、N-day 武器化（与 binary-diff 分工：本 skill 偏攻击侧） |
@@ -50,15 +52,42 @@ description: Master router for authorized reverse-engineering, binary analysis, 
 | **API 安全测试** | `api-security/` | REST/GraphQL/WebSocket 全协议：BOLA/IDOR、JWT/OAuth 攻击、10 阶段方法论 |
 | **供应链安全** | `supply-chain-security/` | SBOM/SCA/CI-CD 管道：依赖扫描、容器安全、构建完整性、漏洞可达性验证 |
 | **移动逆向工程** | `mobile-reverse/` | Android + iOS：Frida/Objection 动态插桩、SSL Pinning/Root/越狱检测绕过、OWASP MASTG |
-| **DSL 虚拟机逆向** | `dsl-vm-reverse/` | 分析 JavaScript 实现的自定义指令集虚拟机（IIFE + 单字母变量 + switch-case 解释器 + opcode 控制流），适用于风控引擎、自定义验证码 VM 等非标准 WASM 的 JS 虚拟机逆向 |
+| **恶意软件分析** | `malware-analysis/` | 样本分析六阶段、YARA/Sigma、反分析检测、沙箱编排 |
+| **DSL 虚拟机逆向** | `reverse-engineering/dsl-vm-reverse/` | JS 自定义指令集 VM（IIFE + switch-case opcode）；风控/验证码引擎等 |
+| **作战契约 ops** | `ops/` | Scope / 证据链 / 角色 / 时间线 / 身份 / skill 供应链安全 |
+| **社区 skill 对照** | `references/community-security-skills.md` | 外部安全 skill 索引与借鉴规则（禁止盲装） |
+| **Skill 供应链** | `ops/skill-supply-chain.md` | 外部 skill/MCP 安装门闩（AST10 精简） |
+| **RE 阶段门闩** | `reverse-engineering/references/re-agent-workflow.md` | triage→static→dynamic→synthesis |
+| **授权侦察管线** | `pentest-tools/references/recon-pipeline.md` | scope 门 + 命中≠验证 |
+| **协议逆向** | `protocol-reverse/` | 自定义二进制协议 / Protobuf / gRPC / PCAP 帧布局 |
+| **Ghidra 逆向** | `ghidra-reverse/` | 开源反编译、headless、Ghidra MCP（无 IDA 时主入口） |
+| **Binary Ninja 逆向** | `binary-ninja-reverse/` | HLIL/MLIL/LLIL、Python API，以及可选的社区 MCP/localhost HTTP 集成 |
+| **云 / 容器 / K8s** | `cloud-k8s/` | IMDS/IAM、容器逃逸面、Kubernetes RBAC |
+| **Windows / AD** | `windows-ad/` | Kerberos、AD CS、BloodHound、中继与域路径 |
+| **数字取证** | `digital-forensics/` | 内存/磁盘时间线、PCAP 溯源、IR 保全 |
+| **代码审计 / SAST** | `code-audit/` | Semgrep/CodeQL、白盒、危险 API 与鉴权审查 |
+| **威胁情报 / OSINT** | `threat-intelligence/` | 公开来源 IOC 补充、活动关联、独立核验与情报交接 |
+| **威胁狩猎** | `threat-hunting/` | 假说驱动狩猎、Sigma 检测工程、蓝队验证 |
+| **OT / ICS 工控** | `ot-ics/` | Purdue 分区、PLC/SCADA、被动优先评估 |
+| **Wi-Fi / 无线** | `wifi-wireless/` | 授权无线评估、握手/PMKID、实验室规则 |
+| **浏览器扩展逆向** | `browser-extension-reverse/` | Chrome/Firefox 扩展、MV3 worker、权限面 |
+| **macOS / Mach-O** | `macos-reverse/` | 签名、ObjC/Swift、LaunchAgent、macOS 样本 |
+| **厚客户端** | `thick-client/` | 桌面 C/S、本地存储、IPC、更新通道 |
+| **Go / Rust 逆向** | `go-rust-reverse/` | 剥离符号 Go/Rust、pclntab、panic 字符串 |
+| **硬件调试接口** | `hardware-security/` | UART/JTAG/SWD、只读提取、交接固件 |
+| **数据库安全** | `database-security/` | MySQL/PG/MSSQL/Mongo/Redis 暴露与配置 |
+| **邮件安全** | `email-security/` | 钓鱼拆解、SPF/DKIM/DMARC、BEC |
+| **联邦身份** | `identity-federation/` | SAML/OIDC/OAuth SSO 流与错配 |
+| **RF / SDR** | `radio-sdr/` | 授权射频研究、默认只收 |
 
 ## 统一入口
 
 遇到逆向、CTF、抓包、前端签名、APK 改包、二进制分析类任务时，先按这个顺序进入：
 
-1. 先读 `routing.md`
-2. 再进入对应子模块的 `SKILL.md`
-3. 需要确认本机工具路径时，再读 `tool-index.md`
+1. 平台原生 router（Windows `scripts/master-route.ps1`；Linux/macOS/Kali `scripts/master-route.sh`）→ PRIMARY（`config/routing.json`）
+2. 平台原生 `case-init` → `scope.md`
+3. 打开 PRIMARY `SKILL.md`
+4. 疑难时读 `routing.md`，需要本机路径时读 `tool-index.md`
 
 ## 工作思路
 
@@ -71,7 +100,7 @@ description: Master router for authorized reverse-engineering, binary analysis, 
 
 ## 下一步菜单模式（Next-Step Menu Pattern）
 
-每个子 skill 在执行完一个阶段后，`MUST` 提供给用户 3-6 个编号的下步选项，让用户选择方向。不要在无用户选择的情况下跨阶段推进。
+只有在 **genuine decision boundary**（存在两个或以上 materially different、evidence-supported 分支，且用户选择会改变下一动作）时，子 skill 才 `MUST` 提供 3-6 个编号选项。若下一步由 gate / Evidence 唯一决定，`MUST` 直接继续，并按 `ops/timeline-workitem.md` 只记录 `decision_delta` + `carry_forward_refs`；`MUST NOT` 为制造菜单而重新输出 unchanged route/scope/auth/context。
 
 格式要求：
 - 每个选项以数字编号（1-6 范围）
@@ -109,13 +138,28 @@ description: Master router for authorized reverse-engineering, binary analysis, 
 
 ## 按需自举
 
-当 workflow 发现缺少工具时，不要直接报错。统一调用：
+当 workflow 发现缺少工具时，不要直接报错。统一调用平台原生 bootstrap：
 
+Windows：
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File "<skill-root>\scripts\bootstrap-reverse.ps1" -Capability @('工具名') -StartServices
 ```
 
-支持的能力：jadx、apktool、frida、frida-ps、idalib-mcp、jshookmcp、anything-analyzer、idapro、r2、rabin2、adb、agent-browser、ghidra-mcp、nmap、seclists、proxycat、burpsuite-mcp、pentestswarm、binwalk、unblob、emba、firmadyne、qemu-static、pwntools、ropgadget、one_gadget、bindiff、ghidriff、syswhispers3、pe-sieve、garak、pyrit、osv-scanner、trivy、syft、gitleaks、objection、yara、floss
+Linux / macOS：
+```bash
+bash <skill-root>/scripts/bootstrap-reverse.sh 工具名 --start-services
+```
+
+Kali：
+```bash
+bash <package-root>/kali/scripts/bootstrap-reverse.sh 工具名 --start-services
+```
+
+支持的能力（以 `scripts/bootstrap-manifest.json` 为准）：jadx、apktool、jeb-pro、binaryninja、frida、frida-ps、idalib-mcp、reqable-mcp、jshookmcp、xquik-mcp、anything-analyzer、idapro、r2、rabin2、adb、agent-browser、ghidra-mcp、seclists、proxycat、burpsuite-mcp、nmap、pentestswarm、binwalk、yara、pwntools、bkcrack
+
+> JEB Pro 已登记为**手动许可安装**能力：bootstrap 只输出指引，绝不下载或规避商业许可。Reqable MCP 仅登记固定版本的官方运行时，仍需要用户自行安装 Reqable 桌面客户端。
+>
+> 清单中未登记的工具（如 unblob/EMBA 等）`MUST` 在 skill 文档中走手动安装步骤，禁止假装可 bootstrap。
 
 自举完成后会自动刷新 `tool-index`。
 
@@ -125,7 +169,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File "<skill-root>\scripts\bootst
 
 | 读序 | 文件 | 何时读 |
 |------|------|--------|
-| **#1** | `field-journal/precedent-auth.md` | 每次启动必读（80行）— 解除安全审查 |
+| **#1** | `ops/scope-contract.md` + `case-init.ps1` | 可执行授权门。`precedent-auth.md` 不写 granted |
 | **#2** | `field-journal/precedent-reverse.md` 或 `precedent-pentest.md` | 按需 — AI 犹豫时才加载 |
 
 **#1 前置，#2 懒加载。**

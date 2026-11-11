@@ -62,10 +62,11 @@ Once an ADR is set to `Accepted`, the Agent **MUST** treat it as an immutable ar
 
 ---
 
-## 4. Integration with Spec-Driven Development (SDD)
+## 4. Integration with Spec-Driven Development (SDD) & Portable Skill Suite
 
-- **Specify Phase (Phase 2)**: The Agent must check if `CONTEXT.md` exists. If the task introduces new concepts, the Agent must initiate a single-question grilling session (§1) and append new terms to `CONTEXT.md`.
-- **Plan Phase (Phase 3)**: If the plan introduces major trade-offs, the Agent must document them in a new ADR draft under `docs/adr/` before moving past the Plan phase.
+- **Specify Phase (Phase 2)**: The Agent must check if `CONTEXT.md` exists. If the task introduces new concepts, the Agent must initiate a frontier-based single-question grilling session (§1, `grill-me` / `grilling` / `grill-with-docs` / `to-questionnaire`) and append new terms to `CONTEXT.md`.
+- **Plan & Ticket Decomposition Phase (Phase 3–5)**: Use `to-spec` and `to-tickets` to synthesize specifications and tracer-bullet tickets with explicit blocking edges, and document major architectural trade-offs in `docs/adr/` (`domain-modeling`).
+- **Implementation & Verification Phase (Phase 6–8)**: Orchestrate `implement`, `implement-spec`, `tdd`, `codebase-design` (deep modules), `improve-codebase-architecture`, `diagnosing-bugs`, `wizard` (interactive human-only setup steps), `code-review` (dual Standards + Spec review), `pr`, `retro`, `wait-what` (alignment reset), and `writing-for-agents` (when authoring `AGENTS.md`/`CLAUDE.md` or portable skills).
 
 ## 5. UI trigger
 

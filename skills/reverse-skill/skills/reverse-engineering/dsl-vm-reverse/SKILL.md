@@ -1,9 +1,15 @@
 ---
 name: dsl-vm-reverse
-description: Authorized reverse-engineering and clean-room analysis of custom JavaScript/WASM bytecode virtual machines.
+description: Reverse JavaScript-based custom DSL/VM interpreters, non-standard WASM-like runtimes, and risk-control engines. Use when analyzing IIFE or switch-based opcode dispatchers, extracting instruction tables, recovering bytecode semantics, capturing VM state at runtime, or reconstructing execution flow.
 ---
 
 # 🔄 DSL 自定义虚拟机逆向（DSL VM Reverse Engineering）
+
+## ACTION REQUIRED（读完后立刻执行）
+
+1. `NOW`: 确认当前任务是自定义 JS opcode VM / 风控引擎，不是标准 WASM 或普通 webpack
+2. `NOW`: `case-init` 直到 `scope.md` 就绪；离线样本用 `offline` / `lab`
+3. `ACT`: 从「3. 通用逆向工作流」Phase 1 做文件分类，不要停在目录
 
 > 用于逆向基于 JavaScript 实现的自定义 WASM 虚拟机/风控引擎
 
@@ -358,7 +364,7 @@ async function run() {
 
 | 类型 | 路由 |
 |------|------|
-| **目标类型**: WASM / DSL VM / 自定义指令集 | `dsl-vm-reverse/SKILL.md` |
+| **目标类型**: WASM / DSL VM / 自定义指令集 | `reverse-engineering/dsl-vm-reverse/SKILL.md` |
 | **用户意图**: "DSL VM / 风控引擎逆向" | 本 skill |
 | **工具链**: Playwright / Selenium CDP | 浏览器注入方案 |
 
@@ -366,7 +372,7 @@ async function run() {
 
 ```
 DSL VM 逆向路径:
-  dsl-vm-reverse/ → Phase 1-6 工作流
+  reverse-engineering/dsl-vm-reverse/ → Phase 1-6 工作流
   ↓ 若需要捕获运行时数据
   browser-automation/ → Playwright/Selenium CDP
   ↓ 若需要分析 API 协议层

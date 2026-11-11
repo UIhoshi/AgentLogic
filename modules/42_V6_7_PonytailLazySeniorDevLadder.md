@@ -28,7 +28,7 @@ Before writing, modifying, or refactoring any line of code, the Agent **MUST** e
 | **4. Native Platform** | Does the native platform provide a feature for this? | Prefer native platform elements (e.g., `<input type="date">` over a calendar library, native CSS scroll-behavior over JS scroll scripts, DB constraints over app-level validation). |
 | **5. Existing Dependency** | Can an already-installed package solve it? | Reuse existing dependencies. Never add a new dependency for what a few lines of plain code or an existing library can do. |
 | **6. One-Liner** | Can this entire change be implemented in a single line? | If yes, write one line. |
-| **7. Minimum Viable Code** | If none of the above hold. | Write the absolute minimum amount of code that satisfies the specification. No unrequested abstractions, no interfaces with a single implementation, no factories for a single product. |
+| **7. Minimum Viable Code** | If none of the above hold. | Write the absolute minimum amount of code that satisfies the specification. No unrequested abstractions, no interfaces with a single implementation, no factories for a single product. When taking a deliberate bounded shortcut (e.g., in-memory cache instead of Redis for `< 1k` items), leave a `// shortcut: <limit>, <when to upgrade>` comment so `ponytail-debt` can audit it. |
 
 ---
 

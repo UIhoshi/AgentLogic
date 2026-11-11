@@ -20,11 +20,11 @@ or begin implementation before the logic-entry loop above has been completed.
 > `README.md` is the canonical English repository README and entry documentation. This file is retained as a legacy/reference document and is not part of the formal logic-entry chain.
 
 
-# 🌌 AgentLogic: 智能体级本地自进化规则引擎 (V6.9.0)
+# 🌌 AgentLogic: 智能体级本地自进化规则引擎 (V6.9.1)
 
 [![Agentic Code](https://img.shields.io/badge/Agent-Autonomous-blueviolet?style=flat-square)](https://github.com/UIhoshi/AgentLogic)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/Version-V6.9.0_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_9_0.md)
+[![Version](https://img.shields.io/badge/Version-V6.9.1_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_9_1.md)
 
 AgentLogic 是一套专为本地 AI 编码宿主（**Antigravity / Gemini**、**Claude Code**、**OpenAI Codex / GPT**）设计的**分层自进化规则引擎**。它将多轮会话规范、**开局角色自主推荐门（Turn 1 Role Gate）**、**纯前端 UI/UX 设计与文生图强制联动门**、**遇到即自动触发的 9 大第一方专业领域技能**、安全沙箱审计及项目知识同步集成打包，作为 AI 智能体的“主运行心智”。
 
@@ -42,7 +42,7 @@ AgentLogic 是一套专为本地 AI 编码宿主（**Antigravity / Gemini**、**
 | :--- | :--- | :--- |
 | **1. 环境诊断** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\doctor.ps1` | 检测仓库健康度，读取元数据，生成推荐安装指令 |
 | **2. 一键安装** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost antigravity` | 构建并部署宿主规则包及 9 个第一方自动触发 Skill（可将 `antigravity` 替换为 `claude` 或 `codex`） |
-| **3. 本地验证** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\maintainer-check.ps1` | 运行 124 个注册技能、19 条自动路由、34 项外部引用及四层架构完整性校验 |
+| **3. 本地验证** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\maintainer-check.ps1` | 运行 157 个注册技能、19 条自动路由、34 项外部引用及四层架构完整性校验 |
 
 ---
 
@@ -73,7 +73,7 @@ flowchart TD
         CodeSimp --> Verify["29_MandatoryVerificationMatrix.md & SRA 交付可评审性审计"]
     end
 
-    subgraph L4 ["L4: 9 大第一方自动触发驱动与 124 可移植技能库"]
+    subgraph L4 ["L4: 9 大第一方自动触发驱动与 157 可移植技能库"]
         UIImpl --> BrowserSkill["agent-browser & nano-banana-pro"]
         DomainDispatch --> Decompile["decompile-reconstruction (IDA / Ghidra / jadx / webcrack -> 洁净室源码还原)"]
         DomainDispatch --> MediaDir["multimodal-media-director (文生图构图 / 文生视频分镜运镜 / 文生音乐编曲)"]
@@ -100,7 +100,7 @@ flowchart TD
 | **L1: Strategy & Entry**<br>(战略与入口层) | 确立 AI 起手式、开局上下文确认、开局角色自主推荐（`role-persona-router`）及项目知识同步。 | - [00_START_HERE.md](./00_START_HERE.md) (起手式)<br>- [MAIN.md](./MAIN.md) (宿主绑定入口)<br>- [AGENTS.md](./AGENTS.md) (智能体规范)<br>- [15_LogicEntryChecklist.md](./modules/15_LogicEntryChecklist.md) (自检清单)<br>- [54_V6_9_RoleAndMultimodalCreativeGovernance.md](./modules/54_V6_9_RoleAndMultimodalCreativeGovernance.md) (V6.9 角色与多模态治理) |
 | **L2: Session & Loop**<br>(会话与循环层) | 规范多轮对话中的单问题需求澄清、SDD 六阶段规格驱动及 19 条自动任务路由。 | - [03_AgenticLoop.md](./modules/03_AgenticLoop.md) (执行循环)<br>- [38_SpecDrivenDevelopment.md](./modules/38_V6_6_SpecDrivenDevelopment.md) (SDD 规格驱动六阶段)<br>- [48_V6_8_SkillAndToolRouting.md](./modules/48_V6_8_SkillAndToolRouting.md) (技能与工具自动路由)<br>- [53_V6_8_ProgrammingLevelSkillEnforcement.md](./modules/53_V6_8_ProgrammingLevelSkillEnforcement.md) (编程级技能强制状态机) |
 | **L3: Control & Auditing**<br>(执行与控制层) | 执行纯 UI 设计规范 + 文生图前置确认、代码实现后自动精简（`code-simplifier`）及验证矩阵。 | - [29_MandatoryVerificationMatrix.md](./modules/29_MandatoryVerificationMatrix.md) (强验证矩阵)<br>- [39_TasteFrontendDesign.md](./modules/39_V6_6_TasteFrontendDesign.md) (视觉品味与 UI 审计)<br>- [30_ToolQuestionBoundaryMatrix.md](./modules/30_ToolQuestionBoundaryMatrix.md) (提问凭证边界)<br>- [31_ToolMisuseAndAntiPatternMatrix.md](./modules/31_ToolMisuseAndAntiPatternMatrix.md) (反模式纠偏) |
-| **L4: Drivers & Skills**<br>(基底与驱动层) | 自动同步部署到三大宿主的 **9 大第一方自动触发技能** 与 **124 个注册可移植技能**。 | - `skills/` (9 大第一方自动触发技能 + 124 个可移植技能)<br>  * [role-persona-router](./skills/productivity/role-persona-router/) (开局角色自主推荐与 7 大角色菜单)<br>  * [product-requirements-grilling](./skills/productivity/product-requirements-grilling/) (单问题交互式需求追问)<br>  * [ui-ux-pro-max](./skills/design/ui-ux-pro-max/) (纯前端 UI/UX 设计规范 + 文生图强制联动)<br>  * [multimodal-media-director](./skills/creative/multimodal-media-director/) (文生图 / 文生视频分镜 / 文生音乐编曲导演)<br>  * [office-pro-suite](./skills/productivity/office-pro-suite/) (Word / Excel / PPT 专业化设计与规范化)<br>  * [novel-story-architect](./skills/creative/novel-story-architect/) (`.story-bible/` 设定集防吃书与去 AI 味长篇小说引擎)<br>  * [diagram-flowchart-architect](./skills/engineering/diagram-flowchart-architect/) (`.drawio` / `.excalidraw` / 主题 `Mermaid` 架构流程图)<br>  * [code-simplifier](./skills/engineering/code-simplifier/) (实现后自动代码精炼与 AST 改写)<br>  * [decompile-reconstruction](./skills/engineering/decompile-reconstruction/) (二进制/字节码/混淆包自动反编译与洁净室源码还原) |
+| **L4: Drivers & Skills**<br>(基底与驱动层) | 自动同步部署到三大宿主的 **9 大第一方自动触发技能** 与 **157 个注册可移植技能**。 | - `skills/` (9 大第一方自动触发技能 + 157 个可移植技能)<br>  * [role-persona-router](./skills/productivity/role-persona-router/) (开局角色自主推荐与 7 大角色菜单)<br>  * [product-requirements-grilling](./skills/productivity/product-requirements-grilling/) (单问题交互式需求追问)<br>  * [ui-ux-pro-max](./skills/design/ui-ux-pro-max/) (纯前端 UI/UX 设计规范 + 文生图强制联动)<br>  * [multimodal-media-director](./skills/creative/multimodal-media-director/) (文生图 / 文生视频分镜 / 文生音乐编曲导演)<br>  * [office-pro-suite](./skills/productivity/office-pro-suite/) (Word / Excel / PPT 专业化设计与规范化)<br>  * [novel-story-architect](./skills/creative/novel-story-architect/) (`.story-bible/` 设定集防吃书与去 AI 味长篇小说引擎)<br>  * [diagram-flowchart-architect](./skills/engineering/diagram-flowchart-architect/) (`.drawio` / `.excalidraw` / 主题 `Mermaid` 架构流程图)<br>  * [code-simplifier](./skills/engineering/code-simplifier/) (实现后自动代码精炼与 AST 改写)<br>  * [decompile-reconstruction](./skills/engineering/decompile-reconstruction/) (二进制/字节码/混淆包自动反编译与洁净室源码还原) |
 
 ---
 
@@ -168,7 +168,7 @@ AgentLogic 的演进离不开开源社区的启发。我们在设计中深度参
 
 1. **逻辑包纯粹性**：本仓库是规则元数据，不能写入具体的业务项目代码。
 2. **防盲目执行**：AI 助理在进行复杂重构或方案设计前，必须在 `.specify/` 下完成 `spec.md` (规格) 和 `plan.md` (技术规划)。
-3. **版本隔离**：修改核心机制时，应优先回写 `versions/AgentLogic_V6_9_0.md`，然后重新运行 `build-profile.ps1` 进行编译部署。
+3. **版本隔离**：修改核心机制时，应优先回写 `versions/AgentLogic_V6_9_1.md`，然后重新运行 `build-profile.ps1` 进行编译部署。
 
 > [!IMPORTANT]
 > **逻辑版本升级必查红线清单（防漏改与防历史踩坑）**：

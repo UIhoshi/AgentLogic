@@ -100,7 +100,7 @@
                                                               "ui-ux-pro-max",
                                                               "taste-skill"
                                                           ],
-                       "selection_rule":  "Combine the pure design specification from ui-ux-pro-max with imagegen (or Antigravity's built-in image-generator subagent, multimodal-media-director, or nano-banana-pro) to generate the visual UI mockup before any UI code is written. Do not use a frontend implementation skill as mockup evidence.",
+                       "selection_rule":  "Combine the pure design specification from ui-ux-pro-max with imagegen (or Antigravity\u0027s built-in image-generator subagent, multimodal-media-director, or nano-banana-pro) to generate the visual UI mockup before any UI code is written. Do not use a frontend implementation skill as mockup evidence.",
                        "order":  20,
                        "requires_routes":  [
                                                "requirements-grilling",
@@ -471,12 +471,18 @@
                        "conditional_host_skill_aliases":  [
                                                               "ida-reverse",
                                                               "ghidra-mcp",
+                                                              "ghidra-reverse",
+                                                              "binary-ninja-reverse",
+                                                              "go-rust-reverse",
+                                                              "macos-reverse",
+                                                              "protocol-reverse",
+                                                              "browser-extension-reverse",
                                                               "reverse-engineering",
                                                               "dotnet-reverse",
                                                               "apk-reverse",
                                                               "js-reverse"
                                                           ],
-                       "selection_rule":  "Automatically use decompile-reconstruction when analyzing, decompiling, deobfuscating, or recovering clean-room source code from compiled binaries (PE/ELF/Mach-O/DLL/SO), JVM/Android APKs/JARs, .NET assemblies, Python bytecode (.pyc), WASM, or bundled/minified/obfuscated JS/Electron packages. Orchestrate IDA Pro MCP (ida-reverse), Ghidra MCP/headless, jadx, ilspycmd/dnSpyEx, pycdc, or webcrack/ast-grep according to the detected target format; if specialized decompilers are absent, use native disassembly/triage tools and explicitly disclose the fidelity gap.",
+                       "selection_rule":  "Automatically use decompile-reconstruction when analyzing, decompiling, deobfuscating, or recovering clean-room source code from compiled binaries (PE/ELF/Mach-O/DLL/SO), stripped Go/Rust binaries, Unity IL2CPP/Godot containers, JVM/Android APKs/JARs, .NET assemblies, Python bytecode (.pyc), WASM, or bundled/minified/obfuscated JS/Electron packages. Orchestrate IDA Pro MCP (ida-reverse), Ghidra MCP/headless (ghidra-reverse), Binary Ninja (binary-ninja-reverse), go-rust-reverse, jadx, ilspycmd/dnSpyEx, pycdc, or webcrack/ast-grep according to the detected target format; if specialized decompilers are absent, use native disassembly/triage tools and explicitly disclose the fidelity gap.",
                        "order":  35,
                        "requires_routes":  [
 

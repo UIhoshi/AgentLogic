@@ -2,16 +2,36 @@
 
 import json
 import os
-import warnings
+from pathlib import Path
+from unittest.mock import patch
 
 import pytest
+import typer
 import yaml
 
 from specify_cli.integrations import get_integration
+from specify_cli.integrations.base import SkillsIntegration
 from specify_cli.integrations.manifest import IntegrationManifest
 
+REPO_ROOT = Path(__file__).resolve().parents[2]
 
-class TestCopilotIntegration:
+
+@pytest.fixture(autouse=True)
+def _reset_copilot_model_invocation():
+    """``setup()`` stores ``--no-model-invocation`` on the process-wide Copilot
+    singleton; keep it from leaking between tests."""
+    copilot = get_integration("copilot")
+    copilot._disable_model_invocation = False
+    yield
+    copilot._disable_model_invocation = False
+
+
+def _skill_frontmatter(skill_file: Path) -> dict:
+    content = skill_file.read_text(encoding="utf-8")
+    return yaml.safe_load(content.split("---", 2)[1])
+
+
+class TestCopilotCommandsMode:
     def test_copilot_key_and_config(self):
         copilot = get_integration("copilot")
         assert copilot is not None
@@ -28,7 +48,7 @@ class TestCopilotIntegration:
         from specify_cli.integrations.copilot import CopilotIntegration
         copilot = CopilotIntegration()
         m = IntegrationManifest("copilot", tmp_path)
-        created = copilot.setup(tmp_path, m)
+        created = copilot.setup(tmp_path, m, parsed_options={"commands": True})
         assert len(created) > 0
         agent_files = [f for f in created if ".agent." in f.name]
         assert len(agent_files) > 0
@@ -36,36 +56,11 @@ class TestCopilotIntegration:
             assert f.parent == tmp_path / ".github" / "agents"
             assert f.name.endswith(".agent.md")
 
-    def test_setup_warns_legacy_markdown_default_is_deprecated(self, tmp_path):
-        from specify_cli.integrations.copilot import CopilotIntegration
-        copilot = CopilotIntegration()
-        m = IntegrationManifest("copilot", tmp_path)
-
-        with pytest.warns(UserWarning, match="Copilot legacy markdown mode is deprecated"):
-            created = copilot.setup(tmp_path, m)
-
-        assert any(f.name.endswith(".agent.md") for f in created)
-
-    def test_skills_setup_does_not_warn_about_legacy_default(self, tmp_path):
-        from specify_cli.integrations.copilot import CopilotIntegration
-        copilot = CopilotIntegration()
-        m = IntegrationManifest("copilot", tmp_path)
-
-        with warnings.catch_warnings(record=True) as caught:
-            warnings.simplefilter("always")
-            created = copilot.setup(tmp_path, m, parsed_options={"skills": True})
-
-        assert not any(
-            "Copilot legacy markdown mode is deprecated" in str(item.message)
-            for item in caught
-        )
-        assert any(f.name == "SKILL.md" for f in created)
-
     def test_setup_creates_companion_prompts(self, tmp_path):
         from specify_cli.integrations.copilot import CopilotIntegration
         copilot = CopilotIntegration()
         m = IntegrationManifest("copilot", tmp_path)
-        created = copilot.setup(tmp_path, m)
+        created = copilot.setup(tmp_path, m, parsed_options={"commands": True})
         prompt_files = [f for f in created if f.parent.name == "prompts"]
         assert len(prompt_files) > 0
         for f in prompt_files:
@@ -77,7 +72,7 @@ class TestCopilotIntegration:
         from specify_cli.integrations.copilot import CopilotIntegration
         copilot = CopilotIntegration()
         m = IntegrationManifest("copilot", tmp_path)
-        created = copilot.setup(tmp_path, m)
+        created = copilot.setup(tmp_path, m, parsed_options={"commands": True})
         agents = [f for f in created if ".agent.md" in f.name]
         prompts = [f for f in created if ".prompt.md" in f.name]
         assert len(agents) == len(prompts)
@@ -87,7 +82,7 @@ class TestCopilotIntegration:
         copilot = CopilotIntegration()
         assert copilot._vscode_settings_path() is not None
         m = IntegrationManifest("copilot", tmp_path)
-        created = copilot.setup(tmp_path, m)
+        created = copilot.setup(tmp_path, m, parsed_options={"commands": True})
         settings = tmp_path / ".vscode" / "settings.json"
         assert settings.exists()
         assert settings in created
@@ -101,7 +96,7 @@ class TestCopilotIntegration:
         existing = {"editor.fontSize": 14, "custom.setting": True}
         (vscode_dir / "settings.json").write_text(json.dumps(existing, indent=4), encoding="utf-8")
         m = IntegrationManifest("copilot", tmp_path)
-        created = copilot.setup(tmp_path, m)
+        created = copilot.setup(tmp_path, m, parsed_options={"commands": True})
         settings = tmp_path / ".vscode" / "settings.json"
         data = json.loads(settings.read_text(encoding="utf-8"))
         assert data["editor.fontSize"] == 14
@@ -109,11 +104,57 @@ class TestCopilotIntegration:
         assert settings not in created
         assert not any("settings.json" in k for k in m.files)
 
+    def test_setup_merge_keeps_non_ascii_vscode_settings_readable(self, tmp_path):
+        from specify_cli.integrations.copilot import CopilotIntegration
+        copilot = CopilotIntegration()
+        vscode_dir = tmp_path / ".vscode"
+        vscode_dir.mkdir(parents=True)
+        existing = {"cSpell.words": ["naïve", "Привіт", "日本語"]}
+        settings = vscode_dir / "settings.json"
+        settings.write_text(json.dumps(existing, indent=4, ensure_ascii=False), encoding="utf-8")
+        m = IntegrationManifest("copilot", tmp_path)
+
+        copilot.setup(tmp_path, m, parsed_options={"commands": True})
+
+        text = settings.read_text(encoding="utf-8")
+        assert '"naïve"' in text and '"Привіт"' in text and '"日本語"' in text
+        assert json.loads(text)["cSpell.words"] == existing["cSpell.words"]
+
+    def test_setup_merge_keeps_escaped_lone_surrogate_in_vscode_settings(self, tmp_path):
+        from specify_cli.integrations.copilot import CopilotIntegration
+        copilot = CopilotIntegration()
+        vscode_dir = tmp_path / ".vscode"
+        vscode_dir.mkdir(parents=True)
+        settings = vscode_dir / "settings.json"
+        settings.write_text('{"custom.setting": "\\ud800"}', encoding="utf-8")
+        m = IntegrationManifest("copilot", tmp_path)
+
+        copilot.setup(tmp_path, m, parsed_options={"commands": True})
+
+        data = json.loads(settings.read_text(encoding="utf-8"))
+        assert data["custom.setting"] == "\ud800"
+        assert "chat.promptFilesRecommendations" in data
+
+    def test_setup_preserves_non_utf8_vscode_settings(self, tmp_path, caplog):
+        from specify_cli.integrations.copilot import CopilotIntegration
+        copilot = CopilotIntegration()
+        vscode_dir = tmp_path / ".vscode"
+        vscode_dir.mkdir(parents=True)
+        settings = vscode_dir / "settings.json"
+        original = b'{"editor.fontSize": 14}\xff'
+        settings.write_bytes(original)
+        m = IntegrationManifest("copilot", tmp_path)
+
+        copilot.setup(tmp_path, m, parsed_options={"commands": True})
+
+        assert settings.read_bytes() == original
+        assert "Could not parse" in caplog.text
+
     def test_all_created_files_tracked_in_manifest(self, tmp_path):
         from specify_cli.integrations.copilot import CopilotIntegration
         copilot = CopilotIntegration()
         m = IntegrationManifest("copilot", tmp_path)
-        created = copilot.setup(tmp_path, m)
+        created = copilot.setup(tmp_path, m, parsed_options={"commands": True})
         for f in created:
             rel = f.resolve().relative_to(tmp_path.resolve()).as_posix()
             assert rel in m.files, f"Created file {rel} not tracked in manifest"
@@ -122,7 +163,9 @@ class TestCopilotIntegration:
         from specify_cli.integrations.copilot import CopilotIntegration
         copilot = CopilotIntegration()
         m = IntegrationManifest("copilot", tmp_path)
-        created = copilot.install(tmp_path, m)
+        created = copilot.install(
+            tmp_path, m, parsed_options={"commands": True}
+        )
         assert len(created) > 0
         m.save()
         for f in created:
@@ -135,7 +178,9 @@ class TestCopilotIntegration:
         from specify_cli.integrations.copilot import CopilotIntegration
         copilot = CopilotIntegration()
         m = IntegrationManifest("copilot", tmp_path)
-        created = copilot.install(tmp_path, m)
+        created = copilot.install(
+            tmp_path, m, parsed_options={"commands": True}
+        )
         m.save()
         modified_file = created[0]
         modified_file.write_text("user modified this", encoding="utf-8")
@@ -147,14 +192,14 @@ class TestCopilotIntegration:
         from specify_cli.integrations.copilot import CopilotIntegration
         copilot = CopilotIntegration()
         m = IntegrationManifest("copilot", tmp_path)
-        copilot.setup(tmp_path, m)
+        copilot.setup(tmp_path, m, parsed_options={"commands": True})
         agents_dir = tmp_path / ".github" / "agents"
         assert agents_dir.is_dir()
         agent_files = sorted(agents_dir.glob("speckit.*.agent.md"))
-        assert len(agent_files) == 10
+        assert len(agent_files) == 9
         expected_commands = {
             "analyze", "clarify", "constitution", "converge", "implement",
-            "plan", "checklist", "specify", "tasks", "taskstoissues",
+            "plan", "checklist", "specify", "tasks",
         }
         actual_commands = {f.name.removeprefix("speckit.").removesuffix(".agent.md") for f in agent_files}
         assert actual_commands == expected_commands
@@ -163,7 +208,7 @@ class TestCopilotIntegration:
         from specify_cli.integrations.copilot import CopilotIntegration
         copilot = CopilotIntegration()
         m = IntegrationManifest("copilot", tmp_path)
-        copilot.setup(tmp_path, m)
+        copilot.setup(tmp_path, m, parsed_options={"commands": True})
         agents_dir = tmp_path / ".github" / "agents"
         for agent_file in agents_dir.glob("speckit.*.agent.md"):
             content = agent_file.read_text(encoding="utf-8")
@@ -178,15 +223,55 @@ class TestCopilotIntegration:
         from specify_cli.integrations.copilot import CopilotIntegration
         copilot = CopilotIntegration()
         m = IntegrationManifest("copilot", tmp_path)
-        copilot.setup(tmp_path, m)
+        copilot.setup(tmp_path, m, parsed_options={"commands": True})
 
         specify_file = tmp_path / ".github" / "agents" / "speckit.specify.agent.md"
         content = specify_file.read_text(encoding="utf-8")
 
-        assert "specify preset resolve spec-template" in content
-        assert "resolved active `spec-template`" in content
+        assert "resolve-template" in content
+        assert "{SCRIPT}" not in content
+        assert "parse `TEMPLATE_CONTENT` as the active `spec-template`" in content
+        assert "Write `TEMPLATE_CONTENT` to `SPECIFY_FEATURE_DIRECTORY/spec.md`" in content
+        assert "Copy the resolved `spec-template` file" not in content
         assert "Copy `.specify/templates/spec-template.md`" not in content
         assert "Load `.specify/templates/spec-template.md`" not in content
+
+    def test_setup_falls_back_to_bundled_command_template_without_preset_override(self, tmp_path):
+        """Copilot should keep using the bundled specify command template when no preset override exists."""
+        from specify_cli.integrations.copilot import CopilotIntegration
+        copilot = CopilotIntegration()
+        m = IntegrationManifest("copilot", tmp_path)
+
+        copilot.setup(tmp_path, m, parsed_options={"commands": True})
+
+        specify_file = tmp_path / ".github" / "agents" / "speckit.specify.agent.md"
+        content = specify_file.read_text(encoding="utf-8")
+        assert "Create or update the feature specification" in content
+        assert "preset override content" not in content
+
+    def test_setup_uses_preset_command_override_when_present(self, tmp_path):
+        """Copilot should prefer a preset-provided command template over the bundled one."""
+        from specify_cli.integrations.copilot import CopilotIntegration
+        copilot = CopilotIntegration()
+        m = IntegrationManifest("copilot", tmp_path)
+
+        preset_dir = tmp_path / ".specify" / "presets" / "demo"
+        (preset_dir / "commands").mkdir(parents=True, exist_ok=True)
+        (preset_dir / "commands" / "speckit.specify.md").write_text(
+            "preset override content\n",
+            encoding="utf-8",
+        )
+        (tmp_path / ".specify" / "presets" / ".registry").write_text(
+            '{"schema_version": "1.0", "presets": {"demo": {"version": "1.0.0", "source": "local", "enabled": true, "priority": 10}}}',
+            encoding="utf-8",
+        )
+
+        copilot.setup(tmp_path, m, parsed_options={"commands": True})
+
+        specify_file = tmp_path / ".github" / "agents" / "speckit.specify.agent.md"
+        content = specify_file.read_text(encoding="utf-8")
+        assert "preset override content" in content
+        assert "Create or update the feature specification" not in content
 
     def test_plan_command_has_no_context_placeholder(self, tmp_path):
         """The core plan command must not carry a context-file placeholder —
@@ -194,14 +279,14 @@ class TestCopilotIntegration:
         from specify_cli.integrations.copilot import CopilotIntegration
         copilot = CopilotIntegration()
         m = IntegrationManifest("copilot", tmp_path)
-        copilot.setup(tmp_path, m)
+        copilot.setup(tmp_path, m, parsed_options={"commands": True})
         plan_file = tmp_path / ".github" / "agents" / "speckit.plan.agent.md"
         assert plan_file.exists()
         content = plan_file.read_text(encoding="utf-8")
         assert "__CONTEXT_FILE__" not in content
 
     def test_complete_file_inventory_sh(self, tmp_path):
-        """Every file produced by specify init --integration copilot --script sh."""
+        """Every file produced by Copilot commands mode with shell scripts."""
         from typer.testing import CliRunner
         from specify_cli import app
         project = tmp_path / "inventory-sh"
@@ -210,7 +295,8 @@ class TestCopilotIntegration:
         try:
             os.chdir(project)
             result = CliRunner().invoke(app, [
-                "init", "--here", "--integration", "copilot", "--script", "sh",
+                "init", "--here", "--integration", "copilot",
+                "--integration-options", "--commands", "--script", "sh",
             ], catch_exceptions=False)
         finally:
             os.chdir(old_cwd)
@@ -226,7 +312,6 @@ class TestCopilotIntegration:
             ".github/agents/speckit.plan.agent.md",
             ".github/agents/speckit.specify.agent.md",
             ".github/agents/speckit.tasks.agent.md",
-            ".github/agents/speckit.taskstoissues.agent.md",
             ".github/prompts/speckit.analyze.prompt.md",
             ".github/prompts/speckit.checklist.prompt.md",
             ".github/prompts/speckit.clarify.prompt.md",
@@ -236,15 +321,16 @@ class TestCopilotIntegration:
             ".github/prompts/speckit.plan.prompt.md",
             ".github/prompts/speckit.specify.prompt.md",
             ".github/prompts/speckit.tasks.prompt.md",
-            ".github/prompts/speckit.taskstoissues.prompt.md",
             ".vscode/settings.json",
             ".specify/integration.json",
             ".specify/init-options.json",
             ".specify/integrations/copilot.manifest.json",
             ".specify/integrations/speckit.manifest.json",
+            ".specify/.gitignore",
             ".specify/scripts/bash/check-prerequisites.sh",
             ".specify/scripts/bash/common.sh",
             ".specify/scripts/bash/create-new-feature.sh",
+            ".specify/scripts/bash/resolve-template.sh",
             ".specify/scripts/bash/setup-plan.sh",
             ".specify/scripts/bash/setup-tasks.sh",
             ".specify/templates/checklist-template.md",
@@ -263,7 +349,7 @@ class TestCopilotIntegration:
         )
 
     def test_complete_file_inventory_ps(self, tmp_path):
-        """Every file produced by specify init --integration copilot --script ps."""
+        """Every file produced by Copilot commands mode with PowerShell scripts."""
         from typer.testing import CliRunner
         from specify_cli import app
         project = tmp_path / "inventory-ps"
@@ -272,7 +358,8 @@ class TestCopilotIntegration:
         try:
             os.chdir(project)
             result = CliRunner().invoke(app, [
-                "init", "--here", "--integration", "copilot", "--script", "ps",
+                "init", "--here", "--integration", "copilot",
+                "--integration-options", "--commands", "--script", "ps",
             ], catch_exceptions=False)
         finally:
             os.chdir(old_cwd)
@@ -288,7 +375,6 @@ class TestCopilotIntegration:
             ".github/agents/speckit.plan.agent.md",
             ".github/agents/speckit.specify.agent.md",
             ".github/agents/speckit.tasks.agent.md",
-            ".github/agents/speckit.taskstoissues.agent.md",
             ".github/prompts/speckit.analyze.prompt.md",
             ".github/prompts/speckit.checklist.prompt.md",
             ".github/prompts/speckit.clarify.prompt.md",
@@ -298,15 +384,16 @@ class TestCopilotIntegration:
             ".github/prompts/speckit.plan.prompt.md",
             ".github/prompts/speckit.specify.prompt.md",
             ".github/prompts/speckit.tasks.prompt.md",
-            ".github/prompts/speckit.taskstoissues.prompt.md",
             ".vscode/settings.json",
             ".specify/integration.json",
             ".specify/init-options.json",
             ".specify/integrations/copilot.manifest.json",
             ".specify/integrations/speckit.manifest.json",
+            ".specify/.gitignore",
             ".specify/scripts/powershell/check-prerequisites.ps1",
             ".specify/scripts/powershell/common.ps1",
             ".specify/scripts/powershell/create-new-feature.ps1",
+            ".specify/scripts/powershell/resolve-template.ps1",
             ".specify/scripts/powershell/setup-plan.ps1",
             ".specify/scripts/powershell/setup-tasks.ps1",
             ".specify/templates/checklist-template.md",
@@ -324,58 +411,12 @@ class TestCopilotIntegration:
             f"Extra: {sorted(set(actual) - set(expected))}"
         )
 
-    def test_default_cli_init_warns_legacy_markdown_is_deprecated(self, tmp_path):
-        """Default Copilot init should warn users about the future skills default."""
-        from typer.testing import CliRunner
-        from specify_cli import app
-        project = tmp_path / "default-warning"
-        project.mkdir()
-        old_cwd = os.getcwd()
-        try:
-            os.chdir(project)
-            with pytest.warns(
-                UserWarning,
-                match="Copilot legacy markdown mode is deprecated",
-            ):
-                result = CliRunner().invoke(app, [
-                    "init", "--here", "--integration", "copilot", "--script", "sh",
-                ], catch_exceptions=False)
-        finally:
-            os.chdir(old_cwd)
-
-        assert result.exit_code == 0, result.output
-
-    def test_skills_cli_init_does_not_warn_about_legacy_markdown(self, tmp_path):
-        """Explicit Copilot skills mode should not warn about the legacy default."""
-        from typer.testing import CliRunner
-        from specify_cli import app
-        project = tmp_path / "skills-no-warning"
-        project.mkdir()
-        old_cwd = os.getcwd()
-        try:
-            os.chdir(project)
-            with warnings.catch_warnings(record=True) as caught:
-                warnings.simplefilter("always")
-                result = CliRunner().invoke(app, [
-                    "init", "--here", "--integration", "copilot",
-                    "--integration-options", "--skills", "--script", "sh",
-                ], catch_exceptions=False)
-        finally:
-            os.chdir(old_cwd)
-
-        assert result.exit_code == 0, result.output
-        assert not any(
-            "Copilot legacy markdown mode is deprecated" in str(item.message)
-            for item in caught
-        )
-
-
 class TestCopilotSkillsMode:
-    """Tests for Copilot integration in --skills mode."""
+    """Tests for Copilot's default skills mode."""
 
     _SKILL_COMMANDS = [
         "analyze", "clarify", "constitution", "converge", "implement",
-        "plan", "checklist", "specify", "tasks", "taskstoissues",
+        "plan", "checklist", "specify", "tasks",
     ]
 
     def _make_copilot(self):
@@ -384,7 +425,7 @@ class TestCopilotSkillsMode:
 
     def _setup_skills(self, copilot, tmp_path):
         m = IntegrationManifest("copilot", tmp_path)
-        created = copilot.setup(tmp_path, m, parsed_options={"skills": True})
+        created = copilot.setup(tmp_path, m)
         return created, m
 
     # -- Options ----------------------------------------------------------
@@ -396,6 +437,137 @@ class TestCopilotSkillsMode:
         assert len(skills_opts) == 1
         assert skills_opts[0].is_flag is True
         assert skills_opts[0].default is False
+
+    def test_options_include_commands_flag(self):
+        copilot = get_integration("copilot")
+        commands_opts = [o for o in copilot.options() if o.name == "--commands"]
+        assert len(commands_opts) == 1
+        assert commands_opts[0].is_flag is True
+        assert commands_opts[0].default is False
+
+    def test_default_is_skills_mode(self):
+        copilot = self._make_copilot()
+        assert copilot.is_skills_mode() is True
+        assert copilot.is_skills_mode({}) is True
+
+    def test_commands_flag_disables_skills_mode(self):
+        copilot = self._make_copilot()
+        assert copilot.is_skills_mode({"commands": True}) is False
+
+    def test_existing_commands_layout_is_preserved(self, tmp_path):
+        copilot = self._make_copilot()
+        agents_dir = tmp_path / ".github" / "agents"
+        agents_dir.mkdir(parents=True)
+        (agents_dir / "speckit.plan.agent.md").write_text(
+            "# plan\n", encoding="utf-8"
+        )
+        assert copilot.is_skills_mode(project_root=tmp_path) is False
+
+    def test_setup_preserves_existing_commands_without_stored_options(
+        self, tmp_path
+    ):
+        copilot = self._make_copilot()
+        agents_dir = tmp_path / ".github" / "agents"
+        agents_dir.mkdir(parents=True)
+        (agents_dir / "speckit.plan.agent.md").write_text(
+            "# old plan\n", encoding="utf-8"
+        )
+        manifest = IntegrationManifest("copilot", tmp_path)
+
+        created = copilot.setup(tmp_path, manifest)
+
+        assert any(path.name.endswith(".agent.md") for path in created)
+        assert not (tmp_path / ".github" / "skills").exists()
+        assert copilot._skills_mode is False
+
+    def test_existing_skills_layout_stays_in_skills_mode(self, tmp_path):
+        copilot = self._make_copilot()
+        (tmp_path / ".github" / "skills" / "speckit-plan").mkdir(parents=True)
+        assert copilot.is_skills_mode(project_root=tmp_path) is True
+
+    def test_commands_manifest_wins_over_untracked_skill(self, tmp_path):
+        copilot = self._make_copilot()
+        manifest = IntegrationManifest("copilot", tmp_path)
+        copilot.setup(
+            tmp_path, manifest, parsed_options={"commands": True}
+        )
+        manifest.save()
+        stale_skill = (
+            tmp_path
+            / ".github"
+            / "skills"
+            / "speckit-plan"
+            / "SKILL.md"
+        )
+        stale_skill.parent.mkdir(parents=True)
+        stale_skill.write_text("# user-authored skill\n", encoding="utf-8")
+
+        assert copilot.is_skills_mode(project_root=tmp_path) is False
+
+    def test_skills_manifest_wins_over_untracked_command(self, tmp_path):
+        copilot = self._make_copilot()
+        manifest = IntegrationManifest("copilot", tmp_path)
+        copilot.setup(tmp_path, manifest)
+        manifest.save()
+        stale_agent = (
+            tmp_path
+            / ".github"
+            / "agents"
+            / "speckit.plan.agent.md"
+        )
+        stale_agent.parent.mkdir(parents=True)
+        stale_agent.write_text("# stale command\n", encoding="utf-8")
+
+        assert copilot.is_skills_mode(project_root=tmp_path) is True
+
+    def test_explicit_skills_forces_migration_from_commands(self, tmp_path):
+        copilot = self._make_copilot()
+        agents_dir = tmp_path / ".github" / "agents"
+        agents_dir.mkdir(parents=True)
+        (agents_dir / "speckit.plan.agent.md").write_text(
+            "# plan\n", encoding="utf-8"
+        )
+        assert (
+            copilot.is_skills_mode({"skills": True}, project_root=tmp_path)
+            is True
+        )
+
+    def test_skills_and_commands_flags_are_mutually_exclusive(self):
+        copilot = self._make_copilot()
+        with pytest.raises(typer.Exit):
+            copilot.is_skills_mode({"skills": True, "commands": True})
+
+    def test_cli_rejects_skills_and_commands_together(self, tmp_path):
+        from typer.testing import CliRunner
+
+        from specify_cli import app
+
+        project = tmp_path / "conflicting-modes"
+        project.mkdir()
+        old_cwd = os.getcwd()
+        try:
+            os.chdir(project)
+            result = CliRunner().invoke(
+                app,
+                [
+                    "init",
+                    "--here",
+                    "--integration",
+                    "copilot",
+                    "--integration-options",
+                    "--skills --commands",
+                    "--script",
+                    "sh",
+                ],
+                catch_exceptions=False,
+            )
+        finally:
+            os.chdir(old_cwd)
+
+        assert result.exit_code == 1
+        assert "--skills and --commands are mutually exclusive" in result.output
+        assert not (project / ".github" / "skills").exists()
+        assert not (project / ".github" / "agents").exists()
 
     # -- Skills directory structure ---------------------------------------
 
@@ -571,9 +743,20 @@ class TestCopilotSkillsMode:
     def test_skills_mode_invoke_separator(self):
         """Copilot effective_invoke_separator should reflect skills mode."""
         copilot = self._make_copilot()
-        assert copilot.effective_invoke_separator() == "."
+        assert copilot.effective_invoke_separator() == "-"
         assert copilot.effective_invoke_separator({"skills": True}) == "-"
-        assert copilot.effective_invoke_separator({"skills": False}) == "."
+        assert copilot.effective_invoke_separator({"commands": True}) == "."
+
+    def test_invoke_separator_for_mode_tracks_persisted_state(self):
+        """Regression (review #3415): registration paths (preset/extension
+        command refs) must resolve the separator from the persisted ai_skills
+        state. A Copilot skills project renders ``/speckit-<cmd>`` (hyphen),
+        matching ``build_command_invocation``; commands mode renders
+        ``/speckit.<cmd>`` (dot).
+        """
+        copilot = self._make_copilot()
+        assert copilot.invoke_separator_for_mode(True) == "-"
+        assert copilot.invoke_separator_for_mode(False) == "."
 
     def test_skill_body_has_content(self, tmp_path):
         """Each SKILL.md body should contain template content."""
@@ -610,7 +793,7 @@ class TestCopilotSkillsMode:
     def test_install_uninstall_roundtrip(self, tmp_path):
         copilot = self._make_copilot()
         m = IntegrationManifest("copilot", tmp_path)
-        created = copilot.install(tmp_path, m, parsed_options={"skills": True})
+        created = copilot.install(tmp_path, m)
         assert len(created) > 0
         m.save()
         for f in created:
@@ -622,7 +805,7 @@ class TestCopilotSkillsMode:
     def test_modified_file_survives_uninstall(self, tmp_path):
         copilot = self._make_copilot()
         m = IntegrationManifest("copilot", tmp_path)
-        created = copilot.install(tmp_path, m, parsed_options={"skills": True})
+        created = copilot.install(tmp_path, m)
         m.save()
         modified_file = created[0]
         modified_file.write_text("user modified this", encoding="utf-8")
@@ -647,6 +830,12 @@ class TestCopilotSkillsMode:
 
     def test_build_command_invocation_default_mode(self):
         copilot = self._make_copilot()
+        assert copilot.build_command_invocation("plan", "my args") == "/speckit-plan my args"
+        assert copilot.build_command_invocation("plan") == "/speckit-plan"
+
+    def test_build_command_invocation_commands_mode(self):
+        copilot = self._make_copilot()
+        copilot._skills_mode = False
         assert copilot.build_command_invocation("plan", "my args") == "my args"
         assert copilot.build_command_invocation("plan") == ""
 
@@ -662,8 +851,8 @@ class TestCopilotSkillsMode:
 
     # -- CLI integration test ---------------------------------------------
 
-    def test_init_with_integration_options_skills(self, tmp_path):
-        """specify init --integration copilot --integration-options='--skills' scaffolds skills."""
+    def test_init_defaults_to_skills(self, tmp_path):
+        """specify init --integration copilot scaffolds skills by default."""
         from typer.testing import CliRunner
         from specify_cli import app
         project = tmp_path / "copilot-skills"
@@ -673,7 +862,6 @@ class TestCopilotSkillsMode:
             os.chdir(project)
             result = CliRunner().invoke(app, [
                 "init", "--here", "--integration", "copilot",
-                "--integration-options", "--skills",
                 "--script", "sh",
             ], catch_exceptions=False)
         finally:
@@ -689,7 +877,7 @@ class TestCopilotSkillsMode:
         assert not (project / ".vscode" / "settings.json").exists()
 
     def test_complete_file_inventory_skills_sh(self, tmp_path):
-        """Every file produced by specify init --integration copilot --integration-options='--skills' --script sh."""
+        """Every file produced by default Copilot init with shell scripts."""
         from typer.testing import CliRunner
         from specify_cli import app
         project = tmp_path / "inventory-skills-sh"
@@ -699,7 +887,6 @@ class TestCopilotSkillsMode:
             os.chdir(project)
             result = CliRunner().invoke(app, [
                 "init", "--here", "--integration", "copilot",
-                "--integration-options", "--skills",
                 "--script", "sh",
             ], catch_exceptions=False)
         finally:
@@ -714,10 +901,12 @@ class TestCopilotSkillsMode:
             ".specify/integration.json",
             ".specify/integrations/copilot.manifest.json",
             ".specify/integrations/speckit.manifest.json",
+            ".specify/.gitignore",
             # Scripts (sh)
             ".specify/scripts/bash/check-prerequisites.sh",
             ".specify/scripts/bash/common.sh",
             ".specify/scripts/bash/create-new-feature.sh",
+            ".specify/scripts/bash/resolve-template.sh",
             ".specify/scripts/bash/setup-plan.sh",
             ".specify/scripts/bash/setup-tasks.sh",
             # Templates
@@ -739,36 +928,46 @@ class TestCopilotSkillsMode:
 
     # -- Singleton leak: _skills_mode must reset --------------------------
 
-    def test_skills_mode_resets_on_default_setup(self, tmp_path):
-        """setup() with skills=True then without must reset _skills_mode."""
+    def test_skills_mode_resets_between_layouts(self, tmp_path):
+        """setup() must reset the singleton mode for each selected layout."""
         copilot = self._make_copilot()
 
-        # First call: skills mode
+        # First call: default skills mode
         (tmp_path / "proj1").mkdir()
         m1 = IntegrationManifest("copilot", tmp_path / "proj1")
-        copilot.setup(tmp_path / "proj1", m1, parsed_options={"skills": True})
+        copilot.setup(tmp_path / "proj1", m1)
         assert copilot._skills_mode is True
 
-        # Second call: default mode (no skills option)
+        # Second call: explicit commands mode
         (tmp_path / "proj2").mkdir()
         m2 = IntegrationManifest("copilot", tmp_path / "proj2")
-        copilot.setup(tmp_path / "proj2", m2)
+        copilot.setup(
+            tmp_path / "proj2", m2, parsed_options={"commands": True}
+        )
         assert copilot._skills_mode is False
-
-        # build_command_invocation must use default (dotted) mode
         assert copilot.build_command_invocation("plan", "args") == "args"
 
-    # -- Auto-detection must ignore unrelated .github/skills/ -------------
+        # Third call: a fresh default project must switch back to skills.
+        (tmp_path / "proj3").mkdir()
+        m3 = IntegrationManifest("copilot", tmp_path / "proj3")
+        copilot.setup(tmp_path / "proj3", m3)
+        assert copilot._skills_mode is True
+        assert copilot.build_command_invocation("plan") == "/speckit-plan"
 
-    def test_dispatch_ignores_unrelated_skills_directory(self, tmp_path):
-        """dispatch_command() must not treat unrelated .github/skills/ as skills mode."""
+    # -- Auto-detection must preserve managed commands --------------------
+
+    def test_dispatch_preserves_commands_with_unrelated_skills(self, tmp_path):
+        """Unrelated skills must not migrate a managed commands layout."""
         copilot = self._make_copilot()
-        # Create a .github/skills/ with non-speckit content (e.g. GitHub Skills training)
+        agents_dir = tmp_path / ".github" / "agents"
+        agents_dir.mkdir(parents=True)
+        (agents_dir / "speckit.plan.agent.md").write_text(
+            "# plan\n", encoding="utf-8"
+        )
         unrelated = tmp_path / ".github" / "skills" / "introduction-to-github"
         unrelated.mkdir(parents=True)
         (unrelated / "README.md").write_text("# GitHub Skills training\n")
 
-        # Should NOT detect skills mode — cli_args should contain --agent
         import unittest.mock as mock
         with mock.patch("subprocess.run") as mock_run:
             mock_run.return_value = mock.Mock(returncode=0, stdout="", stderr="")
@@ -802,29 +1001,259 @@ class TestCopilotSkillsMode:
                 f"Skills mode prompt should preserve user args, got: {prompt}"
             )
 
-    # -- Next-steps display for Copilot skills mode -----------------------
 
-    def test_init_skills_next_steps_show_skill_syntax(self, tmp_path):
-        """specify init --integration copilot --integration-options='--skills' shows /speckit-plan not /speckit.plan."""
+class TestCopilotNoModelInvocationOption:
+    """``--integration-options="--no-model-invocation"`` opts out of model invocation (#2654)."""
+
+    def test_options_include_no_model_invocation_flag(self):
+        opts = get_integration("copilot").options()
+        matching = [o for o in opts if o.name == "--no-model-invocation"]
+        assert len(matching) == 1
+        assert matching[0].is_flag is True
+        # Opt-in: skills stay model-invocable unless the flag is passed.
+        assert matching[0].default is False
+
+    def test_default_skills_omit_disable_model_invocation(self, tmp_path):
+        i = get_integration("copilot")
+        created = i.setup(tmp_path, IntegrationManifest("copilot", tmp_path), script_type="sh")
+        skill_files = [f for f in created if f.name == "SKILL.md"]
+        assert len(skill_files) > 0
+        for f in skill_files:
+            assert "disable-model-invocation" not in f.read_text(encoding="utf-8")
+
+    def test_setup_with_option_sets_disable_model_invocation_true(self, tmp_path):
+        i = get_integration("copilot")
+        m = IntegrationManifest("copilot", tmp_path)
+        created = i.setup(
+            tmp_path, m, parsed_options={"no_model_invocation": True}, script_type="sh"
+        )
+        skill_files = [f for f in created if f.name == "SKILL.md"]
+        assert len(skill_files) > 0
+        for f in skill_files:
+            fm = _skill_frontmatter(f)
+            assert fm["disable-model-invocation"] is True, f.parent.name
+            assert f.read_text(encoding="utf-8").count("disable-model-invocation:") == 1
+
+    def test_post_process_follows_option_from_setup(self, tmp_path):
+        """Preset overrides of core commands re-registered in the same run as
+        ``setup()`` (init, upgrade) get the same value."""
+        i = get_integration("copilot")
+        i.setup(
+            tmp_path,
+            IntegrationManifest("copilot", tmp_path),
+            parsed_options={"no_model_invocation": True},
+            script_type="sh",
+        )
+        result = i.post_process_skill_content("---\nname: speckit-plan\n---\n\nBody\n")
+        assert "disable-model-invocation: true" in result
+
+    def test_extension_skills_stay_model_invocable(self, tmp_path):
+        """Mandatory extension hooks rely on the model invoking the hook skill,
+        so the option never applies to extension commands."""
+        i = get_integration("copilot")
+        i.setup(
+            tmp_path,
+            IntegrationManifest("copilot", tmp_path),
+            parsed_options={"no_model_invocation": True},
+            script_type="sh",
+        )
+        result = i.post_process_skill_content(
+            "---\nname: speckit-git-feature\n---\n\nBody\n"
+        )
+        assert "disable-model-invocation" not in result
+
+    def test_option_requires_speckit_prefixed_core_name(self, tmp_path):
+        """A skill merely named like a core stem is not a core command skill."""
+        i = get_integration("copilot")
+        i.setup(
+            tmp_path,
+            IntegrationManifest("copilot", tmp_path),
+            parsed_options={"no_model_invocation": True},
+            script_type="sh",
+        )
+        result = i.post_process_skill_content("---\nname: tasks\n---\n\nBody\n")
+        assert "disable-model-invocation" not in result
+
+    def test_injection_preserves_crlf(self, tmp_path):
+        i = get_integration("copilot")
+        i.setup(
+            tmp_path,
+            IntegrationManifest("copilot", tmp_path),
+            parsed_options={"no_model_invocation": True},
+            script_type="sh",
+        )
+        result = i.post_process_skill_content("---\r\nname: speckit-plan\r\n---\r\nBody\r\n")
+        assert "disable-model-invocation: true\r\n---" in result
+        assert "true\n---" not in result.replace("\r\n", "")
+
+    def test_commands_layout_ignores_option(self, tmp_path):
+        i = get_integration("copilot")
+        created = i.setup(
+            tmp_path,
+            IntegrationManifest("copilot", tmp_path),
+            parsed_options={"commands": True, "no_model_invocation": True},
+            script_type="sh",
+        )
+        assert not (tmp_path / ".github" / "skills").exists()
+        for f in created:
+            if f.suffix == ".md":
+                assert "disable-model-invocation" not in f.read_text(encoding="utf-8")
+        result = i.post_process_skill_content("---\nname: speckit-plan\n---\n\nBody\n")
+        assert "disable-model-invocation" not in result
+
+    @pytest.mark.parametrize("failing", ["setup", "emit_events"])
+    def test_failed_setup_does_not_leave_option_set(self, tmp_path, failing):
+        i = get_integration("copilot")
+        target = SkillsIntegration if failing == "setup" else type(i)
+        with patch.object(target, failing, side_effect=RuntimeError("boom")):
+            with pytest.raises(RuntimeError):
+                i.setup(
+                    tmp_path,
+                    IntegrationManifest("copilot", tmp_path),
+                    parsed_options={"no_model_invocation": True},
+                    script_type="sh",
+                )
+        result = i.post_process_skill_content("---\nname: speckit-plan\n---\n\nBody\n")
+        assert "disable-model-invocation" not in result
+
+    def test_setup_without_option_resets(self, tmp_path):
+        i = get_integration("copilot")
+        first = tmp_path / "first"
+        first.mkdir()
+        i.setup(
+            first,
+            IntegrationManifest("copilot", first),
+            parsed_options={"no_model_invocation": True},
+            script_type="sh",
+        )
+        second = tmp_path / "second"
+        second.mkdir()
+        created = i.setup(second, IntegrationManifest("copilot", second), script_type="sh")
+        for f in (f for f in created if f.name == "SKILL.md"):
+            assert "disable-model-invocation" not in f.read_text(encoding="utf-8")
+        result = i.post_process_skill_content("---\nname: speckit-plan\n---\n\nBody\n")
+        assert "disable-model-invocation" not in result
+
+    def test_cli_rejects_value_for_flag(self, tmp_path):
         from typer.testing import CliRunner
         from specify_cli import app
-        project = tmp_path / "copilot-nextsteps"
+
+        project = tmp_path / "copilot-bad-option"
         project.mkdir()
         old_cwd = os.getcwd()
         try:
             os.chdir(project)
-            result = CliRunner().invoke(app, [
-                "init", "--here", "--integration", "copilot",
-                "--integration-options", "--skills",
-            ], catch_exceptions=False)
+            result = CliRunner().invoke(
+                app,
+                [
+                    "init",
+                    "--here",
+                    "--integration",
+                    "copilot",
+                    "--integration-options",
+                    "--no-model-invocation=yes",
+                    "--script",
+                    "sh",
+                    "--ignore-agent-tools",
+                ],
+                catch_exceptions=False,
+            )
         finally:
             os.chdir(old_cwd)
-        assert result.exit_code == 0, f"init failed: {result.output}"
-        # Skills mode should show /speckit-plan (hyphenated)
-        assert "/speckit-plan" in result.output, (
-            f"Expected /speckit-plan in next steps but got:\n{result.output}"
+
+        assert result.exit_code != 0
+        assert "does not accept a value" in result.output
+        assert not (project / ".github" / "skills").exists()
+
+    def test_option_persists_across_upgrade_and_can_be_cleared(self, tmp_path):
+        from tests.specify_cli.integrations._helpers import _init_project, _run_in_project
+
+        project = _init_project(tmp_path, "copilot", "--no-model-invocation")
+        skills_dir = project / ".github" / "skills"
+        skill_files = sorted(skills_dir.glob("speckit-*/SKILL.md"))
+        assert len(skill_files) > 0
+        for f in skill_files:
+            assert _skill_frontmatter(f)["disable-model-invocation"] is True, f.parent.name
+
+        state = json.loads((project / ".specify" / "integration.json").read_text(encoding="utf-8"))
+        settings = state["integration_settings"]["copilot"]
+        assert settings["raw_options"] == "--no-model-invocation"
+        assert settings["parsed_options"] == {"no_model_invocation": True}
+
+        # A later ``specify integration upgrade`` is a new process: drop the
+        # in-memory value so only the persisted options can supply it.
+        get_integration("copilot")._disable_model_invocation = False
+        result = _run_in_project(project, ["integration", "upgrade", "copilot", "--force"])
+        assert result.exit_code == 0, result.output
+        for f in skill_files:
+            assert _skill_frontmatter(f)["disable-model-invocation"] is True, f.parent.name
+
+        # Passing replacement options (here: none) clears it.
+        result = _run_in_project(
+            project,
+            ["integration", "upgrade", "copilot", "--force", "--integration-options", ""],
         )
-        # Must NOT show the dotted /speckit.plan form
-        assert "/speckit.plan" not in result.output, (
-            f"Should not show /speckit.plan in skills mode:\n{result.output}"
+        assert result.exit_code == 0, result.output
+        for f in skill_files:
+            assert "disable-model-invocation" not in f.read_text(encoding="utf-8"), f.parent.name
+        state = json.loads((project / ".specify" / "integration.json").read_text(encoding="utf-8"))
+        assert "parsed_options" not in state["integration_settings"]["copilot"]
+
+    def test_upgrade_reapplies_option_to_preset_overrides(self, tmp_path):
+        """``preset add`` runs without ``setup()`` (documented limitation);
+        ``integration upgrade copilot --force`` reapplies the option to the
+        core-command skills a preset overrides."""
+        from tests.specify_cli.integrations._helpers import _init_project, _run_in_project
+
+        project = _init_project(tmp_path, "copilot", "--no-model-invocation")
+        skill_file = project / ".github" / "skills" / "speckit-plan" / "SKILL.md"
+        assert _skill_frontmatter(skill_file)["disable-model-invocation"] is True
+
+        get_integration("copilot")._disable_model_invocation = False
+        result = _run_in_project(
+            project, ["preset", "add", "--dev", str(REPO_ROOT / "presets" / "lean")]
         )
+        assert result.exit_code == 0, result.output
+        fm = _skill_frontmatter(skill_file)
+        assert fm["metadata"]["source"] == "preset:lean"
+        # Documented in docs/integrations/copilot.md; update the docs if
+        # preset commands start honouring the option.
+        assert "disable-model-invocation" not in fm
+
+        # The docs say ``--force`` is needed here: preset add modified
+        # installed skill files, so a plain upgrade refuses.
+        result = _run_in_project(project, ["integration", "upgrade", "copilot"])
+        assert result.exit_code != 0
+        assert "modified since installation" in result.output
+        assert "disable-model-invocation" not in _skill_frontmatter(skill_file)
+
+        get_integration("copilot")._disable_model_invocation = False
+        result = _run_in_project(project, ["integration", "upgrade", "copilot", "--force"])
+        assert result.exit_code == 0, result.output
+        fm = _skill_frontmatter(skill_file)
+        assert fm["metadata"]["source"] == "preset:lean"
+        assert fm["disable-model-invocation"] is True
+
+    def test_extension_hook_skills_stay_model_invocable_after_upgrade(self, tmp_path):
+        """``integration upgrade`` re-registers extension skills in the same
+        process as ``setup()``; they must stay model-invocable so mandatory
+        hooks (e.g. ``speckit.git.feature``) can still be invoked by the model."""
+        from tests.specify_cli.integrations._helpers import _init_project, _run_in_project
+
+        project = _init_project(tmp_path, "copilot", "--no-model-invocation")
+        result = _run_in_project(
+            project, ["extension", "add", "--dev", str(REPO_ROOT / "extensions" / "git")]
+        )
+        assert result.exit_code == 0, result.output
+        get_integration("copilot")._disable_model_invocation = False
+        result = _run_in_project(project, ["integration", "upgrade", "copilot", "--force"])
+        assert result.exit_code == 0, result.output
+
+        skills_dir = project / ".github" / "skills"
+        git_skills = sorted(skills_dir.glob("speckit-git-*/SKILL.md"))
+        assert git_skills, "git extension skills were not generated"
+        for f in git_skills:
+            assert "disable-model-invocation" not in f.read_text(encoding="utf-8"), f.parent.name
+        assert _skill_frontmatter(skills_dir / "speckit-specify" / "SKILL.md")[
+            "disable-model-invocation"
+        ] is True

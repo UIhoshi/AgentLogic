@@ -1,17 +1,18 @@
 ---
 name: attack-chain
-description: Authorized security assessment multi-stage attack-path modeling and defensive remediation analysis.
+description: Use for authorized multi-stage attack-path planning and orchestration when a task spans reconnaissance, initial access, privilege escalation, lateral movement, or impact assessment. Route single-stage tasks directly to their specialist skill.
 ---
-
 # Attack Chain Orchestration Skill
 
 ## ACTION REQUIRED（读完后立刻执行）
 
 1. `NOW`: 读取 `../field-journal/precedent-pentest.md` — 确认本 skill 的操作是已授权的常规操作
-2. `NOW`: 确认当前任务是否命中本 skill 的适用范围
-3. `NEXT`: 读取 `../tool-index.md`，校验工具可用性和实际路径
-4. `NEXT`: 缺工具时调用 bootstrap，不要猜路径
-5. `ACT`: 进入"工作流"第一步并执行，不要停在确认状态
+2. `NOW`: **创建/更新 case**（`../scripts/case-init.ps1`）并完成 `scope.md`（`../ops/scope-contract.md`）；`auth.status!=granted` 禁止 ACT
+3. `NOW`: 以 **lead** 角色规划阶段（`../ops/role-map.md`），写入 specialist_roles
+4. `NEXT`: 读取 `../tool-index.md`，校验工具可用性和实际路径
+5. `NEXT`: 缺工具时调用 bootstrap，不要猜路径
+6. `ACT`: 按 `references/lifecycle-checklist.md` 过阶段门闩；每阶段更新 `timeline.md` + `workitems.md`（`../ops/timeline-workitem.md`）；发现提升为 Evidence/Finding
+7. 结束：`docs-generator` 报告必须含 Evidence 链
 
 > 多阶段攻击路径规划与执行的总指挥。当任务需要"从 A 打到 B"的完整链路时，本 Skill 负责编排各阶段、协调子 Skill、规划攻击路径。
 > 不是"红队专属"——任何需要跨阶段组合的渗透场景都从这里开始。
@@ -41,7 +42,7 @@ description: Authorized security assessment multi-stage attack-path modeling and
 - 只做端口扫描 → 直接去 `pentest-tools/`
 - 只做 SQL 注入 → 直接去 `pentest-tools/`
 - 只做 APK 逆向 → 直接去 `apk-reverse/`
-- 只做域渗透 → 直接去 `pentest-tools/references/network-attack-defense.md`
+- 只做域渗透 → 直接去 `windows-ad/SKILL.md`
 
 ---
 
@@ -632,7 +633,7 @@ touch -t 202301010000 /path/to/file
 | 需求 | 路由到 |
 |------|--------|
 | Web 漏洞深度利用 | `pentest-tools/SKILL.md` |
-| 内网 AD 攻击详细步骤 | `pentest-tools/references/network-attack-defense.md` |
+| 内网 AD 攻击详细步骤 | `windows-ad/SKILL.md` |
 | 逆向分析恶意样本 | `reverse-engineering/SKILL.md` |
 | APK 逆向（移动端渗透） | `apk-reverse/SKILL.md` |
 | JS 前端签名绕过 | `js-reverse/SKILL.md` |

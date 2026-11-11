@@ -22,9 +22,9 @@ AgentLogic V6.6 embeds the **Cybersecurity Skills Router** to provide:
 
 For any cybersecurity or reverse-engineering task, the agent MUST execute the following sequence:
 
-1. **Classification**: Identify target type (APK, ELF/PE, JS, Web Traffic, CTF, Firmware) and user intent:
-   - **Security / Vulnerability / CTF / Traffic Audit (`security_surface`)**: Route through `skills/reverse-skill/skills/` (`apk-reverse`, `ida-reverse`, `malware-analysis`, `firmware-analysis`, `js-reverse`, `ctf-solver`).
-   - **Engineering Decompilation & Clean-Room Source Reconstruction (`decompile_or_reconstruct`)**: When the goal is to recover readable, typed, buildable source code or module contracts from compiled binaries, bytecode, or minified bundles, automatically route through `skills/engineering/decompile-reconstruction/SKILL.md` (`decompile-reconstruction` route), which orchestrates `GhidraMCP`, `ida-reverse`, `jadx`, `ilspycmd`, `pycdc`, and `webcrack`.
+1. **Classification**: Identify target type (APK, ELF/PE/Mach-O, Go/Rust binary, JS/Browser Extension, Web Traffic/Protocol, Cloud/K8s/AD, CTF, Firmware) and user intent:
+   - **Security / Vulnerability / CTF / Traffic Audit (`security_surface`)**: Route through `skills/reverse-skill/skills/` (`apk-reverse`, `ida-reverse`, `ghidra-reverse`, `binary-ninja-reverse`, `go-rust-reverse`, `macos-reverse`, `protocol-reverse`, `browser-extension-reverse`, `malware-analysis`, `firmware-pentest`, `js-reverse`, `ctf-sandbox`, `cloud-k8s`, `windows-ad`, `code-audit`, `case-review`).
+   - **Engineering Decompilation & Clean-Room Source Reconstruction (`decompile_or_reconstruct`)**: When the goal is to recover readable, typed, buildable source code or module contracts from compiled binaries, stripped Go/Rust binaries, Unity IL2CPP/Godot containers, bytecode, or minified bundles, automatically route through `skills/engineering/decompile-reconstruction/SKILL.md` (`decompile-reconstruction` route), which orchestrates `GhidraMCP` (`ghidra-reverse`), `ida-reverse`, `binary-ninja-reverse`, `go-rust-reverse`, `jadx`, `ilspycmd`, `pycdc`, and `webcrack`.
 2. **Routing**: Map to the appropriate skill directory under `skills/reverse-skill/skills/` or `skills/engineering/decompile-reconstruction/`.
 3. **Pre-check**: Run tool detection scripts (e.g. `skills/reverse-skill/kali/` or `skills/reverse-skill/skills/scripts/bootstrap-reverse.sh`) to verify tool paths and versions.
 4. **Execution**: Perform static/dynamic analysis using precise, script-guided methods instead of "vibe guessing."

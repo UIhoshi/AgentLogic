@@ -1,5 +1,18 @@
 # Changelog
 
+## V6.9.1 — 2026-11-11
+
+### Added
+- **Expanded Portable Skill Ecosystem (124 $\rightarrow$ 157 Registered Skills)**:
+  - **Matt Pocock Engineering & Productivity Suite (18 new skills)**: Added `code-review`, `codebase-design`, `diagnosing-bugs`, `domain-modeling`, `implement`, `implement-spec`, `improve-codebase-architecture`, `pr`, `retro`, `tdd`, `to-Prompt`, `to-questionnaire`, `to-spec`, `to-tickets`, `ubiquitous-language`, `wait-what`, `wizard`, and `writing-for-agents`.
+  - **Taste Skill 2.5.1 Suite (5 new skills + UI asset fragments)**: Added `minimalist-skill`, `redesign-skill`, `soft-skill`, `stitch-skill`, and `taste-Tokens` alongside modular HTML/CSS/JS UI component fragments and lint scripts.
+  - **Reverse Engineering & Security Expansion (10 new skills)**: Added `ghidra-reverse`, `binary-ninja-reverse`, `go-rust-reverse`, `protocol-reverse`, `vulnerability-validation`, and CTF Sandbox Orchestrator modules (`competition-ad-certificate-abuse`, `competition-agent-cloud`, `competition-android-hooking`, `competition-browser-persistence`, `competition-container-escape`).
+
+### Changed
+- Upgraded `manifest.json`, `versions/AgentLogic_V6_9_1.md`, entry documents, and compiled `dist/` host bundles to **`V6.9.1`**.
+- Synchronized all vendored & referenced upstream GitHub repositories (`agent-browser` v0.41.2, `spec-kit` v1.3.3.dev0, `taste-skill` 2.5.1, `ponytail`, `mattpocock/skills`, `self-improving-agent`, `reverse-skill`, `ui-ux-pro-max` v2.5+, `morluto/rea`, `oh-story-claudecode` v0.10.2, `Agents365-ai/drawio-skill` v3.4.4, `jgraph/drawio-mcp` v1.7.0, `obra/superpowers` v7.0.2, `anthropics/skills` Apache 2.0).
+- Enhanced first-party skills (`ui-ux-pro-max`, `novel-story-architect`, `diagram-flowchart-architect`, `decompile-reconstruction`, `code-simplifier`, `office-pro-suite`) and governance modules (`modules/37`–`39`, `42`–`43`, `54`) with upstream capabilities.
+
 ## V6.9.0 — 2026-10-31
 
 ### Added

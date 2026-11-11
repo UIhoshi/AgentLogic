@@ -1,8 +1,7 @@
 ---
 name: mobile-reverse
-description: Authorized Android APK and iOS IPA reverse-engineering, decompilation, and mobile security auditing.
+description: Use for authorized Android or iOS application reverse engineering and security testing, including APK or IPA analysis, runtime instrumentation, SSL pinning, and platform protection checks.
 ---
-
 # Mobile Reverse Engineering
 
 ## ACTION REQUIRED（读完后立刻执行）

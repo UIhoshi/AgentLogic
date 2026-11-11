@@ -1,16 +1,24 @@
 """Copilot integration — GitHub Copilot in VS Code.
 
-Copilot has several unique behaviors compared to standard markdown agents:
+Copilot supports two layouts:
+- Skills are the default and use ``speckit-<name>/SKILL.md`` directories under
+  ``.github/skills/``
+- ``--commands`` uses ``.agent.md`` files, companion ``.prompt.md`` files, and
+  a VS Code settings merge
+
+The two modes are mutually exclusive. The commands layout remains supported,
+but is no longer the preferred default.
+
+The commands layout has several unique behaviors compared to standard markdown
+agents:
 - Commands use ``.agent.md`` extension (not ``.md``)
 - Each command gets a companion ``.prompt.md`` file in ``.github/prompts/``
 - Installs ``.vscode/settings.json`` with prompt file recommendations
-
-When ``--skills`` is passed via ``--integration-options``, Copilot scaffolds
-commands as ``speckit-<name>/SKILL.md`` directories under ``.github/skills/``
-instead.  The two modes are mutually exclusive.
 """
 
 from __future__ import annotations
+
+from collections.abc import Mapping, Sequence
 
 import json
 import os
@@ -19,18 +27,44 @@ import warnings
 from pathlib import Path
 from typing import Any
 
+import typer
+
+from .._capture import run_captured
 from ..base import IntegrationBase, IntegrationOption, SkillsIntegration
 from ..manifest import IntegrationManifest
+
+_COPILOT_CORE_COMMANDS = {
+    "analyze",
+    "checklist",
+    "clarify",
+    "constitution",
+    "converge",
+    "implement",
+    "plan",
+    "specify",
+    "tasks",
+}
 
 
 def _copilot_executable() -> str:
     """Return the executable name for Copilot CLI on this platform.
 
-    On Windows, subprocess invocation is reliable with `copilot.cmd`.
+    On Windows, the Copilot CLI may be installed as `copilot.exe` (e.g. a
+    standalone installer, winget, scoop) or as a `copilot.cmd` npm shim.
+    Probe `PATH` for whichever is actually present instead of assuming the
+    npm-style shim.
     """
-    if os.name == "nt":
-        return "copilot.cmd"
-    return "copilot"
+    if os.name != "nt":
+        return "copilot"
+
+    for candidate in ("copilot.exe", "copilot.cmd"):
+        if shutil.which(candidate):
+            return candidate
+
+    # Nothing found on PATH — keep the historical default so the
+    # resulting "command not found" error still references the
+    # previously expected name.
+    return "copilot.cmd"
 
 
 def _allow_all() -> bool:
@@ -57,22 +91,24 @@ def _allow_all() -> bool:
     return True
 
 
-def _warn_legacy_markdown_default() -> None:
-    """Warn that Copilot's default markdown scaffold is being phased out."""
-    warnings.warn(
-        "Copilot legacy markdown mode is deprecated and will stop being the "
-        'default in a future Spec Kit release; pass --integration-options "--skills" '
-        "to opt in to Copilot skills mode now.",
-        UserWarning,
-        stacklevel=3,
-    )
+def _validate_mode_options(parsed_options: dict[str, Any] | None) -> None:
+    """Reject the two explicit Copilot layout selectors used together."""
+    opts = parsed_options or {}
+    if opts.get("skills") and opts.get("commands"):
+        from ..._console import console
+
+        console.print(
+            "[red]Error:[/red] --skills and --commands are mutually exclusive; "
+            "pass only one."
+        )
+        raise typer.Exit(1)
 
 
 class _CopilotSkillsHelper(SkillsIntegration):
     """Internal helper used when Copilot is scaffolded in skills mode.
 
-    Not registered in the integration registry — only used as a delegate
-    by ``CopilotIntegration`` when ``--skills`` is passed.
+    Not registered in the integration registry — only used as the default
+    skills-layout delegate by ``CopilotIntegration``.
     """
 
     key = "copilot"
@@ -94,13 +130,11 @@ class _CopilotSkillsHelper(SkillsIntegration):
 class CopilotIntegration(IntegrationBase):
     """Integration for GitHub Copilot (VS Code IDE + CLI).
 
-    The IDE integration (``requires_cli: False``) installs ``.agent.md``
-    command files.  Workflow dispatch additionally requires the
-    ``copilot`` CLI to be installed separately.
-
-    When ``--skills`` is passed via ``--integration-options``, commands
-    are scaffolded as ``speckit-<name>/SKILL.md`` under ``.github/skills/``
-    instead of the default ``.agent.md`` + ``.prompt.md`` layout.
+    The default IDE integration (``requires_cli: False``) installs skills under
+    ``.github/skills/``. Pass ``--commands`` via ``--integration-options`` to
+    install the supported ``.agent.md`` + ``.prompt.md`` layout instead.
+    Workflow dispatch additionally requires the ``copilot`` CLI to be installed
+    separately.
     """
 
     key = "copilot"
@@ -117,38 +151,182 @@ class CopilotIntegration(IntegrationBase):
         "args": "$ARGUMENTS",
         "extension": ".agent.md",
     }
+    invoke_separator = "-"
+
+    CANONICAL_TO_NATIVE = {
+        "session_start": "sessionStart",
+        "pre_tool_use": "preToolUse",
+        "post_tool_use": "postToolUse",
+        "session_end": "sessionEnd",
+        "user_prompt_submit": "userPromptSubmitted",
+        # Copilot CLI supports the canonical per-turn stop lifecycle as native
+        # agentStop (U3); mapping it so an extension's stop handler fires.
+        "stop": "agentStop",
+    }
+    events_config_file = ".github/hooks/speckit.json"
+    events_format = "copilot-json"
+    # Copilot sessionStart and userPromptSubmitted inject a top-level
+    # additionalContext field into the model-facing prompt (C13). Non-JSON
+    # stdout is discarded harmlessly by Copilot on other events, so no other
+    # event needs an envelope.
+    events_context_envelope = {
+        "session_start": "additionalContext",
+        "user_prompt_submit": "additionalContext",
+    }
 
     # Mutable flag set by setup() — indicates the active scaffolding mode.
-    _skills_mode: bool = False
+    _skills_mode: bool = True
+
+    # Set by ``setup()`` from ``--no-model-invocation`` (skills layout only);
+    # applies to core command skills only, since mandatory extension hooks rely
+    # on the model invoking the hook skill. Integrations are process-wide
+    # singletons, so preset overrides re-registered later in the same run see
+    # the same value. Commands that rewrite skills without calling ``setup()``
+    # (e.g. ``preset add``, ``integration use``) get the default.
+    _disable_model_invocation: bool = False
 
     def effective_invoke_separator(
-        self, parsed_options: dict[str, Any] | None = None
+        self,
+        parsed_options: dict[str, Any] | None = None,
+        project_root: Path | None = None,
     ) -> str:
-        """Return ``"-"`` when skills mode is requested, ``"."`` otherwise."""
-        if parsed_options and parsed_options.get("skills"):
-            return "-"
-        if self._skills_mode:
-            return "-"
-        return self.invoke_separator
+        """Return the separator for the resolved Copilot layout."""
+        return "-" if self.is_skills_mode(parsed_options, project_root) else "."
+
+    def is_skills_mode(
+        self,
+        parsed_options: dict[str, Any] | None = None,
+        project_root: Path | None = None,
+    ) -> bool:
+        """Copilot defaults to skills; ``--commands`` opts into commands mode.
+
+        Explicit flags override on-disk detection. Without a flag, existing
+        projects retain their managed Spec Kit layout while fresh projects use
+        skills. This prevents ``use`` and ``upgrade`` from silently migrating
+        projects created before skills became the default.
+        """
+        opts = parsed_options or {}
+        _validate_mode_options(opts)
+        if opts.get("skills"):
+            return True
+        if opts.get("commands"):
+            return False
+        if project_root is not None:
+            project_root = Path(project_root)
+            manifest_path = (
+                project_root
+                / ".specify"
+                / "integrations"
+                / "copilot.manifest.json"
+            )
+            if manifest_path.is_file():
+                try:
+                    manifest_files = IntegrationManifest.load(
+                        self.key, Path(project_root)
+                    ).files
+                except (OSError, ValueError):
+                    manifest_files = None
+                if manifest_files is not None and any(
+                    path.startswith(".github/skills/speckit-")
+                    and path.endswith("/SKILL.md")
+                    for path in manifest_files
+                ):
+                    return True
+                if manifest_files is not None and any(
+                    path.startswith(".github/agents/speckit.")
+                    and path.endswith(".agent.md")
+                    for path in manifest_files
+                ):
+                    return False
+
+            github_dir = project_root / ".github"
+            has_managed_skills = any(
+                (
+                    github_dir
+                    / "skills"
+                    / f"speckit-{command}"
+                    / "SKILL.md"
+                ).is_file()
+                for command in _COPILOT_CORE_COMMANDS
+            )
+            has_managed_commands = any(
+                (
+                    github_dir
+                    / "agents"
+                    / f"speckit.{command}.agent.md"
+                ).is_file()
+                or (
+                    github_dir
+                    / "prompts"
+                    / f"speckit.{command}.prompt.md"
+                ).is_file()
+                for command in _COPILOT_CORE_COMMANDS
+            )
+            if has_managed_commands and not has_managed_skills:
+                return False
+        return True
+
+    def invoke_separator_for_mode(self, skills_enabled: bool) -> str:
+        """Skills projects render ``/speckit-<cmd>``; commands use ``.``.
+
+        Copilot is dual-layout, so — like Bob — the command-reference
+        separator depends on the persisted ``ai_skills`` state rather than a
+        single static value.  This keeps preset/extension command refs in a
+        Copilot skills project consistent with ``build_command_invocation``
+        (which emits ``/speckit-<stem>``).
+        """
+        return "-" if skills_enabled else "."
 
     @classmethod
     def options(cls) -> list[IntegrationOption]:
-        return [
+        # Compose with super() so the base class declares --events for this
+        # event-capable integration; otherwise --integration-options
+        # "--events false" is rejected as unknown (#9).
+        opts = super().options()
+        opts.append(
             IntegrationOption(
                 "--skills",
                 is_flag=True,
                 default=False,
-                help="Scaffold commands as agent skills (speckit-<name>/SKILL.md) instead of .agent.md files",
+                help=(
+                    "Force the default skills layout (.github/skills/), "
+                    "overriding on-disk auto-detection"
+                ),
             ),
-        ]
+        )
+        opts.append(
+            IntegrationOption(
+                "--commands",
+                is_flag=True,
+                default=False,
+                help=(
+                    "Scaffold .github/agents/*.agent.md commands with companion "
+                    ".github/prompts/*.prompt.md files instead of the default "
+                    "skills layout"
+                ),
+            ),
+        )
+        opts.append(
+            IntegrationOption(
+                "--no-model-invocation",
+                is_flag=True,
+                default=False,
+                help=(
+                    "Install core command skills as user-invocable only "
+                    "(disable-model-invocation: true); skills layout only, documented for VS Code"
+                ),
+            ),
+        )
+        return opts
 
     def _resolve_executable(self) -> str:
         """Return the Copilot CLI executable, respecting the env-var override.
 
         Checks ``SPECKIT_INTEGRATION_COPILOT_EXECUTABLE`` first.  Falls
-        back to the platform-specific default from ``_copilot_executable()``
-        (``copilot.cmd`` on Windows, ``copilot`` elsewhere) so that
-        existing behaviour is preserved when the env var is unset.
+        back to the platform-specific default from ``_copilot_executable()``:
+        on Windows this probes ``PATH`` for ``copilot.exe`` then
+        ``copilot.cmd``, only falling back to ``copilot.cmd`` when neither is
+        found; elsewhere it is always ``copilot``.
         """
         env_name = "SPECKIT_INTEGRATION_COPILOT_EXECUTABLE"
         override = os.environ.get(env_name, "").strip()
@@ -160,7 +338,11 @@ class CopilotIntegration(IntegrationBase):
         *,
         model: str | None = None,
         output_json: bool = True,
+        integration_args: Sequence[str] | None = None,
+        integration_options: Mapping[str, Any] | None = None,
+        project_root: Path | None = None,
     ) -> list[str] | None:
+        self.validate_runtime_config(integration_args, integration_options)
         # GitHub Copilot CLI uses ``copilot -p "prompt"`` for
         # non-interactive mode.  --yolo enables all permissions
         # (tools, paths, and URLs) so the agent can perform file
@@ -181,8 +363,8 @@ class CopilotIntegration(IntegrationBase):
     def build_command_invocation(self, command_name: str, args: str = "") -> str:
         """Build the native invocation for a Copilot command.
 
-        Default mode: agents are not slash-commands — return args as prompt.
-        Skills mode: ``/speckit-<stem>`` slash-command dispatch.
+        Commands mode: agents are not slash-commands — return args as prompt.
+        Skills mode (default): ``/speckit-<stem>`` slash-command dispatch.
         """
         if self._skills_mode:
             stem = command_name
@@ -203,6 +385,10 @@ class CopilotIntegration(IntegrationBase):
         model: str | None = None,
         timeout: int = 600,
         stream: bool = True,
+        integration_args: Sequence[str] | None = None,
+        integration_options: Mapping[str, Any] | None = None,
+        output_json: bool | None = None,
+        capture_max_bytes: int | None = None,
     ) -> dict[str, Any]:
         """Dispatch via ``--agent speckit.<stem>`` instead of slash-commands.
 
@@ -215,19 +401,22 @@ class CopilotIntegration(IntegrationBase):
         """
         import subprocess
 
+        if stream and capture_max_bytes is not None:
+            raise ValueError("capture_max_bytes requires stream=False.")
+        if output_json is None:
+            output_json = not stream
+
+        self.validate_runtime_config(integration_args, integration_options)
+
         stem = command_name
         if stem.startswith("speckit."):
             stem = stem[len("speckit."):]
 
-        # Detect skills mode from project layout when not set via setup()
-        skills_mode = self._skills_mode
-        if not skills_mode and project_root:
-            skills_dir = project_root / ".github" / "skills"
-            if skills_dir.is_dir():
-                skills_mode = any(
-                    d.is_dir() and (d / "SKILL.md").is_file()
-                    for d in skills_dir.glob("speckit-*")
-                )
+        skills_mode = (
+            self.is_skills_mode(project_root=project_root)
+            if project_root
+            else self._skills_mode
+        )
 
         if skills_mode:
             prompt = "/speckit-" + stem.replace(".", "-")
@@ -249,7 +438,7 @@ class CopilotIntegration(IntegrationBase):
             cli_args.append("--yolo")
         if model:
             cli_args.extend(["--model", model])
-        if not stream:
+        if output_json:
             cli_args.extend(["--output-format", "json"])
 
         cwd = str(project_root) if project_root else None
@@ -272,6 +461,14 @@ class CopilotIntegration(IntegrationBase):
                 "stdout": "",
                 "stderr": "",
             }
+
+        if capture_max_bytes is not None:
+            return run_captured(
+                cli_args,
+                cwd=cwd,
+                timeout=timeout,
+                max_bytes=capture_max_bytes,
+            ).as_dispatch_result()
 
         result = subprocess.run(
             cli_args,
@@ -299,7 +496,61 @@ class CopilotIntegration(IntegrationBase):
         be flagged stale and deleted, destroying user settings (and the file
         the integration still manages).
         """
-        return {".vscode/settings.json"}
+        exclusions = super().stale_cleanup_exclusions()
+        exclusions.add(".vscode/settings.json")
+        return exclusions
+
+    @staticmethod
+    def _inject_frontmatter_flag(content: str, key: str, value: str = "true") -> str:
+        """Insert ``key: value`` before the closing ``---`` if not already present."""
+        lines = content.splitlines(keepends=True)
+        dash_count = 0
+        for line in lines:
+            stripped = line.rstrip("\n\r")
+            if stripped == "---":
+                dash_count += 1
+                if dash_count == 2:
+                    break
+                continue
+            if dash_count == 1 and stripped.startswith(f"{key}:"):
+                return content
+
+        out: list[str] = []
+        dash_count = 0
+        injected = False
+        for line in lines:
+            if line.rstrip("\n\r") == "---":
+                dash_count += 1
+                if dash_count == 2 and not injected:
+                    eol = "\r\n" if line.endswith("\r\n") else "\n"
+                    out.append(f"{key}: {value}{eol}")
+                    injected = True
+            out.append(line)
+        return "".join(out)
+
+    @staticmethod
+    def _skill_name_from_content(content: str) -> str | None:
+        """Return the ``name:`` field of a skill's first frontmatter block."""
+        dash_count = 0
+        for line in content.splitlines():
+            stripped = line.rstrip("\r\n")
+            if stripped == "---":
+                dash_count += 1
+                if dash_count == 2:
+                    break
+                continue
+            if dash_count == 1 and stripped.startswith("name:"):
+                name = stripped[len("name:"):].strip().strip('"').strip("'")
+                return name or None
+        return None
+
+    @staticmethod
+    def _is_core_command_skill(name: str | None) -> bool:
+        from specify_cli.extensions import CORE_COMMAND_NAMES  # lazy: avoids circular import
+
+        return bool(name) and name.startswith("speckit-") and (
+            name.removeprefix("speckit-") in CORE_COMMAND_NAMES
+        )
 
     def post_process_skill_content(self, content: str) -> str:
         """Inject shared hook guidance into Copilot skill content.
@@ -307,8 +558,20 @@ class CopilotIntegration(IntegrationBase):
         Delegates to :class:`_CopilotSkillsHelper` for shared post-processing.
         The ``mode:`` frontmatter field is intentionally omitted: VS Code
         Copilot Agent Skills do not support it (see issue #2799).
+
+        ``disable-model-invocation: true`` is added to core command skills
+        when the last ``setup()`` in this process was given
+        ``--no-model-invocation`` in the skills layout. Otherwise the key is
+        omitted, which VS Code treats as ``false``.
         """
-        return _CopilotSkillsHelper().post_process_skill_content(content)
+        updated = _CopilotSkillsHelper().post_process_skill_content(content)
+        if self._disable_model_invocation and self._is_core_command_skill(
+            self._skill_name_from_content(updated)
+        ):
+            updated = self._inject_frontmatter_flag(
+                updated, "disable-model-invocation"
+            )
+        return updated
 
     def setup(
         self,
@@ -317,28 +580,43 @@ class CopilotIntegration(IntegrationBase):
         parsed_options: dict[str, Any] | None = None,
         **opts: Any,
     ) -> list[Path]:
-        """Install copilot commands, companion prompts, and VS Code settings.
+        """Install Copilot skills or the opt-in commands layout.
 
-        When ``parsed_options["skills"]`` is truthy, delegates to skills
-        scaffolding (``speckit-<name>/SKILL.md`` under ``.github/skills/``).
-        Otherwise uses the default ``.agent.md`` + ``.prompt.md`` layout.
+        Skills are the default. ``parsed_options["commands"]`` selects
+        ``.agent.md`` files, companion prompts, and the VS Code settings merge.
+        Existing managed command layouts are preserved when no mode is explicit.
         """
         parsed_options = parsed_options or {}
-        self._skills_mode = bool(parsed_options.get("skills"))
-        if self._skills_mode:
-            return self._setup_skills(project_root, manifest, parsed_options, **opts)
-        if "skills" not in parsed_options:
-            _warn_legacy_markdown_default()
-        return self._setup_default(project_root, manifest, parsed_options, **opts)
+        self._skills_mode = self.is_skills_mode(parsed_options, project_root)
+        self._disable_model_invocation = (
+            self._skills_mode and parsed_options.get("no_model_invocation") is True
+        )
+        try:
+            if self._skills_mode:
+                created = self._setup_skills(project_root, manifest, parsed_options, **opts)
+            else:
+                created = self._setup_commands(project_root, manifest, parsed_options, **opts)
 
-    def _setup_default(
+            # Install agent runtime events
+            event_files = self.emit_events(
+                project_root, manifest, events=opts.get("events"), parsed_options=parsed_options,
+                force=opts.get("force", False),
+            )
+        except BaseException:
+            self._disable_model_invocation = False
+            raise
+
+        created.extend(event_files)
+        return created
+
+    def _setup_commands(
         self,
         project_root: Path,
         manifest: IntegrationManifest,
         parsed_options: dict[str, Any] | None = None,
         **opts: Any,
     ) -> list[Path]:
-        """Default mode: .agent.md + .prompt.md + VS Code settings merge."""
+        """Commands mode: .agent.md + .prompt.md + VS Code settings merge."""
         project_root_resolved = project_root.resolve()
         if manifest.project_root != project_root_resolved:
             raise ValueError(
@@ -349,6 +627,10 @@ class CopilotIntegration(IntegrationBase):
         templates = self.list_command_templates()
         if not templates:
             return []
+
+        from ...presets import PresetResolver
+
+        preset_resolver = PresetResolver(project_root_resolved)
 
         dest = self.commands_dest(project_root)
         dest_resolved = dest.resolve()
@@ -367,7 +649,11 @@ class CopilotIntegration(IntegrationBase):
 
         # 1. Process and write command files as .agent.md
         for src_file in templates:
-            raw = src_file.read_text(encoding="utf-8")
+            resolved_template = preset_resolver.resolve(
+                f"speckit.{src_file.stem}", template_type="command"
+            )
+            source_path = resolved_template or src_file
+            raw = source_path.read_text(encoding="utf-8")
             processed = self.process_template(
                 raw, self.key, script_type, arg_placeholder,
                 project_root=project_root,
@@ -395,13 +681,16 @@ class CopilotIntegration(IntegrationBase):
         settings_src = self._vscode_settings_path()
         if settings_src and settings_src.is_file():
             dst_settings = project_root / ".vscode" / "settings.json"
-            dst_settings.parent.mkdir(parents=True, exist_ok=True)
             if dst_settings.exists():
                 # Merge into existing — don't track since we can't safely
                 # remove the user's settings file on uninstall.
                 self._merge_vscode_settings(settings_src, dst_settings)
             else:
-                shutil.copy2(settings_src, dst_settings)
+                from .._file_changes import changing_file
+
+                with changing_file(dst_settings):
+                    dst_settings.parent.mkdir(parents=True, exist_ok=True)
+                    shutil.copy2(settings_src, dst_settings)
                 self.record_file_in_manifest(dst_settings, project_root, manifest)
                 created.append(dst_settings)
 
@@ -434,7 +723,9 @@ class CopilotIntegration(IntegrationBase):
             content = path.read_text(encoding="utf-8")
             updated = self.post_process_skill_content(content)
             if updated != content:
-                path.write_bytes(updated.encode("utf-8"))
+                from .._file_changes import write_bytes
+
+                write_bytes(path, updated.encode("utf-8"))
                 self.record_file_in_manifest(path, project_root, manifest)
 
         return created
@@ -460,7 +751,7 @@ class CopilotIntegration(IntegrationBase):
         """
         try:
             existing = json.loads(dst.read_text(encoding="utf-8"))
-        except (json.JSONDecodeError, OSError):
+        except (json.JSONDecodeError, UnicodeDecodeError, OSError):
             # Cannot parse existing file (likely JSONC with comments).
             # Skip merge to preserve the user's settings, but show
             # what they should add manually.
@@ -497,6 +788,12 @@ class CopilotIntegration(IntegrationBase):
         if not changed:
             return
 
-        dst.write_text(
-            json.dumps(existing, indent=4) + "\n", encoding="utf-8"
+        # A lone surrogate (\ud800) can't be UTF-8 encoded; write it back as its JSON escape.
+        from .._file_changes import write_text
+
+        write_text(
+            dst,
+            json.dumps(existing, indent=4, ensure_ascii=False) + "\n",
+            encoding="utf-8",
+            errors="backslashreplace",
         )

@@ -9,24 +9,43 @@ and ``specify init``'s next-steps output stay consistent.
 from __future__ import annotations
 
 # Agents that render $speckit-<name> (chat invocation) when in skills mode.
-DOLLAR_SKILLS_AGENTS: frozenset[str] = frozenset({"codex", "zcode"})
+DOLLAR_SKILLS_AGENTS: frozenset[str] = frozenset({"codex", "zcode", "command-code"})
 
 # Agents that always render /speckit-<name>, regardless of ai_skills.
-ALWAYS_SLASH_AGENTS: frozenset[str] = frozenset({"devin", "trae", "zed"})
+ALWAYS_SLASH_AGENTS: frozenset[str] = frozenset(
+    {
+        "devin",
+        "docker-agent",
+        "droid",
+        "dsh",
+        "grok",
+        "mcode",
+        "muse",
+        "qodercli",
+        "trae",
+        "zed",
+    }
+)
 
 # Agents that render /speckit-<name> only when ai_skills is enabled.
 CONDITIONAL_SLASH_AGENTS: frozenset[str] = frozenset(
     {
         "agy",
+        "alquimia",
+        "bob",
         "claude",
         "copilot",
         "cursor-agent",
+        "generic",
         "hermes",
         "lingma",
         "rovodev",
         "vibe",
     }
 )
+
+# Agents that render /skill:<name> (skill-colon invocation) when in skills mode.
+SKILL_COLON_AGENTS: frozenset[str] = frozenset({"kimi"})
 
 
 def is_dollar_skills_agent(selected_ai: str | None, ai_skills_enabled: bool) -> bool:
@@ -38,6 +57,21 @@ def is_dollar_skills_agent(selected_ai: str | None, ai_skills_enabled: bool) -> 
     if not isinstance(selected_ai, str):
         return False
     return selected_ai in DOLLAR_SKILLS_AGENTS and ai_skills_enabled
+
+
+def get_invocation_prefix(selected_ai: str | None, ai_skills_enabled: bool) -> str:
+    """Return the native invocation prefix for *selected_ai* in skills mode.
+
+    Returns ``"$"`` for dollar-skills agents (Codex, ZCode),
+    ``"/skill:"`` for skill-colon agents (Kimi), and ``"/"`` for all others.
+    """
+    if not isinstance(selected_ai, str):
+        return "/"
+    if selected_ai in DOLLAR_SKILLS_AGENTS and ai_skills_enabled:
+        return "$"
+    if selected_ai in SKILL_COLON_AGENTS and ai_skills_enabled:
+        return "/skill:"
+    return "/"
 
 
 def is_slash_skills_agent(selected_ai: str | None, ai_skills_enabled: bool) -> bool:

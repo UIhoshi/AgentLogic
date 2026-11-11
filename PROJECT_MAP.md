@@ -2,7 +2,7 @@
 
 ## L1 — Entry & Surface
 - Entrypoints: `00_START_HERE.md`, `AGENTS.md`, `MAIN.md`, and `README.md`.
-- User/API/CLI surfaces: host adapters (`codex`, `claude`, `antigravity`, `generic`), `install.ps1`, `install.sh`, and generated `dist/` bundles (`V6.9.0`).
+- User/API/CLI surfaces: host adapters (`codex`, `claude`, `antigravity`, `generic`), `install.ps1`, `install.sh`, and generated `dist/` bundles (`V6.9.1`).
 
 ## L2 — Flow & Lifecycle
 - Core flows: Turn 1 entry + autonomous role recommendation gate (`role-persona-router`) → task classification → project/code map consultation or refresh → applicable SDD / domain auto-skill execution / verification → profile build.
@@ -15,7 +15,7 @@
   `scripts/maintainer-check.ps1` for release-level changes.
 
 ## L4 — Base & Dependencies
-- Base assets: `skills/` (124 registered portable skills including 9 first-party auto-deployed skills), `spec-kit/`, `manifest.json`, scripts, and generated `dist/` bundles.
+- Base assets: `skills/` (157 registered portable skills including 9 first-party auto-deployed skills), `spec-kit/`, `manifest.json`, scripts, and generated `dist/` bundles.
 - External comparison sources are policy-only unless explicitly installed and trusted. Requested
   `.docx`, `.xlsx`, and `.pptx` processing routes through `office-pro-suite` (and `OfficeCLI` when installed).
 - `img2threejs` is a review-required optional source candidate for approved reference-image
