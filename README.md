@@ -113,6 +113,67 @@ flowchart TD
     class BrowserSkill,Decompile,MediaDir,OfficePro,NovelArch,DiagramArch l4
 ```
 
+### Detailed End-to-End Execution & Blocking Gate Workflow
+
+```mermaid
+flowchart TD
+    Start(["User Request"]) --> ContextCheck["Gate 1a: Context-Reset Check (Continue or Forget/Compress?)"]
+    ContextCheck --> RoleGate["Gate 1b: role-persona-router (Recommend #1 Lead Role + 7-Role Menu)"]
+    RoleGate --> SyncCheck["Knowledge Sync (git fetch + AGENTS.md / PROJECT_MAP.md / CODE_MAP.md / .learnings/)"]
+    SyncCheck --> Classify{"Deterministic Task Classification (21 Auto-Routes)"}
+
+    %% Frontend Net-New UI Path
+    Classify -->|"Net-New UI / Substantial Refactor"| ReqGrill["product-requirements-grilling (1 Question at a Time -> requirements-brief.md)"]
+    ReqGrill --> DesignSpec["ui-ux-pro-max (Industry Palette, Typography, Grid Spec)"]
+    DesignSpec --> MockupGen["Text-to-Image Mockup (image-generator / multimodal-media-director / nano-banana-pro)"]
+    MockupGen --> MockupApprove{"User Approved or Explicit Opt-Out?"}
+    MockupApprove -->|"Revise"| DesignSpec
+    MockupApprove -->|"Approved"| RefCheck{"Real-World Object or Motion (SVG / Canvas / 3D / Anim)?"}
+    RefCheck -->|"Real-World Subject"| FetchRef["Inspect Real Photos (Static) & GIFs / Video (Motion Keyframes)"]
+    RefCheck -->|"Abstract / Fictional"| DirectCreate["Proceed to Creative Composition"]
+    FetchRef --> WebGuide["modern-web-guidance (Baseline APIs, Fallbacks, CWV, A11y)"]
+    DirectCreate --> WebGuide
+    WebGuide --> VisualVerify["Browser & Bounding-Box Screenshot Verification"]
+
+    %% Frontend Small Fix & Chrome Extension Paths
+    Classify -->|"Small Frontend Fix / Legacy Modernization"| WebModRoute["web-platform-modernization (modern-web-guidance / legacy-scan)"]
+    WebModRoute --> RefCheck
+    Classify -->|"Chrome Extension (MV3)"| ExtDev["chrome-extension-development (chrome-extensions MV3, CSP Sandbox, Store Checklist)"]
+    ExtDev --> VisualVerify
+
+    %% Engineering & SDD Path
+    Classify -->|"Feature / Refactor / Multi-File"| SDDGate["SDD Lifecycle (Spec -> Red-Team Gate -> Plan -> Tasks -> Implement)"]
+    SDDGate --> Simplifier["code-simplifier (Lock Green -> Guard Clauses / ast-grep -> Re-Verify)"]
+    Simplifier --> FinalVerify["Verification Matrix & Fresh Command Output"]
+
+    %% Specialized Domain Auto-Dispatch
+    Classify -->|"Binary / Bytecode / Obfuscated JS"| Decomp["decompile-reconstruction (IDA / Ghidra / jadx / ilspycmd / pycdc / webcrack)"]
+    Classify -->|"Word / Excel / PPT"| Office["office-pro-suite"]
+    Classify -->|"Image / Video / Music"| Media["multimodal-media-director"]
+    Classify -->|"Novel / Script"| Novel["novel-story-architect"]
+    Classify -->|"Flowchart / Architecture Diagram"| Diagram["diagram-flowchart-architect"]
+
+    Decomp --> FinalVerify
+    Office --> FinalVerify
+    Media --> FinalVerify
+    Novel --> FinalVerify
+    Diagram --> FinalVerify
+    VisualVerify --> FinalVerify
+
+    FinalVerify --> MapSync["Update PROJECT_MAP.md / CODE_MAP.md / .learnings/ERRORS.md"]
+    MapSync --> Done(["Verified Delivery"])
+
+    classDef gate fill:#fee2e2,stroke:#b91c1c,color:#7f1d1d,stroke-width:2px
+    classDef ui fill:#fce7f3,stroke:#be185d,color:#831843,stroke-width:1.5px
+    classDef eng fill:#dbeafe,stroke:#1d4ed8,color:#1e3a8a,stroke-width:1.5px
+    classDef domain fill:#dcfce7,stroke:#15803d,color:#14532d,stroke-width:1.5px
+
+    class ContextCheck,RoleGate,MockupApprove,RefCheck gate
+    class ReqGrill,DesignSpec,MockupGen,FetchRef,DirectCreate,WebGuide,WebModRoute,ExtDev,VisualVerify ui
+    class SDDGate,Simplifier,FinalVerify,MapSync eng
+    class Decomp,Office,Media,Novel,Diagram domain
+```
+
 ### Detailed Module Mapping
 
 | Abstraction Layer | Primary Core Responsibility | Included Files / Directories |
