@@ -27,7 +27,9 @@
                             "office_document_request",
                             "multimodal_creative_brief",
                             "narrative_story_request",
-                            "diagram_architecture_request"
+                            "diagram_architecture_request",
+                            "frontend_change_request",
+                            "chrome_extension_request"
                         ],
     "default_pipelines":  [
                               {
@@ -116,6 +118,26 @@
                                   "user_skill_selection_required":  false,
                                   "nodes":  [
                                                 "diagram-flowchart"
+                                            ]
+                              },
+                              {
+                                  "id":  "web-platform-modernization",
+                                  "triggers":  [
+                                                   "frontend_fix_or_modernization"
+                                               ],
+                                  "user_skill_selection_required":  false,
+                                  "nodes":  [
+                                                "web-platform-modernization"
+                                            ]
+                              },
+                              {
+                                  "id":  "chrome-extension-delivery",
+                                  "triggers":  [
+                                                   "chrome_extension"
+                                               ],
+                                  "user_skill_selection_required":  false,
+                                  "nodes":  [
+                                                "chrome-extension-development"
                                             ]
                               }
                           ],
@@ -249,7 +271,8 @@
                                            "approved_requirements_brief",
                                            "approved_mockup_or_explicit_opt_out",
                                            "implementation_validation",
-                                           "visual_verification_plan"
+                                           "visual_verification_plan",
+                                           "real_world_reference_grounding_if_applicable"
                                        ]
                   },
                   {
@@ -500,6 +523,55 @@
                       "verification":  [
                                            "reviewable_handover"
                                        ]
+                  },
+                  {
+                      "id":  "web-platform-modernization",
+                      "posture":  "route",
+                      "user_skill_selection_required":  false,
+                      "requires":  [
+
+                                   ],
+                      "consumes":  [
+                                       "frontend_change_request"
+                                   ],
+                      "produces":  [
+                                       "modernized_frontend_record"
+                                   ],
+                      "blocks":  [
+                                     "frontend_code_without_guidance"
+                                 ],
+                      "verification":  [
+                                           "modern_web_guidance_checked",
+                                           "real_world_reference_grounding_if_applicable",
+                                           "baseline_fallback_verified"
+                                       ],
+                      "route_ids":  [
+                                        "web-platform-modernization"
+                                    ]
+                  },
+                  {
+                      "id":  "chrome-extension-development",
+                      "posture":  "route",
+                      "user_skill_selection_required":  false,
+                      "requires":  [
+
+                                   ],
+                      "consumes":  [
+                                       "chrome_extension_request"
+                                   ],
+                      "produces":  [
+                                       "mv3_extension_record"
+                                   ],
+                      "blocks":  [
+                                     "extension_build_without_mv3_checks"
+                                 ],
+                      "verification":  [
+                                           "mv3_manifest_and_csp_verified",
+                                           "extension_permissions_justified"
+                                       ],
+                      "route_ids":  [
+                                        "chrome-extension-development"
+                                    ]
                   }
               ]
 }

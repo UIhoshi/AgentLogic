@@ -4427,14 +4427,16 @@
                         "family":  "frontend",
                         "lifecycle":  "conditional",
                         "route_ids":  [
-                                          "ui-implementation"
+                                          "ui-implementation",
+                                          "web-platform-modernization"
                                       ],
                         "reason":  "Mandatory modern web platform best-practices \u0026 Baseline compatibility guide during frontend UI implementation.",
                         "activation":  {
                                            "mode":  "route_candidate",
                                            "triggers":  [
                                                             "net_new_ui",
-                                                            "substantial_ui_refactor"
+                                                            "substantial_ui_refactor",
+                                                            "frontend_fix_or_modernization"
                                                         ],
                                            "purpose":  "Enforce modern web platform APIs, Baseline browser compatibility, CWV performance, and accessibility for HTML/CSS/client-side JS tasks.",
                                            "explicit_signals":  [
@@ -4454,15 +4456,15 @@
                         "id":  "skills-frontend-chrome-extensions-skill-md",
                         "entrypoint":  "skills/frontend/chrome-extensions/SKILL.md",
                         "family":  "frontend",
-                        "lifecycle":  "manual_only",
+                        "lifecycle":  "conditional",
                         "route_ids":  [
-
+                                          "chrome-extension-development"
                                       ],
-                        "reason":  "Guided frontend skill for Manifest V3 Chrome/browser extension development and Chrome Web Store publishing.",
+                        "reason":  "Automatic Manifest V3 Chrome/browser extension and Web Store governance skill.",
                         "activation":  {
-                                           "mode":  "guided_candidate",
+                                           "mode":  "route_candidate",
                                            "triggers":  [
-                                                            "explicit_user_request"
+                                                            "chrome_extension"
                                                         ],
                                            "purpose":  "Build and publish Chrome Extensions using Manifest V3 best practices, service workers, side panels, and CSP-safe sandboxes.",
                                            "explicit_signals":  [
@@ -4474,7 +4476,7 @@
                                                                     "browser_extension_api",
                                                                     "content_script_side_panel"
                                                                 ],
-                                           "confirmation_policy":  "confirm_on_intent"
+                                           "confirmation_policy":  "auto_within_route_gate"
                                        }
                     }
                 ],

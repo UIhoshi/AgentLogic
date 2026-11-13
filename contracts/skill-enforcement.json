@@ -66,7 +66,9 @@
                                                     "test_design",
                                                     "coverage_gap",
                                                     "pull_request_review",
-                                                    "release_review"
+                                                    "release_review",
+                                                    "frontend_modernization",
+                                                    "chrome_extension"
                                                 ],
                                 "signal_rules":  [
                                                      {
@@ -381,6 +383,33 @@
                                                          "signals":  [
                                                                          "pull_request_review"
                                                                      ]
+                                                     },
+                                                     {
+                                                         "field":  "ui_scope",
+                                                         "values":  [
+                                                                        "small_correction"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "frontend_fix_or_modernization"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "frontend_modernization"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "frontend_fix_or_modernization"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "chrome_extension"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "chrome_extension"
+                                                                     ]
                                                      }
                                                  ]
                             },
@@ -400,7 +429,7 @@
                                                  "closed",
                                                  "blocked"
                                              ],
-                                  "location":  ".specify/<task>/skill-execution.json"
+                                  "location":  ".specify/\u003ctask\u003e/skill-execution.json"
                               },
     "project_skill_usage":  {
                                 "location":  ".agentlogic/skill-usage.json",
@@ -418,6 +447,6 @@
                                                               "status"
                                                           ],
                                 "code_map_heading":  "Skill Usage",
-                                "transient_task_records":  ".specify/<task>/skill-execution.json"
+                                "transient_task_records":  ".specify/\u003ctask\u003e/skill-execution.json"
                             }
 }

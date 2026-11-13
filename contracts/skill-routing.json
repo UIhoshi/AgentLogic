@@ -607,7 +607,8 @@
                                                 "approved_requirements_brief",
                                                 "approved_mockup_or_explicit_opt_out",
                                                 "implementation_validation",
-                                                "visual_verification_plan"
+                                                "visual_verification_plan",
+                                                "real_world_reference_grounding_if_applicable"
                                             ],
                        "order":  30,
                        "requires_routes":  [
@@ -733,6 +734,78 @@
                        "exemption_policy":  "none",
                        "artifact_requirements":  [
                                                      "handover_record"
+                                                 ]
+                   },
+                   {
+                       "id":  "web-platform-modernization",
+                       "triggers":  [
+                                        "frontend_fix_or_modernization"
+                                    ],
+                       "capability":  "web_platform_and_legacy_modernization",
+                       "primary_host_skill_aliases":  [
+                                                          "modern-web-guidance"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "taste-skill",
+                                                              "senior-frontend"
+                                                          ],
+                       "selection_rule":  "Automatically use modern-web-guidance (via npx or local guides/) for any HTML/CSS/DOM/client-side JS fix, CWV/a11y improvement, or legacy-scan modernization without requiring full net-new UI mockup approval. Enforce Real-World Visual \u0026 Motion Reference Grounding for any real-world SVG/Canvas/animation.",
+                       "fallback":  "use_local_modern_web_guides",
+                       "closure_evidence":  [
+                                                "modern_web_guidance_checked",
+                                                "real_world_reference_grounding_if_applicable",
+                                                "baseline_fallback_verified"
+                                            ],
+                       "order":  32,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "frontend_code_without_guidance"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+                                                     "implementation_validation_record"
+                                                 ]
+                   },
+                   {
+                       "id":  "chrome-extension-development",
+                       "triggers":  [
+                                        "chrome_extension"
+                                    ],
+                       "capability":  "chrome_extension_mv3_delivery",
+                       "primary_host_skill_aliases":  [
+                                                          "chrome-extensions"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "modern-web-guidance"
+                                                          ],
+                       "selection_rule":  "Automatically use chrome-extensions when building, debugging, or publishing Manifest V3 Chrome/browser extensions, service workers, side panels, content scripts, or Chrome Web Store listings.",
+                       "fallback":  "block_broken_mv3_patterns",
+                       "closure_evidence":  [
+                                                "mv3_manifest_and_csp_verified",
+                                                "extension_permissions_justified"
+                                            ],
+                       "order":  33,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "extension_build_without_mv3_checks"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+                                                     "implementation_validation_record"
                                                  ]
                    }
                ],

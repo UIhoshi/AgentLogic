@@ -199,7 +199,7 @@ For local diagnostic runs and cross-host deployment (`antigravity`, `claude`, `c
 | :--- | :--- | :--- |
 | **1. Diagnosis** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\doctor.ps1` | Analyzes repository layout, checks manifests, and recommends installers |
 | **2. Install** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost antigravity` | Validates, builds, verifies, and deploys the fresh host-ready ruleset and 9 first-party skills (`antigravity` / `claude` / `codex`) |
-| **3. Validation** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\maintainer-check.ps1` | Verifies structural link integrity, 157 registered skills, 19 auto-routes, and compiled adapter bundles |
+| **3. Validation** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\maintainer-check.ps1` | Verifies structural link integrity, 158 registered skills, 21 auto-routes, and compiled adapter bundles |
 
 ---
 
@@ -230,7 +230,7 @@ flowchart TD
         CodeSimp --> Verify["29_MandatoryVerificationMatrix.md & SRA Audit"]
     end
 
-    subgraph L4 ["L4: First-Party Auto-Triggered Skills & Drivers (157 Portable Skills)"]
+    subgraph L4 ["L4: First-Party Auto-Triggered Skills & Drivers (158 Portable Skills)"]
         UIImpl --> BrowserSkill["agent-browser & nano-banana-pro"]
         DomainDispatch --> Decompile["decompile-reconstruction (IDA / Ghidra / jadx / webcrack -> Clean-Room Source)"]
         DomainDispatch --> MediaDir["multimodal-media-director (Text-to-Image / Video Storyboard / Music Arrangement)"]
@@ -255,9 +255,9 @@ flowchart TD
 | Abstraction Layer | Primary Core Responsibility | Included Files / Directories |
 | :--- | :--- | :--- |
 | **L1: Strategy & Entry** | Defines entrypoints, Turn 1 context-reset confirmation, autonomous `#1` role recommendation (`role-persona-router`), and project-native knowledge sync. | - [00_START_HERE.md](./00_START_HERE.md) (起手式)<br>- [MAIN.md](./MAIN.md) (Stable Host Binding)<br>- [AGENTS.md](./AGENTS.md) (Agent Entry)<br>- [15_LogicEntryChecklist.md](./modules/15_LogicEntryChecklist.md) (Gate Checklist)<br>- [54_V6_9_RoleAndMultimodalCreativeGovernance.md](./modules/54_V6_9_RoleAndMultimodalCreativeGovernance.md) (V6.9 Role & Creative Gates) |
-| **L2: Session & Loop** | Manages the single-turn execution cycle, single-question requirements grilling, SDD lifecycle, and 19-route zero-manual-selection dispatch. | - [03_AgenticLoop.md](./modules/03_AgenticLoop.md) (Agentic Cycle)<br>- [38_SpecDrivenDevelopment.md](./modules/38_V6_6_SpecDrivenDevelopment.md) (SDD Lifecycle)<br>- [48_V6_8_SkillAndToolRouting.md](./modules/48_V6_8_SkillAndToolRouting.md) (Autonomous Skill & Tool Routing)<br>- [53_V6_8_ProgrammingLevelSkillEnforcement.md](./modules/53_V6_8_ProgrammingLevelSkillEnforcement.md) (Skill Enforcement State Machine) |
+| **L2: Session & Loop** | Manages the single-turn execution cycle, single-question requirements grilling, SDD lifecycle, and 21-route zero-manual-selection dispatch. | - [03_AgenticLoop.md](./modules/03_AgenticLoop.md) (Agentic Cycle)<br>- [38_SpecDrivenDevelopment.md](./modules/38_V6_6_SpecDrivenDevelopment.md) (SDD Lifecycle)<br>- [48_V6_8_SkillAndToolRouting.md](./modules/48_V6_8_SkillAndToolRouting.md) (Autonomous Skill & Tool Routing)<br>- [53_V6_8_ProgrammingLevelSkillEnforcement.md](./modules/53_V6_8_ProgrammingLevelSkillEnforcement.md) (Skill Enforcement State Machine) |
 | **L3: Control & Auditing** | Establishes pure UI/UX design-first + mandatory text-to-image mockup gating, post-implementation code simplification, and verification matrices. | - [29_MandatoryVerificationMatrix.md](./modules/29_MandatoryVerificationMatrix.md) (Verification Matrix)<br>- [39_TasteFrontendDesign.md](./modules/39_V6_6_TasteFrontendDesign.md) (Aesthetic & Spacing Audit)<br>- [30_ToolQuestionBoundaryMatrix.md](./modules/30_ToolQuestionBoundaryMatrix.md) (Credential Boundary)<br>- [31_ToolMisuseAndAntiPatternMatrix.md](./modules/31_ToolMisuseAndAntiPatternMatrix.md) (Anti-Pattern Gating) |
-| **L4: Base & Drivers** | 9 first-party auto-deployed domain skills across all hosts (`~/.gemini/skills`, `~/.claude/skills`, `~/.codex/skills`), 157 portable skills, and original UI templates. | - `skills/` (9 First-Party Auto-Triggered Skills + 157 Registered Portable Skills)<br>  * [role-persona-router](./skills/productivity/role-persona-router/) (Turn 1 Role Recommendation & 7-Role Menu)<br>  * [product-requirements-grilling](./skills/productivity/product-requirements-grilling/) (Single-Question Requirements Brief)<br>  * [ui-ux-pro-max](./skills/design/ui-ux-pro-max/) (Pure UI/UX Design Spec + Mandatory Text-to-Image Coupling)<br>  * [multimodal-media-director](./skills/creative/multimodal-media-director/) (Text-to-Image / Video Storyboard / Music Production)<br>  * [office-pro-suite](./skills/productivity/office-pro-suite/) (Executive Word `.docx`, Excel `.xlsx`, PowerPoint `.pptx`)<br>  * [novel-story-architect](./skills/creative/novel-story-architect/) (`.story-bible/` Continuity & Anti-AI-Cliché Fiction Engine)<br>  * [diagram-flowchart-architect](./skills/engineering/diagram-flowchart-architect/) (`.drawio` XML, `.excalidraw` JSON & Themed Mermaid)<br>  * [code-simplifier](./skills/engineering/code-simplifier/) (Auto Post-Implementation Code Refinement & AST Rewrite)<br>  * [decompile-reconstruction](./skills/engineering/decompile-reconstruction/) (Auto Decompilation & Clean-Room Source Reconstruction)<br>- [`templates/frontend/`](./templates/frontend/) (Original, unbranded UI starting points) |
+| **L4: Base & Drivers** | 11 first-party auto-deployed domain skills across all hosts (`~/.gemini/skills`, `~/.claude/skills`, `~/.codex/skills`), 158 portable skills, and original UI templates. | - `skills/` (11 First-Party Auto-Triggered Skills + 158 Registered Portable Skills)<br>  * [role-persona-router](./skills/productivity/role-persona-router/) (Turn 1 Role Recommendation & 7-Role Menu)<br>  * [product-requirements-grilling](./skills/productivity/product-requirements-grilling/) (Single-Question Requirements Brief)<br>  * [ui-ux-pro-max](./skills/design/ui-ux-pro-max/) (Pure UI/UX Design Spec + Mandatory Text-to-Image Coupling)<br>  * [modern-web-guidance](./skills/frontend/modern-web-guidance/) (Modern Web Platform APIs, Baseline Compatibility, CWV & `legacy-scan`)<br>  * [chrome-extensions](./skills/frontend/chrome-extensions/) (Manifest V3 Browser Extensions & Chrome Web Store Publishing)<br>  * [multimodal-media-director](./skills/creative/multimodal-media-director/) (Text-to-Image / Video Storyboard / Music Production)<br>  * [office-pro-suite](./skills/productivity/office-pro-suite/) (Executive Word `.docx`, Excel `.xlsx`, PowerPoint `.pptx`)<br>  * [novel-story-architect](./skills/creative/novel-story-architect/) (`.story-bible/` Continuity & Anti-AI-Cliché Fiction Engine)<br>  * [diagram-flowchart-architect](./skills/engineering/diagram-flowchart-architect/) (`.drawio` XML, `.excalidraw` JSON & Themed Mermaid)<br>  * [code-simplifier](./skills/engineering/code-simplifier/) (Auto Post-Implementation Code Refinement & AST Rewrite)<br>  * [decompile-reconstruction](./skills/engineering/decompile-reconstruction/) (Auto Decompilation & Clean-Room Source Reconstruction)<br>- [`templates/frontend/`](./templates/frontend/) (Original, unbranded UI starting points) |
 
 ---
 
@@ -540,7 +540,7 @@ This repository is logic infrastructure, not a business-project workspace.
 # AgentLogic V6.9.1
 
 Status: **Current Stable V6.9.1 Line**.
-Promoted from V6.9.0 with **Synchronized Upstream Skill & Tooling Ecosystem (`agent-browser` v0.41.2, `spec-kit` v1.3.3.dev0, `taste-skill` 2.5.1, `mattpocock/skills`, `reverse-skill`, `ui-ux-pro-max` v2.5+, `oh-story-claudecode` v0.10.2, `Agents365-ai/drawio-skill` v3.4.4, `jgraph/drawio-mcp` v1.7.0, `obra/superpowers` v7.0.2, `anthropics/skills` Apache 2.0)**, **157 Registered Portable Skills**, **Autonomous Startup Role Recommendation (`role-persona-router`)**, **Pure UI/UX Design + Mandatory Text-to-Image Coupling (`ui-ux-pro-max`)**, **Multimodal Media Direction (`multimodal-media-director` for Image / Video / Music)**, **Office Professional Design & Standardization (`office-pro-suite` for Word / Excel / PPT)**, **Long-Form Novel & Story Architecture (`novel-story-architect`)**, **Multi-Format Flowchart & Architecture Diagramming (`diagram-flowchart-architect`)**, and **Cross-Host Parity across Antigravity, Claude Code, OpenAI Codex/GPT, and Generic bundles**.
+Promoted from V6.9.0 with **Synchronized Upstream Skill & Tooling Ecosystem (`agent-browser` v0.41.2, `spec-kit` v1.3.3.dev0, `taste-skill` 2.5.1, `mattpocock/skills`, `reverse-skill`, `ui-ux-pro-max` v2.5+, `oh-story-claudecode` v0.10.2, `Agents365-ai/drawio-skill` v3.4.4, `jgraph/drawio-mcp` v1.7.0, `obra/superpowers` v7.0.2, `anthropics/skills` Apache 2.0)**, **158 Registered Portable Skills**, **Autonomous Startup Role Recommendation (`role-persona-router`)**, **Pure UI/UX Design + Mandatory Text-to-Image Coupling (`ui-ux-pro-max`)**, **Multimodal Media Direction (`multimodal-media-director` for Image / Video / Music)**, **Office Professional Design & Standardization (`office-pro-suite` for Word / Excel / PPT)**, **Long-Form Novel & Story Architecture (`novel-story-architect`)**, **Multi-Format Flowchart & Architecture Diagramming (`diagram-flowchart-architect`)**, and **Cross-Host Parity across Antigravity, Claude Code, OpenAI Codex/GPT, and Generic bundles**.
 
 ---
 
@@ -4411,7 +4411,8 @@ For the reference-based interactive 3D route:
                                                 "approved_requirements_brief",
                                                 "approved_mockup_or_explicit_opt_out",
                                                 "implementation_validation",
-                                                "visual_verification_plan"
+                                                "visual_verification_plan",
+                                                "real_world_reference_grounding_if_applicable"
                                             ],
                        "order":  30,
                        "requires_routes":  [
@@ -4537,6 +4538,78 @@ For the reference-based interactive 3D route:
                        "exemption_policy":  "none",
                        "artifact_requirements":  [
                                                      "handover_record"
+                                                 ]
+                   },
+                   {
+                       "id":  "web-platform-modernization",
+                       "triggers":  [
+                                        "frontend_fix_or_modernization"
+                                    ],
+                       "capability":  "web_platform_and_legacy_modernization",
+                       "primary_host_skill_aliases":  [
+                                                          "modern-web-guidance"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "taste-skill",
+                                                              "senior-frontend"
+                                                          ],
+                       "selection_rule":  "Automatically use modern-web-guidance (via npx or local guides/) for any HTML/CSS/DOM/client-side JS fix, CWV/a11y improvement, or legacy-scan modernization without requiring full net-new UI mockup approval. Enforce Real-World Visual \u0026 Motion Reference Grounding for any real-world SVG/Canvas/animation.",
+                       "fallback":  "use_local_modern_web_guides",
+                       "closure_evidence":  [
+                                                "modern_web_guidance_checked",
+                                                "real_world_reference_grounding_if_applicable",
+                                                "baseline_fallback_verified"
+                                            ],
+                       "order":  32,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "frontend_code_without_guidance"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+                                                     "implementation_validation_record"
+                                                 ]
+                   },
+                   {
+                       "id":  "chrome-extension-development",
+                       "triggers":  [
+                                        "chrome_extension"
+                                    ],
+                       "capability":  "chrome_extension_mv3_delivery",
+                       "primary_host_skill_aliases":  [
+                                                          "chrome-extensions"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "modern-web-guidance"
+                                                          ],
+                       "selection_rule":  "Automatically use chrome-extensions when building, debugging, or publishing Manifest V3 Chrome/browser extensions, service workers, side panels, content scripts, or Chrome Web Store listings.",
+                       "fallback":  "block_broken_mv3_patterns",
+                       "closure_evidence":  [
+                                                "mv3_manifest_and_csp_verified",
+                                                "extension_permissions_justified"
+                                            ],
+                       "order":  33,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "extension_build_without_mv3_checks"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+                                                     "implementation_validation_record"
                                                  ]
                    }
                ],
@@ -4926,7 +4999,9 @@ task state.
                                                     "test_design",
                                                     "coverage_gap",
                                                     "pull_request_review",
-                                                    "release_review"
+                                                    "release_review",
+                                                    "frontend_modernization",
+                                                    "chrome_extension"
                                                 ],
                                 "signal_rules":  [
                                                      {
@@ -5241,6 +5316,33 @@ task state.
                                                          "signals":  [
                                                                          "pull_request_review"
                                                                      ]
+                                                     },
+                                                     {
+                                                         "field":  "ui_scope",
+                                                         "values":  [
+                                                                        "small_correction"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "frontend_fix_or_modernization"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "frontend_modernization"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "frontend_fix_or_modernization"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "chrome_extension"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "chrome_extension"
+                                                                     ]
                                                      }
                                                  ]
                             },
@@ -5260,7 +5362,7 @@ task state.
                                                  "closed",
                                                  "blocked"
                                              ],
-                                  "location":  ".specify/<task>/skill-execution.json"
+                                  "location":  ".specify/\u003ctask\u003e/skill-execution.json"
                               },
     "project_skill_usage":  {
                                 "location":  ".agentlogic/skill-usage.json",
@@ -5278,7 +5380,7 @@ task state.
                                                               "status"
                                                           ],
                                 "code_map_heading":  "Skill Usage",
-                                "transient_task_records":  ".specify/<task>/skill-execution.json"
+                                "transient_task_records":  ".specify/\u003ctask\u003e/skill-execution.json"
                             }
 }
 
@@ -9717,14 +9819,16 @@ task state.
                         "family":  "frontend",
                         "lifecycle":  "conditional",
                         "route_ids":  [
-                                          "ui-implementation"
+                                          "ui-implementation",
+                                          "web-platform-modernization"
                                       ],
                         "reason":  "Mandatory modern web platform best-practices \u0026 Baseline compatibility guide during frontend UI implementation.",
                         "activation":  {
                                            "mode":  "route_candidate",
                                            "triggers":  [
                                                             "net_new_ui",
-                                                            "substantial_ui_refactor"
+                                                            "substantial_ui_refactor",
+                                                            "frontend_fix_or_modernization"
                                                         ],
                                            "purpose":  "Enforce modern web platform APIs, Baseline browser compatibility, CWV performance, and accessibility for HTML/CSS/client-side JS tasks.",
                                            "explicit_signals":  [
@@ -9744,15 +9848,15 @@ task state.
                         "id":  "skills-frontend-chrome-extensions-skill-md",
                         "entrypoint":  "skills/frontend/chrome-extensions/SKILL.md",
                         "family":  "frontend",
-                        "lifecycle":  "manual_only",
+                        "lifecycle":  "conditional",
                         "route_ids":  [
-
+                                          "chrome-extension-development"
                                       ],
-                        "reason":  "Guided frontend skill for Manifest V3 Chrome/browser extension development and Chrome Web Store publishing.",
+                        "reason":  "Automatic Manifest V3 Chrome/browser extension and Web Store governance skill.",
                         "activation":  {
-                                           "mode":  "guided_candidate",
+                                           "mode":  "route_candidate",
                                            "triggers":  [
-                                                            "explicit_user_request"
+                                                            "chrome_extension"
                                                         ],
                                            "purpose":  "Build and publish Chrome Extensions using Manifest V3 best practices, service workers, side panels, and CSP-safe sandboxes.",
                                            "explicit_signals":  [
@@ -9764,7 +9868,7 @@ task state.
                                                                     "browser_extension_api",
                                                                     "content_script_side_panel"
                                                                 ],
-                                           "confirmation_policy":  "confirm_on_intent"
+                                           "confirmation_policy":  "auto_within_route_gate"
                                        }
                     }
                 ],
@@ -9822,7 +9926,9 @@ task state.
                             "office_document_request",
                             "multimodal_creative_brief",
                             "narrative_story_request",
-                            "diagram_architecture_request"
+                            "diagram_architecture_request",
+                            "frontend_change_request",
+                            "chrome_extension_request"
                         ],
     "default_pipelines":  [
                               {
@@ -9911,6 +10017,26 @@ task state.
                                   "user_skill_selection_required":  false,
                                   "nodes":  [
                                                 "diagram-flowchart"
+                                            ]
+                              },
+                              {
+                                  "id":  "web-platform-modernization",
+                                  "triggers":  [
+                                                   "frontend_fix_or_modernization"
+                                               ],
+                                  "user_skill_selection_required":  false,
+                                  "nodes":  [
+                                                "web-platform-modernization"
+                                            ]
+                              },
+                              {
+                                  "id":  "chrome-extension-delivery",
+                                  "triggers":  [
+                                                   "chrome_extension"
+                                               ],
+                                  "user_skill_selection_required":  false,
+                                  "nodes":  [
+                                                "chrome-extension-development"
                                             ]
                               }
                           ],
@@ -10044,7 +10170,8 @@ task state.
                                            "approved_requirements_brief",
                                            "approved_mockup_or_explicit_opt_out",
                                            "implementation_validation",
-                                           "visual_verification_plan"
+                                           "visual_verification_plan",
+                                           "real_world_reference_grounding_if_applicable"
                                        ]
                   },
                   {
@@ -10295,6 +10422,55 @@ task state.
                       "verification":  [
                                            "reviewable_handover"
                                        ]
+                  },
+                  {
+                      "id":  "web-platform-modernization",
+                      "posture":  "route",
+                      "user_skill_selection_required":  false,
+                      "requires":  [
+
+                                   ],
+                      "consumes":  [
+                                       "frontend_change_request"
+                                   ],
+                      "produces":  [
+                                       "modernized_frontend_record"
+                                   ],
+                      "blocks":  [
+                                     "frontend_code_without_guidance"
+                                 ],
+                      "verification":  [
+                                           "modern_web_guidance_checked",
+                                           "real_world_reference_grounding_if_applicable",
+                                           "baseline_fallback_verified"
+                                       ],
+                      "route_ids":  [
+                                        "web-platform-modernization"
+                                    ]
+                  },
+                  {
+                      "id":  "chrome-extension-development",
+                      "posture":  "route",
+                      "user_skill_selection_required":  false,
+                      "requires":  [
+
+                                   ],
+                      "consumes":  [
+                                       "chrome_extension_request"
+                                   ],
+                      "produces":  [
+                                       "mv3_extension_record"
+                                   ],
+                      "blocks":  [
+                                     "extension_build_without_mv3_checks"
+                                 ],
+                      "verification":  [
+                                           "mv3_manifest_and_csp_verified",
+                                           "extension_permissions_justified"
+                                       ],
+                      "route_ids":  [
+                                        "chrome-extension-development"
+                                    ]
                   }
               ]
 }
