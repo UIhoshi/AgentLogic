@@ -4422,31 +4422,59 @@
                                        }
                     },
                     {
-                        "id":  "skills-taste-skill-skills-taste-skill-v1-skill-md",
-                        "entrypoint":  "skills/taste-skill/skills/taste-skill-v1/SKILL.md",
-                        "family":  "taste-skill",
+                        "id":  "skills-frontend-modern-web-guidance-skill-md",
+                        "entrypoint":  "skills/frontend/modern-web-guidance/SKILL.md",
+                        "family":  "frontend",
+                        "lifecycle":  "conditional",
+                        "route_ids":  [
+                                          "ui-implementation"
+                                      ],
+                        "reason":  "Mandatory modern web platform best-practices \u0026 Baseline compatibility guide during frontend UI implementation.",
+                        "activation":  {
+                                           "mode":  "route_candidate",
+                                           "triggers":  [
+                                                            "net_new_ui",
+                                                            "substantial_ui_refactor"
+                                                        ],
+                                           "purpose":  "Enforce modern web platform APIs, Baseline browser compatibility, CWV performance, and accessibility for HTML/CSS/client-side JS tasks.",
+                                           "explicit_signals":  [
+                                                                    "modern_web_guidance",
+                                                                    "web_platform_api",
+                                                                    "legacy_scan"
+                                                                ],
+                                           "inferred_signals":  [
+                                                                    "html_css_dom_implementation",
+                                                                    "cwv_performance_a11y",
+                                                                    "baseline_browser_fallback"
+                                                                ],
+                                           "confirmation_policy":  "auto_within_route_gate"
+                                       }
+                    },
+                    {
+                        "id":  "skills-frontend-chrome-extensions-skill-md",
+                        "entrypoint":  "skills/frontend/chrome-extensions/SKILL.md",
+                        "family":  "frontend",
                         "lifecycle":  "manual_only",
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
+                        "reason":  "Guided frontend skill for Manifest V3 Chrome/browser extension development and Chrome Web Store publishing.",
                         "activation":  {
-                                           "mode":  "manual",
+                                           "mode":  "guided_candidate",
                                            "triggers":  [
-                                                            "explicit_user_request",
-                                                            "visual_design_workflow",
-                                                            "permission_and_scope_confirmed"
+                                                            "explicit_user_request"
                                                         ],
-                                           "purpose":  "The original v1 taste-skill, preserved for projects depending on its exact behavior. The current default is `design-taste-frontend` (v2 experimental), which is a substantial rewrite. Use this v1 install name only if you need exact backward compatibility.",
+                                           "purpose":  "Build and publish Chrome Extensions using Manifest V3 best practices, service workers, side panels, and CSP-safe sandboxes.",
                                            "explicit_signals":  [
-                                                                    "explicit_user_request",
-                                                                    "visual_design_workflow",
-                                                                    "permission_and_scope_confirmed"
+                                                                    "chrome_extension",
+                                                                    "manifest_v3",
+                                                                    "chrome_web_store"
                                                                 ],
                                            "inferred_signals":  [
-
+                                                                    "browser_extension_api",
+                                                                    "content_script_side_panel"
                                                                 ],
-                                           "confirmation_policy":  "explicit_user_intent_required"
+                                           "confirmation_policy":  "confirm_on_intent"
                                        }
                     }
                 ],

@@ -594,12 +594,14 @@
                                     ],
                        "capability":  "frontend_ui_implementation",
                        "primary_host_skill_aliases":  [
-                                                          "senior-frontend"
+                                                          "senior-frontend",
+                                                          "modern-web-guidance"
                                                       ],
                        "conditional_host_skill_aliases":  [
-                                                              "figma-implement-design"
+                                                              "figma-implement-design",
+                                                              "chrome-extensions"
                                                           ],
-                       "selection_rule":  "Use senior-frontend only after requirements and mockup gates close. Use figma-implement-design when an approved Figma node is the implementation source; it does not replace requirements grilling or mockup approval.",
+                       "selection_rule":  "Use senior-frontend and modern-web-guidance only after requirements and mockup gates close. Always consult modern-web-guidance (via npx or local guides/) for HTML/CSS/DOM/client-side JS to enforce Baseline browser compatibility, native web platform APIs, CWV performance, and accessibility. Use figma-implement-design when an approved Figma node is the implementation source, and chrome-extensions when building/publishing Manifest V3 browser extensions.",
                        "fallback":  "block_before_ui_code",
                        "closure_evidence":  [
                                                 "approved_requirements_brief",

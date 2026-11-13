@@ -82,3 +82,15 @@ performance review; this module remains the authority for visual direction and p
 ## 7. Requirements-before-image integration
 
 For net-new UI or substantial UI refactors, complete the single-question requirements grilling and record an approved UI brief before Prompt Formulation in section 3.1. A user may opt out of mockup approval only after that discovery step. Clearly classified small visual corrections may skip a new mockup under Module 49, but still require visual verification.
+
+---
+
+## 8. Modern Web Platform & Baseline Integration (`modern-web-guidance`)
+
+While `ui-ux-pro-max` and `taste-skill` govern **aesthetic direction, anti-slop copy, and visual prototyping**, all HTML, CSS, DOM, and client-side JS implementation (`ui-implementation`) MUST pair them with **`skills/frontend/modern-web-guidance/SKILL.md`** (from `GoogleChrome/modern-web-guidance`):
+
+1. **Search-First Platform Guidance**: Before writing custom JS workarounds or adding heavy UI libraries for modals, popovers, tooltips, tables, forms, dark mode, animations, or performance fixes, query `npx -y modern-web-guidance@latest search "<query>"` + `retrieve "<id>"` (or read the vendored offline catalog under `skills/frontend/modern-web-guidance/guides/`).
+2. **Baseline Compatibility & Responsible Fallbacks**: Prefer **Baseline Widely available** native APIs (`<dialog>`, Popover API, CSS Anchor Positioning, Container Queries, View Transitions, Scroll-driven animations, `:user-invalid`, `oklch()`, `content-visibility`, `scheduler.yield()`). For features not yet Baseline Widely available, follow the guide's explicit fallback policy unless the project specifies a custom browser target.
+3. **Codebase Modernization (`legacy-scan`)**: When asked for a broad frontend modernization or legacy-pattern audit, run `npx -y modern-web-guidance@latest legacy-scan <path> --json`, verify findings against `keepWhen`/`dropWhen`, and modernize with retrieved guides.
+4. **Chrome Extensions (MV3)**: For browser extension development or Chrome Web Store publishing, load **`skills/frontend/chrome-extensions/SKILL.md`** and its `references/`.
+5. **Deprecated Variants Removed**: Legacy `taste-skill-v1` has been retired in favor of `taste-skill` (`v2.5.1`) + `modern-web-guidance`.

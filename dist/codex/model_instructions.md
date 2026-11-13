@@ -2516,6 +2516,18 @@ performance review; this module remains the authority for visual direction and p
 
 For net-new UI or substantial UI refactors, complete the single-question requirements grilling and record an approved UI brief before Prompt Formulation in section 3.1. A user may opt out of mockup approval only after that discovery step. Clearly classified small visual corrections may skip a new mockup under Module 49, but still require visual verification.
 
+---
+
+## 8. Modern Web Platform & Baseline Integration (`modern-web-guidance`)
+
+While `ui-ux-pro-max` and `taste-skill` govern **aesthetic direction, anti-slop copy, and visual prototyping**, all HTML, CSS, DOM, and client-side JS implementation (`ui-implementation`) MUST pair them with **`skills/frontend/modern-web-guidance/SKILL.md`** (from `GoogleChrome/modern-web-guidance`):
+
+1. **Search-First Platform Guidance**: Before writing custom JS workarounds or adding heavy UI libraries for modals, popovers, tooltips, tables, forms, dark mode, animations, or performance fixes, query `npx -y modern-web-guidance@latest search "<query>"` + `retrieve "<id>"` (or read the vendored offline catalog under `skills/frontend/modern-web-guidance/guides/`).
+2. **Baseline Compatibility & Responsible Fallbacks**: Prefer **Baseline Widely available** native APIs (`<dialog>`, Popover API, CSS Anchor Positioning, Container Queries, View Transitions, Scroll-driven animations, `:user-invalid`, `oklch()`, `content-visibility`, `scheduler.yield()`). For features not yet Baseline Widely available, follow the guide's explicit fallback policy unless the project specifies a custom browser target.
+3. **Codebase Modernization (`legacy-scan`)**: When asked for a broad frontend modernization or legacy-pattern audit, run `npx -y modern-web-guidance@latest legacy-scan <path> --json`, verify findings against `keepWhen`/`dropWhen`, and modernize with retrieved guides.
+4. **Chrome Extensions (MV3)**: For browser extension development or Chrome Web Store publishing, load **`skills/frontend/chrome-extensions/SKILL.md`** and its `references/`.
+5. **Deprecated Variants Removed**: Legacy `taste-skill-v1` has been retired in favor of `taste-skill` (`v2.5.1`) + `modern-web-guidance`.
+
 ## END FILE: modules/39_V6_6_TasteFrontendDesign.md
 
 ---
@@ -4370,12 +4382,14 @@ For the reference-based interactive 3D route:
                                     ],
                        "capability":  "frontend_ui_implementation",
                        "primary_host_skill_aliases":  [
-                                                          "senior-frontend"
+                                                          "senior-frontend",
+                                                          "modern-web-guidance"
                                                       ],
                        "conditional_host_skill_aliases":  [
-                                                              "figma-implement-design"
+                                                              "figma-implement-design",
+                                                              "chrome-extensions"
                                                           ],
-                       "selection_rule":  "Use senior-frontend only after requirements and mockup gates close. Use figma-implement-design when an approved Figma node is the implementation source; it does not replace requirements grilling or mockup approval.",
+                       "selection_rule":  "Use senior-frontend and modern-web-guidance only after requirements and mockup gates close. Always consult modern-web-guidance (via npx or local guides/) for HTML/CSS/DOM/client-side JS to enforce Baseline browser compatibility, native web platform APIs, CWV performance, and accessibility. Use figma-implement-design when an approved Figma node is the implementation source, and chrome-extensions when building/publishing Manifest V3 browser extensions.",
                        "fallback":  "block_before_ui_code",
                        "closure_evidence":  [
                                                 "approved_requirements_brief",
@@ -9682,31 +9696,59 @@ task state.
                                        }
                     },
                     {
-                        "id":  "skills-taste-skill-skills-taste-skill-v1-skill-md",
-                        "entrypoint":  "skills/taste-skill/skills/taste-skill-v1/SKILL.md",
-                        "family":  "taste-skill",
+                        "id":  "skills-frontend-modern-web-guidance-skill-md",
+                        "entrypoint":  "skills/frontend/modern-web-guidance/SKILL.md",
+                        "family":  "frontend",
+                        "lifecycle":  "conditional",
+                        "route_ids":  [
+                                          "ui-implementation"
+                                      ],
+                        "reason":  "Mandatory modern web platform best-practices \u0026 Baseline compatibility guide during frontend UI implementation.",
+                        "activation":  {
+                                           "mode":  "route_candidate",
+                                           "triggers":  [
+                                                            "net_new_ui",
+                                                            "substantial_ui_refactor"
+                                                        ],
+                                           "purpose":  "Enforce modern web platform APIs, Baseline browser compatibility, CWV performance, and accessibility for HTML/CSS/client-side JS tasks.",
+                                           "explicit_signals":  [
+                                                                    "modern_web_guidance",
+                                                                    "web_platform_api",
+                                                                    "legacy_scan"
+                                                                ],
+                                           "inferred_signals":  [
+                                                                    "html_css_dom_implementation",
+                                                                    "cwv_performance_a11y",
+                                                                    "baseline_browser_fallback"
+                                                                ],
+                                           "confirmation_policy":  "auto_within_route_gate"
+                                       }
+                    },
+                    {
+                        "id":  "skills-frontend-chrome-extensions-skill-md",
+                        "entrypoint":  "skills/frontend/chrome-extensions/SKILL.md",
+                        "family":  "frontend",
                         "lifecycle":  "manual_only",
                         "route_ids":  [
 
                                       ],
-                        "reason":  "Legacy portable skill: no reviewed automatic trigger and closure contract yet.",
+                        "reason":  "Guided frontend skill for Manifest V3 Chrome/browser extension development and Chrome Web Store publishing.",
                         "activation":  {
-                                           "mode":  "manual",
+                                           "mode":  "guided_candidate",
                                            "triggers":  [
-                                                            "explicit_user_request",
-                                                            "visual_design_workflow",
-                                                            "permission_and_scope_confirmed"
+                                                            "explicit_user_request"
                                                         ],
-                                           "purpose":  "The original v1 taste-skill, preserved for projects depending on its exact behavior. The current default is `design-taste-frontend` (v2 experimental), which is a substantial rewrite. Use this v1 install name only if you need exact backward compatibility.",
+                                           "purpose":  "Build and publish Chrome Extensions using Manifest V3 best practices, service workers, side panels, and CSP-safe sandboxes.",
                                            "explicit_signals":  [
-                                                                    "explicit_user_request",
-                                                                    "visual_design_workflow",
-                                                                    "permission_and_scope_confirmed"
+                                                                    "chrome_extension",
+                                                                    "manifest_v3",
+                                                                    "chrome_web_store"
                                                                 ],
                                            "inferred_signals":  [
-
+                                                                    "browser_extension_api",
+                                                                    "content_script_side_panel"
                                                                 ],
-                                           "confirmation_policy":  "explicit_user_intent_required"
+                                           "confirmation_policy":  "confirm_on_intent"
                                        }
                     }
                 ],
