@@ -31,19 +31,39 @@ AgentLogic is a versioned primary-logic package designed to be pulled into local
 
 ---
 
-## 🚀 Quick Start & Deployment
+## 🚀 Zero-Friction Install (Let Your Agent Do It)
 
-For local diagnostic runs and cross-host deployment (`antigravity`, `claude`, `codex`), execute the following commands in sequence:
+You don't need to manually copy 158 skill folders. Just paste this repository to your coding agent (**Antigravity**, **Claude Code**, or **OpenAI Codex**):
+
+> **Prompt for your Agent**:  
+> `Read AGENT_INSTALL.md in this repository, install AgentLogic for my local host non-destructively, and verify with scripts/doctor.ps1.`
+
+<details>
+<summary><strong>Manual PowerShell Commands (Optional)</strong></summary>
 
 | Step | PowerShell Command | Primary Purpose |
 | :--- | :--- | :--- |
 | **1. Diagnosis** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\doctor.ps1` | Analyzes repository layout, checks manifests, and recommends installers |
-| **2. Install** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost antigravity` | Validates, builds, verifies, and deploys the fresh host-ready ruleset and 9 first-party skills (`antigravity` / `claude` / `codex`) |
+| **2. Install** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost antigravity` | Validates, builds, verifies, and deploys the host-ready ruleset and **11 first-party skills** (`antigravity` / `claude` / `codex`) |
 | **3. Validation** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\maintainer-check.ps1` | Verifies structural link integrity, 158 registered skills, 21 auto-routes, and compiled adapter bundles |
+
+</details>
 
 ---
 
-## 🏛️ 4-Layer Architecture & V6.9 Autonomous Execution Flow
+## ⚡ Why AgentLogic? (vs. Vanilla AI & Ad-hoc Skills)
+
+| Dimension | Vanilla AI (Raw Prompting) | Ad-hoc Skill Users | AgentLogic (`V6.9.1`) |
+| :--- | :--- | :--- | :--- |
+| **Skill Dispatch** | Relies on ad-hoc prompting; resets every new session | Requires remembering & manually invoking skills | **Zero-Manual-Selection**: Turn 1 role router + **21 deterministic auto-routes** |
+| **Blocking Gates** | AI often skips planning and dumps boilerplate code | Soft suggestions only; skills can be bypassed | **Hard Blocking Gates**: 1-question requirements brief → `ui-ux-pro-max` spec → text-to-image mockup approval before UI code |
+| **Real-World Visuals & Motion** | Hallucinates anatomy/geometry for SVGs & animations | No visual/motion reference enforcement | **Real-World Reference Grounding**: Requires real photos/GIFs/short videos before coding SVGs, Canvas, or animations of real-world subjects |
+| **Modern Web & Extensions** | Frequently defaults to legacy CSS/JS workarounds | Fragmented or outdated frontend guidance | **GoogleChrome/modern-web-guidance** (209 Baseline guides + `legacy-scan`) & **Chrome Extensions MV3** built into auto-routes |
+| **Cross-Host Parity** | Rules diverge across Claude, Codex, and Antigravity | Separate configs per tool | **Single Source of Truth**: Compiles to Antigravity, Claude Code, Codex, and Generic + `PROJECT_MAP.md` / `CODE_MAP.md` sync |
+
+---
+
+## 🏛️ 4-Layer Architecture & V6.9.1 Autonomous Execution Flow
 
 We organize rules, blocking gates, and auto-triggered capabilities into a **4-layer progressive abstraction model** so every host executes the same deterministic workflow without manual `/skill` selection:
 
@@ -55,23 +75,26 @@ flowchart TD
         RoleRouter --> Check["00_START_HERE.md & Knowledge Sync (PROJECT_MAP / CODE_MAP)"]
     end
 
-    subgraph L2 ["L2: Session, SDD & Automatic Task Router (19 Routes)"]
+    subgraph L2 ["L2: Session, SDD & Automatic Task Router (21 Routes)"]
         Check --> Router{"Gate 3: Encounter -> Auto-Route"}
         Router -->|"UI / Frontend Task"| Grilling["product-requirements-grilling (1-Question-at-a-Time Brief)"]
+        Router -->|"Small Fix / Modernization"| WebMod["web-platform-modernization (modern-web-guidance / legacy-scan)"]
+        Router -->|"Chrome Extension"| ExtRoute["chrome-extension-development (chrome-extensions MV3)"]
         Router -->|"Feature / Refactor"| SDD["38_SpecDrivenDevelopment.md (Spec -> Red-Team -> Plan -> Tasks)"]
         Router -->|"Domain / Creative / Reverse Task"| DomainDispatch["Zero-Manual-Selection Domain Dispatch"]
     end
 
-    subgraph L3 ["L3: Design, Auditing & Verification Gates"]
+    subgraph L3 ["L3: Design, Reference Grounding & Verification Gates"]
         Grilling --> UIProMax["Gate 2: ui-ux-pro-max (Pure Palette / Typography / Grid Spec)"]
         UIProMax --> MockupGate["Mandatory Text-to-Image UI Mockup + User Approval Gate"]
-        MockupGate --> UIImpl["Frontend Implementation & Browser / Visual Verification"]
+        MockupGate --> RefGate["Real-World Visual & Motion Reference Grounding (Photos / GIFs / Video)"]
+        RefGate --> UIImpl["modern-web-guidance + Frontend Implementation & Visual Verification"]
         SDD --> CodeSimp["code-simplifier (Post-Implementation AST & Guard-Clause Polish)"]
         CodeSimp --> Verify["29_MandatoryVerificationMatrix.md & SRA Audit"]
     end
 
     subgraph L4 ["L4: First-Party Auto-Triggered Skills & Drivers (158 Portable Skills)"]
-        UIImpl --> BrowserSkill["agent-browser & nano-banana-pro"]
+        UIImpl --> BrowserSkill["modern-web-guidance, chrome-extensions, agent-browser & nano-banana-pro"]
         DomainDispatch --> Decompile["decompile-reconstruction (IDA / Ghidra / jadx / webcrack -> Clean-Room Source)"]
         DomainDispatch --> MediaDir["multimodal-media-director (Text-to-Image / Video Storyboard / Music Arrangement)"]
         DomainDispatch --> OfficePro["office-pro-suite (Executive Word .docx / Dynamic Excel .xlsx / Action-Title PPT .pptx)"]
@@ -85,8 +108,8 @@ flowchart TD
     classDef l4 fill:#dcfce7,stroke:#15803d,color:#14532d,stroke-width:2px
 
     class Entry,Gate1,RoleRouter,Check l1
-    class Router,Grilling,SDD,DomainDispatch l2
-    class UIProMax,MockupGate,UIImpl,CodeSimp,Verify l3
+    class Router,Grilling,WebMod,ExtRoute,SDD,DomainDispatch l2
+    class UIProMax,MockupGate,RefGate,UIImpl,CodeSimp,Verify l3
     class BrowserSkill,Decompile,MediaDir,OfficePro,NovelArch,DiagramArch l4
 ```
 
