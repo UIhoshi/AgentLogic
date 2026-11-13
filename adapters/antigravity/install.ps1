@@ -121,6 +121,9 @@ $hookTemplate = @'
      - Combine the `ui-ux-pro-max` design specification into a high-precision visual prompt and invoke Antigravity's built-in **`image-generator` subagent** (`invoke_subagent` with `TypeName: "image-generator"`) or `nano-banana-pro` to generate the visual UI mockup image.
      - Save/copy the generated mockup image to `.specify/mockups/` (or artifact directory), present both the **Design Specification** and **Mockup Image** to the user, and wait for user approval before writing UI implementation code.
   4. **Workflow State Recording**: Record route progression (`requirements-grilling` -> `design-direction` -> `ui-design` -> `ui-implementation`) using [skill-enforcement.ps1](file:///__ENFORCEMENT_SCRIPT_URI__).
+  5. **Real-World Visual & Motion Reference Grounding Gate (SVG / Canvas / 3D / Animation)**:
+     - **Real-World Existing Subject** (e.g., globe, zebra, animal, anatomy, landmark, real mechanism): NEVER draw or animate from blind text priors. First acquire/inspect real reference photos/images for static structure (silhouette, proportions, landmarks, textures) AND real GIF/short video/gait references for motion (keyframe phases, joint pivots, timing) before writing SVG/Canvas/CSS/JS animation code.
+     - **Non-Existent / Purely Abstract Subject**: Proceed directly to creative design without mandatory real-world reference lookup.
 
 ## Gate 3: Encounter -> Auto-Use Domain Capabilities (Zero Manual Skill Selection)
 - **ZERO MANUAL SKILL SELECTION**: Never wait for the user to name a skill. Automatically read and execute the matching first-party skill when encountering any of the following tasks:
@@ -130,6 +133,8 @@ $hookTemplate = @'
   4. **Text-to-Image, Text-to-Video, & Text-to-Music Generation** -> [multimodal-media-director](file:///__SKILLS_ROOT_URI__/multimodal-media-director/SKILL.md) (art-direction prompts for Imagen/Gemini/Flux; shot-by-shot camera storyboards for Veo/Kling/Hailuo; BPM/Key/Instrumentation/Metatag production sheets for Lyria/MiniMax/Suno).
   5. **Long-Form Novel, Fiction, & Script Writing** -> [novel-story-architect](file:///__SKILLS_ROOT_URI__/novel-story-architect/SKILL.md) (`.story-bible/` continuity compiler, scene beat sheets, and strict anti-AI-cliche prose filter).
   6. **Flowcharts, Swimlanes, & System Architecture Diagrams** -> [diagram-flowchart-architect](file:///__SKILLS_ROOT_URI__/diagram-flowchart-architect/SKILL.md) (automatic `.drawio` XML, `.excalidraw` JSON, and syntax-validated themed `Mermaid`).
+  7. **Modern Web Frontend (HTML / CSS / DOM / Client-Side JS / CWV / A11y)** -> [modern-web-guidance](file:///__SKILLS_ROOT_URI__/modern-web-guidance/SKILL.md) (query `npx -y modern-web-guidance@latest` or local `guides/` FIRST for modals/popovers/tables/dark mode/scroll animations/forms/performance/a11y/Baseline fallbacks, and `legacy-scan` for modernization).
+  8. **Chrome / Browser Extensions (Manifest V3 & Chrome Web Store)** -> [chrome-extensions](file:///__SKILLS_ROOT_URI__/chrome-extensions/SKILL.md) (MV3 service workers, side panels, CSP-safe sandboxes, permissions, and Web Store review compliance).
 
 ## Gate 4: Project-Native Knowledge Sync & Verification Matrix
 - Before business-project implementation, run `git fetch --prune` (when available) and read the project's tracked `AGENTS.md`, `PROJECT_MAP.md`, `CODE_MAP.md`, and `.learnings/ERRORS.md`. Update `PROJECT_MAP.md`, `CODE_MAP.md`, and `.learnings/ERRORS.md` in the same commit as structural, key-flow, or error-lesson changes.

@@ -54,7 +54,7 @@
 
 ### L4：规则资产、技能与生成输出 (Assets & Generated Outputs)
 
-- 可移植技能：`skills/`（含 9 个第一方自动触发技能：`product-requirements-grilling`、`role-persona-router`、`ui-ux-pro-max`、`multimodal-media-director`、`office-pro-suite`、`novel-story-architect`、`diagram-flowchart-architect`、`code-simplifier`、`decompile-reconstruction`）
+- 可移植技能：`skills/`（含 11 个第一方自动触发技能：`product-requirements-grilling`、`role-persona-router`、`ui-ux-pro-max`、`multimodal-media-director`、`office-pro-suite`、`novel-story-architect`、`diagram-flowchart-architect`、`code-simplifier`、`decompile-reconstruction`、`modern-web-guidance`、`chrome-extensions`）
 - SDD 工具层：`spec-kit/`
 - 原始参考层：不入库（仅保留在仓库外的本地存档；`reference/` 已被 `.gitignore` 排除）
 - 宿主 bundle：`dist/`
@@ -172,7 +172,7 @@ UI 实施完成后仍必须执行截图、父子布局边界、溢出、换行�
   才能候选 `img2threejs`，且不得推断已安装、可信或可执行。
 - 多模块功能、重大重构、架构或发布工作在 Converge/Ship 时应询问用户是否需要代码视图预览。
 - 用户明确同意后，才可在目标业务项目中生成 `graphify-out/`；不得默认在 AgentLogic 仓库内生成，也不得把外部图谱结果当作运行时事实证明。
-- `modules/53_V6_8_ProgrammingLevelSkillEnforcement.md` 与 `modules/54_V6_9_RoleAndMultimodalCreativeGovernance.md` 要求每个可携带 `SKILL.md` 在机器可读注册表中有生命周期状态；匹配路由必须经过可执行的 preflight、invocation 与 closure 记录。Turn 1 启动自动触发 `role-persona-router` 角色推荐；UI 设计自动串联 `product-requirements-grilling` -> `ui-ux-pro-max` -> 文生图预览；遇到重构或代码改良任务时自动触发 `code-refinement`（`code-simplifier`），遇到二进制/字节码/混淆包反编译与源码还原任务时自动触发 `decompile-reconstruction`，遇到 Office 文档、多模态生成、长篇小说、流程图/架构图时分别自动触发 `office-pro-suite`、`multimodal-media-director`、`novel-story-architect`、`diagram-flowchart-architect`，无需用户手动指定 skill。该工作流门不等同于未验证的宿主原生工具拦截。
+- `modules/53_V6_8_ProgrammingLevelSkillEnforcement.md` 与 `modules/54_V6_9_RoleAndMultimodalCreativeGovernance.md` 要求每个可携带 `SKILL.md` 在机器可读注册表中有生命周期状态；匹配路由必须经过可执行的 preflight、invocation 与 closure 记录。Turn 1 启动自动触发 `role-persona-router` 角色推荐；UI 设计自动串联 `product-requirements-grilling` -> `ui-ux-pro-max` -> 文生图预览 -> `modern-web-guidance`（HTML/CSS/JS 与 Baseline 兼容/无障碍/CWV 规范，涉及浏览器扩展自动触发 `chrome-extensions`；若涉及现实存在物体/动作的 SVG/Canvas/动画，必须先获取真实图片/GIF/短视频参照物再实现）；遇到重构或代码改良任务时自动触发 `code-refinement`（`code-simplifier`），遇到二进制/字节码/混淆包反编译与源码还原任务时自动触发 `decompile-reconstruction`，遇到 Office 文档、多模态生成、长篇小说、流程图/架构图时分别自动触发 `office-pro-suite`、`multimodal-media-director`、`novel-story-architect`、`diagram-flowchart-architect`，无需用户手动指定 skill。该工作流门不等同于未验证的宿主原生工具拦截。
 
 ## 11. 项目内 L1-L4 地图
 

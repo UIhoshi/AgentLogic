@@ -94,3 +94,19 @@ While `ui-ux-pro-max` and `taste-skill` govern **aesthetic direction, anti-slop 
 3. **Codebase Modernization (`legacy-scan`)**: When asked for a broad frontend modernization or legacy-pattern audit, run `npx -y modern-web-guidance@latest legacy-scan <path> --json`, verify findings against `keepWhen`/`dropWhen`, and modernize with retrieved guides.
 4. **Chrome Extensions (MV3)**: For browser extension development or Chrome Web Store publishing, load **`skills/frontend/chrome-extensions/SKILL.md`** and its `references/`.
 5. **Deprecated Variants Removed**: Legacy `taste-skill-v1` has been retired in favor of `taste-skill` (`v2.5.1`) + `modern-web-guidance`.
+
+---
+
+## 9. Real-World Visual & Motion Reference Grounding Gate (SVG / Canvas / 3D / Animation)
+
+Before generating bespoke frontend illustrations, vector graphics (`.svg`), Canvas/WebGL scenes, or motion/keyframe animations, the Agent MUST classify the subject's physical existence and apply reference-first grounding:
+
+1. **Existence Classification**:
+   - **Real-World Existing Subject** (animals such as zebras/horses, globes/continents, real architecture, human anatomy, mechanical devices, real vehicles): **BLOCKING** — Do NOT draw shapes or choreograph motion from blind text priors.
+   - **Non-Existent / Purely Abstract Subject** (abstract geometric flourishes, fictional creatures, pure conceptual UI icons): May proceed directly to creative composition.
+2. **Static Visual Reference (Shape, Proportions & Texture)**:
+   - When creating static visuals (e.g., an SVG zebra or a globe), first retrieve and inspect real photographs or verified visual references (via `search_web` / browser / local reference, or generate an anatomical reference study via `image-generator` when web media is unavailable). Extract exact silhouette proportions, anatomical joints, continent boundaries, and pattern flow before writing `<path>` / `<g>` / Canvas geometry.
+3. **Dynamic Motion Reference (GIF / Short Video / Gait Cycle)**:
+   - When animating a real-world subject (e.g., making a zebra gallop, rotating a tilted globe, simulating mechanical gears), first locate and analyze real motion references (GIFs, short video clips, sprite/gait-cycle breakdowns) to extract exact **keyframe phases, joint pivot points, leg-crossing order, easing curves, and secondary motion** before writing CSS `@keyframes`, SMIL, GSAP, or Web Animations API code.
+4. **Rendered Visual Audit**:
+   - Verify the rendered output in a real browser/screenshot to confirm anatomical fidelity and natural motion rather than deformed or "uncanny" approximations.

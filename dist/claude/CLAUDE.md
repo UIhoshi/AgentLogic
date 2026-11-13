@@ -764,7 +764,7 @@ V6.9.1 enforces identical automatic routing across Antigravity (`~/.gemini/GEMIN
 
 ### L4：规则资产、技能与生成输出 (Assets & Generated Outputs)
 
-- 可移植技能：`skills/`（含 9 个第一方自动触发技能：`product-requirements-grilling`、`role-persona-router`、`ui-ux-pro-max`、`multimodal-media-director`、`office-pro-suite`、`novel-story-architect`、`diagram-flowchart-architect`、`code-simplifier`、`decompile-reconstruction`）
+- 可移植技能：`skills/`（含 11 个第一方自动触发技能：`product-requirements-grilling`、`role-persona-router`、`ui-ux-pro-max`、`multimodal-media-director`、`office-pro-suite`、`novel-story-architect`、`diagram-flowchart-architect`、`code-simplifier`、`decompile-reconstruction`、`modern-web-guidance`、`chrome-extensions`）
 - SDD 工具层：`spec-kit/`
 - 原始参考层：不入库（仅保留在仓库外的本地存档；`reference/` 已被 `.gitignore` 排除）
 - 宿主 bundle：`dist/`
@@ -882,7 +882,7 @@ UI 实施完成后仍必须执行截图、父子布局边界、溢出、换行�
   才能候选 `img2threejs`，且不得推断已安装、可信或可执行。
 - 多模块功能、重大重构、架构或发布工作在 Converge/Ship 时应询问用户是否需要代码视图预览。
 - 用户明确同意后，才可在目标业务项目中生成 `graphify-out/`；不得默认在 AgentLogic 仓库内生成，也不得把外部图谱结果当作运行时事实证明。
-- `modules/53_V6_8_ProgrammingLevelSkillEnforcement.md` 与 `modules/54_V6_9_RoleAndMultimodalCreativeGovernance.md` 要求每个可携带 `SKILL.md` 在机器可读注册表中有生命周期状态；匹配路由必须经过可执行的 preflight、invocation 与 closure 记录。Turn 1 启动自动触发 `role-persona-router` 角色推荐；UI 设计自动串联 `product-requirements-grilling` -> `ui-ux-pro-max` -> 文生图预览；遇到重构或代码改良任务时自动触发 `code-refinement`（`code-simplifier`），遇到二进制/字节码/混淆包反编译与源码还原任务时自动触发 `decompile-reconstruction`，遇到 Office 文档、多模态生成、长篇小说、流程图/架构图时分别自动触发 `office-pro-suite`、`multimodal-media-director`、`novel-story-architect`、`diagram-flowchart-architect`，无需用户手动指定 skill。该工作流门不等同于未验证的宿主原生工具拦截。
+- `modules/53_V6_8_ProgrammingLevelSkillEnforcement.md` 与 `modules/54_V6_9_RoleAndMultimodalCreativeGovernance.md` 要求每个可携带 `SKILL.md` 在机器可读注册表中有生命周期状态；匹配路由必须经过可执行的 preflight、invocation 与 closure 记录。Turn 1 启动自动触发 `role-persona-router` 角色推荐；UI 设计自动串联 `product-requirements-grilling` -> `ui-ux-pro-max` -> 文生图预览 -> `modern-web-guidance`（HTML/CSS/JS 与 Baseline 兼容/无障碍/CWV 规范，涉及浏览器扩展自动触发 `chrome-extensions`；若涉及现实存在物体/动作的 SVG/Canvas/动画，必须先获取真实图片/GIF/短视频参照物再实现）；遇到重构或代码改良任务时自动触发 `code-refinement`（`code-simplifier`），遇到二进制/字节码/混淆包反编译与源码还原任务时自动触发 `decompile-reconstruction`，遇到 Office 文档、多模态生成、长篇小说、流程图/架构图时分别自动触发 `office-pro-suite`、`multimodal-media-director`、`novel-story-architect`、`diagram-flowchart-architect`，无需用户手动指定 skill。该工作流门不等同于未验证的宿主原生工具拦截。
 
 ## 11. 项目内 L1-L4 地图
 
@@ -2527,6 +2527,22 @@ While `ui-ux-pro-max` and `taste-skill` govern **aesthetic direction, anti-slop 
 3. **Codebase Modernization (`legacy-scan`)**: When asked for a broad frontend modernization or legacy-pattern audit, run `npx -y modern-web-guidance@latest legacy-scan <path> --json`, verify findings against `keepWhen`/`dropWhen`, and modernize with retrieved guides.
 4. **Chrome Extensions (MV3)**: For browser extension development or Chrome Web Store publishing, load **`skills/frontend/chrome-extensions/SKILL.md`** and its `references/`.
 5. **Deprecated Variants Removed**: Legacy `taste-skill-v1` has been retired in favor of `taste-skill` (`v2.5.1`) + `modern-web-guidance`.
+
+---
+
+## 9. Real-World Visual & Motion Reference Grounding Gate (SVG / Canvas / 3D / Animation)
+
+Before generating bespoke frontend illustrations, vector graphics (`.svg`), Canvas/WebGL scenes, or motion/keyframe animations, the Agent MUST classify the subject's physical existence and apply reference-first grounding:
+
+1. **Existence Classification**:
+   - **Real-World Existing Subject** (animals such as zebras/horses, globes/continents, real architecture, human anatomy, mechanical devices, real vehicles): **BLOCKING** — Do NOT draw shapes or choreograph motion from blind text priors.
+   - **Non-Existent / Purely Abstract Subject** (abstract geometric flourishes, fictional creatures, pure conceptual UI icons): May proceed directly to creative composition.
+2. **Static Visual Reference (Shape, Proportions & Texture)**:
+   - When creating static visuals (e.g., an SVG zebra or a globe), first retrieve and inspect real photographs or verified visual references (via `search_web` / browser / local reference, or generate an anatomical reference study via `image-generator` when web media is unavailable). Extract exact silhouette proportions, anatomical joints, continent boundaries, and pattern flow before writing `<path>` / `<g>` / Canvas geometry.
+3. **Dynamic Motion Reference (GIF / Short Video / Gait Cycle)**:
+   - When animating a real-world subject (e.g., making a zebra gallop, rotating a tilted globe, simulating mechanical gears), first locate and analyze real motion references (GIFs, short video clips, sprite/gait-cycle breakdowns) to extract exact **keyframe phases, joint pivot points, leg-crossing order, easing curves, and secondary motion** before writing CSS `@keyframes`, SMIL, GSAP, or Web Animations API code.
+4. **Rendered Visual Audit**:
+   - Verify the rendered output in a real browser/screenshot to confirm anatomical fidelity and natural motion rather than deformed or "uncanny" approximations.
 
 ## END FILE: modules/39_V6_6_TasteFrontendDesign.md
 
