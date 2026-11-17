@@ -2622,11 +2622,14 @@ Before generating bespoke frontend illustrations, vector graphics (`.svg`), Canv
 1. **Existence Classification**:
    - **Real-World Existing Subject** (animals such as zebras/horses, globes/continents, real architecture, human anatomy, mechanical devices, real vehicles): **BLOCKING** — Do NOT draw shapes or choreograph motion from blind text priors.
    - **Non-Existent / Purely Abstract Subject** (abstract geometric flourishes, fictional creatures, pure conceptual UI icons): May proceed directly to creative composition.
-2. **Static Visual Reference (Shape, Proportions & Texture)**:
-   - When creating static visuals (e.g., an SVG zebra or a globe), first retrieve and inspect real photographs or verified visual references (via `search_web` / browser / local reference, or generate an anatomical reference study via `image-generator` when web media is unavailable). Extract exact silhouette proportions, anatomical joints, continent boundaries, and pattern flow before writing `<path>` / `<g>` / Canvas geometry.
-3. **Dynamic Motion Reference (GIF / Short Video / Gait Cycle)**:
-   - When animating a real-world subject (e.g., making a zebra gallop, rotating a tilted globe, simulating mechanical gears), first locate and analyze real motion references (GIFs, short video clips, sprite/gait-cycle breakdowns) to extract exact **keyframe phases, joint pivot points, leg-crossing order, easing curves, and secondary motion** before writing CSS `@keyframes`, SMIL, GSAP, or Web Animations API code.
-4. **Rendered Visual Audit**:
+2. **Static Visual Reference (Mandatory Media Download + `read_file` Visual Inspection)**:
+   - **NEVER substitute text-only `search_web` summaries for real visual inspection.**
+   - When creating static visuals (e.g., an SVG/Canvas zebra, dog, pelican, or globe), first locate real photographs (e.g., Wikimedia Commons / verified visual sources), **download the actual image files locally** (e.g., into `references/media/` or `.specify/<task>/references/`), and **visually inspect each downloaded image with `read_file`** before writing `<path>` / `<g>` / Canvas geometry.
+   - Extract exact silhouette proportions, joint musculature transitions, continent boundaries, and natural pattern flow (e.g., curved scapula/gluteal stripes rather than uniform "barcode" lines).
+3. **Dynamic Motion Reference (Mandatory GIF / Video / Gait Frame Inspection)**:
+   - When animating a real-world subject (e.g., making a zebra gallop, a dog run and sit, a pelican fly and dive), first locate and **download real motion references** (GIFs, short video clips, or multi-frame gait sequences) locally and inspect them via `read_file` (or extracted keyframes) to extract **keyframe phases, joint pivot points, leg-crossing order, easing curves, and secondary motion** before writing CSS `@keyframes`, SMIL, GSAP, Canvas, or Web Animations API code.
+4. **Anti-Stick-Puppet Contour Discipline & Rendered Visual Audit**:
+   - Build real-world subjects using continuous anatomical Bézier contours (`bezierCurveTo` / SVG `<path>`) that blend torso, neck, and limb musculature—avoid bare ovals with straight-tube limbs and exposed circular joint caps.
    - Verify the rendered output in a real browser/screenshot to confirm anatomical fidelity and natural motion rather than deformed or "uncanny" approximations.
 
 ## END FILE: modules/39_V6_6_TasteFrontendDesign.md
@@ -4638,11 +4641,12 @@ For the reference-based interactive 3D route:
                                                               "taste-skill",
                                                               "senior-frontend"
                                                           ],
-                       "selection_rule":  "Automatically use modern-web-guidance (via npx or local guides/) for any HTML/CSS/DOM/client-side JS fix, CWV/a11y improvement, or legacy-scan modernization without requiring full net-new UI mockup approval. Enforce Real-World Visual \u0026 Motion Reference Grounding for any real-world SVG/Canvas/animation.",
+                       "selection_rule":  "Automatically use modern-web-guidance (via npx or local guides/) for any HTML/CSS/DOM/client-side JS fix, CWV/a11y improvement, or legacy-scan modernization without requiring full net-new UI mockup approval. Enforce Real-World Visual \u0026 Motion Reference Grounding (actual downloaded photos/GIFs inspected via read_file, never text-only search summaries) for any real-world SVG/Canvas/animation.",
                        "fallback":  "use_local_modern_web_guides",
                        "closure_evidence":  [
                                                 "modern_web_guidance_checked",
                                                 "real_world_reference_grounding_if_applicable",
+                                                "downloaded_media_visually_inspected",
                                                 "baseline_fallback_verified"
                                             ],
                        "order":  32,
@@ -10527,6 +10531,7 @@ task state.
                       "verification":  [
                                            "modern_web_guidance_checked",
                                            "real_world_reference_grounding_if_applicable",
+                                           "downloaded_media_visually_inspected",
                                            "baseline_fallback_verified"
                                        ],
                       "route_ids":  [

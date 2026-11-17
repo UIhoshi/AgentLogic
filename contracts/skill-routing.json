@@ -749,11 +749,12 @@
                                                               "taste-skill",
                                                               "senior-frontend"
                                                           ],
-                       "selection_rule":  "Automatically use modern-web-guidance (via npx or local guides/) for any HTML/CSS/DOM/client-side JS fix, CWV/a11y improvement, or legacy-scan modernization without requiring full net-new UI mockup approval. Enforce Real-World Visual \u0026 Motion Reference Grounding for any real-world SVG/Canvas/animation.",
+                       "selection_rule":  "Automatically use modern-web-guidance (via npx or local guides/) for any HTML/CSS/DOM/client-side JS fix, CWV/a11y improvement, or legacy-scan modernization without requiring full net-new UI mockup approval. Enforce Real-World Visual \u0026 Motion Reference Grounding (actual downloaded photos/GIFs inspected via read_file, never text-only search summaries) for any real-world SVG/Canvas/animation.",
                        "fallback":  "use_local_modern_web_guides",
                        "closure_evidence":  [
                                                 "modern_web_guidance_checked",
                                                 "real_world_reference_grounding_if_applicable",
+                                                "downloaded_media_visually_inspected",
                                                 "baseline_fallback_verified"
                                             ],
                        "order":  32,

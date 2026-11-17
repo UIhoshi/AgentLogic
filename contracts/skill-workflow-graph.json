@@ -543,6 +543,7 @@
                       "verification":  [
                                            "modern_web_guidance_checked",
                                            "real_world_reference_grounding_if_applicable",
+                                           "downloaded_media_visually_inspected",
                                            "baseline_fallback_verified"
                                        ],
                       "route_ids":  [

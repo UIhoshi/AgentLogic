@@ -122,7 +122,7 @@ $hookTemplate = @'
      - Save/copy the generated mockup image to `.specify/mockups/` (or artifact directory), present both the **Design Specification** and **Mockup Image** to the user, and wait for user approval before writing UI implementation code.
   4. **Workflow State Recording**: Record route progression (`requirements-grilling` -> `design-direction` -> `ui-design` -> `ui-implementation`) using [skill-enforcement.ps1](file:///__ENFORCEMENT_SCRIPT_URI__).
   5. **Real-World Visual & Motion Reference Grounding Gate (SVG / Canvas / 3D / Animation)**:
-     - **Real-World Existing Subject** (e.g., globe, zebra, animal, anatomy, landmark, real mechanism): NEVER draw or animate from blind text priors. First acquire/inspect real reference photos/images for static structure (silhouette, proportions, landmarks, textures) AND real GIF/short video/gait references for motion (keyframe phases, joint pivots, timing) before writing SVG/Canvas/CSS/JS animation code.
+     - **Real-World Existing Subject** (e.g., globe, zebra, animal, anatomy, landmark, real mechanism): NEVER draw or animate from blind text priors or text-only `search_web` summaries. First download real reference photos AND real GIF/short video/gait references locally (e.g., `references/media/`) and visually inspect them via `read_file` to extract continuous anatomical silhouettes, joint musculature, pattern flow, and keyframe phases before writing SVG/Canvas/CSS/JS animation code (avoid bare ovals + stick-puppet tube limbs).
      - **Non-Existent / Purely Abstract Subject**: Proceed directly to creative design without mandatory real-world reference lookup.
 
 ## Gate 3: Encounter -> Auto-Use Domain Capabilities (Zero Manual Skill Selection)
