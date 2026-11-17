@@ -1,4 +1,10 @@
 # Project Error Log
+## 2026-11-17 - Single-frame visual audit & monolithic SVG primitives limited multi-act animation quality
+- Symptom: Initial browser verification only captured a single early frame (`t ≈ 2s`), missing Act 2/3 motion defects, Z-depth limb/frame overlap, and overly sparse geometric textures; meanwhile standard UI rules lacked multi-state/breakpoint audit guidance.
+- Root cause: `modules/39_V6_6_TasteFrontendDesign.md` Section 9 did not mandate Z-depth interleaving, deterministic `?t=` multi-frame/multi-state screenshot audits, or a scoped creative-animation sub-path (`rig`/`timeline`/`scenes` + specialized brush/3D libraries) separate from lean business UI.
+- Correction: Updated `modules/39_V6_6_TasteFrontendDesign.md` Section 9 to require Z-depth interleaving, multi-state/multi-frame (`?t=`) visual audits for UI and animations, and a scoped creative-animation sub-path that does not bloat standard business UI.
+- Prevention: Always verify multiple key states/frames (`?t=` / viewports / overlays) via browser screenshots, and match rendering primitives to the target art style.
+- Verification: `node scripts/check-logic-entry.js`, `scripts/maintainer-check.ps1`, `scripts/audit-skill-duplicates.ps1 -FailOnCandidates`, and `install.ps1` cross-host sync pass.
 ## 2026-11-17 - Text-only `search_web` bypassed Real-World Visual & Motion Reference Grounding Gate for Canvas animations
 - Symptom: When drawing/animating real-world animals (dog, zebra, pelican) in Canvas/HTML, the agent relied solely on `search_web` text summaries of anatomy and gait phases instead of downloading and visually inspecting real photos and GIFs, producing "stick-puppet" ovals, exposed circular joint caps, and uniform barcode zebra stripes.
 - Root cause: `modules/39_V6_6_TasteFrontendDesign.md` Section 9 and `adapters/antigravity/install.ps1` Gate 2.5 required acquiring/inspecting real reference photos and GIFs, but did not explicitly forbid text-only `search_web` summaries or require local media download + `read_file` multimodal visual inspection + continuous anatomical Bézier contours.
