@@ -25,6 +25,7 @@ or begin implementation before the logic-entry loop above has been completed.
 [![Agentic Code](https://img.shields.io/badge/Agent-Autonomous-blueviolet?style=flat-square)](https://github.com/UIhoshi/AgentLogic)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 [![Version](https://img.shields.io/badge/Version-V6.9.3_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_9_3.md)
+[![CI](https://github.com/UIhoshi/AgentLogic/actions/workflows/validate-package.yml/badge.svg)](https://github.com/UIhoshi/AgentLogic/actions/workflows/validate-package.yml)
 
 AgentLogic 是一套专为本地 AI 编码宿主（**Antigravity / Gemini**、**Claude Code**、**OpenAI Codex / GPT**）设计的**分层自进化规则引擎**。它将多轮会话规范、**11 大正交主控角色与双轴 Subagent 协同小队门（Turn 1 Role Gate）**、**纯前端 UI/UX 设计与文生图强制联动门**、**Skill-First 条件反射自动触发协议与 17 大第一方专业领域技能**、安全沙箱审计及项目知识同步集成打包，作为 AI 智能体的“主运行心智”。
 
@@ -36,17 +37,31 @@ AgentLogic 是一套专为本地 AI 编码宿主（**Antigravity / Gemini**、**
 
 ## 🚀 快速启动与跨宿主部署
 
-对于本地环境的诊断与跨宿主部署（支持 `antigravity`、`claude`、`codex`），请执行以下指令：
+对于本地环境的诊断与跨宿主部署（支持 `antigravity`、`claude`、`codex`、`generic`），请执行以下指令：
 
-| 操作步骤 | 运行指令 (PowerShell) | 核心作用 |
+> [!NOTE]
+> **轻量非破坏式宿主钩子（~11 KB）**：安装器会先对既有用户规则做 `.agentlogic-backup/` 快照备份，再写入带边界标记的 `~11 KB` 钩子（`<!-- BEGIN AGENTLOGIC HOOK --> ... <!-- END AGENTLOGIC HOOK -->`）指向本地参考 Bundle（不向全局 Prompt 灌入 700+ KB 内容，严格遵守 Antigravity 24 KB 单文件上限）。
+
+| 操作步骤 | 运行指令 (Windows PowerShell / `pwsh`) | 核心作用 |
 | :--- | :--- | :--- |
 | **1. 环境诊断** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\doctor.ps1` | 检测仓库健康度，读取元数据，生成推荐安装指令 |
 | **2. 一键安装** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost antigravity` | 构建并部署宿主规则包及 17 个第一方自动触发 Skill（可将 `antigravity` 替换为 `claude` 或 `codex`） |
-| **3. 本地验证** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\maintainer-check.ps1` | 运行 164 个注册技能、26 条自动路由、11 大角色契约、42 项外部引用、Token 预算、回归测试及四端 + Codex 插件包完整性校验 |
+| **3. 本地验证** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\maintainer-check.ps1` | 运行 164 个注册技能、26 条自动路由、11 大角色契约、42 项注册外部引用、Token 预算、回归测试、四端 + Codex 插件包完整性校验，并在 CI 覆盖 Windows 与 Ubuntu 双平台 |
+
+macOS / Linux 环境可直接运行（自动检测 `pwsh`，未安装 PowerShell 时无缝回退到零依赖 `node` [`scripts/install.js`](./scripts/install.js)）：
+
+```bash
+./install.sh --host antigravity
+./install.sh --host claude
+./install.sh --host codex
+
+# 或在任意系统直接使用零依赖 Node.js 安装器：
+node ./scripts/install.js --host claude
+```
 
 ---
 
-## 🏛️ 架构矩阵与 V6.9 全自动触发流程图 (4-Layer Grid & Auto-Routing Flow)
+## 🏛️ 架构矩阵与 V6.9.3 全自动触发流程图 (4-Layer Grid & Auto-Routing Flow)
 
 本仓库拒绝线性的规则堆砌，将所有模块按**四层抽象 + 三大强制阻断门**进行分级治理，实现“遇到对应任务即自动触发对应技能，零手动指定”：
 
@@ -61,15 +76,18 @@ flowchart TD
     subgraph L2 ["L2: 会话、SDD 与 26 路由全自动分发层"]
         Check --> Router{"Gate 3: Skill-First Reflex -> 自动路由"}
         Router -->|"UI / 前端页面任务"| Grilling["product-requirements-grilling (单问题逐步追问生成需求简报)"]
+        Router -->|"小改动 / 现代 Web 升级"| WebMod["web-platform-modernization (modern-web-guidance / legacy-scan)"]
+        Router -->|"Chrome 扩展"| ExtRoute["chrome-extension-development (chrome-extensions MV3)"]
         Router -->|"图表 / 看板 / 游戏"| VizGame["web-data-visualization & web-game-studio"]
         Router -->|"功能开发 / 架构重构"| SDD["38_SpecDrivenDevelopment.md (Spec -> 红队自审 -> Plan -> Tasks)"]
         Router -->|"安全 / CI / 技能评估 / 多模态 / Office"| DomainDispatch["零手动选择：领域能力自动派发"]
     end
 
-    subgraph L3 ["L3: 纯设计规范、代码精炼与审计验证层"]
+    subgraph L3 ["L3: 纯设计规范、参考锚定、代码精炼与审计验证层"]
         Grilling --> UIProMax["Gate 2: ui-ux-pro-max (纯前端设计规范：配色 / 字体配对 / 空间栅格)"]
         UIProMax --> MockupGate["强制联动文生图生成 UI 效果图 + 等待用户确认"]
-        MockupGate --> UIImpl["前端代码实现 & 并排 Design QA / 多状态截图验证"]
+        MockupGate --> RefGate["现实视觉与动作参考锚定 + 并排 Design QA"]
+        RefGate --> UIImpl["modern-web-guidance + 前端代码实现与多状态截图验证"]
         SDD --> CodeSimp["code-simplifier (实现后自动 AST 结构化精简与卫语句重构)"]
         CodeSimp --> Verify["29_MandatoryVerificationMatrix.md & SRA 交付可评审性审计"]
     end
@@ -90,8 +108,8 @@ flowchart TD
     classDef l4 fill:#dcfce7,stroke:#15803d,color:#14532d,stroke-width:2px
 
     class Entry,Gate1,RoleRouter,Check l1
-    class Router,Grilling,VizGame,SDD,DomainDispatch l2
-    class UIProMax,MockupGate,UIImpl,CodeSimp,Verify l3
+    class Router,Grilling,WebMod,ExtRoute,VizGame,SDD,DomainDispatch l2
+    class UIProMax,MockupGate,RefGate,UIImpl,CodeSimp,Verify l3
     class BrowserSkill,AppSecCI,Decompile,MediaDir,OfficePro,NovelArch,DiagramArch l4
 ```
 
@@ -184,15 +202,15 @@ AgentLogic 的演进离不开开源社区的启发。我们在设计中深度参
 > **逻辑版本升级必查红线清单（防漏改与防历史踩坑）**：
 > 每次升级版本或新增核心模块/技能时，**必须**逐条核对以下红线（详见 `.learnings/ERRORS.md` 历史复盘）：
 > 1. **11 处核心文档同频更新**：严禁只改 `manifest.json` 和 `README.md`。必须同步更新 `manifest.json`、`versions/AgentLogic_<新版本>.md`、`00_START_HERE.md`、`AGENTS.md`、`MAIN.md`、`README.md`、`00_README.md`、`AGENT_INSTALL.md`、`modules/01_MasterLogic.md`（含 L2 模块与 L4 第一方技能列表）、`modules/11_CrossDirectoryMap.md`、`modules/40_AgentLogicSystemMap.md`、`PROJECT_MAP.md`、`CODE_MAP.md` 与 `CHANGELOG.md`。
-> 2. **UTF-8 与 CP1252 编码红线**：所有入口 `.ps1` 脚本必须保持 100% 纯 ASCII 无 BOM（禁止直接写入中文或破折号 `—`，统一用 `\uXXXX` 转义，防止 GitHub Actions `Windows-1252` 将 `0x94` 误判为右双引号）；PowerShell 读取文本必须显式加 `Get-Content -Encoding UTF8`（防止 CP936 将 `—` 损坏为 `\u9225` 乱码）；写入 JSON/JS/MD 必须使用 `[System.Text.UTF8Encoding]::new($false)`（无 BOM）。
+> 2. **UTF-8、CP1252 与 POSIX `pwsh` 红线**：所有 27 份运行 `.ps1` 脚本必须保持 100% 纯 ASCII 无 BOM（禁止直接写入中文或破折号 `—`，统一用 `\uXXXX` 转义，防止 GitHub Actions `Windows-1252` 将 `0x94` 误判为右双引号），并保持 POSIX `pwsh` 跨平台兼容（`[IO.Path]::Combine(...)`、Core `pwsh` 自动切换、`$HOME` 回退，通过 Windows 与 Ubuntu 双平台 CI）；PowerShell 读取文本必须显式加 `Get-Content -Encoding UTF8`（防止 CP936 将 `—` 损坏为 `\u9225` 乱码）；写入 JSON/JS/MD 必须使用 `[System.Text.UTF8Encoding]::new($false)`（无 BOM）。
 > 3. **PowerShell 与宿主适配红线**：严禁使用 `$host` 作为循环变量；含反引号的 Markdown 模板严禁使用双引号 `@"..."@`（防止 `` `f `` 变成控制字符 `\x0C`）；Antigravity 全局钩子 `~/.gemini/GEMINI.md`（受 24KB 限制）必须直接内联 Gates 1–4 并注册 `~/.gemini/skills`。
 > 4. **技能头部与杀软防误报红线**：所有 `SKILL.md` 必须包含 YAML 头部 `name:`；安全参考文档中的原始 `<script>` / `onerror=` 必须做无害化转义（如 `<scr\ipt>`），防止 Windows Defender 拦截或隔离文件。
-> 5. **四端编译、本机同步与 Git 标签对齐**：必须运行 `scripts/maintainer-check.ps1` 与 `scripts/audit-skill-duplicates.ps1 -FailOnCandidates`，重新执行 `antigravity` / `claude` / `codex` 本地安装，并将 Git 版本标签对齐至最终提交。
+> 5. **四端编译、本机同步与 Git 标签对齐**：必须运行 `scripts/maintainer-check.ps1`（自动包含 `check-logic-entry.js`、`eval-skills.ps1`、`audit-skill-duplicates.ps1 -FailOnCandidates`、`build-codex-plugin.ps1`、`validate-package.ps1` 含 `validate-role-personas.ps1` `default_skills` 交叉校验，以及 `test-skill-registry` / `test-skill-workflow-graph` / `test-skill-enforcement` 全套回归测试），重新执行 `antigravity` / `claude` / `codex` 本地安装，并将 Git 版本标签对齐至最终提交。
 
 ---
 
 ## 🛡️ 安全合规、净室重构与第三方开源致谢声明
 
 1. **合法授权与净室重构声明 (Authorized Security & Clean-Room Use Only)**：本仓库包含的二进制反编译与净室源码重构规则（`decompile-reconstruction`）以及安全审计技能路由包（`skills/reverse-skill/`）**仅限用于合法的互操作性净室研究（Clean-Room Reconstruction）、恶意样本防御分析、CTF 竞赛、安全教学及经明确书面授权的安全测试**。严禁用于任何未经授权的逆向破解或非法入侵行为。
-2. **开源致谢与许可证声明 (Third-Party Open-Source Attribution)**：AgentLogic 作为跨宿主元治理框架，致谢并吸收了上表列出的 42 个优秀开源项目的理念与可移植技能结构。各内嵌子模块（如 `spec-kit`、`taste-skill`、`agent-browser`、`reverse-skill`、`modern-web-guidance` 等）均保留其原有的 `MIT` / `Apache-2.0` 开源许可证文件与版权归属。
+2. **开源致谢与许可证声明 (Third-Party Open-Source Attribution)**：AgentLogic 作为跨宿主元治理框架，致谢并吸收了上表列出的 44 个优秀开源项目的理念与可移植技能结构（其中 42 项纳入 `versions/AgentLogic_V6_9_3.md` 正式注册表校验，另含 2 项架构设计灵感来源）。各内嵌子模块（如 `spec-kit`、`taste-skill`、`agent-browser`、`reverse-skill`、`modern-web-guidance` 等）均保留其原有的 `MIT` / `Apache-2.0` 开源许可证文件与版权归属。
 3. **纯规则与契约边界**：本仓库仅提供纯文本 Markdown 规则、JSON 路由契约与自动化校验脚本，不包含任何商业闭源软件的源码或专有二进制文件。
