@@ -96,9 +96,7 @@
                        "conditional_host_skill_aliases":  [
                                                               "multimodal-media-director",
                                                               "image-generator",
-                                                              "nano-banana-pro",
-                                                              "ui-ux-pro-max",
-                                                              "taste-skill"
+                                                              "nano-banana-pro"
                                                           ],
                        "selection_rule":  "Combine the pure design specification from ui-ux-pro-max with imagegen (or Antigravity\u0027s built-in image-generator subagent, multimodal-media-director, or nano-banana-pro) to generate the visual UI mockup before any UI code is written. Do not use a frontend implementation skill as mockup evidence.",
                        "order":  20,
@@ -751,11 +749,11 @@
                                                               "senior-frontend"
                                                           ],
                        "selection_rule":  "Automatically use modern-web-guidance (via npx or local guides/) for any HTML/CSS/DOM/client-side JS fix, CWV/a11y improvement, or legacy-scan modernization without requiring full net-new UI mockup approval. Enforce Real-World Visual \u0026 Motion Reference Grounding (actual downloaded photos/GIFs inspected via read_file, never text-only search summaries) for any real-world SVG/Canvas/animation.",
-                       "fallback":  "use_local_modern_web_guides",
+                       "fallback":  "allow_native_local_modern_web_guides",
                        "closure_evidence":  [
                                                 "modern_web_guidance_checked",
                                                 "real_world_reference_grounding_if_applicable",
-                                                "downloaded_media_visually_inspected",
+                                                "downloaded_media_visually_inspected_if_applicable",
                                                 "baseline_fallback_verified"
                                             ],
                        "order":  32,

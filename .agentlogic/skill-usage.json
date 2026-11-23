@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "reviewed_commit": "056c70b + V6.9.0 release worktree",
+  "reviewed_commit": "V6.9.3",
   "skills": [
     {
       "skill_id": "role-persona-router",
       "capability": "role_persona_routing",
       "flows": [
-        "Turn 1 startup role recommendation and persona selection"
+        "Turn 1 startup role recommendation and Subagent squad selection"
       ],
       "trigger": "role_selection",
       "source": "first-party portable skill",
@@ -16,7 +16,7 @@
       "skill_id": "product-requirements-grilling",
       "capability": "requirements_grilling",
       "flows": [
-        "Major feature specification"
+        "Major feature and UI requirements specification"
       ],
       "trigger": "major_feature",
       "source": "first-party portable skill",
@@ -33,10 +33,50 @@
       "status": "active"
     },
     {
+      "skill_id": "modern-web-guidance",
+      "capability": "web_platform_and_legacy_modernization",
+      "flows": [
+        "Baseline modern web platform guidance and legacy scan"
+      ],
+      "trigger": "frontend_fix_or_modernization",
+      "source": "first-party portable skill",
+      "status": "active"
+    },
+    {
+      "skill_id": "chrome-extensions",
+      "capability": "chrome_extension_mv3_delivery",
+      "flows": [
+        "Manifest V3 browser extension engineering and Web Store compliance"
+      ],
+      "trigger": "chrome_extension",
+      "source": "first-party portable skill",
+      "status": "active"
+    },
+    {
+      "skill_id": "web-data-visualization",
+      "capability": "web_data_visualization",
+      "flows": [
+        "Truthful web charts, KPI dashboards, and geospatial maps"
+      ],
+      "trigger": "data_visualization",
+      "source": "first-party portable skill",
+      "status": "active"
+    },
+    {
+      "skill_id": "web-game-studio",
+      "capability": "browser_game_engineering",
+      "flows": [
+        "2D Phaser/Canvas2D and 3D Three.js/R3F browser games and playtest"
+      ],
+      "trigger": "web_game",
+      "source": "first-party portable skill",
+      "status": "active"
+    },
+    {
       "skill_id": "multimodal-media-director",
       "capability": "multimodal_media_generation",
       "flows": [
-        "Automatic text-to-image, text-to-video, and text-to-music direction"
+        "Text-to-image, video storyboards, Remotion/HyperFrames, and music direction"
       ],
       "trigger": "multimodal_media",
       "source": "first-party portable skill",
@@ -46,7 +86,7 @@
       "skill_id": "office-pro-suite",
       "capability": "office_document_design_and_processing",
       "flows": [
-        "Automatic Word, Excel, and PowerPoint professional design and standardization"
+        "Executive Word, dynamic Excel tie-out, PowerPoint, and PDF visual QA"
       ],
       "trigger": "office_document",
       "source": "first-party portable skill",
@@ -56,9 +96,19 @@
       "skill_id": "novel-story-architect",
       "capability": "long_form_fiction_and_story_bible",
       "flows": [
-        "Automatic Story Bible continuity compilation and anti-AI-cliche novel drafting"
+        "Story Bible continuity compilation and anti-AI-cliche novel drafting"
       ],
       "trigger": "novel_writing",
+      "source": "first-party portable skill",
+      "status": "active"
+    },
+    {
+      "skill_id": "screenplay-manga-director",
+      "capability": "screenplay_manga_and_short_video_scripting",
+      "flows": [
+        "Manga panels, 0-3s hook micro-drama shooting tables, and screenplays"
+      ],
+      "trigger": "screenplay_manga_video",
       "source": "first-party portable skill",
       "status": "active"
     },
@@ -66,9 +116,39 @@
       "skill_id": "diagram-flowchart-architect",
       "capability": "diagram_and_flowchart_architecture",
       "flows": [
-        "Automatic Draw.io, Excalidraw, and themed Mermaid flowchart generation"
+        "Draw.io, Excalidraw, and themed Mermaid architecture diagram generation"
       ],
       "trigger": "diagram_flowchart",
+      "source": "first-party portable skill",
+      "status": "active"
+    },
+    {
+      "skill_id": "appsec-review",
+      "capability": "security_review",
+      "flows": [
+        "Diff-scoped AppSec triage, tri-state verdicts, and STRIDE threat modeling"
+      ],
+      "trigger": "security_review",
+      "source": "first-party portable skill",
+      "status": "active"
+    },
+    {
+      "skill_id": "gh-pr-ci-triage",
+      "capability": "github_pr_and_ci_triage",
+      "flows": [
+        "GitHub Actions CI failure log inspection and PR comment resolution"
+      ],
+      "trigger": "gh_ci_or_pr_triage",
+      "source": "first-party portable skill",
+      "status": "active"
+    },
+    {
+      "skill_id": "skill-evaluator",
+      "capability": "skill_and_plugin_evaluation",
+      "flows": [
+        "SKILL.md quality, trigger precision, link containment, and token-budget audit"
+      ],
+      "trigger": "skill_evaluation",
       "source": "first-party portable skill",
       "status": "active"
     },
@@ -94,7 +174,7 @@
     },
     {
       "skill_id": "decompile-reconstruction",
-      "capability": "decompile_reconstruction",
+      "capability": "decompile_and_reconstruct",
       "flows": [
         "Automatic binary/bundle decompilation and clean-room reconstruction"
       ],
@@ -106,7 +186,7 @@
       "skill_id": "code-review",
       "capability": "code_review",
       "flows": [
-        "V6.9.0 release review"
+        "V6.9.3 release review"
       ],
       "trigger": "release_review",
       "source": "host-provided portable skill",

@@ -1,0 +1,161 @@
+{
+    "schema_version":  1,
+    "purpose":  "Machine-readable registry of AgentLogic's 11 orthogonal Lead Roles, universal Subagent functional roles, bound default skills, and dual-axis Subagent squad dispatch contract.",
+    "lead_roles":  [
+                       {
+                           "number":  1,
+                           "id":  "systems-architect-lead",
+                           "title":  "Principal Systems Architect & Full-Stack Lead",
+                           "domain":  "Backend/frontend systems architecture, APIs, databases, TDD, clean boundaries, and post-implementation refactoring.",
+                           "default_skills":  [
+                                                  "product-requirements-grilling",
+                                                  "ponytail",
+                                                  "tdd-guide",
+                                                  "code-simplifier"
+                                              ]
+                       },
+                       {
+                           "number":  2,
+                           "id":  "ui-ux-creative-director",
+                           "title":  "UI/UX Creative Design Director & Frontend Craftsman",
+                           "domain":  "Pure UI/UX design systems, typography/HSL psychology, text-to-image mockup gating, modern web APIs, and Chrome MV3 extensions.",
+                           "default_skills":  [
+                                                  "product-requirements-grilling",
+                                                  "ui-ux-pro-max",
+                                                  "taste-skill",
+                                                  "modern-web-guidance",
+                                                  "chrome-extensions",
+                                                  "multimodal-media-director"
+                                              ]
+                       },
+                       {
+                           "number":  3,
+                           "id":  "reverse-reconstruction-specialist",
+                           "title":  "Reverse Engineering & Clean-Room Reconstruction Specialist",
+                           "domain":  "Binary/bytecode/bundle triage, static symbol/struct recovery, control-flow deobfuscation, and clean-room source reconstruction.",
+                           "default_skills":  [
+                                                  "decompile-reconstruction",
+                                                  "code-simplifier"
+                                              ]
+                       },
+                       {
+                           "number":  4,
+                           "id":  "executive-office-consultant",
+                           "title":  "Management Consultant & Financial/Office Architect",
+                           "domain":  "Executive Word reports, dynamic-formula financial Excel models with tie-out QA, 16:9 action-title PPT decks, and PDF render verification.",
+                           "default_skills":  [
+                                                  "office-pro-suite",
+                                                  "diagram-flowchart-architect"
+                                              ]
+                       },
+                       {
+                           "number":  5,
+                           "id":  "multimodal-creative-director",
+                           "title":  "Multimodal Creative Director (Image / Video / Code Video / Music)",
+                           "domain":  "Art direction, cinematic video storyboards, Remotion/HyperFrames programmatic video, and structured BPM/Key/Metatag music arrangement.",
+                           "default_skills":  [
+                                                  "multimodal-media-director",
+                                                  "ui-ux-pro-max"
+                                              ]
+                       },
+                       {
+                           "number":  6,
+                           "id":  "master-novelist-showrunner",
+                           "title":  "Chief Showrunner & Long-Form Novel Architect",
+                           "domain":  "World-building, character arc engineering, scene beat sheets, anti-AI-cliche prose, and .story-bible/ continuity verification.",
+                           "default_skills":  [
+                                                  "novel-story-architect",
+                                                  "diagram-flowchart-architect"
+                                              ]
+                       },
+                       {
+                           "number":  7,
+                           "id":  "visual-systems-diagrammer",
+                           "title":  "Enterprise Architecture & Flowchart Cartographer",
+                           "domain":  "Swimlane business flows, C4 system architecture, ER schemas, and zero-overlap diagrams in .drawio, .excalidraw, and Mermaid.",
+                           "default_skills":  [
+                                                  "diagram-flowchart-architect"
+                                              ]
+                       },
+                       {
+                           "number":  8,
+                           "id":  "appsec-security-guardian",
+                           "title":  "AppSec & DevSecOps Security Guardian",
+                           "domain":  "Diff-scoped security reviews, STRIDE threat modeling, tri-state vulnerability verdicts, Git security ownership, and GitHub PR/CI triage.",
+                           "default_skills":  [
+                                                  "appsec-review",
+                                                  "gh-pr-ci-triage",
+                                                  "code-review"
+                                              ]
+                       },
+                       {
+                           "number":  9,
+                           "id":  "data-viz-architect",
+                           "title":  "Data Analytics & Visualization Architect",
+                           "domain":  "Truthful charts, KPI dashboards, geospatial maps, D3/Vega-Lite/Canvas2D engineering, URL state, and dual desktop/mobile analytics views.",
+                           "default_skills":  [
+                                                  "web-data-visualization",
+                                                  "office-pro-suite",
+                                                  "modern-web-guidance"
+                                              ]
+                       },
+                       {
+                           "number":  10,
+                           "id":  "game-graphics-lead",
+                           "title":  "Interactive Game & Creative Graphics Lead",
+                           "domain":  "2D Phaser/Canvas2D and 3D Three.js/R3F browser games, fixed-timestep loops, asset pipelines, painterly/rigged animations, and playtest QA.",
+                           "default_skills":  [
+                                                  "web-game-studio",
+                                                  "modern-web-guidance",
+                                                  "multimodal-media-director"
+                                              ]
+                       },
+                       {
+                           "number":  11,
+                           "id":  "screenplay-manga-video-director",
+                           "title":  "Screenwriter, Manga-Script & Short-Video Showrunner",
+                           "domain":  "Manga/webtoon panel scripts, 0-3s hook short-video & micro-drama shooting tables, and film/animation screenplays chained with visual/audio generation.",
+                           "default_skills":  [
+                                                  "screenplay-manga-director",
+                                                  "novel-story-architect",
+                                                  "multimodal-media-director"
+                                              ]
+                       }
+                   ],
+    "subagent_functional_roles":  [
+                                      {
+                                          "id":  "codebase-explorer",
+                                          "title":  "Read-Only Codebase & Reference Explorer",
+                                          "default_posture":  "explore",
+                                          "capability":  "read-only",
+                                          "purpose":  "Wide codebase search, call-chain tracing, and fact compression without mutating files or cluttering Lead context."
+                                      },
+                                      {
+                                          "id":  "independent-verifier",
+                                          "title":  "Independent QA, Test & Visual Referee",
+                                          "default_posture":  "verify",
+                                          "capability":  "execute",
+                                          "purpose":  "Runs tests, ?t= multi-frame captures, side-by-side Design QA, and security/continuity checks without editing production code."
+                                      }
+                                  ],
+    "subagent_dispatch_contract":  {
+                                       "complexity_tier_policy":  {
+                                                                      "simple_or_single_domain":  "lead_role_only",
+                                                                      "complex_or_cross_domain":  "lead_plus_supporting_subagent_squad"
+                                                                  },
+                                       "execution_postures":  [
+                                                                  "explore",
+                                                                  "plan",
+                                                                  "implement",
+                                                                  "review",
+                                                                  "verify"
+                                                              ],
+                                       "specialist_role_pool":  "lead_roles + subagent_functional_roles",
+                                       "guardrails":  {
+                                                          "max_depth":  1,
+                                                          "disjoint_write_ownership":  true,
+                                                          "propagate_bound_skills":  true,
+                                                          "lead_synthesizes_and_updates_maps":  true
+                                                      }
+                                   }
+}

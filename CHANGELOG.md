@@ -1,5 +1,28 @@
 # Changelog
 
+## V6.9.3 — 2026-11-24
+
+### Security & Reliability Fixes (Full Logic Audit)
+- **Eliminated 774 KB Inline Context Bomb on Claude Code & Codex (`P0-1`, `P0-4`)**:
+  - Removed 338 KB `contracts/skill-registry.json` from `minimal` and `core-enhanced` prompt bundles (retained on disk in `skill-enforcement/`) and compacted embedded JSON contracts in `scripts/build-profile.ps1`.
+  - Replaced full-bundle overwrites in `adapters/claude/install.ps1` and `adapters/codex/install.ps1` with shared bounded ~11 KB non-destructive executive hooks (`scripts/install-hook.ps1` using `<!-- BEGIN AGENTLOGIC HOOK --> ... <!-- END AGENTLOGIC HOOK -->` + `IndexOf`/`Substring` span replacement + automatic timestamped `.agentlogic-backup/` snapshots), preserving existing user rules across Antigravity, Claude Code, and Codex (~180K tokens saved on Turn 1).
+  - Updated `adapters/codex/install.ps1` to write double-quoted forward-slash TOML paths via a `$`-safe `MatchEvaluator`.
+- **Closed `skill-enforcement.ps1` State-Machine & Routing Bypass Gaps (`P0-2`, `P0-3`, `P1-4`)**:
+  - Removed stale hardcoded `[ValidateSet(...)]` on `-TaskClass` in `scripts/skill-enforcement.ps1` so all 21 V6.9.2+ `task_class` values validate directly against `contracts/skill-enforcement.json`.
+  - Updated `-Mode validate` to require all `matched_route_ids` to be `closed` by default (added explicit `-AllowIncomplete` for partial mid-task hash checks).
+  - Removed text-only skills (`ui-ux-pro-max`, `taste-skill`) from `ui-design` `conditional_host_skill_aliases` (and `ui-design` from their `route_ids` in `contracts/skill-registry.json`) so mockup generation cannot be bypassed when no image generator is available.
+  - Changed `web-platform-modernization` fallback to `allow_native_local_modern_web_guides` and closure evidence to `downloaded_media_visually_inspected_if_applicable`, and added all 26 routes to `scripts/validate-skill-routing.ps1`.
+- **Validator, Packaging & CI Hardening (`P1-1`, `P1-2`, `P1-3`, `P1-5`)**:
+  - Fixed misplaced closing brace in `scripts/check-logic-entry.js` (`checkOperationalPowerShellAsciiSafety`) so all `.ps1` files under `install.ps1`, `scripts/`, and `adapters/` are audited for UTF-8 BOM, non-ASCII CP1252 bytes, and `Get-Content -Encoding UTF8`.
+  - Added `contracts/role-personas.json` to `scripts/deploy-skill-enforcement.ps1` and `contracts/host-skill-capabilities.json`.
+  - Synchronized `dist/generic/` (via `adapters/generic/install.ps1` in `scripts/maintainer-check.ps1`) and `.agentlogic/skill-usage.json` with `CODE_MAP.md`, and enforced `validate-project-usage` inside `scripts/validate-package.ps1`.
+  - Hardened `scripts/maintainer-check.ps1` and `.github/workflows/validate-package.yml` to execute `audit-skill-duplicates.ps1 -FailOnCandidates`, `test-skill-registry.ps1`, `test-skill-workflow-graph.ps1`, `test-skill-enforcement.ps1`, and Node.js installer smoke checks.
+- **Cross-Platform & Skill Hygiene (`P2-1`–`P2-4`)**:
+  - Added zero-`pwsh` cross-platform Node.js installer `scripts/install.js` and automatic fallback inside `install.sh` for macOS/Linux users; replaced backslash joins in core enforcement/validation scripts with `[IO.Path]::Combine`.
+  - Quoted `role-persona-router` YAML `description:` (preventing `#1` comment truncation) and removed its escaping relative link; upgraded `scripts/eval-skills.ps1` to support YAML block scalars (`|` / `>`), flag unquoted `#` truncation, and reject relative links escaping the skill directory.
+  - Added explicit single-turn read-only Q&A scope note in Gate 1 hooks (`install-hook.ps1`, `build-profile.ps1`, `role-persona-router`) to eliminate unnecessary friction on trivial lookup questions.
+  - Registered `GoogleChrome/modern-web-guidance` in `versions/AgentLogic_V6_9_3.md` Section 4 and `00_README.md` (42 verified external references total), updated `README.md` to 3-layer progressive disclosure with evergreen `assets/agentlogic-hero.png`, and promoted the repository to **`V6.9.3`**.
+
 ## V6.9.2 — 2026-11-24
 
 ### Added
@@ -22,7 +45,7 @@
   - `office-pro-suite`: Added PDF (`.pdf`) visual-render QA (`pdftoppm` + `read_file`, Apache-2.0 `openai/skills` `pdf`) and clean-room Excel three-statement tie-out / PPT deck QC checklists.
   - `multimodal-media-director`: Added programmatic video composition guidance (`Remotion` MIT / `HyperFrames` Apache-2.0).
   - `modules/39_V6_6_TasteFrontendDesign.md` & `ui-ux-pro-max`: Added clean-room side-by-side Design QA & `P0`/`P1`/`P2` blocking remediation loop.
-- Upgraded `manifest.json`, `versions/AgentLogic_V6_9_2.md`, entry documents, contracts (`skill-registry.json`, `skill-routing.json`, `skill-enforcement.json`, `skill-workflow-graph.json`, `host-skill-capabilities.json`), and compiled `dist/` host bundles to **`V6.9.2`**.
+- Upgraded `manifest.json`, `versions/AgentLogic_V6_9_3.md`, entry documents, contracts (`skill-registry.json`, `skill-routing.json`, `skill-enforcement.json`, `skill-workflow-graph.json`, `host-skill-capabilities.json`), and compiled `dist/` host bundles to **`V6.9.2`**.
 
 ## V6.9.1 — 2026-11-11
 

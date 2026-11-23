@@ -18,11 +18,17 @@ $payload = @(
     'contracts/skill-enforcement.json',
     'contracts/skill-routing.json',
     'contracts/skill-registry.json',
-    'contracts/skill-workflow-graph.json'
+    'contracts/skill-workflow-graph.json',
+    'contracts/role-personas.json'
 )
 foreach ($relative in $payload) {
-    $source = Join-Path $RepoRoot $relative
-    $target = Join-Path $TargetPath $relative
+    $segments = $relative.Split('/')
+    $source = $RepoRoot
+    $target = $TargetPath
+    foreach ($seg in $segments) {
+        $source = Join-Path $source $seg
+        $target = Join-Path $target $seg
+    }
     if ($Verify) {
         if (-not (Test-Path -LiteralPath $target)) { throw "Skill enforcement payload is missing: $target" }
         if ((Get-FileHash -Algorithm SHA256 -LiteralPath $source).Hash -ne (Get-FileHash -Algorithm SHA256 -LiteralPath $target).Hash) { throw "Skill enforcement payload differs from source: $relative" }

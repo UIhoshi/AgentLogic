@@ -109,6 +109,9 @@ The V6.9.2 stable line integrates the following external source repositories:
 - **UI/UX Pro Max Skill (pure UI/UX design-system intelligence reference)**:
   - Source URL: `https://github.com/nextlevelbuilder/ui-ux-pro-max-skill`
   - Integration path: `skills/design/ui-ux-pro-max/SKILL.md`
+- **Modern Web Guidance (`GoogleChrome/modern-web-guidance` — Apache-2.0 209 web platform guides, `legacy-scan`, & Chrome Extension MV3 references)**:
+  - Source URL: `https://github.com/GoogleChrome/modern-web-guidance`
+  - Integration path: `skills/frontend/modern-web-guidance/SKILL.md`, `skills/frontend/chrome-extensions/SKILL.md`
 - **Google Cloud GenMedia Creative Studio (Imagen / Veo / Lyria multimodal reference)**:
   - Source URL: `https://github.com/GoogleCloudPlatform/vertex-ai-creative-studio`
   - Integration path: `skills/creative/multimodal-media-director/SKILL.md`

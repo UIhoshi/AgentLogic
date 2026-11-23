@@ -12,7 +12,6 @@ param(
     [string]$RepoRoot,
     [string]$TaskStatePath,
     [string]$TaskId,
-    [ValidateSet('read_only','documentation','trivial_fix','feature','major_feature','refactor','decompile_or_reconstruct','office_document','multimodal_media','novel_writing','diagram_flowchart','code_audit','security_review','install','package','release')]
     [string]$TaskClass,
     [ValidateSet('isolated','multi_file','architectural')]
     [string]$ChangeScope,
@@ -26,7 +25,8 @@ param(
     [string]$RouteId,
     [string[]]$Evidence = @(),
     [string]$RemoteTarget,
-    [string]$ProjectRoot
+    [string]$ProjectRoot,
+    [switch]$AllowIncomplete
 )
 
 $ErrorActionPreference = 'Stop'
@@ -157,14 +157,14 @@ function Get-RequiredClosureEvidence([object]$Route, [object]$Classification) {
     return @($required | Sort-Object -Unique)
 }
 
-$script:routing = Read-Json -Path (Join-Path $RepoRoot 'contracts\skill-routing.json') -Label 'skill routing contract'
-$contract = Read-Json -Path (Join-Path $RepoRoot 'contracts\skill-enforcement.json') -Label 'skill enforcement contract'
-$graph = Read-Json -Path (Join-Path $RepoRoot 'contracts\skill-workflow-graph.json') -Label 'skill workflow graph contract'
+$script:routing = Read-Json -Path ([IO.Path]::Combine($RepoRoot, 'contracts', 'skill-routing.json')) -Label 'skill routing contract'
+$contract = Read-Json -Path ([IO.Path]::Combine($RepoRoot, 'contracts', 'skill-enforcement.json')) -Label 'skill enforcement contract'
+$graph = Read-Json -Path ([IO.Path]::Combine($RepoRoot, 'contracts', 'skill-workflow-graph.json')) -Label 'skill workflow graph contract'
 if ($script:routing.schema_version -ne 3 -or $contract.schema_version -ne 1 -or $graph.schema_version -ne 1) { throw 'Unsupported enforcement contract versions.' }
 
 if ($Mode -eq 'validate-project-usage') {
     if (-not $ProjectRoot) { throw 'validate-project-usage requires -ProjectRoot.' }
-    $usagePath = Join-Path $ProjectRoot '.agentlogic\skill-usage.json'
+    $usagePath = [IO.Path]::Combine($ProjectRoot, '.agentlogic', 'skill-usage.json')
     $codeMapPath = Join-Path $ProjectRoot 'CODE_MAP.md'
     $usage = Read-Json -Path $usagePath -Label 'project skill usage'
     foreach ($field in @($contract.project_skill_usage.required_fields)) { if ($null -eq $usage.$field) { throw "Project skill usage is missing '$field'." } }
@@ -210,6 +210,12 @@ $state = Read-Json -Path $TaskStatePath -Label 'skill execution state'
 Assert-TaskState -State $state -Routing $script:routing -Contract $contract -Graph $graph
 if ($Mode -eq 'validate') {
     foreach ($record in @($state.routes | Where-Object state -eq 'closed')) { Assert-ArtifactIntegrity -RouteRecord $record -Route (Get-Route -Routing $script:routing -Id $record.route_id) }
+    if (-not $AllowIncomplete) {
+        $unclosed = @($state.routes | Where-Object { $_.state -ne 'closed' } | ForEach-Object { "$($_.route_id) ($($_.state))" })
+        if ($unclosed.Count -gt 0 -or @($state.routes).Count -ne @($state.matched_route_ids).Count) {
+            throw "Task state '$($state.task_id)' has unclosed routes: $($unclosed -join ', '). Pass -AllowIncomplete to validate only in-progress closed artifacts."
+        }
+    }
     Write-Host "Skill enforcement task state validation passed: $($state.task_id)"
     exit 0
 }

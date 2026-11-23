@@ -1,6 +1,6 @@
 # V6.9 Role Persona Routing, Dual-Axis Subagent Squads, Skill-First Reflex & Multimodal Creative Governance
 
-Status: **Current Stable V6.9.2 Line**.
+Status: **Current Stable V6.9.3 Line**.
 
 This module defines the V6.9 cross-host execution rules for **Autonomous Startup Role Recommendation (`role-persona-router`, 11 orthogonal Lead Roles `[1]`–`[11]`)**, **Dual-Axis Subagent Squad Assignment (`contracts/role-personas.json`)**, **Habitual Skill-First Reflex ("Encounter -> Auto-Use Habit")**, **Pure UI/UX Design + Mandatory Text-to-Image Coupling (`ui-ux-pro-max`)**, **Multimodal & Programmatic Media (`multimodal-media-director`)**, **Office & PDF Standardization (`office-pro-suite`)**, **Long-Form Novel & Story Engineering (`novel-story-architect`)**, **Manga, Short-Video & Screenplay Direction (`screenplay-manga-director`)**, **Diagramming (`diagram-flowchart-architect`)**, **Application Security (`appsec-review`)**, **Web Data Visualization (`web-data-visualization`)**, **Browser Game Engineering (`web-game-studio`)**, **GitHub PR & CI Triage (`gh-pr-ci-triage`)**, and **Skill Evaluation (`skill-evaluator`)**.
 

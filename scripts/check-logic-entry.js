@@ -45,6 +45,9 @@ const OPERATIONAL_ENTRY_FILES = [
   'scripts/test-skill-workflow-graph.ps1',
   'scripts/validate-requirements-brief.ps1',
   'scripts/deploy-first-party-skill.ps1',
+  'scripts/install-hook.ps1',
+  'scripts/install.js',
+  'scripts/audit-skill-duplicates.ps1',
   'scripts/eval-skills.ps1',
   'scripts/build-codex-plugin.ps1',
   'scripts/release-version.ps1',
@@ -268,11 +271,12 @@ function checkActiveRelativeLinks() {
     return;
   }
 
-  const files = parsed.profiles?.[parsed.default_profile]?.files || [];
+  const profileFiles = parsed.profiles?.[parsed.default_profile]?.files || [];
+  const markdownFiles = Array.from(new Set([...profileFiles, 'README.md', '00_README.md']));
   const markdownLink = /\[[^\]]*\]\(([^)]+)\)/g;
   let checked = 0;
 
-  for (const relPath of files) {
+  for (const relPath of markdownFiles) {
     if (!relPath.endsWith('.md')) continue;
     const content = readFileSafe(relPath);
     if (content == null) continue;
@@ -428,13 +432,35 @@ function checkCodeMapReadability() {
   ok(`${relPath} is valid UTF-8 and contains no disallowed control characters.`);
 }
 
+function collectOperationalPs1Files() {
+  const results = new Set(['install.ps1']);
+  const walk = (dirRel) => {
+    const abs = path.join(ROOT, dirRel);
+    if (!fs.existsSync(abs)) return;
+    for (const entry of fs.readdirSync(abs, { withFileTypes: true })) {
+      const childRel = path.posix.join(dirRel.replace(/\\/g, '/'), entry.name);
+      if (entry.isDirectory()) {
+        walk(childRel);
+      } else if (entry.isFile() && entry.name.endsWith('.ps1')) {
+        results.add(childRel);
+      }
+    }
+  };
+  walk('scripts');
+  walk('adapters');
+  return Array.from(results).sort();
+}
+
 function checkOperationalPowerShellAsciiSafety() {
-  for (const relPath of OPERATIONAL_ENTRY_FILES) {
-    if (!relPath.endsWith('.ps1')) continue;
+  const ps1Files = collectOperationalPs1Files();
+  for (const relPath of ps1Files) {
     const fullPath = path.join(ROOT, relPath);
     if (!fs.existsSync(fullPath)) continue;
     const buf = fs.readFileSync(fullPath);
     const hasBom = buf.length >= 3 && buf[0] === 0xef && buf[1] === 0xbb && buf[2] === 0xbf;
+    if (hasBom) {
+      fail(`PowerShell script '${relPath}' contains a UTF-8 BOM (operational .ps1 files must be BOM-free pure ASCII).`);
+    }
     const startIdx = hasBom ? 3 : 0;
     let nonAsciiByte = -1;
     let nonAsciiOffset = -1;
@@ -445,19 +471,19 @@ function checkOperationalPowerShellAsciiSafety() {
         break;
       }
     }
-    if (nonAsciiByte !== -1 && !hasBom) {
+    if (nonAsciiByte !== -1) {
       fail(
-        `PowerShell entry script '${relPath}' contains non-ASCII byte 0x${nonAsciiByte.toString(16)} at offset ${nonAsciiOffset} without UTF-8 BOM (breaks Windows PowerShell 5.1 under CP1252). Use pure ASCII with \\uXXXX escapes.`
+        `PowerShell script '${relPath}' contains non-ASCII byte 0x${nonAsciiByte.toString(16)} at offset ${nonAsciiOffset} (breaks Windows PowerShell 5.1 under CP1252). Use pure ASCII with \\uXXXX escapes.`
       );
-    const lines = buf.toString('utf8').split(/\r?\n/);
+    }
+    const lines = buf.toString('utf8', startIdx).split(/\r?\n/);
     lines.forEach((line, idx) => {
       if (/\bGet-Content\b/.test(line) && !/-Encoding\s+UTF8/i.test(line)) {
         fail(`PowerShell script '${relPath}:${idx + 1}' calls Get-Content without '-Encoding UTF8' (causes CP936/CP1252 mojibake).`);
       }
     });
-    }
   }
-  ok('All operational PowerShell entry scripts are CP1252 / Windows PowerShell 5.1 encoding-safe.');
+  ok(`All ${ps1Files.length} operational PowerShell scripts are BOM-free, pure-ASCII CP1252-safe, and UTF-8 safe on Get-Content.`);
 }
 
 function main() {

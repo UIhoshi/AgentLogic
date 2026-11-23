@@ -43,6 +43,11 @@ Never feed raw, unstructured sentences to a video model. First produce a **Shot-
 1. **If Video Generation MCP/API/CLI is available** (e.g., Google `Veo` via `mcp-genmedia`, `MiniMax-MCP` Hailuo Video, Kling/Runway/Wan via `eachlabs` or local script): Execute generation using the structured shot prompt and save the `.mp4` output + keyframe reference images.
 2. **Keyframe-First Fallback**: When direct video generation API credentials are not yet configured on the host, automatically generate **First-Frame & Keyframe Concept Stills** via `image-generator` AND output the copy-ready **Veo / Kling / Runway / Sora Master Prompt Pack** in `.specify/<task>/video-storyboard.md`, clearly disclosing whether live `.mp4` rendering or keyframe+storyboard synthesis was used.
 
+### B.3 Programmatic Video & Motion Composition (`Remotion` / `HyperFrames`)
+When the user asks for **code-driven video generation**, animated SaaS product demos, kinetic typography reels, data-driven video reports, or website-to-video motion compositions:
+1. **React Programmatic Video (`Remotion` — `MIT`)**: Use deterministic frame functions (`useCurrentFrame()`, `spring()`, `interpolate()` — never CSS transitions or `requestAnimationFrame` which drift during headless render), align audio/caption timings explicitly, and verify rendered frames via `npx remotion still` / `npx remotion render` before delivery.
+2. **HTML + GSAP Composition (`HyperFrames` — `Apache-2.0`)**: Use modular HTML/CSS/GSAP timeline compositions when targeting lightweight web-native motion reels or website-to-video captures, verifying keyframe timestamps (`?t=`) visually before final video render.
+
 ---
 
 ## 4. Mode C: Text-to-Music & Audio Arrangement Director (`text_to_music`)

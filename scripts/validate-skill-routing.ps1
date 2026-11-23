@@ -8,12 +8,12 @@
 
 param([string]$RepoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path)
 $ErrorActionPreference = 'Stop'
-$routingPath = Join-Path $RepoRoot 'contracts\skill-routing.json'
-$registryPath = Join-Path $RepoRoot 'contracts\skill-registry.json'
-$enforcementPath = Join-Path $RepoRoot 'contracts\skill-enforcement.json'
-$workflowGraphPath = Join-Path $RepoRoot 'contracts\skill-workflow-graph.json'
-$modulePath = Join-Path $RepoRoot 'modules\49_V6_8_AutonomousSkillEnforcement.md'
-$hostCapabilitiesPath = Join-Path $RepoRoot 'contracts\host-skill-capabilities.json'
+$routingPath = [IO.Path]::Combine($RepoRoot, 'contracts', 'skill-routing.json')
+$registryPath = [IO.Path]::Combine($RepoRoot, 'contracts', 'skill-registry.json')
+$enforcementPath = [IO.Path]::Combine($RepoRoot, 'contracts', 'skill-enforcement.json')
+$workflowGraphPath = [IO.Path]::Combine($RepoRoot, 'contracts', 'skill-workflow-graph.json')
+$modulePath = [IO.Path]::Combine($RepoRoot, 'modules', '49_V6_8_AutonomousSkillEnforcement.md')
+$hostCapabilitiesPath = [IO.Path]::Combine($RepoRoot, 'contracts', 'host-skill-capabilities.json')
 foreach ($path in @($routingPath,$registryPath,$enforcementPath,$workflowGraphPath,$modulePath,$hostCapabilitiesPath)) { if (-not (Test-Path $path)) { throw "Missing autonomous enforcement asset: $path" } }
 try { $routing = Get-Content -Raw -Encoding UTF8 $routingPath | ConvertFrom-Json } catch { throw "Invalid skill routing JSON: $($_.Exception.Message)" }
 try { $enforcement = Get-Content -Raw -Encoding UTF8 $enforcementPath | ConvertFrom-Json } catch { throw "Invalid skill enforcement JSON: $($_.Exception.Message)" }
@@ -22,7 +22,7 @@ if ($routing.schema_version -ne 3) { throw 'Unsupported skill routing schema ver
 if ($enforcement.schema_version -ne 1) { throw 'Unsupported skill enforcement schema version; expected 1.' }
 if ($hostCapabilities.schema_version -ne 2 -or $hostCapabilities.first_party_skill -ne 'product-requirements-grilling') { throw 'Unsupported host skill capability schema version; expected 2.' }
 if ($routing.enforcement_contract -ne 'contracts/skill-enforcement.json') { throw 'Skill routing must reference the enforcement contract.' }
-$required = @('role-selection','requirements-grilling','design-direction','ui-design','ui-implementation','multimodal-media','office-document','novel-writing','screenplay-manga-video','diagram-flowchart','decompile-reconstruction','data-visualization','web-game-development','gh-pr-ci-triage','skill-evaluation','test-design','code-refinement','code-review','handover','security-review','extension-security-review','browser-verification','visual-verification','package-release')
+$required = @('role-selection','requirements-grilling','design-direction','ui-design','ui-implementation','web-platform-modernization','chrome-extension-development','multimodal-media','office-document','novel-writing','screenplay-manga-video','diagram-flowchart','decompile-reconstruction','data-visualization','web-game-development','gh-pr-ci-triage','skill-evaluation','test-design','code-refinement','code-review','handover','security-review','extension-security-review','browser-verification','visual-verification','package-release')
 $seen = @{}
 $orders = @{}
 foreach ($route in @($routing.routes)) {
@@ -67,9 +67,9 @@ foreach ($hostName in @('codex','claude','antigravity','generic')) {
     if (@($hostEntry.enforcement.required_files) -notcontains 'contracts/skill-workflow-graph.json') { throw "Host '$hostName' enforcement payload must include the skill workflow graph contract." }
 }
 
-& powershell -NoProfile -ExecutionPolicy Bypass -File (Join-Path $RepoRoot 'scripts\validate-skill-registry.ps1') -RepoRoot $RepoRoot
+& powershell -NoProfile -ExecutionPolicy Bypass -File ([IO.Path]::Combine($RepoRoot, 'scripts', 'validate-skill-registry.ps1')) -RepoRoot $RepoRoot
 if ($LASTEXITCODE -ne 0) { throw 'Skill registry validation failed.' }
-& powershell -NoProfile -ExecutionPolicy Bypass -File (Join-Path $RepoRoot 'scripts\validate-skill-workflow-graph.ps1') -RepoRoot $RepoRoot
+& powershell -NoProfile -ExecutionPolicy Bypass -File ([IO.Path]::Combine($RepoRoot, 'scripts', 'validate-skill-workflow-graph.ps1')) -RepoRoot $RepoRoot
 if ($LASTEXITCODE -ne 0) { throw 'Skill workflow graph validation failed.' }
 $module = Get-Content -Raw -Encoding UTF8 $modulePath
 foreach ($anchor in @('Strict missing-capability policy','Software candidate reporting','invocation evidence')) { if ($module -notmatch [regex]::Escape($anchor)) { throw "Enforcement module missing anchor: $anchor" } }

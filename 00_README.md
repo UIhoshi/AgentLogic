@@ -20,11 +20,11 @@ or begin implementation before the logic-entry loop above has been completed.
 > `README.md` is the canonical English repository README and entry documentation. This file is retained as a legacy/reference document and is not part of the formal logic-entry chain.
 
 
-# 🌌 AgentLogic: 智能体级本地自进化规则引擎 (V6.9.2)
+# 🌌 AgentLogic: 智能体级本地自进化规则引擎 (V6.9.3)
 
 [![Agentic Code](https://img.shields.io/badge/Agent-Autonomous-blueviolet?style=flat-square)](https://github.com/UIhoshi/AgentLogic)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/Version-V6.9.2_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_9_2.md)
+[![Version](https://img.shields.io/badge/Version-V6.9.3_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_9_3.md)
 
 AgentLogic 是一套专为本地 AI 编码宿主（**Antigravity / Gemini**、**Claude Code**、**OpenAI Codex / GPT**）设计的**分层自进化规则引擎**。它将多轮会话规范、**11 大正交主控角色与双轴 Subagent 协同小队门（Turn 1 Role Gate）**、**纯前端 UI/UX 设计与文生图强制联动门**、**Skill-First 条件反射自动触发协议与 17 大第一方专业领域技能**、安全沙箱审计及项目知识同步集成打包，作为 AI 智能体的“主运行心智”。
 
@@ -42,7 +42,7 @@ AgentLogic 是一套专为本地 AI 编码宿主（**Antigravity / Gemini**、**
 | :--- | :--- | :--- |
 | **1. 环境诊断** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\doctor.ps1` | 检测仓库健康度，读取元数据，生成推荐安装指令 |
 | **2. 一键安装** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost antigravity` | 构建并部署宿主规则包及 17 个第一方自动触发 Skill（可将 `antigravity` 替换为 `claude` 或 `codex`） |
-| **3. 本地验证** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\maintainer-check.ps1` | 运行 164 个注册技能、26 条自动路由、11 大角色契约、41 项外部引用、Token 预算及四端 + Codex 插件包完整性校验 |
+| **3. 本地验证** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\maintainer-check.ps1` | 运行 164 个注册技能、26 条自动路由、11 大角色契约、42 项外部引用、Token 预算、回归测试及四端 + Codex 插件包完整性校验 |
 
 ---
 
@@ -150,12 +150,13 @@ AgentLogic 的演进离不开开源社区的启发。我们在设计中深度参
 | **ast-grep** | [ast-grep/ast-grep](https://github.com/ast-grep/ast-grep) | 提供基于 AST 语法树的精准跨文件代码搜索与等价改写规范 |
 | **Superpowers** | [obra/superpowers](https://github.com/obra/superpowers) | 建立由测试护航的 Red-Green-Refactor 自动化代码精炼闭环 |
 | **UI/UX Pro Max Skill** | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | 提供纯前端设计规范智库（行业配色、字体配对、网格版式），并与文生图预览门强制联动 |
+| **Modern Web Guidance** | [GoogleChrome/modern-web-guidance](https://github.com/GoogleChrome/modern-web-guidance) | 提供 209 条现代 Web 平台指南、Baseline 兼容性、CWV/无障碍规范、`legacy-scan` 与 Chrome 扩展 MV3 最佳实践 (`Apache-2.0`) |
 | **Google Cloud GenMedia Creative Studio** | [GoogleCloudPlatform/vertex-ai-creative-studio](https://github.com/GoogleCloudPlatform/vertex-ai-creative-studio) | 启发文生图 (Imagen)、文生视频 (Veo) 与文生音乐 (Lyria) 多模态导演工作流 |
 | **EachLabs Multimodal Skills** | [eachlabs/skills](https://github.com/eachlabs/skills) | 提供跨模型文生图、视频分镜与音乐编排调用参考 |
 | **MiniMax MCP** | [MiniMax-AI/MiniMax-MCP](https://github.com/MiniMax-AI/MiniMax-MCP) | 提供海螺视频与 MiniMax 音乐编曲 MCP 生成对照 |
 | **Claude Image Gen** | [guinacio/claude-image-gen](https://github.com/guinacio/claude-image-gen) | 提供参考图垫图、画幅比与局部重绘控制规范 |
 | **Anthropic Official Document Skills** | [anthropics/skills](https://github.com/anthropics/skills) | 确立咨询级 Word (.docx)、投行级动态公式 Excel (.xlsx) 与结论先行 PPT (.pptx) 标准 |
-| **The Agency (agency-agents)** | [msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents) | 启发开局角色自主推荐门 (`role-persona-router`) 的 7 大专家角色画像 |
+| **The Agency (agency-agents)** | [msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents) | 启发开局角色自主推荐门 (`role-persona-router`) 的 11 大正交专家角色画像 |
 | **BMAD-METHOD** | [bmad-code-org/BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) | 启发主责角色 + 协同小队的多角色契约交接机制 |
 | **Oh-Story ClaudeCode** | [zenstory-ai/oh-story-claudecode](https://github.com/zenstory-ai/oh-story-claudecode) | 启发网文黄金三章、爽点节奏控制与强力去 AI 腔调过滤规则 |
 | **Story Skills** | [danjdewhurst/story-skills](https://github.com/danjdewhurst/story-skills) | 建立 `.story-bible/` 设定集防吃书连续性编译器与四点校对机制 |
@@ -177,7 +178,7 @@ AgentLogic 的演进离不开开源社区的启发。我们在设计中深度参
 
 1. **逻辑包纯粹性**：本仓库是规则元数据，不能写入具体的业务项目代码。
 2. **防盲目执行**：AI 助理在进行复杂重构或方案设计前，必须在 `.specify/` 下完成 `spec.md` (规格) 和 `plan.md` (技术规划)。
-3. **版本隔离**：修改核心机制时，应优先回写 `versions/AgentLogic_V6_9_2.md`，然后重新运行 `build-profile.ps1` 进行编译部署。
+3. **版本隔离**：修改核心机制时，应优先回写 `versions/AgentLogic_V6_9_3.md`，然后重新运行 `build-profile.ps1` 进行编译部署。
 
 > [!IMPORTANT]
 > **逻辑版本升级必查红线清单（防漏改与防历史踩坑）**：
@@ -193,5 +194,5 @@ AgentLogic 的演进离不开开源社区的启发。我们在设计中深度参
 ## 🛡️ 安全合规、净室重构与第三方开源致谢声明
 
 1. **合法授权与净室重构声明 (Authorized Security & Clean-Room Use Only)**：本仓库包含的二进制反编译与净室源码重构规则（`decompile-reconstruction`）以及安全审计技能路由包（`skills/reverse-skill/`）**仅限用于合法的互操作性净室研究（Clean-Room Reconstruction）、恶意样本防御分析、CTF 竞赛、安全教学及经明确书面授权的安全测试**。严禁用于任何未经授权的逆向破解或非法入侵行为。
-2. **开源致谢与许可证声明 (Third-Party Open-Source Attribution)**：AgentLogic 作为跨宿主元治理框架，致谢并吸收了上表列出的 41 个优秀开源项目的理念与可移植技能结构。各内嵌子模块（如 `spec-kit`、`taste-skill`、`agent-browser`、`reverse-skill`、`modern-web-guidance` 等）均保留其原有的 `MIT` / `Apache-2.0` 开源许可证文件与版权归属。
+2. **开源致谢与许可证声明 (Third-Party Open-Source Attribution)**：AgentLogic 作为跨宿主元治理框架，致谢并吸收了上表列出的 42 个优秀开源项目的理念与可移植技能结构。各内嵌子模块（如 `spec-kit`、`taste-skill`、`agent-browser`、`reverse-skill`、`modern-web-guidance` 等）均保留其原有的 `MIT` / `Apache-2.0` 开源许可证文件与版权归属。
 3. **纯规则与契约边界**：本仓库仅提供纯文本 Markdown 规则、JSON 路由契约与自动化校验脚本，不包含任何商业闭源软件的源码或专有二进制文件。

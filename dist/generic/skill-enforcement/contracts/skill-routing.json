@@ -20,7 +20,7 @@
                        "conditional_host_skill_aliases":  [
 
                                                           ],
-                       "selection_rule":  "At the start of every new project or non-continuation task, automatically use role-persona-router to recommend the best-fit lead role (and supporting squad) alongside the compact 7-role selection menu, and bind the confirmed persona for the task lifecycle.",
+                       "selection_rule":  "At the start of every new project or non-continuation task, automatically use role-persona-router (backed by contracts/role-personas.json) to recommend the #1 best-fit Lead Role (plus an optional Supporting Subagent Squad for complex tasks) alongside the 11-role orthogonal menu, and assign dual-axis sub-roles + bound skills whenever spawning subagents.",
                        "order":  5,
                        "requires_routes":  [
 
@@ -96,9 +96,7 @@
                        "conditional_host_skill_aliases":  [
                                                               "multimodal-media-director",
                                                               "image-generator",
-                                                              "nano-banana-pro",
-                                                              "ui-ux-pro-max",
-                                                              "taste-skill"
+                                                              "nano-banana-pro"
                                                           ],
                        "selection_rule":  "Combine the pure design specification from ui-ux-pro-max with imagegen (or Antigravity\u0027s built-in image-generator subagent, multimodal-media-director, or nano-banana-pro) to generate the visual UI mockup before any UI code is written. Do not use a frontend implementation skill as mockup evidence.",
                        "order":  20,
@@ -175,7 +173,7 @@
                                                               "xlsx",
                                                               "pptx"
                                                           ],
-                       "selection_rule":  "Automatically use office-pro-suite whenever creating, editing, formatting, or auditing Word (.docx), Excel (.xlsx), or PowerPoint (.pptx) files. Enforce named typography styles and three-line/zebra tables in Word, live dynamic formulas and institutional blue/black/green color coding in Excel, and 16:9 action-title visual variety in PowerPoint.",
+                       "selection_rule":  "Automatically use office-pro-suite whenever creating, editing, formatting, or auditing Word (.docx), Excel (.xlsx), PowerPoint (.pptx), or PDF (.pdf) files. Enforce named typography styles and three-line/zebra tables in Word, live dynamic formulas, institutional blue/black/green color coding, and three-statement tie-out QA in Excel, 16:9 action-title visual variety in PowerPoint, and rendered PNG page visual inspection for PDF.",
                        "order":  24,
                        "requires_routes":  [
 
@@ -315,13 +313,14 @@
                                                 "trust_decision"
                                             ],
                        "primary_host_skill_aliases":  [
+                                                          "appsec-review",
                                                           "security-best-practices"
                                                       ],
                        "conditional_host_skill_aliases":  [
                                                               "senior-security",
                                                               "senior-secops"
                                                           ],
-                       "selection_rule":  "Use security-best-practices for supported source-code reviews. Use senior-security for threat modeling or secure architecture and senior-secops for CVE/compliance/infrastructure operations. A conditional specialty does not waive the primary review when the primary applies.",
+                       "selection_rule":  "Use appsec-review (or security-best-practices) for diff-scoped security reviews, threat modeling, security ownership analysis, and SECURITY.md boundary resolution with tri-state static verdicts (confirmed / not_actionable / needs_review) and Self-Refute First rigor. Use senior-security for threat modeling or secure architecture and senior-secops for CVE/compliance/infrastructure operations. A conditional specialty does not waive the primary review when the primary applies.",
                        "order":  71,
                        "requires_routes":  [
 
@@ -594,18 +593,21 @@
                                     ],
                        "capability":  "frontend_ui_implementation",
                        "primary_host_skill_aliases":  [
-                                                          "senior-frontend"
+                                                          "senior-frontend",
+                                                          "modern-web-guidance"
                                                       ],
                        "conditional_host_skill_aliases":  [
-                                                              "figma-implement-design"
+                                                              "figma-implement-design",
+                                                              "chrome-extensions"
                                                           ],
-                       "selection_rule":  "Use senior-frontend only after requirements and mockup gates close. Use figma-implement-design when an approved Figma node is the implementation source; it does not replace requirements grilling or mockup approval.",
+                       "selection_rule":  "Use senior-frontend and modern-web-guidance only after requirements and mockup gates close. Always consult modern-web-guidance (via npx or local guides/) for HTML/CSS/DOM/client-side JS to enforce Baseline browser compatibility, native web platform APIs, CWV performance, and accessibility. Use figma-implement-design when an approved Figma node is the implementation source, and chrome-extensions when building/publishing Manifest V3 browser extensions.",
                        "fallback":  "block_before_ui_code",
                        "closure_evidence":  [
                                                 "approved_requirements_brief",
                                                 "approved_mockup_or_explicit_opt_out",
                                                 "implementation_validation",
-                                                "visual_verification_plan"
+                                                "visual_verification_plan",
+                                                "real_world_reference_grounding_if_applicable"
                                             ],
                        "order":  30,
                        "requires_routes":  [
@@ -731,6 +733,258 @@
                        "exemption_policy":  "none",
                        "artifact_requirements":  [
                                                      "handover_record"
+                                                 ]
+                   },
+                   {
+                       "id":  "web-platform-modernization",
+                       "triggers":  [
+                                        "frontend_fix_or_modernization"
+                                    ],
+                       "capability":  "web_platform_and_legacy_modernization",
+                       "primary_host_skill_aliases":  [
+                                                          "modern-web-guidance"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "taste-skill",
+                                                              "senior-frontend"
+                                                          ],
+                       "selection_rule":  "Automatically use modern-web-guidance (via npx or local guides/) for any HTML/CSS/DOM/client-side JS fix, CWV/a11y improvement, or legacy-scan modernization without requiring full net-new UI mockup approval. Enforce Real-World Visual \u0026 Motion Reference Grounding (actual downloaded photos/GIFs inspected via read_file, never text-only search summaries) for any real-world SVG/Canvas/animation.",
+                       "fallback":  "allow_native_local_modern_web_guides",
+                       "closure_evidence":  [
+                                                "modern_web_guidance_checked",
+                                                "real_world_reference_grounding_if_applicable",
+                                                "downloaded_media_visually_inspected_if_applicable",
+                                                "baseline_fallback_verified"
+                                            ],
+                       "order":  32,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "frontend_code_without_guidance"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+                                                     "implementation_validation_record"
+                                                 ]
+                   },
+                   {
+                       "id":  "chrome-extension-development",
+                       "triggers":  [
+                                        "chrome_extension"
+                                    ],
+                       "capability":  "chrome_extension_mv3_delivery",
+                       "primary_host_skill_aliases":  [
+                                                          "chrome-extensions"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "modern-web-guidance"
+                                                          ],
+                       "selection_rule":  "Automatically use chrome-extensions when building, debugging, or publishing Manifest V3 Chrome/browser extensions, service workers, side panels, content scripts, or Chrome Web Store listings.",
+                       "fallback":  "block_broken_mv3_patterns",
+                       "closure_evidence":  [
+                                                "mv3_manifest_and_csp_verified",
+                                                "extension_permissions_justified"
+                                            ],
+                       "order":  33,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "extension_build_without_mv3_checks"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+                                                     "implementation_validation_record"
+                                                 ]
+                   },
+                   {
+                       "id":  "data-visualization",
+                       "triggers":  [
+                                        "data_visualization"
+                                    ],
+                       "capability":  "web_data_visualization",
+                       "primary_host_skill_aliases":  [
+                                                          "web-data-visualization"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "ui-ux-pro-max",
+                                                              "modern-web-guidance"
+                                                          ],
+                       "selection_rule":  "Automatically use web-data-visualization whenever designing, building, critiquing, testing, or exporting charts, KPI dashboards, maps, Gantt timelines, statistical plots, or real-time telemetry visuals. Enforce evidence-bearing marks, dual desktop/mobile portrait views, URL state, and accessible colorblind-safe encodings.",
+                       "fallback":  "allow_native_data_viz_with_disclosure",
+                       "closure_evidence":  [
+                                                "analytical_encoding_and_dual_viewport_check",
+                                                "verified_visualization_artifact"
+                                            ],
+                       "order":  34,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "verified_data_visualization"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+
+                                                 ]
+                   },
+                   {
+                       "id":  "web-game-development",
+                       "triggers":  [
+                                        "web_game"
+                                    ],
+                       "capability":  "browser_game_engineering",
+                       "primary_host_skill_aliases":  [
+                                                          "web-game-studio"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "modern-web-guidance"
+                                                          ],
+                       "selection_rule":  "Automatically use web-game-studio whenever designing, prototyping, building, or playtesting 2D/3D browser games (Phaser, Canvas2D, Three.js, React Three Fiber). Enforce modular core/entities/ui separation, real-world visual reference grounding when applicable, and deterministic browser playtest verification.",
+                       "fallback":  "allow_native_game_engineering_with_disclosure",
+                       "closure_evidence":  [
+                                                "core_loop_and_asset_architecture_check",
+                                                "browser_playtest_verification"
+                                            ],
+                       "order":  36,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "verified_web_game"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+
+                                                 ]
+                   },
+                   {
+                       "id":  "gh-pr-ci-triage",
+                       "triggers":  [
+                                        "gh_ci_or_pr_triage"
+                                    ],
+                       "capability":  "github_pr_and_ci_triage",
+                       "primary_host_skill_aliases":  [
+                                                          "gh-pr-ci-triage",
+                                                          "gh-fix-ci",
+                                                          "gh-address-comments"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "code-review"
+                                                          ],
+                       "selection_rule":  "Automatically use gh-pr-ci-triage when debugging failing GitHub Actions PR checks or addressing PR review/issue comments via gh CLI. Verify gh auth status first, report external CI providers honestly without inventing logs, and draft a fix plan before applying bounded edits.",
+                       "fallback":  "allow_native_gh_cli_triage_with_disclosure",
+                       "closure_evidence":  [
+                                                "gh_checks_or_comments_inspected",
+                                                "verified_ci_or_pr_fix_plan"
+                                            ],
+                       "order":  73,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "verified_gh_pr_ci_triage"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+
+                                                 ]
+                   },
+                   {
+                       "id":  "skill-evaluation",
+                       "triggers":  [
+                                        "skill_evaluation"
+                                    ],
+                       "capability":  "skill_and_plugin_evaluation",
+                       "primary_host_skill_aliases":  [
+                                                          "skill-evaluator"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+
+                                                          ],
+                       "selection_rule":  "Automatically use skill-evaluator when auditing, benchmarking, scoring, or refactoring SKILL.md files or plugin packages for frontmatter validity, trigger precision, progressive disclosure, link integrity, and token budget efficiency.",
+                       "fallback":  "allow_native_skill_eval_with_disclosure",
+                       "closure_evidence":  [
+                                                "skill_structure_and_token_budget_audit",
+                                                "prioritized_fix_first_report"
+                                            ],
+                       "order":  76,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "verified_skill_evaluation"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+
+                                                 ]
+                   },
+                   {
+                       "id":  "screenplay-manga-video",
+                       "triggers":  [
+                                        "screenplay_manga_video"
+                                    ],
+                       "capability":  "screenplay_manga_and_short_video_scripting",
+                       "primary_host_skill_aliases":  [
+                                                          "screenplay-manga-director"
+                                                      ],
+                       "conditional_host_skill_aliases":  [
+                                                              "novel-story-architect",
+                                                              "multimodal-media-director"
+                                                          ],
+                       "selection_rule":  "Automatically use screenplay-manga-director when creating, adapting, or polishing manga/webtoon panel scripts, 0-3s hook short-video & micro-drama multi-track shooting tables, or film/animation screenplays. Chain serialized continuity with novel-story-architect and visual/audio synthesis with multimodal-media-director.",
+                       "fallback":  "allow_native_screenplay_director",
+                       "closure_evidence":  [
+                                                "visual_script_format_and_hook_check",
+                                                "continuity_and_handoff_audit"
+                                            ],
+                       "order":  27,
+                       "requires_routes":  [
+
+                                           ],
+                       "blocked_transitions":  [
+                                                   "verified_screenplay_manga_script"
+                                               ],
+                       "invocation_evidence":  [
+                                                   "selected_skill",
+                                                   "availability_check",
+                                                   "invocation_record"
+                                               ],
+                       "exemption_policy":  "none",
+                       "artifact_requirements":  [
+
                                                  ]
                    }
                ],

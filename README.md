@@ -17,11 +17,11 @@ Do not continue deeper reading, modify files, delete files, perform write action
 or begin implementation before the logic-entry loop above has been completed.
 -->
 
-# 🌌 AgentLogic (`V6.9.2`)
+# 🌌 AgentLogic (`V6.9.3`)
 
 **One autonomous operating mind for Claude Code, OpenAI Codex & Antigravity — Turn-1 11-role routing, mockup-before-code UI gates, and habitual skill-first execution.**
 
-[![Version](https://img.shields.io/badge/Version-V6.9.2_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_9_2.md)
+[![Version](https://img.shields.io/badge/Version-V6.9.3_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_9_3.md)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](./LICENSE)
 [![Auto-Skills](https://img.shields.io/badge/First--Party_Auto--Skills-17_(164_Registered)-indigo?style=flat-square)](#-17-built-in-auto-triggered-first-party-skills)
 [![Roles](https://img.shields.io/badge/Roles-11_Lead_%2B_Dual--Axis_Subagents-blueviolet?style=flat-square)](./contracts/role-personas.json)
@@ -29,7 +29,7 @@ or begin implementation before the logic-entry loop above has been completed.
 
 [中文文档 (`00_README.md`)](./00_README.md) · [Changelog](./CHANGELOG.md) · [Quick Start (`00_START_HERE.md`)](./00_START_HERE.md) · [Security Policy](./SECURITY.md)
 
-![AgentLogic V6.9.2 Architecture & Workflow Overview](./assets/agentlogic-hero.png)
+![AgentLogic V6.9.3 Architecture & Workflow Overview](./assets/agentlogic-hero.png)
 
 ### What Changes the Moment You Install It
 1. **Stops Skipped Skills & Random Prompting**: Every task runs a Turn-1 **11-Role + Dual-Axis Subagent Squad** gate and a **3-second Skill-First Reflex scan** across **26 deterministic auto-routes** and **17 auto-deployed first-party skills** (164 registered portable skills total).
@@ -46,10 +46,10 @@ You don't need to manually wire rules or copy skill folders. Give your coding ag
 > `Read AGENT_INSTALL.md in this repository, install AgentLogic for my local host non-destructively, and verify with scripts/doctor.ps1.`
 
 > [!NOTE]
-> **Safe & Non-Destructive by Design**: The installer backs up existing user rules before updating, writes only plain-text Markdown/JSON/scripts (zero proprietary binaries), enforces Antigravity's 24 KB rule cap cleanly, and never adds global hooks that hijack unrelated projects.
+> **Safe, Lean & Non-Destructive by Design**: The installer backs up existing user rules before updating, injects a compact **~11 KB bounded hook** (`<!-- BEGIN AGENTLOGIC HOOK --> ... <!-- END AGENTLOGIC HOOK -->`) pointing to on-disk reference bundles (never bloating Claude Code, Codex, or Antigravity prompts with 700+ KB dumps, and strictly respecting Antigravity's 24 KB limit), writes only plain-text Markdown/JSON/scripts, and never adds global hooks that hijack unrelated projects.
 
 <details>
-<summary><strong>Manual CLI Install (Windows PowerShell & macOS / Linux Bash) + Verification Commands</strong></summary>
+<summary><strong>Manual CLI Install (Windows PowerShell &amp; macOS / Linux Bash + Node.js) + Verification Commands</strong></summary>
 
 #### Windows (PowerShell 5.1+ / `pwsh`)
 ```powershell
@@ -65,14 +65,17 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost co
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\maintainer-check.ps1
 ```
 
-#### macOS / Linux (`bash` + PowerShell `pwsh`)
+#### macOS / Linux (`bash` with Node.js or `pwsh` — zero PowerShell setup needed)
 ```bash
 # Install for your host: antigravity | claude | codex | generic
 ./install.sh --host claude
 ./install.sh --host codex
 ./install.sh --host antigravity
+
+# Or invoke the zero-dependency Node.js installer directly on any OS:
+node ./scripts/install.js --host claude
 ```
-*(Requires [`pwsh`](https://learn.microsoft.com/powershell/scripting/install/installing-powershell) on macOS/Linux; see [INSTALL.md](./INSTALL.md) and [AGENT_INSTALL.md](./AGENT_INSTALL.md) for custom `-TargetPath` and uninstall/rollback details.)*
+*(Uses `pwsh` when present and automatically falls back to pure `node` ([`scripts/install.js`](./scripts/install.js)); see [INSTALL.md](./INSTALL.md) and [AGENT_INSTALL.md](./AGENT_INSTALL.md) for custom targets and backup details.)*
 
 </details>
 
@@ -80,7 +83,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\maintainer-check.p
 
 ## ⚡ Why AgentLogic? (vs. Vanilla AI & Ad-hoc Skills)
 
-| Dimension | Vanilla AI (Raw Prompting) | Ad-hoc Skill Users | AgentLogic (`V6.9.2`) |
+| Dimension | Vanilla AI (Raw Prompting) | Ad-hoc Skill Users | AgentLogic (`V6.9.3`) |
 | :--- | :--- | :--- | :--- |
 | **Skill Dispatch** | Relies on ad-hoc prompting; resets every new session | Requires remembering & manually invoking skills | **Skill-First Reflex Habit**: Turn 1 **11-role + Subagent squad router** + **26 deterministic auto-routes** & **17 auto-deployed first-party skills** |
 | **Blocking Gates** | AI often skips planning and dumps boilerplate code | Soft suggestions only; skills can be bypassed | **Hard Blocking Gates**: 1-question requirements brief $\rightarrow$ `ui-ux-pro-max` spec $\rightarrow$ text-to-image mockup approval before UI code |
@@ -103,7 +106,7 @@ Every installed host receives all **17 first-party skills** automatically—no m
 
 ---
 
-## 🏛️ 4-Layer Architecture & V6.9.2 Autonomous Execution Flow
+## 🏛️ 4-Layer Architecture & V6.9.3 Autonomous Execution Flow
 
 Rules, blocking gates, and auto-triggered capabilities are organized into a **4-layer progressive abstraction model** so every host executes the same deterministic workflow:
 
@@ -263,7 +266,7 @@ flowchart LR
 
 ## 📚 External References & Integrated Sources
 
-During its evolutionary cycles, AgentLogic has integrated concepts and structures from **41** verified open-source GitHub projects:
+During its evolutionary cycles, AgentLogic has integrated concepts and structures from **42** verified open-source GitHub projects:
 
 | Project Source | GitHub Repository | Primary Concept Integrated |
 | :--- | :--- | :--- |
@@ -321,7 +324,7 @@ During its evolutionary cycles, AgentLogic has integrated concepts and structure
 
 1. **Keep it Pure**: No business logic or project-specific implementations should be written into `AgentLogic` rule files.
 2. **Specify Before Writing**: Always compile technical blueprints to `.specify/spec.md` and `.specify/plan.md` before touching code.
-3. **Generate via Bundle**: Never edit `dist/` bundles manually. Always write updates to version files (e.g. `versions/AgentLogic_V6_9_2.md`), then run `build-profile.ps1` to rebuild the adapter targets.
+3. **Generate via Bundle**: Never edit `dist/` bundles manually. Always write updates to version files (e.g. `versions/AgentLogic_V6_9_3.md`), then run `build-profile.ps1` to rebuild the adapter targets.
 
 <details>
 <summary><strong>Mandatory Version Update &amp; Pitfall Checklist (逻辑版本更新必查红线)</strong></summary>
@@ -335,7 +338,7 @@ Whenever promoting a version or updating core rules/skills, verify all items bel
 
 </details>
 
-### V6.9.2 Role, Multimodal & Knowledge-Sync Governance
+### V6.9.3 Role, Multimodal & Knowledge-Sync Governance
 
 The default `core-enhanced` profile includes [`modules/54_V6_9_RoleAndMultimodalCreativeGovernance.md`](./modules/54_V6_9_RoleAndMultimodalCreativeGovernance.md) alongside [`modules/44_V6_8_GrokBuildOperationalIntegration.md`](./modules/44_V6_8_GrokBuildOperationalIntegration.md), [`modules/45_V6_8_GraphifyCodeMapIntegration.md`](./modules/45_V6_8_GraphifyCodeMapIntegration.md), [`modules/47_V6_8_ReferenceToInterfaceWorkflow.md`](./modules/47_V6_8_ReferenceToInterfaceWorkflow.md), [`modules/48_V6_8_SkillAndToolRouting.md`](./modules/48_V6_8_SkillAndToolRouting.md), [`modules/52_V6_8_Img2ThreeJs3DWebIntegration.md`](./modules/52_V6_8_Img2ThreeJs3DWebIntegration.md), and [`modules/53_V6_8_ProgrammingLevelSkillEnforcement.md`](./modules/53_V6_8_ProgrammingLevelSkillEnforcement.md).
 

@@ -14,16 +14,18 @@ param(
 
 $ErrorActionPreference = "Stop"
 
-$repoRoot = (Resolve-Path (Join-Path $PSScriptRoot "..\..")).Path
-$buildScript = Join-Path $repoRoot "scripts\build-profile.ps1"
-$skillsGovernanceScript = Join-Path $repoRoot "scripts\skills-governance.ps1"
-$deploySkillScript = Join-Path $repoRoot "scripts\deploy-first-party-skill.ps1"
-$deployEnforcementScript = Join-Path $repoRoot 'scripts\deploy-skill-enforcement.ps1'
-$productSkillTarget = Join-Path $UserHome '.claude\skills\product-requirements-grilling'
-$enforcementTarget = Join-Path $UserHome '.claude\AgentLogic\skill-enforcement'
+$repoRoot = (Resolve-Path ([IO.Path]::Combine($PSScriptRoot, '..', '..'))).Path
+$buildScript = [IO.Path]::Combine($repoRoot, 'scripts', 'build-profile.ps1')
+$skillsGovernanceScript = [IO.Path]::Combine($repoRoot, 'scripts', 'skills-governance.ps1')
+$deploySkillScript = [IO.Path]::Combine($repoRoot, 'scripts', 'deploy-first-party-skill.ps1')
+$deployEnforcementScript = [IO.Path]::Combine($repoRoot, 'scripts', 'deploy-skill-enforcement.ps1')
+$hookScript = [IO.Path]::Combine($repoRoot, 'scripts', 'install-hook.ps1')
+$skillsRoot = [IO.Path]::Combine($UserHome, '.claude', 'skills')
+$productSkillTarget = [IO.Path]::Combine($skillsRoot, 'product-requirements-grilling')
+$enforcementTarget = [IO.Path]::Combine($UserHome, '.claude', 'AgentLogic', 'skill-enforcement')
 
 if (-not $TargetPath) {
-    $TargetPath = Join-Path $UserHome ".claude\AgentLogic\CLAUDE.md"
+    $TargetPath = [IO.Path]::Combine($UserHome, '.claude', 'AgentLogic', 'CLAUDE.md')
 }
 
 $targetDir = Split-Path -Parent $TargetPath
@@ -34,10 +36,11 @@ if ($targetDir) {
 powershell -NoProfile -ExecutionPolicy Bypass -File $buildScript -ProfileName $ProfileName -TargetHost claude -OutputPath $TargetPath
 if ($LASTEXITCODE -ne 0) { throw "build-profile.ps1 failed with exit code $LASTEXITCODE." }
 
-# Also mirror to ~/.claude/CLAUDE.md when installing to the default ~/.claude/AgentLogic/CLAUDE.md path so Claude Code CLI loads it automatically
-$rootClaudeMd = Join-Path $UserHome ".claude\CLAUDE.md"
-if ($TargetPath -eq (Join-Path $UserHome ".claude\AgentLogic\CLAUDE.md")) {
-    Copy-Item -LiteralPath $TargetPath -Destination $rootClaudeMd -Force
+# Install a compact (~11 KB) bounded executive hook into ~/.claude/CLAUDE.md non-destructively (pointing to ~/.claude/AgentLogic/CLAUDE.md on disk)
+$rootClaudeMd = [IO.Path]::Combine($UserHome, '.claude', 'CLAUDE.md')
+if ($TargetPath -eq ([IO.Path]::Combine($UserHome, '.claude', 'AgentLogic', 'CLAUDE.md'))) {
+    powershell -NoProfile -ExecutionPolicy Bypass -File $hookScript -TargetHost claude -TargetPath $rootClaudeMd -RepoRoot $repoRoot -BundlePath $TargetPath -SkillsRoot $skillsRoot -EnforcementRoot $enforcementTarget -UserHome $UserHome
+    if ($LASTEXITCODE -ne 0) { throw "install-hook.ps1 failed for '$rootClaudeMd' with exit code $LASTEXITCODE." }
 }
 
 powershell -NoProfile -ExecutionPolicy Bypass -File $deploySkillScript -RepoRoot $repoRoot -TargetPath $productSkillTarget

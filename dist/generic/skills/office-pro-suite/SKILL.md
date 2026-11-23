@@ -1,15 +1,15 @@
 ---
 name: office-pro-suite
-description: Professional design, formatting, and standardization suite for Word (.docx), Excel (.xlsx), and PowerPoint (.pptx) documents. Triggered automatically whenever the user asks to create, edit, format, redesign, audit, or convert .docx, .xlsx, or .pptx files.
+description: Professional design, formatting, and standardization suite for Word (.docx), Excel (.xlsx), PowerPoint (.pptx), and PDF (.pdf) documents. Triggered automatically whenever the user asks to create, edit, format, redesign, audit, or convert .docx, .xlsx, .pptx, or .pdf files.
 ---
 
 # Office Professional Design & Standardization Suite (`office-pro-suite`)
 
-This skill synthesizes the industry-gold-standard document design and engineering rules from **Anthropic Official Document Skills** (`anthropics/skills` — open-source Apache 2.0 `docx`, `xlsx`, `pptx`, `pdf`) with AgentLogic's **OfficeCLI** governance contract (`iOfficeAI/OfficeCLI`, Module 50).
+This skill synthesizes the industry-gold-standard document design and engineering rules from **Anthropic Official Document Skills** (`anthropics/skills` — open-source Apache 2.0 `docx`, `xlsx`, `pptx`, `pdf`), **OpenAI Skills PDF Workflow** (`openai/skills` `pdf` — `Apache-2.0`), and AgentLogic's **OfficeCLI** governance contract (`iOfficeAI/OfficeCLI`, Module 50), plus clean-room institutional tie-out QA checklists.
 
 ## 1. Mandatory Automatic Activation Rule
 
-Whenever the user requests creating, editing, styling, formatting, auditing, or converting **Word (`.docx`)**, **Excel (`.xlsx`)**, or **PowerPoint (`.pptx`)** files, this skill activates automatically. Never output plain unstyled text dumps or raw CSVs when an Office document is requested.
+Whenever the user requests creating, editing, styling, formatting, auditing, or converting **Word (`.docx`)**, **Excel (`.xlsx`)**, **PowerPoint (`.pptx`)**, or **PDF (`.pdf`)** files, this skill activates automatically. Never output plain unstyled text dumps or raw CSVs when an Office/PDF document is requested.
 
 ---
 
@@ -37,9 +37,10 @@ When generating or editing `.xlsx` spreadsheets (via `OfficeCLI`, `openpyxl`, or
    - **Black Text (`#000000` or `#0F172A`)**: Same-sheet formula calculations.
    - **Green Text (`#008000` or `#15803D`)**: Cross-sheet links and external references.
    - **Soft Yellow Fill (`#FEF9C3`)**: Key scenario drivers / editable assumption cells.
-3. **Number Formatting & Grid Hygiene**:
+3. **Number Formatting, Grid Hygiene & Financial Tie-Out QA**:
    - Explicitly apply number formats: Currency (`$#,##0;($#,##0);"-"` or `¥#,##0`), Percentages (`0.0%`), Multiples (`0.0"x"`), Integers (`#,##0`).
    - Hide gridlines (`showGridLines = False` or subtle `#E2E8F0` borders), freeze header rows/columns (`freeze_panes`), auto-fit column widths with a 15% safety buffer so `###` truncation never occurs, and verify **zero formula errors (`#REF!`, `#DIV/0!`, `#VALUE!`, `#NAME?`)**.
+   - **Three-Statement & Model Tie-Out QA**: Whenever building financial models or multi-tab workbooks, include explicit balance/tie-out check rows (`Assets - (Liabilities + Equity) = 0`, Cash Flow ending cash = Balance Sheet cash, consistent sign conventions across periods, and explicit unit headers such as `$ in millions`).
 
 ---
 
@@ -52,13 +53,24 @@ When generating or redesigning `.pptx` decks (via `OfficeCLI`, `pptxgenjs`, or `
 2. **Anti-Wall-of-Text Layout Variety**:
    - **Maximum 4–5 bullet points per card**, maximum 12–15 words per bullet.
    - Never use the same "title + vertical bullet list" layout on 3 consecutive slides. Rotate across **Bento KPI Cards (3–4 metric callouts)**, **Split Comparison (2-column Before/After or Pros/Cons)**, **Process Chevron / Timeline Flow**, **2x2 Matrix**, and **Chart + Key Takeaway Sidebar**.
-3. **Palette, Contrast & Overflow Verification**:
+3. **Palette, Contrast, Overflow & Deck QC**:
    - Enforce a cohesive 3-color deck theme (Primary Brand Surface, High-Contrast Ink, Single High-Impact Accent).
    - Explicitly calculate bounding-box coordinates (`x`, `y`, `w`, `h`) so shapes never overlap slide margins (`>= 0.5 inch` safe zone) or footer trackers.
+   - **Deck QC Gate**: Verify source/date citations on data slides, consistent units/denominators across slides, alignment between chart data and action-title claim, and zero clipped text.
 
 ---
 
-## 5. Mandatory Verification Closure
-After creating or mutating any `.docx`, `.xlsx`, or `.pptx` file:
-1. Inspect the generated XML/structure (sheet names, slide count, style definitions, formula cells).
-2. Verify that the file opens cleanly without corruption and check visual/layout boundaries (via `OfficeCLI` / LibreOffice / PDF-to-image screenshot when available).
+## 5. PDF (`.pdf`) — Layout & Visual-Render Verification Standard
+
+When creating, extracting, or reviewing `.pdf` deliverables:
+1. **Tooling Selection**:
+   - Prefer `reportlab` or HTML/CSS-to-PDF (`weasyprint` / headless browser print CSS with explicit `@page` size and margins) for clean publication PDFs; use `pdfplumber` or `pypdf` for structured text/table extraction.
+2. **Visual-Render Inspection (Never Ship Unrendered PDFs Blindly)**:
+   - Render key pages to PNG images (e.g., via Poppler `pdftoppm -png -r 150` or equivalent viewer) and visually inspect the rendered pages via `read_file` to confirm zero overlapping elements, zero clipped tables, clean page breaks (no orphan headings or split signatures), and crisp typography.
+
+---
+
+## 6. Mandatory Verification Closure
+After creating or mutating any `.docx`, `.xlsx`, `.pptx`, or `.pdf` file:
+1. Inspect the generated XML/structure (sheet names, slide count, style definitions, formula cells, or page count).
+2. Verify that the file opens cleanly without corruption and check visual/layout boundaries (via `OfficeCLI` / LibreOffice / `pdftoppm` + `read_file` screenshot when available).

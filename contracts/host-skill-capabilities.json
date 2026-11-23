@@ -82,7 +82,8 @@
                                                                            "contracts/skill-enforcement.json",
                                                                            "contracts/skill-routing.json",
                                                                            "contracts/skill-registry.json",
-                                                                           "contracts/skill-workflow-graph.json"
+                                                                           "contracts/skill-workflow-graph.json",
+                                                                           "contracts/role-personas.json"
                                                                        ]
                                                 }
                             },
@@ -98,7 +99,8 @@
                                                                             "contracts/skill-enforcement.json",
                                                                             "contracts/skill-routing.json",
                                                                             "contracts/skill-registry.json",
-                                                                            "contracts/skill-workflow-graph.json"
+                                                                            "contracts/skill-workflow-graph.json",
+                                                                            "contracts/role-personas.json"
                                                                         ]
                                                  }
                              },
@@ -114,7 +116,8 @@
                                                                                  "contracts/skill-enforcement.json",
                                                                                  "contracts/skill-routing.json",
                                                                                  "contracts/skill-registry.json",
-                                                                                 "contracts/skill-workflow-graph.json"
+                                                                                 "contracts/skill-workflow-graph.json",
+                                                                                 "contracts/role-personas.json"
                                                                              ]
                                                       }
                                   },
@@ -130,7 +133,8 @@
                                                                              "contracts/skill-enforcement.json",
                                                                              "contracts/skill-routing.json",
                                                                              "contracts/skill-registry.json",
-                                                                             "contracts/skill-workflow-graph.json"
+                                                                             "contracts/skill-workflow-graph.json",
+                                                                             "contracts/role-personas.json"
                                                                          ]
                                                   }
                               }
@@ -144,7 +148,8 @@
                                               "contracts/skill-enforcement.json",
                                               "contracts/skill-routing.json",
                                               "contracts/skill-registry.json",
-                                              "contracts/skill-workflow-graph.json"
+                                              "contracts/skill-workflow-graph.json",
+                                              "contracts/role-personas.json"
                                           ]
                             }
 }

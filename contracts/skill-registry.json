@@ -362,8 +362,7 @@
                         "family":  "design",
                         "lifecycle":  "mandatory",
                         "route_ids":  [
-                                          "design-direction",
-                                          "ui-design"
+                                          "design-direction"
                                       ],
                         "reason":  "First-party pure UI/UX design-system intelligence that derives industry palettes, typography pairings, and layout specifications and drives text-to-image mockup generation before UI code.",
                         "activation":  {
@@ -4401,7 +4400,7 @@
                         "family":  "taste-skill",
                         "lifecycle":  "conditional",
                         "route_ids":  [
-                                          "ui-design"
+                                          "design-direction"
                                       ],
                         "reason":  "Conditional UI art-direction capability; it cannot replace image generation.",
                         "activation":  {

@@ -14,12 +14,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Validate package contract
-        shell: pwsh
-        run: |
-          ./scripts/validate-package.ps1
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
 
-      - name: Build default generic bundle
+      - name: Run full AgentLogic maintainer check and regression suite
         shell: pwsh
         run: |
-          ./scripts/build-profile.ps1 -ProfileName core-enhanced -TargetHost generic
+          ./scripts/maintainer-check.ps1
+
+      - name: Smoke-test Node.js cross-platform installer
+        shell: pwsh
+        run: |
+          $tmpOut = Join-Path $env:RUNNER_TEMP 'agentlogic-node-smoke\AGENTLOGIC.md'
+          node ./scripts/install.js --host generic --target-path $tmpOut

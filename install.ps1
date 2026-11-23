@@ -15,11 +15,12 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+if ([string]::IsNullOrWhiteSpace($UserHome)) { $UserHome = $HOME }
 
 $repoRoot = (Resolve-Path $PSScriptRoot).Path
-$adapterScript = Join-Path $repoRoot ("adapters\{0}\install.ps1" -f $TargetHost)
-$logicEntryScript = Join-Path $repoRoot "scripts\check-logic-entry.js"
-$validateScript = Join-Path $repoRoot "scripts\validate-package.ps1"
+$adapterScript = [IO.Path]::Combine($repoRoot, 'adapters', $TargetHost, 'install.ps1')
+$logicEntryScript = [IO.Path]::Combine($repoRoot, 'scripts', 'check-logic-entry.js')
+$validateScript = [IO.Path]::Combine($repoRoot, 'scripts', 'validate-package.ps1')
 
 if (-not (Test-Path $adapterScript)) {
     throw "Unsupported host adapter: $TargetHost"
@@ -29,6 +30,8 @@ if (-not (Get-Command node -ErrorAction SilentlyContinue)) {
     throw "node is required to validate the repository logic entry before installation."
 }
 
+$psExe = if (Get-Command pwsh -ErrorAction SilentlyContinue) { 'pwsh' } else { 'powershell' }
+
 Write-Host "Preflight: checking repository logic entry..."
 & node $logicEntryScript
 if ($LASTEXITCODE -ne 0) {
@@ -36,7 +39,7 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 Write-Host "Preflight: checking package and generated host bundles..."
-& powershell -NoProfile -ExecutionPolicy Bypass -File $validateScript -RepoRoot $repoRoot
+& $psExe -NoProfile -ExecutionPolicy Bypass -File $validateScript -RepoRoot $repoRoot
 if ($LASTEXITCODE -ne 0) {
     throw "Package validation failed with exit code $LASTEXITCODE. No host files were changed."
 }
@@ -66,24 +69,27 @@ switch ($TargetHost) {
 }
 
 Write-Host "Installing $TargetHost profile '$ProfileName'..."
-& powershell @arguments
+& $psExe @arguments
 if ($LASTEXITCODE -ne 0) {
     throw "Host installation failed for '$TargetHost' with exit code $LASTEXITCODE. Legacy files were not changed."
 }
 
 $installedTargets = @()
 switch ($TargetHost) {
-    "codex" { $installedTargets += Join-Path $UserHome ".codex\agentlogic\model_instructions.md" }
+    "codex" {
+        $installedTargets += [IO.Path]::Combine($UserHome, '.codex', 'agentlogic', 'model_instructions.md')
+        $installedTargets += [IO.Path]::Combine($UserHome, '.codex', 'agentlogic', 'AGENTLOGIC_BUNDLE.md')
+    }
     "claude" {
-        $installedTargets += if ($TargetPath) { $TargetPath } else { Join-Path $UserHome ".claude\AgentLogic\CLAUDE.md" }
-        if (-not $TargetPath) { $installedTargets += Join-Path $UserHome ".claude\CLAUDE.md" }
+        $installedTargets += if ($TargetPath) { $TargetPath } else { [IO.Path]::Combine($UserHome, '.claude', 'AgentLogic', 'CLAUDE.md') }
+        if (-not $TargetPath) { $installedTargets += [IO.Path]::Combine($UserHome, '.claude', 'CLAUDE.md') }
     }
     "antigravity" {
-        $installedTargets += if ($TargetPath) { $TargetPath } else { Join-Path $UserHome ".gemini\GEMINI.md" }
-        $installedTargets += Join-Path $UserHome ".gemini\antigravity-cli\AgentLogic\AGENTS_BUNDLE.md"
-        if (-not $TargetPath) { $installedTargets += Join-Path $UserHome ".gemini\AgentLogic\GEMINI.md" }
+        $installedTargets += if ($TargetPath) { $TargetPath } else { [IO.Path]::Combine($UserHome, '.gemini', 'GEMINI.md') }
+        $installedTargets += [IO.Path]::Combine($UserHome, '.gemini', 'antigravity-cli', 'AgentLogic', 'AGENTS_BUNDLE.md')
+        if (-not $TargetPath) { $installedTargets += [IO.Path]::Combine($UserHome, '.gemini', 'AgentLogic', 'GEMINI.md') }
     }
-    "generic" { $installedTargets += if ($TargetPath) { $TargetPath } else { Join-Path $repoRoot "dist\generic\AGENTLOGIC.md" } }
+    "generic" { $installedTargets += if ($TargetPath) { $TargetPath } else { [IO.Path]::Combine($repoRoot, 'dist', 'generic', 'AGENTLOGIC.md') } }
 }
 
 foreach ($installedTarget in $installedTargets) {
@@ -93,12 +99,12 @@ foreach ($installedTarget in $installedTargets) {
 }
 
 $installedSkillPath = switch ($TargetHost) {
-    "codex" { Join-Path $UserHome ".codex\skills\product-requirements-grilling\SKILL.md" }
-    "claude" { Join-Path $UserHome ".claude\skills\product-requirements-grilling\SKILL.md" }
-    "antigravity" { Join-Path $UserHome ".gemini\skills\product-requirements-grilling\SKILL.md" }
+    "codex" { [IO.Path]::Combine($UserHome, '.codex', 'skills', 'product-requirements-grilling', 'SKILL.md') }
+    "claude" { [IO.Path]::Combine($UserHome, '.claude', 'skills', 'product-requirements-grilling', 'SKILL.md') }
+    "antigravity" { [IO.Path]::Combine($UserHome, '.gemini', 'skills', 'product-requirements-grilling', 'SKILL.md') }
     "generic" {
-        $genericBundle = if ($TargetPath) { $TargetPath } else { Join-Path $repoRoot "dist\generic\AGENTLOGIC.md" }
-        Join-Path (Split-Path -Parent $genericBundle) "skills\product-requirements-grilling\SKILL.md"
+        $genericBundle = if ($TargetPath) { $TargetPath } else { [IO.Path]::Combine($repoRoot, 'dist', 'generic', 'AGENTLOGIC.md') }
+        [IO.Path]::Combine((Split-Path -Parent $genericBundle), 'skills', 'product-requirements-grilling', 'SKILL.md')
     }
 }
 if (-not (Test-Path $installedSkillPath)) {
@@ -106,16 +112,16 @@ if (-not (Test-Path $installedSkillPath)) {
 }
 
 $enforcementPayloadRoot = switch ($TargetHost) {
-    "codex" { Join-Path $UserHome ".codex\agentlogic\skill-enforcement" }
-    "claude" { Join-Path $UserHome ".claude\AgentLogic\skill-enforcement" }
-    "antigravity" { Join-Path $UserHome ".gemini\antigravity-cli\AgentLogic\skill-enforcement" }
+    "codex" { [IO.Path]::Combine($UserHome, '.codex', 'agentlogic', 'skill-enforcement') }
+    "claude" { [IO.Path]::Combine($UserHome, '.claude', 'AgentLogic', 'skill-enforcement') }
+    "antigravity" { [IO.Path]::Combine($UserHome, '.gemini', 'antigravity-cli', 'AgentLogic', 'skill-enforcement') }
     "generic" {
-        $genericBundle = if ($TargetPath) { $TargetPath } else { Join-Path $repoRoot "dist\generic\AGENTLOGIC.md" }
-        Join-Path (Split-Path -Parent $genericBundle) "skill-enforcement"
+        $genericBundle = if ($TargetPath) { $TargetPath } else { [IO.Path]::Combine($repoRoot, 'dist', 'generic', 'AGENTLOGIC.md') }
+        [IO.Path]::Combine((Split-Path -Parent $genericBundle), 'skill-enforcement')
     }
 }
-$enforcementDeployer = Join-Path $repoRoot "scripts\deploy-skill-enforcement.ps1"
-& powershell -NoProfile -ExecutionPolicy Bypass -File $enforcementDeployer -RepoRoot $repoRoot -TargetPath $enforcementPayloadRoot -Verify
+$enforcementDeployer = [IO.Path]::Combine($repoRoot, 'scripts', 'deploy-skill-enforcement.ps1')
+& $psExe -NoProfile -ExecutionPolicy Bypass -File $enforcementDeployer -RepoRoot $repoRoot -TargetPath $enforcementPayloadRoot -Verify
 if ($LASTEXITCODE -ne 0) {
     throw "Post-install verification failed; skill enforcement payload is missing or stale: $enforcementPayloadRoot"
 }
@@ -123,12 +129,12 @@ if ($LASTEXITCODE -ne 0) {
 # Legacy files are moved only after the new target is verified. The selected target is protected.
 $legacyFiles = @()
 if ($TargetHost -eq "antigravity") {
-    $legacyFiles += Join-Path $UserHome ".gemini\AgentLogic\GEMINI.md"
-    $legacyFiles += Join-Path $UserHome ".gemini\GEMINI.md"
+    $legacyFiles += [IO.Path]::Combine($UserHome, '.gemini', 'AgentLogic', 'GEMINI.md')
+    $legacyFiles += [IO.Path]::Combine($UserHome, '.gemini', 'GEMINI.md')
 } elseif ($TargetHost -eq "claude") {
-    $legacyFiles += Join-Path $UserHome ".claude\CLAUDE.md"
+    $legacyFiles += [IO.Path]::Combine($UserHome, '.claude', 'CLAUDE.md')
 } elseif ($TargetHost -eq "codex") {
-    $legacyFiles += Join-Path $UserHome ".codex\model_instructions.md"
+    $legacyFiles += [IO.Path]::Combine($UserHome, '.codex', 'model_instructions.md')
 }
 
 $backupRoot = $null
@@ -141,7 +147,7 @@ foreach ($legacyFile in $legacyFiles) {
     }
 
     if (-not $backupRoot) {
-        $backupRoot = Join-Path $UserHome (".agentlogic-backup\{0}" -f (Get-Date -Format "yyyyMMdd-HHmmss"))
+        $backupRoot = [IO.Path]::Combine($UserHome, '.agentlogic-backup', (Get-Date -Format 'yyyyMMdd-HHmmss'))
         New-Item -ItemType Directory -Force -Path $backupRoot | Out-Null
     }
 

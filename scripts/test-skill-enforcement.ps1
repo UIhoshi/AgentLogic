@@ -111,6 +111,8 @@ try {
     & $gate -Mode preflight -RepoRoot $RepoRoot -TaskStatePath $v692Path -AvailableSkill appsec-review,web-data-visualization,web-game-studio,gh-pr-ci-triage,skill-evaluator,screenplay-manga-director
     $v692State = Get-Content -Raw -Encoding UTF8 -LiteralPath $v692Path | ConvertFrom-Json
     if (@($v692State.routes | Where-Object route_id -eq 'security-review')[0].selected_skill -ne 'appsec-review') { throw 'Security review did not select appsec-review as primary skill.' }
+    Expect-Failure { & $gate -Mode validate -RepoRoot $RepoRoot -TaskStatePath $v692Path } 'validate rejects pending/unclosed routes by default'
+    & $gate -Mode validate -RepoRoot $RepoRoot -TaskStatePath $v692Path -AllowIncomplete
     & $gate -Mode record-invocation -RepoRoot $RepoRoot -TaskStatePath $v692Path -RouteId security-review -Evidence appsec_review_run
     & $gate -Mode closure -RepoRoot $RepoRoot -TaskStatePath $v692Path -RouteId security-review -Evidence self_refuted_findings,trust_decision -Artifact "review_report=$v692Review"
     & $gate -Mode record-invocation -RepoRoot $RepoRoot -TaskStatePath $v692Path -RouteId screenplay-manga-video -Evidence screenplay_manga_director_run
@@ -124,6 +126,27 @@ try {
     & $gate -Mode record-invocation -RepoRoot $RepoRoot -TaskStatePath $v692Path -RouteId skill-evaluation -Evidence skill_evaluator_run
     & $gate -Mode closure -RepoRoot $RepoRoot -TaskStatePath $v692Path -RouteId skill-evaluation -Evidence skill_structure_and_token_budget_audit,prioritized_fix_first_report
     & $gate -Mode validate -RepoRoot $RepoRoot -TaskStatePath $v692Path
+
+    foreach ($tc in @('data_visualization','web_game','gh_ci_or_pr_triage','skill_evaluation','screenplay_manga_video')) {
+        $tcPath = Join-Path $root ("tc-" + $tc + ".json")
+        & $gate -Mode initialize -RepoRoot $RepoRoot -TaskStatePath $tcPath -TaskId ("tc-" + $tc) -TaskClass $tc -ChangeScope isolated -UiScope none -ExternalEffect none
+        & $gate -Mode preflight -RepoRoot $RepoRoot -TaskStatePath $tcPath -AvailableSkill web-data-visualization,web-game-studio,gh-pr-ci-triage,skill-evaluator,screenplay-manga-director
+    }
+
+    $blockedUiPath = Join-Path $root 'ui-no-imagegen.json'
+    & $gate -Mode initialize -RepoRoot $RepoRoot -TaskStatePath $blockedUiPath -TaskId ui-no-img -TaskClass feature -ChangeScope isolated -UiScope net_new -ExternalEffect none
+    Expect-Failure { & $gate -Mode preflight -RepoRoot $RepoRoot -TaskStatePath $blockedUiPath -AvailableSkill product-requirements-grilling,ui-ux-pro-max,taste-skill,senior-frontend,tdd-guide,playwright,screenshot,code-reviewer } 'ui-design preflight must fail without image/mockup capability'
+
+    $webModPath = Join-Path $root 'web-mod.json'
+    $webModImpl = New-Artifact 'web-mod-impl'
+    $webModVisual = New-Artifact 'web-mod-visual'
+    & $gate -Mode initialize -RepoRoot $RepoRoot -TaskStatePath $webModPath -TaskId web-mod -TaskClass trivial_fix -ChangeScope isolated -UiScope small_correction -ExternalEffect none
+    & $gate -Mode preflight -RepoRoot $RepoRoot -TaskStatePath $webModPath -AvailableSkill modern-web-guidance,screenshot
+    & $gate -Mode record-invocation -RepoRoot $RepoRoot -TaskStatePath $webModPath -RouteId web-platform-modernization -Evidence modern_web_guidance_run
+    & $gate -Mode closure -RepoRoot $RepoRoot -TaskStatePath $webModPath -RouteId web-platform-modernization -Evidence modern_web_guidance_checked,real_world_reference_grounding_if_applicable,downloaded_media_visually_inspected_if_applicable,baseline_fallback_verified -Artifact "implementation_validation_record=$webModImpl"
+    & $gate -Mode record-invocation -RepoRoot $RepoRoot -TaskStatePath $webModPath -RouteId visual-verification -Evidence screenshot_run
+    & $gate -Mode closure -RepoRoot $RepoRoot -TaskStatePath $webModPath -RouteId visual-verification -Evidence screenshot_or_equivalent,boundary_check -Artifact "visual_capture=$webModVisual"
+    & $gate -Mode validate -RepoRoot $RepoRoot -TaskStatePath $webModPath
 
     $releasePath = Join-Path $root 'release.json'
     $releaseReview = New-Artifact 'release-review-report'
@@ -157,7 +180,7 @@ try {
     "# Code Map`n`n## Skill Usage`n| Durable flow | Capability / skill | Trigger | Source of truth | Reviewed commit |`n| --- | --- | --- | --- | --- |`n| validation | tdd-guide | behavior_change | .agentlogic/skill-usage.json | abc123 |" | Set-Content -LiteralPath (Join-Path $projectRoot 'CODE_MAP.md') -Encoding utf8
     & $gate -Mode validate-project-usage -RepoRoot $RepoRoot -ProjectRoot $projectRoot
     & $gate -Mode validate-project-usage -ProjectRoot $projectRoot
-    (Get-Content -Raw -LiteralPath (Join-Path $projectRoot 'CODE_MAP.md')).Replace('behavior_change','incorrect_trigger') | Set-Content -LiteralPath (Join-Path $projectRoot 'CODE_MAP.md') -Encoding utf8
+    (Get-Content -Raw -Encoding UTF8 -LiteralPath (Join-Path $projectRoot 'CODE_MAP.md')).Replace('behavior_change','incorrect_trigger') | Set-Content -LiteralPath (Join-Path $projectRoot 'CODE_MAP.md') -Encoding utf8
     Expect-Failure { & $gate -Mode validate-project-usage -RepoRoot $RepoRoot -ProjectRoot $projectRoot } 'inconsistent CODE_MAP Skill Usage row'
 
     Write-Host 'Skill enforcement tests passed.'

@@ -82,7 +82,7 @@ function Build-Bundle {
     [void]$builder.AppendLine("> **CROSS-HOST MANDATORY BLOCKING GATES (Antigravity / Claude Code / OpenAI Codex / Generic)**:")
     [void]$builder.AppendLine(">")
     [void]$builder.AppendLine("> **Gate 1 $emDash Startup Context-Reset & Autonomous Role Recommendation Gate (Turn 1 Blocking)**:")
-    [void]$builder.AppendLine("> Do NOT merely read, recite, or summarize AgentLogic rules as passive background text. On Turn 1 of any new project or non-continuation task, you MUST interactively execute BOTH:")
+    [void]$builder.AppendLine("> Do NOT merely read, recite, or summarize AgentLogic rules as passive background text. On Turn 1 of any new project or formal non-continuation task (coding, planning, UI, creative, Office, or audit $emDash trivial 1-turn read-only Q&A may answer directly without blocking), you MUST interactively execute BOTH:")
     [void]$builder.AppendLine('> 1. **Context-Reset Confirmation**: Ask whether the current task extends the previous coding round, and if not, whether to `forget/compress context` (in the user''s active language):')
     [void]$builder.AppendLine(">    - Chinese: '$zhStartupPrompt'")
     [void]$builder.AppendLine(">    - English: 'Does the current task extend the previous coding round? If not, please confirm whether to forget/compress context.'")
@@ -112,12 +112,17 @@ function Build-Bundle {
     [void]$builder.AppendLine()
 
     foreach ($relativePath in $files) {
-        $fullPath = Join-Path $RepoRoot $relativePath
+        $fullPath = $RepoRoot
+        foreach ($seg in $relativePath.Split('/')) { $fullPath = Join-Path $fullPath $seg }
         if (-not (Test-Path $fullPath)) {
             throw "Profile file missing: $relativePath"
         }
 
         $content = Get-Content -Raw -Encoding UTF8 -Path $fullPath
+        if ($relativePath.EndsWith('.json', [System.StringComparison]::OrdinalIgnoreCase)) {
+            $parsedJson = $content | ConvertFrom-Json
+            $content = $parsedJson | ConvertTo-Json -Depth 30 -Compress
+        }
         [void]$builder.AppendLine("---")
         [void]$builder.AppendLine()
         [void]$builder.AppendLine("## BEGIN FILE: $relativePath")

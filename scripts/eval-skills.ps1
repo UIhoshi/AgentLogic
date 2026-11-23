@@ -20,7 +20,7 @@ function Get-FrontmatterInfo {
     param([string]$RawText)
     $lines = @($RawText -split "\r?\n")
     if ($lines.Count -lt 3 -or $lines[0].Trim() -ne '---') {
-        return [pscustomobject]@{ HasFrontmatter = $false; Name = $null; Description = $null }
+        return [pscustomobject]@{ HasFrontmatter = $false; Name = $null; Description = $null; UnquotedHashComment = $false }
     }
     $endIdx = -1
     for ($i = 1; $i -lt [Math]::Min($lines.Count, 80); $i++) {
@@ -30,22 +30,37 @@ function Get-FrontmatterInfo {
         }
     }
     if ($endIdx -lt 0) {
-        return [pscustomobject]@{ HasFrontmatter = $false; Name = $null; Description = $null }
+        return [pscustomobject]@{ HasFrontmatter = $false; Name = $null; Description = $null; UnquotedHashComment = $false }
     }
     $nameVal = $null
     $descVal = $null
+    $hasHashTruncation = $false
     for ($i = 1; $i -lt $endIdx; $i++) {
         $line = $lines[$i]
         if ($line -match '^name\s*:\s*(?<v>.+?)\s*$') {
-            $nameVal = $Matches.v.Trim().Trim('"', "'")
-        } elseif ($line -match '^description\s*:\s*(?<v>.+?)\s*$') {
-            $descVal = $Matches.v.Trim().Trim('"', "'")
+            $rawV = $Matches.v.Trim()
+            if ($rawV -notmatch '^[''"]' -and $rawV -match '\s#') { $hasHashTruncation = $true }
+            $nameVal = $rawV.Trim('"', "'")
+        } elseif ($line -match '^description\s*:\s*(?<v>.*)\s*$') {
+            $rawV = $Matches.v.Trim()
+            if ($rawV -match '^[\|\>][+-]?$') {
+                $blockLines = @()
+                while (($i + 1) -lt $endIdx -and $lines[$i + 1] -match '^\s+\S') {
+                    $i++
+                    $blockLines += $lines[$i].Trim()
+                }
+                $descVal = ($blockLines -join ' ').Trim()
+            } else {
+                if ($rawV -notmatch '^[''"]' -and $rawV -match '\s#') { $hasHashTruncation = $true }
+                $descVal = $rawV.Trim('"', "'")
+            }
         }
     }
     return [pscustomobject]@{
         HasFrontmatter = $true
         Name = $nameVal
         Description = $descVal
+        UnquotedHashComment = $hasHashTruncation
     }
 }
 
@@ -107,13 +122,20 @@ foreach ($file in $skillFiles) {
     $fm = Get-FrontmatterInfo -RawText $raw
 
     $brokenLinks = 0
+    $escapingLinks = 0
     if ($isFirstParty) {
+        $skillDirFull = [System.IO.Path]::GetFullPath((Split-Path -Parent $file.FullName))
+        if (-not $skillDirFull.EndsWith([string][System.IO.Path]::DirectorySeparatorChar)) {
+            $skillDirFull += [System.IO.Path]::DirectorySeparatorChar
+        }
         $linkMatches = [System.Text.RegularExpressions.Regex]::Matches($raw, '\[[^\]]*\]\(([^)]+)\)')
         foreach ($m in $linkMatches) {
             $linkTarget = $m.Groups[1].Value.Split('#')[0].Trim().Trim('<', '>')
             if ([string]::IsNullOrWhiteSpace($linkTarget) -or $linkTarget -match '^(https?:|mailto:|file:|app:)') { continue }
-            $resolvedLink = Join-Path (Split-Path -Parent $file.FullName) ($linkTarget.Replace('/', '\'))
-            if (-not (Test-Path -LiteralPath $resolvedLink)) {
+            $resolvedFull = [System.IO.Path]::GetFullPath((Join-Path $skillDirFull ($linkTarget.Replace('/', [System.IO.Path]::DirectorySeparatorChar))))
+            if (-not $resolvedFull.StartsWith($skillDirFull, [System.StringComparison]::OrdinalIgnoreCase)) {
+                $escapingLinks++
+            } elseif (-not (Test-Path -LiteralPath $resolvedFull)) {
                 $brokenLinks++
             }
         }
@@ -123,9 +145,11 @@ foreach ($file in $skillFiles) {
     if (-not $fm.HasFrontmatter) { $issues += 'missing_frontmatter' }
     if ([string]::IsNullOrWhiteSpace($fm.Name)) { $issues += 'missing_name' }
     if ([string]::IsNullOrWhiteSpace($fm.Description)) { $issues += 'missing_description' }
+    if ($fm.UnquotedHashComment) { $issues += 'unquoted_yaml_hash_comment' }
     if ($isFirstParty -and $bytes -gt $MaxFirstPartyBytes) { $issues += "oversized_first_party($bytes>$MaxFirstPartyBytes)" }
     elseif ($bytes -gt $MaxWarnBytes) { $issues += "oversized_warn($bytes>$MaxWarnBytes)" }
     if ($brokenLinks -gt 0) { $issues += "broken_links($brokenLinks)" }
+    if ($escapingLinks -gt 0) { $issues += "escaping_skill_dir_links($escapingLinks)" }
 
     $blockingIssues = @($issues | Where-Object { $_ -notmatch '^oversized_warn\(' })
     if ($isFirstParty -and $blockingIssues.Count -gt 0) {

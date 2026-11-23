@@ -2,7 +2,7 @@
 
 ## L1 — Entry & Surface
 - Entrypoints: `00_START_HERE.md`, `AGENTS.md`, `MAIN.md`, and `README.md`.
-- User/API/CLI surfaces: host adapters (`codex`, `claude`, `antigravity`, `generic`), `install.ps1`, `install.sh`, and generated `dist/` bundles (`V6.9.2`).
+- User/API/CLI surfaces: host adapters (`codex`, `claude`, `antigravity`, `generic`), `install.ps1`, `install.sh`, `scripts/install.js` (pure Node.js cross-platform installer), `scripts/install-hook.ps1` (~11 KB bounded non-destructive host hooks), and generated `dist/` bundles (`V6.9.3`).
 
 ## L2 — Flow & Lifecycle
 - Core flows: Turn 1 entry + autonomous role recommendation gate (`role-persona-router`) → task classification → project/code map consultation or refresh → applicable SDD / domain auto-skill execution / verification → profile build.

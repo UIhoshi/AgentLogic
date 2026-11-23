@@ -53,24 +53,38 @@ if command -v pwsh >/dev/null 2>&1; then
 elif command -v powershell >/dev/null 2>&1; then
   PS_BIN="powershell"
 else
-  echo "PowerShell is required. Install 'pwsh' or 'powershell' first." >&2
+  PS_BIN=""
+fi
+
+if [[ -n "$PS_BIN" ]]; then
+  ARGS=(
+    -NoProfile
+    -ExecutionPolicy Bypass
+    -File "$SCRIPT_DIR/install.ps1"
+    -TargetHost "$TARGET_HOST"
+    -ProfileName "$PROFILE_NAME"
+  )
+  if [[ -n "$TARGET_PATH" ]]; then
+    ARGS+=(-TargetPath "$TARGET_PATH")
+  fi
+  if [[ -n "$USER_HOME" ]]; then
+    ARGS+=(-UserHome "$USER_HOME")
+  fi
+  exec "$PS_BIN" "${ARGS[@]}"
+elif command -v node >/dev/null 2>&1; then
+  NODE_ARGS=(
+    "$SCRIPT_DIR/scripts/install.js"
+    --host "$TARGET_HOST"
+    --profile "$PROFILE_NAME"
+  )
+  if [[ -n "$TARGET_PATH" ]]; then
+    NODE_ARGS+=(--target-path "$TARGET_PATH")
+  fi
+  if [[ -n "$USER_HOME" ]]; then
+    NODE_ARGS+=(--user-home "$USER_HOME")
+  fi
+  exec node "${NODE_ARGS[@]}"
+else
+  echo "Either PowerShell ('pwsh'/'powershell') or Node.js ('node') is required." >&2
   exit 1
 fi
-
-ARGS=(
-  -NoProfile
-  -ExecutionPolicy Bypass
-  -File "$SCRIPT_DIR/install.ps1"
-  -TargetHost "$TARGET_HOST"
-  -ProfileName "$PROFILE_NAME"
-)
-
-if [[ -n "$TARGET_PATH" ]]; then
-  ARGS+=(-TargetPath "$TARGET_PATH")
-fi
-
-if [[ -n "$USER_HOME" ]]; then
-  ARGS+=(-UserHome "$USER_HOME")
-fi
-
-exec "$PS_BIN" "${ARGS[@]}"

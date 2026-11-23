@@ -84,10 +84,12 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost an
 powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost generic
 ```
 
-On shell environments:
+On macOS / Linux shell environments (automatically uses `pwsh` if installed, or falls back natively to `node` via `scripts/install.js` without requiring PowerShell):
 
 ```bash
 ./install.sh --host codex
+# Or invoke the zero-dependency Node.js installer directly:
+node ./scripts/install.js --host claude
 ```
 
 ## Validate The Package

@@ -27,7 +27,14 @@
                             "office_document_request",
                             "multimodal_creative_brief",
                             "narrative_story_request",
-                            "diagram_architecture_request"
+                            "diagram_architecture_request",
+                            "frontend_change_request",
+                            "chrome_extension_request",
+                            "data_visualization_request",
+                            "web_game_request",
+                            "gh_pr_ci_request",
+                            "skill_evaluation_request",
+                            "screenplay_manga_video_request"
                         ],
     "default_pipelines":  [
                               {
@@ -116,6 +123,76 @@
                                   "user_skill_selection_required":  false,
                                   "nodes":  [
                                                 "diagram-flowchart"
+                                            ]
+                              },
+                              {
+                                  "id":  "web-platform-modernization",
+                                  "triggers":  [
+                                                   "frontend_fix_or_modernization"
+                                               ],
+                                  "user_skill_selection_required":  false,
+                                  "nodes":  [
+                                                "web-platform-modernization"
+                                            ]
+                              },
+                              {
+                                  "id":  "chrome-extension-delivery",
+                                  "triggers":  [
+                                                   "chrome_extension"
+                                               ],
+                                  "user_skill_selection_required":  false,
+                                  "nodes":  [
+                                                "chrome-extension-development"
+                                            ]
+                              },
+                              {
+                                  "id":  "data-visualization-delivery",
+                                  "triggers":  [
+                                                   "data_visualization"
+                                               ],
+                                  "user_skill_selection_required":  false,
+                                  "nodes":  [
+                                                "web-data-visualization"
+                                            ]
+                              },
+                              {
+                                  "id":  "web-game-delivery",
+                                  "triggers":  [
+                                                   "web_game"
+                                               ],
+                                  "user_skill_selection_required":  false,
+                                  "nodes":  [
+                                                "web-game-development"
+                                            ]
+                              },
+                              {
+                                  "id":  "gh-pr-ci-triage-delivery",
+                                  "triggers":  [
+                                                   "gh_ci_or_pr_triage"
+                                               ],
+                                  "user_skill_selection_required":  false,
+                                  "nodes":  [
+                                                "gh-pr-ci-triage"
+                                            ]
+                              },
+                              {
+                                  "id":  "skill-evaluation-delivery",
+                                  "triggers":  [
+                                                   "skill_evaluation"
+                                               ],
+                                  "user_skill_selection_required":  false,
+                                  "nodes":  [
+                                                "skill-evaluation"
+                                            ]
+                              },
+                              {
+                                  "id":  "screenplay-manga-video-delivery",
+                                  "triggers":  [
+                                                   "screenplay_manga_video"
+                                               ],
+                                  "user_skill_selection_required":  false,
+                                  "nodes":  [
+                                                "screenplay-manga-video"
                                             ]
                               }
                           ],
@@ -249,7 +326,8 @@
                                            "approved_requirements_brief",
                                            "approved_mockup_or_explicit_opt_out",
                                            "implementation_validation",
-                                           "visual_verification_plan"
+                                           "visual_verification_plan",
+                                           "real_world_reference_grounding_if_applicable"
                                        ]
                   },
                   {
@@ -500,6 +578,176 @@
                       "verification":  [
                                            "reviewable_handover"
                                        ]
+                  },
+                  {
+                      "id":  "web-platform-modernization",
+                      "posture":  "route",
+                      "user_skill_selection_required":  false,
+                      "requires":  [
+
+                                   ],
+                      "consumes":  [
+                                       "frontend_change_request"
+                                   ],
+                      "produces":  [
+                                       "modernized_frontend_record"
+                                   ],
+                      "blocks":  [
+                                     "frontend_code_without_guidance"
+                                 ],
+                      "verification":  [
+                                           "modern_web_guidance_checked",
+                                           "real_world_reference_grounding_if_applicable",
+                                           "downloaded_media_visually_inspected_if_applicable",
+                                           "baseline_fallback_verified"
+                                       ],
+                      "route_ids":  [
+                                        "web-platform-modernization"
+                                    ]
+                  },
+                  {
+                      "id":  "chrome-extension-development",
+                      "posture":  "route",
+                      "user_skill_selection_required":  false,
+                      "requires":  [
+
+                                   ],
+                      "consumes":  [
+                                       "chrome_extension_request"
+                                   ],
+                      "produces":  [
+                                       "mv3_extension_record"
+                                   ],
+                      "blocks":  [
+                                     "extension_build_without_mv3_checks"
+                                 ],
+                      "verification":  [
+                                           "mv3_manifest_and_csp_verified",
+                                           "extension_permissions_justified"
+                                       ],
+                      "route_ids":  [
+                                        "chrome-extension-development"
+                                    ]
+                  },
+                  {
+                      "id":  "web-data-visualization",
+                      "posture":  "route",
+                      "user_skill_selection_required":  false,
+                      "requires":  [
+
+                                   ],
+                      "consumes":  [
+                                       "data_visualization_request"
+                                   ],
+                      "produces":  [
+                                       "verified_visualization_artifact"
+                                   ],
+                      "blocks":  [
+                                     "verified_data_visualization"
+                                 ],
+                      "verification":  [
+                                           "analytical_encoding_and_dual_viewport_check",
+                                           "verified_visualization_artifact"
+                                       ],
+                      "route_ids":  [
+                                        "data-visualization"
+                                    ]
+                  },
+                  {
+                      "id":  "web-game-development",
+                      "posture":  "route",
+                      "user_skill_selection_required":  false,
+                      "requires":  [
+
+                                   ],
+                      "consumes":  [
+                                       "web_game_request"
+                                   ],
+                      "produces":  [
+                                       "verified_web_game_artifact"
+                                   ],
+                      "blocks":  [
+                                     "verified_web_game"
+                                 ],
+                      "verification":  [
+                                           "core_loop_and_asset_architecture_check",
+                                           "browser_playtest_verification"
+                                       ],
+                      "route_ids":  [
+                                        "web-game-development"
+                                    ]
+                  },
+                  {
+                      "id":  "gh-pr-ci-triage",
+                      "posture":  "route",
+                      "user_skill_selection_required":  false,
+                      "requires":  [
+
+                                   ],
+                      "consumes":  [
+                                       "gh_pr_ci_request"
+                                   ],
+                      "produces":  [
+                                       "verified_ci_or_pr_resolution"
+                                   ],
+                      "blocks":  [
+                                     "verified_gh_pr_ci_triage"
+                                 ],
+                      "verification":  [
+                                           "gh_checks_or_comments_inspected",
+                                           "verified_ci_or_pr_fix_plan"
+                                       ],
+                      "route_ids":  [
+                                        "gh-pr-ci-triage"
+                                    ]
+                  },
+                  {
+                      "id":  "skill-evaluation",
+                      "posture":  "route",
+                      "user_skill_selection_required":  false,
+                      "requires":  [
+
+                                   ],
+                      "consumes":  [
+                                       "skill_evaluation_request"
+                                   ],
+                      "produces":  [
+                                       "skill_evaluation_report"
+                                   ],
+                      "blocks":  [
+                                     "verified_skill_evaluation"
+                                 ],
+                      "verification":  [
+                                           "skill_structure_and_token_budget_audit",
+                                           "prioritized_fix_first_report"
+                                       ],
+                      "route_ids":  [
+                                        "skill-evaluation"
+                                    ]
+                  },
+                  {
+                      "id":  "screenplay-manga-video",
+                      "posture":  "route",
+                      "user_skill_selection_required":  false,
+                      "requires":  [
+
+                                   ],
+                      "consumes":  [
+                                       "screenplay_manga_video_request"
+                                   ],
+                      "produces":  [
+                                       "verified_screenplay_manga_artifact"
+                                   ],
+                      "blocks":  [
+                                     "verified_screenplay_manga_script"
+                                 ],
+                      "verification":  [
+                                           "visual_script_format_and_hook_check",
+                                           "continuity_and_handoff_audit"
+                                       ],
+                      "route_ids":  [
+                                        "screenplay-manga-video"
+                                    ]
                   }
               ]
 }

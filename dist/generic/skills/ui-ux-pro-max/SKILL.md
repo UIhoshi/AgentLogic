@@ -50,3 +50,6 @@ Define the spatial layout architecture:
 Compile Steps 1–4 into a **Master Visual Mockup Prompt** and immediately invoke the image generation capability (`image-generator` subagent, `imagegen`, or `nano-banana-pro`):
 - Include: **Device frame & aspect ratio (16:9 desktop or 9:16 mobile) + Business kind & aesthetic archetype + Exact Hex/HSL color palette + Typography hierarchy + Section-by-section spatial layout + Lighting/texture details + Explicit negative constraints (no generic AI robot icons, no gibberish text, no neon purple/cyan slop, no 3-equal-card SaaS clichés)**.
 - Save the generated mockup image to `.specify/mockups/` (or artifact directory), present both the **Design Specification** and the **Visual Mockup Image** to the user, and wait for approval before writing any UI code.
+
+### Step 6: Post-Implementation Side-by-Side Design QA Closure
+After the approved design is implemented in code, perform a **side-by-side Design QA comparison** (inspecting the approved mockup/design target alongside the rendered implementation screenshot at matching desktop & mobile viewports). Classify any visible deviations as `P0`/`P1`/`P2`; keep the handoff blocked until actionable discrepancies are fixed and re-verified on fresh captures.

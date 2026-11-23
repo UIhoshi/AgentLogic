@@ -1,15 +1,15 @@
 ---
 name: role-persona-router
-description: Autonomous startup role recommendation, 11-role orthogonal persona matrix, and dual-axis Subagent squad assignment gate. Triggered automatically at Turn 1 of every new project or non-trivial task to recommend the #1 Lead Role (and optional Supporting Subagent Squad for complex tasks), present the 11-role menu, and bind specialist sub-roles + required skills when spawning subagents.
+description: "Autonomous startup role recommendation, 11-role orthogonal persona matrix, and dual-axis Subagent squad assignment gate. Triggered automatically at Turn 1 of every new project or formal non-continuation task to recommend the best-fit Lead Role and Subagent squad."
 ---
 
 # Role Persona Router (`role-persona-router`)
 
-This skill synthesizes the specialist persona discipline of **The Agency** (`msitarzewski/agency-agents`), the multi-role artifact handoff architecture of **BMAD-METHOD** (`bmad-code-org/BMAD-METHOD`), and AgentLogic's machine-readable [`contracts/role-personas.json`](../../../contracts/role-personas.json) contract.
+This skill synthesizes the specialist persona discipline of **The Agency** (`msitarzewski/agency-agents`), the multi-role artifact handoff architecture of **BMAD-METHOD** (`bmad-code-org/BMAD-METHOD`), and AgentLogic's machine-readable `contracts/role-personas.json` contract.
 
-## 1. Mandatory Activation Rule (All Project Starts)
+## 1. Mandatory Activation Rule (All Formal Project Starts)
 
-Every new project or non-continuation coding round MUST execute this role recommendation and selection gate on **Turn 1** alongside the Startup Context-Reset Gate. Never wait for the user to ask for a role or persona.
+Every new project or formal non-continuation coding/planning/creative/audit round MUST execute this role recommendation and selection gate on **Turn 1** alongside the Startup Context-Reset Gate. Never wait for the user to ask for a role or persona. Trivial single-turn read-only factual questions (with zero file edits, planning, or artifact creation) may be answered directly without blocking.
 
 ## 2. The 11-Role Orthogonal Expert Matrix (`[1]`–`[11]`)
 
