@@ -154,6 +154,21 @@ The V6.9.2 stable line integrates the following external source repositories:
 - **OpenAI Skills (`openai/skills` — Apache-2.0 curated AppSec, GitHub PR/CI, and PDF workflows; upstream repo noted as deprecated)**:
   - Source URL: `https://github.com/openai/skills`
   - Integration path: `skills/engineering/appsec-review/SKILL.md`, `skills/engineering/gh-pr-ci-triage/SKILL.md`, `skills/productivity/office-pro-suite/SKILL.md`
+- **Drama Skills (`zenstory-ai/drama-skills` — MIT AI short-drama & motion-comic 12-stage workflow & independent cross-shot review)**:
+  - Source URL: `https://github.com/zenstory-ai/drama-skills`
+  - Integration path: `skills/creative/screenplay-manga-director/SKILL.md`, `skills/creative/screenplay-manga-director/references/production-checklists.md`
+- **Shuohao Skills (`eternityspring/shuohao-skills` — Apache-2.0 opening spatial blocking `novel-staging` & single-root character anchor sheets `character-refs`)**:
+  - Source URL: `https://github.com/eternityspring/shuohao-skills`
+  - Integration path: `skills/creative/screenplay-manga-director/SKILL.md`, `skills/creative/screenplay-manga-director/references/production-checklists.md`
+- **Muse Video Skill (`LuoJiangYong/muse-video-skill` — MIT six-role virtual film-crew Subagent squad, asset-ID reference chain & 6-part prompt compilation)**:
+  - Source URL: `https://github.com/LuoJiangYong/muse-video-skill`
+  - Integration path: `skills/creative/screenplay-manga-director/SKILL.md`, `skills/creative/screenplay-manga-director/references/production-checklists.md`
+- **ManjuForge (`mengxiujie/ManjuForge` — MIT-0 serialized comic-drama memory, identity invariants vs state variables & Foreshadow Engine)**:
+  - Source URL: `https://github.com/mengxiujie/ManjuForge`
+  - Integration path: `skills/creative/screenplay-manga-director/SKILL.md`, `skills/creative/screenplay-manga-director/references/production-checklists.md`
+- **Hand-Drawn Video Prompts (`kaomei/hand-drawn-video-prompts` — MIT 9:16 vertical hand-drawn/chibi storyboard & animation prompt discipline)**:
+  - Source URL: `https://github.com/kaomei/hand-drawn-video-prompts`
+  - Integration path: `skills/creative/screenplay-manga-director/SKILL.md`
 
 ---
 

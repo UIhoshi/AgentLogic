@@ -42,7 +42,7 @@ AgentLogic 是一套专为本地 AI 编码宿主（**Antigravity / Gemini**、**
 | :--- | :--- | :--- |
 | **1. 环境诊断** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\doctor.ps1` | 检测仓库健康度，读取元数据，生成推荐安装指令 |
 | **2. 一键安装** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost antigravity` | 构建并部署宿主规则包及 17 个第一方自动触发 Skill（可将 `antigravity` 替换为 `claude` 或 `codex`） |
-| **3. 本地验证** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\maintainer-check.ps1` | 运行 164 个注册技能、26 条自动路由、11 大角色契约、36 项外部引用、Token 预算及四端 + Codex 插件包完整性校验 |
+| **3. 本地验证** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\maintainer-check.ps1` | 运行 164 个注册技能、26 条自动路由、11 大角色契约、41 项外部引用、Token 预算及四端 + Codex 插件包完整性校验 |
 
 ---
 
@@ -165,6 +165,11 @@ AgentLogic 的演进离不开开源社区的启发。我们在设计中深度参
 | **Excalidraw Diagram Skill** | [coleam00/excalidraw-diagram-skill](https://github.com/coleam00/excalidraw-diagram-skill) | 启发带色彩分区与画布防溢出校验的 `.excalidraw` 手绘架构图生成 |
 | **OpenAI Plugins** | [openai/plugins](https://github.com/openai/plugins) | 吸收 MIT `web-data-visualization`、`skill-evaluator`、`web-game-studio`、Codex `.codex-plugin/plugin.json` 格式，以及洁净室并排 Design QA 与 Diff 安全审查理念 |
 | **OpenAI Skills（上游已归档）** | [openai/skills](https://github.com/openai/skills) | 整合 Apache-2.0 AppSec（`security-best-practices` / `threat-model` / `ownership-map`）、GitHub PR/CI（`gh-fix-ci` / `gh-address-comments`）与 PDF 视觉校验工作流 |
+| **Drama Skills** | [zenstory-ai/drama-skills](https://github.com/zenstory-ai/drama-skills) | 吸收 MIT 五文档单集骨架、`REF`/`PLAN` 参考图分流、独立跨镜 `REV-xxx` 审查与 `## 被删的强钩子` 保护机制 |
+| **Shuohao Skills** | [eternityspring/shuohao-skills](https://github.com/eternityspring/shuohao-skills) | 吸收 Apache-2.0 单根角色锚点三视图（`character-refs`）与开场俯视空间走位调度（`novel-staging`） |
+| **Muse Video Skill** | [LuoJiangYong/muse-video-skill](https://github.com/LuoJiangYong/muse-video-skill) | 吸收 MIT 六角色虚拟剧组 Subagent 编排、资产 ID 全链引用、`visual_cause` 美术转译与六段式视频提示词编译 |
+| **ManjuForge** | [mengxiujie/ManjuForge](https://github.com/mengxiujie/ManjuForge) | 吸收 MIT-0 漫剧连载记忆分层（身份不变量 vs 状态变量）与全剧伏笔回收追踪（Foreshadow Engine） |
+| **Hand-Drawn Video Prompts** | [kaomei/hand-drawn-video-prompts](https://github.com/kaomei/hand-drawn-video-prompts) | 吸收 MIT 9:16 竖屏漫绘/Q 版分镜构图与移动端字幕安全区规范 |
 
 ---
 
@@ -188,5 +193,5 @@ AgentLogic 的演进离不开开源社区的启发。我们在设计中深度参
 ## 🛡️ 安全合规、净室重构与第三方开源致谢声明
 
 1. **合法授权与净室重构声明 (Authorized Security & Clean-Room Use Only)**：本仓库包含的二进制反编译与净室源码重构规则（`decompile-reconstruction`）以及安全审计技能路由包（`skills/reverse-skill/`）**仅限用于合法的互操作性净室研究（Clean-Room Reconstruction）、恶意样本防御分析、CTF 竞赛、安全教学及经明确书面授权的安全测试**。严禁用于任何未经授权的逆向破解或非法入侵行为。
-2. **开源致谢与许可证声明 (Third-Party Open-Source Attribution)**：AgentLogic 作为跨宿主元治理框架，致谢并吸收了上表列出的 36 个优秀开源项目的理念与可移植技能结构。各内嵌子模块（如 `spec-kit`、`taste-skill`、`agent-browser`、`reverse-skill`、`modern-web-guidance` 等）均保留其原有的 `MIT` / `Apache-2.0` 开源许可证文件与版权归属。
+2. **开源致谢与许可证声明 (Third-Party Open-Source Attribution)**：AgentLogic 作为跨宿主元治理框架，致谢并吸收了上表列出的 41 个优秀开源项目的理念与可移植技能结构。各内嵌子模块（如 `spec-kit`、`taste-skill`、`agent-browser`、`reverse-skill`、`modern-web-guidance` 等）均保留其原有的 `MIT` / `Apache-2.0` 开源许可证文件与版权归属。
 3. **纯规则与契约边界**：本仓库仅提供纯文本 Markdown 规则、JSON 路由契约与自动化校验脚本，不包含任何商业闭源软件的源码或专有二进制文件。

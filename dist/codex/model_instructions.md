@@ -288,9 +288,9 @@ flowchart TD
 ```mermaid
 flowchart TD
     Start(["User Request"]) --> ContextCheck["Gate 1a: Context-Reset Check (Continue or Forget/Compress?)"]
-    ContextCheck --> RoleGate["Gate 1b: role-persona-router (Recommend #1 Lead Role + 7-Role Menu)"]
+    ContextCheck --> RoleGate["Gate 1b: role-persona-router (Recommend #1 Lead Role + 11-Role Menu & Dual-Axis Subagent Squads)"]
     RoleGate --> SyncCheck["Knowledge Sync (git fetch + AGENTS.md / PROJECT_MAP.md / CODE_MAP.md / .learnings/)"]
-    SyncCheck --> Classify{"Deterministic Task Classification (21 Auto-Routes)"}
+    SyncCheck --> Classify{"Skill-First Reflex & Deterministic Classification (26 Auto-Routes)"}
 
     %% Frontend Net-New UI Path
     Classify -->|"Net-New UI / Substantial Refactor"| ReqGrill["product-requirements-grilling (1 Question at a Time -> requirements-brief.md)"]
@@ -303,7 +303,7 @@ flowchart TD
     RefCheck -->|"Abstract / Fictional"| DirectCreate["Proceed to Creative Composition"]
     FetchRef --> WebGuide["modern-web-guidance (Baseline APIs, Fallbacks, CWV, A11y)"]
     DirectCreate --> WebGuide
-    WebGuide --> VisualVerify["Browser & Bounding-Box Screenshot Verification"]
+    WebGuide --> VisualVerify["Side-by-Side Design QA (P0/P1/P2) & Multi-State ?t= Visual Audit"]
 
     %% Frontend Small Fix & Chrome Extension Paths
     Classify -->|"Small Frontend Fix / Legacy Modernization"| WebModRoute["web-platform-modernization (modern-web-guidance / legacy-scan)"]
@@ -318,16 +318,28 @@ flowchart TD
 
     %% Specialized Domain Auto-Dispatch
     Classify -->|"Binary / Bytecode / Obfuscated JS"| Decomp["decompile-reconstruction (IDA / Ghidra / jadx / ilspycmd / pycdc / webcrack)"]
-    Classify -->|"Word / Excel / PPT"| Office["office-pro-suite"]
-    Classify -->|"Image / Video / Music"| Media["multimodal-media-director"]
-    Classify -->|"Novel / Script"| Novel["novel-story-architect"]
+    Classify -->|"Word / Excel / PPT / PDF"| Office["office-pro-suite (Tie-Out & Visual QA)"]
+    Classify -->|"Image / Video / Code Video / Music"| Media["multimodal-media-director (Imagen / Veo / Remotion & HyperFrames / Lyria)"]
+    Classify -->|"Long-Form Novel"| Novel["novel-story-architect (.story-bible/)"]
+    Classify -->|"Manga / Short-Video / Screenplay"| Screenplay["screenplay-manga-director (5-Doc Spine, Anchors, Blocking & REV-xxx)"]
     Classify -->|"Flowchart / Architecture Diagram"| Diagram["diagram-flowchart-architect"]
+    Classify -->|"Security Audit / Threat Model"| AppSec["appsec-review (Diff-Scoped Verdicts & STRIDE)"]
+    Classify -->|"Charts / Dashboards / Maps"| DataViz["web-data-visualization (D3 / Vega / Canvas2D & Dual-Viewport QA)"]
+    Classify -->|"2D / 3D Browser Game"| WebGame["web-game-studio (Phaser / Three.js / R3F & Playtest)"]
+    Classify -->|"PR CI Failure / Review Threads"| GHPR["gh-pr-ci-triage (gh CLI Logs & Comment Plan)"]
+    Classify -->|"Skill Audit / Token Budget"| SkillEval["skill-evaluator (eval-skills.ps1 & Trigger Precision)"]
 
     Decomp --> FinalVerify
     Office --> FinalVerify
     Media --> FinalVerify
     Novel --> FinalVerify
+    Screenplay --> FinalVerify
     Diagram --> FinalVerify
+    AppSec --> FinalVerify
+    DataViz --> FinalVerify
+    WebGame --> FinalVerify
+    GHPR --> FinalVerify
+    SkillEval --> FinalVerify
     VisualVerify --> FinalVerify
 
     FinalVerify --> MapSync["Update PROJECT_MAP.md / CODE_MAP.md / .learnings/ERRORS.md"]
@@ -341,16 +353,16 @@ flowchart TD
     class ContextCheck,RoleGate,MockupApprove,RefCheck gate
     class ReqGrill,DesignSpec,MockupGen,FetchRef,DirectCreate,WebGuide,WebModRoute,ExtDev,VisualVerify ui
     class SDDGate,Simplifier,FinalVerify,MapSync eng
-    class Decomp,Office,Media,Novel,Diagram domain
+    class Decomp,Office,Media,Novel,Screenplay,Diagram,AppSec,DataViz,WebGame,GHPR,SkillEval domain
 ```
 
 ### Detailed Module Mapping
 
 | Abstraction Layer | Primary Core Responsibility | Included Files / Directories |
 | :--- | :--- | :--- |
-| **L1: Strategy & Entry** | Defines entrypoints, Turn 1 context-reset confirmation, autonomous `#1` role recommendation (`role-persona-router`), and project-native knowledge sync. | - [00_START_HERE.md](./00_START_HERE.md) (起手式)<br>- [MAIN.md](./MAIN.md) (Stable Host Binding)<br>- [AGENTS.md](./AGENTS.md) (Agent Entry)<br>- [15_LogicEntryChecklist.md](./modules/15_LogicEntryChecklist.md) (Gate Checklist)<br>- [54_V6_9_RoleAndMultimodalCreativeGovernance.md](./modules/54_V6_9_RoleAndMultimodalCreativeGovernance.md) (V6.9 Role & Creative Gates) |
-| **L2: Session & Loop** | Manages the single-turn execution cycle, single-question requirements grilling, SDD lifecycle, and 21-route zero-manual-selection dispatch. | - [03_AgenticLoop.md](./modules/03_AgenticLoop.md) (Agentic Cycle)<br>- [38_SpecDrivenDevelopment.md](./modules/38_V6_6_SpecDrivenDevelopment.md) (SDD Lifecycle)<br>- [48_V6_8_SkillAndToolRouting.md](./modules/48_V6_8_SkillAndToolRouting.md) (Autonomous Skill & Tool Routing)<br>- [53_V6_8_ProgrammingLevelSkillEnforcement.md](./modules/53_V6_8_ProgrammingLevelSkillEnforcement.md) (Skill Enforcement State Machine) |
-| **L3: Control & Auditing** | Establishes pure UI/UX design-first + mandatory text-to-image mockup gating, post-implementation code simplification, and verification matrices. | - [29_MandatoryVerificationMatrix.md](./modules/29_MandatoryVerificationMatrix.md) (Verification Matrix)<br>- [39_TasteFrontendDesign.md](./modules/39_V6_6_TasteFrontendDesign.md) (Aesthetic & Spacing Audit)<br>- [30_ToolQuestionBoundaryMatrix.md](./modules/30_ToolQuestionBoundaryMatrix.md) (Credential Boundary)<br>- [31_ToolMisuseAndAntiPatternMatrix.md](./modules/31_ToolMisuseAndAntiPatternMatrix.md) (Anti-Pattern Gating) |
+| **L1: Strategy & Entry** | Defines entrypoints, Turn 1 context-reset confirmation, autonomous `#1` 11-role recommendation & dual-axis Subagent squads (`role-persona-router`), and project-native knowledge sync. | - [00_START_HERE.md](./00_START_HERE.md) (起手式)<br>- [MAIN.md](./MAIN.md) (Stable Host Binding)<br>- [AGENTS.md](./AGENTS.md) (Agent Entry)<br>- [15_LogicEntryChecklist.md](./modules/15_LogicEntryChecklist.md) (Gate Checklist)<br>- [54_V6_9_RoleAndMultimodalCreativeGovernance.md](./modules/54_V6_9_RoleAndMultimodalCreativeGovernance.md) (V6.9 Role & Creative Gates)<br>- [role-personas.json](./contracts/role-personas.json) (11-Role + Subagent Contract) |
+| **L2: Session & Loop** | Manages the single-turn execution cycle, single-question requirements grilling, SDD lifecycle, and 26-route Skill-First Reflex zero-manual-selection dispatch. | - [03_AgenticLoop.md](./modules/03_AgenticLoop.md) (Agentic Cycle)<br>- [38_SpecDrivenDevelopment.md](./modules/38_V6_6_SpecDrivenDevelopment.md) (SDD Lifecycle)<br>- [48_V6_8_SkillAndToolRouting.md](./modules/48_V6_8_SkillAndToolRouting.md) (Autonomous Skill & Tool Routing)<br>- [53_V6_8_ProgrammingLevelSkillEnforcement.md](./modules/53_V6_8_ProgrammingLevelSkillEnforcement.md) (Skill Enforcement State Machine) |
+| **L3: Control & Auditing** | Establishes pure UI/UX design-first + mandatory text-to-image mockup gating, side-by-side Design QA, post-implementation code simplification, `skill-evaluator` / `scripts/eval-skills.ps1` auditing, and verification matrices. | - [29_MandatoryVerificationMatrix.md](./modules/29_MandatoryVerificationMatrix.md) (Verification Matrix)<br>- [39_TasteFrontendDesign.md](./modules/39_V6_6_TasteFrontendDesign.md) (Aesthetic, Spacing & Side-by-Side Design QA Audit)<br>- [30_ToolQuestionBoundaryMatrix.md](./modules/30_ToolQuestionBoundaryMatrix.md) (Credential Boundary)<br>- [31_ToolMisuseAndAntiPatternMatrix.md](./modules/31_ToolMisuseAndAntiPatternMatrix.md) (Anti-Pattern Gating) |
 | **L4: Base & Drivers** | 17 first-party auto-deployed domain skills across all hosts (`~/.gemini/skills`, `~/.claude/skills`, `~/.codex/skills`), 164 portable skills, 11 role personas (`contracts/role-personas.json`), Codex plugin bundle, and original UI templates. | - `skills/` (17 First-Party Auto-Triggered Skills + 164 Registered Portable Skills)<br>  * [role-persona-router](./skills/productivity/role-persona-router/) (Turn 1 11-Role Recommendation & Dual-Axis Subagent Squads)<br>  * [product-requirements-grilling](./skills/productivity/product-requirements-grilling/) (Single-Question Requirements Brief)<br>  * [ui-ux-pro-max](./skills/design/ui-ux-pro-max/) (Pure UI/UX Design Spec + Mandatory Text-to-Image Coupling)<br>  * [modern-web-guidance](./skills/frontend/modern-web-guidance/) (Modern Web Platform APIs, Baseline Compatibility, CWV & `legacy-scan`)<br>  * [chrome-extensions](./skills/frontend/chrome-extensions/) (Manifest V3 Browser Extensions & Chrome Web Store Publishing)<br>  * [web-data-visualization](./skills/frontend/web-data-visualization/) (Truthful Charts, Dashboards, Maps, D3/Vega/Canvas2D & Dual-Viewport QA)<br>  * [web-game-studio](./skills/frontend/web-game-studio/) (2D Phaser/Canvas2D & 3D Three.js/R3F Browser Games & Playtest)<br>  * [multimodal-media-director](./skills/creative/multimodal-media-director/) (Text-to-Image / Video Storyboard / Remotion & HyperFrames / Music Production)<br>  * [office-pro-suite](./skills/productivity/office-pro-suite/) (Executive Word `.docx`, Excel `.xlsx` + Tie-Out, PowerPoint `.pptx` & PDF `.pdf` Visual QA)<br>  * [novel-story-architect](./skills/creative/novel-story-architect/) (`.story-bible/` Continuity & Anti-AI-Cliché Fiction Engine)<br>  * [screenplay-manga-director](./skills/creative/screenplay-manga-director/) (Manga/Webtoon Panels, 0–3s Hook Short-Video Tables & Film/Animation Screenplays)<br>  * [diagram-flowchart-architect](./skills/engineering/diagram-flowchart-architect/) (`.drawio` XML, `.excalidraw` JSON & Themed Mermaid)<br>  * [appsec-review](./skills/engineering/appsec-review/) (Diff-Scoped AppSec Review, Tri-State Verdicts, STRIDE & Ownership Map)<br>  * [gh-pr-ci-triage](./skills/engineering/gh-pr-ci-triage/) (GitHub Actions CI Failure Logs & PR Review Resolution via `gh` CLI)<br>  * [skill-evaluator](./skills/engineering/skill-evaluator/) (Skill Quality, Trigger Precision, Link & Token-Budget Evaluation)<br>  * [code-simplifier](./skills/engineering/code-simplifier/) (Auto Post-Implementation Code Refinement & AST Rewrite)<br>  * [decompile-reconstruction](./skills/engineering/decompile-reconstruction/) (Auto Decompilation & Clean-Room Source Reconstruction)<br>- [`templates/frontend/`](./templates/frontend/) (Original, unbranded UI starting points) |
 
 ---
@@ -411,7 +423,7 @@ During its evolutionary cycles, AgentLogic has integrated concepts and structure
 | **MiniMax MCP** | [MiniMax-AI/MiniMax-MCP](https://github.com/MiniMax-AI/MiniMax-MCP) | Provides Hailuo Video and MiniMax Music MCP generation reference patterns |
 | **Claude Image Gen** | [guinacio/claude-image-gen](https://github.com/guinacio/claude-image-gen) | Informs aspect-ratio, reference-image guidance, and inpainting controls for UI and illustration mockups |
 | **Anthropic Official Document Skills** | [anthropics/skills](https://github.com/anthropics/skills) | Establishes executive Word (.docx), dynamic-formula Excel (.xlsx), and action-title PowerPoint (.pptx) standards |
-| **The Agency (agency-agents)** | [msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents) | Informs the 7 specialist role personas in the Turn 1 Autonomous Role Recommendation Gate |
+| **The Agency (agency-agents)** | [msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents) | Informs the 11 orthogonal specialist role personas in the Turn 1 Autonomous Role Recommendation Gate |
 | **BMAD-METHOD** | [bmad-code-org/BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) | Informs multi-role Lead + Supporting Squad orchestration and artifact handoffs |
 | **Oh-Story ClaudeCode** | [zenstory-ai/oh-story-claudecode](https://github.com/zenstory-ai/oh-story-claudecode) | Informs web-novel pacing, Golden 3-Chapter structure, and anti-AI-cliche prose filtering |
 | **Story Skills** | [danjdewhurst/story-skills](https://github.com/danjdewhurst/story-skills) | Establishes the `.story-bible/` continuity compiler and 4-point chapter audit |
@@ -421,6 +433,11 @@ During its evolutionary cycles, AgentLogic has integrated concepts and structure
 | **Excalidraw Diagram Skill** | [coleam00/excalidraw-diagram-skill](https://github.com/coleam00/excalidraw-diagram-skill) | Informs color-zoned hand-drawn system design diagrams in `.excalidraw` |
 | **OpenAI Plugins** | [openai/plugins](https://github.com/openai/plugins) | Informs MIT `web-data-visualization`, `skill-evaluator`, `web-game-studio`, Codex `.codex-plugin/plugin.json` packaging, and clean-room side-by-side Design QA / diff-scoped AppSec patterns |
 | **OpenAI Skills (Deprecated Upstream)** | [openai/skills](https://github.com/openai/skills) | Provides Apache-2.0 AppSec (`security-best-practices` / `threat-model` / `ownership-map`), GitHub PR/CI (`gh-fix-ci` / `gh-address-comments`), and PDF (`pdf`) workflows |
+| **Drama Skills** | [zenstory-ai/drama-skills](https://github.com/zenstory-ai/drama-skills) | Informs 5-doc short-drama episode spine, `REF`/`PLAN` branching, and independent `REV-xxx` cross-shot review with hook protection (`MIT`) |
+| **Shuohao Skills** | [eternityspring/shuohao-skills](https://github.com/eternityspring/shuohao-skills) | Informs single-root character anchor sheets (`character-refs`) and top-down opening spatial blocking (`novel-staging`) (`Apache-2.0`) |
+| **Muse Video Skill** | [LuoJiangYong/muse-video-skill](https://github.com/LuoJiangYong/muse-video-skill) | Informs six-role virtual film-crew Subagent squad, asset-ID reference chain, `visual_cause` art direction, and 6-part video prompt compilation (`MIT`) |
+| **ManjuForge** | [mengxiujie/ManjuForge](https://github.com/mengxiujie/ManjuForge) | Informs serialized comic-drama memory split (identity invariants vs state variables) and Foreshadow Engine tracking (`MIT-0`) |
+| **Hand-Drawn Video Prompts** | [kaomei/hand-drawn-video-prompts](https://github.com/kaomei/hand-drawn-video-prompts) | Informs 9:16 vertical hand-drawn/chibi storyboard framing and mobile safe-zone scripting (`MIT`) |
 
 ---
 
@@ -790,6 +807,21 @@ The V6.9.2 stable line integrates the following external source repositories:
 - **OpenAI Skills (`openai/skills` — Apache-2.0 curated AppSec, GitHub PR/CI, and PDF workflows; upstream repo noted as deprecated)**:
   - Source URL: `https://github.com/openai/skills`
   - Integration path: `skills/engineering/appsec-review/SKILL.md`, `skills/engineering/gh-pr-ci-triage/SKILL.md`, `skills/productivity/office-pro-suite/SKILL.md`
+- **Drama Skills (`zenstory-ai/drama-skills` — MIT AI short-drama & motion-comic 12-stage workflow & independent cross-shot review)**:
+  - Source URL: `https://github.com/zenstory-ai/drama-skills`
+  - Integration path: `skills/creative/screenplay-manga-director/SKILL.md`, `skills/creative/screenplay-manga-director/references/production-checklists.md`
+- **Shuohao Skills (`eternityspring/shuohao-skills` — Apache-2.0 opening spatial blocking `novel-staging` & single-root character anchor sheets `character-refs`)**:
+  - Source URL: `https://github.com/eternityspring/shuohao-skills`
+  - Integration path: `skills/creative/screenplay-manga-director/SKILL.md`, `skills/creative/screenplay-manga-director/references/production-checklists.md`
+- **Muse Video Skill (`LuoJiangYong/muse-video-skill` — MIT six-role virtual film-crew Subagent squad, asset-ID reference chain & 6-part prompt compilation)**:
+  - Source URL: `https://github.com/LuoJiangYong/muse-video-skill`
+  - Integration path: `skills/creative/screenplay-manga-director/SKILL.md`, `skills/creative/screenplay-manga-director/references/production-checklists.md`
+- **ManjuForge (`mengxiujie/ManjuForge` — MIT-0 serialized comic-drama memory, identity invariants vs state variables & Foreshadow Engine)**:
+  - Source URL: `https://github.com/mengxiujie/ManjuForge`
+  - Integration path: `skills/creative/screenplay-manga-director/SKILL.md`, `skills/creative/screenplay-manga-director/references/production-checklists.md`
+- **Hand-Drawn Video Prompts (`kaomei/hand-drawn-video-prompts` — MIT 9:16 vertical hand-drawn/chibi storyboard & animation prompt discipline)**:
+  - Source URL: `https://github.com/kaomei/hand-drawn-video-prompts`
+  - Integration path: `skills/creative/screenplay-manga-director/SKILL.md`
 
 ---
 
