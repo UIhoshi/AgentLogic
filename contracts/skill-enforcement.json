@@ -29,7 +29,12 @@
                                                    "security_review",
                                                    "install",
                                                    "package",
-                                                   "release"
+                                                   "release",
+                                                   "data_visualization",
+                                                   "web_game",
+                                                   "gh_ci_or_pr_triage",
+                                                   "skill_evaluation",
+                                                   "screenplay_manga_video"
                                                ],
                                 "change_scope":  [
                                                      "isolated",
@@ -68,7 +73,12 @@
                                                     "pull_request_review",
                                                     "release_review",
                                                     "frontend_modernization",
-                                                    "chrome_extension"
+                                                    "chrome_extension",
+                                                    "data_visualization",
+                                                    "web_game",
+                                                    "gh_ci_or_pr_triage",
+                                                    "skill_evaluation",
+                                                    "screenplay_manga_video"
                                                 ],
                                 "signal_rules":  [
                                                      {
@@ -409,6 +419,96 @@
                                                                     ],
                                                          "signals":  [
                                                                          "chrome_extension"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "task_class",
+                                                         "values":  [
+                                                                        "data_visualization"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "data_visualization"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "data_visualization"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "data_visualization"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "task_class",
+                                                         "values":  [
+                                                                        "web_game"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "web_game"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "web_game"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "web_game"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "task_class",
+                                                         "values":  [
+                                                                        "gh_ci_or_pr_triage"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "gh_ci_or_pr_triage"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "gh_ci_or_pr_triage"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "gh_ci_or_pr_triage"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "task_class",
+                                                         "values":  [
+                                                                        "skill_evaluation"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "skill_evaluation"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "skill_evaluation"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "skill_evaluation"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "task_class",
+                                                         "values":  [
+                                                                        "screenplay_manga_video"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "screenplay_manga_video"
+                                                                     ]
+                                                     },
+                                                     {
+                                                         "field":  "claim_types",
+                                                         "values":  [
+                                                                        "screenplay_manga_video"
+                                                                    ],
+                                                         "signals":  [
+                                                                         "screenplay_manga_video"
                                                                      ]
                                                      }
                                                  ]

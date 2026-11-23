@@ -54,7 +54,7 @@ try {
     & $gate -Mode record-invocation -RepoRoot $RepoRoot -TaskStatePath $uiPath -RouteId ui-design -Evidence imagegen_run
     & $gate -Mode closure -RepoRoot $RepoRoot -TaskStatePath $uiPath -RouteId ui-design -Evidence approved_requirements_brief,mockup_requested_or_explicit_opt_out,approved_mockup_or_explicit_opt_out,visual_verification_plan -Artifact "mockup_or_opt_out_record=$mockup"
     & $gate -Mode record-invocation -RepoRoot $RepoRoot -TaskStatePath $uiPath -RouteId ui-implementation -Evidence senior_frontend_run
-    & $gate -Mode closure -RepoRoot $RepoRoot -TaskStatePath $uiPath -RouteId ui-implementation -Evidence approved_requirements_brief,approved_mockup_or_explicit_opt_out,implementation_validation,visual_verification_plan -Artifact "implementation_validation_record=$implementation"
+    & $gate -Mode closure -RepoRoot $RepoRoot -TaskStatePath $uiPath -RouteId ui-implementation -Evidence approved_requirements_brief,approved_mockup_or_explicit_opt_out,implementation_validation,visual_verification_plan,real_world_reference_grounding_if_applicable -Artifact "implementation_validation_record=$implementation"
     Expect-Failure { & $gate -Mode record-invocation -RepoRoot $RepoRoot -TaskStatePath $uiPath -RouteId code-review -Evidence code_review_run } 'Website code review before behavior and browser/visual verification close'
     & $gate -Mode record-invocation -RepoRoot $RepoRoot -TaskStatePath $uiPath -RouteId test-design -Evidence test_plan
     & $gate -Mode closure -RepoRoot $RepoRoot -TaskStatePath $uiPath -RouteId test-design -Evidence relevant_test_or_explicit_gap,command_result -Artifact "behavior_result=$behavior"
@@ -104,6 +104,26 @@ try {
     & $gate -Mode record-invocation -RepoRoot $RepoRoot -TaskStatePath $v69Path -RouteId diagram-flowchart -Evidence diagram_flowchart_architect_run
     & $gate -Mode closure -RepoRoot $RepoRoot -TaskStatePath $v69Path -RouteId diagram-flowchart -Evidence spatial_zoning_and_zero_overlap_check,diagram_artifact_or_mermaid_preview
     & $gate -Mode validate -RepoRoot $RepoRoot -TaskStatePath $v69Path
+
+    $v692Path = Join-Path $root 'v692-domains.json'
+    $v692Review = New-Artifact 'v692-review-report'
+    & $gate -Mode initialize -RepoRoot $RepoRoot -TaskStatePath $v692Path -TaskId v692 -TaskClass security_review -ChangeScope isolated -UiScope none -ExternalEffect none -ClaimType data_visualization,web_game,gh_ci_or_pr_triage,skill_evaluation,screenplay_manga_video
+    & $gate -Mode preflight -RepoRoot $RepoRoot -TaskStatePath $v692Path -AvailableSkill appsec-review,web-data-visualization,web-game-studio,gh-pr-ci-triage,skill-evaluator,screenplay-manga-director
+    $v692State = Get-Content -Raw -Encoding UTF8 -LiteralPath $v692Path | ConvertFrom-Json
+    if (@($v692State.routes | Where-Object route_id -eq 'security-review')[0].selected_skill -ne 'appsec-review') { throw 'Security review did not select appsec-review as primary skill.' }
+    & $gate -Mode record-invocation -RepoRoot $RepoRoot -TaskStatePath $v692Path -RouteId security-review -Evidence appsec_review_run
+    & $gate -Mode closure -RepoRoot $RepoRoot -TaskStatePath $v692Path -RouteId security-review -Evidence self_refuted_findings,trust_decision -Artifact "review_report=$v692Review"
+    & $gate -Mode record-invocation -RepoRoot $RepoRoot -TaskStatePath $v692Path -RouteId screenplay-manga-video -Evidence screenplay_manga_director_run
+    & $gate -Mode closure -RepoRoot $RepoRoot -TaskStatePath $v692Path -RouteId screenplay-manga-video -Evidence visual_script_format_and_hook_check,continuity_and_handoff_audit
+    & $gate -Mode record-invocation -RepoRoot $RepoRoot -TaskStatePath $v692Path -RouteId data-visualization -Evidence web_data_visualization_run
+    & $gate -Mode closure -RepoRoot $RepoRoot -TaskStatePath $v692Path -RouteId data-visualization -Evidence analytical_encoding_and_dual_viewport_check,verified_visualization_artifact
+    & $gate -Mode record-invocation -RepoRoot $RepoRoot -TaskStatePath $v692Path -RouteId web-game-development -Evidence web_game_studio_run
+    & $gate -Mode closure -RepoRoot $RepoRoot -TaskStatePath $v692Path -RouteId web-game-development -Evidence core_loop_and_asset_architecture_check,browser_playtest_verification
+    & $gate -Mode record-invocation -RepoRoot $RepoRoot -TaskStatePath $v692Path -RouteId gh-pr-ci-triage -Evidence gh_pr_ci_triage_run
+    & $gate -Mode closure -RepoRoot $RepoRoot -TaskStatePath $v692Path -RouteId gh-pr-ci-triage -Evidence gh_checks_or_comments_inspected,verified_ci_or_pr_fix_plan
+    & $gate -Mode record-invocation -RepoRoot $RepoRoot -TaskStatePath $v692Path -RouteId skill-evaluation -Evidence skill_evaluator_run
+    & $gate -Mode closure -RepoRoot $RepoRoot -TaskStatePath $v692Path -RouteId skill-evaluation -Evidence skill_structure_and_token_budget_audit,prioritized_fix_first_report
+    & $gate -Mode validate -RepoRoot $RepoRoot -TaskStatePath $v692Path
 
     $releasePath = Join-Path $root 'release.json'
     $releaseReview = New-Artifact 'release-review-report'

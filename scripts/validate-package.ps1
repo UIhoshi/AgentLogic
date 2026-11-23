@@ -50,8 +50,10 @@ Assert-Exists -Root $RepoRoot -RelativePath "scripts/audit-skill-duplicates.ps1"
 Assert-Exists -Root $RepoRoot -RelativePath "scripts/test-skill-registry.ps1" -Label "Skill registry activation test"
 Assert-Exists -Root $RepoRoot -RelativePath "scripts/test-skill-enforcement.ps1" -Label "Skill enforcement test"
 Assert-Exists -Root $RepoRoot -RelativePath "scripts/validate-skill-workflow-graph.ps1" -Label "Skill workflow graph validator"
+Assert-Exists -Root $RepoRoot -RelativePath "scripts/validate-role-personas.ps1" -Label "Role personas validator"
 Assert-Exists -Root $RepoRoot -RelativePath "scripts/test-skill-workflow-graph.ps1" -Label "Skill workflow graph test"
 Assert-Exists -Root $RepoRoot -RelativePath "contracts/host-skill-capabilities.json" -Label "Host skill deployment contract"
+Assert-Exists -Root $RepoRoot -RelativePath "contracts/role-personas.json" -Label "Role personas contract"
 Assert-Exists -Root $RepoRoot -RelativePath "contracts/skill-registry.json" -Label "Portable skill registry"
 Assert-Exists -Root $RepoRoot -RelativePath "contracts/skill-enforcement.json" -Label "Skill enforcement contract"
 Assert-Exists -Root $RepoRoot -RelativePath "contracts/skill-workflow-graph.json" -Label "Skill workflow graph contract"
@@ -220,6 +222,8 @@ if ($manifest.current_version -match '^V6\.(8\.[2-9]|9\.)') {
 
 & powershell -NoProfile -ExecutionPolicy Bypass -File (Join-Path $RepoRoot 'scripts\validate-skill-routing.ps1') -RepoRoot $RepoRoot
 if ($LASTEXITCODE -ne 0) { Fail 'Autonomous skill routing validation failed.' }
+& powershell -NoProfile -ExecutionPolicy Bypass -File (Join-Path $RepoRoot 'scripts\validate-role-personas.ps1') -RepoRoot $RepoRoot
+if ($LASTEXITCODE -ne 0) { Fail 'Role personas contract validation failed.' }
 
 if ($manifest.current_version -match '^V6\.(8\.[3-9]|9\.)') {
     $referenceWorkflowModule = "modules/47_V6_8_ReferenceToInterfaceWorkflow.md"

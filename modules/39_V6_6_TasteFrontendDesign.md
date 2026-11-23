@@ -116,3 +116,12 @@ Before generating bespoke frontend illustrations, vector graphics (`.svg`), Canv
 5. **Scoped Creative Animation Sub-Path (Do NOT Bloat Standard Business UI)**:
    - Keep standard business/SaaS UI lean with native HTML/CSS (`modern-web-guidance`).
    - Only when building bespoke multi-act generative animations or painterly/ink/brush art styles, prefer modular separation (`rig/`, `timeline/`, `scenes/`) and specialized rendering primitives (e.g., `p5.js` + `p5.brush.js`, `Three.js`) over cramming bare geometric approximations into a single file.
+
+---
+
+## 10. Side-by-Side Design QA & P0/P1/P2 Blocking Iteration Loop
+
+When verifying a rendered UI, prototype, or mockup-to-code implementation against its source visual target (approved mockup, Figma node, or reference capture):
+1. **True Side-by-Side Visual Comparison**: Never treat inspecting the source design and the rendered implementation screenshot in two separate, isolated views as side-by-side QA. Compare both artifacts side-by-side (or inside a single combined composite input) at matching viewport dimensions and interaction states.
+2. **Prioritized Severity Classification (`P0` / `P1` / `P2`)**: Record concrete visual discrepancies (layout drift, clipping/overflow, contrast/token mismatch, missing hierarchy, broken responsive state) by severity (`P0` blocker, `P1` major, `P2` polish).
+3. **Blocking Remediation Loop**: If any actionable `P0`/`P1`/`P2` issue is found, keep Design QA in a **blocked** state, apply the fix, recapture at the same viewport/state, and re-compare side-by-side until clean. Build, dependency, lint, or preview server troubleshooting passes do NOT count as Design QA iterations.

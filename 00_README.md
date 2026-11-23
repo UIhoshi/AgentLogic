@@ -20,13 +20,13 @@ or begin implementation before the logic-entry loop above has been completed.
 > `README.md` is the canonical English repository README and entry documentation. This file is retained as a legacy/reference document and is not part of the formal logic-entry chain.
 
 
-# 🌌 AgentLogic: 智能体级本地自进化规则引擎 (V6.9.1)
+# 🌌 AgentLogic: 智能体级本地自进化规则引擎 (V6.9.2)
 
 [![Agentic Code](https://img.shields.io/badge/Agent-Autonomous-blueviolet?style=flat-square)](https://github.com/UIhoshi/AgentLogic)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/Version-V6.9.1_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_9_1.md)
+[![Version](https://img.shields.io/badge/Version-V6.9.2_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_9_2.md)
 
-AgentLogic 是一套专为本地 AI 编码宿主（**Antigravity / Gemini**、**Claude Code**、**OpenAI Codex / GPT**）设计的**分层自进化规则引擎**。它将多轮会话规范、**开局角色自主推荐门（Turn 1 Role Gate）**、**纯前端 UI/UX 设计与文生图强制联动门**、**遇到即自动触发的 9 大第一方专业领域技能**、安全沙箱审计及项目知识同步集成打包，作为 AI 智能体的“主运行心智”。
+AgentLogic 是一套专为本地 AI 编码宿主（**Antigravity / Gemini**、**Claude Code**、**OpenAI Codex / GPT**）设计的**分层自进化规则引擎**。它将多轮会话规范、**11 大正交主控角色与双轴 Subagent 协同小队门（Turn 1 Role Gate）**、**纯前端 UI/UX 设计与文生图强制联动门**、**Skill-First 条件反射自动触发协议与 17 大第一方专业领域技能**、安全沙箱审计及项目知识同步集成打包，作为 AI 智能体的“主运行心智”。
 
 > [!IMPORTANT]
 > **开发前置卡点**：本仓库是逻辑基础设施，而非普通的业务项目。
@@ -41,8 +41,8 @@ AgentLogic 是一套专为本地 AI 编码宿主（**Antigravity / Gemini**、**
 | 操作步骤 | 运行指令 (PowerShell) | 核心作用 |
 | :--- | :--- | :--- |
 | **1. 环境诊断** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\doctor.ps1` | 检测仓库健康度，读取元数据，生成推荐安装指令 |
-| **2. 一键安装** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost antigravity` | 构建并部署宿主规则包及 9 个第一方自动触发 Skill（可将 `antigravity` 替换为 `claude` 或 `codex`） |
-| **3. 本地验证** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\maintainer-check.ps1` | 运行 157 个注册技能、19 条自动路由、34 项外部引用及四层架构完整性校验 |
+| **2. 一键安装** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost antigravity` | 构建并部署宿主规则包及 17 个第一方自动触发 Skill（可将 `antigravity` 替换为 `claude` 或 `codex`） |
+| **3. 本地验证** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\maintainer-check.ps1` | 运行 164 个注册技能、26 条自动路由、11 大角色契约、36 项外部引用、Token 预算及四端 + Codex 插件包完整性校验 |
 
 ---
 
@@ -54,31 +54,33 @@ AgentLogic 是一套专为本地 AI 编码宿主（**Antigravity / Gemini**、**
 flowchart TD
     subgraph L1 ["L1: 入口、战略与开局角色门 (Turn 1 强制阻断)"]
         Entry["MAIN.md / AGENTS.md / 宿主全局规则"] --> Gate1{"Gate 1: 开局与上下文门"}
-        Gate1 -->|"询问是否延续或 forget/compress"| RoleRouter["role-persona-router (自动推荐 #1 主责角色 + 7 大专家角色菜单)"]
+        Gate1 -->|"询问是否延续或 forget/compress"| RoleRouter["role-persona-router (11 大正交角色 + 双轴 Subagent 小队)"]
         RoleRouter --> Check["00_START_HERE.md & 知识同步 (PROJECT_MAP / CODE_MAP)"]
     end
 
-    subgraph L2 ["L2: 会话、SDD 与 19 路由全自动分发层"]
-        Check --> Router{"Gate 3: 遇到任务即自动路由"}
+    subgraph L2 ["L2: 会话、SDD 与 26 路由全自动分发层"]
+        Check --> Router{"Gate 3: Skill-First Reflex -> 自动路由"}
         Router -->|"UI / 前端页面任务"| Grilling["product-requirements-grilling (单问题逐步追问生成需求简报)"]
+        Router -->|"图表 / 看板 / 游戏"| VizGame["web-data-visualization & web-game-studio"]
         Router -->|"功能开发 / 架构重构"| SDD["38_SpecDrivenDevelopment.md (Spec -> 红队自审 -> Plan -> Tasks)"]
-        Router -->|"逆向 / 多模态 / Office / 小说 / 流程图"| DomainDispatch["零手动选择：领域能力自动派发"]
+        Router -->|"安全 / CI / 技能评估 / 多模态 / Office"| DomainDispatch["零手动选择：领域能力自动派发"]
     end
 
     subgraph L3 ["L3: 纯设计规范、代码精炼与审计验证层"]
         Grilling --> UIProMax["Gate 2: ui-ux-pro-max (纯前端设计规范：配色 / 字体配对 / 空间栅格)"]
         UIProMax --> MockupGate["强制联动文生图生成 UI 效果图 + 等待用户确认"]
-        MockupGate --> UIImpl["前端代码实现 & 浏览器真实渲染 / 溢出边界验证"]
+        MockupGate --> UIImpl["前端代码实现 & 并排 Design QA / 多状态截图验证"]
         SDD --> CodeSimp["code-simplifier (实现后自动 AST 结构化精简与卫语句重构)"]
         CodeSimp --> Verify["29_MandatoryVerificationMatrix.md & SRA 交付可评审性审计"]
     end
 
-    subgraph L4 ["L4: 9 大第一方自动触发驱动与 157 可移植技能库"]
-        UIImpl --> BrowserSkill["agent-browser & nano-banana-pro"]
+    subgraph L4 ["L4: 17 大第一方自动触发驱动与 164 可移植技能库"]
+        UIImpl --> BrowserSkill["modern-web-guidance, chrome-extensions, web-data-visualization & web-game-studio"]
+        DomainDispatch --> AppSecCI["appsec-review, gh-pr-ci-triage & skill-evaluator"]
         DomainDispatch --> Decompile["decompile-reconstruction (IDA / Ghidra / jadx / webcrack -> 洁净室源码还原)"]
-        DomainDispatch --> MediaDir["multimodal-media-director (文生图构图 / 文生视频分镜运镜 / 文生音乐编曲)"]
-        DomainDispatch --> OfficePro["office-pro-suite (Word 三线表排版 / Excel 投行动态公式 / PPT 结论先行)"]
-        DomainDispatch --> NovelArch["novel-story-architect (.story-bible/ 防吃书设定集 + 场景节拍表 + 去 AI 腔调)"]
+        DomainDispatch --> MediaDir["multimodal-media-director (文生图 / 视频分镜 / Remotion & HyperFrames / 音乐编曲)"]
+        DomainDispatch --> OfficePro["office-pro-suite (Word / Excel+三表勾稽 / PPT 结论先行 / PDF 渲染检查)"]
+        DomainDispatch --> NovelArch["novel-story-architect & screenplay-manga-director (小说 / 漫剧本 / 短视频 / 影视剧本)"]
         DomainDispatch --> DiagramArch["diagram-flowchart-architect (.drawio 原生 XML / .excalidraw 手绘 / 主题 Mermaid)"]
     end
 
@@ -88,9 +90,9 @@ flowchart TD
     classDef l4 fill:#dcfce7,stroke:#15803d,color:#14532d,stroke-width:2px
 
     class Entry,Gate1,RoleRouter,Check l1
-    class Router,Grilling,SDD,DomainDispatch l2
+    class Router,Grilling,VizGame,SDD,DomainDispatch l2
     class UIProMax,MockupGate,UIImpl,CodeSimp,Verify l3
-    class BrowserSkill,Decompile,MediaDir,OfficePro,NovelArch,DiagramArch l4
+    class BrowserSkill,AppSecCI,Decompile,MediaDir,OfficePro,NovelArch,DiagramArch l4
 ```
 
 ### 模块详细清单
@@ -98,9 +100,9 @@ flowchart TD
 | 抽象层级 | 核心职责 | 包含的规则文件 / 目录 |
 | :--- | :--- | :--- |
 | **L1: Strategy & Entry**<br>(战略与入口层) | 确立 AI 起手式、开局上下文确认、开局角色自主推荐（`role-persona-router`）及项目知识同步。 | - [00_START_HERE.md](./00_START_HERE.md) (起手式)<br>- [MAIN.md](./MAIN.md) (宿主绑定入口)<br>- [AGENTS.md](./AGENTS.md) (智能体规范)<br>- [15_LogicEntryChecklist.md](./modules/15_LogicEntryChecklist.md) (自检清单)<br>- [54_V6_9_RoleAndMultimodalCreativeGovernance.md](./modules/54_V6_9_RoleAndMultimodalCreativeGovernance.md) (V6.9 角色与多模态治理) |
-| **L2: Session & Loop**<br>(会话与循环层) | 规范多轮对话中的单问题需求澄清、SDD 六阶段规格驱动及 19 条自动任务路由。 | - [03_AgenticLoop.md](./modules/03_AgenticLoop.md) (执行循环)<br>- [38_SpecDrivenDevelopment.md](./modules/38_V6_6_SpecDrivenDevelopment.md) (SDD 规格驱动六阶段)<br>- [48_V6_8_SkillAndToolRouting.md](./modules/48_V6_8_SkillAndToolRouting.md) (技能与工具自动路由)<br>- [53_V6_8_ProgrammingLevelSkillEnforcement.md](./modules/53_V6_8_ProgrammingLevelSkillEnforcement.md) (编程级技能强制状态机) |
-| **L3: Control & Auditing**<br>(执行与控制层) | 执行纯 UI 设计规范 + 文生图前置确认、代码实现后自动精简（`code-simplifier`）及验证矩阵。 | - [29_MandatoryVerificationMatrix.md](./modules/29_MandatoryVerificationMatrix.md) (强验证矩阵)<br>- [39_TasteFrontendDesign.md](./modules/39_V6_6_TasteFrontendDesign.md) (视觉品味与 UI 审计)<br>- [30_ToolQuestionBoundaryMatrix.md](./modules/30_ToolQuestionBoundaryMatrix.md) (提问凭证边界)<br>- [31_ToolMisuseAndAntiPatternMatrix.md](./modules/31_ToolMisuseAndAntiPatternMatrix.md) (反模式纠偏) |
-| **L4: Drivers & Skills**<br>(基底与驱动层) | 自动同步部署到三大宿主的 **9 大第一方自动触发技能** 与 **157 个注册可移植技能**。 | - `skills/` (9 大第一方自动触发技能 + 157 个可移植技能)<br>  * [role-persona-router](./skills/productivity/role-persona-router/) (开局角色自主推荐与 7 大角色菜单)<br>  * [product-requirements-grilling](./skills/productivity/product-requirements-grilling/) (单问题交互式需求追问)<br>  * [ui-ux-pro-max](./skills/design/ui-ux-pro-max/) (纯前端 UI/UX 设计规范 + 文生图强制联动)<br>  * [multimodal-media-director](./skills/creative/multimodal-media-director/) (文生图 / 文生视频分镜 / 文生音乐编曲导演)<br>  * [office-pro-suite](./skills/productivity/office-pro-suite/) (Word / Excel / PPT 专业化设计与规范化)<br>  * [novel-story-architect](./skills/creative/novel-story-architect/) (`.story-bible/` 设定集防吃书与去 AI 味长篇小说引擎)<br>  * [diagram-flowchart-architect](./skills/engineering/diagram-flowchart-architect/) (`.drawio` / `.excalidraw` / 主题 `Mermaid` 架构流程图)<br>  * [code-simplifier](./skills/engineering/code-simplifier/) (实现后自动代码精炼与 AST 改写)<br>  * [decompile-reconstruction](./skills/engineering/decompile-reconstruction/) (二进制/字节码/混淆包自动反编译与洁净室源码还原) |
+| **L2: Session & Loop**<br>(会话与循环层) | 规范多轮对话中的单问题需求澄清、SDD 六阶段规格驱动及 26 条自动任务路由。 | - [03_AgenticLoop.md](./modules/03_AgenticLoop.md) (执行循环)<br>- [38_SpecDrivenDevelopment.md](./modules/38_V6_6_SpecDrivenDevelopment.md) (SDD 规格驱动六阶段)<br>- [48_V6_8_SkillAndToolRouting.md](./modules/48_V6_8_SkillAndToolRouting.md) (技能与工具自动路由)<br>- [53_V6_8_ProgrammingLevelSkillEnforcement.md](./modules/53_V6_8_ProgrammingLevelSkillEnforcement.md) (编程级技能强制状态机) |
+| **L3: Control & Auditing**<br>(执行与控制层) | 执行纯 UI 设计规范 + 文生图前置确认、并排 Design QA、代码精简（`code-simplifier`）、Token 评估及验证矩阵。 | - [29_MandatoryVerificationMatrix.md](./modules/29_MandatoryVerificationMatrix.md) (强验证矩阵)<br>- [39_TasteFrontendDesign.md](./modules/39_V6_6_TasteFrontendDesign.md) (视觉品味与并排 Design QA)<br>- [30_ToolQuestionBoundaryMatrix.md](./modules/30_ToolQuestionBoundaryMatrix.md) (提问凭证边界)<br>- [31_ToolMisuseAndAntiPatternMatrix.md](./modules/31_ToolMisuseAndAntiPatternMatrix.md) (反模式纠偏) |
+| **L4: Drivers & Skills**<br>(基底与驱动层) | 自动同步部署到三大宿主的 **17 大第一方自动触发技能** 与 **164 个注册可移植技能**（含 11 角色契约与 Codex 原生插件包）。 | - `skills/` (17 大第一方自动触发技能 + 164 个可移植技能)<br>  * [role-persona-router](./skills/productivity/role-persona-router/) (开局 11 角色推荐与双轴 Subagent 小队)<br>  * [product-requirements-grilling](./skills/productivity/product-requirements-grilling/) (单问题交互式需求追问)<br>  * [ui-ux-pro-max](./skills/design/ui-ux-pro-max/) (纯前端 UI/UX 设计规范 + 文生图联动)<br>  * [modern-web-guidance](./skills/frontend/modern-web-guidance/) (现代 Web 平台 API、Baseline 兼容与 `legacy-scan`)<br>  * [chrome-extensions](./skills/frontend/chrome-extensions/) (Manifest V3 浏览器扩展与商店合规)<br>  * [web-data-visualization](./skills/frontend/web-data-visualization/) (Web 数据可视化、看板、地图与双端视图)<br>  * [web-game-studio](./skills/frontend/web-game-studio/) (2D Phaser / 3D Three.js 浏览器游戏工程与试玩)<br>  * [multimodal-media-director](./skills/creative/multimodal-media-director/) (文生图 / 视频分镜 / Remotion & HyperFrames / 音乐编曲)<br>  * [office-pro-suite](./skills/productivity/office-pro-suite/) (Word / Excel+三表勾稽 / PPT / PDF 渲染校验)<br>  * [novel-story-architect](./skills/creative/novel-story-architect/) (`.story-bible/` 设定集防吃书与去 AI 味长篇小说引擎)<br>  * [screenplay-manga-director](./skills/creative/screenplay-manga-director/) (漫剧本分格 / 短视频 0-3s 钩子台本 / 影视剧本导演)<br>  * [diagram-flowchart-architect](./skills/engineering/diagram-flowchart-architect/) (`.drawio` / `.excalidraw` / 主题 `Mermaid` 架构流程图)<br>  * [appsec-review](./skills/engineering/appsec-review/) (Diff 可达性安全审查、三态裁决与 STRIDE 威胁建模)<br>  * [gh-pr-ci-triage](./skills/engineering/gh-pr-ci-triage/) (GitHub Actions CI 日志排查与 PR 评论闭环)<br>  * [skill-evaluator](./skills/engineering/skill-evaluator/) (`SKILL.md` 质量、触发精度与 Token 预算评估)<br>  * [code-simplifier](./skills/engineering/code-simplifier/) (实现后自动代码精炼与 AST 改写)<br>  * [decompile-reconstruction](./skills/engineering/decompile-reconstruction/) (二进制/字节码/混淆包自动反编译与洁净室源码还原) |
 
 ---
 
@@ -161,6 +163,8 @@ AgentLogic 的演进离不开开源社区的启发。我们在设计中深度参
 | **Draw.io Official MCP & Skill** | [jgraph/drawio-mcp](https://github.com/jgraph/drawio-mcp) | 提供原生可编辑 `.drawio` XML 与正交防重叠连线规范 |
 | **Agents365 Draw.io Skill** | [Agents365-ai/drawio-skill](https://github.com/Agents365-ai/drawio-skill) | 启发企业级泳道图、系统架构图与 ER 图的多视图生成 |
 | **Excalidraw Diagram Skill** | [coleam00/excalidraw-diagram-skill](https://github.com/coleam00/excalidraw-diagram-skill) | 启发带色彩分区与画布防溢出校验的 `.excalidraw` 手绘架构图生成 |
+| **OpenAI Plugins** | [openai/plugins](https://github.com/openai/plugins) | 吸收 MIT `web-data-visualization`、`skill-evaluator`、`web-game-studio`、Codex `.codex-plugin/plugin.json` 格式，以及洁净室并排 Design QA 与 Diff 安全审查理念 |
+| **OpenAI Skills（上游已归档）** | [openai/skills](https://github.com/openai/skills) | 整合 Apache-2.0 AppSec（`security-best-practices` / `threat-model` / `ownership-map`）、GitHub PR/CI（`gh-fix-ci` / `gh-address-comments`）与 PDF 视觉校验工作流 |
 
 ---
 
@@ -168,7 +172,7 @@ AgentLogic 的演进离不开开源社区的启发。我们在设计中深度参
 
 1. **逻辑包纯粹性**：本仓库是规则元数据，不能写入具体的业务项目代码。
 2. **防盲目执行**：AI 助理在进行复杂重构或方案设计前，必须在 `.specify/` 下完成 `spec.md` (规格) 和 `plan.md` (技术规划)。
-3. **版本隔离**：修改核心机制时，应优先回写 `versions/AgentLogic_V6_9_1.md`，然后重新运行 `build-profile.ps1` 进行编译部署。
+3. **版本隔离**：修改核心机制时，应优先回写 `versions/AgentLogic_V6_9_2.md`，然后重新运行 `build-profile.ps1` 进行编译部署。
 
 > [!IMPORTANT]
 > **逻辑版本升级必查红线清单（防漏改与防历史踩坑）**：
@@ -184,5 +188,5 @@ AgentLogic 的演进离不开开源社区的启发。我们在设计中深度参
 ## 🛡️ 安全合规、净室重构与第三方开源致谢声明
 
 1. **合法授权与净室重构声明 (Authorized Security & Clean-Room Use Only)**：本仓库包含的二进制反编译与净室源码重构规则（`decompile-reconstruction`）以及安全审计技能路由包（`skills/reverse-skill/`）**仅限用于合法的互操作性净室研究（Clean-Room Reconstruction）、恶意样本防御分析、CTF 竞赛、安全教学及经明确书面授权的安全测试**。严禁用于任何未经授权的逆向破解或非法入侵行为。
-2. **开源致谢与许可证声明 (Third-Party Open-Source Attribution)**：AgentLogic 作为跨宿主元治理框架，致谢并吸收了上表列出的 34 个优秀开源项目的理念与可移植技能结构。各内嵌子模块（如 `spec-kit`、`taste-skill`、`agent-browser`、`reverse-skill` 等）均保留其原有的 `MIT` / `Apache-2.0` 开源许可证文件与版权归属。
+2. **开源致谢与许可证声明 (Third-Party Open-Source Attribution)**：AgentLogic 作为跨宿主元治理框架，致谢并吸收了上表列出的 36 个优秀开源项目的理念与可移植技能结构。各内嵌子模块（如 `spec-kit`、`taste-skill`、`agent-browser`、`reverse-skill`、`modern-web-guidance` 等）均保留其原有的 `MIT` / `Apache-2.0` 开源许可证文件与版权归属。
 3. **纯规则与契约边界**：本仓库仅提供纯文本 Markdown 规则、JSON 路由契约与自动化校验脚本，不包含任何商业闭源软件的源码或专有二进制文件。

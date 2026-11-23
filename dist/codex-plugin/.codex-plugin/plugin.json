@@ -1,0 +1,41 @@
+{
+    "name":  "agentlogic",
+    "version":  "6.9.2",
+    "description":  "AgentLogic cross-host governance, Turn 1 11-role \u0026 Subagent squad routing, design-first UI mockups, and 17 habitual auto-triggered first-party skills.",
+    "author":  {
+                   "name":  "UIhoshi",
+                   "url":  "https://github.com/UIhoshi/AgentLogic"
+               },
+    "homepage":  "https://github.com/UIhoshi/AgentLogic",
+    "repository":  "https://github.com/UIhoshi/AgentLogic",
+    "license":  "MIT",
+    "keywords":  [
+                     "agentlogic",
+                     "codex",
+                     "governance",
+                     "sdd",
+                     "ui-ux",
+                     "appsec",
+                     "data-visualization",
+                     "skills"
+                 ],
+    "skills":  "./skills/",
+    "interface":  {
+                      "displayName":  "AgentLogic",
+                      "shortDescription":  "Habitual auto-triggered skills and blocking quality gates",
+                      "longDescription":  "Bundles AgentLogic first-party portable skills (requirements grilling, 11-role + Subagent squad routing, pure UI/UX design, modern web, Chrome MV3, data visualization, web games, Office/PDF, multimodal video/audio, novel continuity, manga/short-video/screenplay scripts, diagrams, AppSec review, GitHub PR/CI triage, code simplification, decompilation, and skill evaluation).",
+                      "developerName":  "UIhoshi",
+                      "category":  "Developer Tools",
+                      "capabilities":  [
+                                           "Interactive",
+                                           "Read",
+                                           "Write"
+                                       ],
+                      "websiteURL":  "https://github.com/UIhoshi/AgentLogic",
+                      "defaultPrompt":  [
+                                            "Start a new project with AgentLogic Gate 1 role recommendation and skill routing.",
+                                            "Review my diff with AppSec three-state triage and Self-Refute First rigor.",
+                                            "Evaluate a local SKILL.md for trigger precision and token budget."
+                                        ]
+                  }
+}

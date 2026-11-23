@@ -21,8 +21,10 @@ $targetPath = Join-Path $targetDir "model_instructions.md"
 $configPath = Join-Path $UserHome ".codex\config.toml"
 $deploySkillScript = Join-Path $repoRoot 'scripts\deploy-first-party-skill.ps1'
 $deployEnforcementScript = Join-Path $repoRoot 'scripts\deploy-skill-enforcement.ps1'
+$buildCodexPluginScript = Join-Path $repoRoot 'scripts\build-codex-plugin.ps1'
 $productSkillTarget = Join-Path $UserHome '.codex\skills\product-requirements-grilling'
 $enforcementTarget = Join-Path $UserHome '.codex\agentlogic\skill-enforcement'
+$codexPluginTarget = Join-Path $UserHome '.codex\agentlogic\codex-plugin'
 
 New-Item -ItemType Directory -Force -Path $targetDir | Out-Null
 
@@ -63,6 +65,9 @@ powershell -NoProfile -ExecutionPolicy Bypass -File $deployEnforcementScript -Re
 if ($LASTEXITCODE -ne 0) { throw "deploy-skill-enforcement.ps1 failed with exit code $LASTEXITCODE." }
 powershell -NoProfile -ExecutionPolicy Bypass -File $deployEnforcementScript -RepoRoot $repoRoot -TargetPath $enforcementTarget -Verify
 if ($LASTEXITCODE -ne 0) { throw "Skill enforcement payload verification failed with exit code $LASTEXITCODE." }
+
+powershell -NoProfile -ExecutionPolicy Bypass -File $buildCodexPluginScript -RepoRoot $repoRoot -OutputDir $codexPluginTarget
+if ($LASTEXITCODE -ne 0) { throw "build-codex-plugin.ps1 failed with exit code $LASTEXITCODE." }
 
 powershell -NoProfile -ExecutionPolicy Bypass -File $skillsGovernanceScript -TargetHost codex -UserHome $UserHome
 if ($LASTEXITCODE -ne 0) { throw "skills-governance.ps1 failed with exit code $LASTEXITCODE." }

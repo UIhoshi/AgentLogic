@@ -17,11 +17,11 @@ Do not continue deeper reading, modify files, delete files, perform write action
 or begin implementation before the logic-entry loop above has been completed.
 -->
 
-# 🌌 AgentLogic: Autonomous Evolving Rule Engine (V6.9.1)
+# 🌌 AgentLogic: Autonomous Evolving Rule Engine (V6.9.2)
 
 [![Agentic Code](https://img.shields.io/badge/Agent-Autonomous-blueviolet?style=flat-square)](https://github.com/UIhoshi/AgentLogic)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/Version-V6.9.1_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_9_1.md)
+[![Version](https://img.shields.io/badge/Version-V6.9.2_Stable-emerald?style=flat-square)](./versions/AgentLogic_V6_9_2.md)
 
 AgentLogic is a versioned primary-logic package designed to be pulled into local AI coding hosts (**Antigravity / Gemini**, **Claude Code**, **OpenAI Codex / GPT**) and used as their default operating mind. It consolidates multi-turn session workflows, **Turn 1 autonomous role recommendation**, **pure UI/UX design + text-to-image mockup coupling**, **zero-manual-selection domain skill routing**, security sandbox auditing, and project-native knowledge synchronization.
 
@@ -33,7 +33,7 @@ AgentLogic is a versioned primary-logic package designed to be pulled into local
 
 ## 🚀 Zero-Friction Install (Let Your Agent Do It)
 
-You don't need to manually copy 158 skill folders. Just paste this repository to your coding agent (**Antigravity**, **Claude Code**, or **OpenAI Codex**):
+You don't need to manually copy 164 skill folders. Just paste this repository to your coding agent (**Antigravity**, **Claude Code**, or **OpenAI Codex**):
 
 > **Prompt for your Agent**:  
 > `Read AGENT_INSTALL.md in this repository, install AgentLogic for my local host non-destructively, and verify with scripts/doctor.ps1.`
@@ -44,8 +44,8 @@ You don't need to manually copy 158 skill folders. Just paste this repository to
 | Step | PowerShell Command | Primary Purpose |
 | :--- | :--- | :--- |
 | **1. Diagnosis** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\doctor.ps1` | Analyzes repository layout, checks manifests, and recommends installers |
-| **2. Install** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost antigravity` | Validates, builds, verifies, and deploys the host-ready ruleset and **11 first-party skills** (`antigravity` / `claude` / `codex`) |
-| **3. Validation** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\maintainer-check.ps1` | Verifies structural link integrity, 158 registered skills, 21 auto-routes, and compiled adapter bundles |
+| **2. Install** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -TargetHost antigravity` | Validates, builds, verifies, and deploys the host-ready ruleset and **17 first-party skills** (`antigravity` / `claude` / `codex`) |
+| **3. Validation** | `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\maintainer-check.ps1` | Verifies structural link integrity, 164 registered skills, 26 auto-routes, 11 role personas, skill token budgets, and compiled adapter + Codex plugin bundles |
 
 </details>
 
@@ -53,9 +53,9 @@ You don't need to manually copy 158 skill folders. Just paste this repository to
 
 ## ⚡ Why AgentLogic? (vs. Vanilla AI & Ad-hoc Skills)
 
-| Dimension | Vanilla AI (Raw Prompting) | Ad-hoc Skill Users | AgentLogic (`V6.9.1`) |
+| Dimension | Vanilla AI (Raw Prompting) | Ad-hoc Skill Users | AgentLogic (`V6.9.2`) |
 | :--- | :--- | :--- | :--- |
-| **Skill Dispatch** | Relies on ad-hoc prompting; resets every new session | Requires remembering & manually invoking skills | **Zero-Manual-Selection**: Turn 1 role router + **21 deterministic auto-routes** |
+| **Skill Dispatch** | Relies on ad-hoc prompting; resets every new session | Requires remembering & manually invoking skills | **Skill-First Reflex Habit**: Turn 1 **11-role + Subagent squad router** + **26 deterministic auto-routes** & **17 auto-deployed first-party skills** |
 | **Blocking Gates** | AI often skips planning and dumps boilerplate code | Soft suggestions only; skills can be bypassed | **Hard Blocking Gates**: 1-question requirements brief → `ui-ux-pro-max` spec → text-to-image mockup approval before UI code |
 | **Real-World Visuals & Motion** | Hallucinates anatomy/geometry for SVGs & animations | No visual/motion reference enforcement | **Real-World Reference Grounding**: Requires real photos/GIFs/short videos before coding SVGs, Canvas, or animations of real-world subjects |
 | **Modern Web & Extensions** | Frequently defaults to legacy CSS/JS workarounds | Fragmented or outdated frontend guidance | **GoogleChrome/modern-web-guidance** (209 Baseline guides + `legacy-scan`) & **Chrome Extensions MV3** built into auto-routes |
@@ -63,7 +63,7 @@ You don't need to manually copy 158 skill folders. Just paste this repository to
 
 ---
 
-## 🏛️ 4-Layer Architecture & V6.9.1 Autonomous Execution Flow
+## 🏛️ 4-Layer Architecture & V6.9.2 Autonomous Execution Flow
 
 We organize rules, blocking gates, and auto-triggered capabilities into a **4-layer progressive abstraction model** so every host executes the same deterministic workflow without manual `/skill` selection:
 
@@ -71,34 +71,36 @@ We organize rules, blocking gates, and auto-triggered capabilities into a **4-la
 flowchart TD
     subgraph L1 ["L1: Strategy, Entry & Role Gate (Turn 1 Blocking)"]
         Entry["MAIN.md / AGENTS.md / Host Global Rules"] --> Gate1{"Gate 1: Startup & Context Gate"}
-        Gate1 -->|"Ask forget/compress context"| RoleRouter["role-persona-router (Auto #1 Role Recommendation + 7-Role Menu)"]
+        Gate1 -->|"Ask forget/compress context"| RoleRouter["role-persona-router (11-Role Orthogonal Matrix + Dual-Axis Subagent Squads)"]
         RoleRouter --> Check["00_START_HERE.md & Knowledge Sync (PROJECT_MAP / CODE_MAP)"]
     end
 
-    subgraph L2 ["L2: Session, SDD & Automatic Task Router (21 Routes)"]
-        Check --> Router{"Gate 3: Encounter -> Auto-Route"}
+    subgraph L2 ["L2: Session, SDD & Automatic Task Router (26 Routes)"]
+        Check --> Router{"Gate 3: Skill-First Reflex -> Auto-Route"}
         Router -->|"UI / Frontend Task"| Grilling["product-requirements-grilling (1-Question-at-a-Time Brief)"]
         Router -->|"Small Fix / Modernization"| WebMod["web-platform-modernization (modern-web-guidance / legacy-scan)"]
         Router -->|"Chrome Extension"| ExtRoute["chrome-extension-development (chrome-extensions MV3)"]
+        Router -->|"Data Viz / Browser Game"| VizGame["web-data-visualization & web-game-studio"]
         Router -->|"Feature / Refactor"| SDD["38_SpecDrivenDevelopment.md (Spec -> Red-Team -> Plan -> Tasks)"]
-        Router -->|"Domain / Creative / Reverse Task"| DomainDispatch["Zero-Manual-Selection Domain Dispatch"]
+        Router -->|"AppSec / PR CI / Skill Eval / Creative"| DomainDispatch["Zero-Manual-Selection Domain Dispatch"]
     end
 
     subgraph L3 ["L3: Design, Reference Grounding & Verification Gates"]
         Grilling --> UIProMax["Gate 2: ui-ux-pro-max (Pure Palette / Typography / Grid Spec)"]
         UIProMax --> MockupGate["Mandatory Text-to-Image UI Mockup + User Approval Gate"]
-        MockupGate --> RefGate["Real-World Visual & Motion Reference Grounding (Photos / GIFs / Video)"]
-        RefGate --> UIImpl["modern-web-guidance + Frontend Implementation & Visual Verification"]
+        MockupGate --> RefGate["Real-World Visual & Motion Reference Grounding + Side-by-Side Design QA"]
+        RefGate --> UIImpl["modern-web-guidance + Frontend Implementation & Multi-State Visual Audit"]
         SDD --> CodeSimp["code-simplifier (Post-Implementation AST & Guard-Clause Polish)"]
         CodeSimp --> Verify["29_MandatoryVerificationMatrix.md & SRA Audit"]
     end
 
-    subgraph L4 ["L4: First-Party Auto-Triggered Skills & Drivers (158 Portable Skills)"]
-        UIImpl --> BrowserSkill["modern-web-guidance, chrome-extensions, agent-browser & nano-banana-pro"]
+    subgraph L4 ["L4: 17 First-Party Auto-Triggered Skills & 164 Registered Portable Skills"]
+        UIImpl --> BrowserSkill["modern-web-guidance, chrome-extensions, web-data-visualization & web-game-studio"]
+        DomainDispatch --> AppSecCI["appsec-review (Diff-Scoped STRIDE), gh-pr-ci-triage & skill-evaluator"]
         DomainDispatch --> Decompile["decompile-reconstruction (IDA / Ghidra / jadx / webcrack -> Clean-Room Source)"]
-        DomainDispatch --> MediaDir["multimodal-media-director (Text-to-Image / Video Storyboard / Music Arrangement)"]
-        DomainDispatch --> OfficePro["office-pro-suite (Executive Word .docx / Dynamic Excel .xlsx / Action-Title PPT .pptx)"]
-        DomainDispatch --> NovelArch["novel-story-architect (.story-bible/ Continuity + Scene Beats + Anti-AI-Cliche)"]
+        DomainDispatch --> MediaDir["multimodal-media-director (Image / Video / Remotion & HyperFrames / Music)"]
+        DomainDispatch --> OfficePro["office-pro-suite (Word .docx / Excel .xlsx + Tie-Out / PPT .pptx / PDF Visual QA)"]
+        DomainDispatch --> NovelArch["novel-story-architect & screenplay-manga-director (Novels / Manga / Short-Video / Screenplays)"]
         DomainDispatch --> DiagramArch["diagram-flowchart-architect (.drawio XML / .excalidraw JSON / Themed Mermaid)"]
     end
 
@@ -108,9 +110,9 @@ flowchart TD
     classDef l4 fill:#dcfce7,stroke:#15803d,color:#14532d,stroke-width:2px
 
     class Entry,Gate1,RoleRouter,Check l1
-    class Router,Grilling,WebMod,ExtRoute,SDD,DomainDispatch l2
+    class Router,Grilling,WebMod,ExtRoute,VizGame,SDD,DomainDispatch l2
     class UIProMax,MockupGate,RefGate,UIImpl,CodeSimp,Verify l3
-    class BrowserSkill,Decompile,MediaDir,OfficePro,NovelArch,DiagramArch l4
+    class BrowserSkill,AppSecCI,Decompile,MediaDir,OfficePro,NovelArch,DiagramArch l4
 ```
 
 ### Detailed End-to-End Execution & Blocking Gate Workflow
@@ -181,7 +183,7 @@ flowchart TD
 | **L1: Strategy & Entry** | Defines entrypoints, Turn 1 context-reset confirmation, autonomous `#1` role recommendation (`role-persona-router`), and project-native knowledge sync. | - [00_START_HERE.md](./00_START_HERE.md) (起手式)<br>- [MAIN.md](./MAIN.md) (Stable Host Binding)<br>- [AGENTS.md](./AGENTS.md) (Agent Entry)<br>- [15_LogicEntryChecklist.md](./modules/15_LogicEntryChecklist.md) (Gate Checklist)<br>- [54_V6_9_RoleAndMultimodalCreativeGovernance.md](./modules/54_V6_9_RoleAndMultimodalCreativeGovernance.md) (V6.9 Role & Creative Gates) |
 | **L2: Session & Loop** | Manages the single-turn execution cycle, single-question requirements grilling, SDD lifecycle, and 21-route zero-manual-selection dispatch. | - [03_AgenticLoop.md](./modules/03_AgenticLoop.md) (Agentic Cycle)<br>- [38_SpecDrivenDevelopment.md](./modules/38_V6_6_SpecDrivenDevelopment.md) (SDD Lifecycle)<br>- [48_V6_8_SkillAndToolRouting.md](./modules/48_V6_8_SkillAndToolRouting.md) (Autonomous Skill & Tool Routing)<br>- [53_V6_8_ProgrammingLevelSkillEnforcement.md](./modules/53_V6_8_ProgrammingLevelSkillEnforcement.md) (Skill Enforcement State Machine) |
 | **L3: Control & Auditing** | Establishes pure UI/UX design-first + mandatory text-to-image mockup gating, post-implementation code simplification, and verification matrices. | - [29_MandatoryVerificationMatrix.md](./modules/29_MandatoryVerificationMatrix.md) (Verification Matrix)<br>- [39_TasteFrontendDesign.md](./modules/39_V6_6_TasteFrontendDesign.md) (Aesthetic & Spacing Audit)<br>- [30_ToolQuestionBoundaryMatrix.md](./modules/30_ToolQuestionBoundaryMatrix.md) (Credential Boundary)<br>- [31_ToolMisuseAndAntiPatternMatrix.md](./modules/31_ToolMisuseAndAntiPatternMatrix.md) (Anti-Pattern Gating) |
-| **L4: Base & Drivers** | 11 first-party auto-deployed domain skills across all hosts (`~/.gemini/skills`, `~/.claude/skills`, `~/.codex/skills`), 158 portable skills, and original UI templates. | - `skills/` (11 First-Party Auto-Triggered Skills + 158 Registered Portable Skills)<br>  * [role-persona-router](./skills/productivity/role-persona-router/) (Turn 1 Role Recommendation & 7-Role Menu)<br>  * [product-requirements-grilling](./skills/productivity/product-requirements-grilling/) (Single-Question Requirements Brief)<br>  * [ui-ux-pro-max](./skills/design/ui-ux-pro-max/) (Pure UI/UX Design Spec + Mandatory Text-to-Image Coupling)<br>  * [modern-web-guidance](./skills/frontend/modern-web-guidance/) (Modern Web Platform APIs, Baseline Compatibility, CWV & `legacy-scan`)<br>  * [chrome-extensions](./skills/frontend/chrome-extensions/) (Manifest V3 Browser Extensions & Chrome Web Store Publishing)<br>  * [multimodal-media-director](./skills/creative/multimodal-media-director/) (Text-to-Image / Video Storyboard / Music Production)<br>  * [office-pro-suite](./skills/productivity/office-pro-suite/) (Executive Word `.docx`, Excel `.xlsx`, PowerPoint `.pptx`)<br>  * [novel-story-architect](./skills/creative/novel-story-architect/) (`.story-bible/` Continuity & Anti-AI-Cliché Fiction Engine)<br>  * [diagram-flowchart-architect](./skills/engineering/diagram-flowchart-architect/) (`.drawio` XML, `.excalidraw` JSON & Themed Mermaid)<br>  * [code-simplifier](./skills/engineering/code-simplifier/) (Auto Post-Implementation Code Refinement & AST Rewrite)<br>  * [decompile-reconstruction](./skills/engineering/decompile-reconstruction/) (Auto Decompilation & Clean-Room Source Reconstruction)<br>- [`templates/frontend/`](./templates/frontend/) (Original, unbranded UI starting points) |
+| **L4: Base & Drivers** | 17 first-party auto-deployed domain skills across all hosts (`~/.gemini/skills`, `~/.claude/skills`, `~/.codex/skills`), 164 portable skills, 11 role personas (`contracts/role-personas.json`), Codex plugin bundle, and original UI templates. | - `skills/` (17 First-Party Auto-Triggered Skills + 164 Registered Portable Skills)<br>  * [role-persona-router](./skills/productivity/role-persona-router/) (Turn 1 11-Role Recommendation & Dual-Axis Subagent Squads)<br>  * [product-requirements-grilling](./skills/productivity/product-requirements-grilling/) (Single-Question Requirements Brief)<br>  * [ui-ux-pro-max](./skills/design/ui-ux-pro-max/) (Pure UI/UX Design Spec + Mandatory Text-to-Image Coupling)<br>  * [modern-web-guidance](./skills/frontend/modern-web-guidance/) (Modern Web Platform APIs, Baseline Compatibility, CWV & `legacy-scan`)<br>  * [chrome-extensions](./skills/frontend/chrome-extensions/) (Manifest V3 Browser Extensions & Chrome Web Store Publishing)<br>  * [web-data-visualization](./skills/frontend/web-data-visualization/) (Truthful Charts, Dashboards, Maps, D3/Vega/Canvas2D & Dual-Viewport QA)<br>  * [web-game-studio](./skills/frontend/web-game-studio/) (2D Phaser/Canvas2D & 3D Three.js/R3F Browser Games & Playtest)<br>  * [multimodal-media-director](./skills/creative/multimodal-media-director/) (Text-to-Image / Video Storyboard / Remotion & HyperFrames / Music Production)<br>  * [office-pro-suite](./skills/productivity/office-pro-suite/) (Executive Word `.docx`, Excel `.xlsx` + Tie-Out, PowerPoint `.pptx` & PDF `.pdf` Visual QA)<br>  * [novel-story-architect](./skills/creative/novel-story-architect/) (`.story-bible/` Continuity & Anti-AI-Cliché Fiction Engine)<br>  * [screenplay-manga-director](./skills/creative/screenplay-manga-director/) (Manga/Webtoon Panels, 0–3s Hook Short-Video Tables & Film/Animation Screenplays)<br>  * [diagram-flowchart-architect](./skills/engineering/diagram-flowchart-architect/) (`.drawio` XML, `.excalidraw` JSON & Themed Mermaid)<br>  * [appsec-review](./skills/engineering/appsec-review/) (Diff-Scoped AppSec Review, Tri-State Verdicts, STRIDE & Ownership Map)<br>  * [gh-pr-ci-triage](./skills/engineering/gh-pr-ci-triage/) (GitHub Actions CI Failure Logs & PR Review Resolution via `gh` CLI)<br>  * [skill-evaluator](./skills/engineering/skill-evaluator/) (Skill Quality, Trigger Precision, Link & Token-Budget Evaluation)<br>  * [code-simplifier](./skills/engineering/code-simplifier/) (Auto Post-Implementation Code Refinement & AST Rewrite)<br>  * [decompile-reconstruction](./skills/engineering/decompile-reconstruction/) (Auto Decompilation & Clean-Room Source Reconstruction)<br>- [`templates/frontend/`](./templates/frontend/) (Original, unbranded UI starting points) |
 
 ---
 
@@ -249,6 +251,8 @@ During its evolutionary cycles, AgentLogic has integrated concepts and structure
 | **Draw.io Official MCP & Skill** | [jgraph/drawio-mcp](https://github.com/jgraph/drawio-mcp) | Provides native `.drawio` XML and orthogonal layout rules for enterprise flowcharts |
 | **Agents365 Draw.io Skill** | [Agents365-ai/drawio-skill](https://github.com/Agents365-ai/drawio-skill) | Informs multi-view architecture, swimlane, and ER schema generation in `.drawio` |
 | **Excalidraw Diagram Skill** | [coleam00/excalidraw-diagram-skill](https://github.com/coleam00/excalidraw-diagram-skill) | Informs color-zoned hand-drawn system design diagrams in `.excalidraw` |
+| **OpenAI Plugins** | [openai/plugins](https://github.com/openai/plugins) | Informs MIT `web-data-visualization`, `skill-evaluator`, `web-game-studio`, Codex `.codex-plugin/plugin.json` packaging, and clean-room side-by-side Design QA / diff-scoped AppSec patterns |
+| **OpenAI Skills (Deprecated Upstream)** | [openai/skills](https://github.com/openai/skills) | Provides Apache-2.0 AppSec (`security-best-practices` / `threat-model` / `ownership-map`), GitHub PR/CI (`gh-fix-ci` / `gh-address-comments`), and PDF (`pdf`) workflows |
 
 ---
 
@@ -256,26 +260,26 @@ During its evolutionary cycles, AgentLogic has integrated concepts and structure
 
 1. **Keep it Pure**: No business logic or project-specific implementations should be written into `AgentLogic` rule files.
 2. **Specify Before Writing**: Always compile technical blueprints to `.specify/spec.md` and `.specify/plan.md` before touching code.
-3. **Generate via Bundle**: Never edit `dist/` bundles manually. Always write updates to version files (e.g. `versions/AgentLogic_V6_9_1.md`), then run `build-profile.ps1` to rebuild the adapter targets.
+3. **Generate via Bundle**: Never edit `dist/` bundles manually. Always write updates to version files (e.g. `versions/AgentLogic_V6_9_2.md`), then run `build-profile.ps1` to rebuild the adapter targets.
 
 > [!IMPORTANT]
 > **Mandatory Version Update & Pitfall Checklist (逻辑版本更新必查红线)**:
 > Whenever promoting a version or updating core rules/skills, you **MUST** check and synchronize all items below (derived from `.learnings/ERRORS.md` historical post-mortems):
-> 1. **11-File Version & Skill Sync**: Synchronize `manifest.json`, `versions/AgentLogic_<VER>.md`, `00_START_HERE.md`, `AGENTS.md`, `MAIN.md`, `README.md`, `00_README.md`, `AGENT_INSTALL.md`, `modules/01_MasterLogic.md` (L2 + L4 9 first-party skills), `modules/11_CrossDirectoryMap.md`, `modules/40_AgentLogicSystemMap.md`, `PROJECT_MAP.md`, `CODE_MAP.md`, and `CHANGELOG.md`.
+> 1. **11-File Version & Skill Sync**: Synchronize `manifest.json`, `versions/AgentLogic_<VER>.md`, `00_START_HERE.md`, `AGENTS.md`, `MAIN.md`, `README.md`, `00_README.md`, `AGENT_INSTALL.md`, `modules/01_MasterLogic.md` (L2 + L4 17 first-party skills), `modules/11_CrossDirectoryMap.md`, `modules/40_AgentLogicSystemMap.md`, `PROJECT_MAP.md`, `CODE_MAP.md`, and `CHANGELOG.md`.
 > 2. **CP1252 & UTF-8 Encoding Redlines**: Keep all operational `.ps1` scripts 100% pure ASCII without BOM (use `\uXXXX` escapes instead of literal `—` or CJK text); always pass `-Encoding UTF8` to `Get-Content`; always write JSON/JS/MD using `[System.Text.UTF8Encoding]::new($false)` (no BOM, no `\u9225` CP936 mojibake).
 > 3. **PowerShell & Antigravity Pitfalls**: Never use `$host` as a variable name; never use double-quoted `@"..."@` for Markdown containing backticks (`` `f `` becomes `\x0C`); always inline Gates 1–4 in `~/.gemini/GEMINI.md` (24 KB cap) and register `~/.gemini/skills`.
 > 4. **Skill YAML & Defender Defanging**: Every `SKILL.md` must have YAML front-matter `name:`; security reference docs must defang raw `<script>` / `onerror=` strings to prevent Windows Defender false-positive quarantine.
 > 5. **4-Host Rebuild, Local Sync & Tag Alignment**: Run `scripts/maintainer-check.ps1` + `scripts/audit-skill-duplicates.ps1 -FailOnCandidates`, run `install.ps1` across `antigravity` / `claude` / `codex`, and align the Git release tag with the final `main` commit.
 
-## V6.9.1 Role & Multimodal Creative Governance
+## V6.9.2 Role & Multimodal Creative Governance
 
 The default `core-enhanced` profile includes [`modules/54_V6_9_RoleAndMultimodalCreativeGovernance.md`](./modules/54_V6_9_RoleAndMultimodalCreativeGovernance.md) alongside [`modules/44_V6_8_GrokBuildOperationalIntegration.md`](./modules/44_V6_8_GrokBuildOperationalIntegration.md), [`modules/45_V6_8_GraphifyCodeMapIntegration.md`](./modules/45_V6_8_GraphifyCodeMapIntegration.md), [`modules/47_V6_8_ReferenceToInterfaceWorkflow.md`](./modules/47_V6_8_ReferenceToInterfaceWorkflow.md), [`modules/48_V6_8_SkillAndToolRouting.md`](./modules/48_V6_8_SkillAndToolRouting.md), [`modules/52_V6_8_Img2ThreeJs3DWebIntegration.md`](./modules/52_V6_8_Img2ThreeJs3DWebIntegration.md), and [`modules/53_V6_8_ProgrammingLevelSkillEnforcement.md`](./modules/53_V6_8_ProgrammingLevelSkillEnforcement.md).
 
-- **Gate 1 (Turn 1 Context & Autonomous Role Gate)**: Every new project or non-continuation task triggers context-reset confirmation and [`role-persona-router`](./skills/productivity/role-persona-router/SKILL.md) to recommend the `#1` best-fit Lead Role + present a 7-role selection menu.
+- **Gate 1 (Turn 1 Context & 11-Role + Subagent Squad Gate)**: Every new project or non-continuation task triggers context-reset confirmation and [`role-persona-router`](./skills/productivity/role-persona-router/SKILL.md) (`contracts/role-personas.json`) to recommend the `#1` best-fit Lead Role (+ optional Subagent Squad for complex tasks) & present the 11-role selection menu.
 - **Gate 2 (Pure UI Design + Mandatory Text-to-Image Coupling)**: Every net-new or substantially refactored UI runs [`product-requirements-grilling`](./skills/productivity/product-requirements-grilling/SKILL.md) $\rightarrow$ [`ui-ux-pro-max`](./skills/design/ui-ux-pro-max/SKILL.md) $\rightarrow$ [`multimodal-media-director`](./skills/creative/multimodal-media-director/SKILL.md) (`image-generator` / `nano-banana-pro`) and pauses for user approval before writing frontend code.
-- **Gate 3 (Encounter $\rightarrow$ Auto-Use Domain Capabilities)**: Compiled binaries/bundles trigger [`decompile-reconstruction`](./skills/engineering/decompile-reconstruction/SKILL.md); post-implementation code triggers [`code-simplifier`](./skills/engineering/code-simplifier/SKILL.md); `.docx`/`.xlsx`/`.pptx` tasks trigger [`office-pro-suite`](./skills/productivity/office-pro-suite/SKILL.md); image/video/music generation triggers [`multimodal-media-director`](./skills/creative/multimodal-media-director/SKILL.md); fiction/script tasks trigger [`novel-story-architect`](./skills/creative/novel-story-architect/SKILL.md); flowchart/architecture diagrams trigger [`diagram-flowchart-architect`](./skills/engineering/diagram-flowchart-architect/SKILL.md).
+- **Gate 3 (Skill-First Reflex -> Auto-Use Domain Capabilities)**: Compiled binaries/bundles trigger [`decompile-reconstruction`](./skills/engineering/decompile-reconstruction/SKILL.md); post-implementation code triggers [`code-simplifier`](./skills/engineering/code-simplifier/SKILL.md); `.docx`/`.xlsx`/`.pptx`/`.pdf` tasks trigger [`office-pro-suite`](./skills/productivity/office-pro-suite/SKILL.md); image/video/Remotion/music tasks trigger [`multimodal-media-director`](./skills/creative/multimodal-media-director/SKILL.md); fiction prose triggers [`novel-story-architect`](./skills/creative/novel-story-architect/SKILL.md); manga/short-video/screenplay scripts trigger [`screenplay-manga-director`](./skills/creative/screenplay-manga-director/SKILL.md); flowchart/architecture diagrams trigger [`diagram-flowchart-architect`](./skills/engineering/diagram-flowchart-architect/SKILL.md); security reviews/threat models trigger [`appsec-review`](./skills/engineering/appsec-review/SKILL.md); charts/dashboards/maps trigger [`web-data-visualization`](./skills/frontend/web-data-visualization/SKILL.md); browser games trigger [`web-game-studio`](./skills/frontend/web-game-studio/SKILL.md); GitHub PR/CI triage triggers [`gh-pr-ci-triage`](./skills/engineering/gh-pr-ci-triage/SKILL.md); and skill audits trigger [`skill-evaluator`](./skills/engineering/skill-evaluator/SKILL.md).
 
-## V6.9.1 Project-Native Knowledge Sync & Skill Enforcement
+## V6.9.2 Project-Native Knowledge Sync & Skill Enforcement
 
 Business projects synchronize their own concise operational facts and symbol-level navigation with code through tracked `AGENTS.md`, `PROJECT_MAP.md`, `CODE_MAP.md`, and `.learnings/ERRORS.md`. See [Project-Native Knowledge Sync](./modules/46_V6_8_ProjectKnowledgeSync.md), [CHANGELOG.md](./CHANGELOG.md), and [Module 53](./modules/53_V6_8_ProgrammingLevelSkillEnforcement.md).
 

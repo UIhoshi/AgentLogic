@@ -85,7 +85,7 @@ foreach ($node in $nodes) {
     }
 }
 
-$requiredNodes = @('role-selection','requirements-grilling','design-direction-selection','image-mockup','frontend-implementation','code-refinement','decompile-reconstruction','multimodal-media','office-document','novel-writing','diagram-flowchart','behavior-verification','browser-and-visual-verification','code-review','handover')
+$requiredNodes = @('role-selection','requirements-grilling','design-direction-selection','image-mockup','frontend-implementation','code-refinement','decompile-reconstruction','multimodal-media','office-document','novel-writing','screenplay-manga-video','diagram-flowchart','web-data-visualization','web-game-development','gh-pr-ci-triage','skill-evaluation','behavior-verification','browser-and-visual-verification','code-review','handover')
 foreach ($id in $requiredNodes) { if (-not $byId.ContainsKey($id)) { throw "Skill workflow graph is missing required node '$id'." } }
 $websitePipelines = @($graph.default_pipelines | Where-Object id -eq 'website-delivery')
 if ($websitePipelines.Count -ne 1) { throw 'Skill workflow graph requires exactly one website-delivery default pipeline.' }

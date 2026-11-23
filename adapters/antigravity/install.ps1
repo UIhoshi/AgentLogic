@@ -100,15 +100,20 @@ $hookTemplate = @'
   1. **Context-Reset Confirmation**: Ask whether the current task extends the previous coding round, and if not, whether to `forget/compress context` in the user's interaction language:
      - Chinese: "__ZH_STARTUP_PROMPT__"
      - English: "Does the current task extend the previous coding round? If not, please confirm whether to forget/compress context."
-  2. **Autonomous Role Recommendation & Selection ([role-persona-router](file:///__SKILLS_ROOT_URI__/role-persona-router/SKILL.md))**:
-     - Analyze the user's project/task, **recommend the #1 best-fit Lead Role (with a 1-sentence rationale)**, and display the compact 7-role selection menu so the user can approve or switch roles:
+  2. **Autonomous Role Recommendation & Dual-Axis Subagent Squads ([role-persona-router](file:///__SKILLS_ROOT_URI__/role-persona-router/SKILL.md))**:
+     - Analyze the user's project/task, **recommend the #1 best-fit Lead Role (with a 1-sentence rationale)** (plus a 1-line **Supporting Subagent Squad** ONLY when cross-domain/multi-module complexity warrants it), and display the compact 11-role selection menu so the user can approve or switch roles:
        - `[1] Principal Systems Architect & Full-Stack Lead`
        - `[2] UI/UX Creative Design Director & Frontend Craftsman`
        - `[3] Reverse Engineering & Clean-Room Reconstruction Specialist`
        - `[4] Management Consultant & Financial/Office Architect`
-       - `[5] Multimodal Creative Director (Text-to-Image / Video / Music)`
+       - `[5] Multimodal Creative Director (Image / Video / Code Video / Music)`
        - `[6] Chief Showrunner & Long-Form Novel Architect`
        - `[7] Enterprise Architecture & Flowchart Cartographer`
+       - `[8] AppSec & DevSecOps Security Guardian`
+       - `[9] Data Analytics & Visualization Architect`
+       - `[10] Interactive Game & Creative Graphics Lead`
+       - `[11] Screenwriter, Manga-Script & Short-Video Showrunner`
+     - **Subagent Role Assignment**: When spawning any subagent in complex tasks, assign BOTH Axis A (`explore|plan|implement|review|verify`) and Axis B (`[1]`-`[11]` or `codebase-explorer` / `independent-verifier`), propagate required `SKILL.md` paths (`Bound Skills`), enforce disjoint write ownership, and keep `max_depth = 1`.
 - To prevent the "limited initial view" issue, proactively scan the `AgentLogic` directory or read [AGENTS_BUNDLE.md](file:///__BUNDLE_PATH_URI__) immediately upon startup.
 
 ## Gate 2: Pure UI Design (`ui-ux-pro-max`) + Mandatory Text-to-Image Mockup Gate (BLOCKING Before Any UI Code)
@@ -121,20 +126,27 @@ $hookTemplate = @'
      - Combine the `ui-ux-pro-max` design specification into a high-precision visual prompt and invoke Antigravity's built-in **`image-generator` subagent** (`invoke_subagent` with `TypeName: "image-generator"`) or `nano-banana-pro` to generate the visual UI mockup image.
      - Save/copy the generated mockup image to `.specify/mockups/` (or artifact directory), present both the **Design Specification** and **Mockup Image** to the user, and wait for user approval before writing UI implementation code.
   4. **Workflow State Recording**: Record route progression (`requirements-grilling` -> `design-direction` -> `ui-design` -> `ui-implementation`) using [skill-enforcement.ps1](file:///__ENFORCEMENT_SCRIPT_URI__).
-  5. **Real-World Visual & Motion Reference Grounding Gate (SVG / Canvas / 3D / Animation)**:
+  5. **Real-World Visual & Motion Reference Grounding & Side-by-Side Design QA**:
      - **Real-World Existing Subject** (e.g., globe, zebra, animal, anatomy, landmark, real mechanism): NEVER draw or animate from blind text priors or text-only `search_web` summaries. First download real reference photos AND real GIF/short video/gait references locally (e.g., `references/media/`) and visually inspect them via `read_file` to extract continuous anatomical silhouettes, joint musculature, pattern flow, and keyframe phases before writing SVG/Canvas/CSS/JS animation code (avoid bare ovals + stick-puppet tube limbs).
      - **Non-Existent / Purely Abstract Subject**: Proceed directly to creative design without mandatory real-world reference lookup.
+     - **Side-by-Side Design QA**: Compare the approved mockup/source visual and the rendered implementation screenshot side-by-side at matching viewports (`?t=` for animations); fix any P0/P1/P2 gap before claiming completion.
 
-## Gate 3: Encounter -> Auto-Use Domain Capabilities (Zero Manual Skill Selection)
-- **ZERO MANUAL SKILL SELECTION**: Never wait for the user to name a skill. Automatically read and execute the matching first-party skill when encountering any of the following tasks:
-  1. **Compiled Binaries, Bytecode, or Obfuscated Bundles** -> [decompile-reconstruction](file:///__SKILLS_ROOT_URI__/decompile-reconstruction/SKILL.md) (orchestrating IDA Pro MCP `idapro_*`, Ghidra MCP/headless, `jadx`, `ilspycmd`, `pycdc`, `webcrack` -> clean-room source reconstruction).
-  2. **Post-Implementation Polish & Code Refactoring** -> [code-simplifier](file:///__SKILLS_ROOT_URI__/code-simplifier/SKILL.md) (lock green baseline -> flatten nesting with guard clauses -> `ast-grep` (`sg`) structural rewrites -> verify zero behavior change).
-  3. **Word (`.docx`), Excel (`.xlsx`), & PowerPoint (`.pptx`) Professional Design** -> [office-pro-suite](file:///__SKILLS_ROOT_URI__/office-pro-suite/SKILL.md) (executive typography & three-line/zebra tables in Word; live formulas & blue/black/green financial modeling standard in Excel; 16:9 action-title visual variety in PPT).
-  4. **Text-to-Image, Text-to-Video, & Text-to-Music Generation** -> [multimodal-media-director](file:///__SKILLS_ROOT_URI__/multimodal-media-director/SKILL.md) (art-direction prompts for Imagen/Gemini/Flux; shot-by-shot camera storyboards for Veo/Kling/Hailuo; BPM/Key/Instrumentation/Metatag production sheets for Lyria/MiniMax/Suno).
-  5. **Long-Form Novel, Fiction, & Script Writing** -> [novel-story-architect](file:///__SKILLS_ROOT_URI__/novel-story-architect/SKILL.md) (`.story-bible/` continuity compiler, scene beat sheets, and strict anti-AI-cliche prose filter).
-  6. **Flowcharts, Swimlanes, & System Architecture Diagrams** -> [diagram-flowchart-architect](file:///__SKILLS_ROOT_URI__/diagram-flowchart-architect/SKILL.md) (automatic `.drawio` XML, `.excalidraw` JSON, and syntax-validated themed `Mermaid`).
-  7. **Modern Web Frontend (HTML / CSS / DOM / Client-Side JS / CWV / A11y)** -> [modern-web-guidance](file:///__SKILLS_ROOT_URI__/modern-web-guidance/SKILL.md) (query `npx -y modern-web-guidance@latest` or local `guides/` FIRST for modals/popovers/tables/dark mode/scroll animations/forms/performance/a11y/Baseline fallbacks, and `legacy-scan` for modernization).
-  8. **Chrome / Browser Extensions (Manifest V3 & Chrome Web Store)** -> [chrome-extensions](file:///__SKILLS_ROOT_URI__/chrome-extensions/SKILL.md) (MV3 service workers, side panels, CSP-safe sandboxes, permissions, and Web Store review compliance).
+## Gate 3: Skill-First Reflex & Auto-Use Domain Capabilities (Zero Manual Skill Selection)
+- **SKILL-FIRST REFLEX HABIT (NON-NEGOTIABLE)**: Never wait for the user to name a skill. Before writing code, designing UI/charts, reviewing security/PRs, creating Office/PDF/media/games, or auditing skills, ALWAYS run a 3-second Scenario -> Skill scan. On ANY match, immediately read its `SKILL.md`, announce `[Skill Activated: <name>]`, and execute it by default (chaining multiple skills when a task spans domains) __EM_DASH__ never improvise from memory:
+  1. **Compiled Binaries, Bytecode, or Obfuscated Bundles** -> [decompile-reconstruction](file:///__SKILLS_ROOT_URI__/decompile-reconstruction/SKILL.md) (IDA/Ghidra/`jadx`/`ilspycmd`/`pycdc`/`webcrack` -> clean-room source).
+  2. **Post-Implementation Polish & Code Refactoring** -> [code-simplifier](file:///__SKILLS_ROOT_URI__/code-simplifier/SKILL.md) (green baseline -> guard clauses -> `ast-grep` (`sg`) rewrites -> zero regression).
+  3. **Word (`.docx`), Excel (`.xlsx`), PowerPoint (`.pptx`), & PDF (`.pdf`)** -> [office-pro-suite](file:///__SKILLS_ROOT_URI__/office-pro-suite/SKILL.md) (Word styles/three-line tables; Excel live formulas + tie-out QA; 16:9 action-title PPT + QC; PDF `pdftoppm` visual inspection).
+  4. **Text-to-Image, Text-to-Video, Programmatic Video, & Music** -> [multimodal-media-director](file:///__SKILLS_ROOT_URI__/multimodal-media-director/SKILL.md) (Imagen/Gemini/Flux; Veo/Kling/Hailuo storyboards; Remotion/HyperFrames code video; Lyria/MiniMax/Suno).
+  5. **Long-Form Novel, Fiction, & Script Writing** -> [novel-story-architect](file:///__SKILLS_ROOT_URI__/novel-story-architect/SKILL.md) (`.story-bible/` continuity compiler, scene beats, anti-AI-cliche filter).
+  6. **Flowcharts, Swimlanes, & System Architecture Diagrams** -> [diagram-flowchart-architect](file:///__SKILLS_ROOT_URI__/diagram-flowchart-architect/SKILL.md) (`.drawio` XML, `.excalidraw` JSON, themed `Mermaid`).
+  7. **Modern Web Frontend (HTML / CSS / DOM / Client-Side JS / CWV / A11y)** -> [modern-web-guidance](file:///__SKILLS_ROOT_URI__/modern-web-guidance/SKILL.md) (query `npx -y modern-web-guidance@latest` or local `guides/` FIRST, and `legacy-scan` for modernization).
+  8. **Chrome / Browser Extensions (Manifest V3 & Chrome Web Store)** -> [chrome-extensions](file:///__SKILLS_ROOT_URI__/chrome-extensions/SKILL.md) (MV3 service workers, side panels, CSP sandboxes, store compliance).
+  9. **Security Review, Diff Audit, Threat Model, & Ownership Map** -> [appsec-review](file:///__SKILLS_ROOT_URI__/appsec-review/SKILL.md) (diff-scoped reachability, `SECURITY.md` policy, `confirmed`/`not_actionable`/`needs_review` verdicts, STRIDE).
+  10. **Web Data Visualization (Charts / Dashboards / Maps / D3 / Vega / Canvas2D)** -> [web-data-visualization](file:///__SKILLS_ROOT_URI__/web-data-visualization/SKILL.md) (truthful encodings, dual desktop/mobile views, URL state, a11y).
+  11. **2D / 3D Browser Games (Phaser / Canvas2D / Three.js / R3F)** -> [web-game-studio](file:///__SKILLS_ROOT_URI__/web-game-studio/SKILL.md) (modular `core/entities/ui`, asset pipeline, browser playtest loop).
+  12. **GitHub Actions CI Failures & PR Review Threads (`gh` CLI)** -> [gh-pr-ci-triage](file:///__SKILLS_ROOT_URI__/gh-pr-ci-triage/SKILL.md) (check `gh auth status`, inspect failed logs, plan before fixing).
+  13. **Skill & Plugin Quality / Token-Budget Evaluation** -> [skill-evaluator](file:///__SKILLS_ROOT_URI__/skill-evaluator/SKILL.md) (`At a Glance` / `Fix First` audit, frontmatter/links/token budget).
+  14. **Manga/Webtoon Scripts, Short-Video/Micro-Drama Scripts, & Screenplays** -> [screenplay-manga-director](file:///__SKILLS_ROOT_URI__/screenplay-manga-director/SKILL.md) (panel breakdown, 0-3s hook multi-track table, `INT./EXT.` format, `.story-bible/` & media handoff).
 
 ## Gate 4: Project-Native Knowledge Sync & Verification Matrix
 - Before business-project implementation, run `git fetch --prune` (when available) and read the project's tracked `AGENTS.md`, `PROJECT_MAP.md`, `CODE_MAP.md`, and `.learnings/ERRORS.md`. Update `PROJECT_MAP.md`, `CODE_MAP.md`, and `.learnings/ERRORS.md` in the same commit as structural, key-flow, or error-lesson changes.

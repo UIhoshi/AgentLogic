@@ -30,7 +30,13 @@ $companionSkills = @(
     @{ Name = 'code-simplifier'; Relative = 'skills\engineering\code-simplifier' },
     @{ Name = 'decompile-reconstruction'; Relative = 'skills\engineering\decompile-reconstruction' },
     @{ Name = 'modern-web-guidance'; Relative = 'skills\frontend\modern-web-guidance' },
-    @{ Name = 'chrome-extensions'; Relative = 'skills\frontend\chrome-extensions' }
+    @{ Name = 'chrome-extensions'; Relative = 'skills\frontend\chrome-extensions' },
+    @{ Name = 'appsec-review'; Relative = 'skills\engineering\appsec-review' },
+    @{ Name = 'web-data-visualization'; Relative = 'skills\frontend\web-data-visualization' },
+    @{ Name = 'gh-pr-ci-triage'; Relative = 'skills\engineering\gh-pr-ci-triage' },
+    @{ Name = 'skill-evaluator'; Relative = 'skills\engineering\skill-evaluator' },
+    @{ Name = 'web-game-studio'; Relative = 'skills\frontend\web-game-studio' },
+    @{ Name = 'screenplay-manga-director'; Relative = 'skills\creative\screenplay-manga-director' }
 )
 foreach ($skill in $companionSkills) {
     $skillSource = Join-Path $RepoRoot $skill.Relative

@@ -36,6 +36,20 @@ foreach ($target in $targets) {
     }
 }
 
+Write-Host "Running first-party skill quality and token-budget evaluation..."
+$evalScript = Join-Path $RepoRoot "scripts\eval-skills.ps1"
+& powershell -NoProfile -ExecutionPolicy Bypass -File $evalScript -RepoRoot $RepoRoot -FailOnFirstPartyErrors
+if ($LASTEXITCODE -ne 0) {
+    throw "eval-skills.ps1 failed with exit code $LASTEXITCODE."
+}
+
+Write-Host "Building standard Codex plugin bundle..."
+$codexPluginScript = Join-Path $RepoRoot "scripts\build-codex-plugin.ps1"
+& powershell -NoProfile -ExecutionPolicy Bypass -File $codexPluginScript -RepoRoot $RepoRoot
+if ($LASTEXITCODE -ne 0) {
+    throw "build-codex-plugin.ps1 failed with exit code $LASTEXITCODE."
+}
+
 Write-Host "Running AgentLogic package validation..."
 & powershell -NoProfile -ExecutionPolicy Bypass -File $validateScript -RepoRoot $RepoRoot
 if ($LASTEXITCODE -ne 0) {

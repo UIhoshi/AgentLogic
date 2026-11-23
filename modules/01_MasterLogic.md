@@ -1,4 +1,4 @@
-# AgentLogic V6.9.1 Master Logic
+# AgentLogic V6.9.2 Master Logic
 
 本文件是 AgentLogic 仓库的项目级主逻辑摘要。它描述本仓库中的规则、验证、安装和
 打包资产，不描述任何外部业务项目或某个具体 Agentic CLI 产品的源码事实。
@@ -23,7 +23,7 @@
 
 ### L2：会话规则与开发生命周期 (Session & Development Lifecycle)
 
-- 稳定版本源：`versions/AgentLogic_V6_9_1.md`
+- 稳定版本源：`versions/AgentLogic_V6_9_2.md`
 - 主逻辑摘要：`modules/01_MasterLogic.md`
 - Agent 强制规则：`modules/12_AgentEnforcement.md`
 - 入口清单：`modules/15_LogicEntryChecklist.md`
@@ -36,7 +36,7 @@
 - 工具可供性优先路由：`modules/51_V6_8_AffordanceFirstToolUse.md`
 - 交互式 3D 网页模型策略：`modules/52_V6_8_Img2ThreeJs3DWebIntegration.md`
 - 编程级技能强制：`modules/53_V6_8_ProgrammingLevelSkillEnforcement.md`、`contracts/skill-registry.json`、`contracts/skill-enforcement.json`
-- 角色推荐与多模态创意治理：`modules/54_V6_9_RoleAndMultimodalCreativeGovernance.md`
+- 角色推荐、Subagent 分工与多模态创意治理：`modules/54_V6_9_RoleAndMultimodalCreativeGovernance.md`、`contracts/role-personas.json`
 - 任务规格与状态：`.specify/`
 
 ### L3：安全、权限与验证控制 (Safety & Verification Control)
@@ -48,13 +48,15 @@
 - 反模式纠偏：`modules/31_ToolMisuseAndAntiPatternMatrix.md`
 - 技能与工具路由：`modules/48_V6_8_SkillAndToolRouting.md`
 - 规则入口校验：`scripts/check-logic-entry.js`
+- 技能质量与 Token 预算评估：`scripts/eval-skills.ps1`
+- Codex 原生插件打包：`scripts/build-codex-plugin.ps1`
 - 包校验：`scripts/validate-package.ps1`
 - 维护者校验：`scripts/maintainer-check.ps1`
 - 环境诊断：`scripts/doctor.ps1`
 
 ### L4：规则资产、技能与生成输出 (Assets & Generated Outputs)
 
-- 可移植技能：`skills/`（含 11 个第一方自动触发技能：`product-requirements-grilling`、`role-persona-router`、`ui-ux-pro-max`、`multimodal-media-director`、`office-pro-suite`、`novel-story-architect`、`diagram-flowchart-architect`、`code-simplifier`、`decompile-reconstruction`、`modern-web-guidance`、`chrome-extensions`）
+- 可移植技能：`skills/`（含 17 个第一方自动触发技能：`product-requirements-grilling`、`role-persona-router`、`ui-ux-pro-max`、`multimodal-media-director`、`office-pro-suite`、`novel-story-architect`、`screenplay-manga-director`、`diagram-flowchart-architect`、`code-simplifier`、`decompile-reconstruction`、`modern-web-guidance`、`chrome-extensions`、`appsec-review`、`web-data-visualization`、`web-game-studio`、`gh-pr-ci-triage`、`skill-evaluator`）
 - SDD 工具层：`spec-kit/`
 - 原始参考层：不入库（仅保留在仓库外的本地存档；`reference/` 已被 `.gitignore` 排除）
 - 宿主 bundle：`dist/`
@@ -172,7 +174,7 @@ UI 实施完成后仍必须执行截图、父子布局边界、溢出、换行�
   才能候选 `img2threejs`，且不得推断已安装、可信或可执行。
 - 多模块功能、重大重构、架构或发布工作在 Converge/Ship 时应询问用户是否需要代码视图预览。
 - 用户明确同意后，才可在目标业务项目中生成 `graphify-out/`；不得默认在 AgentLogic 仓库内生成，也不得把外部图谱结果当作运行时事实证明。
-- `modules/53_V6_8_ProgrammingLevelSkillEnforcement.md` 与 `modules/54_V6_9_RoleAndMultimodalCreativeGovernance.md` 要求每个可携带 `SKILL.md` 在机器可读注册表中有生命周期状态；匹配路由必须经过可执行的 preflight、invocation 与 closure 记录。Turn 1 启动自动触发 `role-persona-router` 角色推荐；UI 设计自动串联 `product-requirements-grilling` -> `ui-ux-pro-max` -> 文生图预览 -> `modern-web-guidance`（HTML/CSS/JS 与 Baseline 兼容/无障碍/CWV 规范，涉及浏览器扩展自动触发 `chrome-extensions`；若涉及现实存在物体/动作的 SVG/Canvas/动画，必须先获取真实图片/GIF/短视频参照物再实现）；遇到重构或代码改良任务时自动触发 `code-refinement`（`code-simplifier`），遇到二进制/字节码/混淆包反编译与源码还原任务时自动触发 `decompile-reconstruction`，遇到 Office 文档、多模态生成、长篇小说、流程图/架构图时分别自动触发 `office-pro-suite`、`multimodal-media-director`、`novel-story-architect`、`diagram-flowchart-architect`，无需用户手动指定 skill。该工作流门不等同于未验证的宿主原生工具拦截。
+- `modules/53_V6_8_ProgrammingLevelSkillEnforcement.md` 与 `modules/54_V6_9_RoleAndMultimodalCreativeGovernance.md` 要求每个可携带 `SKILL.md` 在机器可读注册表中有生命周期状态；匹配路由必须经过可执行的 preflight、invocation 与 closure 记录，并强制遵循 **Skill-First 条件反射协议（3 秒场景扫描 -> 读取 `SKILL.md` -> 声明 `[Skill Activated: <name>]` 并按闭环执行）**。Turn 1 启动自动触发 `role-persona-router`（`contracts/role-personas.json`：11 大正交主控角色与复杂任务双轴 Subagent 小队分工）；UI 设计自动串联 `product-requirements-grilling` -> `ui-ux-pro-max` -> 文生图预览 -> `modern-web-guidance`（HTML/CSS/JS 与 Baseline 兼容/无障碍/CWV 规范，涉及浏览器扩展自动触发 `chrome-extensions`；若涉及现实存在物体/动作的 SVG/Canvas/动画，必须先下载并 `read_file` 查看真实图片/GIF/短视频参照物再实现，完成后执行并排 Design QA）；遇到重构或代码改良任务时自动触发 `code-simplifier`，遇到二进制/字节码/混淆包反编译与源码还原任务时自动触发 `decompile-reconstruction`，遇到安全审查/Diff 审计/威胁建模时自动触发 `appsec-review`，遇到 Web 数据图表/看板/地图时自动触发 `web-data-visualization`，遇到 2D/3D 浏览器游戏时自动触发 `web-game-studio`，遇到 GitHub PR/CI 排查时自动触发 `gh-pr-ci-triage`，遇到技能评估/Token 预算审计时自动触发 `skill-evaluator`，遇到 Office/PDF 文档、多模态/Remotion 视频与音频生成、长篇小说、漫剧本/短视频台本/影视剧本、流程图/架构图时分别自动触发 `office-pro-suite`、`multimodal-media-director`、`novel-story-architect`、`screenplay-manga-director`、`diagram-flowchart-architect`，无需用户手动指定 skill。该工作流门不等同于未验证的宿主原生工具拦截。
 
 ## 11. 项目内 L1-L4 地图
 

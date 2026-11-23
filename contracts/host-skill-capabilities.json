@@ -35,6 +35,38 @@
                                           {
                                               "id":  "decompile-reconstruction",
                                               "source":  "skills/engineering/decompile-reconstruction"
+                                          },
+                                          {
+                                              "id":  "modern-web-guidance",
+                                              "source":  "skills/frontend/modern-web-guidance"
+                                          },
+                                          {
+                                              "id":  "chrome-extensions",
+                                              "source":  "skills/frontend/chrome-extensions"
+                                          },
+                                          {
+                                              "id":  "appsec-review",
+                                              "source":  "skills/engineering/appsec-review"
+                                          },
+                                          {
+                                              "id":  "web-data-visualization",
+                                              "source":  "skills/frontend/web-data-visualization"
+                                          },
+                                          {
+                                              "id":  "gh-pr-ci-triage",
+                                              "source":  "skills/engineering/gh-pr-ci-triage"
+                                          },
+                                          {
+                                              "id":  "skill-evaluator",
+                                              "source":  "skills/engineering/skill-evaluator"
+                                          },
+                                          {
+                                              "id":  "web-game-studio",
+                                              "source":  "skills/frontend/web-game-studio"
+                                          },
+                                          {
+                                              "id":  "screenplay-manga-director",
+                                              "source":  "skills/creative/screenplay-manga-director"
                                           }
                                       ],
     "hosts":  {

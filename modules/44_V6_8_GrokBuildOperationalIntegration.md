@@ -133,14 +133,14 @@ Project-local extensions do not outrank AgentLogic or host security policy.
 
 ## 7. Subagent contract
 
-Every child agent receives an explicit contract:
+Every child agent receives an explicit dual-axis contract (backed by `contracts/role-personas.json`):
 
-- role: `explore`, `plan`, `implement`, `review`, or `verify`;
+- execution posture (permission axis): `explore`, `plan`, `implement`, `review`, or `verify`;
+- specialist sub-role (domain axis): either a Lead persona (`[1]`–`[11]`, e.g. `ui-ux-creative-director`, `appsec-security-guardian`, `data-viz-architect`, `screenplay-manga-video-director`) or one of the two universal functional sub-roles (`codebase-explorer` for read-only recon; `independent-verifier` for tests, `?t=` multi-frame captures, and side-by-side Design QA without editing production code);
+- bound skills propagation: explicitly pass the required `SKILL.md` paths and closure checks in the child prompt so the Skill-First Reflex Habit carries into child contexts;
 - capability: `read-only`, `read-write`, `execute`, or `all`;
-- isolation: shared workspace, isolated worktree, or another host-enforced
-  boundary;
-- allowed tools, forbidden tools, input scope, output schema, timeout, and
-  cancellation handle;
+- isolation & disjoint write ownership: shared workspace for read-only work; isolated worktree or non-overlapping file ownership for parallel `implement` workers;
+- allowed tools, forbidden tools, input scope, output schema, timeout, and cancellation handle;
 - parent session, task identifier, and whether background execution is allowed.
 
 Default to read-only exploration and planning. Default to isolated worktrees for
