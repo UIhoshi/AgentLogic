@@ -8,9 +8,10 @@
 param([string]$RepoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path)
 
 $ErrorActionPreference = 'Stop'
-$registryPath = Join-Path $RepoRoot 'contracts\skill-registry.json'
+$psExe = if ($PSVersionTable.PSEdition -eq 'Core') { 'pwsh' } else { 'powershell' }
+$registryPath = [IO.Path]::Combine($RepoRoot, 'contracts', 'skill-registry.json')
 $skillsRoot = Join-Path $RepoRoot 'skills'
-$validator = Join-Path $RepoRoot 'scripts\validate-skill-registry.ps1'
+$validator = [IO.Path]::Combine($RepoRoot, 'scripts', 'validate-skill-registry.ps1')
 $tempRoot = Join-Path ([IO.Path]::GetTempPath()) ("agentlogic-skill-registry-test-" + [guid]::NewGuid())
 New-Item -ItemType Directory -Force -Path $tempRoot | Out-Null
 
@@ -21,7 +22,7 @@ function Assert-ValidatorFails([string]$Label, [scriptblock]$Mutate) {
     [IO.File]::WriteAllText($candidatePath, ($candidate | ConvertTo-Json -Depth 20), [Text.UTF8Encoding]::new($false))
     $failedAsExpected = $false
     try {
-        & powershell -NoProfile -ExecutionPolicy Bypass -File $validator -RepoRoot $RepoRoot -RegistryPath $candidatePath -SkillsRoot $skillsRoot 2>$null | Out-Null
+        & $psExe -NoProfile -ExecutionPolicy Bypass -File $validator -RepoRoot $RepoRoot -RegistryPath $candidatePath -SkillsRoot $skillsRoot 2>$null | Out-Null
         $failedAsExpected = $LASTEXITCODE -ne 0
     } catch {
         $failedAsExpected = $true
@@ -30,7 +31,7 @@ function Assert-ValidatorFails([string]$Label, [scriptblock]$Mutate) {
 }
 
 try {
-    & powershell -NoProfile -ExecutionPolicy Bypass -File $validator -RepoRoot $RepoRoot -RegistryPath $registryPath -SkillsRoot $skillsRoot
+    & $psExe -NoProfile -ExecutionPolicy Bypass -File $validator -RepoRoot $RepoRoot -RegistryPath $registryPath -SkillsRoot $skillsRoot
     if ($LASTEXITCODE -ne 0) { throw 'Registry validator rejected the valid registry.' }
     Assert-ValidatorFails -Label 'route-trigger-drift' -Mutate {
         param($candidate)

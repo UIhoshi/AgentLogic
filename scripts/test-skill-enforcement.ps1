@@ -16,17 +16,17 @@ function Expect-Failure([scriptblock]$Action, [string]$Label) {
     if (-not $failed) { throw "Expected failure did not occur: $Label" }
 }
 function New-Artifact([string]$Name) {
-    $path = Join-Path $root ("artifacts\\$Name.txt")
+    $path = [IO.Path]::Combine($root, 'artifacts', "$Name.txt")
     New-Item -ItemType Directory -Force -Path (Split-Path -Parent $path) | Out-Null
     Set-Content -LiteralPath $path -Value "evidence:$Name" -Encoding utf8
     return $path
 }
 try {
-    & (Join-Path $RepoRoot 'scripts\validate-skill-registry.ps1') -RepoRoot $RepoRoot
-    & (Join-Path $RepoRoot 'scripts\validate-skill-routing.ps1') -RepoRoot $RepoRoot
+    & ([IO.Path]::Combine($RepoRoot, 'scripts', 'validate-skill-registry.ps1')) -RepoRoot $RepoRoot
+    & ([IO.Path]::Combine($RepoRoot, 'scripts', 'validate-skill-routing.ps1')) -RepoRoot $RepoRoot
 
     $statePath = Join-Path $root 'feature.json'
-    $gate = Join-Path $RepoRoot 'scripts\skill-enforcement.ps1'
+    $gate = [IO.Path]::Combine($RepoRoot, 'scripts', 'skill-enforcement.ps1')
     $featureBrief = New-Artifact 'feature-requirements-brief'
     $featureBehavior = New-Artifact 'feature-behavior-result'
     & $gate -Mode initialize -RepoRoot $RepoRoot -TaskStatePath $statePath -TaskId feature -TaskClass major_feature -ChangeScope multi_file -UiScope none -ExternalEffect none -ClaimType behavior_change
@@ -136,6 +136,17 @@ try {
     $blockedUiPath = Join-Path $root 'ui-no-imagegen.json'
     & $gate -Mode initialize -RepoRoot $RepoRoot -TaskStatePath $blockedUiPath -TaskId ui-no-img -TaskClass feature -ChangeScope isolated -UiScope net_new -ExternalEffect none
     Expect-Failure { & $gate -Mode preflight -RepoRoot $RepoRoot -TaskStatePath $blockedUiPath -AvailableSkill product-requirements-grilling,ui-ux-pro-max,taste-skill,senior-frontend,tdd-guide,playwright,screenshot,code-reviewer } 'ui-design preflight must fail without image/mockup capability'
+    & $gate -Mode preflight -RepoRoot $RepoRoot -TaskStatePath $blockedUiPath -AvailableSkill product-requirements-grilling,ui-ux-pro-max,imagegen,senior-frontend,tdd-guide,playwright,screenshot,code-reviewer
+    $recoveredUi = Get-Content -Raw -Encoding UTF8 -LiteralPath $blockedUiPath | ConvertFrom-Json
+    $uiDesignRec = @($recoveredUi.routes | Where-Object route_id -eq 'ui-design')[0]
+    if ($uiDesignRec.state -ne 'preflight_passed' -or $null -ne $uiDesignRec.blocked_reason) { throw 'Blocked route failed to recover cleanly on re-preflight.' }
+
+    $forgedPath = Join-Path $root 'forged-closed.json'
+    & $gate -Mode initialize -RepoRoot $RepoRoot -TaskStatePath $forgedPath -TaskId forged -TaskClass data_visualization -ChangeScope isolated -UiScope none -ExternalEffect none
+    $forgedObj = Get-Content -Raw -Encoding UTF8 -LiteralPath $forgedPath | ConvertFrom-Json
+    $forgedObj.routes[0].state = 'closed'
+    [IO.File]::WriteAllText($forgedPath, ($forgedObj | ConvertTo-Json -Depth 20), [Text.UTF8Encoding]::new($false))
+    Expect-Failure { & $gate -Mode validate -RepoRoot $RepoRoot -TaskStatePath $forgedPath } 'validate must reject hand-edited state=closed without invocation/closure evidence'
 
     $webModPath = Join-Path $root 'web-mod.json'
     $webModImpl = New-Artifact 'web-mod-impl'
@@ -167,16 +178,16 @@ try {
     & $gate -Mode record-invocation -RepoRoot $RepoRoot -TaskStatePath $packagePath -RouteId package-release -Evidence native_package_validation_run
     & $gate -Mode closure -RepoRoot $RepoRoot -TaskStatePath $packagePath -RouteId package-release -Evidence artifact_validation,post_result_inspection
 
-    $fixtureSkills = Join-Path $root 'registry-fixture\skills\example'
+    $fixtureSkills = [IO.Path]::Combine($root, 'registry-fixture', 'skills', 'example')
     New-Item -ItemType Directory -Force -Path $fixtureSkills | Out-Null
     Set-Content -LiteralPath (Join-Path $fixtureSkills 'SKILL.md') -Value '# example' -Encoding utf8
-    $emptyRegistry = Join-Path $root 'registry-fixture\registry.json'
+    $emptyRegistry = [IO.Path]::Combine($root, 'registry-fixture', 'registry.json')
     '{"schema_version":1,"lifecycle_states":["mandatory","conditional","manual_only","archived","deprecated"],"records":[]}' | Set-Content -LiteralPath $emptyRegistry -Encoding utf8
-    Expect-Failure { & (Join-Path $RepoRoot 'scripts\validate-skill-registry.ps1') -RepoRoot $RepoRoot -RegistryPath $emptyRegistry -SkillsRoot (Join-Path $root 'registry-fixture\skills') } 'unregistered portable skill'
+    Expect-Failure { & ([IO.Path]::Combine($RepoRoot, 'scripts', 'validate-skill-registry.ps1')) -RepoRoot $RepoRoot -RegistryPath $emptyRegistry -SkillsRoot ([IO.Path]::Combine($root, 'registry-fixture', 'skills')) } 'unregistered portable skill'
 
     $projectRoot = Join-Path $root 'project'
     New-Item -ItemType Directory -Force -Path (Join-Path $projectRoot '.agentlogic') | Out-Null
-    '{"schema_version":1,"reviewed_commit":"abc123","skills":[{"skill_id":"tdd-guide","capability":"test_engineering","flows":["validation"],"trigger":"behavior_change","source":"host","status":"active"}]}' | Set-Content -LiteralPath (Join-Path $projectRoot '.agentlogic\skill-usage.json') -Encoding utf8
+    '{"schema_version":1,"reviewed_commit":"abc123","skills":[{"skill_id":"tdd-guide","capability":"test_engineering","flows":["validation"],"trigger":"behavior_change","source":"host","status":"active"}]}' | Set-Content -LiteralPath ([IO.Path]::Combine($projectRoot, '.agentlogic', 'skill-usage.json')) -Encoding utf8
     "# Code Map`n`n## Skill Usage`n| Durable flow | Capability / skill | Trigger | Source of truth | Reviewed commit |`n| --- | --- | --- | --- | --- |`n| validation | tdd-guide | behavior_change | .agentlogic/skill-usage.json | abc123 |" | Set-Content -LiteralPath (Join-Path $projectRoot 'CODE_MAP.md') -Encoding utf8
     & $gate -Mode validate-project-usage -RepoRoot $RepoRoot -ProjectRoot $projectRoot
     & $gate -Mode validate-project-usage -ProjectRoot $projectRoot

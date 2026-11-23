@@ -13,13 +13,13 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
-if (-not $RegistryPath) { $RegistryPath = Join-Path $RepoRoot 'contracts\skill-registry.json' }
+if (-not $RegistryPath) { $RegistryPath = [IO.Path]::Combine($RepoRoot, 'contracts', 'skill-registry.json') }
 if (-not $SkillsRoot) { $SkillsRoot = Join-Path $RepoRoot 'skills' }
 if (-not (Test-Path -LiteralPath $RegistryPath)) { throw "Missing skill registry: $RegistryPath" }
 if (-not (Test-Path -LiteralPath $SkillsRoot)) { throw "Missing portable skills root: $SkillsRoot" }
 
 try { $registry = Get-Content -Raw -Encoding UTF8 -LiteralPath $RegistryPath | ConvertFrom-Json } catch { throw "Invalid skill registry JSON: $($_.Exception.Message)" }
-$routingPath = Join-Path $RepoRoot 'contracts\skill-routing.json'
+$routingPath = [IO.Path]::Combine($RepoRoot, 'contracts', 'skill-routing.json')
 if (-not (Test-Path -LiteralPath $routingPath)) { throw "Missing skill routing contract: $routingPath" }
 try { $routing = Get-Content -Raw -Encoding UTF8 -LiteralPath $routingPath | ConvertFrom-Json } catch { throw "Invalid skill routing JSON: $($_.Exception.Message)" }
 $routeById = @{}

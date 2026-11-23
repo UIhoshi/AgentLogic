@@ -147,6 +147,23 @@ function Assert-ArtifactIntegrity([object]$RouteRecord, [object]$Route) {
         if ($currentHash -ne $artifact[0].sha256) { throw "Route '$($Route.id)' artifact '$kind' changed after it was recorded." }
     }
 }
+function Assert-ClosedRouteComplete([object]$State, [object]$Route, [object]$RouteRecord) {
+    Assert-ClosedDependencies -State $State -Route $Route -RouteRecord $RouteRecord -Transition 'validate'
+    $missingInv = @($Route.invocation_evidence | Where-Object { @($RouteRecord.invocation_evidence) -notcontains $_ })
+    $missingCls = @(Get-RequiredClosureEvidence -Route $Route -Classification $State.classification | Where-Object { @($RouteRecord.closure_evidence) -notcontains $_ })
+    if ($missingInv.Count -gt 0 -or $missingCls.Count -gt 0) {
+        throw "Closed route '$($Route.id)' has incomplete evidence. Missing invocation: $($missingInv -join ', '); missing closure: $($missingCls -join ', ')."
+    }
+    foreach ($conditional in @($Route.conditional_closure_evidence)) {
+        $actual = @($State.classification.($conditional.field))
+        if ($conditional.requires_remote_target -and @($actual | Where-Object { @($conditional.values) -contains $_ }).Count -gt 0) {
+            if ([string]::IsNullOrWhiteSpace([string]$RouteRecord.remote_target)) {
+                throw "Closed route '$($Route.id)' is missing required remote_target."
+            }
+        }
+    }
+    Assert-ArtifactIntegrity -RouteRecord $RouteRecord -Route $Route
+}
 function Get-RequiredClosureEvidence([object]$Route, [object]$Classification) {
     $required = @($Route.closure_evidence)
     foreach ($rule in @($Route.conditional_closure_evidence)) {
@@ -209,7 +226,9 @@ if ($Mode -eq 'initialize') {
 $state = Read-Json -Path $TaskStatePath -Label 'skill execution state'
 Assert-TaskState -State $state -Routing $script:routing -Contract $contract -Graph $graph
 if ($Mode -eq 'validate') {
-    foreach ($record in @($state.routes | Where-Object state -eq 'closed')) { Assert-ArtifactIntegrity -RouteRecord $record -Route (Get-Route -Routing $script:routing -Id $record.route_id) }
+    foreach ($record in @($state.routes | Where-Object state -eq 'closed')) {
+        Assert-ClosedRouteComplete -State $state -Route (Get-Route -Routing $script:routing -Id $record.route_id) -RouteRecord $record
+    }
     if (-not $AllowIncomplete) {
         $unclosed = @($state.routes | Where-Object { $_.state -ne 'closed' } | ForEach-Object { "$($_.route_id) ($($_.state))" })
         if ($unclosed.Count -gt 0 -or @($state.routes).Count -ne @($state.matched_route_ids).Count) {
@@ -223,7 +242,7 @@ if ($Mode -eq 'preflight') {
     foreach ($id in @($state.matched_route_ids)) {
         $route = Get-Route -Routing $script:routing -Id $id
         $record = Get-RouteRecord -State $state -Id $id
-        if ($record.state -notin @('pending','preflight_passed')) { throw "Route '$id' cannot enter preflight from state '$($record.state)'." }
+        if ($record.state -notin @('pending','preflight_passed','blocked')) { throw "Route '$id' cannot enter preflight from state '$($record.state)'." }
         if (@($AvailableSkill) -notcontains $record.selected_skill) {
             $approvedAliases = @($route.primary_host_skill_aliases) + @($route.conditional_host_skill_aliases)
             $replacement = @($approvedAliases | Where-Object { @($AvailableSkill) -contains $_ })[0]
@@ -236,6 +255,7 @@ if ($Mode -eq 'preflight') {
         }
         $record.available_skills = @($AvailableSkill)
         Add-UniqueEvidence -RouteRecord $record -Property 'invocation_evidence' -Values @('selected_skill','availability_check')
+        $record.blocked_reason = $null
         $record.state = 'preflight_passed'
     }
     Write-Json -Path $TaskStatePath -Value $state

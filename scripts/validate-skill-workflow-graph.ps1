@@ -25,8 +25,8 @@ function Assert-UniqueStrings([object[]]$Values, [string]$Label) {
     }
 }
 
-if ([string]::IsNullOrWhiteSpace($GraphPath)) { $GraphPath = Join-Path $RepoRoot 'contracts\skill-workflow-graph.json' }
-if ([string]::IsNullOrWhiteSpace($RoutingPath)) { $RoutingPath = Join-Path $RepoRoot 'contracts\skill-routing.json' }
+if ([string]::IsNullOrWhiteSpace($GraphPath)) { $GraphPath = [IO.Path]::Combine($RepoRoot, 'contracts', 'skill-workflow-graph.json') }
+if ([string]::IsNullOrWhiteSpace($RoutingPath)) { $RoutingPath = [IO.Path]::Combine($RepoRoot, 'contracts', 'skill-routing.json') }
 $graph = Read-Contract $GraphPath 'skill workflow graph contract'
 $routing = Read-Contract $RoutingPath 'skill routing contract'
 if ($graph.schema_version -ne 1) { throw "Unsupported skill workflow graph schema version: $($graph.schema_version)" }

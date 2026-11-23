@@ -67,9 +67,10 @@ foreach ($hostName in @('codex','claude','antigravity','generic')) {
     if (@($hostEntry.enforcement.required_files) -notcontains 'contracts/skill-workflow-graph.json') { throw "Host '$hostName' enforcement payload must include the skill workflow graph contract." }
 }
 
-& powershell -NoProfile -ExecutionPolicy Bypass -File ([IO.Path]::Combine($RepoRoot, 'scripts', 'validate-skill-registry.ps1')) -RepoRoot $RepoRoot
+$psExe = if ($PSVersionTable.PSEdition -eq 'Core') { 'pwsh' } else { 'powershell' }
+& $psExe -NoProfile -ExecutionPolicy Bypass -File ([IO.Path]::Combine($RepoRoot, 'scripts', 'validate-skill-registry.ps1')) -RepoRoot $RepoRoot
 if ($LASTEXITCODE -ne 0) { throw 'Skill registry validation failed.' }
-& powershell -NoProfile -ExecutionPolicy Bypass -File ([IO.Path]::Combine($RepoRoot, 'scripts', 'validate-skill-workflow-graph.ps1')) -RepoRoot $RepoRoot
+& $psExe -NoProfile -ExecutionPolicy Bypass -File ([IO.Path]::Combine($RepoRoot, 'scripts', 'validate-skill-workflow-graph.ps1')) -RepoRoot $RepoRoot
 if ($LASTEXITCODE -ne 0) { throw 'Skill workflow graph validation failed.' }
 $module = Get-Content -Raw -Encoding UTF8 $modulePath
 foreach ($anchor in @('Strict missing-capability policy','Software candidate reporting','invocation evidence')) { if ($module -notmatch [regex]::Escape($anchor)) { throw "Enforcement module missing anchor: $anchor" } }

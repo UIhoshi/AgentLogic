@@ -8,10 +8,11 @@
 
 param(
     [string]$ProfileName = "core-enhanced",
-    [string]$UserHome = $env:USERPROFILE
+    [string]$UserHome = $(if ($env:USERPROFILE) { $env:USERPROFILE } else { $HOME })
 )
 
 $ErrorActionPreference = "Stop"
+$psExe = if ($PSVersionTable.PSEdition -eq 'Core') { 'pwsh' } else { 'powershell' }
 
 $repoRoot = (Resolve-Path ([IO.Path]::Combine($PSScriptRoot, '..', '..'))).Path
 $buildScript = [IO.Path]::Combine($repoRoot, 'scripts', 'build-profile.ps1')
@@ -31,10 +32,10 @@ $codexPluginTarget = [IO.Path]::Combine($targetDir, 'codex-plugin')
 
 New-Item -ItemType Directory -Force -Path $targetDir | Out-Null
 
-powershell -NoProfile -ExecutionPolicy Bypass -File $buildScript -ProfileName $ProfileName -TargetHost codex -OutputPath $bundlePath
+& $psExe -NoProfile -ExecutionPolicy Bypass -File $buildScript -ProfileName $ProfileName -TargetHost codex -OutputPath $bundlePath
 if ($LASTEXITCODE -ne 0) { throw "build-profile.ps1 failed with exit code $LASTEXITCODE." }
 
-powershell -NoProfile -ExecutionPolicy Bypass -File $hookScript -TargetHost codex -TargetPath $targetPath -RepoRoot $repoRoot -BundlePath $bundlePath -SkillsRoot $skillsRoot -EnforcementRoot $enforcementTarget -UserHome $UserHome
+& $psExe -NoProfile -ExecutionPolicy Bypass -File $hookScript -TargetHost codex -TargetPath $targetPath -RepoRoot $repoRoot -BundlePath $bundlePath -SkillsRoot $skillsRoot -EnforcementRoot $enforcementTarget -UserHome $UserHome
 if ($LASTEXITCODE -ne 0) { throw "install-hook.ps1 failed for '$targetPath' with exit code $LASTEXITCODE." }
 
 if (-not (Test-Path $configPath)) {
@@ -70,17 +71,17 @@ if ($config -match "(?m)^model_instructions_file\s*=") {
 
 [System.IO.File]::WriteAllText($configPath, $updated, [System.Text.UTF8Encoding]::new($false))
 
-powershell -NoProfile -ExecutionPolicy Bypass -File $deploySkillScript -RepoRoot $repoRoot -TargetPath $productSkillTarget
+& $psExe -NoProfile -ExecutionPolicy Bypass -File $deploySkillScript -RepoRoot $repoRoot -TargetPath $productSkillTarget
 if ($LASTEXITCODE -ne 0) { throw "deploy-first-party-skill.ps1 failed with exit code $LASTEXITCODE." }
-powershell -NoProfile -ExecutionPolicy Bypass -File $deployEnforcementScript -RepoRoot $repoRoot -TargetPath $enforcementTarget
+& $psExe -NoProfile -ExecutionPolicy Bypass -File $deployEnforcementScript -RepoRoot $repoRoot -TargetPath $enforcementTarget
 if ($LASTEXITCODE -ne 0) { throw "deploy-skill-enforcement.ps1 failed with exit code $LASTEXITCODE." }
-powershell -NoProfile -ExecutionPolicy Bypass -File $deployEnforcementScript -RepoRoot $repoRoot -TargetPath $enforcementTarget -Verify
+& $psExe -NoProfile -ExecutionPolicy Bypass -File $deployEnforcementScript -RepoRoot $repoRoot -TargetPath $enforcementTarget -Verify
 if ($LASTEXITCODE -ne 0) { throw "Skill enforcement payload verification failed with exit code $LASTEXITCODE." }
 
-powershell -NoProfile -ExecutionPolicy Bypass -File $buildCodexPluginScript -RepoRoot $repoRoot -OutputDir $codexPluginTarget
+& $psExe -NoProfile -ExecutionPolicy Bypass -File $buildCodexPluginScript -RepoRoot $repoRoot -OutputDir $codexPluginTarget
 if ($LASTEXITCODE -ne 0) { throw "build-codex-plugin.ps1 failed with exit code $LASTEXITCODE." }
 
-powershell -NoProfile -ExecutionPolicy Bypass -File $skillsGovernanceScript -TargetHost codex -UserHome $UserHome
+& $psExe -NoProfile -ExecutionPolicy Bypass -File $skillsGovernanceScript -TargetHost codex -UserHome $UserHome
 if ($LASTEXITCODE -ne 0) { throw "skills-governance.ps1 failed with exit code $LASTEXITCODE." }
 
 Write-Host "Installed AgentLogic into Codex."

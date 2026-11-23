@@ -9,10 +9,10 @@
 
 param([ValidateSet('generate','query','website-pipeline')][string]$Mode='generate',[string]$RepoRoot=(Resolve-Path (Join-Path $PSScriptRoot '..')).Path,[string]$Brief='')
 $ErrorActionPreference='Stop'
-$registry=Get-Content -Raw -Encoding UTF8 (Join-Path $RepoRoot 'contracts\skill-registry.json')|ConvertFrom-Json
+$registry=Get-Content -Raw -Encoding UTF8 ([IO.Path]::Combine($RepoRoot, 'contracts', 'skill-registry.json'))|ConvertFrom-Json
 if($Mode -eq 'website-pipeline') {
-  $graph=Get-Content -Raw -Encoding UTF8 (Join-Path $RepoRoot 'contracts\skill-workflow-graph.json')|ConvertFrom-Json
-  $routing=Get-Content -Raw -Encoding UTF8 (Join-Path $RepoRoot 'contracts\skill-routing.json')|ConvertFrom-Json
+  $graph=Get-Content -Raw -Encoding UTF8 ([IO.Path]::Combine($RepoRoot, 'contracts', 'skill-workflow-graph.json'))|ConvertFrom-Json
+  $routing=Get-Content -Raw -Encoding UTF8 ([IO.Path]::Combine($RepoRoot, 'contracts', 'skill-routing.json'))|ConvertFrom-Json
   $pipeline=@($graph.default_pipelines|Where-Object id -eq 'website-delivery')
   if($pipeline.Count -ne 1){throw 'Missing website-delivery workflow pipeline.'}
   $phases=foreach($nodeId in @($pipeline[0].nodes)){
@@ -29,7 +29,7 @@ if($Mode -eq 'query') {
   [ordered]@{brief=$Brief;candidates=@($hits|ForEach-Object {[ordered]@{id=$_.id;entrypoint=$_.entrypoint;purpose=$_.activation.purpose;confirmation_policy=$_.activation.confirmation_policy}});confirmation_required=(@($hits).Count -gt 1);rejected_manual_count=@($registry.records|Where-Object {$_.activation.mode -eq 'manual'}).Count}|ConvertTo-Json -Depth 8
   exit 0
 }
-$out=Join-Path $RepoRoot 'documentation\skill-catalog.md'; New-Item -ItemType Directory -Force -Path (Split-Path $out) | Out-Null
+$out=[IO.Path]::Combine($RepoRoot, 'documentation', 'skill-catalog.md'); New-Item -ItemType Directory -Force -Path (Split-Path $out) | Out-Null
 $lines=@('# Portable Skill Catalog','',"Generated from `contracts/skill-registry.json`. It recommends only selection postures; availability, permissions, trust, and route closure remain separate.",'')
 foreach($record in @($registry.records|Sort-Object family,id)){ $a=$record.activation; $lines += "## $($record.id)"; $lines += ('- Entry: `' + $record.entrypoint + '`'); $lines += ('- Lifecycle / posture: `' + $record.lifecycle + '` / `' + $a.mode + '`'); $lines += "- Purpose: $($a.purpose)"; $lines += "- Explicit signals: $(@($a.explicit_signals)-join ', ')"; $lines += "- Inferred signals: $(@($a.inferred_signals)-join ', ')"; $lines += "- Confirmation: $($a.confirmation_policy)"; $lines += '' }
 [IO.File]::WriteAllText($out,($lines -join [Environment]::NewLine)+[Environment]::NewLine,[Text.UTF8Encoding]::new($false)); Write-Host "Generated skill catalog: $out"

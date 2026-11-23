@@ -13,7 +13,7 @@ param(
     [Parameter(Mandatory)][string]$BundlePath,
     [Parameter(Mandatory)][string]$SkillsRoot,
     [Parameter(Mandatory)][string]$EnforcementRoot,
-    [string]$UserHome = $env:USERPROFILE
+    [string]$UserHome = $(if ($env:USERPROFILE) { $env:USERPROFILE } else { $HOME })
 )
 
 $ErrorActionPreference = 'Stop'
@@ -21,11 +21,11 @@ $ErrorActionPreference = 'Stop'
 $beginMarker = '<!-- BEGIN AGENTLOGIC HOOK -->'
 $endMarker = '<!-- END AGENTLOGIC HOOK -->'
 
-$repoRootUri = $RepoRoot.Replace('\', '/')
-$bundlePathUri = $BundlePath.Replace('\', '/')
-$enforcementScriptUri = ([IO.Path]::Combine($EnforcementRoot, 'scripts', 'skill-enforcement.ps1')).Replace('\', '/')
-$rolePersonasUri = ([IO.Path]::Combine($EnforcementRoot, 'contracts', 'role-personas.json')).Replace('\', '/')
-$skillsRootUri = $SkillsRoot.Replace('\', '/')
+$repoRootUri = $RepoRoot.Replace('\', '/').TrimStart('/')
+$bundlePathUri = $BundlePath.Replace('\', '/').TrimStart('/')
+$enforcementScriptUri = ([IO.Path]::Combine($EnforcementRoot, 'scripts', 'skill-enforcement.ps1')).Replace('\', '/').TrimStart('/')
+$rolePersonasUri = ([IO.Path]::Combine($EnforcementRoot, 'contracts', 'role-personas.json')).Replace('\', '/').TrimStart('/')
+$skillsRootUri = $SkillsRoot.Replace('\', '/').TrimStart('/')
 $bundleFileName = Split-Path -Leaf $BundlePath
 
 $emDash = [regex]::Unescape('\u2014')

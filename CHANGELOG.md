@@ -22,6 +22,7 @@
   - Quoted `role-persona-router` YAML `description:` (preventing `#1` comment truncation) and removed its escaping relative link; upgraded `scripts/eval-skills.ps1` to support YAML block scalars (`|` / `>`), flag unquoted `#` truncation, and reject relative links escaping the skill directory.
   - Added explicit single-turn read-only Q&A scope note in Gate 1 hooks (`install-hook.ps1`, `build-profile.ps1`, `role-persona-router`) to eliminate unnecessary friction on trivial lookup questions.
   - Registered `GoogleChrome/modern-web-guidance` in `versions/AgentLogic_V6_9_3.md` Section 4 and `00_README.md` (42 verified external references total), updated `README.md` to 3-layer progressive disclosure with evergreen `assets/agentlogic-hero.png`, and promoted the repository to **`V6.9.3`**.
+  - Completed full POSIX `pwsh` compatibility across all 27 `.ps1` scripts (dynamic `$psExe` discovery, `[IO.Path]::Combine`, `$HOME` fallbacks, normalized `file:///` URIs, and `CodePagesEncodingProvider`), closed forged `state: closed` validation and `blocked` preflight deadlock paths in `scripts/skill-enforcement.ps1`, added `default_skills` cross-validation in `scripts/validate-role-personas.ps1`, aligned Node `install.js` byte parity and Codex backup behavior, and added `ubuntu-latest` CI matrix coverage.
 
 ## V6.9.2 — 2026-11-24
 

@@ -14,7 +14,7 @@ param(
 $ErrorActionPreference = 'Stop'
 
 if ([string]::IsNullOrWhiteSpace($ContractPath)) {
-    $ContractPath = Join-Path $RepoRoot 'contracts\role-personas.json'
+    $ContractPath = [IO.Path]::Combine($RepoRoot, 'contracts', 'role-personas.json')
 }
 if (-not (Test-Path -LiteralPath $ContractPath)) {
     throw "Missing role personas contract: $ContractPath"
@@ -24,6 +24,25 @@ try {
     $contract = Get-Content -Raw -Encoding UTF8 -LiteralPath $ContractPath | ConvertFrom-Json
 } catch {
     throw "Invalid role personas JSON: $($_.Exception.Message)"
+}
+
+$knownSkills = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+$routingPath = [IO.Path]::Combine($RepoRoot, 'contracts', 'skill-routing.json')
+$registryPath = [IO.Path]::Combine($RepoRoot, 'contracts', 'skill-registry.json')
+if (Test-Path -LiteralPath $routingPath) {
+    $routingData = Get-Content -Raw -Encoding UTF8 -LiteralPath $routingPath | ConvertFrom-Json
+    foreach ($r in @($routingData.routes)) {
+        foreach ($alias in @($r.primary_host_skill_aliases) + @($r.conditional_host_skill_aliases)) {
+            if (-not [string]::IsNullOrWhiteSpace([string]$alias)) { [void]$knownSkills.Add([string]$alias) }
+        }
+    }
+}
+if (Test-Path -LiteralPath $registryPath) {
+    $registryData = Get-Content -Raw -Encoding UTF8 -LiteralPath $registryPath | ConvertFrom-Json
+    foreach ($rec in @($registryData.records)) {
+        if (-not [string]::IsNullOrWhiteSpace([string]$rec.id)) { [void]$knownSkills.Add([string]$rec.id) }
+        if ($rec.entrypoint -match '/([^/]+)/SKILL\.md$') { [void]$knownSkills.Add($Matches[1]) }
+    }
 }
 
 if ($contract.schema_version -ne 1) {
@@ -54,6 +73,13 @@ foreach ($role in $leadRoles) {
     $seenIds[[string]$role.id] = $true
     if ($null -eq $role.default_skills -or @($role.default_skills).Count -eq 0) {
         throw "Lead role '$($role.id)' must declare at least one default skill."
+    }
+    if ($knownSkills.Count -gt 0) {
+        foreach ($ds in @($role.default_skills)) {
+            if (-not $knownSkills.Contains([string]$ds)) {
+                throw "Lead role '$($role.id)' references unknown default_skill '$ds' (missing from contracts/skill-routing.json and contracts/skill-registry.json)."
+            }
+        }
     }
 }
 

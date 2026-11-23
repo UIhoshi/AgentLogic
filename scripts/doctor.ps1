@@ -88,9 +88,9 @@ if ($env:CODEX_HOME -or (Test-Path (Join-Path $HOME ".codex"))) {
 if ($env:CLAUDE_CONFIG_DIR -or (Test-Path (Join-Path $HOME ".claude"))) {
     $detected += "claude"
 }
-if ((Test-Path (Join-Path $HOME ".gemini\antigravity-cli")) -or
-    (Test-Path (Join-Path $HOME ".gemini\GEMINI.md")) -or
-    (Test-Path (Join-Path $HOME ".gemini\AgentLogic\GEMINI.md"))) {
+if ((Test-Path ([IO.Path]::Combine($HOME, '.gemini', 'antigravity-cli'))) -or
+    (Test-Path ([IO.Path]::Combine($HOME, '.gemini', 'GEMINI.md'))) -or
+    (Test-Path ([IO.Path]::Combine($HOME, '.gemini', 'AgentLogic', 'GEMINI.md')))) {
     $detected += "antigravity"
 }
 

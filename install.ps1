@@ -11,7 +11,7 @@ param(
     [string]$TargetHost = "generic",
     [string]$ProfileName = "core-enhanced",
     [string]$TargetPath,
-    [string]$UserHome = $env:USERPROFILE
+    [string]$UserHome = $(if ($env:USERPROFILE) { $env:USERPROFILE } else { $HOME })
 )
 
 $ErrorActionPreference = "Stop"

@@ -8,8 +8,8 @@
 
 param([string]$RepoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path)
 $ErrorActionPreference = 'Stop'
-$validator = Join-Path $RepoRoot 'scripts\validate-skill-workflow-graph.ps1'
-$source = Join-Path $RepoRoot 'contracts\skill-workflow-graph.json'
+$validator = [IO.Path]::Combine($RepoRoot, 'scripts', 'validate-skill-workflow-graph.ps1')
+$source = [IO.Path]::Combine($RepoRoot, 'contracts', 'skill-workflow-graph.json')
 $temp = Join-Path ([IO.Path]::GetTempPath()) ("agentlogic-skill-workflow-graph-" + [guid]::NewGuid().ToString('N') + '.json')
 try {
     & $validator -RepoRoot $RepoRoot

@@ -220,9 +220,10 @@ if ($manifest.current_version -match '^V6\.(8\.[2-9]|9\.)') {
     }
 }
 
-& powershell -NoProfile -ExecutionPolicy Bypass -File ([IO.Path]::Combine($RepoRoot, 'scripts', 'validate-skill-routing.ps1')) -RepoRoot $RepoRoot
+$psExe = if ($PSVersionTable.PSEdition -eq 'Core') { 'pwsh' } else { 'powershell' }
+& $psExe -NoProfile -ExecutionPolicy Bypass -File ([IO.Path]::Combine($RepoRoot, 'scripts', 'validate-skill-routing.ps1')) -RepoRoot $RepoRoot
 if ($LASTEXITCODE -ne 0) { Fail 'Autonomous skill routing validation failed.' }
-& powershell -NoProfile -ExecutionPolicy Bypass -File ([IO.Path]::Combine($RepoRoot, 'scripts', 'validate-role-personas.ps1')) -RepoRoot $RepoRoot
+& $psExe -NoProfile -ExecutionPolicy Bypass -File ([IO.Path]::Combine($RepoRoot, 'scripts', 'validate-role-personas.ps1')) -RepoRoot $RepoRoot
 if ($LASTEXITCODE -ne 0) { Fail 'Role personas contract validation failed.' }
 
 if ($manifest.current_version -match '^V6\.(8\.[3-9]|9\.)') {
@@ -272,6 +273,9 @@ if ($manifest.current_version -match '^V6\.(8\.[3-9]|9\.)') {
     }
 }
 
+if ($PSVersionTable.PSEdition -eq 'Core') {
+    [System.Text.Encoding]::RegisterProvider([System.Text.CodePagesEncodingProvider]::Instance)
+}
 $cp1252 = [System.Text.Encoding]::GetEncoding(1252)
 $operationalPs1Files = @(Get-ChildItem -Path (Join-Path $RepoRoot "scripts") -Filter *.ps1) + @(Get-ChildItem -Path (Join-Path $RepoRoot "adapters") -Recurse -Filter *.ps1) + @(Get-Item -Path (Join-Path $RepoRoot "install.ps1"))
 foreach ($ps1File in $operationalPs1Files) {
@@ -288,7 +292,7 @@ foreach ($ps1File in $operationalPs1Files) {
 
 $buildScript = [IO.Path]::Combine($RepoRoot, 'scripts', 'build-profile.ps1')
 foreach ($hostName in $manifest.host_outputs.PSObject.Properties.Name) {
-    & powershell -NoProfile -ExecutionPolicy Bypass -File $buildScript -ProfileName $manifest.default_profile -TargetHost $hostName -Verify
+    & $psExe -NoProfile -ExecutionPolicy Bypass -File $buildScript -ProfileName $manifest.default_profile -TargetHost $hostName -Verify
     if ($LASTEXITCODE -ne 0) {
         Fail "Host output '$hostName' does not match a generated '$($manifest.default_profile)' profile bundle."
     }
@@ -304,10 +308,10 @@ foreach ($skillId in $requiredFirstParty) {
     }
 }
 $genericEnfTarget = [IO.Path]::Combine($RepoRoot, 'dist', 'generic', 'skill-enforcement')
-& powershell -NoProfile -ExecutionPolicy Bypass -File ([IO.Path]::Combine($RepoRoot, 'scripts', 'deploy-skill-enforcement.ps1')) -RepoRoot $RepoRoot -TargetPath $genericEnfTarget -Verify
+& $psExe -NoProfile -ExecutionPolicy Bypass -File ([IO.Path]::Combine($RepoRoot, 'scripts', 'deploy-skill-enforcement.ps1')) -RepoRoot $RepoRoot -TargetPath $genericEnfTarget -Verify
 if ($LASTEXITCODE -ne 0) { Fail "Generic skill-enforcement payload verification failed." }
 
-& powershell -NoProfile -ExecutionPolicy Bypass -File ([IO.Path]::Combine($RepoRoot, 'scripts', 'skill-enforcement.ps1')) -Mode validate-project-usage -RepoRoot $RepoRoot -ProjectRoot $RepoRoot
+& $psExe -NoProfile -ExecutionPolicy Bypass -File ([IO.Path]::Combine($RepoRoot, 'scripts', 'skill-enforcement.ps1')) -Mode validate-project-usage -RepoRoot $RepoRoot -ProjectRoot $RepoRoot
 if ($LASTEXITCODE -ne 0) { Fail "Repository .agentlogic/skill-usage.json and CODE_MAP.md validation failed." }
 
 $versionFileToken = ($manifest.current_version -replace '\.', '_')

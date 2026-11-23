@@ -8,7 +8,11 @@ on:
 
 jobs:
   validate:
-    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
 
     steps:
       - name: Checkout
@@ -27,5 +31,12 @@ jobs:
       - name: Smoke-test Node.js cross-platform installer
         shell: pwsh
         run: |
-          $tmpOut = Join-Path $env:RUNNER_TEMP 'agentlogic-node-smoke\AGENTLOGIC.md'
+          $tmpOut = [IO.Path]::Combine($env:RUNNER_TEMP, 'agentlogic-node-smoke', 'AGENTLOGIC.md')
           node ./scripts/install.js --host generic --target-path $tmpOut
+
+      - name: Smoke-test install.sh on Ubuntu
+        if: matrix.os == 'ubuntu-latest'
+        shell: bash
+        run: |
+          chmod +x ./install.sh
+          ./install.sh --host generic --target-path "$RUNNER_TEMP/agentlogic-sh-smoke/AGENTLOGIC.md" --user-home "$RUNNER_TEMP/agentlogic-sh-home"

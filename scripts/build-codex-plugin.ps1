@@ -21,11 +21,11 @@ if (-not (Test-Path -LiteralPath $manifestPath)) {
 $manifest = Get-Content -Raw -Encoding UTF8 -LiteralPath $manifestPath | ConvertFrom-Json
 $rawVersion = ([string]$manifest.current_version).TrimStart('V', 'v')
 if ([string]::IsNullOrWhiteSpace($OutputDir)) {
-    $OutputDir = Join-Path $RepoRoot 'dist\codex-plugin'
+    $OutputDir = [IO.Path]::Combine($RepoRoot, 'dist', 'codex-plugin')
 }
 
 $pluginMetaDir = Join-Path $OutputDir '.codex-plugin'
-$marketplaceDir = Join-Path $OutputDir '.agents\plugins'
+$marketplaceDir = [IO.Path]::Combine($OutputDir, '.agents', 'plugins')
 $skillsDestRoot = Join-Path $OutputDir 'skills'
 $firstSkillTarget = Join-Path $skillsDestRoot 'product-requirements-grilling'
 
@@ -33,8 +33,9 @@ New-Item -ItemType Directory -Force -Path $pluginMetaDir | Out-Null
 New-Item -ItemType Directory -Force -Path $marketplaceDir | Out-Null
 New-Item -ItemType Directory -Force -Path $skillsDestRoot | Out-Null
 
-$deploySkillScript = Join-Path $RepoRoot 'scripts\deploy-first-party-skill.ps1'
-& powershell -NoProfile -ExecutionPolicy Bypass -File $deploySkillScript -RepoRoot $RepoRoot -TargetPath $firstSkillTarget
+$psExe = if ($PSVersionTable.PSEdition -eq 'Core') { 'pwsh' } else { 'powershell' }
+$deploySkillScript = [IO.Path]::Combine($RepoRoot, 'scripts', 'deploy-first-party-skill.ps1')
+& $psExe -NoProfile -ExecutionPolicy Bypass -File $deploySkillScript -RepoRoot $RepoRoot -TargetPath $firstSkillTarget
 if ($LASTEXITCODE -ne 0) {
     throw "deploy-first-party-skill.ps1 failed while building Codex plugin bundle."
 }

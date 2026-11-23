@@ -9,7 +9,7 @@
 param(
     [ValidateSet("codex", "claude", "antigravity", "generic")]
     [string]$TargetHost = "generic",
-    [string]$UserHome = $env:USERPROFILE,
+    [string]$UserHome = $(if ($env:USERPROFILE) { $env:USERPROFILE } else { $HOME }),
     [switch]$Apply
 )
 
@@ -154,10 +154,10 @@ function Get-SkillsRoot {
     )
 
     switch ($TargetName) {
-        "codex" { return Join-Path $UserRoot ".codex\skills" }
-        "claude" { return Join-Path $UserRoot ".claude\skills" }
-        "gemini" { return Join-Path $UserRoot ".gemini\skills" }
-        "antigravity" { return Join-Path $UserRoot ".gemini\skills" }
+        "codex" { return [IO.Path]::Combine($UserRoot, '.codex', 'skills') }
+        "claude" { return [IO.Path]::Combine($UserRoot, '.claude', 'skills') }
+        "gemini" { return [IO.Path]::Combine($UserRoot, '.gemini', 'skills') }
+        "antigravity" { return [IO.Path]::Combine($UserRoot, '.gemini', 'skills') }
         default { return $null }
     }
 }
@@ -226,7 +226,7 @@ function Invoke-ArchivePlan {
         [array]$Inventory
     )
 
-    $archiveRoot = Join-Path (Split-Path -Parent $SkillsRoot) ("skills-archive\{0}" -f ((Get-Date -Format "yyyy-MM-dd") + "-AgentLogic-host-local"))
+    $archiveRoot = [IO.Path]::Combine((Split-Path -Parent $SkillsRoot), 'skills-archive', ("{0}-AgentLogic-host-local" -f (Get-Date -Format 'yyyy-MM-dd')))
     New-Item -ItemType Directory -Force -Path $archiveRoot | Out-Null
 
     $moved = @()

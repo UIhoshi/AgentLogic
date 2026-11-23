@@ -9,10 +9,11 @@
 param(
     [string]$ProfileName = "core-enhanced",
     [string]$TargetPath,
-    [string]$UserHome = $env:USERPROFILE
+    [string]$UserHome = $(if ($env:USERPROFILE) { $env:USERPROFILE } else { $HOME })
 )
 
 $ErrorActionPreference = "Stop"
+$psExe = if ($PSVersionTable.PSEdition -eq 'Core') { 'pwsh' } else { 'powershell' }
 
 $repoRoot = (Resolve-Path ([IO.Path]::Combine($PSScriptRoot, '..', '..'))).Path
 $buildScript = [IO.Path]::Combine($repoRoot, 'scripts', 'build-profile.ps1')
@@ -33,23 +34,23 @@ if ($targetDir) {
     New-Item -ItemType Directory -Force -Path $targetDir | Out-Null
 }
 
-powershell -NoProfile -ExecutionPolicy Bypass -File $buildScript -ProfileName $ProfileName -TargetHost claude -OutputPath $TargetPath
+& $psExe -NoProfile -ExecutionPolicy Bypass -File $buildScript -ProfileName $ProfileName -TargetHost claude -OutputPath $TargetPath
 if ($LASTEXITCODE -ne 0) { throw "build-profile.ps1 failed with exit code $LASTEXITCODE." }
 
 # Install a compact (~11 KB) bounded executive hook into ~/.claude/CLAUDE.md non-destructively (pointing to ~/.claude/AgentLogic/CLAUDE.md on disk)
 $rootClaudeMd = [IO.Path]::Combine($UserHome, '.claude', 'CLAUDE.md')
 if ($TargetPath -eq ([IO.Path]::Combine($UserHome, '.claude', 'AgentLogic', 'CLAUDE.md'))) {
-    powershell -NoProfile -ExecutionPolicy Bypass -File $hookScript -TargetHost claude -TargetPath $rootClaudeMd -RepoRoot $repoRoot -BundlePath $TargetPath -SkillsRoot $skillsRoot -EnforcementRoot $enforcementTarget -UserHome $UserHome
+    & $psExe -NoProfile -ExecutionPolicy Bypass -File $hookScript -TargetHost claude -TargetPath $rootClaudeMd -RepoRoot $repoRoot -BundlePath $TargetPath -SkillsRoot $skillsRoot -EnforcementRoot $enforcementTarget -UserHome $UserHome
     if ($LASTEXITCODE -ne 0) { throw "install-hook.ps1 failed for '$rootClaudeMd' with exit code $LASTEXITCODE." }
 }
 
-powershell -NoProfile -ExecutionPolicy Bypass -File $deploySkillScript -RepoRoot $repoRoot -TargetPath $productSkillTarget
+& $psExe -NoProfile -ExecutionPolicy Bypass -File $deploySkillScript -RepoRoot $repoRoot -TargetPath $productSkillTarget
 if ($LASTEXITCODE -ne 0) { throw "deploy-first-party-skill.ps1 failed with exit code $LASTEXITCODE." }
-powershell -NoProfile -ExecutionPolicy Bypass -File $deployEnforcementScript -RepoRoot $repoRoot -TargetPath $enforcementTarget
+& $psExe -NoProfile -ExecutionPolicy Bypass -File $deployEnforcementScript -RepoRoot $repoRoot -TargetPath $enforcementTarget
 if ($LASTEXITCODE -ne 0) { throw "deploy-skill-enforcement.ps1 failed with exit code $LASTEXITCODE." }
-powershell -NoProfile -ExecutionPolicy Bypass -File $deployEnforcementScript -RepoRoot $repoRoot -TargetPath $enforcementTarget -Verify
+& $psExe -NoProfile -ExecutionPolicy Bypass -File $deployEnforcementScript -RepoRoot $repoRoot -TargetPath $enforcementTarget -Verify
 if ($LASTEXITCODE -ne 0) { throw "Skill enforcement payload verification failed with exit code $LASTEXITCODE." }
-powershell -NoProfile -ExecutionPolicy Bypass -File $skillsGovernanceScript -TargetHost claude -UserHome $UserHome
+& $psExe -NoProfile -ExecutionPolicy Bypass -File $skillsGovernanceScript -TargetHost claude -UserHome $UserHome
 if ($LASTEXITCODE -ne 0) { throw "skills-governance.ps1 failed with exit code $LASTEXITCODE." }
 
 Write-Host "Built Claude-ready AgentLogic bundle."

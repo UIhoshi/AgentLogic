@@ -9,10 +9,11 @@
 param(
     [string]$ProfileName = "core-enhanced",
     [string]$TargetPath,
-    [string]$UserHome = $env:USERPROFILE
+    [string]$UserHome = $(if ($env:USERPROFILE) { $env:USERPROFILE } else { $HOME })
 )
 
 $ErrorActionPreference = "Stop"
+$psExe = if ($PSVersionTable.PSEdition -eq 'Core') { 'pwsh' } else { 'powershell' }
 
 $repoRoot = (Resolve-Path ([IO.Path]::Combine($PSScriptRoot, '..', '..'))).Path
 $buildScript = [IO.Path]::Combine($repoRoot, 'scripts', 'build-profile.ps1')
@@ -35,19 +36,19 @@ if ($bundleDir) {
 }
 
 # 1. Build the profile bundle to the dedicated bundle path
-powershell -NoProfile -ExecutionPolicy Bypass -File $buildScript -ProfileName $ProfileName -TargetHost antigravity -OutputPath $bundlePath
+& $psExe -NoProfile -ExecutionPolicy Bypass -File $buildScript -ProfileName $ProfileName -TargetHost antigravity -OutputPath $bundlePath
 if ($LASTEXITCODE -ne 0) { throw "build-profile.ps1 failed with exit code $LASTEXITCODE." }
-powershell -NoProfile -ExecutionPolicy Bypass -File $deploySkillScript -RepoRoot $repoRoot -TargetPath $productSkillTarget
+& $psExe -NoProfile -ExecutionPolicy Bypass -File $deploySkillScript -RepoRoot $repoRoot -TargetPath $productSkillTarget
 if ($LASTEXITCODE -ne 0) { throw "deploy-first-party-skill.ps1 failed with exit code $LASTEXITCODE." }
-powershell -NoProfile -ExecutionPolicy Bypass -File $deployEnforcementScript -RepoRoot $repoRoot -TargetPath $enforcementTarget
+& $psExe -NoProfile -ExecutionPolicy Bypass -File $deployEnforcementScript -RepoRoot $repoRoot -TargetPath $enforcementTarget
 if ($LASTEXITCODE -ne 0) { throw "deploy-skill-enforcement.ps1 failed with exit code $LASTEXITCODE." }
-powershell -NoProfile -ExecutionPolicy Bypass -File $deployEnforcementScript -RepoRoot $repoRoot -TargetPath $enforcementTarget -Verify
+& $psExe -NoProfile -ExecutionPolicy Bypass -File $deployEnforcementScript -RepoRoot $repoRoot -TargetPath $enforcementTarget -Verify
 if ($LASTEXITCODE -ne 0) { throw "Skill enforcement payload verification failed with exit code $LASTEXITCODE." }
-powershell -NoProfile -ExecutionPolicy Bypass -File $skillsGovernanceScript -TargetHost antigravity -UserHome $UserHome
+& $psExe -NoProfile -ExecutionPolicy Bypass -File $skillsGovernanceScript -TargetHost antigravity -UserHome $UserHome
 if ($LASTEXITCODE -ne 0) { throw "skills-governance.ps1 failed with exit code $LASTEXITCODE." }
 
 # 2. Ensure ~/.gemini/config/skills.json registers ~/.gemini/skills so deployed skills are discoverable across all workspaces
-$configSkillsPath = Join-Path $UserHome ".gemini\config\skills.json"
+$configSkillsPath = [IO.Path]::Combine($UserHome, '.gemini', 'config', 'skills.json')
 $configSkillsDir = Split-Path -Parent $configSkillsPath
 if ($configSkillsDir -and -not (Test-Path -LiteralPath $configSkillsDir)) {
     New-Item -ItemType Directory -Force -Path $configSkillsDir | Out-Null
@@ -71,7 +72,7 @@ if (-not $skillsConfigObj) {
     if ($skillsConfigObj.PSObject.Properties.Name -contains 'entries' -and $null -ne $skillsConfigObj.entries) {
         $existingEntries = @($skillsConfigObj.entries)
     }
-    $alreadyRegistered = @($existingEntries | Where-Object { $_.path -eq $skillsEntryPath -or $_.path -eq (Join-Path $UserHome ".gemini\skills").Replace('\', '/') })
+    $alreadyRegistered = @($existingEntries | Where-Object { $_.path -eq $skillsEntryPath -or $_.path -eq ([IO.Path]::Combine($UserHome, '.gemini', 'skills')).Replace('\', '/') })
     if ($alreadyRegistered.Count -eq 0) {
         $existingEntries += [pscustomobject]@{ path = $skillsEntryPath }
         $skillsConfigObj | Add-Member -Force -NotePropertyName entries -NotePropertyValue @($existingEntries)
@@ -87,7 +88,7 @@ if ($TargetPath -eq ([IO.Path]::Combine($UserHome, '.gemini', 'GEMINI.md'))) {
 }
 
 foreach ($target in $targets) {
-    powershell -NoProfile -ExecutionPolicy Bypass -File $hookScript -TargetHost antigravity -TargetPath $target -RepoRoot $repoRoot -BundlePath $bundlePath -SkillsRoot $skillsRoot -EnforcementRoot $enforcementTarget -UserHome $UserHome
+    & $psExe -NoProfile -ExecutionPolicy Bypass -File $hookScript -TargetHost antigravity -TargetPath $target -RepoRoot $repoRoot -BundlePath $bundlePath -SkillsRoot $skillsRoot -EnforcementRoot $enforcementTarget -UserHome $UserHome
     if ($LASTEXITCODE -ne 0) { throw "install-hook.ps1 failed for '$target' with exit code $LASTEXITCODE." }
 }
 
