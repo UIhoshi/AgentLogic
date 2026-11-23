@@ -13,9 +13,10 @@
   - **`gh-pr-ci-triage`** (`skills/engineering/gh-pr-ci-triage/SKILL.md`): Synthesizes Apache-2.0 `openai/skills` `gh-fix-ci` & `gh-address-comments` via `gh` CLI.
   - **`skill-evaluator`** (`skills/engineering/skill-evaluator/SKILL.md` + `scripts/eval-skills.ps1`): Synthesizes MIT `openai/plugins/plugins/plugin-eval` to audit frontmatter, trigger precision, progressive disclosure, broken links, and token budgets.
   - **`web-game-studio`** (`skills/frontend/web-game-studio/SKILL.md`): Synthesizes MIT `openai/plugins/plugins/game-studio` for 2D Phaser/Canvas2D and 3D Three.js/R3F browser games and deterministic playtesting.
-- **Standard Codex Plugin Packaging (`scripts/build-codex-plugin.ps1`)**: Generates `.codex-plugin/plugin.json` + `.agents/plugins/marketplace.json` + all 16 first-party skills under `dist/codex-plugin/` and deploys it during Codex installation.
+- **Standard Codex Plugin Packaging (`scripts/build-codex-plugin.ps1`)**: Generates `.codex-plugin/plugin.json` + `.agents/plugins/marketplace.json` + all 17 first-party skills under `dist/codex-plugin/` and deploys it during Codex installation.
 
 ### Changed
+- **Gate 2 Real-World Visual/Motion Grounding & Animation Audit (`36c4acd`, `b711c25`)**: Enforced local media download + `read_file` visual inspection for real-world subjects, anti-stick-puppet continuous silhouette geometry, Z-depth interleaving, multi-state `?t=` animation screenshot auditing, and a scoped creative animation verification path.
 - **Skill-First Reflex Protocol ("Encounter -> Auto-Use Habit")**: Baked the mandatory 3-second Scenario -> Skill scan, `[Skill Activated: <name>]` announcement, and multi-skill chaining discipline into Gate 3 across `scripts/build-profile.ps1`, `adapters/antigravity/install.ps1`, `modules/54_V6_9_RoleAndMultimodalCreativeGovernance.md`, and `modules/48_V6_8_SkillAndToolRouting.md`.
 - **Upgraded Existing First-Party Skills & Visual QA**:
   - `office-pro-suite`: Added PDF (`.pdf`) visual-render QA (`pdftoppm` + `read_file`, Apache-2.0 `openai/skills` `pdf`) and clean-room Excel three-statement tie-out / PPT deck QC checklists.
@@ -32,7 +33,7 @@
   - **Reverse Engineering & Security Expansion (10 new skills)**: Added `ghidra-reverse`, `binary-ninja-reverse`, `go-rust-reverse`, `protocol-reverse`, `vulnerability-validation`, and CTF Sandbox Orchestrator modules (`competition-ad-certificate-abuse`, `competition-agent-cloud`, `competition-android-hooking`, `competition-browser-persistence`, `competition-container-escape`).
 
 ### Changed
-- Upgraded `manifest.json`, `versions/AgentLogic_V6_9_2.md`, entry documents, and compiled `dist/` host bundles to **`V6.9.1`**.
+- Upgraded `manifest.json`, `versions/AgentLogic_V6_9_1.md`, entry documents, and compiled `dist/` host bundles to **`V6.9.1`**.
 - Synchronized all vendored & referenced upstream GitHub repositories (`agent-browser` v0.41.2, `spec-kit` v1.3.3.dev0, `taste-skill` 2.5.1, `ponytail`, `mattpocock/skills`, `self-improving-agent`, `reverse-skill`, `ui-ux-pro-max` v2.5+, `morluto/rea`, `oh-story-claudecode` v0.10.2, `Agents365-ai/drawio-skill` v3.4.4, `jgraph/drawio-mcp` v1.7.0, `obra/superpowers` v7.0.2, `anthropics/skills` Apache 2.0).
 - Enhanced first-party skills (`ui-ux-pro-max`, `novel-story-architect`, `diagram-flowchart-architect`, `decompile-reconstruction`, `code-simplifier`, `office-pro-suite`) and governance modules (`modules/37`–`39`, `42`–`43`, `54`) with upstream capabilities.
 
